@@ -1,0 +1,28 @@
+{
+  "name": "payoutsplit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run generate:pages && wrangler dev",
+    "deploy": "npm run generate:pages && wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "db:migrate:local": "wrangler d1 migrations apply payoutsplit-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply payoutsplit-db --remote",
+    "generate:pages": "tsx scripts/generate-landing-pages.ts"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260730.1",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.118.0"
+  },
+  "dependencies": {
+    "hono": "^4.6.9",
+    "stripe": "^17.3.1"
+  }
+}

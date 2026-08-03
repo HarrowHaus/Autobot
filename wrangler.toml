@@ -1,0 +1,24 @@
+name = "payoutsplit"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "payoutsplit-db"
+database_id = "93587ae8-698e-4fd1-891e-228252673a84"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "ecce870d0d264b00ab9091755b6bb00c"
+
+[triggers]
+crons = ["0 6 * * 1"]
+
+[vars]
+ENVIRONMENT = "production"
