@@ -3,11 +3,10 @@
 # login required -- uses `wrangler deploy --temporary`, which mints an
 # anonymous account good for ~1 hour unless claimed.
 #
-# Useful for demoing a change before real CLOUDFLARE_API_TOKEN/
-# CLOUDFLARE_ACCOUNT_ID credentials are available for the main deploy
-# pipeline (see .github/workflows/deploy.yml). Not meant to replace that
-# pipeline -- the temp account's D1/KV are separate from the real ones and
-# disappear when the account expires or is claimed elsewhere.
+# Useful for demoing a change without needing Cloudflare login at all.
+# Not meant to replace the real deploy path (Cloudflare's Git integration,
+# see README) -- the temp account's D1/KV are separate from the real ones
+# and disappear when the account expires or is claimed elsewhere.
 #
 # Usage: ./scripts/preview-deploy.sh
 

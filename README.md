@@ -27,10 +27,7 @@ npm run typecheck
 
 ## Deployment
 
-Deploys via GitHub Actions (`.github/workflows/deploy.yml`) on push to `main`. Requires two repo secrets:
-
-- `CLOUDFLARE_API_TOKEN` — scoped to Workers Scripts:Edit, D1:Edit, Workers KV:Edit
-- `CLOUDFLARE_ACCOUNT_ID`
+Deploys via Cloudflare's Git integration ("Workers Builds") on push to `main` — connected directly in the Cloudflare dashboard (Workers & Pages → Import a repository), no GitHub secrets involved. Build command: `npm run generate:pages`. GitHub Actions (`.github/workflows/test.yml`) only runs tests/typecheck; it doesn't deploy.
 
 Manual deploy: `npm run deploy` (requires `wrangler login` or `CLOUDFLARE_API_TOKEN` in the local shell).
 
@@ -38,7 +35,7 @@ No credentials at all? `./scripts/preview-deploy.sh` spins up a fully-working pr
 
 ## Required secrets for full functionality
 
-Set via `wrangler secret put <NAME>` (or as GitHub Actions secrets consumed at deploy time, depending on your setup):
+Set via `wrangler secret put <NAME>` (or the Cloudflare dashboard: Worker → Settings → Variables and Secrets):
 
 - `STRIPE_SECRET_KEY` — enables `/billing/checkout` and credit purchases. Without it, billing routes return `501 billing_not_configured` and only the one free trial conversion works.
 - `STRIPE_WEBHOOK_SECRET` — enables `/webhooks/stripe` fulfillment.
