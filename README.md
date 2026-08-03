@@ -34,6 +34,8 @@ Deploys via GitHub Actions (`.github/workflows/deploy.yml`) on push to `main`. R
 
 Manual deploy: `npm run deploy` (requires `wrangler login` or `CLOUDFLARE_API_TOKEN` in the local shell).
 
+No credentials at all? `./scripts/preview-deploy.sh` spins up a fully-working preview (real D1 + KV, schema applied) on a throwaway anonymous Cloudflare account via `wrangler deploy --temporary` — no login required. It expires in about an hour unless claimed via the URL the script prints, and its data store is separate from the real one.
+
 ## Required secrets for full functionality
 
 Set via `wrangler secret put <NAME>` (or as GitHub Actions secrets consumed at deploy time, depending on your setup):
