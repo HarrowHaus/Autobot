@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # TODO: switch back to `npm ci` once package-lock.json is committed
+      # (temporarily omitted — see PR description for why).
+      - run: npm install
       - run: npm run typecheck
       - run: npm test
 
@@ -28,7 +30,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      - run: npm install
       - run: npm run generate:pages
       - uses: cloudflare/wrangler-action@v3
         with:
