@@ -12,16 +12,20 @@
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
+ROOT="$(pwd)"
 
 echo "==> Minting a temporary Cloudflare account (no bindings yet)..."
-cat > /tmp/wrangler-preview-bootstrap.toml <<'EOF'
+# wrangler resolves `main`/`directory` relative to the config file's own
+# location, not the CWD -- so these must be absolute paths since the config
+# lives outside the repo (in /tmp).
+cat > /tmp/wrangler-preview-bootstrap.toml <<EOF
 name = "payoutsplit"
-main = "src/index.ts"
+main = "$ROOT/src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]
-directory = "public"
+directory = "$ROOT/public"
 binding = "ASSETS"
 
 [vars]
@@ -59,12 +63,12 @@ KV_ID=$(echo "$KV_OUTPUT" | grep '^id' | sed -E 's/id = "(.*)"/\1/')
 PREVIEW_CONFIG=/tmp/wrangler-preview-full.toml
 cat > "$PREVIEW_CONFIG" <<EOF
 name = "payoutsplit"
-main = "src/index.ts"
+main = "$ROOT/src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]
-directory = "public"
+directory = "$ROOT/public"
 binding = "ASSETS"
 
 [[d1_databases]]
