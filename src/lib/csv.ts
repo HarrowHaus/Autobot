@@ -64,8 +64,37 @@ export function parseCsvRecords(text: string): Record<string, string>[] {
   });
 }
 
+// A cell that is a plain number or an ISO date is never a formula, however
+// it starts — this lets legitimate negative amounts like "-43.70" through
+// untouched while still catching the actual injection vector: attacker-
+// controlled text (descriptions, IDs) that happens to start with a
+// spreadsheet-formula trigger character.
+const PURE_NUMBER_OR_DATE = /^-?\d+(\.\d+)?$|^\d{4}-\d{2}-\d{2}$/;
+// OWASP CSV-injection trigger characters: = + @ and the raw tab/CR bytes,
+// which some spreadsheet implementations also treat as formula starts.
+const RISKY_LEADING_CHAR = /^[=+@\t\r]/;
+
+/**
+ * Neutralizes CSV formula injection in a single cell. Text starting with a
+ * formula-trigger character is prefixed with a leading apostrophe, which
+ * every major spreadsheet application treats as "force this cell to plain
+ * text" rather than evaluating it. Pure numbers/dates (including negative
+ * amounts) are left untouched since they are never formulas and quoting
+ * them would corrupt legitimate accounting data on import.
+ */
+export function sanitizeCsvCell(value: string): string {
+  if (PURE_NUMBER_OR_DATE.test(value)) return value;
+  if (RISKY_LEADING_CHAR.test(value)) return `'${value}`;
+  // A bare leading '-' followed by anything that isn't purely more digits
+  // is also a documented injection vector (e.g. "-2+3+cmd|...!A1") — the
+  // PURE_NUMBER_OR_DATE check above only exempts genuine plain numbers, so
+  // anything else starting with '-' reaches here and gets neutralized too.
+  if (value.startsWith("-")) return `'${value}`;
+  return value;
+}
+
 function csvEscape(value: string | number): string {
-  const s = String(value);
+  const s = sanitizeCsvCell(String(value));
   if (s.includes(",") || s.includes('"') || s.includes("\n")) {
     return `"${s.replace(/"/g, '""')}"`;
   }
@@ -73,19 +102,9 @@ function csvEscape(value: string | number): string {
 }
 
 export function toCsv(header: string[], rows: (string | number)[][]): string {
-  const lines = [header.map(csvEscape).join(",")];
+  const lines = [header.map((h) => csvEscape(h)).join(",")];
   for (const row of rows) {
     lines.push(row.map(csvEscape).join(","));
   }
   return lines.join("\r\n") + "\r\n";
-}
-
-/** Header signature used only as a growth-loop signal — never row content. */
-export async function hashHeaderSignature(header: string[]): Promise<string> {
-  const normalized = header.map((h) => h.trim().toLowerCase()).join("|");
-  const data = new TextEncoder().encode(normalized);
-  const digest = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
 }

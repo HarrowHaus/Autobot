@@ -13,22 +13,22 @@
 <p>Last updated: 2026</p>
 
 <h2>What this is</h2>
-<p>PayoutSplit converts payment-processor export files (Stripe, PayPal) into files formatted for import into QuickBooks Online or Xero. You provide a file; we return two converted files. That's the whole service.</p>
+<p>PayoutSplit is an early alpha. It reads a Stripe Payout Reconciliation Itemized CSV export and produces a reconciliation report — per-payout charges, refunds, fees, and any variance between the file's stated net and an independently recalculated net. It does not currently produce a QuickBooks Online or Xero import file, and it does not support PayPal or any processor other than Stripe.</p>
 
 <h2>Not accounting advice</h2>
-<p>PayoutSplit is a data-formatting tool, not an accounting, bookkeeping, or tax service. We don't verify that your source export is complete or accurate, and we don't verify your chart of accounts. <strong>You are responsible for reviewing the converted files before importing them</strong> and for confirming the result is correct for your books. If you're not sure, check with a bookkeeper or accountant.</p>
+<p>PayoutSplit is a data-review tool, not an accounting, bookkeeping, or tax service. The reconciliation report is informational — it is not accounting-ready and should not be recorded to your books without review. We don't verify that your source export is complete or accurate. <strong>You are responsible for reviewing every figure before using it for anything.</strong> If you're not sure, check with a bookkeeper or accountant.</p>
 
 <h2>No warranty</h2>
-<p>The service is provided "as is." We do our best to handle common export formats correctly and test against known column layouts, but processor export formats can change without notice, and we can't guarantee every file will convert correctly. If a conversion looks wrong, don't import it — let us know instead.</p>
+<p>The service is provided "as is," as an alpha. We validate strictly against one documented Stripe export format and reject anything we can't confidently interpret rather than guess — but we can't guarantee the report is complete or error-free, and Stripe's export format can change without notice. If a report looks wrong, don't rely on it — let us know instead.</p>
 
 <h2>Billing</h2>
-<p>Conversions are pay-per-use. Your first conversion is free; after that, purchases are one-time credit packs — there are no subscriptions and no recurring charges. Credits don't expire. We don't offer refunds for used credits, but unused credits can be refunded on request within a reasonable time.</p>
+<p>Billing is not currently enabled. There is no payment, subscription, or credit purchase of any kind — the alpha is free to use, subject to rate limits. If billing is introduced in the future, this section will be updated before any charge is possible.</p>
 
 <h2>Acceptable use</h2>
-<p>Don't use the API to abuse, overload, or attempt to circumvent metering or rate limits. Don't upload files containing data you don't have the right to process.</p>
+<p>Don't attempt to overload the service or circumvent rate limits. Don't upload files containing data you don't have the right to process.</p>
 
 <h2>Liability</h2>
-<p>To the extent permitted by law, PayoutSplit's liability for any issue arising from use of the service is limited to the amount you paid us in the preceding 12 months.</p>
+<p>To the extent permitted by law, PayoutSplit's liability for any issue arising from use of the service is limited to $0, consistent with this being a free, no-payment alpha.</p>
 
 <h2>Contact</h2>
 <p>Questions: open an issue on our <a href="https://github.com/harrowhaus/autobot">GitHub repository</a>.</p>

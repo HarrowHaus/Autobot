@@ -1,51 +1,51 @@
-import { parsePayPal } from "./parsers/paypal.js";
-import { parseStripe } from "./parsers/stripe.js";
-import { groupByPayout } from "./lib/group.js";
-import { mapToQboJournal } from "./mappers/qbo-journal.js";
-import { mapToQboBankMatch } from "./mappers/qbo-bankmatch.js";
-import { mapToXeroJournal } from "./mappers/xero-journal.js";
-import { mapToXeroBankMatch } from "./mappers/xero-bankmatch.js";
-import type { AccountingTarget, ConversionResult, Processor } from "./types.js";
+import { validateStripePayoutItemized, type StripeValidationOutcome } from "./validators/stripe-payout-itemized.js";
+import { buildQboJournalCsv, type AccountMappings, type JournalBuildResult } from "./lib/qbo-journal-builder.js";
 
-const PARSERS: Record<Processor, (csv: string) => ReturnType<typeof parseStripe>> = {
-  stripe: parseStripe,
-  paypal: parsePayPal,
-  square: () => {
-    throw new Error("Square is not supported yet");
-  },
-};
+/**
+ * Only Stripe is supported. PayPal and Xero are disabled at this layer as
+ * well as in the UI — an API caller who explicitly requests either gets a
+ * clear rejection here, not a silently-wrong result.
+ */
+export type SupportedProcessor = "stripe";
 
-export function convert(csvText: string, processor: Processor, target: AccountingTarget): ConversionResult {
-  const parser = PARSERS[processor];
-  if (!parser) throw new Error(`Unknown processor: ${processor}`);
+export function isSupportedProcessor(value: string): value is SupportedProcessor {
+  return value === "stripe";
+}
 
-  const transactions = parser(csvText);
-  const groups = groupByPayout(transactions);
+export interface ConvertOptions {
+  /** Only honored when the caller has already confirmed ALLOW_QBO_EXPORT is true. */
+  qboExport?: { mappings: AccountMappings };
+}
 
-  const journalContent = target === "qbo" ? mapToQboJournal(groups) : mapToXeroJournal(groups);
-  const bankMatchContent = target === "qbo" ? mapToQboBankMatch(groups) : mapToXeroBankMatch(groups);
+export interface ConvertResult {
+  validation: StripeValidationOutcome;
+  qboJournal: JournalBuildResult | null;
+}
 
-  const totalGrossCents = groups.reduce((s, g) => s + g.totalGrossCents, 0);
-  const totalFeeCents = groups.reduce((s, g) => s + g.totalFeeCents, 0);
-  const totalNetCents = groups.reduce((s, g) => s + g.totalNetCents, 0);
+export async function convert(csvText: string, processor: string, options: ConvertOptions = {}): Promise<ConvertResult> {
+  if (!isSupportedProcessor(processor)) {
+    return {
+      validation: {
+        ok: false,
+        report: null,
+        blockingErrors: [
+          {
+            code: "unsupported_processor",
+            field: "processor",
+            message: `Processor "${processor}" is not supported in this alpha. Only "stripe" is currently enabled.`,
+          },
+        ],
+      },
+      qboJournal: null,
+    };
+  }
 
-  return {
-    journalFile: {
-      filename: `${processor}-${target}-journal-entries.csv`,
-      content: journalContent,
-      mimeType: "text/csv",
-    },
-    bankMatchFile: {
-      filename: `${processor}-${target}-bank-match.csv`,
-      content: bankMatchContent,
-      mimeType: "text/csv",
-    },
-    summary: {
-      payoutCount: groups.length,
-      transactionCount: transactions.length,
-      totalGrossCents,
-      totalFeeCents,
-      totalNetCents,
-    },
-  };
+  const validation = await validateStripePayoutItemized(csvText);
+
+  let qboJournal: JournalBuildResult | null = null;
+  if (validation.ok && validation.report && options.qboExport) {
+    qboJournal = buildQboJournalCsv(validation.report, options.qboExport.mappings);
+  }
+
+  return { validation, qboJournal };
 }

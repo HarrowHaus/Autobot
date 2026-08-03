@@ -13,25 +13,27 @@
 <p>Last updated: 2026</p>
 
 <h2>The short version</h2>
-<p>We never store the contents of the file you upload. It's processed in memory for the duration of a single request and discarded immediately after we send you the converted file back. We don't need a database of your transactions to run this service, so we don't keep one.</p>
+<p>We never store the contents of the file you upload. It's processed in memory for the duration of a single request and discarded immediately after we send you the reconciliation report back. We don't need a database of your transactions to run this service, so we don't keep one.</p>
 
 <h2>What we do store</h2>
 <ul>
-  <li><strong>Account &amp; billing:</strong> your email address, credit balance, and Stripe payment records (handled by Stripe — we never see your card details).</li>
-  <li><strong>API keys:</strong> a one-way hash of your API key, not the key itself.</li>
-  <li><strong>Usage metadata:</strong> which processor/target pair you converted, how many transactions, and whether it succeeded — never the transaction data itself.</li>
-  <li><strong>Failed conversions:</strong> if your file's format isn't recognized, we store a one-way hash of the column headers (not their values) so we can tell which new formats are worth adding. We never store row content from a failed conversion either.</li>
+  <li><strong>Email address:</strong> only if you provide one, which happens after your first free run. It's used to track free-trial usage and (since billing is disabled) an always-zero credit balance placeholder for that purpose.</li>
+  <li><strong>Usage metadata:</strong> that a conversion attempt happened, which processor was used, whether it succeeded, and row/payout counts — never the transaction data itself.</li>
+  <li><strong>Rate-limit and free-trial state:</strong> your IP address, kept in short-lived form only long enough to enforce rate limits and the one-free-run policy.</li>
+  <li><strong>"Missing platform" feedback:</strong> if you use the "don't see your processor" box, we store the text you typed.</li>
 </ul>
+<p>Billing is disabled in this alpha (no checkout, no payment processor is contacted), so no payment data of any kind is collected. The database has tables reserved for future credit-pack purchases and API keys, but they stay empty while billing is off.</p>
 
 <h2>What we don't do</h2>
 <ul>
-  <li>We don't connect to your bank, Stripe, PayPal, QuickBooks, or Xero accounts. You download an export yourself and upload it here; you import the result yourself. No OAuth, no standing access to your financial accounts.</li>
-  <li>We don't sell or share your data with third parties beyond the infrastructure providers necessary to run the service (Cloudflare for hosting, Stripe for payment processing).</li>
-  <li>We don't use your uploaded data to train any model. There's no model in this product — the conversion is deterministic code, not AI.</li>
+  <li>We don't connect to your bank, Stripe, QuickBooks, or Xero accounts. You download an export yourself and upload it here; nothing is written back anywhere automatically. No OAuth, no standing access to your financial accounts.</li>
+  <li>We don't store column headers or any other content from files that fail validation.</li>
+  <li>We don't sell or share your data with third parties beyond the infrastructure provider necessary to run the service (Cloudflare for hosting).</li>
+  <li>We don't use your uploaded data to train any model. There's no model in this product — the validation and reconciliation logic is deterministic code, not AI.</li>
 </ul>
 
 <h2>Infrastructure</h2>
-<p>The service runs on Cloudflare Workers. Account, billing, and usage-metadata records are stored in Cloudflare D1. Rate-limiting state is stored in Cloudflare KV.</p>
+<p>The service runs on Cloudflare Workers. Rate-limiting and free-trial state are stored in Cloudflare KV. Cloudflare D1 is provisioned for future use but does not currently store any per-user data.</p>
 
 <h2>Contact</h2>
 <p>Questions about this policy: open an issue on our <a href="https://github.com/harrowhaus/autobot">GitHub repository</a>.</p>

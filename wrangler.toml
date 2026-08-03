@@ -19,8 +19,11 @@ migrations_dir = "migrations"
 binding = "CACHE"
 id = "ecce870d0d264b00ab9091755b6bb00c"
 
-[triggers]
-crons = ["0 6 * * 1"]
-
 [vars]
 ENVIRONMENT = "production"
+# Non-production alpha: both flags default off. Billing must not be
+# enabled, and QuickBooks journal export must not be offered, until the
+# acceptance tests in the containment audit pass and a human explicitly
+# flips these — see the audit's final report for the remaining blockers.
+BILLING_ENABLED = "false"
+ALLOW_QBO_EXPORT = "false"

@@ -206,6 +206,33 @@ button:disabled { opacity: 0.6; cursor: default; }
 .hidden { display: none; }
 .fine-print { font-size: 0.82rem; color: var(--muted); margin-top: 14px; }
 
+.error-list { margin: 10px 0; padding-left: 1.3em; color: var(--error); font-size: 0.9rem; }
+.error-list li { margin: 4px 0; }
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+.report-table th, .report-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.report-table th {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
 /* ---------- Pricing ---------- */
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 18px 0; }
 .price-tile { border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }

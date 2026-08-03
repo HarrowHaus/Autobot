@@ -1,31 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
-export type Processor = "stripe" | "paypal" | "square";
-export type AccountingTarget = "qbo" | "xero";
-
-export interface NormalizedTransaction {
-  date: string; // YYYY-MM-DD
-  type: "charge" | "refund" | "fee" | "adjustment" | "other";
-  grossCents: number;
-  feeCents: number;
-  netCents: number;
-  currency: string;
-  /** Transactions sharing a payoutId become a single bank deposit line. */
-  payoutId: string;
-  description: string;
-}
-
-export interface ConversionResult {
-  journalFile: { filename: string; content: string; mimeType: string };
-  bankMatchFile: { filename: string; content: string; mimeType: string };
-  summary: {
-    payoutCount: number;
-    transactionCount: number;
-    totalGrossCents: number;
-    totalFeeCents: number;
-    totalNetCents: number;
-  };
-}
+export type Processor = "stripe";
+export type AccountingTarget = "qbo";
 
 export class UnrecognizedFormatError extends Error {
   header: string[];
@@ -36,12 +12,28 @@ export class UnrecognizedFormatError extends Error {
   }
 }
 
+/**
+ * PayoutSplit is a non-production alpha. BILLING_ENABLED and
+ * ALLOW_QBO_EXPORT default to "false" and gate the only two things in this
+ * app that could cause real financial harm if wrong: charging real money,
+ * and producing a file someone imports directly into their books.
+ */
 export interface Env {
   DB: D1Database;
   CACHE: KVNamespace;
   ASSETS: Fetcher;
   ENVIRONMENT: string;
+  BILLING_ENABLED?: string;
+  ALLOW_QBO_EXPORT?: string;
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
   GITHUB_TOKEN?: string;
+}
+
+export function isBillingEnabled(env: Env): boolean {
+  return env.BILLING_ENABLED === "true";
+}
+
+export function isQboExportAllowed(env: Env): boolean {
+  return env.ALLOW_QBO_EXPORT === "true";
 }
