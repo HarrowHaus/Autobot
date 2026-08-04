@@ -4,6 +4,3 @@ dist/
 *.log
 .env
 .dev.vars
-public/convert/*.html
-!public/convert/.gitkeep
-public/sitemap.xml

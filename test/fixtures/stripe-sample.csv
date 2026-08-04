@@ -1,6 +1,0 @@
-Created (UTC),Currency,Gross,Fee,Net,Payout ID,Description,Reporting Category
-2026-01-10 08:00:00,USD,100.00,3.20,96.80,po_1,Charge for order #123,charge
-2026-01-11 09:15:00,USD,50.00,1.75,48.25,po_1,Charge for order #124,charge
-2026-01-12 10:00:00,USD,-20.00,-0.58,-19.42,po_1,Refund for order #123,refund
-2026-01-13 00:00:00,USD,0.00,0.00,126.63,po_1,Payout po_1,payout
-2026-01-14 08:00:00,USD,200.00,5.80,194.20,po_2,Charge for order #200,charge

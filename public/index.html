@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PayoutSplit — Convert Stripe/PayPal payouts to QuickBooks &amp; Xero</title>
-<meta name="description" content="Convert Stripe and PayPal payout exports into QuickBooks Online or Xero-ready journal entries and bank-match files. No signup, no subscription, files never stored.">
+<title>PayoutSplit (alpha) — Stripe payout reconciliation report</title>
+<meta name="description" content="Early alpha: upload a Stripe Payout Reconciliation Itemized export and get a reconciliation report showing charges, refunds, fees, and variances per payout. Not an accounting-ready import.">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <main>
 
 <section>
-  <span class="eyebrow">Stripe &amp; PayPal → QuickBooks &amp; Xero</span>
-  <h1>Your payout is one lump number. Your books need three.</h1>
-  <p class="tagline">PayoutSplit splits every Stripe or PayPal deposit into the sale, the fee, and the net — correctly, every time — so your bank feed finally matches your ledger.</p>
+  <span class="eyebrow">Early alpha — not production accounting software</span>
+  <h1>See exactly what's inside a Stripe payout before it touches your books</h1>
+  <p class="tagline">PayoutSplit reads a Stripe Payout Reconciliation Itemized export and produces a reconciliation report — the charges, refunds, fees, and any variance for each payout — so you can review it before you record anything. It does not currently produce a QuickBooks or Xero import file.</p>
 
   <div class="compare" aria-hidden="false">
     <div class="compare-panel before">
@@ -22,95 +22,70 @@
     </div>
     <div class="arrow" aria-hidden="true">→</div>
     <div class="compare-panel after">
-      <span class="panel-label">What PayoutSplit gives you</span>
-      <div class="ledger-row mono"><span>Undeposited Funds</span><span class="amount">Dr 1,255.63</span></div>
-      <div class="ledger-row mono"><span>Merchant Processing Fees</span><span class="amount">Dr 43.70</span></div>
-      <div class="ledger-row mono"><span>Sales Income</span><span class="amount">Cr 1,299.33</span></div>
+      <span class="panel-label">What the reconciliation report shows</span>
+      <div class="ledger-row mono"><span>Charges</span><span class="amount">1,299.33</span></div>
+      <div class="ledger-row mono"><span>Fees</span><span class="amount">43.70</span></div>
+      <div class="ledger-row mono"><span>Source net vs. calculated net</span><span class="amount">variance: 0.00</span></div>
     </div>
   </div>
 
-  <a href="#convert" class="btn hero-cta">Convert your first file free</a>
+  <a href="#convert" class="btn hero-cta">Try the alpha</a>
 </section>
 
 <section>
-  <p class="section-label">How it works</p>
+  <p class="section-label">What this alpha actually does</p>
   <div class="steps">
     <div class="step">
       <span class="step-num">1</span>
-      <h3>Upload your export</h3>
-      <p>Download a payout CSV from Stripe or PayPal, drop it in below.</p>
+      <h3>Upload one file</h3>
+      <p>A Stripe Payout Reconciliation Itemized CSV export. That is the only supported input right now.</p>
     </div>
     <div class="step">
       <span class="step-num">2</span>
-      <h3>We split gross, fee, and net</h3>
-      <p>Integer-cents math, guaranteed to balance — no rounding drift.</p>
+      <h3>We validate it strictly</h3>
+      <p>Unrecognized columns, mixed currencies, or unknown transaction categories are reported as errors, not guessed at.</p>
     </div>
     <div class="step">
       <span class="step-num">3</span>
-      <h3>Import two clean files</h3>
-      <p>A journal entry and a bank-match file, ready for QuickBooks or Xero.</p>
+      <h3>You get a reconciliation report</h3>
+      <p>Per-payout totals and any variance between the file's stated net and an independently recalculated net. This is informational, not an accounting import.</p>
     </div>
   </div>
 </section>
 
 <section id="convert">
-  <p class="section-label">Convert a file</p>
+  <p class="section-label">Try it</p>
   <div class="card">
     <form id="convert-form">
-      <div class="row">
-        <div>
-          <label for="processor">From</label>
-          <select id="processor" name="processor" required>
-            <option value="stripe">Stripe</option>
-            <option value="paypal">PayPal</option>
-          </select>
-        </div>
-        <div>
-          <label for="target">To</label>
-          <select id="target" name="target" required>
-            <option value="qbo">QuickBooks Online</option>
-            <option value="xero">Xero</option>
-          </select>
-        </div>
-      </div>
-
-      <label for="file">Your export file (.csv)</label>
+      <label for="file">Stripe Payout Reconciliation Itemized export (.csv)</label>
       <input type="file" id="file" name="file" accept=".csv" required>
+      <input type="hidden" name="processor" value="stripe">
 
-      <label for="email">Email <span style="font-weight:400;color:var(--muted)">(only needed after your first free conversion)</span></label>
-      <input type="email" id="email" name="email" placeholder="you@example.com">
-
-      <button type="submit" id="submit-btn" class="btn-block">Convert</button>
+      <button type="submit" id="submit-btn" class="btn-block">Validate file</button>
     </form>
 
-    <p class="trust-line"><strong>Nothing is ever stored.</strong> Your file is processed in memory for this one request and discarded immediately — no database, no disk, no OAuth into your bank or accounting software. Read the <a href="/privacy.html">privacy policy</a>.</p>
+    <p class="trust-line"><strong>This is an early alpha, not production software.</strong> Your file is processed in memory for this one request and is not written to a database — but treat every result here as informational, not accounting-ready, until it's been reviewed. Read the <a href="/privacy.html">privacy policy</a>.</p>
 
     <div id="result" class="result hidden"></div>
   </div>
 </section>
 
 <section>
-  <p class="section-label">Pricing</p>
-  <div class="pricing-grid">
-    <div class="price-tile"><div class="amount">Free</div><div class="desc">1st conversion</div></div>
-    <div class="price-tile"><div class="amount">$2</div><div class="desc">per conversion</div></div>
-    <div class="price-tile"><div class="amount">$15</div><div class="desc">10-pack</div></div>
-    <div class="price-tile"><div class="amount">$60</div><div class="desc">50-pack</div></div>
-  </div>
-  <p class="fine-print">No subscription, no account required to start. Credits never expire. Bookkeepers converting many clients' files: use the <a href="/v1/convert">API</a> with a 100-credit pack for $30.</p>
+  <p class="section-label">Access</p>
+  <p>This is a free, early alpha. There are no accounts, no email required, and no payment of any kind — that system isn't disabled, it doesn't exist. Usage is rate-limited to keep it available for everyone testing it.</p>
 </section>
 
 <section>
   <p class="section-label">Don't see your processor?</p>
   <form id="feedback-form" class="inline-form">
-    <input type="text" id="feedback-query" placeholder="e.g. Square to Xero">
+    <input type="text" id="feedback-query" placeholder="e.g. Square, or Amazon Seller Central">
     <button type="submit" class="btn-secondary">Send</button>
   </form>
   <p id="feedback-thanks" class="ok-text hidden fine-print">Thanks — noted.</p>
 </section>
 
 <footer>
-  PayoutSplit is <a href="https://github.com/harrowhaus/autobot">open source</a> — verify exactly what it does with your data.
+  PayoutSplit's <a href="https://github.com/harrowhaus/autobot">source is available for inspection</a> — verify exactly what it does with your data.
   &middot; <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
 </footer>
 
@@ -121,64 +96,177 @@ const form = document.getElementById('convert-form');
 const resultEl = document.getElementById('result');
 const submitBtn = document.getElementById('submit-btn');
 
-function centsToUsd(cents) {
-  return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+// DOM-construction helper — never innerHTML. Every value passed through
+// here becomes a text node or a plain IDL property assignment, so
+// server-provided strings (error messages, IDs, report values) can never
+// be interpreted as markup.
+function el(tag, props, children) {
+  const e = document.createElement(tag);
+  if (props) {
+    for (const [k, v] of Object.entries(props)) e[k] = v;
+  }
+  if (children) {
+    for (const child of children) {
+      e.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+    }
+  }
+  return e;
 }
 
-function downloadLink(file) {
-  const blob = new Blob([file.content], { type: file.mimeType });
-  const url = URL.createObjectURL(blob);
-  return `<a class="file-link" href="${url}" download="${file.filename}">Download ${file.filename}</a>`;
+function clearResult() {
+  while (resultEl.firstChild) resultEl.removeChild(resultEl.firstChild);
+}
+
+// Money arrives as integer MINOR units. Dividing by 100 is only correct for
+// two-decimal currencies — JPY and KRW have no minor unit at all, so ¥1000
+// would render as ¥10.00. The server tells us the exponent; never assume it.
+function minorToDisplay(minorUnits, currency, minorDigits) {
+  const digits = Number.isInteger(minorDigits) ? minorDigits : 2;
+  const value = minorUnits / Math.pow(10, digits);
+  try {
+    return value.toLocaleString('en-US', {
+      style: 'currency',
+      currency: currency || 'USD',
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits,
+    });
+  } catch {
+    return value.toFixed(digits);
+  }
+}
+
+function renderErrors(errors, correlationId) {
+  clearResult();
+  resultEl.appendChild(el('p', { className: 'error' }, ['This file could not be validated:']));
+  const list = el('ul', { className: 'error-list' });
+  for (const e of errors || []) {
+    list.appendChild(el('li', {}, [e.message || e.code || 'Unknown error']));
+  }
+  resultEl.appendChild(list);
+  if (correlationId) {
+    resultEl.appendChild(el('p', { className: 'fine-print' }, ['Correlation ID: ' + correlationId]));
+  }
+}
+
+function renderReport(report, correlationId) {
+  clearResult();
+  resultEl.appendChild(
+    el('p', { className: 'ok-text' }, [
+      'Validated ' + report.includedRowCount + ' of ' + report.totalRowsInFile + ' row(s) across ' + report.payouts.length + ' payout(s).',
+    ])
+  );
+
+  if (report.fileWarnings && report.fileWarnings.length) {
+    const warnList = el('ul', { className: 'error-list' });
+    for (const w of report.fileWarnings) warnList.appendChild(el('li', {}, [w]));
+    resultEl.appendChild(warnList);
+  }
+
+  const digits = report.currencyMinorDigits;
+
+  // One table per payout, listing EVERY reporting category by name. There is
+  // deliberately no "other" column: a bucket labelled "other" is where money
+  // goes to be forgotten about.
+  for (const p of report.payouts) {
+    const money = (v) => minorToDisplay(v, p.currency, digits);
+
+    resultEl.appendChild(
+      el('h3', { className: 'payout-heading' }, [p.payoutId + ' — ' + p.effectiveDate + ' (' + p.rowCount + ' rows)'])
+    );
+
+    const headers = ['Category', 'Rows', 'Gross', 'Fee column', 'Net', 'Treatment', 'Direction'];
+    const table = el('table', { className: 'report-table' });
+    table.appendChild(el('thead', {}, [el('tr', {}, headers.map((h) => el('th', {}, [h])))]));
+    const tbody = el('tbody');
+
+    for (const c of p.categories) {
+      const treatment = c.classification === 'unclassified' ? 'unclassified' : c.classification;
+      const direction = c.directionConfidence === 'confirmed' ? c.direction : c.direction + ' (unconfirmed)';
+      const cells = [
+        c.category,
+        String(c.rowCount),
+        money(c.grossCents),
+        money(c.feeColumnCents),
+        money(c.netCents),
+        treatment,
+        direction,
+      ];
+      tbody.appendChild(
+        el(
+          'tr',
+          c.classification === 'unclassified' ? { className: 'row-unclassified' } : {},
+          cells.map((v) => el('td', {}, [v]))
+        )
+      );
+    }
+
+    const totals = [
+      ['Gross total', money(p.grossTotalCents)],
+      ['Total fees (Stripe formula)', money(p.totalFeesPerStripeFormulaCents)],
+      ["Net per file", money(p.sourceNetCents)],
+      ['Net recalculated', money(p.calculatedNetCents)],
+      ['Variance', money(p.varianceCents)],
+    ];
+    for (const [label, value] of totals) {
+      tbody.appendChild(
+        el('tr', { className: 'totals-row' }, [
+          el('td', { colSpan: headers.length - 1 }, [label]),
+          el('td', label === 'Variance' && p.varianceCents !== 0 ? { className: 'error' } : {}, [value]),
+        ])
+      );
+    }
+
+    table.appendChild(tbody);
+    resultEl.appendChild(table);
+
+    for (const w of p.warnings || []) {
+      resultEl.appendChild(el('p', { className: 'fine-print' }, [w]));
+    }
+  }
+
+  // Completeness is never asserted — it cannot be verified from this file.
+  const disclosure = el('div', { className: 'disclosure' });
+  disclosure.appendChild(el('p', { className: 'section-label' }, ['What this report cannot tell you']));
+  const dlist = el('ul', { className: 'error-list' });
+  for (const d of report.completenessDisclosure || []) dlist.appendChild(el('li', {}, [d]));
+  disclosure.appendChild(dlist);
+  resultEl.appendChild(disclosure);
+
+  resultEl.appendChild(
+    el('p', { className: 'fine-print' }, [
+      'Reconciliation report only — not an accounting-ready import. Parser ' +
+        report.parserVersion +
+        '. File SHA-256: ' +
+        report.sourceFileSha256.slice(0, 16) +
+        '… Correlation ID: ' +
+        correlationId,
+    ])
+  );
 }
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Converting…';
+  submitBtn.textContent = 'Validating…';
   resultEl.classList.remove('hidden');
-  resultEl.innerHTML = '';
+  clearResult();
 
   const fd = new FormData(form);
   try {
     const res = await fetch('/convert', { method: 'POST', body: fd });
     const data = await res.json();
 
-    if (res.status === 402) {
-      resultEl.innerHTML = `<p class="error">${data.error === 'email_required_after_trial' ? 'Enter your email to continue after your free conversion.' : 'Free conversion used. Buy credits to continue.'}</p>`;
-      if (data.error === 'no_credits') {
-        resultEl.innerHTML += `<button id="buy-btn" type="button" class="btn">Buy 10 credits — $15</button>`;
-        document.getElementById('buy-btn').addEventListener('click', async () => {
-          const email = document.getElementById('email').value;
-          const checkoutRes = await fetch('/billing/checkout', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ pack: 'web_10', email }),
-          });
-          const checkout = await checkoutRes.json();
-          if (checkout.url) window.location.href = checkout.url;
-          else resultEl.innerHTML += '<p class="error">Billing isn\'t live yet — check back soon.</p>';
-        });
-      }
-      return;
-    }
-
     if (!data.ok) {
-      resultEl.innerHTML = `<p class="error">${data.message || data.error}</p>`;
+      renderErrors(data.errors, data.correlationId);
       return;
     }
 
-    const s = data.summary;
-    resultEl.innerHTML = `
-      <p class="ok-text">Converted ${s.transactionCount} transaction(s) across ${s.payoutCount} payout(s).</p>
-      <p>Gross ${centsToUsd(s.totalGrossCents)} &minus; Fees ${centsToUsd(s.totalFeeCents)} = Net ${centsToUsd(s.totalNetCents)}</p>
-      <div>${downloadLink(data.journalFile)}${downloadLink(data.bankMatchFile)}</div>
-      <p class="fine-print">Import the journal-entries file first, then the bank-match file when reconciling your bank feed.</p>
-    `;
+    renderReport(data.report, data.correlationId);
   } catch (err) {
-    resultEl.innerHTML = `<p class="error">Something went wrong: ${err}</p>`;
+    renderErrors([{ message: 'Something went wrong sending the request. Please try again.' }], null);
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Convert';
+    submitBtn.textContent = 'Validate file';
   }
 });
 

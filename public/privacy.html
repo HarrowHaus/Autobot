@@ -13,25 +13,36 @@
 <p>Last updated: 2026</p>
 
 <h2>The short version</h2>
-<p>We never store the contents of the file you upload. It's processed in memory for the duration of a single request and discarded immediately after we send you the converted file back. We don't need a database of your transactions to run this service, so we don't keep one.</p>
+<p>We never store the contents of the file you upload. It's processed in memory for the duration of a single request and discarded immediately after we send you the reconciliation report back. We don't need a database of your transactions to run this service, so we don't keep one.</p>
 
-<h2>What we do store</h2>
+<h2>We don't ask who you are</h2>
+<p>There are no accounts. We don't ask for your email, there's no sign-up, no login, no API key, and no payment of any kind — that entire system has been removed from the codebase, not merely switched off. Nothing you upload is linked to an identity, because we don't have one for you.</p>
+
+<h2>Exactly what gets written down</h2>
+<p>Two things go into our database (Cloudflare D1):</p>
 <ul>
-  <li><strong>Account &amp; billing:</strong> your email address, credit balance, and Stripe payment records (handled by Stripe — we never see your card details).</li>
-  <li><strong>API keys:</strong> a one-way hash of your API key, not the key itself.</li>
-  <li><strong>Usage metadata:</strong> which processor/target pair you converted, how many transactions, and whether it succeeded — never the transaction data itself.</li>
-  <li><strong>Failed conversions:</strong> if your file's format isn't recognized, we store a one-way hash of the column headers (not their values) so we can tell which new formats are worth adding. We never store row content from a failed conversion either.</li>
+  <li><strong>An anonymous usage row per conversion attempt:</strong> a random ID, which processor was selected, whether it succeeded or failed, an error code if it failed, and how many rows were included. No IP address, no identity, and no transaction data. We use this to know whether the alpha works at all.</li>
+  <li><strong>"Missing platform" feedback:</strong> if you type into the "don't see your processor" box, we store that text (truncated to 500 characters) and nothing else.</li>
 </ul>
+<p>One thing goes into short-term storage (Cloudflare KV):</p>
+<ul>
+  <li><strong>Rate-limit counters</strong> keyed by your IP address. These are set to expire automatically about a minute after they're written, and are used solely to stop one person from overwhelming the service.</li>
+</ul>
+<p><strong>Retention:</strong> KV rate-limit counters self-delete within roughly a minute. The two D1 tables above are currently kept indefinitely; because neither contains identifying information or file content, there is nothing in them to tie back to you. If that changes, this page changes first.</p>
 
 <h2>What we don't do</h2>
 <ul>
-  <li>We don't connect to your bank, Stripe, PayPal, QuickBooks, or Xero accounts. You download an export yourself and upload it here; you import the result yourself. No OAuth, no standing access to your financial accounts.</li>
-  <li>We don't sell or share your data with third parties beyond the infrastructure providers necessary to run the service (Cloudflare for hosting, Stripe for payment processing).</li>
-  <li>We don't use your uploaded data to train any model. There's no model in this product — the conversion is deterministic code, not AI.</li>
+  <li>We don't store the contents of your file, any column from it, or any derivative of it — including from files that fail validation.</li>
+  <li>We don't connect to your bank, Stripe, QuickBooks, or Xero accounts. You download an export yourself and upload it here; nothing is written back anywhere automatically. No OAuth, no standing access to your financial accounts.</li>
+  <li>We don't sell or share your data with third parties beyond the infrastructure provider necessary to run the service (Cloudflare for hosting).</li>
+  <li>We don't use your uploaded data to train any model. There's no model in this product — the validation and reconciliation logic is deterministic code, not AI.</li>
 </ul>
 
 <h2>Infrastructure</h2>
-<p>The service runs on Cloudflare Workers. Account, billing, and usage-metadata records are stored in Cloudflare D1. Rate-limiting state is stored in Cloudflare KV.</p>
+<p>The service runs on Cloudflare Workers, with Cloudflare D1 for the two metadata tables described above and Cloudflare KV for expiring rate-limit counters. Cloudflare also processes request logs on our behalf as part of hosting.</p>
+
+<h2>Verify this yourself</h2>
+<p>You don't have to take our word for any of the above. The source is published — <code>src/lib/signals.ts</code> contains every database write this service makes, and it is about twenty lines long.</p>
 
 <h2>Contact</h2>
 <p>Questions about this policy: open an issue on our <a href="https://github.com/harrowhaus/autobot">GitHub repository</a>.</p>

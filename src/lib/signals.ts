@@ -1,22 +1,9 @@
-import { hashHeaderSignature } from "./csv.js";
 import { newId } from "./ids.js";
 
-/** Growth-loop input. Only a hashed header signature is stored — never row content. */
-export async function logFailedConversion(
-  db: D1Database,
-  processorGuess: string | null,
-  target: string | null,
-  reasonCode: string,
-  header: string[]
-): Promise<void> {
-  const headerHash = header.length > 0 ? await hashHeaderSignature(header) : null;
-  await db
-    .prepare(
-      `INSERT INTO failed_conversion_signals (id, processor_guess, target, reason_code, header_signature_hash) VALUES (?, ?, ?, ?, ?)`
-    )
-    .bind(newId("fcs"), processorGuess, target, reasonCode, headerHash)
-    .run();
-}
+/**
+ * The only two things this alpha writes to D1. Neither stores file content,
+ * and neither is tied to a user identity — there are no accounts.
+ */
 
 export async function logLandingPageQuery(db: D1Database, queryText: string): Promise<void> {
   await db
@@ -27,7 +14,6 @@ export async function logLandingPageQuery(db: D1Database, queryText: string): Pr
 
 export async function logConversion(
   db: D1Database,
-  accountId: string | null,
   processor: string,
   target: string,
   status: "ok" | "error",
@@ -36,8 +22,8 @@ export async function logConversion(
 ): Promise<void> {
   await db
     .prepare(
-      `INSERT INTO conversions (id, account_id, processor, target, status, row_count, error_code) VALUES (?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO conversions (id, processor, target, status, row_count, error_code) VALUES (?, ?, ?, ?, ?, ?)`
     )
-    .bind(newId("conv"), accountId, processor, target, status, rowCount, errorCode)
+    .bind(newId("conv"), processor, target, status, rowCount, errorCode)
     .run();
 }

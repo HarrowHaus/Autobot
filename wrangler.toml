@@ -19,8 +19,18 @@ migrations_dir = "migrations"
 binding = "CACHE"
 id = "ecce870d0d264b00ab9091755b6bb00c"
 
-[triggers]
-crons = ["0 6 * * 1"]
-
 [vars]
 ENVIRONMENT = "production"
+
+# BILLING_ENABLED is an assertion, not a switch. There is no billing,
+# account, credit, API-key, checkout, or webhook code in this Worker — it
+# was deleted, not disabled. This var exists so /healthz can state that
+# fact externally. Setting it to "true" enables nothing.
+BILLING_ENABLED = "false"
+
+# ALLOW_QBO_EXPORT does gate real behavior. The QuickBooks journal builder
+# exists and is tested, but its output has never been imported into a real
+# QuickBooks company, and the parser it depends on has never been run
+# against a real Stripe export. Do not set this to "true" until both of
+# those are done — see the manual validation checklist in PR #5.
+ALLOW_QBO_EXPORT = "false"
