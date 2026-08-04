@@ -28,6 +28,7 @@ export async function convert(csvText: string, processor: string, options: Conve
       validation: {
         ok: false,
         report: null,
+        errorsTruncated: false,
         blockingErrors: [
           {
             code: "unsupported_processor",

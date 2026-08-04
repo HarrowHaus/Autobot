@@ -162,37 +162,75 @@ function renderReport(report, correlationId) {
     resultEl.appendChild(warnList);
   }
 
-  const headers = ['Payout', 'Date', 'Charges', 'Refunds', 'Fees', 'Disputes', 'Adjustments', 'Source net', 'Calc. net', 'Variance'];
-  const table = el('table', { className: 'report-table' });
-  table.appendChild(el('thead', {}, [el('tr', {}, headers.map((h) => el('th', {}, [h])))]));
-  const tbody = el('tbody');
+  const digits = report.currencyMinorDigits;
 
+  // One table per payout, listing EVERY reporting category by name. There is
+  // deliberately no "other" column: a bucket labelled "other" is where money
+  // goes to be forgotten about.
   for (const p of report.payouts) {
-    const cells = [
-      p.payoutId,
-      p.effectiveDate || '—',
-      centsToDisplay(p.chargeTotalCents, p.currency),
-      centsToDisplay(p.refundTotalCents, p.currency),
-      centsToDisplay(p.feeTotalCents, p.currency),
-      centsToDisplay(p.disputeTotalCents, p.currency),
-      centsToDisplay(p.adjustmentTotalCents, p.currency),
-      centsToDisplay(p.sourceNetCents, p.currency),
-      centsToDisplay(p.calculatedNetCents, p.currency),
-      centsToDisplay(p.varianceCents, p.currency),
-    ];
-    const row = el(
-      'tr',
-      {},
-      cells.map((c, i) => el('td', i === cells.length - 1 && p.varianceCents !== 0 ? { className: 'error' } : {}, [String(c)]))
+    const money = (v) => minorToDisplay(v, p.currency, digits);
+
+    resultEl.appendChild(
+      el('h3', { className: 'payout-heading' }, [p.payoutId + ' — ' + p.effectiveDate + ' (' + p.rowCount + ' rows)'])
     );
-    tbody.appendChild(row);
-    if (p.warnings && p.warnings.length) {
-      const warnCell = el('td', { colSpan: headers.length, className: 'fine-print' }, [p.warnings.join(' ')]);
-      tbody.appendChild(el('tr', {}, [warnCell]));
+
+    const headers = ['Category', 'Rows', 'Gross', 'Fee column', 'Net', 'Treatment', 'Direction'];
+    const table = el('table', { className: 'report-table' });
+    table.appendChild(el('thead', {}, [el('tr', {}, headers.map((h) => el('th', {}, [h])))]));
+    const tbody = el('tbody');
+
+    for (const c of p.categories) {
+      const treatment = c.classification === 'unclassified' ? 'unclassified' : c.classification;
+      const direction = c.directionConfidence === 'confirmed' ? c.direction : c.direction + ' (unconfirmed)';
+      const cells = [
+        c.category,
+        String(c.rowCount),
+        money(c.grossCents),
+        money(c.feeColumnCents),
+        money(c.netCents),
+        treatment,
+        direction,
+      ];
+      tbody.appendChild(
+        el(
+          'tr',
+          c.classification === 'unclassified' ? { className: 'row-unclassified' } : {},
+          cells.map((v) => el('td', {}, [v]))
+        )
+      );
+    }
+
+    const totals = [
+      ['Gross total', money(p.grossTotalCents)],
+      ['Total fees (Stripe formula)', money(p.totalFeesPerStripeFormulaCents)],
+      ["Net per file", money(p.sourceNetCents)],
+      ['Net recalculated', money(p.calculatedNetCents)],
+      ['Variance', money(p.varianceCents)],
+    ];
+    for (const [label, value] of totals) {
+      tbody.appendChild(
+        el('tr', { className: 'totals-row' }, [
+          el('td', { colSpan: headers.length - 1 }, [label]),
+          el('td', label === 'Variance' && p.varianceCents !== 0 ? { className: 'error' } : {}, [value]),
+        ])
+      );
+    }
+
+    table.appendChild(tbody);
+    resultEl.appendChild(table);
+
+    for (const w of p.warnings || []) {
+      resultEl.appendChild(el('p', { className: 'fine-print' }, [w]));
     }
   }
-  table.appendChild(tbody);
-  resultEl.appendChild(table);
+
+  // Completeness is never asserted — it cannot be verified from this file.
+  const disclosure = el('div', { className: 'disclosure' });
+  disclosure.appendChild(el('p', { className: 'section-label' }, ['What this report cannot tell you']));
+  const dlist = el('ul', { className: 'error-list' });
+  for (const d of report.completenessDisclosure || []) dlist.appendChild(el('li', {}, [d]));
+  disclosure.appendChild(dlist);
+  resultEl.appendChild(disclosure);
 
   resultEl.appendChild(
     el('p', { className: 'fine-print' }, [

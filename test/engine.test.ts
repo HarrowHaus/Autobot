@@ -36,7 +36,6 @@ describe("convert", () => {
           refundsAndReturns: "Refunds and Returns",
           processingFees: "Merchant Processing Fees",
           disputesAndChargebacks: "Disputes and Chargebacks",
-          otherAdjustments: "Other Adjustments",
         },
       },
     });
@@ -54,7 +53,6 @@ describe("convert", () => {
           refundsAndReturns: "c",
           processingFees: "d",
           disputesAndChargebacks: "e",
-          otherAdjustments: "f",
         },
       },
     });

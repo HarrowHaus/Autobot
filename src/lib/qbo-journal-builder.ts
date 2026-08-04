@@ -1,13 +1,21 @@
 import { toCsv } from "./csv.js";
 import { centsToDecimalString } from "./money.js";
 import type { ReconciliationReport } from "../validators/stripe-payout-itemized.js";
+import { specFor } from "../validators/stripe-categories.js";
 
 /**
  * Builds a QuickBooks Online journal-entry CSV from an already-reconciled
- * report. Gated behind ALLOW_QBO_EXPORT at the route level — this module
- * assumes the caller has already checked that flag; it does not check it
- * itself, since "does this feature run at all" and "is this specific
- * output safe to produce" are different questions.
+ * report.
+ *
+ * Gated behind ALLOW_QBO_EXPORT at the route level — this module assumes the
+ * caller checked that flag. It has NEVER been imported into a real
+ * QuickBooks company, so it must stay disabled until that happens.
+ *
+ * The governing rule: refuse rather than guess. Every category present must
+ * map to an account the caller explicitly nominated. Anything Stripe does
+ * not document a booking treatment for blocks the whole journal, because the
+ * failure mode of guessing — silently classifying an unknown movement as
+ * revenue — is exactly the kind of error nobody notices until an audit.
  */
 
 export interface AccountMappings {
@@ -16,7 +24,6 @@ export interface AccountMappings {
   refundsAndReturns: string;
   processingFees: string;
   disputesAndChargebacks: string;
-  otherAdjustments: string;
 }
 
 const REQUIRED_MAPPING_KEYS: (keyof AccountMappings)[] = [
@@ -25,7 +32,6 @@ const REQUIRED_MAPPING_KEYS: (keyof AccountMappings)[] = [
   "refundsAndReturns",
   "processingFees",
   "disputesAndChargebacks",
-  "otherAdjustments",
 ];
 
 export interface JournalBuildError {
@@ -49,13 +55,12 @@ export function validateAccountMappings(mappings: Partial<AccountMappings> | nul
 }
 
 /**
- * Derives a stable journal number from the payout ID itself — never a
- * PS1/PS2-style sequential counter, which would silently collide or shift
- * across separate runs/uploads of the same payout.
+ * Journal number derived from the payout ID itself — never a PS1/PS2
+ * sequential counter, which would collide or shift across separate runs of
+ * the same payout and destroy the audit trail.
  */
 function journalNumberFor(payoutId: string): string {
-  const cleaned = payoutId.replace(/[^a-zA-Z0-9]/g, "");
-  return `PS-${cleaned}`.slice(0, 21); // QBO journal-number fields are conventionally capped around 21 chars
+  return `PS-${payoutId.replace(/[^a-zA-Z0-9]/g, "")}`.slice(0, 21);
 }
 
 function signedLine(account: string, signedCents: number): { account: string; debit: number; credit: number } {
@@ -66,10 +71,7 @@ function signedLine(account: string, signedCents: number): { account: string; de
   };
 }
 
-export function buildQboJournalCsv(
-  report: ReconciliationReport,
-  mappings: AccountMappings
-): JournalBuildResult {
+export function buildQboJournalCsv(report: ReconciliationReport, mappings: AccountMappings): JournalBuildResult {
   const mappingError = validateAccountMappings(mappings);
   if (mappingError) return { ok: false, error: mappingError };
 
@@ -86,16 +88,7 @@ export function buildQboJournalCsv(
         ok: false,
         error: {
           code: "unreconciled_payout",
-          message: `Payout ${payout.payoutId} does not reconcile (variance ${payout.varianceCents} cent(s)) — cannot generate a journal entry until this is resolved.`,
-        },
-      };
-    }
-    if (payout.otherTotalCents !== 0) {
-      return {
-        ok: false,
-        error: {
-          code: "unclassified_category",
-          message: `Payout ${payout.payoutId} includes ${payout.otherTotalCents} cent(s) in reporting categories that aren't mapped to a QuickBooks account (charge/refund/dispute/adjustment only). Refusing to guess an account rather than misclassify it as revenue.`,
+          message: `Payout ${payout.payoutId} does not reconcile (variance ${payout.varianceCents}). Refusing to journal it.`,
         },
       };
     }
@@ -104,22 +97,79 @@ export function buildQboJournalCsv(
         ok: false,
         error: {
           code: "missing_effective_date",
-          message: `Payout ${payout.payoutId} has no parseable payout effective date; the journal date must be the payout effective date, not a transaction date.`,
+          message: `Payout ${payout.payoutId} has no payout effective date; the journal date must be the payout date, not a transaction date.`,
+        },
+      };
+    }
+
+    // Every category must have a documented booking treatment AND an account.
+    const unbookable = payout.categories.filter((c) => {
+      const classification = specFor(c.category)?.classification;
+      return classification === undefined || classification === "unclassified";
+    });
+    if (unbookable.length > 0) {
+      return {
+        ok: false,
+        error: {
+          code: "unclassified_category",
+          message: `Payout ${payout.payoutId} contains categor${unbookable.length === 1 ? "y" : "ies"} with no documented accounting treatment: ${unbookable
+            .map((c) => `${c.category} (${centsToDecimalString(c.grossCents, payout.currency)})`)
+            .join(", ")}. Refusing to guess an account rather than misclassify it — most dangerously, as revenue.`,
+        },
+      };
+    }
+
+    // Accumulate by booking treatment. Fees come from BOTH the fee column and
+    // the gross of fee-in-gross categories (Stripe's published formula) —
+    // totalling only the fee column would understate them.
+    let revenueGross = 0;
+    let refundGross = 0;
+    let disputeGross = 0;
+    for (const c of payout.categories) {
+      switch (specFor(c.category)!.classification) {
+        case "revenue":
+          revenueGross += c.grossCents;
+          break;
+        case "refund":
+          refundGross += c.grossCents;
+          break;
+        case "dispute":
+          disputeGross += c.grossCents;
+          break;
+        case "fee":
+          break; // handled via totalFeesPerStripeFormulaCents below
+        default:
+          break;
+      }
+    }
+
+    const feesDebit = payout.totalFeesPerStripeFormulaCents;
+
+    const lines = [
+      signedLine(mappings.stripeClearing, payout.calculatedNetCents),
+      signedLine(mappings.revenue, -revenueGross),
+      signedLine(mappings.refundsAndReturns, -refundGross),
+      signedLine(mappings.disputesAndChargebacks, -disputeGross),
+      signedLine(mappings.processingFees, feesDebit),
+    ].filter((l) => l.debit !== 0 || l.credit !== 0);
+
+    // Balance is a property of the arithmetic, not an aspiration. Assert it
+    // rather than trusting it: an unbalanced journal that reaches QuickBooks
+    // is worse than no journal at all.
+    const totalDebits = lines.reduce((a, l) => a + l.debit, 0);
+    const totalCredits = lines.reduce((a, l) => a + l.credit, 0);
+    if (totalDebits !== totalCredits) {
+      return {
+        ok: false,
+        error: {
+          code: "unbalanced_journal",
+          message: `Internal check failed: journal for payout ${payout.payoutId} does not balance (debits ${totalDebits}, credits ${totalCredits}). This is a bug in PayoutSplit — please report it. No journal was produced.`,
         },
       };
     }
 
     const journalNo = journalNumberFor(payout.payoutId);
     const description = `Stripe payout ${payout.payoutId}`;
-    const lines = [
-      signedLine(mappings.stripeClearing, payout.calculatedNetCents),
-      signedLine(mappings.revenue, -payout.chargeTotalCents),
-      signedLine(mappings.refundsAndReturns, -payout.refundTotalCents),
-      signedLine(mappings.processingFees, payout.feeTotalCents),
-      signedLine(mappings.disputesAndChargebacks, -payout.disputeTotalCents),
-      signedLine(mappings.otherAdjustments, -payout.adjustmentTotalCents),
-    ].filter((l) => l.debit !== 0 || l.credit !== 0);
-
     for (const line of lines) {
       rows.push([
         journalNo,
