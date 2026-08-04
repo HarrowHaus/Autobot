@@ -13,10 +13,17 @@ export class UnrecognizedFormatError extends Error {
 }
 
 /**
- * PayoutSplit is a non-production alpha. BILLING_ENABLED and
- * ALLOW_QBO_EXPORT default to "false" and gate the only two things in this
- * app that could cause real financial harm if wrong: charging real money,
- * and producing a file someone imports directly into their books.
+ * PayoutSplit is a non-production alpha.
+ *
+ * There is no billing code in this Worker at all — the account, credit,
+ * API-key, checkout, and webhook system was deleted rather than disabled.
+ * BILLING_ENABLED is retained only as an explicit, externally-visible
+ * assertion (surfaced on /healthz) that no payment path exists; there is
+ * nothing it could switch on.
+ *
+ * ALLOW_QBO_EXPORT does gate real behavior: the QuickBooks journal builder
+ * exists and is tested, but must not be offered until its output has been
+ * imported into a real QuickBooks sandbox and verified.
  */
 export interface Env {
   DB: D1Database;
@@ -25,11 +32,9 @@ export interface Env {
   ENVIRONMENT: string;
   BILLING_ENABLED?: string;
   ALLOW_QBO_EXPORT?: string;
-  STRIPE_SECRET_KEY?: string;
-  STRIPE_WEBHOOK_SECRET?: string;
-  GITHUB_TOKEN?: string;
 }
 
+/** Always false in this alpha: no payment path is implemented. */
 export function isBillingEnabled(env: Env): boolean {
   return env.BILLING_ENABLED === "true";
 }

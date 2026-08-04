@@ -61,9 +61,6 @@
       <input type="file" id="file" name="file" accept=".csv" required>
       <input type="hidden" name="processor" value="stripe">
 
-      <label for="email">Email <span style="font-weight:400;color:var(--muted)">(only needed after your first free run)</span></label>
-      <input type="email" id="email" name="email" placeholder="you@example.com">
-
       <button type="submit" id="submit-btn" class="btn-block">Validate file</button>
     </form>
 
@@ -75,7 +72,7 @@
 
 <section>
   <p class="section-label">Access</p>
-  <p>This is a free, early alpha. There is no payment or subscription — purchasing isn't enabled. Usage is rate-limited to keep it available for everyone testing it.</p>
+  <p>This is a free, early alpha. There are no accounts, no email required, and no payment of any kind — that system isn't disabled, it doesn't exist. Usage is rate-limited to keep it available for everyone testing it.</p>
 </section>
 
 <section>
@@ -88,7 +85,7 @@
 </section>
 
 <footer>
-  PayoutSplit is <a href="https://github.com/harrowhaus/autobot">open source</a> — verify exactly what it does with your data.
+  PayoutSplit's <a href="https://github.com/harrowhaus/autobot">source is available for inspection</a> — verify exactly what it does with your data.
   &middot; <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
 </footer>
 
@@ -120,11 +117,21 @@ function clearResult() {
   while (resultEl.firstChild) resultEl.removeChild(resultEl.firstChild);
 }
 
-function centsToDisplay(cents, currency) {
+// Money arrives as integer MINOR units. Dividing by 100 is only correct for
+// two-decimal currencies — JPY and KRW have no minor unit at all, so ¥1000
+// would render as ¥10.00. The server tells us the exponent; never assume it.
+function minorToDisplay(minorUnits, currency, minorDigits) {
+  const digits = Number.isInteger(minorDigits) ? minorDigits : 2;
+  const value = minorUnits / Math.pow(10, digits);
   try {
-    return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: currency || 'USD' });
+    return value.toLocaleString('en-US', {
+      style: 'currency',
+      currency: currency || 'USD',
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits,
+    });
   } catch {
-    return (cents / 100).toFixed(2);
+    return value.toFixed(digits);
   }
 }
 

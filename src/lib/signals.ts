@@ -1,5 +1,10 @@
 import { newId } from "./ids.js";
 
+/**
+ * The only two things this alpha writes to D1. Neither stores file content,
+ * and neither is tied to a user identity — there are no accounts.
+ */
+
 export async function logLandingPageQuery(db: D1Database, queryText: string): Promise<void> {
   await db
     .prepare(`INSERT INTO landing_page_queries (id, query_text) VALUES (?, ?)`)
@@ -9,7 +14,6 @@ export async function logLandingPageQuery(db: D1Database, queryText: string): Pr
 
 export async function logConversion(
   db: D1Database,
-  accountId: string | null,
   processor: string,
   target: string,
   status: "ok" | "error",
@@ -18,8 +22,8 @@ export async function logConversion(
 ): Promise<void> {
   await db
     .prepare(
-      `INSERT INTO conversions (id, account_id, processor, target, status, row_count, error_code) VALUES (?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO conversions (id, processor, target, status, row_count, error_code) VALUES (?, ?, ?, ?, ?, ?)`
     )
-    .bind(newId("conv"), accountId, processor, target, status, rowCount, errorCode)
+    .bind(newId("conv"), processor, target, status, rowCount, errorCode)
     .run();
 }

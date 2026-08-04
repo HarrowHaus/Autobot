@@ -1,52 +1,93 @@
-# PayoutSplit
+# PayoutSplit (alpha)
 
-Converts Stripe/PayPal payout and transaction exports into QuickBooks Online / Xero-ready journal-entry and bank-match files. Pay-per-use, no signup, no subscription — positioned against subscription incumbents (A2X, Synder, Webgility) rather than competing with them.
+**Status: early alpha. Not production accounting software. Not tested against a real Stripe export.**
 
-See [`plan`](https://github.com/harrowhaus/autobot) commit history / PR description for the full validation research behind this product.
+Reads a Stripe **Payout Reconciliation Itemized** CSV export and produces a
+*reconciliation report*: per-payout activity broken out by reporting
+category, with the file's stated net compared against an independently
+recalculated net.
 
-## How it works
+It deliberately does **not**:
 
-Single Cloudflare Worker (Hono). Uploaded CSVs are parsed, grouped by payout, and mapped to two output files entirely in memory — nothing is ever persisted to disk, R2, or a database. Only usage metadata (never file content) goes into D1.
+- produce a QuickBooks or Xero import file (the QuickBooks journal builder
+  exists and is tested, but is gated off behind `ALLOW_QBO_EXPORT` until its
+  output has actually been imported into a real QuickBooks sandbox);
+- support PayPal, Square, or any processor other than Stripe;
+- accept payment — there is no billing, account, or API-key system in this
+  codebase at all;
+- guess. Anything it cannot interpret against the one documented schema it
+  supports is reported as an error rather than silently absorbed.
+
+## Why it fails loudly
+
+This tool handles money, so it is built to fail closed. Unknown reporting
+categories, mixed currencies, malformed amounts, duplicate transaction IDs,
+and rows whose `gross`/`fee`/`net` don't satisfy Stripe's documented
+arithmetic identity are all **blocking errors**, not warnings. A file that
+produces no output is a better outcome than a report that quietly
+misclassifies a transaction.
+
+Rows that are merely out of scope (for example, balance transactions not yet
+associated with an automatic payout) are excluded rather than blocking — but
+every exclusion is recorded in the report's row audit with its reason. No row
+is ever silently dropped.
+
+## Known limitations
+
+See the "Remaining unsupported cases" section of the open containment PR for
+the current list. The most important ones:
+
+- **The validator has never been run against a real, unmodified Stripe
+  export.** All fixtures are synthetic, built from documented schemas.
+- The `reporting_category` allowlist is assembled from Stripe's published
+  documentation, but Stripe does not publish one authoritative machine-readable
+  enum. Categories whose accounting treatment isn't documented are recognized
+  but deliberately left unclassified rather than guessed at.
+- Payout **completeness cannot be verified** from an itemized export alone —
+  the report says so explicitly rather than implying the totals are whole.
+
+## Architecture
+
+Single Cloudflare Worker (Hono). Uploaded CSVs are parsed and validated
+entirely in memory for the duration of one request — file content is never
+written to disk, R2, or a database.
 
 ```
-src/parsers/{stripe,paypal}.ts     raw CSV -> NormalizedTransaction[]
-src/mappers/{qbo,xero}-*.ts        grouped payouts -> target CSV
-src/engine.ts                      orchestrates parse -> group -> map
-src/index.ts                       Hono routes (/convert, /v1/convert, /webhooks/stripe)
-src/growth-loop.ts                 weekly cron: detects new-pair demand signals
+src/validators/stripe-payout-itemized.ts   the strict single-format validator
+src/lib/money.ts                           strict integer-minor-unit money parsing
+src/lib/qbo-journal-builder.ts             QuickBooks journal (gated off)
+src/engine.ts                              orchestration
+src/index.ts                               Hono routes: /convert, /feedback/*, /healthz
 ```
+
+D1 stores only anonymous usage metadata (`conversions`) and "didn't see your
+processor" submissions (`landing_page_queries`). KV stores only short-lived
+rate-limit counters. See [`public/privacy.html`](public/privacy.html).
 
 ## Local development
 
 ```
 npm install
-npm run dev          # wrangler dev, regenerates landing pages first
-npm test              # vitest
+npm run dev          # wrangler dev
+npm test             # vitest
 npm run typecheck
+npm run db:migrate:local
 ```
 
 ## Deployment
 
-Deploys via Cloudflare's Git integration ("Workers Builds") on push to `main` — connected directly in the Cloudflare dashboard (Workers & Pages → Import a repository), no GitHub secrets involved. Build command: `npm run generate:pages`. GitHub Actions (`.github/workflows/test.yml`) only runs tests/typecheck; it doesn't deploy.
+Deploys via Cloudflare's Git integration ("Workers Builds") on push to `main`.
+GitHub Actions (`.github/workflows/test.yml`) only runs tests and typecheck;
+it does not deploy.
 
-Manual deploy: `npm run deploy` (requires `wrangler login` or `CLOUDFLARE_API_TOKEN` in the local shell).
+**PR branches must not be deployed to the production Worker.**
 
-No credentials at all? `./scripts/preview-deploy.sh` spins up a fully-working preview (real D1 + KV, schema applied) on a throwaway anonymous Cloudflare account via `wrangler deploy --temporary` — no login required. It expires in about an hour unless claimed via the URL the script prints, and its data store is separate from the real one.
+No secrets are required — there are none to set. Both `BILLING_ENABLED` and
+`ALLOW_QBO_EXPORT` are `"false"` in `wrangler.toml` and must stay that way
+until the manual validation checklist in the containment PR is done.
 
-## Required secrets for full functionality
+## License
 
-Set via `wrangler secret put <NAME>` (or the Cloudflare dashboard: Worker → Settings → Variables and Secrets):
-
-- `STRIPE_SECRET_KEY` — enables `/billing/checkout` and credit purchases. Without it, billing routes return `501 billing_not_configured` and only the one free trial conversion works.
-- `STRIPE_WEBHOOK_SECRET` — enables `/webhooks/stripe` fulfillment.
-- `GITHUB_TOKEN` — optional; lets the weekly growth-loop cron open GitHub issues for new-pair demand signals. Without it, detection still runs, issue filing is just skipped.
-
-## Adding a new processor → accounting-software pair
-
-1. Add `src/parsers/<processor>.ts` following the pattern in `stripe.ts`/`paypal.ts` (raw CSV → `NormalizedTransaction[]`).
-2. If needed, add a new mapper in `src/mappers/`.
-3. Wire it into `PARSERS` in `src/engine.ts`.
-4. Add a fixture + tests.
-5. Add an entry to `data/pairs.json` for its landing page.
-
-This is also exactly what the weekly growth-loop issue template asks for — see `src/growth-loop.ts`.
+See [LICENSE](LICENSE). The source is published for inspection — so that
+anyone considering uploading financial data can read exactly what happens to
+it — under a permissive license.

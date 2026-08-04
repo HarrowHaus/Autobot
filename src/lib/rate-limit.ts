@@ -1,22 +1,8 @@
 /**
- * Free-trial gate: one free conversion per IP+email, tracked in KV. The
- * caller is responsible for checking/marking this at the right point in
- * the flow — hasUsedFreeTrial() is a read-only peek, markFreeTrialUsed() is
- * the mutation, and the mutation must only happen after a conversion has
- * been fully validated (see /convert in index.ts). Not perfect anti-abuse,
- * but enough friction for a free trial without adding auth to try it.
+ * Rate limiting is the only access control in this alpha. There is no
+ * free-trial counter and no credit balance, because there are no accounts —
+ * that whole system was removed rather than left dormant.
  */
-function trialKey(ip: string, email: string): string {
-  return `trial:${ip}:${email || "anon"}`;
-}
-
-export async function hasUsedFreeTrial(kv: KVNamespace, ip: string, email: string): Promise<boolean> {
-  return (await kv.get(trialKey(ip, email))) !== null;
-}
-
-export async function markFreeTrialUsed(kv: KVNamespace, ip: string, email: string): Promise<void> {
-  await kv.put(trialKey(ip, email), "1", { expirationTtl: 60 * 60 * 24 * 365 });
-}
 
 export interface RateLimitResult {
   allowed: boolean;

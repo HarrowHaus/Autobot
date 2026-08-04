@@ -64,6 +64,145 @@ export function parseCsvRecords(text: string): Record<string, string>[] {
   });
 }
 
+/**
+ * Structural limits. These are not accounting rules — they exist so that a
+ * malformed or hostile file is rejected with a clear message before any
+ * money logic runs on it, rather than being silently reshaped into
+ * something parseable-but-wrong.
+ */
+export const MAX_COLUMNS = 250;
+export const MAX_FIELD_CHARS = 10_000;
+
+export interface CsvStructureError {
+  code: string;
+  field: string;
+  message: string;
+}
+
+export interface CsvStructureResult {
+  ok: boolean;
+  header: string[];
+  records: Record<string, string>[];
+  errors: CsvStructureError[];
+}
+
+/**
+ * Parses a CSV and enforces structural integrity BEFORE any field is
+ * interpreted. The plain parseCsv() above is forgiving by design (it will
+ * happily absorb an unterminated quote or a short row); for financial input
+ * that forgiveness is a hazard, because a single stray quote can silently
+ * merge two rows into one and change totals without producing any visible
+ * error. This function refuses instead.
+ */
+export function parseCsvStructured(text: string): CsvStructureResult {
+  const empty = { header: [] as string[], records: [] as Record<string, string>[] };
+  const fail = (code: string, field: string, message: string): CsvStructureResult => ({
+    ok: false,
+    ...empty,
+    errors: [{ code, field, message }],
+  });
+
+  // An odd number of unescaped quotes means a field was never closed, which
+  // would otherwise swallow every subsequent row into one giant cell.
+  if (hasUnterminatedQuote(text)) {
+    return fail(
+      "malformed_quotes",
+      "file",
+      "The file has an unterminated quoted field. A stray double-quote can silently merge rows together, so the file is rejected rather than parsed."
+    );
+  }
+
+  const rows = parseCsv(text);
+  if (rows.length === 0) {
+    return fail("empty_file", "file", "The uploaded file has no rows.");
+  }
+
+  const rawHeader = rows[0]!.map((h) => h.trim());
+
+  if (rawHeader.length > MAX_COLUMNS) {
+    return fail(
+      "too_many_columns",
+      "header",
+      `The file has ${rawHeader.length} columns, which exceeds the ${MAX_COLUMNS}-column limit.`
+    );
+  }
+
+  const blankHeaderIndex = rawHeader.findIndex((h) => h === "");
+  if (blankHeaderIndex !== -1) {
+    return fail(
+      "blank_column_name",
+      "header",
+      `Column ${blankHeaderIndex + 1} has no name. Every column must be named so its values can be attributed unambiguously.`
+    );
+  }
+
+  // Duplicate headers are fatal: record-building is last-write-wins, so a
+  // repeated column name would silently discard one of the two columns.
+  const seen = new Map<string, number>();
+  for (const [i, name] of rawHeader.entries()) {
+    const key = name.toLowerCase();
+    const previous = seen.get(key);
+    if (previous !== undefined) {
+      return fail(
+        "duplicate_column",
+        "header",
+        `Column "${name}" appears more than once (positions ${previous + 1} and ${i + 1}). Duplicate column names make row values ambiguous.`
+      );
+    }
+    seen.set(key, i);
+  }
+
+  const errors: CsvStructureError[] = [];
+  const dataRows = rows.slice(1);
+
+  for (const [i, row] of dataRows.entries()) {
+    const rowNumber = i + 1;
+    if (row.length !== rawHeader.length) {
+      errors.push({
+        code: "inconsistent_row_width",
+        field: "file",
+        message: `Row ${rowNumber} has ${row.length} field(s) but the header declares ${rawHeader.length}.`,
+      });
+      continue;
+    }
+    const longFieldIndex = row.findIndex((f) => f.length > MAX_FIELD_CHARS);
+    if (longFieldIndex !== -1) {
+      errors.push({
+        code: "field_too_long",
+        field: rawHeader[longFieldIndex] ?? String(longFieldIndex),
+        message: `Row ${rowNumber}, column "${rawHeader[longFieldIndex]}" exceeds the ${MAX_FIELD_CHARS}-character limit.`,
+      });
+    }
+  }
+
+  if (errors.length > 0) {
+    return { ok: false, ...empty, errors };
+  }
+
+  const records = dataRows.map((r) => {
+    const rec: Record<string, string> = {};
+    rawHeader.forEach((h, i) => {
+      rec[h] = (r[i] ?? "").trim();
+    });
+    return rec;
+  });
+
+  return { ok: true, header: rawHeader, records, errors: [] };
+}
+
+function hasUnterminatedQuote(text: string): boolean {
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== '"') continue;
+    if (inQuotes && text[i + 1] === '"') {
+      i++; // escaped quote inside a quoted field
+      continue;
+    }
+    inQuotes = !inQuotes;
+  }
+  return inQuotes;
+}
+
 // A cell that is a plain number or an ISO date is never a formula, however
 // it starts — this lets legitimate negative amounts like "-43.70" through
 // untouched while still catching the actual injection vector: attacker-
