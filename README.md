@@ -80,7 +80,15 @@ Deploys via Cloudflare's Git integration ("Workers Builds") on push to `main`.
 GitHub Actions (`.github/workflows/test.yml`) only runs tests and typecheck;
 it does not deploy.
 
-**PR branches must not be deployed to the production Worker.**
+**PR branches must not be deployed to the production Worker.** This is a
+dashboard-side setting that no file in this repo can enforce — verify it in
+Cloudflare → Workers & Pages → payoutsplit → Settings → Builds:
+
+- *Production branch* must be `main`, and nothing else.
+- *Non-production branch builds* (preview deployments) should be **off**
+  while this alpha shares one D1 database and one KV namespace with
+  production. A preview deployment of a PR branch would write to the live
+  `payoutsplit-db`, and a migration on a PR branch would run against it.
 
 No secrets are required — there are none to set. Both `BILLING_ENABLED` and
 `ALLOW_QBO_EXPORT` are `"false"` in `wrangler.toml` and must stay that way
