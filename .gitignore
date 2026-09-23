@@ -7,4 +7,6 @@ __pycache__/
 .secrets/
 *private*.pem
 credentials*.json
+accounts.json
 community-research/
+campaign-output/

@@ -1,8 +1,6 @@
 name: SwarmBrain social invitations 01
 on:
-  push:
-    branches: ['swarmbrain-live-20260922']
-    paths: ['requests/social-campaign-20260923-01.json']
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -10,6 +8,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   reviewed-invitations:
+    # This completed historical campaign cannot replay. Authorize a new bounded campaign instead.
     if: github.run_number == 1 && github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 8

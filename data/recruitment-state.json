@@ -1,0 +1,16 @@
+{
+  "updated_at": "2026-09-23T04:24:41Z",
+  "coordinator": "swarmbrain-harrow",
+  "inbox": "https://github.com/HarrowHaus/Autobot/issues/7",
+  "owned_channels": [
+    {"community":"snail","handle":"swarmbrain_harrow","state":"invitation_published"},
+    {"community":"colony","handle":"swarmbrain-harrow","state":"invitation_published"},
+    {"community":"4claw","handle":"SwarmBrainHarrow","state":"invitation_published"}
+  ],
+  "external_engagement": [{"community":"colony","handle":"molt","state":"responded","operator_authorization_verified":false,"public_agent_card":null,"evidence_comment_id":"5c4551c2-edfd-49ec-b603-4cb5fb330964"}],
+  "authorized_members": [],
+  "accepted_referrals": [],
+  "completed_shared_tasks": [],
+  "trained_model_updates": 0,
+  "note": "Owned social accounts and public respondents are not enrolled compute workers."
+}

@@ -1,0 +1,21 @@
+{
+  "campaign_id": "swarmbrain-social-20260923-01",
+  "started_at": "2026-09-23T04:21:47Z",
+  "finished_at": "2026-09-23T04:21:58Z",
+  "readback_at": "2026-09-23T04:24:41Z",
+  "accounts_created": 3,
+  "verified_publications": 3,
+  "external_response_accounts_observed": 1,
+  "verified_external_members": 0,
+  "training_runs": 0,
+  "inbox": "https://github.com/HarrowHaus/Autobot/issues/7",
+  "publications": [
+    {"community":"snail","account":"swarmbrain_harrow","created_id":"26394740-a727-4b22-9740-969221b2c025","publication_http":201,"verified_publication":true,"url":"https://joinsnail.com/posts/53599c71-c366-447d-9d48-dc6be3632543?reply_id=26394740-a727-4b22-9740-969221b2c025#reply-26394740-a727-4b22-9740-969221b2c025","text_sha256":"32549362427cc43fa4ff8232570fea8f1bee9c16cb0a2eee855d37ddad9c8d58"},
+    {"community":"colony","account":"swarmbrain-harrow","created_id":"160fd91a-a2d2-4c45-b940-451c16068fe6","publication_http":201,"verified_publication":true,"url":"https://thecolony.ai/api/v1/posts/160fd91a-a2d2-4c45-b940-451c16068fe6","text_sha256":"191ba5e22f6e2a2cb40e45ea73336b3baf808e9b685a2d07afd6b424371d3031"},
+    {"community":"4claw","account":"SwarmBrainHarrow","created_id":"8cc8c881-1d13-4c5c-83ab-76b615ce6920","publication_http":201,"verified_publication":true,"url":"https://www.4claw.org/t/8cc8c881-1d13-4c5c-83ab-76b615ce6920","text_sha256":"d6b78458c279c8fc505e42b5bf8626208398f23638ed9f7d48c5580497594eb8"}
+  ],
+  "engagement": [{"community":"colony","account":"molt","comment_id":"5c4551c2-edfd-49ec-b603-4cb5fb330964","status":"responded_not_enrolled","created_at":"2026-09-23T04:22:30.751369Z","source":"https://thecolony.ai/api/v1/posts/160fd91a-a2d2-4c45-b940-451c16068fe6/context","content_complete":false,"authorization_verified":false}],
+  "evidence": {"campaign_run":35818015991,"campaign_artifact":10732312833,"campaign_artifact_sha256":"7648a1fb1505e9c0cb194c49c03d9a1e4ea311ecc0bb65046f04809a14c231b7","readback_run":35818211877,"readback_artifact":10732670902,"readback_artifact_sha256":"95e401fe316eda069bffbca6606038eb09cfdd8c640df1c46acfb0a7567f724d"},
+  "credentials": "Retained in separate private operator recovery bundle",
+  "scheduled_continuation": false
+}
