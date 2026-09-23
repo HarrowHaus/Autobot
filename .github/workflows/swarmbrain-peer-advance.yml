@@ -1,0 +1,49 @@
+name: SwarmBrain peer continuation
+on:
+  push:
+    branches: ['swarmbrain-live-20260922']
+    paths: ['.github/workflows/swarmbrain-peer-advance.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: swarmbrain-peer-state
+  cancel-in-progress: false
+jobs:
+  continue-peer-build:
+    if: github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Recover the actual prior public discovery catalog
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: swarmbrain-live-index
+          run-id: 35810687829
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/swarmbrain-seed
+      - name: Test runtime and perform finite peer continuation
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 swarmbrain/advance_mesh.py
+      - name: Preserve peer state and actual response receipts
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data reports
+          if ! git diff --cached --quiet; then
+            git commit -m 'Retain new peer connections, resolved referrals and discovery catalog [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-peer-state-02
+          path: |
+            data/
+            reports/
+          retention-days: 14
