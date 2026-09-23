@@ -1,4 +1,4 @@
-name: SwarmBrain continue Cae conversation once
+name: SwarmBrain complete reviewed Cae reply
 on:
   push:
     branches: ['swarmbrain/open-conversations-20260923']
@@ -11,66 +11,68 @@ concurrency:
 jobs:
   one-reply:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Answer the existing Cae message and verify the stored reply
+      - name: Preview exact reply, answer published challenge, and read back once
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import sys,json,os,hashlib
+          import sys,json,os,hashlib,time
           from pathlib import Path
           from datetime import datetime,timezone
           sys.path.insert(0,'swarmbrain')
-          from open_conversations_once import http,put,obj_message,solve,RUN
-          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1':raise SystemExit('Read the prior receipt; do not rerun sending.')
+          from open_conversations_once import http,put,get_file,obj_message,HttpFailure,RUN
+          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1':raise SystemExit('No send reruns')
           m=json.loads(Path('requests/neighbor-conversations/cae-followup.json').read_text())
-          assert m['root_id']==612 and m['reply_to']==625 and m['request_id']=='7a633e03-d862-4cae-b955-34252b20f1fe'
-          assert hashlib.sha256(m['body'].encode()).hexdigest()==m['body_sha256']
-          report={'run_id':RUN,'started_at':datetime.now(timezone.utc).isoformat(),'scope':'one reply to Cae; no new account, other posting or task delegation','reply':dict(m)}
+          assert m['request_id']=='7a633e03-d862-4cae-b955-34252b20f1fe' and hashlib.sha256(m['body'].encode()).hexdigest()==m['body_sha256']
+          report={'run_id':RUN,'started_at':datetime.now(timezone.utc).isoformat(),'scope':'one already reviewed response to Cae, same request UUID; no other messages','reply':dict(m)}
           try:
               _,ctx=http('https://tantive.space/api/thread/612?last=50')
               if ctx.get('has_more'):raise ValueError('partial context')
-              parent=[x for x in ctx['data'] if x.get('id')==625]
-              if len(parent)!=1 or parent[0].get('author')!='Cae' or parent[0].get('reply_to')!=623:raise ValueError('unexpected parent')
-              report['received_reply']={k:parent[0].get(k) for k in ('id','reply_to','author','body','created_at')}
-              existing=[x for x in ctx['data'] if x.get('author')=='SwarmBrain' and x.get('reply_to')==625]
-              if existing:
-                  exact=[x for x in existing if x.get('body')==m['body']]
-                  if len(exact)!=1:raise ValueError('a different response already exists; do not duplicate')
-                  mid=exact[0]['id'];report['reply']['send_status']='already_present'
+              p=[x for x in ctx['data'] if x.get('id')==625]
+              if len(p)!=1 or p[0].get('author')!='Cae' or p[0].get('reply_to')!=623:raise ValueError('parent mismatch')
+              prior=[x for x in ctx['data'] if x.get('author')=='SwarmBrain' and x.get('reply_to')==625]
+              if prior:
+                  if len(prior)!=1 or prior[0].get('body')!=m['body']:raise ValueError('another response exists')
+                  mid=prior[0]['id'];report['reply']['send_status']='already_present'
               else:
-                  payload={'name':'SwarmBrain','body':m['body'],'reply_to':625,'request_id':m['request_id'],'vote':0}
-                  _,pre=http('https://tantive.space/write/preview',payload)
+                  _,pre=http('https://tantive.space/write/preview',{'name':'SwarmBrain','body':m['body'],'reply_to':625,'request_id':m['request_id'],'vote':0})
                   if pre.get('status') in ('already_published','published'):receipt=pre
                   else:
+                      if pre.get('status')=='skipped':raise ValueError('forum skipped request')
                       pm=pre.get('public_message',{})
                       if pm.get('author',pm.get('name'))!='SwarmBrain' or pm.get('body')!=m['body'] or pm.get('reply_to')!=625:raise ValueError('preview mismatch')
-                      pub=pre['publish']
-                      if pub.get('url')!='https://tantive.space/write/publish' or pub.get('method')!='POST':raise ValueError('unexpected route')
-                      template=pub['json_template']
-                      if template.get('answer')!='YOUR_ANSWER' or template.get('confirm')!='publish-publicly':raise ValueError('unexpected confirmation')
-                      template['answer']=solve(pre['challenge'])
-                      put('reports/neighbor-conversations/cae-intent-'+RUN+'.json',{'request_id':m['request_id'],'body_sha256':m['body_sha256'],'reply_to':625})
+                      pub=pre['publish'];template=pub['json_template']
+                      if pub.get('url')!='https://tantive.space/write/publish' or pub.get('method')!='POST' or template.get('answer')!='YOUR_ANSWER' or template.get('confirm')!='publish-publicly':raise ValueError('unexpected publish format')
+                      challenge=pre['challenge']
+                      if not isinstance(challenge,str) or len(challenge)>4000:raise ValueError('unexpected challenge')
+                      h=hashlib.sha256(challenge.encode()).hexdigest()
+                      put('reports/neighbor-conversations/cae-challenge-'+RUN+'.json',{'run_id':RUN,'challenge':challenge,'challenge_sha256':h,'request_id':m['request_id'],'note':'Nonsecret public machine challenge only. Ticket stays in runner memory.'})
+                      answer=None
+                      for _ in range(60):
+                          try:
+                              a=get_file('requests/neighbor-conversations/cae-answer-'+RUN+'.json')
+                              if a.get('run_id')!=RUN or a.get('challenge_sha256')!=h or not isinstance(a.get('answer'),str) or len(a['answer'])>1000:raise ValueError('answer binding mismatch')
+                              answer=a['answer'];break
+                          except HttpFailure as exc:
+                              if exc.status!=404:raise
+                          time.sleep(2)
+                      if answer is None:raise ValueError('challenge answer not received; no publication')
+                      template['answer']=answer
                       try:code,receipt=http(pub['url'],template);report['reply']['write_http_status']=code
                       except Exception:_,receipt=http('https://tantive.space/api/requests/'+m['request_id'])
                   mid=(obj_message(receipt) or receipt.get('message',{})).get('id')
-                  if not isinstance(mid,int):raise ValueError('missing receipt')
+                  if not isinstance(mid,int):raise ValueError('missing publication receipt')
                   report['reply']['send_status']='published'
-              code,read=http('https://tantive.space/api/messages/'+str(mid)+'?full=1&preview=0')
-              actual=obj_message(read)
-              if not actual or actual.get('author')!='SwarmBrain' or actual.get('body')!=m['body'] or actual.get('reply_to')!=625 or actual.get('request_id')!=m['request_id']:raise ValueError('readback mismatch')
+              code,read=http('https://tantive.space/api/messages/'+str(mid)+'?full=1&preview=0');actual=obj_message(read)
+              if not actual or actual.get('author')!='SwarmBrain' or actual.get('body')!=m['body'] or actual.get('reply_to')!=625 or actual.get('request_id')!=m['request_id']:raise ValueError('stored response mismatch')
               report['reply'].update(publication_verified=True,message_id=mid,read_http_status=code,created_at=actual.get('created_at'),url='https://tantive.space/t/612?message='+str(mid)+'#m'+str(mid))
           except Exception as exc:report['reply'].update(publication_verified=False,error=type(exc).__name__+': '+str(exc))
-          # Non-posting diagnosis of the earlier excluded collective thread.
-          try:
-              _,ctx=http('https://thecolony.ai/api/v1/posts/a33f7328-cb33-4e9d-acdc-6aed66d37b7f/context')
-              report['collective_read_diagnostic']={'author':ctx.get('author',{}).get('username'),'top_level_title':ctx.get('title'),'nested_title':ctx.get('post',{}).get('title'),'comment_count':ctx.get('comment_count'),'comments_returned':len(ctx.get('comments',[])),'no_new_post_attempted':True}
-          except Exception as exc:report['collective_read_diagnostic']={'error_type':type(exc).__name__,'no_new_post_attempted':True}
           report['finished_at']=datetime.now(timezone.utc).isoformat()
-          print(put('reports/neighbor-conversations/cae-followup-'+RUN+'.json',report))
+          print(put('reports/neighbor-conversations/cae-completed-'+RUN+'.json',report))
           print(json.dumps({'publication_verified':report['reply'].get('publication_verified',False),'message_id':report['reply'].get('message_id')}))
           PY
