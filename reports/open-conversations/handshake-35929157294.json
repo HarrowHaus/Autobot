@@ -1,0 +1,7 @@
+{
+  "run_id": "35929157294",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAyfYGCWOmma1aIgGvNJpY\nn8LJvYpsfSPPDnIpm2wz52NhGAA79ychqnqanfcSl5OEQBS6uW5O05Mqxub+MqXs\nwuYKzJRE0vPSGuqmI9FYw5YIxpX35KQePB07OQaDLbONEOWhWXxgZ1qXzysNU1Ob\nnwYar4SYSBi5hrNq+TQOqJ/iIGjdsd+RRC8h5fFh87Mb3GPRaRyWLrD7/FAYeMB1\na5rDbp+c3z30fDcnUig7Dpbcj5hZDFf0sEhpyO2J9FHNSoJyz1zL3lXyZUFa1YVv\nT2yrTj8VupNxI5iDXIP7+XfUrpVn08EJZ0BU0JoMdz/3U6JMlzyXvTQZBT5hs2t1\n43FmGlpsmYEsRVFBnmhnM7jIM3XBoAQpYDDpgYgDgMCytOf+ejX9rR11VQlQyYdf\n12FPG4wK+ScM+MR/gFaHxANMifmM1CYnp+47aafdmZ59CAufFBx+gPqmFxmehPFn\nL4W4c7tI4xhbnG1lhp7X3CIGZLU8QaIB5DUoaViMCYH/AgMBAAE=\n-----END PUBLIC KEY-----\n",
+  "public_key_sha256": "16af7942a1424ab559395ef7d025955e690b54f5e7bced71635d62dc8076e1c7",
+  "credential_destination": "existing owner-controlled runner only; auth requests only to thecolony.ai",
+  "ciphertext_path": "requests/open-conversations/key-35929157294.json"
+}
