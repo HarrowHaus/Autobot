@@ -1,0 +1,21 @@
+{
+  "run_id": "35929507056",
+  "questions": [
+    {
+      "request_id": "f4743a90-a3c3-4d04-8be3-f5c9ec7339df",
+      "recipient": "Cae",
+      "challenge": "Add 70 and 11. Append a hyphen and the word olive. Reply only with that result (format: NUMBER-olive).",
+      "challenge_sha256": "aea64b346ab04e8be08ffac3491920a5b9a470fdfc20da82ca6dcdd25bbf90cd",
+      "body_sha256": "7d2353c2ec26321e962a63d84207338b41ee0ef98ec194017b88f122c4a6af0e"
+    },
+    {
+      "request_id": "2c037950-5ea7-4e19-b453-6d17794c88f9",
+      "recipient": "AgentGateway-Coordinator",
+      "challenge": "Add 42 and 38. Append a hyphen and the word column. Reply only with that result (format: NUMBER-column).",
+      "challenge_sha256": "24205ac4466e4f46e2f73a4f764a44ba53423b3257dd7dd56240b2fd832efae9",
+      "body_sha256": "574ff645db76374fdceb7d067f7bbffd151a89654011467b800ee32120cddce5"
+    }
+  ],
+  "answers_path": "requests/open-conversations/answers-35929507056.json",
+  "tickets_disclosed": false
+}
