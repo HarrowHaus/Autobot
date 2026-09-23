@@ -2,7 +2,7 @@ name: SwarmBrain open conversations
 on:
   push:
     branches: ['swarmbrain/open-conversations-20260923']
-    paths: ['.github/workflows/swarmbrain-open-conversations.yml', 'requests/open-conversations-20260923.json']
+    paths: ['.github/workflows/swarmbrain-open-conversations.yml']
 permissions:
   contents: read
 concurrency:
@@ -13,42 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
-      - name: Read public posts and official participation documentation
+      - name: Read rules and complete public thread context
         run: |
           python3 - <<'PY'
-          import json, re, concurrent.futures
-          from urllib import request, parse, error
-          from html.parser import HTMLParser
-          urls = ['https://tantive.space/', 'https://tantive.space/t/612', 'https://thecolony.ai/skill.md', 'https://thecolony.ai/']
-          class Text(HTMLParser):
-              def __init__(self): super().__init__(); self.parts=[]; self.skip=0
-              def handle_starttag(self,t,a):
-                  if t in ('script','style'): self.skip+=1
-                  if t in ('p','div','br','li','h1','h2','h3','pre','article'): self.parts.append('\n')
-                  if t=='a':
-                      h=dict(a).get('href','')
-                      if h: self.parts.append(' ['+h+'] ')
-              def handle_endtag(self,t):
-                  if t in ('script','style'): self.skip=max(0,self.skip-1)
-              def handle_data(self,d):
-                  if not self.skip: self.parts.append(d)
+          import json, concurrent.futures
+          from urllib import request, parse
+          urls=['https://tantive.space/skill.md','https://tantive.space/rules.md','https://tantive.space/api/thread/550?last=50','https://tantive.space/api/thread/525?last=50','https://thecolony.ai/api/v1/posts/4f93deb9-5e4d-4846-ba21-108293d9bef9/context']
           class NoRedirect(request.HTTPRedirectHandler):
-              def redirect_request(self, req, fp, code, msg, headers, newurl):
-                  if parse.urlsplit(newurl).hostname != parse.urlsplit(req.full_url).hostname: raise ValueError('cross-origin redirect declined')
-                  return super().redirect_request(req,fp,code,msg,headers,newurl)
+              def redirect_request(self,*args,**kwargs): raise ValueError('redirect declined')
           def read(url):
               result={'url':url}
               try:
-                  with request.build_opener(NoRedirect()).open(request.Request(url, headers={'User-Agent':'SwarmBrain/1.0 public-conversation-reader','Accept':'text/plain,text/html,application/json'}),timeout=20) as r:
-                      raw=r.read(500001)
-                      if len(raw)>500000: raise ValueError('oversize public response')
-                      text=raw.decode('utf-8','replace')
-                      if 'text/html' in r.headers.get('Content-Type',''):
-                          p=Text(); p.feed(text); text=''.join(p.parts)
-                      text=re.sub(r'\n[ \t]*\n+', '\n\n', text)
-                      result.update(http_status=r.status,text=text[:32000],truncated=len(text)>32000)
+                  with request.build_opener(NoRedirect()).open(request.Request(url,headers={'User-Agent':'SwarmBrain/1.0 public-conversation-reader'}),timeout=20) as r:
+                      raw=r.read(150001)
+                      if len(raw)>150000: raise ValueError('response too large; no partial context')
+                      text=raw.decode('utf-8','strict'); result.update(http_status=r.status,text=text)
               except Exception as exc: result['error']=type(exc).__name__+': '+str(exc)
               return result
           with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-              for item in pool.map(read, urls): print(json.dumps(item,ensure_ascii=True),flush=True)
+              for item in pool.map(read,urls): print(json.dumps(item,ensure_ascii=True),flush=True)
           PY
