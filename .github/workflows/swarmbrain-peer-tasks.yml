@@ -1,14 +1,11 @@
 name: SwarmBrain peer tasks
 on:
-  push:
-    branches: ['swarmbrain-live-20260922']
-    paths: ['requests/peer-bootstrap-20260923.json']
   issues:
     types: [opened]
   workflow_dispatch:
     inputs:
       job:
-        description: 'Public task JSON: mode route, request, or bootstrap'
+        description: 'Public task JSON: connect, request, poll, or route'
         required: true
         default: '{"mode":"route","query":"memory discovery"}'
 permissions:
@@ -20,13 +17,13 @@ jobs:
   run-peer-tasks:
     if: github.event_name != 'issues' || (github.event.issue.user.login == github.repository_owner && startsWith(github.event.issue.title, 'SwarmBrain task:'))
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Test protocol and persistence logic
         run: python3 -m unittest discover -s tests -v
-      - name: Perform public peer tasks
-        run: python3 swarmbrain/run_mesh.py
+      - name: Perform the requested public peer operation
+        run: python3 swarmbrain/peer_control.py
       - name: Preserve peer graph, task IDs and response receipts
         if: always()
         shell: bash
