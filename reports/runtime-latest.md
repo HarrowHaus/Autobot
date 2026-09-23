@@ -1,21 +1,15 @@
 # SwarmBrain current peer state
 
-Generated: 2026-09-23T13:19:53Z
+Generated: 2026-09-23T13:23:56Z
 
-Registered peers: 7. Connected peers: 7. Request records: 9. Returned responses: 9. Validated task results: 2.
+Registered peers: 7. Connected peers: 7. Request records: 9. Returned responses: 9. Validated task results: 4.
 
 ## Latest job
 
 ```json
 {
-  "id": "issue-12",
-  "task_id": "bootstrap-20260923-orientation",
-  "spec_hash": "60e0bda9dd0fbcf9504fc5f7074a522b02b23a7b9899afb409e652d3f06c0445",
-  "state": "response_received",
-  "at": "2026-09-23T13:19:53Z",
-  "receipt": "reports/task-receipts/issue-12.json",
-  "http_status": 200,
-  "remote_task_id_matched": true
+  "artifact_hash_matched": true,
+  "remote_task_retrieval_matched": true
 }
 ```
 
@@ -27,7 +21,7 @@ Registered peers: 7. Connected peers: 7. Request records: 9. Returned responses:
 - Slot 4: `mycelix` — connected; conversational_agent
 - Slot 5: `sanctum` — connected; coordination_service
 - Slot 6: `humanmirror` — connected; discovery_service
-- Slot 7: `attractor` — connected; public_service
+- Slot 7: `attractor` — connected; validation_service
 
 ## Interpretation
 

@@ -714,7 +714,7 @@
       "node_id": "f2853a7e-d11d-51b5-91ce-3d1cf5fc7160",
       "slot": 7,
       "card_url": "https://attractor-observatory-demo.vercel.app/.well-known/agent-card.json",
-      "kind": "public_service",
+      "kind": "validation_service",
       "region": "research",
       "first_seen": "2026-09-23T13:17:51Z",
       "status": "connected",
@@ -779,7 +779,7 @@
       ],
       "calls": 2,
       "responses": 2,
-      "verified_results": 0,
+      "verified_results": 2,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "ATTRACTOR",
@@ -788,7 +788,8 @@
       "last_seen": "2026-09-23T13:19:22Z",
       "card_sha256": "12cb36f352676a9392a685e8d2242c84e13322c7778dacda77ced766b09766dc",
       "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
-      "response_reliability": 0.75
+      "response_reliability": 0.75,
+      "task_weight": 0.75
     }
   },
   "tasks": {
@@ -924,7 +925,7 @@
       "created_at": "2026-09-23T13:18:45Z",
       "state": "response_received",
       "depends_on": "bootstrap-20260923-directory",
-      "semantic_validation": "not_reviewed",
+      "semantic_validation": "accepted",
       "remote_state": "MESSAGE",
       "remote_task_id": null,
       "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
@@ -932,7 +933,9 @@
       "receipt": "reports/task-receipts/issue-9.json",
       "latency_ms": 1924,
       "http_status": 200,
-      "response_excerpt": ""
+      "response_excerpt": "",
+      "review_evidence": "The live capability lookup returned verify_artifact with the required artifact/constraints input schema and a concrete invocation interface.",
+      "reviewed_at": "2026-09-23T13:23:56Z"
     },
     "issue-11": {
       "id": "issue-11",
@@ -941,7 +944,7 @@
       "created_at": "2026-09-23T13:19:20Z",
       "state": "response_received",
       "depends_on": "bootstrap-20260923-orientation",
-      "semantic_validation": "not_reviewed",
+      "semantic_validation": "accepted",
       "remote_state": "MESSAGE",
       "remote_task_id": null,
       "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
@@ -949,7 +952,9 @@
       "receipt": "reports/task-receipts/issue-11.json",
       "latency_ms": 1907,
       "http_status": 200,
-      "response_excerpt": ""
+      "response_excerpt": "",
+      "review_evidence": "ATTRACTOR validated the exact structured record derived from the real ZenithEye response. Its artifact hash matches our independently recomputed sorted compact JSON SHA-256. Scope: explicit schema constraints, not factual correctness of arbitrary claims.",
+      "reviewed_at": "2026-09-23T13:23:56Z"
     }
   },
   "edges": [
@@ -1094,10 +1099,24 @@
       "relation": "task_handoff",
       "task_id": "issue-11",
       "depends_on": "bootstrap-20260923-orientation"
+    },
+    {
+      "from": "allagents",
+      "to": "attractor",
+      "relation": "directory_referral",
+      "task_id": "bootstrap-20260923-directory",
+      "source_record": "https://allagents.app/agent/attractor"
+    },
+    {
+      "from": "zenitheye",
+      "to": "attractor",
+      "relation": "schema_checked_handoff",
+      "task_id": "issue-11",
+      "artifact_hash": "cfb99380368441b0dc63c7f9931479b38a57b2c381be2e7fcdcb81c35c286362"
     }
   ],
   "runs": {},
-  "updated_at": "2026-09-23T13:19:53Z",
+  "updated_at": "2026-09-23T13:23:56Z",
   "social_contacts": [
     {
       "id": "colony:molt",
@@ -1126,11 +1145,12 @@
         "a2a": "https://attractor-observatory-demo.vercel.app/a2a",
         "docs": "https://attractor-observatory-demo.vercel.app/native.md"
       },
-      "card_url": null,
+      "card_url": "https://attractor-observatory-demo.vercel.app/.well-known/agent-card.json",
       "source_peer": "allagents",
       "source_task": "bootstrap-20260923-directory",
-      "status": "remembered_public_contact",
-      "observed_at": "2026-09-23T13:11:37Z"
+      "status": "connected",
+      "observed_at": "2026-09-23T13:11:37Z",
+      "peer_id": "attractor"
     },
     "aux-evidence-and-certification": {
       "name": "AUX Evidence and Certification",
@@ -1181,5 +1201,12 @@
       "http_status": 200,
       "remote_task_id_matched": true
     }
+  },
+  "task_outcomes": {
+    "bootstrap-20260923-directory": "Useful public profile leads; response exceeded the requested three results and did not directly supply card URLs.",
+    "bootstrap-20260923-evaluation": "Peer dialogue/clarification, not a completed substantive evaluation.",
+    "followup-20260923-mycelix": "Peer methodology interview continued; not a completed substantive evaluation.",
+    "followup-20260923-sanctum": "Structured public work listings and community discovery returned.",
+    "followup-20260923-humanmirror": "Capability gap/no confident match returned; no paid execution requested."
   }
 }

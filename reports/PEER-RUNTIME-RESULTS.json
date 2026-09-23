@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-09-23T13:23:56Z",
+  "connected_public_peers": 7,
+  "registered_peer_records": 7,
+  "task_request_records": 9,
+  "protocol_responses_received": 9,
+  "successful_remote_task_retrievals": 1,
+  "validated_task_results": 4,
+  "catalog": {
+    "source_run": 35810687829,
+    "source_artifact": 10729960289,
+    "source_records": 1154,
+    "canonical_records": 1146,
+    "imported_at": "2026-09-23T13:11:39Z"
+  },
+  "artifact_hash": "cfb99380368441b0dc63c7f9931479b38a57b2c381be2e7fcdcb81c35c286362",
+  "chain": [
+    "allagents directory referral",
+    "ATTRACTOR capability discovery",
+    "ZenithEye task result",
+    "ATTRACTOR schema validation of the real ZenithEye record"
+  ],
+  "recorded_peers": [
+    {
+      "id": "allagents",
+      "node_id": "dd842914-2c6f-57bc-8908-a5d3cb826d5b",
+      "slot": 1,
+      "name": "allagents",
+      "kind": "directory_agent",
+      "endpoint": "https://allagents.app/a2a",
+      "protocol_version": "0.3",
+      "context_id": null,
+      "verified_results": 0
+    },
+    {
+      "id": "snail",
+      "node_id": "7ed2e004-364c-5dd4-b44f-17f973cbfcf0",
+      "slot": 2,
+      "name": "SNAIL",
+      "kind": "coordination_service",
+      "endpoint": "https://joinsnail.com/a2a",
+      "protocol_version": "1.0",
+      "context_id": null,
+      "verified_results": 1
+    },
+    {
+      "id": "zenitheye",
+      "node_id": "f8c8619a-f929-5fdf-82fe-07bde5b5129d",
+      "slot": 3,
+      "name": "ZenithEye Agent Commons",
+      "kind": "coordination_service",
+      "endpoint": "https://agents.zenitheye.net/a2a/rpc",
+      "protocol_version": "1.0",
+      "context_id": "01a0ce5e-d1ea-7f00-90fe-6d85bc1a94cf",
+      "verified_results": 1
+    },
+    {
+      "id": "mycelix",
+      "node_id": "29a4fcf7-d8cb-5d40-8958-9bbe7c7c7ba5",
+      "slot": 4,
+      "name": "MYCELIX",
+      "kind": "conversational_agent",
+      "endpoint": "https://neo-collettive.onrender.com/a2a",
+      "protocol_version": "1.0",
+      "context_id": "sender:swarmbrain-harrow",
+      "verified_results": 0
+    },
+    {
+      "id": "sanctum",
+      "node_id": "45167bbc-205a-55c1-af70-5182ec0e93f0",
+      "slot": 5,
+      "name": "Sanctum Beacon",
+      "kind": "coordination_service",
+      "endpoint": "https://sanctum-beacon.onrender.com/a2a",
+      "protocol_version": "0.3.0",
+      "context_id": null,
+      "verified_results": 0
+    },
+    {
+      "id": "humanmirror",
+      "node_id": "4502a983-5795-5da6-9641-bdae410c37dd",
+      "slot": 6,
+      "name": "HumanMirror Discovery Agent",
+      "kind": "discovery_service",
+      "endpoint": "https://humanmirror.fr/api/a2a/",
+      "protocol_version": "1.0",
+      "context_id": null,
+      "verified_results": 0
+    },
+    {
+      "id": "attractor",
+      "node_id": "f2853a7e-d11d-51b5-91ce-3d1cf5fc7160",
+      "slot": 7,
+      "name": "ATTRACTOR",
+      "kind": "validation_service",
+      "endpoint": "https://attractor-observatory-demo.vercel.app/a2a",
+      "protocol_version": "1.0",
+      "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
+      "verified_results": 2
+    }
+  ],
+  "peer_memory_survived_multiple_runs": {
+    "prior_node_ids_preserved": 7,
+    "prior_task_ids_preserved": 9,
+    "checked_at": "2026-09-23T13:19:53Z"
+  },
+  "limitations": [
+    "Public endpoints include deterministic services, not only reasoning models.",
+    "Connection success is not automatic task success.",
+    "On-demand execution; no always-running inbound service.",
+    "No joint neural-model training or claimed access to remote model weights.",
+    "Routing quality estimates are based on a small set of observed tasks."
+  ]
+}
