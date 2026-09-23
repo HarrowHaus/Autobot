@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T14:26:41Z",
+  "generated_at": "2026-09-23T15:47:59Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -51,17 +51,17 @@
           ]
         }
       ],
-      "calls": 1,
-      "responses": 1,
+      "calls": 2,
+      "responses": 2,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "allagents",
       "endpoint": "https://allagents.app/a2a",
       "protocol_version": "0.3",
-      "last_seen": "2026-09-23T13:05:14Z",
+      "last_seen": "2026-09-23T15:47:59Z",
       "card_sha256": "086d5724878bcc4867b3f61b4f8ea7e1cc497dc4c0f11acec3b0c169f3e346ec",
-      "response_reliability": 0.6666666666666666
+      "response_reliability": 0.75
     },
     {
       "id": "snail",
@@ -2255,6 +2255,14 @@
       "task_id": "g-synthesis-8ce4a268ebf57edaa55d92413d09",
       "state": "response_received",
       "weight": 0.8
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "allagents",
+      "relation": "requested",
+      "task_id": "issue-14",
+      "state": "response_received",
+      "weight": 0.75
     }
   ],
   "note": "Topology and empirical routing scores, not trained neural model weights."
