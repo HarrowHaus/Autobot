@@ -18,8 +18,12 @@ jobs:
     if: github.event_name != 'issues' || (github.event.issue.user.login == github.repository_owner && startsWith(github.event.issue.title, 'SwarmBrain task:'))
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      STATE_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.repository.default_branch }}
       - name: Test protocol and persistence logic
         run: python3 -m unittest discover -s tests -v
       - name: Perform the requested public peer operation
@@ -35,7 +39,7 @@ jobs:
           done
           if ! git diff --cached --quiet; then
             git commit -m 'Persist SwarmBrain peer responses and task history [skip ci]'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git push origin "HEAD:${STATE_BRANCH}"
           fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

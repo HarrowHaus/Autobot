@@ -1,0 +1,42 @@
+name: SwarmBrain verified runtime snapshot
+on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths: ['requests/peer-snapshot-20260923.json']
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-peer-state
+  cancel-in-progress: false
+jobs:
+  review-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Test implementation and verify actual recorded results
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 swarmbrain/review_runtime.py
+      - name: Commit reviewed state and results
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data reports
+          if ! git diff --cached --quiet; then
+            git commit -m 'Verify real peer task handoff and publish runtime evidence [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Package tracked source and actual state only
+        run: |
+          mkdir -p runtime-package
+          git archive --format=zip --output=runtime-package/SwarmBrain-Peer-Runtime.zip HEAD
+          cp reports/PEER-RUNTIME-RESULTS.md runtime-package/SwarmBrain-Peer-Results.md
+          sha256sum runtime-package/SwarmBrain-Peer-Runtime.zip > runtime-package/SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: swarmbrain-verified-runtime
+          path: runtime-package/
+          retention-days: 14
