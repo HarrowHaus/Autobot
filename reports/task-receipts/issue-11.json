@@ -1,0 +1,129 @@
+{
+  "url": "https://attractor-observatory-demo.vercel.app/a2a",
+  "method": "POST",
+  "at": "2026-09-23T13:19:20Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "issue-11",
+    "method": "SendMessage",
+    "params": {
+      "message": {
+        "messageId": "d1ffd031-f5fa-5607-9184-dc9b0111d980",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "data": {
+              "capability": "verify_artifact",
+              "arguments": {
+                "artifact": {
+                  "peer": "zenitheye",
+                  "protocol_version": "1.0",
+                  "remote_task_id": "01a0ce5e-d1ea-7e7b-b00c-dd49a01b5187",
+                  "context_id": "01a0ce5e-d1ea-7f00-90fe-6d85bc1a94cf",
+                  "state": "TASK_STATE_COMPLETED",
+                  "service": "ZenithEye Agent Commons",
+                  "current_event_id": 1155
+                },
+                "constraints": {
+                  "type": "object",
+                  "required": [
+                    "peer",
+                    "protocol_version",
+                    "remote_task_id",
+                    "context_id",
+                    "state",
+                    "service",
+                    "current_event_id"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "peer": {
+                      "type": "string",
+                      "enum": [
+                        "zenitheye"
+                      ]
+                    },
+                    "protocol_version": {
+                      "type": "string",
+                      "enum": [
+                        "1.0"
+                      ]
+                    },
+                    "remote_task_id": {
+                      "type": "string",
+                      "minLength": 36,
+                      "maxLength": 36
+                    },
+                    "context_id": {
+                      "type": "string",
+                      "minLength": 36,
+                      "maxLength": 36
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "TASK_STATE_COMPLETED"
+                      ]
+                    },
+                    "service": {
+                      "type": "string",
+                      "enum": [
+                        "ZenithEye Agent Commons"
+                      ]
+                    },
+                    "current_event_id": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "contextId": "97175296-a969-430b-a8c9-28b21ee343d4",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 1907,
+  "response_sha256": "59e357bfeaf4d5685b975fb5585ebf0d169bc5c58de9ac8418f3e89671fa238c",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": "issue-11",
+    "result": {
+      "message": {
+        "messageId": "f29f2b91-3585-4cab-9e34-3b82f6770661",
+        "contextId": "97175296-a969-430b-a8c9-28b21ee343d4",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "data": {
+              "valid": true,
+              "errors": [],
+              "artifact_hash": "cfb99380368441b0dc63c7f9931479b38a57b2c381be2e7fcdcb81c35c286362",
+              "verification": {
+                "engine": "attractor-schema-subset-v1",
+                "scope": "explicit_schema_constraints_only",
+                "code_executed": false,
+                "semantic_correctness_checked": false
+              },
+              "state_use": null,
+              "request_id": "e20f67ce-38db-4e1e-b9a4-3d2192e0d097"
+            },
+            "mediaType": "application/json"
+          }
+        ],
+        "metadata": {
+          "io.attractor/context": "cb45b6fade4453128188ba44fb47abb627e3a7d3c9e974f5891766809eca5eaf"
+        }
+      }
+    }
+  }
+}
