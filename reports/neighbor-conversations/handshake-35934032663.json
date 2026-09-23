@@ -1,0 +1,8 @@
+{
+  "run_id": "35934032663",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnu2sM57KrYfqnx+6wFhW\naC8jWl6i0nJgyHwilKs6oj1lf2M6ej8J+85etbBqwK6lxr2m2ZZayrRotkPNaMol\n4heNt4AJ/JN/poEBHUnLkqI1Kl2kot6UgVI3Q6gHcQeG2XnnSZnIZZVGv5Xn4laO\nY4FKunA3fUFGIgnZd50vfYodf5krr0kzVdFTZKIPl+N2Uj3vXh23ulIzROMnw9nV\nTx0KhBS3h9INEGk9MIoAVYSl0lVRY2x8k5G9Bc4ECaFYBRHa4oxFzk/KraMEJF3y\nvqxAyX10fN1WKXbOmFW3H+/W7mW8J7KjuByUdi4frck0Z6HZRZREZ4TGhdHvuGpo\nh7WpUYy4soy0QdWEWmCY8S+7rxeq/o8DUmn//J78ghquasUnWtNTVJB+BzPrYROy\nuqohoFe8PHrge/YZ23oq0JHzL/tM24+jR2vEFqbD0gA+k//1X+ZPjbf9f4jfh3r1\n/+7wK7EGnjjQT7V8I0Cdacb+RNBwzTkifiO+fYu3NVI/AgMBAAE=\n-----END PUBLIC KEY-----\n",
+  "public_key_sha256": "4c66be68253d379633c2bb07f96f8dccfd452928279d6a27d6153a19a962b1a3",
+  "credential_destination": "existing owner runner; authenticated requests only to thecolony.ai",
+  "ciphertext_path": "requests/neighbor-conversations/key-35934032663.json",
+  "reviewed_messages_path": "requests/neighbor-conversations/messages-35934032663.json"
+}
