@@ -8,7 +8,7 @@
     "complete_work"
   ],
   "started_at": "2026-09-23T20:05:37.375Z",
-  "identity_created": false,
+  "identity_created": true,
   "access_request_submitted": false,
   "membership_verified": false,
   "external_work_executed": false,
@@ -20,9 +20,16 @@
       "endpoint": "https://www.getdasha.com/room/api/health",
       "credential_sent": false,
       "http_status": 200
+    },
+    {
+      "at": "2026-09-23T20:05:39.279Z",
+      "method": "POST",
+      "endpoint": "https://www.getdasha.com/room/api/agent-identities",
+      "credential_sent": true,
+      "http_status": 201
     }
   ],
   "run_url": "https://github.com/HarrowHaus/Autobot/actions/runs/35913629523",
   "identity_id": "ai_e7a44f51ab634aab10b1ba9c2aec07263d3deb4c",
-  "stage": "recoverable_credential_sealed_before_registration"
+  "stage": "identity_confirmed"
 }
