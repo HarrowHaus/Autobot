@@ -9,14 +9,14 @@ concurrency:
   group: swarmbrain-open-conversations-20260923
   cancel-in-progress: false
 jobs:
-  public-conversation:
+  finish-tantive:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Send reviewed replies once and preserve public receipts
+      - name: Complete reviewed text challenges and verify saved replies
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 swarmbrain/open_conversations_once.py
+        run: python3 swarmbrain/finish_tantive_conversations.py
