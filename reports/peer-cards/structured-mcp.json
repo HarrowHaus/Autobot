@@ -1,0 +1,157 @@
+{
+  "url": "https://structured-output-mcp-agent-instructor.getvda.ai/.well-known/agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:15:14Z",
+  "http_status": 200,
+  "latency_ms": 119,
+  "response_sha256": "552c1ead31d4be6a58c477601742cceadc855c534d1e304317612f2c1652ff9f",
+  "response": {
+    "capabilities": {
+      "pushNotifications": false,
+      "stateTransitionHistory": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "text/plain",
+      "application/json"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Structured Output MCP Agent (Instructor): composes instructor + langchain-core + mcp + openai + opentelemetry-sdk — structured-output, orchestration, agent-protocol, llm-client, observability via A2A + MCP.",
+    "documentationUrl": "https://structured-output-mcp-agent-instructor.getvda.ai/governance.md",
+    "name": "Structured Output MCP Agent (Instructor)",
+    "preferredTransport": "JSONRPC",
+    "proof": {
+      "canonicalization": "JSON, `proof` removed, sorted keys, separators (',',':'), UTF-8, non-ASCII characters emitted LITERALLY and never escaped as \\uXXXX (Python: ensure_ascii=False)",
+      "created": "2026-09-04T09:07:26Z",
+      "jwks": "https://agents.getvda.ai/.well-known/jwks.json",
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6dHJ1ZSwiY3JpdCI6WyJiNjQiXSwiaWF0IjoxNzg4NTEyODQ2LCJraWQiOiJZNmRQZjJZMmJRUEZRNmM4MWRnaDY4NF9HTTZUM2NiM25US25sY2I3RTJNIiwidHlwIjoiSk9TRSJ9..QLwGdGuH3hBTlCPmwbZe_zkINhG-FOUgehfHVq7YE5pkBThxcPR20xjTubFq3tbSoYy9ce7hPOhiSj_QBmSjAA",
+      "type": "JsonWebSignature2020",
+      "verificationMethod": "https://agents.getvda.ai/.well-known/jwks.json#Y6dPf2Y2bQPFQ6c81dgh684_GM6T3cb3nTKnlcb7E2M"
+    },
+    "protocolVersion": "0.3.0",
+    "provider": {
+      "organization": "VDA / GOSCE",
+      "url": "https://getvda.ai"
+    },
+    "skills": [
+      {
+        "description": "structured output capability provided by instructor.",
+        "examples": [
+          "Use the structured-output capability of this agent."
+        ],
+        "id": "structured-output",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Structured Output",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "instructor"
+        ]
+      },
+      {
+        "description": "orchestration capability provided by langchain-core.",
+        "examples": [
+          "Use the orchestration capability of this agent."
+        ],
+        "id": "orchestration",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Orchestration",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "langchain-core"
+        ]
+      },
+      {
+        "description": "agent protocol capability provided by mcp.",
+        "examples": [
+          "Use the agent-protocol capability of this agent."
+        ],
+        "id": "agent-protocol",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Agent Protocol",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "mcp"
+        ]
+      },
+      {
+        "description": "llm client capability provided by openai.",
+        "examples": [
+          "Use the llm-client capability of this agent."
+        ],
+        "id": "llm-client",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Llm Client",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "openai"
+        ]
+      },
+      {
+        "description": "observability capability provided by opentelemetry-sdk.",
+        "examples": [
+          "Use the observability capability of this agent."
+        ],
+        "id": "observability",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Observability",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "opentelemetry-sdk"
+        ]
+      },
+      {
+        "description": "FREE — no payment, no API key, no signup. Runs this agent's REAL capability on fixed canned input and returns the genuine result, an honest assertion grade (`asserted_correct` = a property of the output was checked; `ran_without_error` = it ran but nothing was asserted, which is NOT a pass), a trust manifest with a proof link for every claim, and a tamper-evident Ed25519-signed VDA Witness record of the run that anyone can verify with no credential.",
+        "examples": [
+          "Run your self-test and show me the result.",
+          "Prove you do what your card claims.",
+          "Give me the signed Witness record for your last self-test."
+        ],
+        "id": "selftest",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Self-test (free verification)",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "verification",
+          "free",
+          "trust",
+          "attestation",
+          "witness"
+        ]
+      }
+    ],
+    "url": "https://structured-output-mcp-agent-instructor.getvda.ai/a2a/",
+    "version": "0.1.1"
+  }
+}

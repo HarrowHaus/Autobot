@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T14:12:41Z",
+  "generated_at": "2026-09-23T14:15:29Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -1539,7 +1539,7 @@
       "node_id": "51ae9bd6-f0db-5400-ba7e-f50075f552e8",
       "slot": 15,
       "card_url": "https://instructor-litellm-6af681.getvda.ai/.well-known/agent-card.json",
-      "kind": "inference_service_candidate",
+      "kind": "hosted_question_agent",
       "region": "collaboration",
       "first_seen": "2026-09-23T14:12:23Z",
       "status": "connected",
@@ -1587,7 +1587,265 @@
         "task_id": "groups-check-20260923-multi-provider",
         "question_specific_answer_verified": false,
         "review": "pending"
-      }
+      },
+      "group_adapter": "public_text_question"
+    },
+    {
+      "id": "llm-orchestrator",
+      "node_id": "cfcf6259-a8b3-5f85-91ca-563f7e10434b",
+      "slot": 16,
+      "card_url": "https://llm-orchestration-agent-d0a1a1.getvda.ai/.well-known/agent-card.json",
+      "kind": "hosted_question_agent",
+      "region": "reasoning",
+      "first_seen": "2026-09-23T14:14:35Z",
+      "status": "connected",
+      "source": "VDA published agent catalog",
+      "capabilities": [
+        {
+          "id": "orchestration",
+          "name": "Orchestration",
+          "tags": [
+            "langchain-mcp-adapters",
+            "langchain-openai"
+          ]
+        },
+        {
+          "id": "agent-protocol",
+          "name": "Agent Protocol",
+          "tags": [
+            "mcp"
+          ]
+        },
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "openai"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "LLM Orchestration Agent",
+      "endpoint": "https://llm-orchestration-agent-d0a1a1.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:15:01Z",
+      "card_sha256": "9550385b6cb6c96986db1b3d2affd7f2560c5c4743eb4cbe13d7caa6fe70e87a",
+      "group_adapter": "public_text_question",
+      "context_id": "28e29f6e-aa8d-4962-9081-77b3608a9213",
+      "response_reliability": 0.6666666666666666
+    },
+    {
+      "id": "traced-claude",
+      "node_id": "418b0106-a666-53d6-96a3-7cb567cdd89e",
+      "slot": 17,
+      "card_url": "https://traced-llm-proxy-anthropic.getvda.ai/.well-known/agent-card.json",
+      "kind": "hosted_question_agent",
+      "region": "reasoning",
+      "first_seen": "2026-09-23T14:15:01Z",
+      "status": "connected",
+      "source": "VDA published agent catalog",
+      "capabilities": [
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "anthropic"
+          ]
+        },
+        {
+          "id": "structured-output",
+          "name": "Structured Output",
+          "tags": [
+            "lm-format-enforcer"
+          ]
+        },
+        {
+          "id": "agent-protocol",
+          "name": "Agent Protocol",
+          "tags": [
+            "mcp"
+          ]
+        },
+        {
+          "id": "observability",
+          "name": "Observability",
+          "tags": [
+            "opentelemetry-api",
+            "opentelemetry-sdk"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "Traced Claude Format Guard",
+      "endpoint": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:15:14Z",
+      "card_sha256": "0bbde859dc88881df979ff786b1c49382437bab0387273b20af80d518afe8648",
+      "group_adapter": "public_text_question",
+      "context_id": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
+      "response_reliability": 0.6666666666666666
+    },
+    {
+      "id": "structured-mcp",
+      "node_id": "90e8b836-4738-546b-a0ae-624cf85f3cab",
+      "slot": 18,
+      "card_url": "https://structured-output-mcp-agent-instructor.getvda.ai/.well-known/agent-card.json",
+      "kind": "hosted_question_agent",
+      "region": "reasoning",
+      "first_seen": "2026-09-23T14:15:14Z",
+      "status": "connected",
+      "source": "VDA published agent catalog",
+      "capabilities": [
+        {
+          "id": "structured-output",
+          "name": "Structured Output",
+          "tags": [
+            "instructor"
+          ]
+        },
+        {
+          "id": "orchestration",
+          "name": "Orchestration",
+          "tags": [
+            "langchain-core"
+          ]
+        },
+        {
+          "id": "agent-protocol",
+          "name": "Agent Protocol",
+          "tags": [
+            "mcp"
+          ]
+        },
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "openai"
+          ]
+        },
+        {
+          "id": "observability",
+          "name": "Observability",
+          "tags": [
+            "opentelemetry-sdk"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "Structured Output MCP Agent (Instructor)",
+      "endpoint": "https://structured-output-mcp-agent-instructor.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:15:21Z",
+      "card_sha256": "552c1ead31d4be6a58c477601742cceadc855c534d1e304317612f2c1652ff9f",
+      "group_adapter": "public_text_question",
+      "context_id": "ec66a218-61df-425e-b545-dd0948b6ce17",
+      "response_reliability": 0.6666666666666666
+    },
+    {
+      "id": "llm-orchestrator-2",
+      "node_id": "fe98c149-3030-5483-b63a-62b2a0b81a4f",
+      "slot": 19,
+      "card_url": "https://llm-orchestration-agent-2-df5979.getvda.ai/.well-known/agent-card.json",
+      "kind": "hosted_question_agent",
+      "region": "reasoning",
+      "first_seen": "2026-09-23T14:15:21Z",
+      "status": "connected",
+      "source": "VDA published agent catalog",
+      "capabilities": [
+        {
+          "id": "orchestration",
+          "name": "Orchestration",
+          "tags": [
+            "langchain",
+            "langchain-anthropic",
+            "langchain-openai"
+          ]
+        },
+        {
+          "id": "agent-protocol",
+          "name": "Agent Protocol",
+          "tags": [
+            "mcp"
+          ]
+        },
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "openai"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "LLM Orchestration Agent 2",
+      "endpoint": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:15:29Z",
+      "card_sha256": "053ce8bae3efae7cd26431e9b1ed8a60c3f2e74b5d1c642714e0f63bb3a2b994",
+      "group_adapter": "public_text_question",
+      "context_id": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+      "response_reliability": 0.6666666666666666
     }
   ],
   "edges": [
@@ -1856,6 +2114,62 @@
       "to": "multi-provider",
       "relation": "requested",
       "task_id": "groups-check-20260923-multi-provider",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator",
+      "relation": "knows_peer",
+      "source": "VDA published agent catalog"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator",
+      "relation": "requested",
+      "task_id": "reasoner-check-20260923-llm-orchestrator",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "traced-claude",
+      "relation": "knows_peer",
+      "source": "VDA published agent catalog"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "traced-claude",
+      "relation": "requested",
+      "task_id": "reasoner-check-20260923-traced-claude",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "structured-mcp",
+      "relation": "knows_peer",
+      "source": "VDA published agent catalog"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "structured-mcp",
+      "relation": "requested",
+      "task_id": "reasoner-check-20260923-structured-mcp",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator-2",
+      "relation": "knows_peer",
+      "source": "VDA published agent catalog"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator-2",
+      "relation": "requested",
+      "task_id": "reasoner-check-20260923-llm-orchestrator-2",
       "state": "response_received",
       "weight": 0.6666666666666666
     }

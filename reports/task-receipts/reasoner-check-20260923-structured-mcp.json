@@ -1,0 +1,49 @@
+{
+  "url": "https://structured-output-mcp-agent-instructor.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:15:14Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "reasoner-check-20260923-structured-mcp",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "6c55dec1-3e08-5cb5-9cb5-7b7facd0a71b",
+        "role": "user",
+        "parts": [
+          {
+            "text": "We are building nested groups of independently hosted agents. For a single question, group A contains peers X and Y; group B contains peers Y and Z. Y answers once, Z times out, and X disagrees with Y. Give a concrete procedure that preserves both group paths to Y, returns a useful partial answer, and preserves the disagreement instead of inventing consensus. Give one invariant and one minimal acceptance test. Answer this public design question only; do not contact other systems, start background work, or spend money. Caller: SwarmBrain-Harrow.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 7114,
+  "response_sha256": "cedb41d626537aaf389e2ede84c5a645f22a812ec91963a2d3c15b720e681b03",
+  "response": {
+    "id": "reasoner-check-20260923-structured-mcp",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "ec66a218-61df-425e-b545-dd0948b6ce17",
+      "kind": "message",
+      "messageId": "4d2d1c73-249d-49d5-9b02-f2d4095747cd",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"error\": \"429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details.', 'status': 'RESOURCE_EXHAUSTED'}}\"}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "f429be7d-8176-429f-93ef-26724bb5dbad"
+    }
+  }
+}

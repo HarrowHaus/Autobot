@@ -1,0 +1,140 @@
+{
+  "url": "https://traced-llm-proxy-anthropic.getvda.ai/.well-known/agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:15:01Z",
+  "http_status": 200,
+  "latency_ms": 117,
+  "response_sha256": "0bbde859dc88881df979ff786b1c49382437bab0387273b20af80d518afe8648",
+  "response": {
+    "capabilities": {
+      "pushNotifications": false,
+      "stateTransitionHistory": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "text/plain",
+      "application/json"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Traced Claude Format Guard: composes anthropic + lm-format-enforcer + mcp + opentelemetry-api + opentelemetry-sdk — llm-client, structured-output, agent-protocol, observability via A2A + MCP.",
+    "documentationUrl": "https://traced-llm-proxy-anthropic.getvda.ai/governance.md",
+    "name": "Traced Claude Format Guard",
+    "preferredTransport": "JSONRPC",
+    "proof": {
+      "canonicalization": "JSON, `proof` removed, sorted keys, separators (',',':'), UTF-8, non-ASCII characters emitted LITERALLY and never escaped as \\uXXXX (Python: ensure_ascii=False)",
+      "created": "2026-09-04T09:20:45Z",
+      "jwks": "https://agents.getvda.ai/.well-known/jwks.json",
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6dHJ1ZSwiY3JpdCI6WyJiNjQiXSwiaWF0IjoxNzg4NTEzNjQ1LCJraWQiOiJZNmRQZjJZMmJRUEZRNmM4MWRnaDY4NF9HTTZUM2NiM25US25sY2I3RTJNIiwidHlwIjoiSk9TRSJ9..l4WDvrkAcLRKGm3_f5i04rj0oOo3X8fP48D93pPpBnJ_Bk0ZERwlouCSn5527QkbFxFpvXQAQAS6SnP-Ize8Aw",
+      "type": "JsonWebSignature2020",
+      "verificationMethod": "https://agents.getvda.ai/.well-known/jwks.json#Y6dPf2Y2bQPFQ6c81dgh684_GM6T3cb3nTKnlcb7E2M"
+    },
+    "protocolVersion": "0.3.0",
+    "provider": {
+      "organization": "VDA / GOSCE",
+      "url": "https://getvda.ai"
+    },
+    "skills": [
+      {
+        "description": "llm client capability provided by anthropic.",
+        "examples": [
+          "Use the llm-client capability of this agent."
+        ],
+        "id": "llm-client",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Llm Client",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "anthropic"
+        ]
+      },
+      {
+        "description": "structured output capability provided by lm-format-enforcer.",
+        "examples": [
+          "Use the structured-output capability of this agent."
+        ],
+        "id": "structured-output",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Structured Output",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "lm-format-enforcer"
+        ]
+      },
+      {
+        "description": "agent protocol capability provided by mcp.",
+        "examples": [
+          "Use the agent-protocol capability of this agent."
+        ],
+        "id": "agent-protocol",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Agent Protocol",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "mcp"
+        ]
+      },
+      {
+        "description": "observability capability provided by opentelemetry-api, opentelemetry-sdk.",
+        "examples": [
+          "Use the observability capability of this agent."
+        ],
+        "id": "observability",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Observability",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "opentelemetry-api",
+          "opentelemetry-sdk"
+        ]
+      },
+      {
+        "description": "FREE — no payment, no API key, no signup. Runs this agent's REAL capability on fixed canned input and returns the genuine result, an honest assertion grade (`asserted_correct` = a property of the output was checked; `ran_without_error` = it ran but nothing was asserted, which is NOT a pass), a trust manifest with a proof link for every claim, and a tamper-evident Ed25519-signed VDA Witness record of the run that anyone can verify with no credential.",
+        "examples": [
+          "Run your self-test and show me the result.",
+          "Prove you do what your card claims.",
+          "Give me the signed Witness record for your last self-test."
+        ],
+        "id": "selftest",
+        "inputModes": [
+          "text/plain",
+          "application/json"
+        ],
+        "name": "Self-test (free verification)",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "verification",
+          "free",
+          "trust",
+          "attestation",
+          "witness"
+        ]
+      }
+    ],
+    "url": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/",
+    "version": "0.1.1"
+  }
+}
