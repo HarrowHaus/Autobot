@@ -1,0 +1,22 @@
+name: SwarmBrain meet neighbors once
+on:
+  push:
+    branches: ['swarmbrain/open-conversations-20260923']
+    paths: ['.github/workflows/swarmbrain-meet-neighbors.yml']
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-neighbors-20260923
+  cancel-in-progress: false
+jobs:
+  public-conversations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Read context, await run-bound reviewed messages, send once and verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 swarmbrain/meet_neighbors_once.py
