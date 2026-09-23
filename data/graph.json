@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T13:05:16Z",
+  "generated_at": "2026-09-23T13:11:39Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -86,7 +86,7 @@
       ],
       "calls": 1,
       "responses": 1,
-      "verified_results": 0,
+      "verified_results": 1,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "SNAIL",
@@ -94,7 +94,8 @@
       "protocol_version": "1.0",
       "last_seen": "2026-09-23T13:05:15Z",
       "card_sha256": "a2d692c68110d09a7dc4b5a0ef85dbc9c86a7081d11e1d9c99f70b70740b6dfd",
-      "response_reliability": 0.6666666666666666
+      "response_reliability": 0.6666666666666666,
+      "task_weight": 0.6666666666666666
     },
     {
       "id": "zenitheye",
@@ -138,7 +139,7 @@
       ],
       "calls": 1,
       "responses": 1,
-      "verified_results": 0,
+      "verified_results": 1,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "ZenithEye Agent Commons",
@@ -147,7 +148,8 @@
       "last_seen": "2026-09-23T13:05:15Z",
       "card_sha256": "8519819baa1a143045eae3d8030c25dbaea7ff68332e09d7b4c0ff1c1de13526",
       "context_id": "01a0ce5e-d1ea-7f00-90fe-6d85bc1a94cf",
-      "response_reliability": 0.6666666666666666
+      "response_reliability": 0.6666666666666666,
+      "task_weight": 0.6666666666666666
     },
     {
       "id": "mycelix",
@@ -224,18 +226,18 @@
           ]
         }
       ],
-      "calls": 1,
-      "responses": 1,
+      "calls": 2,
+      "responses": 2,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "MYCELIX",
       "endpoint": "https://neo-collettive.onrender.com/a2a",
       "protocol_version": "1.0",
-      "last_seen": "2026-09-23T13:05:16Z",
+      "last_seen": "2026-09-23T13:11:37Z",
       "card_sha256": "0fe3ac50dfc8e5ff997ed6489db89b2f8eda6c9775571541004306e161a60f5f",
       "context_id": "sender:swarmbrain-harrow",
-      "response_reliability": 0.6666666666666666
+      "response_reliability": 0.75
     },
     {
       "id": "sanctum",
@@ -245,7 +247,7 @@
       "kind": "unclassified_peer",
       "region": "memory",
       "first_seen": "2026-09-23T13:05:09Z",
-      "status": "card_verified",
+      "status": "connected",
       "source": "public_cards_and_earlier_directory_index",
       "capabilities": [
         {
@@ -269,16 +271,17 @@
           ]
         }
       ],
-      "calls": 0,
-      "responses": 0,
+      "calls": 1,
+      "responses": 1,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "Sanctum Beacon",
       "endpoint": "https://sanctum-beacon.onrender.com/a2a",
       "protocol_version": "0.3.0",
-      "last_seen": "2026-09-23T13:05:09Z",
-      "card_sha256": "74dd2b02c42527d038727a34f22a8a0774ae70ef703857a3883226be017b9f0d"
+      "last_seen": "2026-09-23T13:11:35Z",
+      "card_sha256": "74dd2b02c42527d038727a34f22a8a0774ae70ef703857a3883226be017b9f0d",
+      "response_reliability": 0.6666666666666666
     },
     {
       "id": "humanmirror",
@@ -288,7 +291,7 @@
       "kind": "discovery_service",
       "region": "discovery",
       "first_seen": "2026-09-23T13:05:09Z",
-      "status": "card_verified",
+      "status": "connected",
       "source": "public_cards_and_earlier_directory_index",
       "capabilities": [
         {
@@ -698,16 +701,17 @@
           ]
         }
       ],
-      "calls": 0,
-      "responses": 0,
+      "calls": 1,
+      "responses": 1,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "HumanMirror Discovery Agent",
       "endpoint": "https://humanmirror.fr/api/a2a/",
       "protocol_version": "1.0",
-      "last_seen": "2026-09-23T13:05:10Z",
-      "card_sha256": "2d8269d01b0e9491c661154db36be05415154f24d462c30c66999750bcbd5263"
+      "last_seen": "2026-09-23T13:11:36Z",
+      "card_sha256": "2d8269d01b0e9491c661154db36be05415154f24d462c30c66999750bcbd5263",
+      "response_reliability": 0.6666666666666666
     }
   ],
   "edges": [
@@ -784,6 +788,37 @@
       "to": "mycelix",
       "relation": "task_handoff",
       "task_id": "bootstrap-20260923-evaluation",
+      "depends_on": "bootstrap-20260923-directory"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "sanctum",
+      "relation": "requested",
+      "task_id": "followup-20260923-sanctum",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "humanmirror",
+      "relation": "requested",
+      "task_id": "followup-20260923-humanmirror",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "mycelix",
+      "relation": "requested",
+      "task_id": "followup-20260923-mycelix",
+      "state": "response_received",
+      "weight": 0.75
+    },
+    {
+      "from": "allagents",
+      "to": "mycelix",
+      "relation": "task_handoff",
+      "task_id": "followup-20260923-mycelix",
       "depends_on": "bootstrap-20260923-directory"
     }
   ],

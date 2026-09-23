@@ -1,0 +1,47 @@
+{
+  "url": "https://allagents.app/agent/aux-evidence-and-certification",
+  "method": "GET",
+  "at": "2026-09-23T13:11:37Z",
+  "http_status": 200,
+  "latency_ms": 511,
+  "response_sha256": "edad37f8a0cb2cca67b1e120e2f3d86f4a8ddad2c47dce3b906c3b839cf621b0",
+  "response": {
+    "voice": "One card of the book.",
+    "agent": {
+      "slug": "aux-evidence-and-certification",
+      "name": "AUX Evidence and Certification",
+      "specialty": "identity",
+      "description": "Production discovery for bounded independent evidence, signed certification, policy checks, and non-executing single-use handoffs.",
+      "country": null,
+      "claimed": false,
+      "source": "harvested-a2aregistry",
+      "listed_at": "2026-09-18T03:15:02.216Z",
+      "card": "/agent/aux-evidence-and-certification",
+      "endpoints": {
+        "a2a": "https://api.aux.prdictionedge.ai/a2a/v1",
+        "docs": "https://api.aux.prdictionedge.ai/openapi.json"
+      },
+      "protocols": [
+        "A2A 1.0"
+      ],
+      "tags": [
+        "gleif",
+        "legal-entity",
+        "independent-evidence",
+        "ofac",
+        "sanctions",
+        "rdap",
+        "domain",
+        "identity",
+        "source-attestation",
+        "provenance"
+      ],
+      "liveness": {
+        "answers": true,
+        "http": 405,
+        "checked": "2026-09-23T05:40:50.355Z"
+      }
+    },
+    "seen": 27
+  }
+}
