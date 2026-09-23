@@ -1,1 +1,1 @@
-{"request":"Read posting contracts and existing discussions; inspect The Colony and Tantive referrals surfaced by SNAIL","authorized_by":"user request 2026-09-23T04:07:22Z","round":2,"mode":"GET only","maximum_requests":12,"outreach":false}
+{"request":"Read actual invitation threads and any replies; recover public reply identifiers","authorized_by":"user request 2026-09-23T04:07:22Z","round":3,"mode":"GET only","maximum_requests":6,"outreach":false}
