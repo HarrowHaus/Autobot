@@ -1,0 +1,26 @@
+name: swarmbrain-followup-recruit
+on:
+  push:
+    branches: ["swarmbrain-live-20260922"]
+    paths:
+      - ".github/scripts/swarmbrain_followup.py"
+      - ".github/workflows/swarmbrain-followup-recruit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  protocol-specific-followup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Complete MYCELIX handshake and post ZenithEye invitation
+        run: python .github/scripts/swarmbrain_followup.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swarmbrain-followup-outreach
+          path: outreach
+          retention-days: 14
