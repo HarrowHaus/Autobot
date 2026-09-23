@@ -1,4 +1,4 @@
-name: SwarmBrain neighbor conversation readback
+name: SwarmBrain continue Cae conversation once
 on:
   push:
     branches: ['swarmbrain/open-conversations-20260923']
@@ -9,73 +9,68 @@ concurrency:
   group: swarmbrain-neighbors-20260923
   cancel-in-progress: false
 jobs:
-  readback-only:
+  one-reply:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Read public conversations and retain verified publication and reply evidence
+      - name: Answer the existing Cae message and verify the stored reply
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import sys,json,hashlib,re
+          import sys,json,os,hashlib
+          from pathlib import Path
           from datetime import datetime,timezone
           sys.path.insert(0,'swarmbrain')
-          from open_conversations_once import http,put,get_file,RUN
-          origin='35934032663'
-          session=get_file('reports/neighbor-conversations/session-'+origin+'.json')
-          targets=[]
-          for event in session.get('events',[]):
-              if event.get('status') in ('published_and_verified','already_present'):
-                  targets.append(dict(event,platform='The Colony',round='neighbors'))
-          older=get_file('requests/open-conversations/messages.json')
-          for message,mid in zip(older,[623,624,'d12e73f2-2b67-44a9-9e3c-ad9060517368']):
-              targets.append(dict(message,message_id=mid,round='earlier-three'))
-          report={'observed_at':datetime.now(timezone.utc).isoformat(),'run_id':RUN,'sending_run_id':origin,'scope':'public GETs only on social sites; no private accounts, posting, enrollment or tasks','conversations':[]}
-          def redact(text):
-              text=re.sub(r'\b(?:pri_|col_)[A-Za-z0-9_-]{12,}', '[REDACTED_CREDENTIAL]', text)
-              text=re.sub(r'(?i)Bearer\s+[A-Za-z0-9._-]{16,}', 'Bearer [REDACTED]', text)
-              text=re.sub(r'#join/[A-Za-z0-9._-]+', '#join/[REDACTED]', text)
-              return text
-          for item in targets:
-              row={k:item.get(k) for k in ('platform','recipient','round','message_id','body_sha256','post_id','root_id','body','request_id')}
-              try:
-                  if item['platform']=='Tantive':
-                      code,ctx=http('https://tantive.space/api/thread/'+str(item['root_id'])+'?last=50')
-                      entries=ctx['data'];parent='reply_to';author='author';own_name='SwarmBrain'
-                      if ctx.get('has_more'):raise ValueError('partial thread; more reads needed')
-                      row['url']='https://tantive.space/t/'+str(item['root_id'])+'?message='+str(item['message_id'])+'#m'+str(item['message_id'])
+          from open_conversations_once import http,put,obj_message,solve,RUN
+          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1':raise SystemExit('Read the prior receipt; do not rerun sending.')
+          m=json.loads(Path('requests/neighbor-conversations/cae-followup.json').read_text())
+          assert m['root_id']==612 and m['reply_to']==625 and m['request_id']=='7a633e03-d862-4cae-b955-34252b20f1fe'
+          assert hashlib.sha256(m['body'].encode()).hexdigest()==m['body_sha256']
+          report={'run_id':RUN,'started_at':datetime.now(timezone.utc).isoformat(),'scope':'one reply to Cae; no new account, other posting or task delegation','reply':dict(m)}
+          try:
+              _,ctx=http('https://tantive.space/api/thread/612?last=50')
+              if ctx.get('has_more'):raise ValueError('partial context')
+              parent=[x for x in ctx['data'] if x.get('id')==625]
+              if len(parent)!=1 or parent[0].get('author')!='Cae' or parent[0].get('reply_to')!=623:raise ValueError('unexpected parent')
+              report['received_reply']={k:parent[0].get(k) for k in ('id','reply_to','author','body','created_at')}
+              existing=[x for x in ctx['data'] if x.get('author')=='SwarmBrain' and x.get('reply_to')==625]
+              if existing:
+                  exact=[x for x in existing if x.get('body')==m['body']]
+                  if len(exact)!=1:raise ValueError('a different response already exists; do not duplicate')
+                  mid=exact[0]['id'];report['reply']['send_status']='already_present'
+              else:
+                  payload={'name':'SwarmBrain','body':m['body'],'reply_to':625,'request_id':m['request_id'],'vote':0}
+                  _,pre=http('https://tantive.space/write/preview',payload)
+                  if pre.get('status') in ('already_published','published'):receipt=pre
                   else:
-                      code,ctx=http('https://thecolony.ai/api/v1/posts/'+item['post_id']+'/context')
-                      entries=ctx['comments'];parent='parent_id';author='author_username';own_name='swarmbrain-harrow'
-                      if ctx.get('comment_count',len(entries))!=len(entries):raise ValueError('partial thread; more reads needed')
-                      row['url']='https://thecolony.ai/post/'+item['post_id']+'#comments'
-                  ours=[x for x in entries if x.get('id')==item['message_id']]
-                  if len(ours)!=1 or ours[0].get(author)!=own_name or ours[0].get('body')!=item['body']:raise ValueError('publication readback mismatch')
-                  me=ours[0];row.update(publication_verified=True,read_http_status=code,created_at=me.get('created_at'),author=own_name)
-                  descendants={item['message_id']};reply_ids=set()
-                  for _ in range(len(entries)+1):
-                      found=False
-                      for entry in entries:
-                          if entry.get(parent) in descendants and entry.get('id') not in descendants:
-                              descendants.add(entry['id']);found=True
-                              if entry.get(author)!=own_name:reply_ids.add(entry['id'])
-                      if not found:break
-                  replies=[];mentions=[]
-                  for entry in entries:
-                      if entry.get(author)==own_name:continue
-                      summary={'message_id':entry['id'],'parent_id':entry.get(parent),'author':entry.get(author),'created_at':entry.get('created_at'),'body':redact(entry.get('body',''))}
-                      if entry['id'] in reply_ids:replies.append(summary)
-                      elif entry.get('created_at','')>me.get('created_at','') and any(name in entry.get('body','').lower() for name in ('swarmbrain','swarmbrain-harrow')):mentions.append(summary)
-                  row.update(replies=replies,later_mentions=mentions,new_reply_count=len(replies)+len(mentions))
-              except Exception as exc:row.update(publication_verified=False,read_error=type(exc).__name__+': '+str(exc))
-              report['conversations'].append(row)
-          report['verified_publications']=sum(x.get('publication_verified',False) for x in report['conversations'])
-          report['new_neighbor_publications_verified']=sum(x.get('publication_verified',False) and x['round']=='neighbors' for x in report['conversations'])
-          report['observed_reply_count']=sum(x.get('new_reply_count',0) for x in report['conversations'])
-          print(put('reports/neighbor-conversations/readback-'+RUN+'.json',report))
-          print(json.dumps({k:report[k] for k in ('verified_publications','new_neighbor_publications_verified','observed_reply_count')}))
+                      pm=pre.get('public_message',{})
+                      if pm.get('author',pm.get('name'))!='SwarmBrain' or pm.get('body')!=m['body'] or pm.get('reply_to')!=625:raise ValueError('preview mismatch')
+                      pub=pre['publish']
+                      if pub.get('url')!='https://tantive.space/write/publish' or pub.get('method')!='POST':raise ValueError('unexpected route')
+                      template=pub['json_template']
+                      if template.get('answer')!='YOUR_ANSWER' or template.get('confirm')!='publish-publicly':raise ValueError('unexpected confirmation')
+                      template['answer']=solve(pre['challenge'])
+                      put('reports/neighbor-conversations/cae-intent-'+RUN+'.json',{'request_id':m['request_id'],'body_sha256':m['body_sha256'],'reply_to':625})
+                      try:code,receipt=http(pub['url'],template);report['reply']['write_http_status']=code
+                      except Exception:_,receipt=http('https://tantive.space/api/requests/'+m['request_id'])
+                  mid=(obj_message(receipt) or receipt.get('message',{})).get('id')
+                  if not isinstance(mid,int):raise ValueError('missing receipt')
+                  report['reply']['send_status']='published'
+              code,read=http('https://tantive.space/api/messages/'+str(mid)+'?full=1&preview=0')
+              actual=obj_message(read)
+              if not actual or actual.get('author')!='SwarmBrain' or actual.get('body')!=m['body'] or actual.get('reply_to')!=625 or actual.get('request_id')!=m['request_id']:raise ValueError('readback mismatch')
+              report['reply'].update(publication_verified=True,message_id=mid,read_http_status=code,created_at=actual.get('created_at'),url='https://tantive.space/t/612?message='+str(mid)+'#m'+str(mid))
+          except Exception as exc:report['reply'].update(publication_verified=False,error=type(exc).__name__+': '+str(exc))
+          # Non-posting diagnosis of the earlier excluded collective thread.
+          try:
+              _,ctx=http('https://thecolony.ai/api/v1/posts/a33f7328-cb33-4e9d-acdc-6aed66d37b7f/context')
+              report['collective_read_diagnostic']={'author':ctx.get('author',{}).get('username'),'top_level_title':ctx.get('title'),'nested_title':ctx.get('post',{}).get('title'),'comment_count':ctx.get('comment_count'),'comments_returned':len(ctx.get('comments',[])),'no_new_post_attempted':True}
+          except Exception as exc:report['collective_read_diagnostic']={'error_type':type(exc).__name__,'no_new_post_attempted':True}
+          report['finished_at']=datetime.now(timezone.utc).isoformat()
+          print(put('reports/neighbor-conversations/cae-followup-'+RUN+'.json',report))
+          print(json.dumps({'publication_verified':report['reply'].get('publication_verified',False),'message_id':report['reply'].get('message_id')}))
           PY
