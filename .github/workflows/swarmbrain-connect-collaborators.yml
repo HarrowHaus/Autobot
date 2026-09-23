@@ -1,0 +1,43 @@
+name: SwarmBrain connect collaborators
+on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths: ['.github/workflows/swarmbrain-connect-collaborators.yml']
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-peer-state
+  cancel-in-progress: false
+jobs:
+  connect:
+    if: github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Connect published collaborator cards and ask the readiness question
+        run: python3 swarmbrain/connect_collaborators.py
+      - name: Preserve returned identities and receipts
+        if: always()
+        env:
+          STATE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data reports
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save actual collaborator discovery and readiness responses [skip ci]'
+            git push origin "HEAD:${STATE_BRANCH}"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-collaborator-checks
+          path: |
+            reports/collaborator-checks.json
+            reports/peer-cards/
+            reports/task-receipts/
+            data/mesh-state.json
+          retention-days: 14
