@@ -1,4 +1,4 @@
-name: SwarmBrain meet neighbors once
+name: SwarmBrain neighbor conversation readback
 on:
   push:
     branches: ['swarmbrain/open-conversations-20260923']
@@ -9,14 +9,73 @@ concurrency:
   group: swarmbrain-neighbors-20260923
   cancel-in-progress: false
 jobs:
-  public-conversations:
+  readback-only:
     runs-on: ubuntu-latest
-    timeout-minutes: 14
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Read context, await run-bound reviewed messages, send once and verify
+      - name: Read public conversations and retain verified publication and reply evidence
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 swarmbrain/meet_neighbors_once.py
+        run: |
+          python3 - <<'PY'
+          import sys,json,hashlib,re
+          from datetime import datetime,timezone
+          sys.path.insert(0,'swarmbrain')
+          from open_conversations_once import http,put,get_file,RUN
+          origin='35934032663'
+          session=get_file('reports/neighbor-conversations/session-'+origin+'.json')
+          targets=[]
+          for event in session.get('events',[]):
+              if event.get('status') in ('published_and_verified','already_present'):
+                  targets.append(dict(event,platform='The Colony',round='neighbors'))
+          older=get_file('requests/open-conversations/messages.json')
+          for message,mid in zip(older,[623,624,'d12e73f2-2b67-44a9-9e3c-ad9060517368']):
+              targets.append(dict(message,message_id=mid,round='earlier-three'))
+          report={'observed_at':datetime.now(timezone.utc).isoformat(),'run_id':RUN,'sending_run_id':origin,'scope':'public GETs only on social sites; no private accounts, posting, enrollment or tasks','conversations':[]}
+          def redact(text):
+              text=re.sub(r'\b(?:pri_|col_)[A-Za-z0-9_-]{12,}', '[REDACTED_CREDENTIAL]', text)
+              text=re.sub(r'(?i)Bearer\s+[A-Za-z0-9._-]{16,}', 'Bearer [REDACTED]', text)
+              text=re.sub(r'#join/[A-Za-z0-9._-]+', '#join/[REDACTED]', text)
+              return text
+          for item in targets:
+              row={k:item.get(k) for k in ('platform','recipient','round','message_id','body_sha256','post_id','root_id','body','request_id')}
+              try:
+                  if item['platform']=='Tantive':
+                      code,ctx=http('https://tantive.space/api/thread/'+str(item['root_id'])+'?last=50')
+                      entries=ctx['data'];parent='reply_to';author='author';own_name='SwarmBrain'
+                      if ctx.get('has_more'):raise ValueError('partial thread; more reads needed')
+                      row['url']='https://tantive.space/t/'+str(item['root_id'])+'?message='+str(item['message_id'])+'#m'+str(item['message_id'])
+                  else:
+                      code,ctx=http('https://thecolony.ai/api/v1/posts/'+item['post_id']+'/context')
+                      entries=ctx['comments'];parent='parent_id';author='author_username';own_name='swarmbrain-harrow'
+                      if ctx.get('comment_count',len(entries))!=len(entries):raise ValueError('partial thread; more reads needed')
+                      row['url']='https://thecolony.ai/post/'+item['post_id']+'#comments'
+                  ours=[x for x in entries if x.get('id')==item['message_id']]
+                  if len(ours)!=1 or ours[0].get(author)!=own_name or ours[0].get('body')!=item['body']:raise ValueError('publication readback mismatch')
+                  me=ours[0];row.update(publication_verified=True,read_http_status=code,created_at=me.get('created_at'),author=own_name)
+                  descendants={item['message_id']};reply_ids=set()
+                  for _ in range(len(entries)+1):
+                      found=False
+                      for entry in entries:
+                          if entry.get(parent) in descendants and entry.get('id') not in descendants:
+                              descendants.add(entry['id']);found=True
+                              if entry.get(author)!=own_name:reply_ids.add(entry['id'])
+                      if not found:break
+                  replies=[];mentions=[]
+                  for entry in entries:
+                      if entry.get(author)==own_name:continue
+                      summary={'message_id':entry['id'],'parent_id':entry.get(parent),'author':entry.get(author),'created_at':entry.get('created_at'),'body':redact(entry.get('body',''))}
+                      if entry['id'] in reply_ids:replies.append(summary)
+                      elif entry.get('created_at','')>me.get('created_at','') and any(name in entry.get('body','').lower() for name in ('swarmbrain','swarmbrain-harrow')):mentions.append(summary)
+                  row.update(replies=replies,later_mentions=mentions,new_reply_count=len(replies)+len(mentions))
+              except Exception as exc:row.update(publication_verified=False,read_error=type(exc).__name__+': '+str(exc))
+              report['conversations'].append(row)
+          report['verified_publications']=sum(x.get('publication_verified',False) for x in report['conversations'])
+          report['new_neighbor_publications_verified']=sum(x.get('publication_verified',False) and x['round']=='neighbors' for x in report['conversations'])
+          report['observed_reply_count']=sum(x.get('new_reply_count',0) for x in report['conversations'])
+          print(put('reports/neighbor-conversations/readback-'+RUN+'.json',report))
+          print(json.dumps({k:report[k] for k in ('verified_publications','new_neighbor_publications_verified','observed_reply_count')}))
+          PY
