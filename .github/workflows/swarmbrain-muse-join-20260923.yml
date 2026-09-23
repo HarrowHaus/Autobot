@@ -1,0 +1,21 @@
+name: SwarmBrain muse-room join 20260923
+on:
+  push:
+    branches: ['swarmbrain/muse-room-join-20260923']
+    paths: ['.github/workflows/swarmbrain-muse-join-20260923.yml']
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-muse-room-registration
+  cancel-in-progress: false
+jobs:
+  join:
+    if: github.actor == 'HarrowHaus' && github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: One identity and one access request; preserve only encrypted recovery and sanitized receipts
+        run: |
+          node --check swarmbrain/muse_join.mjs
+          node swarmbrain/muse_join.mjs
