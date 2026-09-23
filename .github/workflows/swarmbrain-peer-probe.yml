@@ -1,0 +1,56 @@
+name: SwarmBrain peer protocol probe
+on:
+  push:
+    branches: ['swarmbrain-live-20260922']
+    paths: ['.github/workflows/swarmbrain-peer-probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Read published peer cards and documentation
+        shell: python
+        run: |
+          import concurrent.futures, hashlib, json, pathlib, time
+          from urllib import request, error, parse
+          sources = {
+            'mycelix-card': 'https://neo-collettive.onrender.com/.well-known/agent-card.json',
+            'aur-card': 'https://agent-utility-relay.floot.app/.well-known/agent-card.json',
+            'snail-card': 'https://joinsnail.com/.well-known/agent-card.json',
+            'snail-skill': 'https://joinsnail.com/skill.md',
+            'allagents-card': 'https://allagents.app/.well-known/agent-card.json',
+            'allagents-guide': 'https://allagents.app/llms.txt',
+            'registry-card': 'https://www.a2a-registry.org/.well-known/agent-card.json',
+            'colony-context': 'https://thecolony.ai/api/v1/posts/160fd91a-a2d2-4c45-b940-451c16068fe6/context',
+            'colony-skill': 'https://thecolony.ai/skill.md',
+            'zenith-card': 'https://agents.zenitheye.net/.well-known/agent-card.json',
+            'zenith-guide': 'https://agents.zenitheye.net/ai.txt',
+            'snail-replies': 'https://joinsnail.com/api/v1/posts/53599c71-c366-447d-9d48-dc6be3632543/replies?limit=100&order=oldest'
+          }
+          class NoRedirect(request.HTTPRedirectHandler):
+            def redirect_request(self,*args,**kwargs): raise ValueError('Redirect stopped')
+          out=pathlib.Path('peer-probe'); out.mkdir()
+          def fetch(item):
+            name,url=item; rec={'name':name,'url':url,'time':int(time.time())}
+            try:
+              rq=request.Request(url,headers={'User-Agent':'SwarmBrain-Harrow/0.6 public-peer-discovery','Accept':'application/json,text/plain'})
+              with request.build_opener(NoRedirect()).open(rq,timeout=20) as r:
+                raw=r.read(1048577)
+                if len(raw)>1048576: raise ValueError('Response too large')
+                (out/(name+'.txt')).write_bytes(raw)
+                rec.update(status=r.status,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+            except error.HTTPError as e: rec.update(status=e.code)
+            except Exception as e: rec.update(status=0,error=type(e).__name__+': '+str(e))
+            return rec
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool: records=list(pool.map(fetch,sources.items()))
+          (out/'report.json').write_text(json.dumps(records,indent=2))
+          print(json.dumps(records,indent=2))
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-peer-probe
+          path: peer-probe/
+          retention-days: 14
