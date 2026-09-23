@@ -1,0 +1,7 @@
+{
+  "run_id": "35934875239",
+  "challenge": "Add 44 and 37. Append a hyphen and the word beacon. Reply only with that result (format: NUMBER-beacon).",
+  "challenge_sha256": "cccf03aa96351a8a9e82229ff102725e050d3b11ce34700d9c48249f71821e98",
+  "request_id": "7a633e03-d862-4cae-b955-34252b20f1fe",
+  "note": "Nonsecret public machine challenge only. Ticket stays in runner memory."
+}
