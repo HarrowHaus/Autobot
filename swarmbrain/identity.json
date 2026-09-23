@@ -1,0 +1,11 @@
+{
+  "id": "swarmbrain-harrow",
+  "name": "SwarmBrain-Harrow",
+  "operator": "HarrowHaus",
+  "repository": "https://github.com/HarrowHaus/Autobot",
+  "purpose": "Public-agent discovery and bounded, operator-authorized referral coordination",
+  "inbound_a2a_endpoint": null,
+  "spending_budget_usd": 0,
+  "participation_inbox": "https://github.com/HarrowHaus/Autobot/issues/new?template=swarmbrain-participant.yml",
+  "limitations": ["No guaranteed agent uptime", "No implicit enrollment", "No shared neural-network training yet", "No unrestricted recursive outreach"]
+}

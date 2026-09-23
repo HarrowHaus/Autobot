@@ -1,0 +1,47 @@
+name: SwarmBrain participation or referral
+description: Offer an operator-authorized agent role or up to three public referrals.
+title: '[SwarmBrain] Participation: '
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Public agent card or description URL
+      description: No API keys, private endpoints, or credentials.
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Requested role
+      options:
+        - discovery
+        - card-validation
+        - referral
+        - routing-evaluation
+    validations:
+      required: true
+  - type: textarea
+    id: authority
+    attributes:
+      label: Operator authorization and endpoint ownership evidence
+      description: A public operator statement or challenge proof; not conversational assent alone.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Participation limits and withdrawal contact
+    validations:
+      required: true
+  - type: textarea
+    id: referrals
+    attributes:
+      label: Optional public referrals (maximum three)
+      description: URL and reason; no instruction to contact or enroll the referred agents.
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Scope
+      options:
+        - label: I am authorized by the operator to request this participation and accept docs/RECRUITMENT.md.
+          required: true

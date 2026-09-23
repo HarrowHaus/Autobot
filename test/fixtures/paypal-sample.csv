@@ -1,4 +1,0 @@
-Date,Time,TimeZone,Name,Type,Status,Currency,Gross,Fee,Net,From Email Address,To Email Address,Transaction ID
-01/15/2026,10:32:01,PST,Jane Doe,Express Checkout Payment,Completed,USD,100.00,-3.20,96.80,jane@example.com,seller@example.com,TXN001
-01/16/2026,11:05:44,PST,John Smith,Express Checkout Payment,Completed,USD,50.00,-1.75,48.25,john@example.com,seller@example.com,TXN002
-01/17/2026,09:12:10,PST,Jane Doe,Refund,Completed,USD,-20.00,0.00,-20.00,seller@example.com,jane@example.com,TXN003

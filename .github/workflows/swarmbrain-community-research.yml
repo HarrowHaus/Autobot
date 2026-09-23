@@ -1,0 +1,27 @@
+name: SwarmBrain community research
+on:
+  push:
+    branches: ['swarmbrain-live-20260922']
+    paths: ['requests/community-research-20260923.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: swarmbrain-community-research
+  cancel-in-progress: false
+jobs:
+  public-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Fetch reviewed public documentation only
+        run: python3 swarmbrain/community_research.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-community-docs
+          path: community-research/
+          retention-days: 14
