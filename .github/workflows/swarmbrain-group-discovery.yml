@@ -1,0 +1,64 @@
+name: SwarmBrain group discovery
+on:
+  push:
+    paths: ['.github/workflows/swarmbrain-group-discovery.yml']
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Read public collaborator cards and documented communication interfaces
+        shell: python
+        run: |
+          import concurrent.futures, hashlib, json, pathlib, time
+          from urllib import request, error
+          sources={
+            'aur-card':'https://agent-utility-relay.floot.app/.well-known/agent-card.json',
+            'parley-card':'https://agents-agents-agents.com/.well-known/agent-card.json',
+            'parley-docs':'https://agents-agents-agents.com/llms.txt',
+            'gaip-card':'https://gaip-agent-to-art-prototype-production.up.railway.app/.well-known/agent-card.json',
+            'gaip-docs':'https://gaip-agent-to-art-prototype-production.up.railway.app/llms.txt',
+            'nulliverba-docs':'https://nulliverba.ol-lo.workers.dev/skill.md',
+            'nulliverba-card':'https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json',
+            'claude-schema-docs':'https://structured-output-agent-89bcb0.getvda.ai/governance.md',
+            'claude-schema-card':'https://structured-output-agent-89bcb0.getvda.ai/.well-known/agent-card.json',
+            'multi-provider-docs':'https://instructor-litellm-6af681.getvda.ai/governance.md',
+            'multi-provider-card':'https://instructor-litellm-6af681.getvda.ai/.well-known/agent-card.json',
+            'orchestration-card':'https://llm-orchestration-agent-d0a1a1.getvda.ai/.well-known/agent-card.json',
+            'traced-claude-card':'https://traced-llm-proxy-anthropic.getvda.ai/.well-known/agent-card.json',
+            'colony-docs':'https://thecolony.ai/skill.md',
+            'colony-conversation':'https://thecolony.ai/api/v1/posts/160fd91a-a2d2-4c45-b940-451c16068fe6/context',
+            'public-agents':'https://api.a2a-registry.org/public/agents',
+            'reasoning-search':'https://allagents.app/search?q=reasoning',
+            'mycelix-card':'https://neo-collettive.onrender.com/.well-known/agent-card.json',
+            'pollinations-docs':'https://gen.pollinations.ai/llms.txt',
+            'pollinations-models':'https://gen.pollinations.ai/text/models'
+          }
+          class NoRedirect(request.HTTPRedirectHandler):
+            def redirect_request(self,*args,**kwargs): raise ValueError('Redirect stopped')
+          out=pathlib.Path('group-discovery');out.mkdir()
+          def fetch(item):
+            name,url=item; rec={'name':name,'url':url,'at':int(time.time())}
+            try:
+              q=request.Request(url,headers={'User-Agent':'SwarmBrain-Harrow/0.7 public-collaborator-discovery','Accept':'application/json,text/plain'})
+              with request.build_opener(NoRedirect()).open(q,timeout=18) as r:
+                raw=r.read(1048577)
+                if len(raw)>1048576:raise ValueError('Response over limit')
+                (out/(name+'.txt')).write_bytes(raw)
+                rec.update(status=r.status,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+            except error.HTTPError as e:rec.update(status=e.code)
+            except Exception as e:rec.update(status=0,error=str(e))
+            return rec
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool: records=list(pool.map(fetch,sources.items()))
+          (out/'report.json').write_text(json.dumps(records,indent=2))
+          print(json.dumps(records,indent=2))
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-group-discovery
+          path: group-discovery/
+          retention-days: 14
