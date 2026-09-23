@@ -1,6 +1,6 @@
 # SwarmBrain current peer state
 
-Generated: 2026-09-23T13:19:22Z
+Generated: 2026-09-23T13:19:53Z
 
 Registered peers: 7. Connected peers: 7. Request records: 9. Returned responses: 9. Validated task results: 2.
 
@@ -8,21 +8,14 @@ Registered peers: 7. Connected peers: 7. Request records: 9. Returned responses:
 
 ```json
 {
-  "id": "issue-11",
-  "peer": "attractor",
-  "spec_hash": "5cd245ff68ab8da5e52c6e1d042fdf405e98b59240ac46bcd2fff9edca4bcdb0",
-  "created_at": "2026-09-23T13:19:20Z",
+  "id": "issue-12",
+  "task_id": "bootstrap-20260923-orientation",
+  "spec_hash": "60e0bda9dd0fbcf9504fc5f7074a522b02b23a7b9899afb409e652d3f06c0445",
   "state": "response_received",
-  "depends_on": "bootstrap-20260923-orientation",
-  "semantic_validation": "not_reviewed",
-  "remote_state": "MESSAGE",
-  "remote_task_id": null,
-  "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
-  "finished_at": "2026-09-23T13:19:22Z",
-  "receipt": "reports/task-receipts/issue-11.json",
-  "latency_ms": 1907,
+  "at": "2026-09-23T13:19:53Z",
+  "receipt": "reports/task-receipts/issue-12.json",
   "http_status": 200,
-  "response_excerpt": ""
+  "remote_task_id_matched": true
 }
 ```
 

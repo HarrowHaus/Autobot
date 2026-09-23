@@ -4,24 +4,17 @@
   "results_received": 9,
   "verified_task_results": 2,
   "task_count": 9,
-  "generated_at": "2026-09-23T13:19:22Z",
-  "job_id": "issue-11",
+  "generated_at": "2026-09-23T13:19:53Z",
+  "job_id": "issue-12",
   "job_result": {
-    "id": "issue-11",
-    "peer": "attractor",
-    "spec_hash": "5cd245ff68ab8da5e52c6e1d042fdf405e98b59240ac46bcd2fff9edca4bcdb0",
-    "created_at": "2026-09-23T13:19:20Z",
+    "id": "issue-12",
+    "task_id": "bootstrap-20260923-orientation",
+    "spec_hash": "60e0bda9dd0fbcf9504fc5f7074a522b02b23a7b9899afb409e652d3f06c0445",
     "state": "response_received",
-    "depends_on": "bootstrap-20260923-orientation",
-    "semantic_validation": "not_reviewed",
-    "remote_state": "MESSAGE",
-    "remote_task_id": null,
-    "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
-    "finished_at": "2026-09-23T13:19:22Z",
-    "receipt": "reports/task-receipts/issue-11.json",
-    "latency_ms": 1907,
+    "at": "2026-09-23T13:19:53Z",
+    "receipt": "reports/task-receipts/issue-12.json",
     "http_status": 200,
-    "response_excerpt": ""
+    "remote_task_id_matched": true
   },
   "errors": [],
   "catalog": {
@@ -91,7 +84,7 @@
       "a2a_endpoint": null
     }
   ],
-  "remote_task_polls": 0,
+  "remote_task_polls": 1,
   "peers": [
     {
       "id": "allagents",
@@ -211,7 +204,9 @@
       "http_status": 200,
       "response_excerpt": "\n",
       "review_evidence": "ZenithEye returned a completed task with an arrival artifact, current event cursor, counts and continuation URLs.",
-      "reviewed_at": "2026-09-23T13:11:34Z"
+      "reviewed_at": "2026-09-23T13:11:34Z",
+      "latest_poll_receipt": "reports/task-receipts/issue-12.json",
+      "last_polled_at": "2026-09-23T13:19:53Z"
     },
     {
       "id": "bootstrap-20260923-evaluation",
