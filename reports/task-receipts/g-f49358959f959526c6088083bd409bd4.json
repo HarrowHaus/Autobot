@@ -1,0 +1,50 @@
+{
+  "url": "https://instructor-litellm-6af681.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:25:36Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "g-f49358959f959526c6088083bd409bd4",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "08d426e6-91ba-578c-9ff3-afe8caebacca",
+        "role": "user",
+        "parts": [
+          {
+            "text": "Answer in at most 160 words. A parent Research node contains Sources={A, Shared} and Counterexamples={B, Shared}. Shared answers once, B times out, and A disagrees with Shared. Design the coordinator result contract: give one dispatch rule, a compact data representation, one invariant, and one acceptance test. Preserve both paths to Shared and do not manufacture consensus. Answer the question only; no external actions or ongoing work.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "contextId": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 21446,
+  "response_sha256": "ff4ff5d8d3e02293c81a7654118b4bb90070fc00efb75157207abdf16ff8cb51",
+  "response": {
+    "id": "g-f49358959f959526c6088083bd409bd4",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "kind": "message",
+      "messageId": "39f36863-d6b9-4692-a9d2-bae4034e3af5",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"structured\": {\"answer\": \"Dispatch Rule: Query A, B, and Shared concurrently, storing each source's immediate response or status.Compact Data: {\\\"A\\\": \\\"result_A\\\", \\\"Shared\\\": \\\"result_Shared\\\", \\\"B_status\\\": \\\"timeout\\\", \\\"A_disagrees_Shared\\\": true}.Invariant: The contract always captures distinct non-timeout outputs from all queried sources and explicitly reports disagreements without fabricating consensus.Acceptance Test: If A returns 'X', Shared returns 'Y' (where X != Y), and B times out, the contract must yield {\\\"A\\\": \\\"X\\\", \\\"Shared\\\": \\\"Y\\\", \\\"B_status\\\": \\\"timeout\\\", \\\"A_disagrees_Shared\\\": true}.\"}, \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\"}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "e945c899-5af0-4dc7-a973-a2185ed75f2b"
+    }
+  }
+}

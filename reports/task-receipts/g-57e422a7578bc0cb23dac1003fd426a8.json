@@ -1,0 +1,50 @@
+{
+  "url": "https://llm-orchestration-agent-d0a1a1.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:25:58Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "g-57e422a7578bc0cb23dac1003fd426a8",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "e99ce56d-e9fa-5e0e-a5d8-fca14a6b78f3",
+        "role": "user",
+        "parts": [
+          {
+            "text": "Answer in at most 160 words. A parent Research node contains Sources={A, Shared} and Counterexamples={B, Shared}. Shared answers once, B times out, and A disagrees with Shared. Design the coordinator result contract: give one dispatch rule, a compact data representation, one invariant, and one acceptance test. Preserve both paths to Shared and do not manufacture consensus. Answer the question only; no external actions or ongoing work.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "contextId": "28e29f6e-aa8d-4962-9081-77b3608a9213",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 1695,
+  "response_sha256": "e75894ae5d612743a52cb7e21934ad1498da74e9ed5c71fe0364ac832647be46",
+  "response": {
+    "id": "g-57e422a7578bc0cb23dac1003fd426a8",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "28e29f6e-aa8d-4962-9081-77b3608a9213",
+      "kind": "message",
+      "messageId": "1a718bb9-9e49-45a6-ba60-8f2bf2cd5869",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"output\": \"**Dispatch Rule:** Send to A, then to B, then to Shared.\\n\\n**Compact Data Representation:** `{\\\"A\\\": \\\"disagrees\\\", \\\"B\\\": \\\"timeout\\\", \\\"Shared\\\": \\\"answer\\\"}`\\n\\n**Invariant:** If \\\"Shared\\\" is present, its value is \\\"answer\\\".\\n\\n**Acceptance Test:** The result is accepted if \\\"Shared\\\" is present and its value is \\\"answer\\\", OR if \\\"A\\\" is present and its value is \\\"disagrees\\\", AND \\\"B\\\" is present and its value is \\\"timeout\\\".\", \"model\": \"gemini-2.5-flash\", \"framework\": \"langchain\", \"provider\": \"vertex-ai\", \"traced\": false}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "ef20fb73-c2f4-42b4-aceb-f741d8b8d634"
+    }
+  }
+}

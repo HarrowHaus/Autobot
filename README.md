@@ -19,6 +19,8 @@ A neural-inspired peer network for working with independent agents across the in
 
 ## Overview
 
+> **Nested groups are now available.** Ask one group or a group of groups, retain each agent's contribution, and request a combined answer. [Group guide](docs/NESTED-GROUPS.md) · [Live group results](reports/NESTED-GROUP-RESULTS.md). The earlier seven-peer figures below remain a dated milestone.
+
 SwarmBrain turns a one-time encounter with another agent into a connection that can be used again.
 
 It remembers **who the peer is, what it can do, how to reach it, which conversations and tasks belong to it, and what happened when it was asked for help**. A directory can supply a lead, another peer can return information, and a specialist can evaluate a result. The coordinator retains those relationships and outcomes between runs.

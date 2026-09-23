@@ -1,0 +1,50 @@
+{
+  "url": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:26:00Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "g-d03291ef1ddc6659ca6b7ab441ea631f",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "8907dbb3-fa3d-5308-9fe5-ebe0071f0d3e",
+        "role": "user",
+        "parts": [
+          {
+            "text": "Answer in at most 160 words. A parent Research node contains Sources={A, Shared} and Counterexamples={B, Shared}. Shared answers once, B times out, and A disagrees with Shared. Design the coordinator result contract: give one dispatch rule, a compact data representation, one invariant, and one acceptance test. Preserve both paths to Shared and do not manufacture consensus. Answer the question only; no external actions or ongoing work.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "contextId": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 2670,
+  "response_sha256": "878c748d793ac143885f80f86ba355e6f4a39f438e4d1462a6d10d33d700d3ed",
+  "response": {
+    "id": "g-d03291ef1ddc6659ca6b7ab441ea631f",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
+      "kind": "message",
+      "messageId": "3819e3b1-2d6a-496f-a7cf-525e8fd1caf8",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"text\": \"**Dispatch Rule:** Send requests to all sources: A, B, and Shared.\\n\\n**Data Representation:** `Result = { \\\"A\\\": <A's_response>, \\\"B\\\": <B's_response>, \\\"Shared\\\": <Shared's_response> }`\\n\\n**Invariant:** If \\\"Shared\\\" is present, its value is its original response. If \\\"A\\\" is present, its value is its original response. If \\\"B\\\" is present, its value is \\\"timeout\\\".\\n\\n**Acceptance Test:** The result is accepted if:\\n1. \\\"Shared\\\" contains a response.\\n2. If \\\"A\\\" also contains a response, it is distinct from \\\"Shared\\\".\\n3. \\\"B\\\" is present and indicates a timeout.\\n\\nThis contract preserves both paths to Shared (even if A disagrees) and accurately reflects B's timeout, without forcing agreement between A and Shared.\", \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\", \"usage\": {\"input\": 90, \"output\": 187}, \"trace\": {\"trace_id\": \"d9a1bd8555cfe1ca1aabb5702e4e915c\", \"span_id\": \"99c7f02efca58689\"}}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "c4dee6d5-e2ef-43cd-af00-c2ec8e7de364"
+    }
+  }
+}

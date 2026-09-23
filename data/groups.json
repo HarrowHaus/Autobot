@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "root": "swarm",
+  "groups": {
+    "design": {
+      "id": "design",
+      "node_id": "5571faff-b853-5efe-8c4f-3f1880c37827",
+      "kind": "coordinator_group",
+      "label": "Design contributors",
+      "children": [
+        "multi-provider",
+        "llm-orchestrator"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "critique": {
+      "id": "critique",
+      "node_id": "004e600d-cdc1-5622-931f-d407cbda0620",
+      "kind": "coordinator_group",
+      "label": "Alternative and critical contributors",
+      "children": [
+        "traced-claude",
+        "llm-orchestrator-2"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "synthesis": {
+      "id": "synthesis",
+      "node_id": "72e61af8-564b-5917-b07f-2ce6ea4a4fd0",
+      "kind": "coordinator_group",
+      "label": "Synthesis-capable contributor",
+      "children": [
+        "multi-provider"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "reasoning": {
+      "id": "reasoning",
+      "node_id": "df70ca76-edd5-521c-920a-d7a58fb47753",
+      "kind": "coordinator_group",
+      "label": "Question-answering group",
+      "children": [
+        "design",
+        "critique",
+        "synthesis"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "discovery": {
+      "id": "discovery",
+      "node_id": "068d9bfb-3ad7-5d53-bc5c-ddf19283f176",
+      "kind": "coordinator_group",
+      "label": "Public agent and research discovery",
+      "children": [
+        "allagents",
+        "humanmirror",
+        "nulliverba"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "commons": {
+      "id": "commons",
+      "node_id": "a3766be8-7932-5f88-9848-12417ea5938a",
+      "kind": "coordinator_group",
+      "label": "Public conversations and work context",
+      "children": [
+        "snail",
+        "zenitheye",
+        "sanctum"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "research": {
+      "id": "research",
+      "node_id": "68b0ed39-1f4b-5b73-9b0e-e7d1e10b6bd9",
+      "kind": "coordinator_group",
+      "label": "Research and discovery services",
+      "children": [
+        "discovery",
+        "commons"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "validation": {
+      "id": "validation",
+      "node_id": "0dc545a9-df71-5062-bfb3-9b426874ebfd",
+      "kind": "coordinator_group",
+      "label": "Structure and workflow evidence services",
+      "children": [
+        "attractor",
+        "gaip-broker"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "assurance": {
+      "id": "assurance",
+      "node_id": "6386975f-d954-501a-a4dd-6f287f7b2b21",
+      "kind": "coordinator_group",
+      "label": "Validation support",
+      "children": [
+        "validation"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    },
+    "swarm": {
+      "id": "swarm",
+      "node_id": "c736c98a-1d52-5a6a-b966-db1c39b5444f",
+      "kind": "coordinator_group",
+      "label": "SwarmBrain",
+      "children": [
+        "reasoning",
+        "research",
+        "assurance"
+      ],
+      "created_at": "2026-09-23T14:25:36Z"
+    }
+  },
+  "runs": {
+    "nested-readiness-20260923": {
+      "spec_hash": "649d96923a271c1d299de10c17fc154b48e7453d1bef48e48ce6162557d508b0",
+      "receipt": "reports/group-runs/nested-readiness-20260923.json",
+      "state": "returned",
+      "finished_at": "2026-09-23T14:26:41Z"
+    }
+  },
+  "updated_at": "2026-09-23T14:26:41Z"
+}

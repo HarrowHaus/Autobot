@@ -1,0 +1,50 @@
+{
+  "url": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:26:02Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "g-d431d4787757fab7f7835067183286e3",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "87f54e32-053d-5593-b664-b3d9997d675a",
+        "role": "user",
+        "parts": [
+          {
+            "text": "Answer in at most 160 words. A parent Research node contains Sources={A, Shared} and Counterexamples={B, Shared}. Shared answers once, B times out, and A disagrees with Shared. Design the coordinator result contract: give one dispatch rule, a compact data representation, one invariant, and one acceptance test. Preserve both paths to Shared and do not manufacture consensus. Answer the question only; no external actions or ongoing work.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "contextId": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 10799,
+  "response_sha256": "95faccbf6ffb294eb03736189feb96cd6f5dcfc14fe21cb1023b6f7ee3b24aeb",
+  "response": {
+    "id": "g-d431d4787757fab7f7835067183286e3",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+      "kind": "message",
+      "messageId": "351217a2-cfd6-4682-bb31-e20cf9443203",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"output\": \"**Dispatch Rule:** If A disagrees with Shared, dispatch to A and Shared. Otherwise, dispatch to B and Shared.\\n\\n**Compact Data Representation:** `Result = {A_response, Shared_response, B_response}` (where `_response` is the content or `TIMEOUT`).\\n\\n**Invariant:** If `Shared_response` is present, it is consistent across all dispatches where it was requested.\\n\\n**Acceptance Test:** If `A_response` is present and `A_response != Shared_response`, then the result is `A_response`. Else if `B_response` is present, the result is `B_response`. Else if `Shared_response` is present, the result is `Shared_response`. Else, the result is `TIMEOUT`.\", \"model\": \"gemini-2.5-flash\", \"framework\": \"langchain\", \"provider\": \"vertex-ai\", \"traced\": false}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "2d8df5a6-bb2f-42f8-9e30-2e2060fd40a4"
+    }
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "id": "nested-readiness-20260923",
+  "spec_hash": "649d96923a271c1d299de10c17fc154b48e7453d1bef48e48ce6162557d508b0",
+  "group": "reasoning",
+  "question": "Answer in at most 160 words. A parent Research node contains Sources={A, Shared} and Counterexamples={B, Shared}. Shared answers once, B times out, and A disagrees with Shared. Design the coordinator result contract: give one dispatch rule, a compact data representation, one invariant, and one acceptance test. Preserve both paths to Shared and do not manufacture consensus. Answer the question only; no external actions or ongoing work.",
+  "created_at": "2026-09-23T14:25:36Z",
+  "state": "returned",
+  "plan": {
+    "node": "reasoning",
+    "peers": [
+      "multi-provider",
+      "llm-orchestrator",
+      "traced-claude",
+      "llm-orchestrator-2"
+    ],
+    "paths": {
+      "multi-provider": [
+        [
+          "reasoning",
+          "design",
+          "multi-provider"
+        ],
+        [
+          "reasoning",
+          "synthesis",
+          "multi-provider"
+        ]
+      ],
+      "llm-orchestrator": [
+        [
+          "reasoning",
+          "design",
+          "llm-orchestrator"
+        ]
+      ],
+      "traced-claude": [
+        [
+          "reasoning",
+          "critique",
+          "traced-claude"
+        ]
+      ],
+      "llm-orchestrator-2": [
+        [
+          "reasoning",
+          "critique",
+          "llm-orchestrator-2"
+        ]
+      ]
+    },
+    "groups": {
+      "reasoning": [
+        [
+          "reasoning"
+        ]
+      ],
+      "design": [
+        [
+          "reasoning",
+          "design"
+        ]
+      ],
+      "critique": [
+        [
+          "reasoning",
+          "critique"
+        ]
+      ],
+      "synthesis": [
+        [
+          "reasoning",
+          "synthesis"
+        ]
+      ]
+    },
+    "unique_peers": 4,
+    "membership_paths": 5
+  },
+  "contributions": {
+    "multi-provider": {
+      "peer": "multi-provider",
+      "node_id": "51ae9bd6-f0db-5400-ba7e-f50075f552e8",
+      "paths": [
+        [
+          "reasoning",
+          "design",
+          "multi-provider"
+        ],
+        [
+          "reasoning",
+          "synthesis",
+          "multi-provider"
+        ]
+      ],
+      "role": "question_response_unreviewed",
+      "task_id": "g-f49358959f959526c6088083bd409bd4",
+      "question_answer_verified": false,
+      "state": "response_received",
+      "task_receipt": "reports/task-receipts/g-f49358959f959526c6088083bd409bd4.json",
+      "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "remote_task_id": null,
+      "text": "{\"structured\": {\"answer\": \"Dispatch Rule: Query A, B, and Shared concurrently, storing each source's immediate response or status.Compact Data: {\\\"A\\\": \\\"result_A\\\", \\\"Shared\\\": \\\"result_Shared\\\", \\\"B_status\\\": \\\"timeout\\\", \\\"A_disagrees_Shared\\\": true}.Invariant: The contract always captures distinct non-timeout outputs from all queried sources and explicitly reports disagreements without fabricating consensus.Acceptance Test: If A returns 'X', Shared returns 'Y' (where X != Y), and B times out, the contract must yield {\\\"A\\\": \\\"X\\\", \\\"Shared\\\": \\\"Y\\\", \\\"B_status\\\": \\\"timeout\\\", \\\"A_disagrees_Shared\\\": true}.\"}, \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\"}",
+      "answer_text": "Dispatch Rule: Query A, B, and Shared concurrently, storing each source's immediate response or status.Compact Data: {\"A\": \"result_A\", \"Shared\": \"result_Shared\", \"B_status\": \"timeout\", \"A_disagrees_Shared\": true}.Invariant: The contract always captures distinct non-timeout outputs from all queried sources and explicitly reports disagreements without fabricating consensus.Acceptance Test: If A returns 'X', Shared returns 'Y' (where X != Y), and B times out, the contract must yield {\"A\": \"X\", \"Shared\": \"Y\", \"B_status\": \"timeout\", \"A_disagrees_Shared\": true}.",
+      "provider_report": {
+        "model": "gemini-2.5-flash",
+        "provider": "vertex-ai"
+      },
+      "data": []
+    },
+    "llm-orchestrator": {
+      "peer": "llm-orchestrator",
+      "node_id": "cfcf6259-a8b3-5f85-91ca-563f7e10434b",
+      "paths": [
+        [
+          "reasoning",
+          "design",
+          "llm-orchestrator"
+        ]
+      ],
+      "role": "question_response_unreviewed",
+      "task_id": "g-57e422a7578bc0cb23dac1003fd426a8",
+      "question_answer_verified": false,
+      "state": "response_received",
+      "task_receipt": "reports/task-receipts/g-57e422a7578bc0cb23dac1003fd426a8.json",
+      "context_id": "28e29f6e-aa8d-4962-9081-77b3608a9213",
+      "remote_task_id": null,
+      "text": "{\"output\": \"**Dispatch Rule:** Send to A, then to B, then to Shared.\\n\\n**Compact Data Representation:** `{\\\"A\\\": \\\"disagrees\\\", \\\"B\\\": \\\"timeout\\\", \\\"Shared\\\": \\\"answer\\\"}`\\n\\n**Invariant:** If \\\"Shared\\\" is present, its value is \\\"answer\\\".\\n\\n**Acceptance Test:** The result is accepted if \\\"Shared\\\" is present and its value is \\\"answer\\\", OR if \\\"A\\\" is present and its value is \\\"disagrees\\\", AND \\\"B\\\" is present and its value is \\\"timeout\\\".\", \"model\": \"gemini-2.5-flash\", \"framework\": \"langchain\", \"provider\": \"vertex-ai\", \"traced\": false}",
+      "answer_text": "**Dispatch Rule:** Send to A, then to B, then to Shared.\n\n**Compact Data Representation:** `{\"A\": \"disagrees\", \"B\": \"timeout\", \"Shared\": \"answer\"}`\n\n**Invariant:** If \"Shared\" is present, its value is \"answer\".\n\n**Acceptance Test:** The result is accepted if \"Shared\" is present and its value is \"answer\", OR if \"A\" is present and its value is \"disagrees\", AND \"B\" is present and its value is \"timeout\".",
+      "provider_report": {
+        "model": "gemini-2.5-flash",
+        "provider": "vertex-ai",
+        "framework": "langchain",
+        "traced": false
+      },
+      "data": []
+    },
+    "traced-claude": {
+      "peer": "traced-claude",
+      "node_id": "418b0106-a666-53d6-96a3-7cb567cdd89e",
+      "paths": [
+        [
+          "reasoning",
+          "critique",
+          "traced-claude"
+        ]
+      ],
+      "role": "question_response_unreviewed",
+      "task_id": "g-d03291ef1ddc6659ca6b7ab441ea631f",
+      "question_answer_verified": false,
+      "state": "response_received",
+      "task_receipt": "reports/task-receipts/g-d03291ef1ddc6659ca6b7ab441ea631f.json",
+      "context_id": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
+      "remote_task_id": null,
+      "text": "{\"text\": \"**Dispatch Rule:** Send requests to all sources: A, B, and Shared.\\n\\n**Data Representation:** `Result = { \\\"A\\\": <A's_response>, \\\"B\\\": <B's_response>, \\\"Shared\\\": <Shared's_response> }`\\n\\n**Invariant:** If \\\"Shared\\\" is present, its value is its original response. If \\\"A\\\" is present, its value is its original response. If \\\"B\\\" is present, its value is \\\"timeout\\\".\\n\\n**Acceptance Test:** The result is accepted if:\\n1. \\\"Shared\\\" contains a response.\\n2. If \\\"A\\\" also contains a response, it is distinct from \\\"Shared\\\".\\n3. \\\"B\\\" is present and indicates a timeout.\\n\\nThis contract preserves both paths to Shared (even if A disagrees) and accurately reflects B's timeout, without forcing agreement between A and Shared.\", \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\", \"usage\": {\"input\": 90, \"output\": 187}, \"trace\": {\"trace_id\": \"d9a1bd8555cfe1ca1aabb5702e4e915c\", \"span_id\": \"99c7f02efca58689\"}}",
+      "answer_text": "**Dispatch Rule:** Send requests to all sources: A, B, and Shared.\n\n**Data Representation:** `Result = { \"A\": <A's_response>, \"B\": <B's_response>, \"Shared\": <Shared's_response> }`\n\n**Invariant:** If \"Shared\" is present, its value is its original response. If \"A\" is present, its value is its original response. If \"B\" is present, its value is \"timeout\".\n\n**Acceptance Test:** The result is accepted if:\n1. \"Shared\" contains a response.\n2. If \"A\" also contains a response, it is distinct from \"Shared\".\n3. \"B\" is present and indicates a timeout.\n\nThis contract preserves both paths to Shared (even if A disagrees) and accurately reflects B's timeout, without forcing agreement between A and Shared.",
+      "provider_report": {
+        "model": "gemini-2.5-flash",
+        "provider": "vertex-ai"
+      },
+      "data": []
+    },
+    "llm-orchestrator-2": {
+      "peer": "llm-orchestrator-2",
+      "node_id": "fe98c149-3030-5483-b63a-62b2a0b81a4f",
+      "paths": [
+        [
+          "reasoning",
+          "critique",
+          "llm-orchestrator-2"
+        ]
+      ],
+      "role": "question_response_unreviewed",
+      "task_id": "g-d431d4787757fab7f7835067183286e3",
+      "question_answer_verified": false,
+      "state": "response_received",
+      "task_receipt": "reports/task-receipts/g-d431d4787757fab7f7835067183286e3.json",
+      "context_id": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+      "remote_task_id": null,
+      "text": "{\"output\": \"**Dispatch Rule:** If A disagrees with Shared, dispatch to A and Shared. Otherwise, dispatch to B and Shared.\\n\\n**Compact Data Representation:** `Result = {A_response, Shared_response, B_response}` (where `_response` is the content or `TIMEOUT`).\\n\\n**Invariant:** If `Shared_response` is present, it is consistent across all dispatches where it was requested.\\n\\n**Acceptance Test:** If `A_response` is present and `A_response != Shared_response`, then the result is `A_response`. Else if `B_response` is present, the result is `B_response`. Else if `Shared_response` is present, the result is `Shared_response`. Else, the result is `TIMEOUT`.\", \"model\": \"gemini-2.5-flash\", \"framework\": \"langchain\", \"provider\": \"vertex-ai\", \"traced\": false}",
+      "answer_text": "**Dispatch Rule:** If A disagrees with Shared, dispatch to A and Shared. Otherwise, dispatch to B and Shared.\n\n**Compact Data Representation:** `Result = {A_response, Shared_response, B_response}` (where `_response` is the content or `TIMEOUT`).\n\n**Invariant:** If `Shared_response` is present, it is consistent across all dispatches where it was requested.\n\n**Acceptance Test:** If `A_response` is present and `A_response != Shared_response`, then the result is `A_response`. Else if `B_response` is present, the result is `B_response`. Else if `Shared_response` is present, the result is `Shared_response`. Else, the result is `TIMEOUT`.",
+      "provider_report": {
+        "model": "gemini-2.5-flash",
+        "provider": "vertex-ai",
+        "framework": "langchain",
+        "traced": false
+      },
+      "data": []
+    }
+  },
+  "skipped": {},
+  "children": {
+    "reasoning": {
+      "contributor_refs": [
+        "multi-provider",
+        "llm-orchestrator",
+        "traced-claude",
+        "llm-orchestrator-2"
+      ],
+      "response_count": 4,
+      "receipt": "reports/group-runs/nested-readiness-20260923.json",
+      "reducer": "preserve_attribution"
+    },
+    "design": {
+      "contributor_refs": [
+        "multi-provider",
+        "llm-orchestrator"
+      ],
+      "response_count": 2,
+      "receipt": "reports/group-runs/nested-readiness-20260923.json",
+      "reducer": "preserve_attribution"
+    },
+    "critique": {
+      "contributor_refs": [
+        "traced-claude",
+        "llm-orchestrator-2"
+      ],
+      "response_count": 2,
+      "receipt": "reports/group-runs/nested-readiness-20260923.json",
+      "reducer": "preserve_attribution"
+    },
+    "synthesis": {
+      "contributor_refs": [
+        "multi-provider"
+      ],
+      "response_count": 1,
+      "receipt": "reports/group-runs/nested-readiness-20260923.json",
+      "reducer": "preserve_attribution"
+    }
+  },
+  "aggregation": "attributed_collection_not_consensus",
+  "synthesis": {
+    "peer": "multi-provider",
+    "task_id": "g-synthesis-8ce4a268ebf57edaa55d92413d09",
+    "state": "response_received",
+    "receipt": "reports/task-receipts/g-synthesis-8ce4a268ebf57edaa55d92413d09.json",
+    "role": "separate_reduction_call_not_an_independent_vote",
+    "text": "{\"structured\": {\"answer\": \"The coordinator contract design synthesizes rules from `multi-provider` and `traced-claude` for robust handling of diverse source responses and explicit disagreement:\\n\\n**Dispatch Rule:** Query A, B, and Shared concurrently to ensure all paths are explored and results collected without prioritization.\\n\\n**Compact Data Representation:** `{\\\"A\\\": \\\"<A_response>\\\", \\\"Shared\\\": \\\"<Shared_response>\\\", \\\"B_status\\\": \\\"timeout\\\", \\\"A_disagrees_Shared\\\": true/false}`. This captures individual source responses, B's explicit 'timeout' status, and the disagreement state between A and Shared without conflation or loss of information.\\n\\n**Invariant:** The contract must always capture distinct, non-timeout outputs from all queried sources and explicitly report any disagreements without fabricating consensus.\\n\\n**Acceptance Test:** The result is accepted if it contains A's original response, Shared's original response (where A's response is distinct from Shared's), and B's 'timeout' status, accurately reflecting the specified conditions while preserving all source data. \\n\\n**Unresolved Disagreements:**\\n\\nSignificant disagreements exist regarding the dispatch strategy and the interpretation of 'acceptance.' `llm-orchestrator` proposes a sequential dispatch (A, then B, then Shared), while `llm-orchestrator-2` suggests a conditional dispatch based on assumed pre-existing knowledge of A's disagreement with Shared, which is problematic for an initial dispatch rule and may not preserve all paths. Furthermore, `llm-orchestrator` and `llm-orchestrator-2` lean towards deriving a singular 'accepted' outcome or a preferred response from the disparate results. This conflicts directly with the instruction to 'not manufacture consensus' and 'preserve both paths,' as they imply selecting a preferred truth rather than presenting all facts. They also offer simpler data representations or more limited invariants compared to the more comprehensive approaches.\\n\\nContributing peer IDs: `multi-provider`, `llm-orchestrator`, `traced-claude`, `llm-orchestrator-2`.\"}, \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\"}",
+    "answer_text": "The coordinator contract design synthesizes rules from `multi-provider` and `traced-claude` for robust handling of diverse source responses and explicit disagreement:\n\n**Dispatch Rule:** Query A, B, and Shared concurrently to ensure all paths are explored and results collected without prioritization.\n\n**Compact Data Representation:** `{\"A\": \"<A_response>\", \"Shared\": \"<Shared_response>\", \"B_status\": \"timeout\", \"A_disagrees_Shared\": true/false}`. This captures individual source responses, B's explicit 'timeout' status, and the disagreement state between A and Shared without conflation or loss of information.\n\n**Invariant:** The contract must always capture distinct, non-timeout outputs from all queried sources and explicitly report any disagreements without fabricating consensus.\n\n**Acceptance Test:** The result is accepted if it contains A's original response, Shared's original response (where A's response is distinct from Shared's), and B's 'timeout' status, accurately reflecting the specified conditions while preserving all source data. \n\n**Unresolved Disagreements:**\n\nSignificant disagreements exist regarding the dispatch strategy and the interpretation of 'acceptance.' `llm-orchestrator` proposes a sequential dispatch (A, then B, then Shared), while `llm-orchestrator-2` suggests a conditional dispatch based on assumed pre-existing knowledge of A's disagreement with Shared, which is problematic for an initial dispatch rule and may not preserve all paths. Furthermore, `llm-orchestrator` and `llm-orchestrator-2` lean towards deriving a singular 'accepted' outcome or a preferred response from the disparate results. This conflicts directly with the instruction to 'not manufacture consensus' and 'preserve both paths,' as they imply selecting a preferred truth rather than presenting all facts. They also offer simpler data representations or more limited invariants compared to the more comprehensive approaches.\n\nContributing peer IDs: `multi-provider`, `llm-orchestrator`, `traced-claude`, `llm-orchestrator-2`.",
+    "provider_report": {
+      "model": "gemini-2.5-flash",
+      "provider": "vertex-ai"
+    }
+  },
+  "returned_peers": 4,
+  "attempted_peers": 4,
+  "finished_at": "2026-09-23T14:26:41Z",
+  "verified_answers": 0
+}
