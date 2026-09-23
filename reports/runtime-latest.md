@@ -1,37 +1,30 @@
-# SwarmBrain live peer run
+# SwarmBrain current peer state
 
-Generated: 2026-09-23T13:11:39Z
+Generated: 2026-09-23T13:17:51Z
 
+Registered peers: 7. Connected peers: 6. Request records: 7. Returned responses: 7. Validated task results: 2.
+
+## Latest job
+
+```json
 {
-  "registered_peers": 6,
-  "connected_peers": 6,
-  "results_received": 7,
-  "verified_task_results": 2,
-  "run_key": "continuation-20260923",
-  "at": "2026-09-23T13:11:39Z",
-  "mode": "route",
-  "background_service": false
+  "mode": "connect",
+  "peer": "attractor",
+  "card_verified": true,
+  "status": "card_verified"
 }
+```
 
-## Peers
+## Peer positions
 
-- allagents: connected (directory_agent)
-- snail: connected (coordination_service)
-- zenitheye: connected (coordination_service)
-- mycelix: connected (conversational_agent)
-- sanctum: connected (unclassified_peer)
-- humanmirror: connected (discovery_service)
+- Slot 1: `allagents` — connected; directory_agent
+- Slot 2: `snail` — connected; coordination_service
+- Slot 3: `zenitheye` — connected; coordination_service
+- Slot 4: `mycelix` — connected; conversational_agent
+- Slot 5: `sanctum` — connected; coordination_service
+- Slot 6: `humanmirror` — connected; discovery_service
+- Slot 7: `attractor` — card_verified; public_service
 
-## Tasks
+## Interpretation
 
-- bootstrap-20260923-directory: response_received; receipt: reports/task-receipts/bootstrap-20260923-directory.json
-- bootstrap-20260923-conversation: response_received; receipt: reports/task-receipts/bootstrap-20260923-conversation.json
-- bootstrap-20260923-orientation: response_received; receipt: reports/task-receipts/bootstrap-20260923-orientation.json
-- bootstrap-20260923-evaluation: response_received; receipt: reports/task-receipts/bootstrap-20260923-evaluation.json
-- followup-20260923-sanctum: response_received; receipt: reports/task-receipts/followup-20260923-sanctum.json
-- followup-20260923-humanmirror: response_received; receipt: reports/task-receipts/followup-20260923-humanmirror.json
-- followup-20260923-mycelix: response_received; receipt: reports/task-receipts/followup-20260923-mycelix.json
-
-## Limits
-
-A protocol reply demonstrates communication. Textual claims are unreviewed unless a separate result review is recorded. This is an outbound peer coordinator, not an always-running host or a shared trained neural network.
+A connected peer has returned a valid protocol response. That does not imply its every reply completes the requested task. Public services, directory agents and conversational peers are classified separately. The graph and request history persist; there is no always-running service or shared model-weight training.

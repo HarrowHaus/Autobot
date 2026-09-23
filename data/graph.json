@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T13:11:39Z",
+  "generated_at": "2026-09-23T13:17:51Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -244,7 +244,7 @@
       "node_id": "45167bbc-205a-55c1-af70-5182ec0e93f0",
       "slot": 5,
       "card_url": "https://sanctum-beacon.onrender.com/.well-known/agent-card.json",
-      "kind": "unclassified_peer",
+      "kind": "coordination_service",
       "region": "memory",
       "first_seen": "2026-09-23T13:05:09Z",
       "status": "connected",
@@ -712,6 +712,85 @@
       "last_seen": "2026-09-23T13:11:36Z",
       "card_sha256": "2d8269d01b0e9491c661154db36be05415154f24d462c30c66999750bcbd5263",
       "response_reliability": 0.6666666666666666
+    },
+    {
+      "id": "attractor",
+      "node_id": "f2853a7e-d11d-51b5-91ce-3d1cf5fc7160",
+      "slot": 7,
+      "card_url": "https://attractor-observatory-demo.vercel.app/.well-known/agent-card.json",
+      "kind": "public_service",
+      "region": "research",
+      "first_seen": "2026-09-23T13:17:51Z",
+      "status": "card_verified",
+      "source": "operator:issue-8",
+      "capabilities": [
+        {
+          "id": "verify_artifact",
+          "name": "verify_artifact",
+          "tags": [
+            "structured-data",
+            "verify-artifact"
+          ]
+        },
+        {
+          "id": "find_capability",
+          "name": "find_capability",
+          "tags": [
+            "structured-data",
+            "find-capability"
+          ]
+        },
+        {
+          "id": "share_state",
+          "name": "share_state",
+          "tags": [
+            "structured-data",
+            "share-state"
+          ]
+        },
+        {
+          "id": "retrieve_state",
+          "name": "retrieve_state",
+          "tags": [
+            "structured-data",
+            "retrieve-state"
+          ]
+        },
+        {
+          "id": "record_observation",
+          "name": "record_observation",
+          "tags": [
+            "structured-data",
+            "record-observation"
+          ]
+        },
+        {
+          "id": "check_observation",
+          "name": "check_observation",
+          "tags": [
+            "structured-data",
+            "check-observation"
+          ]
+        },
+        {
+          "id": "find_evidence",
+          "name": "find_evidence",
+          "tags": [
+            "structured-data",
+            "find-evidence"
+          ]
+        }
+      ],
+      "calls": 0,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "ATTRACTOR",
+      "endpoint": "https://attractor-observatory-demo.vercel.app/a2a",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T13:17:51Z",
+      "card_sha256": "12cb36f352676a9392a685e8d2242c84e13322c7778dacda77ced766b09766dc"
     }
   ],
   "edges": [
@@ -820,6 +899,12 @@
       "relation": "task_handoff",
       "task_id": "followup-20260923-mycelix",
       "depends_on": "bootstrap-20260923-directory"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "attractor",
+      "relation": "knows_peer",
+      "source": "operator:issue-8"
     }
   ],
   "note": "Topology and empirical routing scores, not trained neural model weights."
