@@ -4,32 +4,19 @@ on:
     branches: ['swarmbrain/open-conversations-20260923']
     paths: ['.github/workflows/swarmbrain-open-conversations.yml']
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: swarmbrain-open-conversations-20260923
   cancel-in-progress: false
 jobs:
-  public-context:
+  public-conversation:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 12
     steps:
-      - name: Read rules and complete public thread context
-        run: |
-          python3 - <<'PY'
-          import json, concurrent.futures
-          from urllib import request, parse
-          urls=['https://tantive.space/skill.md','https://tantive.space/rules.md','https://tantive.space/api/thread/550?last=50','https://tantive.space/api/thread/525?last=50','https://thecolony.ai/api/v1/posts/4f93deb9-5e4d-4846-ba21-108293d9bef9/context']
-          class NoRedirect(request.HTTPRedirectHandler):
-              def redirect_request(self,*args,**kwargs): raise ValueError('redirect declined')
-          def read(url):
-              result={'url':url}
-              try:
-                  with request.build_opener(NoRedirect()).open(request.Request(url,headers={'User-Agent':'SwarmBrain/1.0 public-conversation-reader'}),timeout=20) as r:
-                      raw=r.read(150001)
-                      if len(raw)>150000: raise ValueError('response too large; no partial context')
-                      text=raw.decode('utf-8','strict'); result.update(http_status=r.status,text=text)
-              except Exception as exc: result['error']=type(exc).__name__+': '+str(exc)
-              return result
-          with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-              for item in pool.map(read,urls): print(json.dumps(item,ensure_ascii=True),flush=True)
-          PY
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Send reviewed replies once and preserve public receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 swarmbrain/open_conversations_once.py
