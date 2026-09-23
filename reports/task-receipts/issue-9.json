@@ -1,0 +1,163 @@
+{
+  "url": "https://attractor-observatory-demo.vercel.app/a2a",
+  "method": "POST",
+  "at": "2026-09-23T13:18:45Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "issue-9",
+    "method": "SendMessage",
+    "params": {
+      "message": {
+        "messageId": "9b23dc51-fcfe-515d-b6cc-5389340e99c7",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "data": {
+              "capability": "find_capability",
+              "arguments": {
+                "query": "verify_artifact"
+              }
+            }
+          }
+        ],
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 1924,
+  "response_sha256": "21dc8fcd658fdbd4481c28698bf37be583d6c7fc5d344a0da79b60d4f65e6548",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": "issue-9",
+    "result": {
+      "message": {
+        "messageId": "72cb68ce-588f-4c5a-a889-1c06d5a2cbe4",
+        "contextId": "97175296-a969-430b-a8c9-28b21ee343d4",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "data": {
+              "capabilities": [
+                {
+                  "name": "verify_artifact",
+                  "description": "Check a JSON artifact against explicit schema constraints before returning or forwarding it. Returns valid, errors, artifact hash and exact verification scope. A code string or structured plan can be checked for shape/explicit values only: this does not execute code, prove semantics or certify a plan. Optional state_id and read_receipt verify use of an identical previously retrieved public state.",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "artifact": {},
+                      "constraints": {
+                        "type": "object",
+                        "description": "Supported deterministic schema subset: type, properties, required, additionalProperties boolean, items, enum, minimum, maximum, minLength, maxLength. Code execution and semantic truth are not checked."
+                      },
+                      "state_id": {
+                        "type": "string",
+                        "pattern": "^ATR-S-[a-f0-9-]{36}$"
+                      },
+                      "read_receipt": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Private read receipt, bound to the application context that retrieved the state."
+                      },
+                      "attractor_trace_id": {
+                        "type": "string",
+                        "pattern": "^ATR-T-[a-f0-9]{32}$",
+                        "description": "Optional public correlation handle from a prior result; not authentication or proof of identity."
+                      },
+                      "attractor_knowledge_id": {
+                        "type": "string",
+                        "pattern": "^ATR-K-[a-f0-9]{64}$",
+                        "description": "Optional prior result handle. Reuse is counted only when the supplied value matches that result fingerprint."
+                      }
+                    },
+                    "required": [
+                      "artifact",
+                      "constraints"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "outputSchema": {
+                    "type": "object",
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "valid": {
+                            "type": "boolean"
+                          },
+                          "errors": {
+                            "type": "array"
+                          },
+                          "artifact_hash": {
+                            "type": "string"
+                          },
+                          "verification": {
+                            "type": "object"
+                          },
+                          "state_use": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "valid",
+                          "errors",
+                          "artifact_hash",
+                          "verification",
+                          "state_use"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string"
+                          },
+                          "request_id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "error"
+                        ]
+                      }
+                    ]
+                  },
+                  "annotations": {
+                    "readOnlyHint": true,
+                    "destructiveHint": false,
+                    "idempotentHint": true,
+                    "openWorldHint": false
+                  },
+                  "mcp": {
+                    "endpoint": "https://attractor-observatory-demo.vercel.app/mcp",
+                    "method": "tools/call",
+                    "name": "verify_artifact"
+                  },
+                  "http": {
+                    "method": "POST",
+                    "url": "https://attractor-observatory-demo.vercel.app/api/v3/verify_artifact"
+                  }
+                }
+              ],
+              "scope": "attractor_catalog_only",
+              "external_delegation": false,
+              "request_id": "f67443e5-46cc-4d06-95eb-fe473bee3d69"
+            },
+            "mediaType": "application/json"
+          }
+        ],
+        "metadata": {
+          "io.attractor/context": "1b123736a9dfc46fc23511a93f51b6b6067c9ddefc7f4da9759acf46900dc0cb"
+        }
+      }
+    }
+  }
+}

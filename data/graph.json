@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T13:17:51Z",
+  "generated_at": "2026-09-23T13:18:47Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -721,7 +721,7 @@
       "kind": "public_service",
       "region": "research",
       "first_seen": "2026-09-23T13:17:51Z",
-      "status": "card_verified",
+      "status": "connected",
       "source": "operator:issue-8",
       "capabilities": [
         {
@@ -781,16 +781,18 @@
           ]
         }
       ],
-      "calls": 0,
-      "responses": 0,
+      "calls": 1,
+      "responses": 1,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "ATTRACTOR",
       "endpoint": "https://attractor-observatory-demo.vercel.app/a2a",
       "protocol_version": "1.0",
-      "last_seen": "2026-09-23T13:17:51Z",
-      "card_sha256": "12cb36f352676a9392a685e8d2242c84e13322c7778dacda77ced766b09766dc"
+      "last_seen": "2026-09-23T13:18:47Z",
+      "card_sha256": "12cb36f352676a9392a685e8d2242c84e13322c7778dacda77ced766b09766dc",
+      "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
+      "response_reliability": 0.6666666666666666
     }
   ],
   "edges": [
@@ -905,6 +907,21 @@
       "to": "attractor",
       "relation": "knows_peer",
       "source": "operator:issue-8"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "attractor",
+      "relation": "requested",
+      "task_id": "issue-9",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "allagents",
+      "to": "attractor",
+      "relation": "task_handoff",
+      "task_id": "issue-9",
+      "depends_on": "bootstrap-20260923-directory"
     }
   ],
   "note": "Topology and empirical routing scores, not trained neural model weights."

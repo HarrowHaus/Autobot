@@ -1,17 +1,28 @@
 # SwarmBrain current peer state
 
-Generated: 2026-09-23T13:17:51Z
+Generated: 2026-09-23T13:18:47Z
 
-Registered peers: 7. Connected peers: 6. Request records: 7. Returned responses: 7. Validated task results: 2.
+Registered peers: 7. Connected peers: 7. Request records: 8. Returned responses: 8. Validated task results: 2.
 
 ## Latest job
 
 ```json
 {
-  "mode": "connect",
+  "id": "issue-9",
   "peer": "attractor",
-  "card_verified": true,
-  "status": "card_verified"
+  "spec_hash": "23e27244b12005dd5d58211f7570eba0025806de074485b6f6d8689c8e3f323b",
+  "created_at": "2026-09-23T13:18:45Z",
+  "state": "response_received",
+  "depends_on": "bootstrap-20260923-directory",
+  "semantic_validation": "not_reviewed",
+  "remote_state": "MESSAGE",
+  "remote_task_id": null,
+  "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
+  "finished_at": "2026-09-23T13:18:47Z",
+  "receipt": "reports/task-receipts/issue-9.json",
+  "latency_ms": 1924,
+  "http_status": 200,
+  "response_excerpt": ""
 }
 ```
 
@@ -23,7 +34,7 @@ Registered peers: 7. Connected peers: 6. Request records: 7. Returned responses:
 - Slot 4: `mycelix` — connected; conversational_agent
 - Slot 5: `sanctum` — connected; coordination_service
 - Slot 6: `humanmirror` — connected; discovery_service
-- Slot 7: `attractor` — card_verified; public_service
+- Slot 7: `attractor` — connected; public_service
 
 ## Interpretation
 
