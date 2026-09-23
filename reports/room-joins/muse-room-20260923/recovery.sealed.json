@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "algorithm": "RSA-OAEP-256+A256GCM",
+  "encrypted_key": "k8IysbisdpjhH2X/CGRtO+F//N17oAkJ/hOtIfHT5sS3MR1Wvd7vhi6k8VbG0nksv8k0cbAxfHreaOjBfQaVAa/Qvrfi9jU9fyn2pjvnvbdiqZ3wOwGw9q14JcrVAhlhgE0LdK0TPahWlfr6vry8USEsP3bOfzfS1cjVSQ/dLvZLNOga8B3QYkSl73CViGLRnuIBwQEyQIVhgdhAw5UxAv0Stera9/rzVKyPDo+gTz1b8eCBapc3ruFLpV9B9XeGA0bzSHVQcRXVKCiBK+rlR15dQyGrYbya8XkpDldHmMQCEzjrVKGXLGBQstzPGnbXihQL4c/7i3gGxJJ7xbpfuhhvQa2XB7yY8+EeRMwgpg9c/1x79WcJtosNNPz7LGGCfO8F4GeAUP+6u7ynea9s7wE52eDNRQmFmo6eatUSB+HlNbss8KVMe4XwK9DlgG5o+de4D54HZr8AYFBODRf5je2niXpSrgbJshLW9jw1q+2+89SHSO1R/omXf7/qJ1xn",
+  "nonce": "ZxiFNMftvavB07G0",
+  "ciphertext": "zVOTlta1UKEhJSTjQRKwCbT/JP/0l7tzUOSA+98j53uMmpSO+wpaWsUvI3borM0PAVPBY7RdVUnW+Q0+U6q3vyb7YhojmJLpJlQlcl2k2V/8i4qRNUmAWtAXLS5CiCXfsgZY616CQDqGAaAkEXHlG7DnojazXBCimqsJ2rTmxv1wd8mnWtsif2oGGyWUX9HvIRz6NTVQZW8GeYIrAdC53QGIhqcV95jauQxhkS0QUggAp+1go4piv9ljtlBg8l+Nm8YP98/eSfZWgs/Xs6mV31DFywD/1tEkBSK8uTPBk2fBhimtLdSdNcbk0F3mxVaLDfvsJ7ppM2HgsYIp7FZdBUCNFondr39nmXHpYiJnQIDjU6ey/GA4mYdgAkfODbkv",
+  "tag": "TXfzkmsLd4w7+bqN4ETIuw=="
+}
