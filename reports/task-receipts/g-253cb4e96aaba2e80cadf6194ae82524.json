@@ -1,0 +1,50 @@
+{
+  "url": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T19:14:30Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "g-253cb4e96aaba2e80cadf6194ae82524",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "41c950ae-d22b-525d-97d7-1df96a0d144d",
+        "role": "user",
+        "parts": [
+          {
+            "text": "SYN-PR-002, stage 1: propose a corrected nested-group result contract for independent review by another team's coordinator. Public technical analysis only: no external actions, purchases, outreach, production changes, or further delegation. Treat this as an illustrative test scenario, not a claim that real agents A/B/Shared ran: Research contains Sources={A,Shared} and Counterexamples={B,Shared}; A returns X, Shared returns Y once, B times out, and the task stipulates that X and Y conflict. Our previous generated answer flattened this to {A:X,Shared:Y,B_status:timeout,A_disagrees_Shared:true}, omitting both group paths. IMPORTANT: our actual saved runtime envelope already records plan.paths and contributions[peer].paths; do not falsely diagnose this generated-answer omission as proof that the runtime loses paths. Return a corrected machine-readable result example, one dispatch rule, invariants, three regression tests, and limitations, at most 600 words. Required properties: retain both Research/Sources/Shared and Research/Counterexamples/Shared paths; key contributors by canonical identity and the same task/input scope rather than count each path as a separate vote; retain each original response and its receipt reference; explicit timeout/pending/error states (timeout means unknown result, not agreement or refusal); record disagreement with evidence references, without inferring all different strings semantically conflict; separate synthesis from original contributions with attribution and no extra vote; do not claim independently operated or different-model workers without evidence. Deduplicate local dispatch for the same contributor/task/input scope; do not claim end-to-end exactly-once execution or retry safety without remote idempotency/read-back support. Regression tests: shared peer has two paths but one contribution/dispatch; timeout plus conflicting answers yields partial evidence and no manufactured consensus; dropping a path or original answer is detected even if a generated summary asserts preservation. This response is a proposal, not an execution receipt or accepted fix.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "contextId": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 6205,
+  "response_sha256": "586b79cdd84d6f04bbe37706bc299d89dbe7cd09d4b584f8acccfd4bd080b969",
+  "response": {
+    "id": "g-253cb4e96aaba2e80cadf6194ae82524",
+    "jsonrpc": "2.0",
+    "result": {
+      "contextId": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+      "kind": "message",
+      "messageId": "86a6a416-5124-4537-bfbc-5f9caf21f71d",
+      "parts": [
+        {
+          "kind": "text",
+          "text": "{\"output\": \"Here's a proposed corrected nested-group result contract for independent review:\\n\\n```json\\n{\\n  \\\"result_contract_version\\\": \\\"SYN-PR-002-v1\\\",\\n  \\\"task_id\\\": \\\"your_task_id_here\\\",\\n  \\\"input_scope\\\": {\\n    \\\"query\\\": \\\"your_query_here\\\"\\n  },\\n  \\\"dispatch_rules\\\": [\\n    {\\n      \\\"rule_id\\\": \\\"deduplicate_contributor_task_input\\\",\\n      \\\"description\\\": \\\"For a given contributor and task/input scope, only one contribution is recorded, regardless of how many paths led to it. Subsequent dispatches to the same contributor/task/input are ignored or treated as updates to the existing contribution.\\\",\\n      \\\"priority\\\": 1\\n    }\\n  ],\\n  \\\"invariants\\\": [\\n    \\\"All original contributions and their receipt references are preserved.\\\",\\n    \\\"Contributors are identified by their canonical identity, not by the number of paths.\\\",\\n    \\\"Explicit states (timeout, pending, error) are recorded for each contribution.\\\",\\n    \\\"Disagreement is recorded with evidence references, without semantic inference.\\\",\\n    \\\"Synthesis is distinct from original contributions and includes attribution.\\\",\\n    \\\"The runtime envelope's 'plan.paths' and 'contributions[peer].paths' are preserved and not duplicated in this contract.\\\"\\n  ],\\n  \\\"contributions\\\": {\\n    \\\"A\\\": {\\n      \\\"canonical_id\\\": \\\"A\\\",\\n      \\\"status\\\": \\\"completed\\\",\\n      \\\"response\\\": \\\"X\\\",\\n      \\\"receipt_ref\\\": \\\"receipt_A_123\\\",\\n      \\\"paths\\\": [\\n        \\\"Research/Sources/A\\\"\\n      ]\\n    },\\n    \\\"Shared\\\": {\\n      \\\"canonical_id\\\": \\\"Shared\\\",\\n      \\\"status\\\": \\\"completed\\\",\\n      \\\"response\\\": \\\"Y\\\",\\n      \\\"receipt_ref\\\": \\\"receipt_Shared_456\\\",\\n      \\\"paths\\\": [\\n        \\\"Research/Sources/Shared\\\",\\n        \\\"Research/Counterexamples/Shared\\\"\\n      ]\\n    },\\n    \\\"B\\\": {\\n      \\\"canonical_id\\\": \\\"B\\\",\\n      \\\"status\\\": \\\"timeout\\\",\\n      \\\"response\\\": null,\\n      \\\"receipt_ref\\\": null,\\n      \\\"paths\\\": [\\n        \\\"Research/Counterexamples/B\\\"\\n      ]\\n    }\\n  },\\n  \\\"synthesis\\\": {\\n    \\\"summary\\\": \\\"Conflicting information received.\\\",\\n    \\\"disagreements\\\": [\\n      {\\n        \\\"contributor_1\\\": \\\"A\\\",\\n        \\\"contributor_2\\\": \\\"Shared\\\",\\n        \\\"evidence_refs\\\": [\\n          \\\"contributions.A.response\\\",\\n          \\\"contributions.Shared.response\\\"\\n        ],\\n        \\\"description\\\": \\\"Contributor A returned 'X' while Contributor Shared returned 'Y'. The task stipulates that X and Y conflict.\\\"\\n      }\\n    ],\\n    \\\"attribution\\\": \\\"Synthesized by SYN-PR-002-processor\\\"\\n  },\\n  \\\"limitations\\\": [\\n    \\\"This contract does not guarantee end-to-end exactly-once execution or retry safety without external idempotency/read-back support.\\\",\\n    \\\"Semantic conflict detection is limited to explicit task stipulations or direct string comparison; no advanced NLP for semantic equivalence/disagreement is performed.\\\",\\n    \\\"The 'paths' field within each contribution reflects the paths *taken* to reach that contributor, not all possible paths defined in the plan.\\\"\\n  ]\\n}\\n```\\n\\n**Regression Tests:**\\n\\n1.  **Shared Peer Two Paths, One Contribution:**\\n    *   **Input:** `Research/Sources={A,Shared}` and `Research/Counterexamples={B,Shared}`; A returns X, Shared returns Y, B times out.\\n    *   **Expected Output:** `contributions.Shared` exists once, contains `response: \\\"Y\\\"`, and `paths` includes both `\\\"Research/Sources/Shared\\\"` and `\\\"Research/Counterexamples/Shared\\\"`.\\n    *   **Verification:** Check `contributions.Shared` for uniqueness and correct `paths` array.\\n\\n2.  **Timeout + Conflicting Answers Yields Partial Evidence, No Consensus:**\\n    *   **Input:** `Research/Sources={A,Shared}` and `Research/Counterexamples={B,Shared}`; A returns X, Shared returns Y, B times out. Task stipulates X and Y conflict.\\n    *   **Expected Output:** `contributions.A` and `contributions.Shared` show `status: \\\"completed\\\"` with their respective responses. `contributions.B` shows `status: \\\"timeout\\\"`. `synthesis.disagreements` explicitly records the conflict between A and Shared. No \\\"consensus\\\" or \\\"merged\\\" result is generated\", \"model\": \"gemini-2.5-flash\", \"framework\": \"langchain\", \"provider\": \"vertex-ai\", \"traced\": false}"
+        }
+      ],
+      "role": "agent",
+      "taskId": "c295aab4-57db-494a-a30f-8a631a67af36"
+    }
+  }
+}

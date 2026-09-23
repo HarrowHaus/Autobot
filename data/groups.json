@@ -121,7 +121,13 @@
       "receipt": "reports/group-runs/nested-readiness-20260923.json",
       "state": "returned",
       "finished_at": "2026-09-23T14:26:41Z"
+    },
+    "group-issue-17": {
+      "spec_hash": "26e11351823b25b0f9f7733c1515fb52cc43e746a6226e4668cafabea0c2a23d",
+      "receipt": "reports/group-runs/group-issue-17.json",
+      "state": "returned",
+      "finished_at": "2026-09-23T19:14:59Z"
     }
   },
-  "updated_at": "2026-09-23T14:26:41Z"
+  "updated_at": "2026-09-23T19:14:59Z"
 }

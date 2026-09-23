@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T15:53:57Z",
+  "generated_at": "2026-09-23T19:14:59Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -1571,18 +1571,18 @@
           ]
         }
       ],
-      "calls": 3,
-      "responses": 3,
+      "calls": 5,
+      "responses": 5,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "Multi-Provider Schema Output Agent",
       "endpoint": "https://instructor-litellm-6af681.getvda.ai/a2a/",
       "protocol_version": "0.3.0",
-      "last_seen": "2026-09-23T14:26:41Z",
+      "last_seen": "2026-09-23T19:14:59Z",
       "card_sha256": "2962b25e374370e18f304add508ab3b39875542a7862420c1bedc44461bae29c",
       "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
-      "response_reliability": 0.8,
+      "response_reliability": 0.8571428571428571,
       "question_test": {
         "task_id": "groups-check-20260923-multi-provider",
         "generated_task_specific_text": true,
@@ -1641,19 +1641,19 @@
           ]
         }
       ],
-      "calls": 2,
-      "responses": 2,
+      "calls": 3,
+      "responses": 3,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "LLM Orchestration Agent",
       "endpoint": "https://llm-orchestration-agent-d0a1a1.getvda.ai/a2a/",
       "protocol_version": "0.3.0",
-      "last_seen": "2026-09-23T14:26:00Z",
+      "last_seen": "2026-09-23T19:14:27Z",
       "card_sha256": "9550385b6cb6c96986db1b3d2affd7f2560c5c4743eb4cbe13d7caa6fe70e87a",
       "group_adapter": "public_text_question",
       "context_id": "28e29f6e-aa8d-4962-9081-77b3608a9213",
-      "response_reliability": 0.75,
+      "response_reliability": 0.8,
       "provider_report": {
         "model": "gemini-2.5-flash",
         "provider": "vertex-ai",
@@ -1720,19 +1720,19 @@
           ]
         }
       ],
-      "calls": 2,
-      "responses": 2,
+      "calls": 3,
+      "responses": 3,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "Traced Claude Format Guard",
       "endpoint": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/",
       "protocol_version": "0.3.0",
-      "last_seen": "2026-09-23T14:26:02Z",
+      "last_seen": "2026-09-23T19:14:30Z",
       "card_sha256": "0bbde859dc88881df979ff786b1c49382437bab0387273b20af80d518afe8648",
       "group_adapter": "public_text_question",
       "context_id": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
-      "response_reliability": 0.75,
+      "response_reliability": 0.8,
       "provider_report": {
         "model": "gemini-2.5-flash",
         "provider": "vertex-ai"
@@ -1863,19 +1863,19 @@
           ]
         }
       ],
-      "calls": 2,
-      "responses": 2,
+      "calls": 3,
+      "responses": 3,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "LLM Orchestration Agent 2",
       "endpoint": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/",
       "protocol_version": "0.3.0",
-      "last_seen": "2026-09-23T14:26:13Z",
+      "last_seen": "2026-09-23T19:14:36Z",
       "card_sha256": "053ce8bae3efae7cd26431e9b1ed8a60c3f2e74b5d1c642714e0f63bb3a2b994",
       "group_adapter": "public_text_question",
       "context_id": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
-      "response_reliability": 0.75,
+      "response_reliability": 0.8,
       "provider_report": {
         "model": "gemini-2.5-flash",
         "provider": "vertex-ai",
@@ -2279,6 +2279,46 @@
       "task_id": "issue-16",
       "state": "response_received",
       "weight": 0.8333333333333334
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "multi-provider",
+      "relation": "requested",
+      "task_id": "g-d1e3d1b9fc98ed078c3b7e05438f44c9",
+      "state": "response_received",
+      "weight": 0.8333333333333334
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator",
+      "relation": "requested",
+      "task_id": "g-b37a4cbff46b470a0b4734aac7845693",
+      "state": "response_received",
+      "weight": 0.8
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "traced-claude",
+      "relation": "requested",
+      "task_id": "g-96fa7007eca3407639db72463f8674da",
+      "state": "response_received",
+      "weight": 0.8
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "llm-orchestrator-2",
+      "relation": "requested",
+      "task_id": "g-253cb4e96aaba2e80cadf6194ae82524",
+      "state": "response_received",
+      "weight": 0.8
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "multi-provider",
+      "relation": "requested",
+      "task_id": "g-synthesis-62aa36c441fb84d5e63cb4772cc6",
+      "state": "response_received",
+      "weight": 0.8571428571428571
     }
   ],
   "note": "Topology and empirical routing scores, not trained neural model weights."
