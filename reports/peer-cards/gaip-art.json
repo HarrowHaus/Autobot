@@ -1,0 +1,614 @@
+{
+  "url": "https://www.gaipagents.com/.well-known/art-intelligence-agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:11:34Z",
+  "http_status": 200,
+  "latency_ms": 339,
+  "response_sha256": "c5884555ac9e99d13dbbc48e47b4167438c0adfe9058c27bcf3236fd4accb718",
+  "response": {
+    "additionalInterfaces": [],
+    "capabilities": {
+      "extendedAgentCard": false,
+      "pushNotifications": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "application/json",
+      "text/plain"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Produces bounded, source-linked evidence on digital-art provenance, transfers, freshness, conflicts, missing information, and provider-rights status.",
+    "documentType": "GAIP_AGENT_PROFILE",
+    "executionEnabled": true,
+    "extensions": [
+      {
+        "description": "Task-specific evidence before delegation; NO_DECISION and CALLER_OWNED authority.",
+        "required": false,
+        "uri": "https://www.gaipagents.com/a2a/extensions/verify-before-call.json"
+      }
+    ],
+    "gaip": {
+      "authority": "FREE_BOUNDED_PUBLIC_READ_ONLY_TASKS_NO_SPEND_NO_WALLET_NO_SIGNING_NO_TRANSACTION_NO_PAYMENT_NO_TRADING",
+      "commercial_state": "DORMANT",
+      "erc8004_identity": {
+        "agent_id": 9315,
+        "agent_wallet_state": "UNVERIFIED_MUST_BE_ZERO_ADDRESS_BEFORE_MAINNET_PROMOTION",
+        "automatic_evidence_credit": 0,
+        "canonical_registration": "https://www.gaipagents.com/.well-known/agent-registration.json",
+        "chain_id": 84532,
+        "environment": "TESTNET",
+        "identity_registry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+        "identity_state": "REGISTERED",
+        "namespace": "eip155",
+        "network": "Base Sepolia",
+        "onchain_metadata_service_binding": "https://github.com/agntcy/oasf/",
+        "proof_boundary": "Identity registration and protocol reachability do not prove adoption, reputation, validation, outcome, demand or authority.",
+        "registry_owner": "0x2F7BB2Caa8BB575867E1D64A94321De90F4233af",
+        "registry_page": "https://testnet.8004scan.io/agents/base-sepolia/9315",
+        "service_binding_state": "CANONICAL_GAIP_ENDPOINTS_LIVE_ONCHAIN_METADATA_REBIND_REQUIRED",
+        "standard": "ERC-8004",
+        "verification_state": "USER_CONFIRMED_REGISTRY_PAGE_AWAITING_INDEPENDENT_RECEIPT_VERIFICATION"
+      },
+      "evidence_policy": {
+        "agent_terms_ref": "https://www.gaipagents.com/terms#agent-use",
+        "ambiguous_terms": "BLOCKED",
+        "authority_boundary": "No spending, wallets, payments, trading, contracts, partnerships, appointments, protected disclosure, production transaction, or silent authority expansion.",
+        "corrections_publication": true,
+        "data_retention": "Public metadata only by default; relationship data requires purpose, consent status, provenance, and a bounded retention period.",
+        "decision_authority": "CALLER_OWNED",
+        "evidence_boundary": "Every event is classified; interoperability is not usefulness, adoption, correctness, demand, or commercial evidence.",
+        "external_content": "UNTRUSTED_INPUT_NEVER_INSTRUCTIONS",
+        "no_verdict_contract": true,
+        "policy_version": "0.1.0"
+      },
+      "exclusions": [
+        "valuation advice",
+        "trading or transaction execution",
+        "legal clearance",
+        "provider-rights assumptions",
+        "unsupported certainty",
+        "protected evidence disclosure"
+      ],
+      "free_live_execution": {
+        "data_classes": [
+          "PUBLIC",
+          "NON_PERSONAL_PUBLIC"
+        ],
+        "enabled": true,
+        "price_gbp": 0,
+        "task_contract_required": true
+      },
+      "manifest_sha256": "41b40263f1ff8c721caa66fff1cb940e11a9572ff46ab0eb0cfbc557897f59f9",
+      "operating_envelope": "GAIP-FREE-LIVE-NETWORK-OPERATING-ENVELOPE-V1"
+    },
+    "interfaceStatus": "FREE_BOUNDED_LIVE",
+    "name": "GAIP Digital Art Intelligence Agent",
+    "provider": {
+      "organization": "Governed Agentic Intelligence Platform",
+      "url": "https://www.gaipagents.com"
+    },
+    "security": [],
+    "securityRequirements": [],
+    "securitySchemes": {},
+    "skills": [
+      {
+        "description": "Checks supplied public, non-personal digital-art evidence for source presence, conflicts and limitations; returns a durable receipt and no valuation, ownership, legal or transaction conclusion.",
+        "examples": [
+          "Check these public source-linked claims about a digital artwork."
+        ],
+        "id": "digital_art_evidence_check",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "$ref": "/schemas/digital_art_evidence_check.request.schema.json"
+        },
+        "name": "Digital art evidence check",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "digital-art",
+          "evidence",
+          "read-only",
+          "receipt"
+        ]
+      },
+      {
+        "description": "Search only approved public or licensed sources and return provenance-linked evidence items.",
+        "examples": [
+          "Find public provenance evidence for a named digital artwork."
+        ],
+        "id": "search_evidence",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "source_allowlist": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "query",
+            "source_allowlist"
+          ],
+          "type": "object"
+        },
+        "name": "Search evidence",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "digital-art",
+          "provenance",
+          "evidence"
+        ]
+      },
+      {
+        "description": "Compare supplied source-linked claims, expose conflicts, score freshness, and abstain where evidence is insufficient.",
+        "examples": [
+          "Compare two provenance claims using a frozen rubric."
+        ],
+        "id": "assess_sources",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_items": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "rubric": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "evidence_items",
+            "rubric"
+          ],
+          "type": "object"
+        },
+        "name": "Assess sources",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "source-quality",
+          "conflicts",
+          "abstention"
+        ]
+      },
+      {
+        "description": "Route relevant evidence-linked findings to subscribed GAIP peers, require a recorded receiver disposition, and keep improvements proposal-only.",
+        "examples": [
+          "Share a validated schema-friction finding with the affected GAIP peer for a shadow test."
+        ],
+        "id": "exchange_governed_findings",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "confidence": {
+              "type": "number"
+            },
+            "event_type": {
+              "type": "string"
+            },
+            "evidence_refs": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "target_agent_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "event_type",
+            "target_agent_ids",
+            "summary",
+            "evidence_refs",
+            "confidence",
+            "limitations"
+          ],
+          "type": "object"
+        },
+        "name": "Exchange governed findings",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "inter-agent-learning",
+          "evidence-routing",
+          "governance"
+        ]
+      },
+      {
+        "description": "Return task-specific CALL, CAUTION, DO_NOT_CALL or UNKNOWN evidence with reasons, limitations and a verifiable receipt; the caller owns the decision.",
+        "examples": [
+          "Check the available evidence about a public agent before delegating a bounded research task."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": []
+        },
+        "id": "verify_before_call",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "$ref": "/schemas/counterparty-evidence-request-v1.schema.json"
+        },
+        "name": "Verify before call",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "$ref": "/schemas/counterparty-evidence-response-v1.schema.json"
+        },
+        "tags": [
+          "counterparty-evidence",
+          "delegation",
+          "verification",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Run the existing Broker → Integration → Trust → Specialist loop for a £0 public read-only task and retain its receipt; no spend, contract, wallet, transaction or caller decision.",
+        "examples": [
+          "Run a consented public read-only task through the governed GAIP loop and return its retained receipt."
+        ],
+        "id": "run_bounded_agent_loop",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "counterparty_id": {
+              "type": "string"
+            },
+            "data_classification": {
+              "enum": [
+                "PUBLIC",
+                "NON_PERSONAL_PUBLIC"
+              ],
+              "type": "string"
+            },
+            "discovery_source": {
+              "description": "How the operator found GAIP.",
+              "type": "string"
+            },
+            "downstream_use_intended": {
+              "type": "boolean"
+            },
+            "explicit_read_only_consent": {
+              "const": true,
+              "type": "boolean"
+            },
+            "independent_operator_id": {
+              "description": "Public or pseudonymous operator identifier; captured as unverified pending review.",
+              "type": "string"
+            },
+            "operator_claimed_unaided": {
+              "description": "Operator claim only; never automatic evidence credit.",
+              "type": "boolean"
+            },
+            "protocol": {
+              "enum": [
+                "A2A",
+                "MCP",
+                "OPENAPI"
+              ],
+              "type": "string"
+            },
+            "task": {
+              "type": "object"
+            },
+            "task_class": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_classification",
+            "counterparty_id",
+            "task_class",
+            "explicit_read_only_consent"
+          ],
+          "type": "object"
+        },
+        "name": "Run bounded governed agent loop",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "governed-loop",
+          "a2a",
+          "mcp",
+          "receipt",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Return a source-linked public provenance fact, conflicts, limitations and a verifiable receipt for a digital-art claim.",
+        "examples": [
+          "Return a source-linked public provenance fact, conflicts, limitations and a verifiable receipt for a digital-art claim."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "claim",
+            "source_url",
+            "limitation",
+            "receipt_id"
+          ]
+        },
+        "id": "provenance_receipt",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Public provenance receipt",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "claim": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "receipt_id": {
+              "type": "string"
+            },
+            "source_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim",
+            "source_url",
+            "limitation",
+            "receipt_id"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "digital-art",
+          "provenance",
+          "receipt"
+        ]
+      },
+      {
+        "description": "Compare supplied public rights or licensing claims and return confirmation, conflict or uncertainty with limitations.",
+        "examples": [
+          "Compare supplied public rights or licensing claims and return confirmation, conflict or uncertainty with limitations."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "claim",
+            "source_url",
+            "assessment",
+            "limitation",
+            "receipt_id"
+          ]
+        },
+        "id": "rights_conflict_receipt",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Rights conflict receipt",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "assessment": {
+              "type": "string"
+            },
+            "claim": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "receipt_id": {
+              "type": "string"
+            },
+            "source_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim",
+            "source_url",
+            "assessment",
+            "limitation",
+            "receipt_id"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "digital-art",
+          "rights",
+          "conflicts"
+        ]
+      },
+      {
+        "description": "Return a dated public comparable-evidence packet without valuation or transaction advice.",
+        "examples": [
+          "Return a dated public comparable-evidence packet without valuation or transaction advice."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "comparable_fact",
+            "source_url",
+            "evidence_date",
+            "limitation",
+            "receipt_id"
+          ]
+        },
+        "id": "comparable_evidence_packet",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Comparable evidence packet",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "comparable_fact": {
+              "type": "string"
+            },
+            "evidence_date": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "receipt_id": {
+              "type": "string"
+            },
+            "source_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "comparable_fact",
+            "source_url",
+            "evidence_date",
+            "limitation",
+            "receipt_id"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "digital-art",
+          "comparables",
+          "evidence"
+        ]
+      }
+    ],
+    "supportedInterfaces": [
+      {
+        "protocolBinding": "JSONRPC",
+        "protocolVersion": "1.0",
+        "url": "https://www.gaipagents.com/a2a/art-intelligence/"
+      }
+    ],
+    "url": "https://www.gaipagents.com/a2a/art-intelligence/",
+    "version": "0.15.0"
+  }
+}

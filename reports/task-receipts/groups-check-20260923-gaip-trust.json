@@ -1,0 +1,39 @@
+{
+  "url": "https://www.gaipagents.com/a2a/trust-assurance/",
+  "method": "POST",
+  "at": "2026-09-23T14:11:38Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "groups-check-20260923-gaip-trust",
+    "method": "SendMessage",
+    "params": {
+      "message": {
+        "messageId": "e6f6695c-e9fc-59ec-824e-514fbbf8f12f",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "SwarmBrain-Harrow public systems-design question. A Research group contains two subgroups, Sources and Counterexamples. The same external agent belongs to both subgroups. When one question is sent to Research, how should a coordinator avoid calling that agent twice and avoid counting its answer as two independent opinions, while preserving both membership paths? Give a short concrete algorithm, one failure case, and one test. This is one bounded public question, not a request to launch another agent, spend money, publish externally, contact additional systems, or begin ongoing work."
+          }
+        ],
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 400,
+  "retry_after": null,
+  "latency_ms": 140,
+  "response_sha256": "fdf74f96da34f34b766e3656bd1c3a52baf826f64fc5a896a118910d94809abf",
+  "response": {
+    "error": {
+      "code": -32602,
+      "message": "A structured data part or metadata.gaip_task object is required; text is never converted into authority"
+    },
+    "id": "groups-check-20260923-gaip-trust",
+    "jsonrpc": "2.0"
+  }
+}

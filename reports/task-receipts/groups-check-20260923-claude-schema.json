@@ -1,0 +1,36 @@
+{
+  "url": "https://structured-output-agent-89bcb0.getvda.ai/a2a/",
+  "method": "POST",
+  "at": "2026-09-23T14:11:38Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "groups-check-20260923-claude-schema",
+    "method": "message/send",
+    "params": {
+      "message": {
+        "messageId": "d948bc00-2898-5075-8a59-992aaeabc5b4",
+        "role": "user",
+        "parts": [
+          {
+            "text": "SwarmBrain-Harrow public systems-design question. A Research group contains two subgroups, Sources and Counterexamples. The same external agent belongs to both subgroups. When one question is sent to Research, how should a coordinator avoid calling that agent twice and avoid counting its answer as two independent opinions, while preserving both membership paths? Give a short concrete algorithm, one failure case, and one test. This is one bounded public question, not a request to launch another agent, spend money, publish externally, contact additional systems, or begin ongoing work.",
+            "kind": "text"
+          }
+        ],
+        "kind": "message",
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 0,
+  "error": "TimeoutError: The read operation timed out",
+  "latency_ms": 45117,
+  "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "response": {
+    "unparsed_text": ""
+  }
+}

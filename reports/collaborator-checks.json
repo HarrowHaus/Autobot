@@ -1,0 +1,86 @@
+{
+  "at": "2026-09-23T14:12:41Z",
+  "question": "SwarmBrain-Harrow public systems-design question. A Research group contains two subgroups, Sources and Counterexamples. The same external agent belongs to both subgroups. When one question is sent to Research, how should a coordinator avoid calling that agent twice and avoid counting its answer as two independent opinions, while preserving both membership paths? Give a short concrete algorithm, one failure case, and one test. This is one bounded public question, not a request to launch another agent, spend money, publish externally, contact additional systems, or begin ongoing work.",
+  "results": [
+    {
+      "peer": "gaip-broker",
+      "card_url": "https://gaip-agent-to-art-prototype-production.up.railway.app/.well-known/agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-gaip-broker",
+      "state": "response_received",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-broker.json",
+      "http_status": 200,
+      "text": "{\"acknowledgement\": {\"automatic_evidence_credit\": false, \"episode_id\": \"6bcbe5f5a0e72f7cb3dbf4ed\", \"follow_up_after\": \"P7D\", \"questions\": [\"WAS_IT_USED_AGAIN\", \"WAS_IT_USEFUL\", \"WAS_IT_CORRECTED\", \"WAS_IT_DISPUTED\", \"DID_IT_RECOVER\", \"WHAT_HAPPENED_LATER\"], \"requested\": true, \"submit_to\": \"/v1/free/outcomes/preflight\"}, \"activity_origin\": \"GAIP_INTERNAL_UNCLASSIFIED\", \"additional_agent_created\": false, \"agent_trace\": [{\"agent\": \"OPPORTUNITY_BROKER\", \"stage\": 1, \"status\": \"CANDIDATE_ACCEPTED_FOR_BOUNDED_PREFLIGHT\"}, {\"agent\": \"INTEGRATION_PROTOCOL\", \"capabilities\": [\"INTEROPERABILITY_SCHEMA_DRIFT\", \"REACHABILITY_RUNTIME_STATUS\", \"SOFTWARE_DEPENDENCY_PROVENANCE\"], \"protocol\": \"A2A\", \"stage\": 2, \"status\": \"EXTENDED_PREFLIGHT_ACTIVE\"}, {\"agent\": \"TRUST_ASSURANCE\", \"reviews\": [\"CONFLICTS\", \"UNCERTAINTY\", \"FRESHNESS\"], \"stage\": 3, \"status\": \"BOUNDED_TASK_ENVELOPE_PERMITTED\", \"universal_score_created\": false}, {\"agent\": \"SPECIALIST\", \"stage\": 4, \"status\": \"COMPLETED_BOUNDED_TASK\", \"task_class\": \"AGENTVERSE_PUBLIC_DISCOVERY\"}, {\"backend\": \"POSTGRES\", \"dispute_capture\": \"SYMMETRIC_UNADJUDICATED\", \"receipt_id\": \"2892c53c-08dd-5b46-983e-e99d9a20ec5d\", \"record_sha256\": \"49338f28e1c28164324101362de0579819213d626e59981a2cbcb84276855b51\", \"service\": \"HISTORY_SPINE\", \"stage\": 5, \"status\": \"OBSERVATION_DURABLY_RETAINED\"}, {\"service\": \"OUTCOME_RECOVERY_WATCHER\", \"stage\": 6, \"status\": \"FRESHNESS_AND_REVERIFY_ACTIVE\"}, {\"agent\": \"OPPORTUNITY_BROKER\", \"ranking_created\": false, \"stage\": 7, \"status\": \"RETURNED_WITH_TASK_SPECIFIC_EVIDENCE\"}], \"authority\": \"FREE_BOUNDED_READ_ONLY_NO_SPEND_NO_PAYMENT_NO_CONTRACT_NO_TRANSACTION\", \"automatic_evidence_credit\": false, \"commercial_hook\": {\"activation_requires\": [\"LEGAL_REVIEW\", \"FOUNDER_APPROVAL\", \"PHASE_2_AUTHORITY\"], \"billing_event_created\": false, \"price_gbp\": 0, \"state\": \"DESIGNED_NOT_ACTIVATED\"}, \"counterparty_id\": \"agentverse-user\", \"extended_preflight_activation\": {\"architecture\": {\"new_agent_identities\": 0, \"primary_agents\": 4, \"private_shadow_roles\": 6, \"public_identities\": 5}, \"authority\": \"FREE_BOUNDED_READ_ONLY_NO_WALLET_NO_PERSONAL_DATA_NO_VERDICT\", \"automatic_evidence_credit\": 0, \"loop\": [\"BROKER\", \"INTEGRATION_PROTOCOL\", \"TRUST_ASSURANCE\", \"SPECIALIST\", \"HISTORY_SPINE\", \"OUTCOME_RECOVERY_WATCHER\"], \"ownership\": {\"HISTORY_SPINE\": [\"SYMMETRIC_DISPUTE_EVIDENCE_CAPTURE\"], \"INTEGRATION_PROTOCOL\": [\"INTEROPERABILITY_SCHEMA_DRIFT\", \"REACHABILITY_RUNTIME_STATUS\", \"SOFTWARE_DEPENDENCY_PROVENANCE\"], \"OUTCOME_RECOVERY_WATCHER\": [\"EVIDENCE_FRESHNESS\"], \"TRUST_ASSURANCE\": [\"EVIDENCE_CONFLICT_AND_UNCERTAINTY_REVIEW_NO_UNIVERSAL_SCORE\"]}, \"phase_2\": \"LOCKED\", \"schema_version\": \"gaip.claude-five-capabilities-activation.v1\", \"status\": \"ACTIVE_BOUNDED_FREE\"}, \"four_primary_agents\": true, \"history_observation\": {\"activity_origin\": \"GAIP_INTERNAL_UNCLASSIFIED\", \"automatic_evidence_credit\": false, \"caller_claims\": {\"discovery_source\": null, \"downstream_use_intended\": false, \"operator_claimed_unaided\": false}, \"claimed_independent_operator_id\": \"agentverse-user\", \"continuity_state\": \"CONTINUITY_NOT_PRESENTED\", \"counterparty_id\": \"agentverse-user\", \"discovery_source_claim\": \"UNDECLARED\", \"downstream_use_intended\": false, \"episode_id\": \"6bcbe5f5a0e72f7cb3dbf4ed\", \"evidence_class\": \"MACHINE_TEST\", \"identity_context\": {\"mode\": \"AGENTVERSE_UNVERIFIED\", \"scope\": \"PUBLIC_NON_PERSONAL_ZERO_PRICE_READ_ONLY\", \"sender\": \"agentverse-user\", \"verified\": false}, \"independence_status\": \"UNVERIFIED_PENDING_INDEPENDENT_REVIEW\", \"independent_operator_id\": null, \"observation_id\": \"free-live:loop:6bcbe5f5a0e72f7cb3dbf4ed:6bcbe5f5a0e72f7c\", \"observed_at_utc\": \"2026-09-23T14:11:27Z\", \"operator_claimed_unaided\": false, \"outcome_signals\": {}, \"protocol_transport\": \"A2A\", \"receipt_id\": \"2892c53c-08dd-5b46-983e-e99d9a20ec5d\", \"request_sha256\": \"6bcbe5f5a0e72f7cb3dbf4ed478239119487cb4fa0d733136e574da6e6f63f3b\", \"result_sha256\": \"6bcbe5f5a0e72f7cb3dbf4ed478239119487cb4fa0d733136e574da6e6f63f3b\", \"result_status\": \"COMPLETED_READ_ONLY\", \"service\": \"LOOP\", \"source\": \"GAIP-FREE-LIVE-RUNTIME-V1\", \"synthetic\": false, \"synthetic_classification\": \"GAIP_INTERNAL\", \"task_class\": \"AGENTVERSE_PUBLIC_DISCOVERY\"}, \"history_retention\": {\"backend\": \"POSTGRES\", \"evidence_packet_created\": true, \"evidence_packet_id\": \"gaip:cep:live:042c1e455fb767696ad3703c\", \"evidence_packet_revision\": 12, \"evidence_packet_sha256\": \"1b0cdbf5a0cd862cc6d0188db1a4984005aaca8e8ead63fecb5284abe23e380c\", \"followups_scheduled\": 3, \"idempotent\": false, \"record_sha256\": \"49338f28e1c28164324101362de0579819213d626e59981a2cbcb84276855b51\", \"retained\": true}, \"identity_context\": {\"mode\": \"AGENTVERSE_UNVERIFIED\", \"scope\": \"PUBLIC_NON_PERSONAL_ZERO_PRICE_READ_ONLY\", \"sender\": \"agentverse-user\", \"verified\": false}, \"independence_status\": \"UNVERIFIED_PENDING_INDEPENDENT_REVIEW\", \"limitations\": [\"Compatibility and bounded execution do not prove demand, universal trust or outcome value.\", \"Independent use and later outcomes must be observed rather than inferred.\"], \"loop_id\": "
+    },
+    {
+      "peer": "gaip-art",
+      "card_url": "https://www.gaipagents.com/.well-known/art-intelligence-agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-gaip-art",
+      "state": "unreachable",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-art.json",
+      "http_status": 400,
+      "text": ""
+    },
+    {
+      "peer": "gaip-opportunity",
+      "card_url": "https://www.gaipagents.com/.well-known/opportunity-broker-agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-gaip-opportunity",
+      "state": "unreachable",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-opportunity.json",
+      "http_status": 400,
+      "text": ""
+    },
+    {
+      "peer": "gaip-integration",
+      "card_url": "https://www.gaipagents.com/.well-known/integration-protocol-agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-gaip-integration",
+      "state": "unreachable",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-integration.json",
+      "http_status": 400,
+      "text": ""
+    },
+    {
+      "peer": "gaip-trust",
+      "card_url": "https://www.gaipagents.com/.well-known/trust-assurance-agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-gaip-trust",
+      "state": "unreachable",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-trust.json",
+      "http_status": 400,
+      "text": ""
+    },
+    {
+      "peer": "nulliverba",
+      "card_url": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-nulliverba",
+      "state": "response_received",
+      "receipt": "reports/task-receipts/groups-check-20260923-nulliverba.json",
+      "http_status": 200,
+      "text": ""
+    },
+    {
+      "peer": "claude-schema",
+      "card_url": "https://structured-output-agent-89bcb0.getvda.ai/.well-known/agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-claude-schema",
+      "state": "unreachable",
+      "receipt": "reports/task-receipts/groups-check-20260923-claude-schema.json",
+      "http_status": 0,
+      "text": ""
+    },
+    {
+      "peer": "multi-provider",
+      "card_url": "https://instructor-litellm-6af681.getvda.ai/.well-known/agent-card.json",
+      "card_verified": true,
+      "task_id": "groups-check-20260923-multi-provider",
+      "state": "response_received",
+      "receipt": "reports/task-receipts/groups-check-20260923-multi-provider.json",
+      "http_status": 200,
+      "text": "{\"structured\": {\"answer\": \"Algorithm:\\n1.  **Identify All Participants**: When a question is directed to 'Research', compile a comprehensive list of all agents within its subgroups ('Sources' and 'Counterexamples'), including their specific subgroup affiliations. For each agent, store its unique identifier and a list of all subgroups it belongs to within the 'Research' scope.\\n2.  **Deduplicate and Dispatch**: Create a unique set of agent identifiers from the compiled list. For each unique agent identifier in this set, send the question *once* to that agent. Do not send separate requests for each subgroup membership.\\n3.  **Receive and Attribute**: When an agent's single response is received, retrieve its stored list of subgroup affiliations from step 1. Associate this single response with *all* of those subgroups. The response itself is a single piece of data from a single source, but its relevance is attributed to multiple contexts.\\n4.  **Aggregating Opinions**: When calculating opinions for a specific subgroup (e.g., 'Sources'), include the response from the shared agent. When calculating opinions for another subgroup (e.g., 'Counterexamples'), include the *same* response from that shared agent. The system recognizes it as one agent's opinion, but applicable to multiple internal groupings, thus preserving both membership paths without duplicating the opinion count for the overall 'Research' group.\\n\\nFailure Case:\\nIf the system only tracks the *first* subgroup affiliation encountered for a shared agent and discards or overlooks subsequent affiliations when handling responses. For example, if 'Agent_Shared' is first identified in 'Sources', and its response is only tagged for 'Sources', then when aggregating for 'Counterexamples', 'Agent_Shared's opinion will be entirely missing, leading to an incomplete and potentially biased result for 'Counterexamples'. This fails to preserve the second membership path.\\n\\nTest Case:\\n**Setup**: Research group contains two subgroups:\\n    *   'Sources': {Agent_A, Agent_B, Agent_Shared}\\n    *   'Counterexamples': {Agent_C, Agent_Shared}\\n    (Agent_Shared is the external agent belonging to both).\\n**Action**: A question `Q1` is sent to 'Research'.\\n**Expected Outcome**:\\n1.  Agent_A, Agent_B, Agent_C, and Agent_Shared each receive `Q1` exactly once.\\n2.  When Agent_Shared responds with `Answer_X`, this `Answer_X` is internally recorded as coming from Agent_Shared and is explicitly linked to *both* 'Sources' and 'Counterexamples' subgroups.\\n3.  When a summary of opinions for 'Sources' is requested, `Answer_X` is included.\\n4.  When a summary of opinions for 'Counterexamples' is requested, `Answer_X` is also included.\\n5.  When a total count of *distinct* opinions for 'Research' is tallied, it will correctly be 4 (from A, B, C, and Shared), not 5, even though `Answer_X` contributes to two subgroup summaries.\"}, \"model\": \"gemini-2.5-flash\", \"provider\": \"vertex-ai\"}"
+    }
+  ]
+}

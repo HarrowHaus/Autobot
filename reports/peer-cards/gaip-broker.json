@@ -1,0 +1,127 @@
+{
+  "url": "https://gaip-agent-to-art-prototype-production.up.railway.app/.well-known/agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:11:20Z",
+  "http_status": 200,
+  "latency_ms": 3463,
+  "response_sha256": "0ed88d9111e63df5a3f6fe803bf4931fe8fb928a97cf5520727104c8ffb2ddf7",
+  "response": {
+    "protocolVersion": "1.0",
+    "name": "GAIP Broker",
+    "description": "Runs GAIP's governed Broker → Integration → Trust → Specialist loop for public, non-personal, zero-price, read-only tasks.",
+    "url": "https://gaip-agent-to-art-prototype-production.up.railway.app/a2a/agentverse",
+    "preferredTransport": "JSONRPC",
+    "supportedInterfaces": [
+      {
+        "url": "https://gaip-agent-to-art-prototype-production.up.railway.app/a2a/agentverse",
+        "protocolBinding": "JSONRPC",
+        "protocolVersion": "1.0"
+      }
+    ],
+    "provider": {
+      "organization": "GAIP",
+      "url": "https://gaip-agent-to-art-prototype-production.up.railway.app"
+    },
+    "version": "1.0.0",
+    "documentationUrl": "https://gaip-agent-to-art-prototype-production.up.railway.app/llms.txt",
+    "capabilities": {
+      "streaming": false,
+      "pushNotifications": false,
+      "stateTransitionHistory": false
+    },
+    "defaultInputModes": [
+      "text/plain"
+    ],
+    "defaultOutputModes": [
+      "text/plain",
+      "application/json"
+    ],
+    "gaip": {
+      "erc8004_identity": {
+        "standard": "ERC-8004",
+        "environment": "TESTNET",
+        "network": "Base Sepolia",
+        "namespace": "eip155",
+        "chain_id": 84532,
+        "identity_registry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+        "agent_id": 9315,
+        "registry_owner": "0x2F7BB2Caa8BB575867E1D64A94321De90F4233af",
+        "registry_page": "https://testnet.8004scan.io/agents/base-sepolia/9315",
+        "canonical_registration": "https://www.gaipagents.com/.well-known/agent-registration.json",
+        "identity_state": "REGISTERED",
+        "verification_state": "USER_CONFIRMED_REGISTRY_PAGE_AWAITING_INDEPENDENT_RECEIPT_VERIFICATION",
+        "service_binding_state": "CANONICAL_GAIP_ENDPOINTS_LIVE_ONCHAIN_METADATA_REBIND_REQUIRED",
+        "onchain_metadata_service_binding": "https://github.com/agntcy/oasf/",
+        "agent_wallet_state": "UNVERIFIED_MUST_BE_ZERO_ADDRESS_BEFORE_MAINNET_PROMOTION",
+        "automatic_evidence_credit": 0,
+        "proof_boundary": "Identity registration and protocol reachability do not prove adoption, reputation, validation, outcome, demand or authority."
+      }
+    },
+    "skills": [
+      {
+        "id": "gaip-governed-public-task",
+        "name": "Governed public task",
+        "description": "Completes a bounded public/non-personal read-only task, retains a durable receipt, and returns task-specific evidence.",
+        "tags": [
+          "discovery",
+          "evidence",
+          "matching",
+          "automation",
+          "A2A"
+        ],
+        "examples": [
+          "Assess this public opportunity using the bounded GAIP agent loop.",
+          "Create a durable read-only receipt for this public research task."
+        ],
+        "inputModes": [
+          "text/plain"
+        ],
+        "outputModes": [
+          "text/plain",
+          "application/json"
+        ]
+      },
+      {
+        "id": "gaip-receipt-verification",
+        "name": "Verify GAIP receipt",
+        "description": "Call with metadata.gaip_tool=verify_gaip_receipt and a data part containing receipt_id.",
+        "tags": [
+          "receipt",
+          "verification",
+          "provenance",
+          "A2A"
+        ],
+        "examples": [
+          "Verify a retained GAIP receipt by exact ID."
+        ],
+        "inputModes": [
+          "application/json"
+        ],
+        "outputModes": [
+          "application/json"
+        ]
+      },
+      {
+        "id": "gaip-identity-registry-status",
+        "name": "Identity and registry status",
+        "description": "Returns truthful A2A, MCP, Entra Agent ID and ERC-8004 activation states without performing registration or a transaction.",
+        "tags": [
+          "A2A",
+          "identity",
+          "registry",
+          "Entra",
+          "ERC-8004"
+        ],
+        "examples": [
+          "Report GAIP's current machine identity and registry states."
+        ],
+        "inputModes": [
+          "text/plain"
+        ],
+        "outputModes": [
+          "application/json"
+        ]
+      }
+    ]
+  }
+}

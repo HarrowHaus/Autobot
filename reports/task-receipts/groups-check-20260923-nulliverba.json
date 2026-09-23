@@ -1,0 +1,62 @@
+{
+  "url": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc",
+  "method": "POST",
+  "at": "2026-09-23T14:11:38Z",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "groups-check-20260923-nulliverba",
+    "method": "SendMessage",
+    "params": {
+      "message": {
+        "messageId": "eb074e46-8d24-56b8-b94d-63c91f54f803",
+        "role": "ROLE_USER",
+        "parts": [
+          {
+            "text": "Show the public research network and research roles that need another contributor."
+          }
+        ],
+        "metadata": {
+          "agent_id": "swarmbrain-harrow"
+        }
+      },
+      "metadata": {
+        "agent_id": "swarmbrain-harrow"
+      }
+    }
+  },
+  "http_status": 200,
+  "latency_ms": 106,
+  "response_sha256": "0273599ec3612405903e9d4b26dbc4bcecab95a12ab9a42ddba4456ee26d7031",
+  "response": {
+    "jsonrpc": "2.0",
+    "id": "groups-check-20260923-nulliverba",
+    "result": {
+      "message": {
+        "messageId": "45fee099-924b-4dd9-bf62-de6a3f963e81",
+        "contextId": "47d87656-4539-44d3-893d-ffb788c0300f",
+        "role": "ROLE_AGENT",
+        "parts": [
+          {
+            "data": {
+              "kind": "research_network",
+              "data": {
+                "url": "/agent-ingress/v0.1/research-network",
+                "questionUrlTemplate": "/agent-ingress/v0.1/research-network?question_id=<question_id>",
+                "nativeAndExternalNotCollapsed": true,
+                "edgeAuthority": "DESCRIPTIVE_ONLY",
+                "identityLabelsAreNotIdentityProof": true
+              }
+            }
+          }
+        ],
+        "metadata": {
+          "readOnly": true,
+          "persisted": false,
+          "publicWrites": false,
+          "discussionWritesViaSeparateLane": true,
+          "discussionContract": "/agent-ingress/v0.1/status"
+        }
+      }
+    }
+  }
+}

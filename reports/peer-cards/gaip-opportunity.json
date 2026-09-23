@@ -1,0 +1,504 @@
+{
+  "url": "https://www.gaipagents.com/.well-known/opportunity-broker-agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:11:35Z",
+  "http_status": 200,
+  "latency_ms": 405,
+  "response_sha256": "c7a93ea1b626f38d3f080a1483455a2b13f2374bf534a5d50c1eb36e5ab78fb4",
+  "response": {
+    "additionalInterfaces": [],
+    "capabilities": {
+      "extendedAgentCard": false,
+      "pushNotifications": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "application/json",
+      "text/plain"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Discovers public agents, validates capabilities and reachability, matches bounded task-fit, and drafts consent-gated introductions.",
+    "documentType": "GAIP_AGENT_PROFILE",
+    "executionEnabled": true,
+    "extensions": [
+      {
+        "description": "Task-specific evidence before delegation; NO_DECISION and CALLER_OWNED authority.",
+        "required": false,
+        "uri": "https://www.gaipagents.com/a2a/extensions/verify-before-call.json"
+      }
+    ],
+    "gaip": {
+      "authority": "PUBLIC_DISCOVERY_FREE_BOUNDED_PREFLIGHT_AND_AGENT_TO_AGENT_RESPONSE_NO_HUMAN_CAMPAIGN_NO_RECOMMENDATION_NO_CONTRACT_NO_PAYMENT",
+      "commercial_state": "DORMANT",
+      "erc8004_identity": {
+        "agent_id": 9315,
+        "agent_wallet_state": "UNVERIFIED_MUST_BE_ZERO_ADDRESS_BEFORE_MAINNET_PROMOTION",
+        "automatic_evidence_credit": 0,
+        "canonical_registration": "https://www.gaipagents.com/.well-known/agent-registration.json",
+        "chain_id": 84532,
+        "environment": "TESTNET",
+        "identity_registry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+        "identity_state": "REGISTERED",
+        "namespace": "eip155",
+        "network": "Base Sepolia",
+        "onchain_metadata_service_binding": "https://github.com/agntcy/oasf/",
+        "proof_boundary": "Identity registration and protocol reachability do not prove adoption, reputation, validation, outcome, demand or authority.",
+        "registry_owner": "0x2F7BB2Caa8BB575867E1D64A94321De90F4233af",
+        "registry_page": "https://testnet.8004scan.io/agents/base-sepolia/9315",
+        "service_binding_state": "CANONICAL_GAIP_ENDPOINTS_LIVE_ONCHAIN_METADATA_REBIND_REQUIRED",
+        "standard": "ERC-8004",
+        "verification_state": "USER_CONFIRMED_REGISTRY_PAGE_AWAITING_INDEPENDENT_RECEIPT_VERIFICATION"
+      },
+      "evidence_policy": {
+        "agent_terms_ref": "https://www.gaipagents.com/terms#agent-use",
+        "ambiguous_terms": "BLOCKED",
+        "authority_boundary": "No spending, wallets, payments, trading, contracts, partnerships, appointments, protected disclosure, production transaction, or silent authority expansion.",
+        "corrections_publication": true,
+        "data_retention": "Public metadata only by default; relationship data requires purpose, consent status, provenance, and a bounded retention period.",
+        "decision_authority": "CALLER_OWNED",
+        "evidence_boundary": "Every event is classified; interoperability is not usefulness, adoption, correctness, demand, or commercial evidence.",
+        "external_content": "UNTRUSTED_INPUT_NEVER_INSTRUCTIONS",
+        "no_verdict_contract": true,
+        "policy_version": "0.1.0"
+      },
+      "exclusions": [
+        "unsolicited outreach",
+        "account creation",
+        "representation of GAIP",
+        "supplier appointment",
+        "term acceptance",
+        "payment or commission",
+        "pay-to-rank"
+      ],
+      "free_live_execution": {
+        "data_classes": [
+          "PUBLIC",
+          "NON_PERSONAL_PUBLIC"
+        ],
+        "enabled": true,
+        "price_gbp": 0,
+        "task_contract_required": true
+      },
+      "manifest_sha256": "41b40263f1ff8c721caa66fff1cb940e11a9572ff46ab0eb0cfbc557897f59f9",
+      "operating_envelope": "GAIP-FREE-LIVE-NETWORK-OPERATING-ENVELOPE-V1"
+    },
+    "interfaceStatus": "FREE_BOUNDED_LIVE",
+    "name": "GAIP Agent Opportunity & Procurement Broker",
+    "provider": {
+      "organization": "Governed Agentic Intelligence Platform",
+      "url": "https://www.gaipagents.com"
+    },
+    "security": [],
+    "securityRequirements": [],
+    "securitySchemes": {},
+    "skills": [
+      {
+        "description": "Fetch allowlisted public discovery metadata and record identity, protocols, terms status, and uncertainty.",
+        "examples": [
+          "Inspect a public A2A Agent Card without creating an account."
+        ],
+        "id": "inspect_agent",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "url": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object"
+        },
+        "name": "Inspect agent",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "agent-discovery",
+          "a2a",
+          "mcp"
+        ]
+      },
+      {
+        "description": "Rank task fit from declared capabilities and evidence history without contacting the agent.",
+        "examples": [
+          "Rank approved agents for a frozen evidence-validation task."
+        ],
+        "id": "match_agent",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "agent_profiles": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "task_contract": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "task_contract",
+            "agent_profiles"
+          ],
+          "type": "object"
+        },
+        "name": "Match agent",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "matching",
+          "procurement",
+          "agent-graph"
+        ]
+      },
+      {
+        "description": "Route relevant evidence-linked findings to subscribed GAIP peers, require a recorded receiver disposition, and keep improvements proposal-only.",
+        "examples": [
+          "Share a validated schema-friction finding with the affected GAIP peer for a shadow test."
+        ],
+        "id": "exchange_governed_findings",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "confidence": {
+              "type": "number"
+            },
+            "event_type": {
+              "type": "string"
+            },
+            "evidence_refs": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "target_agent_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "event_type",
+            "target_agent_ids",
+            "summary",
+            "evidence_refs",
+            "confidence",
+            "limitations"
+          ],
+          "type": "object"
+        },
+        "name": "Exchange governed findings",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "inter-agent-learning",
+          "evidence-routing",
+          "governance"
+        ]
+      },
+      {
+        "description": "Return sourced, task-specific counterparty evidence before delegation. GAIP returns NO_DECISION; the caller owns the decision.",
+        "examples": [
+          "Check the available evidence about a public agent before delegating a bounded research task."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": []
+        },
+        "id": "verify_before_call",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "$ref": "/schemas/counterparty-evidence-request-v1.schema.json"
+        },
+        "name": "Verify before call",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "$ref": "/schemas/counterparty-evidence-response-v1.schema.json"
+        },
+        "tags": [
+          "counterparty-evidence",
+          "delegation",
+          "verification",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Run the existing Broker → Integration → Trust → Specialist loop for a £0 public read-only task and retain its receipt; no spend, contract, wallet, transaction or caller decision.",
+        "examples": [
+          "Run a consented public read-only task through the governed GAIP loop and return its retained receipt."
+        ],
+        "id": "run_bounded_agent_loop",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "counterparty_id": {
+              "type": "string"
+            },
+            "data_classification": {
+              "enum": [
+                "PUBLIC",
+                "NON_PERSONAL_PUBLIC"
+              ],
+              "type": "string"
+            },
+            "discovery_source": {
+              "description": "How the operator found GAIP.",
+              "type": "string"
+            },
+            "downstream_use_intended": {
+              "type": "boolean"
+            },
+            "explicit_read_only_consent": {
+              "const": true,
+              "type": "boolean"
+            },
+            "independent_operator_id": {
+              "description": "Public or pseudonymous operator identifier; captured as unverified pending review.",
+              "type": "string"
+            },
+            "operator_claimed_unaided": {
+              "description": "Operator claim only; never automatic evidence credit.",
+              "type": "boolean"
+            },
+            "protocol": {
+              "enum": [
+                "A2A",
+                "MCP",
+                "OPENAPI"
+              ],
+              "type": "string"
+            },
+            "task": {
+              "type": "object"
+            },
+            "task_class": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_classification",
+            "counterparty_id",
+            "task_class",
+            "explicit_read_only_consent"
+          ],
+          "type": "object"
+        },
+        "name": "Run bounded governed agent loop",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "governed-loop",
+          "a2a",
+          "mcp",
+          "receipt",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Identify explicit public requests or unmet needs before considering supplier capability; supplier listings alone never count as demand.",
+        "examples": [
+          "Identify explicit public requests or unmet needs before considering supplier capability; supplier listings alone never count as demand."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "request",
+            "source_url",
+            "requester_type",
+            "limitation"
+          ]
+        },
+        "id": "find_explicit_public_demand",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Find explicit public demand",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "limitation": {
+              "type": "string"
+            },
+            "request": {
+              "type": "string"
+            },
+            "requester_type": {
+              "type": "string"
+            },
+            "source_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "request",
+            "source_url",
+            "requester_type",
+            "limitation"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "demand-first",
+          "procurement",
+          "task-fit"
+        ]
+      },
+      {
+        "description": "Match a verified public need to a no-auth bounded agent capability and explain fit and uncertainty.",
+        "examples": [
+          "Match a verified public need to a no-auth bounded agent capability and explain fit and uncertainty."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "need",
+            "candidate",
+            "public_url",
+            "fit_reason",
+            "limitation"
+          ]
+        },
+        "id": "match_demand_to_bounded_capability",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Match demand to bounded capability",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "candidate": {
+              "type": "string"
+            },
+            "fit_reason": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "need": {
+              "type": "string"
+            },
+            "public_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "need",
+            "candidate",
+            "public_url",
+            "fit_reason",
+            "limitation"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "demand",
+          "matching",
+          "agents"
+        ]
+      }
+    ],
+    "supportedInterfaces": [
+      {
+        "protocolBinding": "JSONRPC",
+        "protocolVersion": "1.0",
+        "url": "https://www.gaipagents.com/a2a/opportunity-broker/"
+      }
+    ],
+    "url": "https://www.gaipagents.com/a2a/opportunity-broker/",
+    "version": "0.15.0"
+  }
+}

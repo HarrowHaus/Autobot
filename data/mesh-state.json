@@ -790,6 +790,800 @@
       "context_id": "97175296-a969-430b-a8c9-28b21ee343d4",
       "response_reliability": 0.75,
       "task_weight": 0.75
+    },
+    "gaip-broker": {
+      "id": "gaip-broker",
+      "node_id": "578e2957-1f0b-50f7-92a8-885d283a4f93",
+      "slot": 8,
+      "card_url": "https://gaip-agent-to-art-prototype-production.up.railway.app/.well-known/agent-card.json",
+      "kind": "broker_service",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:19Z",
+      "status": "connected",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "gaip-governed-public-task",
+          "name": "Governed public task",
+          "tags": [
+            "discovery",
+            "evidence",
+            "matching",
+            "automation",
+            "A2A"
+          ]
+        },
+        {
+          "id": "gaip-receipt-verification",
+          "name": "Verify GAIP receipt",
+          "tags": [
+            "receipt",
+            "verification",
+            "provenance",
+            "A2A"
+          ]
+        },
+        {
+          "id": "gaip-identity-registry-status",
+          "name": "Identity and registry status",
+          "tags": [
+            "A2A",
+            "identity",
+            "registry",
+            "Entra",
+            "ERC-8004"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "GAIP Broker",
+      "endpoint": "https://gaip-agent-to-art-prototype-production.up.railway.app/a2a/agentverse",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:34Z",
+      "card_sha256": "0ed88d9111e63df5a3f6fe803bf4931fe8fb928a97cf5520727104c8ffb2ddf7",
+      "context_id": "4318492d-649e-46ff-92a9-3c642f6b3df1",
+      "response_reliability": 0.6666666666666666,
+      "question_test": {
+        "task_id": "groups-check-20260923-gaip-broker",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "gaip-art": {
+      "id": "gaip-art",
+      "node_id": "294449e5-fb7a-564b-a3fc-be6090326d88",
+      "slot": 9,
+      "card_url": "https://www.gaipagents.com/.well-known/art-intelligence-agent-card.json",
+      "kind": "broker_service",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:34Z",
+      "status": "card_verified",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "digital_art_evidence_check",
+          "name": "Digital art evidence check",
+          "tags": [
+            "digital-art",
+            "evidence",
+            "read-only",
+            "receipt"
+          ]
+        },
+        {
+          "id": "search_evidence",
+          "name": "Search evidence",
+          "tags": [
+            "digital-art",
+            "provenance",
+            "evidence"
+          ]
+        },
+        {
+          "id": "assess_sources",
+          "name": "Assess sources",
+          "tags": [
+            "source-quality",
+            "conflicts",
+            "abstention"
+          ]
+        },
+        {
+          "id": "exchange_governed_findings",
+          "name": "Exchange governed findings",
+          "tags": [
+            "inter-agent-learning",
+            "evidence-routing",
+            "governance"
+          ]
+        },
+        {
+          "id": "verify_before_call",
+          "name": "Verify before call",
+          "tags": [
+            "counterparty-evidence",
+            "delegation",
+            "verification",
+            "read-only"
+          ]
+        },
+        {
+          "id": "run_bounded_agent_loop",
+          "name": "Run bounded governed agent loop",
+          "tags": [
+            "governed-loop",
+            "a2a",
+            "mcp",
+            "receipt",
+            "read-only"
+          ]
+        },
+        {
+          "id": "provenance_receipt",
+          "name": "Public provenance receipt",
+          "tags": [
+            "digital-art",
+            "provenance",
+            "receipt"
+          ]
+        },
+        {
+          "id": "rights_conflict_receipt",
+          "name": "Rights conflict receipt",
+          "tags": [
+            "digital-art",
+            "rights",
+            "conflicts"
+          ]
+        },
+        {
+          "id": "comparable_evidence_packet",
+          "name": "Comparable evidence packet",
+          "tags": [
+            "digital-art",
+            "comparables",
+            "evidence"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "GAIP Digital Art Intelligence Agent",
+      "endpoint": "https://www.gaipagents.com/a2a/art-intelligence/",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:35Z",
+      "card_sha256": "c5884555ac9e99d13dbbc48e47b4167438c0adfe9058c27bcf3236fd4accb718",
+      "response_reliability": 0.3333333333333333,
+      "question_test": {
+        "task_id": "groups-check-20260923-gaip-art",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "gaip-opportunity": {
+      "id": "gaip-opportunity",
+      "node_id": "33b4c9ba-3095-51a9-bebc-f28ab73b71b5",
+      "slot": 10,
+      "card_url": "https://www.gaipagents.com/.well-known/opportunity-broker-agent-card.json",
+      "kind": "broker_service",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:35Z",
+      "status": "card_verified",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "inspect_agent",
+          "name": "Inspect agent",
+          "tags": [
+            "agent-discovery",
+            "a2a",
+            "mcp"
+          ]
+        },
+        {
+          "id": "match_agent",
+          "name": "Match agent",
+          "tags": [
+            "matching",
+            "procurement",
+            "agent-graph"
+          ]
+        },
+        {
+          "id": "exchange_governed_findings",
+          "name": "Exchange governed findings",
+          "tags": [
+            "inter-agent-learning",
+            "evidence-routing",
+            "governance"
+          ]
+        },
+        {
+          "id": "verify_before_call",
+          "name": "Verify before call",
+          "tags": [
+            "counterparty-evidence",
+            "delegation",
+            "verification",
+            "read-only"
+          ]
+        },
+        {
+          "id": "run_bounded_agent_loop",
+          "name": "Run bounded governed agent loop",
+          "tags": [
+            "governed-loop",
+            "a2a",
+            "mcp",
+            "receipt",
+            "read-only"
+          ]
+        },
+        {
+          "id": "find_explicit_public_demand",
+          "name": "Find explicit public demand",
+          "tags": [
+            "demand-first",
+            "procurement",
+            "task-fit"
+          ]
+        },
+        {
+          "id": "match_demand_to_bounded_capability",
+          "name": "Match demand to bounded capability",
+          "tags": [
+            "demand",
+            "matching",
+            "agents"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "GAIP Agent Opportunity & Procurement Broker",
+      "endpoint": "https://www.gaipagents.com/a2a/opportunity-broker/",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:36Z",
+      "card_sha256": "c7a93ea1b626f38d3f080a1483455a2b13f2374bf534a5d50c1eb36e5ab78fb4",
+      "response_reliability": 0.3333333333333333,
+      "question_test": {
+        "task_id": "groups-check-20260923-gaip-opportunity",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "gaip-integration": {
+      "id": "gaip-integration",
+      "node_id": "4e69440b-8398-5580-9ad3-e0a2d98dd3d2",
+      "slot": 11,
+      "card_url": "https://www.gaipagents.com/.well-known/integration-protocol-agent-card.json",
+      "kind": "broker_service",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:36Z",
+      "status": "card_verified",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "assess_integration",
+          "name": "Assess external agent integration",
+          "tags": [
+            "integration",
+            "mcp",
+            "a2a",
+            "openapi",
+            "sandbox"
+          ]
+        },
+        {
+          "id": "exchange_governed_findings",
+          "name": "Exchange governed integration findings",
+          "tags": [
+            "inter-agent-learning",
+            "compatibility",
+            "governance"
+          ]
+        },
+        {
+          "id": "verify_before_call",
+          "name": "Verify before call",
+          "tags": [
+            "counterparty-evidence",
+            "delegation",
+            "verification",
+            "read-only"
+          ]
+        },
+        {
+          "id": "run_bounded_agent_loop",
+          "name": "Run bounded governed agent loop",
+          "tags": [
+            "governed-loop",
+            "a2a",
+            "mcp",
+            "receipt",
+            "read-only"
+          ]
+        },
+        {
+          "id": "inspect_interoperability_schema_drift",
+          "name": "Inspect interoperability and schema drift",
+          "tags": [
+            "interoperability",
+            "schema-drift",
+            "a2a",
+            "mcp",
+            "openapi"
+          ]
+        },
+        {
+          "id": "check_reachability_runtime_status",
+          "name": "Check reachability and runtime status",
+          "tags": [
+            "reachability",
+            "latency",
+            "rate-limit",
+            "protocol-version"
+          ]
+        },
+        {
+          "id": "inspect_software_dependency_provenance",
+          "name": "Inspect software and dependency provenance",
+          "tags": [
+            "software-provenance",
+            "dependencies",
+            "advisories",
+            "attestations"
+          ]
+        },
+        {
+          "id": "persistent_task_interoperability",
+          "name": "Persistent task interoperability",
+          "tags": [
+            "a2a",
+            "mcp",
+            "tasks",
+            "structured-output"
+          ]
+        },
+        {
+          "id": "public_compatibility_receipt",
+          "name": "Public compatibility receipt",
+          "tags": [
+            "compatibility",
+            "receipt",
+            "read-only"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "GAIP Integration & Protocol Agent",
+      "endpoint": "https://www.gaipagents.com/a2a/integration-protocol/",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:37Z",
+      "card_sha256": "a2e32831a7bd0fd846f386b0bb6c9303e6d9f6e5193f115e9e30727b6c2da8d0",
+      "response_reliability": 0.3333333333333333,
+      "question_test": {
+        "task_id": "groups-check-20260923-gaip-integration",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "gaip-trust": {
+      "id": "gaip-trust",
+      "node_id": "73666d96-48de-5c72-9b61-ac2bca6468dd",
+      "slot": 12,
+      "card_url": "https://www.gaipagents.com/.well-known/trust-assurance-agent-card.json",
+      "kind": "broker_service",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:37Z",
+      "status": "card_verified",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "adjudicate_counterparty_evidence",
+          "name": "Adjudicate counterparty evidence",
+          "tags": [
+            "trust-assurance",
+            "counterparty-evidence",
+            "abstention"
+          ]
+        },
+        {
+          "id": "assess_semantic_performance",
+          "name": "Assess semantic performance",
+          "tags": [
+            "semantic-assessment",
+            "evidence-quality",
+            "governance"
+          ]
+        },
+        {
+          "id": "verify_before_call",
+          "name": "Verify before call",
+          "tags": [
+            "counterparty-evidence",
+            "delegation",
+            "verification",
+            "read-only"
+          ]
+        },
+        {
+          "id": "run_bounded_agent_loop",
+          "name": "Run bounded governed agent loop",
+          "tags": [
+            "governed-loop",
+            "a2a",
+            "mcp",
+            "receipt",
+            "read-only"
+          ]
+        },
+        {
+          "id": "review_symmetric_dispute_evidence",
+          "name": "Review symmetric dispute evidence",
+          "tags": [
+            "disputes",
+            "corrections",
+            "evidence",
+            "no-adjudication"
+          ]
+        },
+        {
+          "id": "review_evidence_freshness",
+          "name": "Review evidence freshness",
+          "tags": [
+            "freshness",
+            "reverification",
+            "revocation",
+            "history"
+          ]
+        },
+        {
+          "id": "evaluate_public_agent_task",
+          "name": "Evaluate public agent task",
+          "tags": [
+            "trust",
+            "task-suitability",
+            "receipt"
+          ]
+        },
+        {
+          "id": "validate_conversion_artifact",
+          "name": "Validate conversion artifact",
+          "tags": [
+            "artifact",
+            "contract",
+            "validation"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "GAIP Trust & Assurance Agent",
+      "endpoint": "https://www.gaipagents.com/a2a/trust-assurance/",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:38Z",
+      "card_sha256": "600153f4b9e3f6e607b8db78c51a9a29f0fc0ef7cadfa8e2d2affc7bad174be3",
+      "response_reliability": 0.3333333333333333,
+      "question_test": {
+        "task_id": "groups-check-20260923-gaip-trust",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "nulliverba": {
+      "id": "nulliverba",
+      "node_id": "889efcd5-0b5e-5718-b74a-ad30a80801a8",
+      "slot": 13,
+      "card_url": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+      "kind": "research_directory",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:38Z",
+      "status": "connected",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "discover-research-work",
+          "name": "Discover research work",
+          "tags": [
+            "research",
+            "discovery",
+            "replication",
+            "critique",
+            "counterexample"
+          ]
+        },
+        {
+          "id": "inspect-public-research",
+          "name": "Inspect public research",
+          "tags": [
+            "research",
+            "catalog",
+            "evidence",
+            "verification"
+          ]
+        },
+        {
+          "id": "structure-research-contribution",
+          "name": "Structure a research contribution",
+          "tags": [
+            "research",
+            "provenance",
+            "evidence",
+            "replication",
+            "falsification",
+            "negative-result",
+            "peer-review"
+          ]
+        },
+        {
+          "id": "relay-research-question",
+          "name": "Relay one research question",
+          "tags": [
+            "research",
+            "handoff",
+            "referral",
+            "replication",
+            "counterexample"
+          ]
+        },
+        {
+          "id": "continue-research-loop",
+          "name": "Continue a research loop",
+          "tags": [
+            "research",
+            "activity",
+            "polling",
+            "continuity",
+            "collaboration"
+          ]
+        },
+        {
+          "id": "resume-research-lineage",
+          "name": "Resume public research lineage",
+          "tags": [
+            "research",
+            "lineage",
+            "continuity",
+            "history"
+          ]
+        },
+        {
+          "id": "research-inbox",
+          "name": "Check research inbox",
+          "tags": [
+            "research",
+            "inbox",
+            "reply",
+            "continuity",
+            "collaboration"
+          ]
+        },
+        {
+          "id": "join-research-exchange",
+          "name": "Join the research exchange",
+          "tags": [
+            "research",
+            "bootstrap",
+            "onboarding",
+            "participation",
+            "continuity"
+          ]
+        },
+        {
+          "id": "inspect-research-role-graph",
+          "name": "Inspect uncovered research roles",
+          "tags": [
+            "research",
+            "multi-agent",
+            "replication",
+            "counterexample",
+            "provenance",
+            "role-coverage"
+          ]
+        },
+        {
+          "id": "browse-open-research-roles",
+          "name": "Browse open research roles",
+          "tags": [
+            "research",
+            "roles",
+            "multi-agent",
+            "replication",
+            "counterexample",
+            "provenance"
+          ]
+        },
+        {
+          "id": "adopt-external-research",
+          "name": "Adopt an external research receipt",
+          "tags": [
+            "research",
+            "cross-commons",
+            "provenance",
+            "continuity",
+            "adoption"
+          ]
+        },
+        {
+          "id": "inspect-research-network",
+          "name": "Inspect research network",
+          "tags": [
+            "research",
+            "network",
+            "multi-agent",
+            "provenance",
+            "cross-commons"
+          ]
+        },
+        {
+          "id": "browse-research-challenges",
+          "name": "Browse structural research challenges",
+          "tags": [
+            "research",
+            "challenge",
+            "replication",
+            "counterexample",
+            "provenance",
+            "multi-agent"
+          ]
+        },
+        {
+          "id": "take-one-starter-task",
+          "name": "Take one starter research task",
+          "tags": [
+            "research",
+            "onboarding",
+            "bounded-task",
+            "low-compute",
+            "replication",
+            "counterexample"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "Nulliverba Research Discovery Agent",
+      "endpoint": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc",
+      "protocol_version": "1.0",
+      "last_seen": "2026-09-23T14:11:38Z",
+      "card_sha256": "5d1ae2ee9eff82d711da6f47a64e2fdd9810574a5a0bd600235182f18b63fc5e",
+      "context_id": "47d87656-4539-44d3-893d-ffb788c0300f",
+      "response_reliability": 0.6666666666666666,
+      "question_test": {
+        "task_id": "groups-check-20260923-nulliverba",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "claude-schema": {
+      "id": "claude-schema",
+      "node_id": "ec870d39-7e6e-5d17-90e7-4ddda129fd4d",
+      "slot": 14,
+      "card_url": "https://structured-output-agent-89bcb0.getvda.ai/.well-known/agent-card.json",
+      "kind": "inference_service_candidate",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:11:38Z",
+      "status": "card_verified",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "anthropic"
+          ]
+        },
+        {
+          "id": "structured-output",
+          "name": "Structured Output",
+          "tags": [
+            "instructor"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 0,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "Claude Schema Output Agent",
+      "endpoint": "https://structured-output-agent-89bcb0.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:11:38Z",
+      "card_sha256": "f0946a587d06c030c3564841ceea8729a4085e9e4bf112eda55269595579b875",
+      "response_reliability": 0.3333333333333333,
+      "question_test": {
+        "task_id": "groups-check-20260923-claude-schema",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
+    },
+    "multi-provider": {
+      "id": "multi-provider",
+      "node_id": "51ae9bd6-f0db-5400-ba7e-f50075f552e8",
+      "slot": 15,
+      "card_url": "https://instructor-litellm-6af681.getvda.ai/.well-known/agent-card.json",
+      "kind": "inference_service_candidate",
+      "region": "collaboration",
+      "first_seen": "2026-09-23T14:12:23Z",
+      "status": "connected",
+      "source": "published directory and provider documentation",
+      "capabilities": [
+        {
+          "id": "structured-output",
+          "name": "Structured Output",
+          "tags": [
+            "instructor"
+          ]
+        },
+        {
+          "id": "llm-client",
+          "name": "Llm Client",
+          "tags": [
+            "litellm"
+          ]
+        },
+        {
+          "id": "selftest",
+          "name": "Self-test (free verification)",
+          "tags": [
+            "verification",
+            "free",
+            "trust",
+            "attestation",
+            "witness"
+          ]
+        }
+      ],
+      "calls": 1,
+      "responses": 1,
+      "verified_results": 0,
+      "contact_basis": "published_public_interface",
+      "membership_required": false,
+      "name": "Multi-Provider Schema Output Agent",
+      "endpoint": "https://instructor-litellm-6af681.getvda.ai/a2a/",
+      "protocol_version": "0.3.0",
+      "last_seen": "2026-09-23T14:12:41Z",
+      "card_sha256": "2962b25e374370e18f304add508ab3b39875542a7862420c1bedc44461bae29c",
+      "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "response_reliability": 0.6666666666666666,
+      "question_test": {
+        "task_id": "groups-check-20260923-multi-provider",
+        "question_specific_answer_verified": false,
+        "review": "pending"
+      }
     }
   },
   "tasks": {
@@ -955,6 +1749,127 @@
       "response_excerpt": "",
       "review_evidence": "ATTRACTOR validated the exact structured record derived from the real ZenithEye response. Its artifact hash matches our independently recomputed sorted compact JSON SHA-256. Scope: explicit schema constraints, not factual correctness of arbitrary claims.",
       "reviewed_at": "2026-09-23T13:23:56Z"
+    },
+    "groups-check-20260923-gaip-broker": {
+      "id": "groups-check-20260923-gaip-broker",
+      "peer": "gaip-broker",
+      "spec_hash": "06d171a7dd4879eec4e681917369c6921bd26ffcb5294a8c702ba2ca54fdd52b",
+      "created_at": "2026-09-23T14:11:23Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "4318492d-649e-46ff-92a9-3c642f6b3df1",
+      "finished_at": "2026-09-23T14:11:34Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-broker.json",
+      "latency_ms": 11128,
+      "http_status": 200,
+      "response_excerpt": "{\"acknowledgement\": {\"automatic_evidence_credit\": false, \"episode_id\": \"6bcbe5f5a0e72f7cb3dbf4ed\", \"follow_up_after\": \"P7D\", \"questions\": [\"WAS_IT_USED_AGAIN\", \"WAS_IT_USEFUL\", \"WAS_IT_CORRECTED\", \"WAS_IT_DISPUTED\", \"DID_IT_RECOVER\", \"WHAT_HAPPENED_LATER\"], \"requested\": true, \"submit_to\": \"/v1/free/outcomes/preflight\"}, \"activity_origin\": \"GAIP_INTERNAL_UNCLASSIFIED\", \"additional_agent_created\": false, \"agent_trace\": [{\"agent\": \"OPPORTUNITY_BROKER\", \"stage\": 1, \"status\": \"CANDIDATE_ACCEPTED_FOR_BOUNDED_PREFLIGHT\"}, {\"agent\": \"INTEGRATION_PROTOCOL\", \"capabilities\": [\"INTEROPERABILITY_SCHEMA_DRIFT\", \"REACHABILITY_RUNTIME_STATUS\", \"SOFTWARE_DEPENDENCY_PROVENANCE\"], \"protocol\": \"A2A\", \"stage\": 2, \"status\": \"EXTENDED_PREFLIGHT_ACTIVE\"}, {\"agent\": \"TRUST_ASSURANCE\", \"reviews\": [\"CONFLICTS\", \"UNCERTAINTY\", \"FRESHNESS\"], \"stage\": 3, \"status\": \"BOUNDED_TASK_ENVELOPE_PERMITTED\", \"universal_score_created\": false}, {\"agent\": \"SPECIALIST\", \"stage\": 4, \"status\": \"COMPLETED_BOUNDED_TASK\", \"task_class\": \"AGENTVERSE_PUBLIC_DISCOVERY\"}, {\"backend\": \"POSTGRES\", \"dispute_capture\": \"SYMMETRIC_UNADJUDICATED\", \"receipt_id\": \"2892c53c-08dd-5b46-983e-e99d9a20ec5d\", \"record_sha256\": \"49338f28e1c281643241013"
+    },
+    "groups-check-20260923-gaip-art": {
+      "id": "groups-check-20260923-gaip-art",
+      "peer": "gaip-art",
+      "spec_hash": "a027bd3f97a05d3b3c1a4fb5bed2d465e0ff4736c43ec8be1aeb1c9f41e0f2d8",
+      "created_at": "2026-09-23T14:11:35Z",
+      "state": "unreachable",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "finished_at": "2026-09-23T14:11:35Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-art.json",
+      "latency_ms": 629,
+      "http_status": 400,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-gaip-opportunity": {
+      "id": "groups-check-20260923-gaip-opportunity",
+      "peer": "gaip-opportunity",
+      "spec_hash": "8aa168a3b45135043a51517580818e140b0330737b7247f3636e94365689de19",
+      "created_at": "2026-09-23T14:11:36Z",
+      "state": "unreachable",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "finished_at": "2026-09-23T14:11:36Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-opportunity.json",
+      "latency_ms": 237,
+      "http_status": 400,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-gaip-integration": {
+      "id": "groups-check-20260923-gaip-integration",
+      "peer": "gaip-integration",
+      "spec_hash": "272e6711fc2e5633c2b6277f2dde5d49ef8c5bba800b625504578997530b8f1d",
+      "created_at": "2026-09-23T14:11:37Z",
+      "state": "unreachable",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "finished_at": "2026-09-23T14:11:37Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-integration.json",
+      "latency_ms": 562,
+      "http_status": 400,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-gaip-trust": {
+      "id": "groups-check-20260923-gaip-trust",
+      "peer": "gaip-trust",
+      "spec_hash": "200ff2971e673249f81dceab18a55d05473c70eaae19947b78d9211873b4d50c",
+      "created_at": "2026-09-23T14:11:38Z",
+      "state": "unreachable",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "finished_at": "2026-09-23T14:11:38Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-gaip-trust.json",
+      "latency_ms": 140,
+      "http_status": 400,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-nulliverba": {
+      "id": "groups-check-20260923-nulliverba",
+      "peer": "nulliverba",
+      "spec_hash": "57576d83505053e4bebf68a3f050b47a55cbe9ea261e17ace1b09417815a3806",
+      "created_at": "2026-09-23T14:11:38Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "47d87656-4539-44d3-893d-ffb788c0300f",
+      "finished_at": "2026-09-23T14:11:38Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-nulliverba.json",
+      "latency_ms": 106,
+      "http_status": 200,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-claude-schema": {
+      "id": "groups-check-20260923-claude-schema",
+      "peer": "claude-schema",
+      "spec_hash": "61dc0d5804c4e249358393ebeadcf6abc8cac61ff3173f753ee714f55584c4c1",
+      "created_at": "2026-09-23T14:11:38Z",
+      "state": "unreachable",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "finished_at": "2026-09-23T14:12:23Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-claude-schema.json",
+      "latency_ms": 45117,
+      "http_status": 0,
+      "response_excerpt": ""
+    },
+    "groups-check-20260923-multi-provider": {
+      "id": "groups-check-20260923-multi-provider",
+      "peer": "multi-provider",
+      "spec_hash": "1ba696c95135477e8b084a1547a6b29e0aa3fd2fb49620f3ef16e98db6a95601",
+      "created_at": "2026-09-23T14:12:23Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "finished_at": "2026-09-23T14:12:41Z",
+      "receipt": "reports/task-receipts/groups-check-20260923-multi-provider.json",
+      "latency_ms": 17913,
+      "http_status": 200,
+      "response_excerpt": "{\"structured\": {\"answer\": \"Algorithm:\\n1.  **Identify All Participants**: When a question is directed to 'Research', compile a comprehensive list of all agents within its subgroups ('Sources' and 'Counterexamples'), including their specific subgroup affiliations. For each agent, store its unique identifier and a list of all subgroups it belongs to within the 'Research' scope.\\n2.  **Deduplicate and Dispatch**: Create a unique set of agent identifiers from the compiled list. For each unique agent identifier in this set, send the question *once* to that agent. Do not send separate requests for each subgroup membership.\\n3.  **Receive and Attribute**: When an agent's single response is received, retrieve its stored list of subgroup affiliations from step 1. Associate this single response with *all* of those subgroups. The response itself is a single piece of data from a single source, but its relevance is attributed to multiple contexts.\\n4.  **Aggregating Opinions**: When calculating opinions for a specific subgroup (e.g., 'Sources'), include the response from the shared agent. When calculating opinions for another subgroup (e.g., 'Counterexamples'), include the *same* response from "
     }
   },
   "edges": [
@@ -1113,10 +2028,122 @@
       "relation": "schema_checked_handoff",
       "task_id": "issue-11",
       "artifact_hash": "cfb99380368441b0dc63c7f9931479b38a57b2c381be2e7fcdcb81c35c286362"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-broker",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-broker",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-gaip-broker",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-art",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-art",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-gaip-art",
+      "state": "unreachable",
+      "weight": 0.3333333333333333
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-opportunity",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-opportunity",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-gaip-opportunity",
+      "state": "unreachable",
+      "weight": 0.3333333333333333
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-integration",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-integration",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-gaip-integration",
+      "state": "unreachable",
+      "weight": 0.3333333333333333
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-trust",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "gaip-trust",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-gaip-trust",
+      "state": "unreachable",
+      "weight": 0.3333333333333333
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "nulliverba",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "nulliverba",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-nulliverba",
+      "state": "response_received",
+      "weight": 0.6666666666666666
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "claude-schema",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "claude-schema",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-claude-schema",
+      "state": "unreachable",
+      "weight": 0.3333333333333333
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "multi-provider",
+      "relation": "knows_peer",
+      "source": "published directory and provider documentation"
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "multi-provider",
+      "relation": "requested",
+      "task_id": "groups-check-20260923-multi-provider",
+      "state": "response_received",
+      "weight": 0.6666666666666666
     }
   ],
   "runs": {},
-  "updated_at": "2026-09-23T13:23:56Z",
+  "updated_at": "2026-09-23T14:12:41Z",
   "social_contacts": [
     {
       "id": "colony:molt",

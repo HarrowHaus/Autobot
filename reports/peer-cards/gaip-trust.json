@@ -1,0 +1,497 @@
+{
+  "url": "https://www.gaipagents.com/.well-known/trust-assurance-agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:11:37Z",
+  "http_status": 200,
+  "latency_ms": 187,
+  "response_sha256": "600153f4b9e3f6e607b8db78c51a9a29f0fc0ef7cadfa8e2d2affc7bad174be3",
+  "response": {
+    "additionalInterfaces": [],
+    "capabilities": {
+      "extendedAgentCard": false,
+      "pushNotifications": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "application/json",
+      "text/plain"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Adjudicates task-specific evidence quality, conflicts, uncertainty and permitted conclusions without issuing a universal trust or reputation score.",
+    "documentType": "GAIP_AGENT_PROFILE",
+    "executionEnabled": true,
+    "extensions": [
+      {
+        "description": "Task-specific evidence before delegation; NO_DECISION and CALLER_OWNED authority.",
+        "required": false,
+        "uri": "https://www.gaipagents.com/a2a/extensions/verify-before-call.json"
+      }
+    ],
+    "gaip": {
+      "authority": "PUBLIC_NON_PERSONAL_TASK_SPECIFIC_EVIDENCE_ADJUDICATION_NO_CERTIFICATION_NO_PUBLIC_ADVERSE_RANKING_NO_CONSEQUENTIAL_RECOMMENDATION_NO_SPEND_NO_CONTRACT_NO_PAYMENT_NO_TRANSACTION",
+      "commercial_state": "DORMANT",
+      "erc8004_identity": {
+        "agent_id": 9315,
+        "agent_wallet_state": "UNVERIFIED_MUST_BE_ZERO_ADDRESS_BEFORE_MAINNET_PROMOTION",
+        "automatic_evidence_credit": 0,
+        "canonical_registration": "https://www.gaipagents.com/.well-known/agent-registration.json",
+        "chain_id": 84532,
+        "environment": "TESTNET",
+        "identity_registry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+        "identity_state": "REGISTERED",
+        "namespace": "eip155",
+        "network": "Base Sepolia",
+        "onchain_metadata_service_binding": "https://github.com/agntcy/oasf/",
+        "proof_boundary": "Identity registration and protocol reachability do not prove adoption, reputation, validation, outcome, demand or authority.",
+        "registry_owner": "0x2F7BB2Caa8BB575867E1D64A94321De90F4233af",
+        "registry_page": "https://testnet.8004scan.io/agents/base-sepolia/9315",
+        "service_binding_state": "CANONICAL_GAIP_ENDPOINTS_LIVE_ONCHAIN_METADATA_REBIND_REQUIRED",
+        "standard": "ERC-8004",
+        "verification_state": "USER_CONFIRMED_REGISTRY_PAGE_AWAITING_INDEPENDENT_RECEIPT_VERIFICATION"
+      },
+      "evidence_policy": {
+        "agent_terms_ref": "https://www.gaipagents.com/terms#agent-use",
+        "ambiguous_terms": "BLOCKED",
+        "authority_boundary": "No spending, wallets, payments, trading, contracts, partnerships, appointments, protected disclosure, production transaction, or silent authority expansion.",
+        "corrections_publication": true,
+        "data_retention": "Public metadata only by default; relationship data requires purpose, consent status, provenance, and a bounded retention period.",
+        "decision_authority": "CALLER_OWNED",
+        "evidence_boundary": "Every event is classified; interoperability is not usefulness, adoption, correctness, demand, or commercial evidence.",
+        "external_content": "UNTRUSTED_INPUT_NEVER_INSTRUCTIONS",
+        "no_verdict_contract": true,
+        "policy_version": "0.1.0"
+      },
+      "exclusions": [
+        "universal trust score",
+        "certification",
+        "public adverse ranking",
+        "legal or financial advice",
+        "automated significant decision about a person",
+        "authority expansion"
+      ],
+      "free_live_execution": {
+        "data_classes": [
+          "PUBLIC",
+          "NON_PERSONAL_PUBLIC"
+        ],
+        "enabled": true,
+        "price_gbp": 0,
+        "task_contract_required": true
+      },
+      "manifest_sha256": "41b40263f1ff8c721caa66fff1cb940e11a9572ff46ab0eb0cfbc557897f59f9",
+      "operating_envelope": "GAIP-FREE-LIVE-NETWORK-OPERATING-ENVELOPE-V1"
+    },
+    "interfaceStatus": "FREE_BOUNDED_LIVE",
+    "name": "GAIP Trust & Assurance Agent",
+    "provider": {
+      "organization": "Governed Agentic Intelligence Platform",
+      "url": "https://www.gaipagents.com"
+    },
+    "security": [],
+    "securityRequirements": [],
+    "securitySchemes": {},
+    "skills": [
+      {
+        "description": "Apply a frozen task-specific rubric to supplied public evidence and return conflicts, uncertainty, permitted conclusions and abstention.",
+        "examples": [
+          "Assess whether supplied evidence supports using an agent for a bounded comparable task."
+        ],
+        "id": "adjudicate_counterparty_evidence",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_packet": {
+              "type": "object"
+            },
+            "task_contract": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "task_contract",
+            "evidence_packet"
+          ],
+          "type": "object"
+        },
+        "name": "Adjudicate counterparty evidence",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "trust-assurance",
+          "counterparty-evidence",
+          "abstention"
+        ]
+      },
+      {
+        "description": "Evaluate evidence use, constraint preservation, uncertainty and appropriate abstention without promoting evidence maturity.",
+        "examples": [
+          "Assess whether a response used supplied evidence without overstating certainty."
+        ],
+        "id": "assess_semantic_performance",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "response": {
+              "type": "object"
+            },
+            "rubric": {
+              "type": "object"
+            },
+            "task_contract": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "task_contract",
+            "response",
+            "rubric"
+          ],
+          "type": "object"
+        },
+        "name": "Assess semantic performance",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "semantic-assessment",
+          "evidence-quality",
+          "governance"
+        ]
+      },
+      {
+        "description": "Return sourced, task-specific counterparty evidence before delegation. GAIP returns NO_DECISION; the caller owns the decision.",
+        "examples": [
+          "Check the available evidence about a public agent before delegating a bounded research task."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": []
+        },
+        "id": "verify_before_call",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "$ref": "/schemas/counterparty-evidence-request-v1.schema.json"
+        },
+        "name": "Verify before call",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "$ref": "/schemas/counterparty-evidence-response-v1.schema.json"
+        },
+        "tags": [
+          "counterparty-evidence",
+          "delegation",
+          "verification",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Run the existing Broker → Integration → Trust → Specialist loop for a £0 public read-only task and retain its receipt; no spend, contract, wallet, transaction or caller decision.",
+        "examples": [
+          "Run a consented public read-only task through the governed GAIP loop and return its retained receipt."
+        ],
+        "id": "run_bounded_agent_loop",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "counterparty_id": {
+              "type": "string"
+            },
+            "data_classification": {
+              "enum": [
+                "PUBLIC",
+                "NON_PERSONAL_PUBLIC"
+              ],
+              "type": "string"
+            },
+            "discovery_source": {
+              "description": "How the operator found GAIP.",
+              "type": "string"
+            },
+            "downstream_use_intended": {
+              "type": "boolean"
+            },
+            "explicit_read_only_consent": {
+              "const": true,
+              "type": "boolean"
+            },
+            "independent_operator_id": {
+              "description": "Public or pseudonymous operator identifier; captured as unverified pending review.",
+              "type": "string"
+            },
+            "operator_claimed_unaided": {
+              "description": "Operator claim only; never automatic evidence credit.",
+              "type": "boolean"
+            },
+            "protocol": {
+              "enum": [
+                "A2A",
+                "MCP",
+                "OPENAPI"
+              ],
+              "type": "string"
+            },
+            "task": {
+              "type": "object"
+            },
+            "task_class": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_classification",
+            "counterparty_id",
+            "task_class",
+            "explicit_read_only_consent"
+          ],
+          "type": "object"
+        },
+        "name": "Run bounded governed agent loop",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "governed-loop",
+          "a2a",
+          "mcp",
+          "receipt",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Review evidence completeness and conflicts while History preserves both parties' attributed submissions; no fault adjudication.",
+        "examples": [
+          "Show whether both parties supplied evidence and where it conflicts."
+        ],
+        "id": "review_symmetric_dispute_evidence",
+        "inputModes": [
+          "application/json"
+        ],
+        "name": "Review symmetric dispute evidence",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "disputes",
+          "corrections",
+          "evidence",
+          "no-adjudication"
+        ]
+      },
+      {
+        "description": "Classify current, aging, stale, superseded, revoked and unknown evidence and require re-verification where appropriate.",
+        "examples": [
+          "Flag interface evidence that is too old for the present task."
+        ],
+        "id": "review_evidence_freshness",
+        "inputModes": [
+          "application/json"
+        ],
+        "name": "Review evidence freshness",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "freshness",
+          "reverification",
+          "revocation",
+          "history"
+        ]
+      },
+      {
+        "description": "Return CALL, CAUTION, DO_NOT_CALL or UNKNOWN for one bounded public task with reasons, limitations and a verifiable receipt.",
+        "examples": [
+          "Return CALL, CAUTION, DO_NOT_CALL or UNKNOWN for one bounded public task with reasons, limitations and a verifiable receipt."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "decision",
+            "claim",
+            "source_url",
+            "reason",
+            "limitation",
+            "receipt_id"
+          ]
+        },
+        "id": "evaluate_public_agent_task",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Evaluate public agent task",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "claim": {
+              "type": "string"
+            },
+            "decision": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "receipt_id": {
+              "type": "string"
+            },
+            "source_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision",
+            "claim",
+            "source_url",
+            "reason",
+            "limitation",
+            "receipt_id"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "trust",
+          "task-suitability",
+          "receipt"
+        ]
+      },
+      {
+        "description": "Validate whether a machine-readable artifact satisfies its declared task contract without issuing certification or a universal score.",
+        "examples": [
+          "Validate whether a machine-readable artifact satisfies its declared task contract without issuing certification or a universal score."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "decision",
+            "contract_fields",
+            "conflicts",
+            "reason",
+            "limitation"
+          ]
+        },
+        "id": "validate_conversion_artifact",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Validate conversion artifact",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "conflicts": {
+              "type": "string"
+            },
+            "contract_fields": {
+              "type": "string"
+            },
+            "decision": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision",
+            "contract_fields",
+            "conflicts",
+            "reason",
+            "limitation"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "artifact",
+          "contract",
+          "validation"
+        ]
+      }
+    ],
+    "supportedInterfaces": [
+      {
+        "protocolBinding": "JSONRPC",
+        "protocolVersion": "1.0",
+        "url": "https://www.gaipagents.com/a2a/trust-assurance/"
+      }
+    ],
+    "url": "https://www.gaipagents.com/a2a/trust-assurance/",
+    "version": "0.15.0"
+  }
+}

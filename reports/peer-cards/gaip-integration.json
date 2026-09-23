@@ -1,0 +1,531 @@
+{
+  "url": "https://www.gaipagents.com/.well-known/integration-protocol-agent-card.json",
+  "method": "GET",
+  "at": "2026-09-23T14:11:36Z",
+  "http_status": 200,
+  "latency_ms": 201,
+  "response_sha256": "a2e32831a7bd0fd846f386b0bb6c9303e6d9f6e5193f115e9e30727b6c2da8d0",
+  "response": {
+    "additionalInterfaces": [],
+    "capabilities": {
+      "extendedAgentCard": false,
+      "pushNotifications": false,
+      "streaming": false
+    },
+    "defaultInputModes": [
+      "application/json",
+      "text/plain"
+    ],
+    "defaultOutputModes": [
+      "application/json"
+    ],
+    "description": "Profiles supplied external-agent interfaces, prepares least-privilege adapters and tests interoperability against synthetic mock fixtures only.",
+    "documentType": "GAIP_AGENT_PROFILE",
+    "executionEnabled": true,
+    "extensions": [
+      {
+        "description": "Task-specific evidence before delegation; NO_DECISION and CALLER_OWNED authority.",
+        "required": false,
+        "uri": "https://www.gaipagents.com/a2a/extensions/verify-before-call.json"
+      }
+    ],
+    "gaip": {
+      "authority": "PUBLIC_SPEC_ENDPOINT_SCHEMA_AND_VERSION_PREFLIGHT_NO_CREDENTIAL_NO_ACCOUNT_NO_DEPLOYMENT_NO_SPEND_NO_CONTRACT_NO_PAYMENT_NO_TRANSACTION",
+      "commercial_state": "DORMANT",
+      "erc8004_identity": {
+        "agent_id": 9315,
+        "agent_wallet_state": "UNVERIFIED_MUST_BE_ZERO_ADDRESS_BEFORE_MAINNET_PROMOTION",
+        "automatic_evidence_credit": 0,
+        "canonical_registration": "https://www.gaipagents.com/.well-known/agent-registration.json",
+        "chain_id": 84532,
+        "environment": "TESTNET",
+        "identity_registry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+        "identity_state": "REGISTERED",
+        "namespace": "eip155",
+        "network": "Base Sepolia",
+        "onchain_metadata_service_binding": "https://github.com/agntcy/oasf/",
+        "proof_boundary": "Identity registration and protocol reachability do not prove adoption, reputation, validation, outcome, demand or authority.",
+        "registry_owner": "0x2F7BB2Caa8BB575867E1D64A94321De90F4233af",
+        "registry_page": "https://testnet.8004scan.io/agents/base-sepolia/9315",
+        "service_binding_state": "CANONICAL_GAIP_ENDPOINTS_LIVE_ONCHAIN_METADATA_REBIND_REQUIRED",
+        "standard": "ERC-8004",
+        "verification_state": "USER_CONFIRMED_REGISTRY_PAGE_AWAITING_INDEPENDENT_RECEIPT_VERIFICATION"
+      },
+      "evidence_policy": {
+        "agent_terms_ref": "https://www.gaipagents.com/terms#agent-use",
+        "ambiguous_terms": "BLOCKED",
+        "authority_boundary": "No spending, wallets, payments, trading, contracts, partnerships, appointments, protected disclosure, production transaction, or silent authority expansion.",
+        "corrections_publication": true,
+        "data_retention": "Public metadata only by default; relationship data requires purpose, consent status, provenance, and a bounded retention period.",
+        "decision_authority": "CALLER_OWNED",
+        "evidence_boundary": "Every event is classified; interoperability is not usefulness, adoption, correctness, demand, or commercial evidence.",
+        "external_content": "UNTRUSTED_INPUT_NEVER_INSTRUCTIONS",
+        "no_verdict_contract": true,
+        "policy_version": "0.1.0"
+      },
+      "exclusions": [
+        "live endpoint activation",
+        "credential use or request",
+        "external contact",
+        "production data",
+        "Trust acceptance decisions",
+        "self-approval or authority expansion"
+      ],
+      "free_live_execution": {
+        "data_classes": [
+          "PUBLIC",
+          "NON_PERSONAL_PUBLIC"
+        ],
+        "enabled": true,
+        "price_gbp": 0,
+        "task_contract_required": true
+      },
+      "manifest_sha256": "41b40263f1ff8c721caa66fff1cb940e11a9572ff46ab0eb0cfbc557897f59f9",
+      "operating_envelope": "GAIP-FREE-LIVE-NETWORK-OPERATING-ENVELOPE-V1"
+    },
+    "interfaceStatus": "FREE_BOUNDED_LIVE",
+    "name": "GAIP Integration & Protocol Agent",
+    "provider": {
+      "organization": "Governed Agentic Intelligence Platform",
+      "url": "https://www.gaipagents.com"
+    },
+    "security": [],
+    "securityRequirements": [],
+    "securitySchemes": {},
+    "skills": [
+      {
+        "description": "Parse a supplied interface specification, reject excessive permissions and exercise a proposed adapter against synthetic mock fixtures.",
+        "examples": [
+          "Assess a supplied MCP tool schema and prepare a non-activating adapter proposal."
+        ],
+        "id": "assess_integration",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "enum": [
+                "MCP",
+                "A2A",
+                "OPENAPI"
+              ],
+              "type": "string"
+            },
+            "specification": {
+              "type": "object"
+            },
+            "synthetic_fixture": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "protocol",
+            "specification",
+            "synthetic_fixture"
+          ],
+          "type": "object"
+        },
+        "name": "Assess external agent integration",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "integration",
+          "mcp",
+          "a2a",
+          "openapi",
+          "sandbox"
+        ]
+      },
+      {
+        "description": "Route evidence-linked compatibility findings to Trust and the receiving specialist; every receiver must record a disposition.",
+        "examples": [
+          "Send a schema-friction finding to Trust for a Shadow eligibility decision."
+        ],
+        "id": "exchange_governed_findings",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_refs": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "target_agent_ids": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "target_agent_ids",
+            "summary",
+            "evidence_refs"
+          ],
+          "type": "object"
+        },
+        "name": "Exchange governed integration findings",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "inter-agent-learning",
+          "compatibility",
+          "governance"
+        ]
+      },
+      {
+        "description": "Return sourced, task-specific counterparty evidence before delegation. GAIP returns NO_DECISION; the caller owns the decision.",
+        "examples": [
+          "Check the available evidence about a public agent before delegating a bounded research task."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": []
+        },
+        "id": "verify_before_call",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "$ref": "/schemas/counterparty-evidence-request-v1.schema.json"
+        },
+        "name": "Verify before call",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "$ref": "/schemas/counterparty-evidence-response-v1.schema.json"
+        },
+        "tags": [
+          "counterparty-evidence",
+          "delegation",
+          "verification",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Run the existing Broker → Integration → Trust → Specialist loop for a £0 public read-only task and retain its receipt; no spend, contract, wallet, transaction or caller decision.",
+        "examples": [
+          "Run a consented public read-only task through the governed GAIP loop and return its retained receipt."
+        ],
+        "id": "run_bounded_agent_loop",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "counterparty_id": {
+              "type": "string"
+            },
+            "data_classification": {
+              "enum": [
+                "PUBLIC",
+                "NON_PERSONAL_PUBLIC"
+              ],
+              "type": "string"
+            },
+            "discovery_source": {
+              "description": "How the operator found GAIP.",
+              "type": "string"
+            },
+            "downstream_use_intended": {
+              "type": "boolean"
+            },
+            "explicit_read_only_consent": {
+              "const": true,
+              "type": "boolean"
+            },
+            "independent_operator_id": {
+              "description": "Public or pseudonymous operator identifier; captured as unverified pending review.",
+              "type": "string"
+            },
+            "operator_claimed_unaided": {
+              "description": "Operator claim only; never automatic evidence credit.",
+              "type": "boolean"
+            },
+            "protocol": {
+              "enum": [
+                "A2A",
+                "MCP",
+                "OPENAPI"
+              ],
+              "type": "string"
+            },
+            "task": {
+              "type": "object"
+            },
+            "task_class": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "data_classification",
+            "counterparty_id",
+            "task_class",
+            "explicit_read_only_consent"
+          ],
+          "type": "object"
+        },
+        "name": "Run bounded governed agent loop",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "governed-loop",
+          "a2a",
+          "mcp",
+          "receipt",
+          "read-only"
+        ]
+      },
+      {
+        "description": "Compare supplied public Agent Card, MCP and OpenAPI declarations and bounded observations; report conflicts without a suitability verdict.",
+        "examples": [
+          "Compare an agent's A2A card, MCP tools and OpenAPI description."
+        ],
+        "id": "inspect_interoperability_schema_drift",
+        "inputModes": [
+          "application/json"
+        ],
+        "name": "Inspect interoperability and schema drift",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "interoperability",
+          "schema-drift",
+          "a2a",
+          "mcp",
+          "openapi"
+        ]
+      },
+      {
+        "description": "Return a timestamped bounded public-endpoint observation from one vantage point, not a reliability verdict.",
+        "examples": [
+          "Check whether a public MCP endpoint responds now."
+        ],
+        "id": "check_reachability_runtime_status",
+        "inputModes": [
+          "application/json"
+        ],
+        "name": "Check reachability and runtime status",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "reachability",
+          "latency",
+          "rate-limit",
+          "protocol-version"
+        ]
+      },
+      {
+        "description": "Reconcile supplied registry, repository, package, advisory and attestation evidence without exploit testing or a safety verdict.",
+        "examples": [
+          "Reconcile a package version with its registry and signed build evidence."
+        ],
+        "id": "inspect_software_dependency_provenance",
+        "inputModes": [
+          "application/json"
+        ],
+        "name": "Inspect software and dependency provenance",
+        "outputModes": [
+          "application/json"
+        ],
+        "tags": [
+          "software-provenance",
+          "dependencies",
+          "advisories",
+          "attestations"
+        ]
+      },
+      {
+        "description": "Inspect A2A or MCP task continuity, context, asynchronous completion and structured-output compatibility.",
+        "examples": [
+          "Inspect A2A or MCP task continuity, context, asynchronous completion and structured-output compatibility."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "protocol",
+            "affected_field",
+            "observed_value",
+            "proposed_read_only_correction",
+            "limitation"
+          ]
+        },
+        "id": "persistent_task_interoperability",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Persistent task interoperability",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "affected_field": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "observed_value": {
+              "type": "string"
+            },
+            "proposed_read_only_correction": {
+              "type": "string"
+            },
+            "protocol": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "protocol",
+            "affected_field",
+            "observed_value",
+            "proposed_read_only_correction",
+            "limitation"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "a2a",
+          "mcp",
+          "tasks",
+          "structured-output"
+        ]
+      },
+      {
+        "description": "Return a read-only A2A, MCP or OpenAPI compatibility receipt for one public endpoint.",
+        "examples": [
+          "Return a read-only A2A, MCP or OpenAPI compatibility receipt for one public endpoint."
+        ],
+        "gaipArtifactContract": {
+          "externalValueCredit": 0,
+          "machineReadable": true,
+          "requiredFields": [
+            "protocol",
+            "assessment",
+            "evidence",
+            "limitation",
+            "receipt_id"
+          ]
+        },
+        "id": "public_compatibility_receipt",
+        "inputModes": [
+          "application/json"
+        ],
+        "inputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "target": {
+              "oneOf": [
+                {
+                  "format": "uri",
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            },
+            "task": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "task"
+          ],
+          "type": "object"
+        },
+        "name": "Public compatibility receipt",
+        "outputModes": [
+          "application/json"
+        ],
+        "outputSchema": {
+          "additionalProperties": true,
+          "properties": {
+            "assessment": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "string"
+            },
+            "limitation": {
+              "type": "string"
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "receipt_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "protocol",
+            "assessment",
+            "evidence",
+            "limitation",
+            "receipt_id"
+          ],
+          "type": "object"
+        },
+        "tags": [
+          "compatibility",
+          "receipt",
+          "read-only"
+        ]
+      }
+    ],
+    "supportedInterfaces": [
+      {
+        "protocolBinding": "JSONRPC",
+        "protocolVersion": "1.0",
+        "url": "https://www.gaipagents.com/a2a/integration-protocol/"
+      }
+    ],
+    "url": "https://www.gaipagents.com/a2a/integration-protocol/",
+    "version": "0.15.0"
+  }
+}
