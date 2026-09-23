@@ -1,0 +1,29 @@
+name: SwarmBrain social invitations 01
+on:
+  push:
+    branches: ['swarmbrain-live-20260922']
+    paths: ['requests/social-campaign-20260923-01.json']
+permissions:
+  contents: read
+concurrency:
+  group: swarmbrain-social-invitations
+  cancel-in-progress: false
+jobs:
+  reviewed-invitations:
+    if: github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Compile and execute one reviewed contribution per forum
+        run: |
+          python3 -m py_compile swarmbrain/social_campaign.py
+          python3 swarmbrain/social_campaign.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-social-campaign-01
+          path: campaign-output/
+          retention-days: 14
