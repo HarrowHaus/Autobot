@@ -1,0 +1,61 @@
+name: SwarmBrain build nested groups
+on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths: ['.github/workflows/swarmbrain-build-groups.yml']
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-peer-state
+  cancel-in-progress: false
+jobs:
+  build-and-question:
+    if: github.run_number == 1 && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    env:
+      STATE_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Test group logic before live execution
+        run: python3 -m unittest discover -s tests -v
+      - name: Build the group graph and ask the real reasoning peers
+        run: python3 swarmbrain/bootstrap_groups.py
+      - name: Link the new group interface from the existing README
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('README.md');text=p.read_text()
+          marker='## Overview\n'
+          note='\n> **Nested groups are now available.** Ask one group or a group of groups, retain each agent\'s contribution, and request a combined answer. [Group guide](docs/NESTED-GROUPS.md) · [Live group results](reports/NESTED-GROUP-RESULTS.md). The earlier seven-peer figures below remain a dated milestone.\n'
+          if 'Nested groups are now available.' not in text and marker in text:
+            p.write_text(text.replace(marker,marker+note,1))
+      - name: Preserve all real group evidence and state
+        if: always()
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data reports README.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Create nested agent groups and retain the live multi-peer answer [skip ci]'
+            git push origin "HEAD:${STATE_BRANCH}"
+          fi
+      - name: Package the tracked source and saved network
+        if: success()
+        run: |
+          mkdir -p nested-group-package
+          git archive --format=zip --output=nested-group-package/SwarmBrain-Nested-Groups.zip HEAD
+          cp reports/NESTED-GROUP-RESULTS.md nested-group-package/SwarmBrain-Group-Results.md
+          sha256sum nested-group-package/SwarmBrain-Nested-Groups.zip > nested-group-package/SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: swarmbrain-nested-groups
+          path: |
+            nested-group-package/
+            reports/NESTED-GROUP-RESULTS.json
+            reports/group-runs/
+            data/groups.json
+          retention-days: 14
