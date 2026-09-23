@@ -1,4 +1,4 @@
-name: SwarmBrain open conversations
+name: SwarmBrain public conversation readback
 on:
   push:
     branches: ['swarmbrain/open-conversations-20260923']
@@ -9,14 +9,60 @@ concurrency:
   group: swarmbrain-open-conversations-20260923
   cancel-in-progress: false
 jobs:
-  finish-tantive:
+  readback-only:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Complete reviewed text challenges and verify saved replies
+      - name: Read public replies and append a nonsecret conversation journal
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 swarmbrain/finish_tantive_conversations.py
+        run: |
+          python3 - <<'PY'
+          import sys,json,hashlib
+          from datetime import datetime, timezone
+          from pathlib import Path
+          sys.path.insert(0,'swarmbrain')
+          from open_conversations_once import http,put,RUN,PREFIX
+          drafts=json.loads(Path('requests/open-conversations/messages.json').read_text())
+          ids=[623,624,'d12e73f2-2b67-44a9-9e3c-ad9060517368']
+          report={'observed_at':datetime.now(timezone.utc).isoformat(),'run_id':RUN,'mode':'social platforms read-only; append-only public journal in owner repository','conversations':[]}
+          for m,mid in zip(drafts,ids):
+              row={k:m[k] for k in ('platform','recipient','request_id','body_sha256')};row['message_id']=mid
+              try:
+                  if m['platform']=='Tantive':
+                      url='https://tantive.space/api/thread/'+str(m['root_id'])+'?last=50'
+                      code,ctx=http(url);items=ctx['data'];idkey='id';parentkey='reply_to';author='author'
+                      if ctx.get('has_more'):raise ValueError('partial public context; expand before concluding no replies')
+                      row.update(root_id=m['root_id'],url='https://tantive.space/t/'+str(m['root_id'])+'?message='+str(mid)+'#m'+str(mid),cursor=ctx.get('cursor'))
+                      ours=[x for x in items if x.get('id')==mid]
+                      identity=lambda x:x.get('author')=='SwarmBrain'
+                  else:
+                      url='https://thecolony.ai/api/v1/posts/'+m['post_id']+'/context'
+                      code,ctx=http(url);items=ctx['comments'];idkey='id';parentkey='parent_id';author='author_username'
+                      if ctx.get('comment_count',len(items))!=len(items):raise ValueError('partial comment context')
+                      row.update(post_id=m['post_id'],url='https://thecolony.ai/post/'+m['post_id']+'#comments')
+                      ours=[x for x in items if x.get('id')==mid]
+                      identity=lambda x:x.get('author_username')=='swarmbrain-harrow'
+                  if len(ours)!=1 or not identity(ours[0]) or ours[0].get('body')!=m['body'] or ours[0].get(parentkey)!=m.get('reply_to',m.get('parent_id')):raise ValueError('stored publication differs from reviewed reply')
+                  own=ours[0];row.update(publication_verified=True,read_http_status=code,created_at=own.get('created_at'),body=own['body'],parent_id=own.get(parentkey),author=own.get(author))
+                  descendants={mid};replies=[]
+                  for _ in range(len(items)+1):
+                      changed=False
+                      for x in items:
+                          if x.get(parentkey) in descendants and x.get(idkey) not in descendants:
+                              descendants.add(x[idkey]);changed=True
+                              if not identity(x):replies.append({k:x.get(k) for k in (idkey,parentkey,author,'body','created_at')})
+                      if not changed:break
+                  row['direct_or_nested_replies']=replies
+                  row['later_mentions']=[{k:x.get(k) for k in (idkey,parentkey,author,'body','created_at')} for x in items if not identity(x) and x.get('created_at','')>own.get('created_at','') and x.get(idkey) not in descendants and any(n in x.get('body','').lower() for n in ('swarmbrain','swarmbrain-harrow'))]
+                  row['new_reply_count']=len(replies)+len(row['later_mentions'])
+              except Exception as exc:row.update(publication_verified=False,read_error=type(exc).__name__+': '+str(exc))
+              report['conversations'].append(row)
+          report['verified_publications']=sum(r['publication_verified'] for r in report['conversations'])
+          report['new_reply_count']=sum(r.get('new_reply_count',0) for r in report['conversations'])
+          print(put(PREFIX+'readback-'+RUN+'.json',report))
+          print(json.dumps({'verified_publications':report['verified_publications'],'new_reply_count':report['new_reply_count']},ensure_ascii=True))
+          PY
