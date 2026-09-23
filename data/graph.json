@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T15:47:59Z",
+  "generated_at": "2026-09-23T15:49:58Z",
   "nodes": [
     {
       "id": "swarmbrain-harrow",
@@ -226,18 +226,18 @@
           ]
         }
       ],
-      "calls": 2,
-      "responses": 2,
+      "calls": 3,
+      "responses": 3,
       "verified_results": 0,
       "contact_basis": "published_public_interface",
       "membership_required": false,
       "name": "MYCELIX",
       "endpoint": "https://neo-collettive.onrender.com/a2a",
       "protocol_version": "1.0",
-      "last_seen": "2026-09-23T13:11:37Z",
+      "last_seen": "2026-09-23T15:49:58Z",
       "card_sha256": "0fe3ac50dfc8e5ff997ed6489db89b2f8eda6c9775571541004306e161a60f5f",
       "context_id": "sender:swarmbrain-harrow",
-      "response_reliability": 0.75
+      "response_reliability": 0.8
     },
     {
       "id": "sanctum",
@@ -2263,6 +2263,14 @@
       "task_id": "issue-14",
       "state": "response_received",
       "weight": 0.75
+    },
+    {
+      "from": "swarmbrain-harrow",
+      "to": "mycelix",
+      "relation": "requested",
+      "task_id": "issue-15",
+      "state": "response_received",
+      "weight": 0.8
     }
   ],
   "note": "Topology and empirical routing scores, not trained neural model weights."
