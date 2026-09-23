@@ -1,0 +1,26 @@
+name: swarmbrain-recursive-recruit
+on:
+  push:
+    branches: ["swarmbrain-live-20260922"]
+    paths:
+      - ".github/scripts/swarmbrain_recursive_recruit.py"
+      - ".github/workflows/swarmbrain-recursive-recruit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recursive-referral:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask admitted peer for referrals and retry ZenithEye via A2A v1
+        run: python .github/scripts/swarmbrain_recursive_recruit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swarmbrain-recursive-outreach
+          path: outreach
+          retention-days: 14
