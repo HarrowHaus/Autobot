@@ -2,6 +2,8 @@
 import json, os, re, time, hashlib, ssl
 from pathlib import Path
 from urllib import request, parse, error
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from urllib.parse import urlparse
 
 UA="SwarmBrain/0.1 (+public-agent-discovery; github.com/HarrowHaus)"
 CTX=ssl.create_default_context()
@@ -43,12 +45,14 @@ def sid(prefix,s): return prefix+":"+hashlib.sha256(s.encode()).hexdigest()[:20]
 def norm(x,source,protocol="a2a"):
     ident=str(x.get("identifier") or x.get("package") or x.get("id") or x.get("slug") or x.get("name") or "unknown")
     name=str(x.get("display_name") or x.get("displayName") or x.get("name") or ident)
-    card=x.get("manifest_url") or x.get("manifestUrl") or x.get("agent_card_url") or x.get("agentCardUrl") or x.get("card_url")
-    endpoint=x.get("url") or x.get("endpoint") or x.get("openapi_url") or x.get("openapiUrl")
+    eps=x.get("endpoints") if isinstance(x.get("endpoints"),dict) else {}
+    card=x.get("manifest_url") or x.get("manifestUrl") or x.get("agent_card_url") or x.get("agentCardUrl") or x.get("card_url") or eps.get("agent_card") or eps.get("card")
+    endpoint=x.get("url") or x.get("endpoint") or x.get("openapi_url") or x.get("openapiUrl") or eps.get("a2a") or eps.get("anp") or eps.get("api") or eps.get("mcp") or eps.get("site")
     skills=[]
-    for s in x.get("skills") or []:
-        skills.append(str((s.get("id") or s.get("name")) if isinstance(s,dict) else s))
-    return {"id":sid("agent",source+"|"+ident+"|"+str(card or endpoint or name)),"name":name[:500],"description":str(x.get("description") or x.get("summary") or "")[:5000],"identifier":ident[:1000],"protocol":protocol,"source":source,"card_url":card,"endpoint":endpoint,"skills":skills[:100],"verified":x.get("verified")}
+    for sk in x.get("skills") or []:
+        skills.append(str((sk.get("id") or sk.get("name")) if isinstance(sk,dict) else sk))
+    protocols=x.get("protocols") if isinstance(x.get("protocols"),list) else ([protocol] if protocol else [])
+    return {"id":sid("agent",source+"|"+ident+"|"+str(card or endpoint or name)),"name":name[:500],"description":str(x.get("description") or x.get("summary") or "")[:5000],"identifier":ident[:1000],"protocol":protocol,"protocols":protocols[:30],"source":source,"card_url":card,"endpoint":endpoint,"endpoints":eps,"skills":skills[:100],"tags":(x.get("tags") or [])[:100] if isinstance(x.get("tags"),list) else [],"specialty":x.get("specialty"),"country":x.get("country"),"claimed":x.get("claimed"),"listing_source":x.get("source"),"verified":x.get("verified")}
 
 agents=[]
 
@@ -63,26 +67,45 @@ for url in [
     if st==200 and isinstance(d,dict):
         a=norm(d,"well-known-seed","a2a"); a["card_url"]=url; agents.append(a)
 
-# allagents: anonymous, 10/page, follow until next is null.
-seen=set()
-for page in range(200):
+# allagents: anonymous, 10/page, then resolve every individual card in parallel.
+seen=set(); allagent_summaries=[]
+for page in range(300):
     st,d=req("https://allagents.app/agents?"+parse.urlencode({"page":page}))
     xs=arr(d); sig=hashlib.sha256(json.dumps(xs,sort_keys=True,default=str).encode()).hexdigest()
-    LOG.append({"source":"allagents","page":page,"status":st,"count":len(xs)})
+    LOG.append({"source":"allagents-pages","page":page,"status":st,"count":len(xs)})
     if st!=200 or not xs or sig in seen: break
-    seen.add(sig); agents += [norm(x,"allagents.app","a2a-directory") for x in xs]
+    seen.add(sig); allagent_summaries.extend(xs)
     if isinstance(d,dict) and d.get("next") is None: break
-    time.sleep(.04)
+    time.sleep(.02)
 
-# Global A2A public read API. Try page+limit; stop if API ignores page and repeats.
-seen=set()
-for page in range(100):
-    st,d=req("https://api.a2a-registry.org/public/agents?"+parse.urlencode({"page":page,"limit":100}))
-    xs=arr(d); sig=hashlib.sha256(json.dumps(xs,sort_keys=True,default=str).encode()).hexdigest()
-    LOG.append({"source":"a2a-registry","page":page,"status":st,"count":len(xs)})
-    if st!=200 or not xs or sig in seen: break
-    seen.add(sig); agents += [norm(x,"a2a-registry.org","a2a") for x in xs]
-    time.sleep(.04)
+def resolve_allagents(x):
+    slug=str(x.get("slug") or "").strip()
+    merged=dict(x); st=0
+    if slug:
+        st,d=req("https://allagents.app/agent/"+parse.quote(slug,safe=""))
+        if st==200 and isinstance(d,dict):
+            full=d.get("agent") if isinstance(d.get("agent"),dict) else d
+            if isinstance(full,dict): merged.update(full)
+    a=norm(merged,"allagents.app","a2a-directory")
+    a["directory_record_url"]="https://allagents.app/agent/"+parse.quote(slug,safe="") if slug else None
+    a["directory_resolve_status"]=st
+    return a
+
+resolved=[]
+with ThreadPoolExecutor(max_workers=24) as ex:
+    futs=[ex.submit(resolve_allagents,x) for x in allagent_summaries]
+    for fut in as_completed(futs):
+        try: resolved.append(fut.result())
+        except Exception as e: LOG.append({"source":"allagents-card-error","error":str(e)[:300]})
+agents.extend(resolved)
+LOG.append({"source":"allagents-card-resolution","summaries":len(allagent_summaries),"resolved":len(resolved),"callable":sum(bool(a.get("endpoint")) for a in resolved)})
+
+# Global A2A Registry public read API. Its contract supports keyword/target, not page/limit.
+st,d=req("https://api.a2a-registry.org/public/agents")
+xs=arr(d)
+LOG.append({"source":"a2a-registry","status":st,"count":len(xs)})
+if st==200:
+    agents += [norm(x,"a2a-registry.org","a2a") for x in xs]
 
 # ANP distributed .well-known discovery.
 for domain in ("agent-network-protocol.com","service.agent-network-protocol.com"):
@@ -105,23 +128,23 @@ for a in agents:
     uniq.setdefault(hashlib.sha256(k.encode()).hexdigest(),a)
 agents=list(uniq.values())
 
-# MCP is a separate capability layer, not mislabeled as agents.
+# MCP is a separate capability layer, not mislabeled as agents. Official API caps pages at 100.
 caps=[]; cursor=None; seen_cursor=set()
-for _ in range(100):
-    q={"version":"latest","limit":5000}
+for _ in range(400):
+    q={"version":"latest","limit":100}
     if cursor: q["cursor"]=cursor
     st,d=req("https://registry.modelcontextprotocol.io/v0.1/servers?"+parse.urlencode(q))
     xs=d.get("servers",[]) if isinstance(d,dict) else []
     for raw in xs:
         if not isinstance(raw,dict): continue
-        s=raw.get("server") if isinstance(raw.get("server"),dict) else raw
-        name=s.get("name") or s.get("id") or "unknown"
-        caps.append({"id":sid("mcp",str(name)),"name":name,"description":s.get("description") or "","kind":"capability-server","source":"registry.modelcontextprotocol.io","packages":s.get("packages") or [],"remotes":s.get("remotes") or []})
+        srv=raw.get("server") if isinstance(raw.get("server"),dict) else raw
+        name=srv.get("name") or srv.get("id") or "unknown"
+        caps.append({"id":sid("mcp",str(name)),"name":name,"title":srv.get("title"),"description":srv.get("description") or "","kind":"capability-server","source":"registry.modelcontextprotocol.io","website":srv.get("websiteUrl"),"packages":srv.get("packages") or [],"remotes":srv.get("remotes") or []})
     meta=d.get("metadata",{}) if isinstance(d,dict) else {}
     nxt=meta.get("nextCursor") or meta.get("next_cursor")
     LOG.append({"source":"mcp-registry","status":st,"count":len(xs),"total_so_far":len(caps),"has_next":bool(nxt)})
     if st!=200 or not nxt or str(nxt) in seen_cursor or len(caps)>=40000: break
-    seen_cursor.add(str(nxt)); cursor=str(nxt); time.sleep(.04)
+    seen_cursor.add(str(nxt)); cursor=str(nxt); time.sleep(.01)
 
 # One actual opt-in invitation in an agent-native coordination substrate.
 run=os.environ.get("GITHUB_RUN_ID") or str(int(time.time()))
@@ -160,7 +183,7 @@ def dump(name,obj):
     (OUT/name).write_text(json.dumps(obj,indent=2,ensure_ascii=False,sort_keys=True))
 
 dump("agents.json",agents); dump("capability_nodes.json",caps); dump("hubs.json",hubs); dump("recruitment.json",recruit); dump("crawl_log.json",LOG)
-report={"generated_at_unix":int(time.time()),"agent_records":len(agents),"mcp_capability_records":len(caps),"hubs":len(hubs),"recruitment":recruit,
-"notes":["Public A2A/ANP records are agents; MCP servers remain separate capability nodes.","Enrollment requires explicit JOIN SWARMBRAIN; referrals are candidates only.","Federated hubs remain live roots for on-demand discovery."]}
+report={"generated_at_unix":int(time.time()),"agent_records":len(agents),"callable_agent_records":sum(bool(a.get("endpoint")) for a in agents),"resolved_directory_cards":sum(a.get("directory_resolve_status")==200 for a in agents),"mcp_capability_records":len(caps),"hubs":len(hubs),"recruitment":recruit,
+"notes":["Public A2A/ANP records are agents; MCP servers remain separate capability nodes.","Every allagents summary is resolved to its individual public card when reachable.","Enrollment requires explicit JOIN SWARMBRAIN; referrals are candidates only.","Federated hubs remain live roots for on-demand discovery."]}
 dump("report.json",report)
 print(json.dumps(report,indent=2))
