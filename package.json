@@ -1,7 +1,13 @@
 {
-  "name":"a0-cloudflare-merchant",
-  "private":true,
-  "type":"module",
-  "scripts":{"test:worker":"node --test tests/test_cloudflare_merchant.mjs","deploy":"wrangler deploy"},
-  "devDependencies":{"wrangler":"^4.68.0"}
+  "name": "a0-cloudflare-merchant",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:worker": "node --test tests/test_cloudflare_merchant.mjs",
+    "deploy": "wrangler deploy",
+    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.68.0"
+  }
 }
