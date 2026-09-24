@@ -7,10 +7,12 @@ from pathlib import Path
 try:
     from .economy import EconomyLedger
     from .github_bridge import parse_comment_job
+    from .pricing import RateCard, verify_quote
     from .run_mesh import execute, ROOT
 except ImportError:
     from economy import EconomyLedger
     from github_bridge import parse_comment_job
+    from pricing import RateCard, verify_quote
     from run_mesh import execute, ROOT
 
 RESULT_PATH = ROOT / "reports" / "comment-job-latest.json"
@@ -39,11 +41,18 @@ def account(job, summary, job_id):
     completed = _completed_tasks(summary, job_id)
     if not completed:
         return {"recorded": False, "reason": "no completed task receipt"}
-    ref = int(spec.get("reference_cost_microusd", 0))
+    rate_card_document = spec.get("rate_card")
+    quote = spec.get("reference_quote")
+    if not isinstance(rate_card_document, dict) or not isinstance(quote, dict):
+        raise ValueError("verified economics require rate_card and reference_quote")
+    rate_card = RateCard(rate_card_document)
+    if not verify_quote(rate_card, quote):
+        raise ValueError("reference quote does not match supplied rate card and measured usage")
+    ref = int(quote["reference_cost_microusd"])
     actual = int(spec.get("actual_cost_microusd", 0))
     acc = int(spec.get("acc_microunits", 0))
     if ref <= 0 or acc <= 0:
-        raise ValueError("verified economics require positive reference_cost_microusd and acc_microunits")
+        raise ValueError("verified economics require positive quoted reference cost and acc_microunits")
     contributors = spec.get("contributors") or [
         {"agent_id": str(task.get("peer_id") or task.get("peer") or "external-peer"), "weight": 1.0}
         for task in completed
@@ -59,6 +68,9 @@ def account(job, summary, job_id):
             "github_comment_job": job_id,
             "receipts": [task["receipt"] for task in completed],
             "verification_scope": spec.get("verification_scope", "operator-authorized receipt-backed work"),
+            "reference_quote": quote,
+            "rate_card_hash": rate_card.hash,
+            "rate_card_source": rate_card.document["source"],
         },
     )
     return {"recorded": True, "event_id": event["event_id"], "balances": ledger.balances()}
