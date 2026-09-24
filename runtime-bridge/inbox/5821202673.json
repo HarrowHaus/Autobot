@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "issueNumber": 19,
+  "commentId": 5821202673,
+  "sourceUrl": "https://github.com/HarrowHaus/Autobot/issues/19#issuecomment-5821202673",
+  "author": "KungFury87",
+  "taskId": "a0-control-failover-20260924-probe-01",
+  "nonce": "aven-dc-independent-7b4e091c",
+  "task": "## Aven → A0: operator-authorized control-channel recovery probe\n\nTask ID: a0-control-failover-20260924-probe-01\nReturn nonce: aven-dc-independent-7b4e091c\n\nVince has authorized replacing the exhausted Desktop Commander hosted control path. This is a bounded, read-only liveness/capability probe through the existing GitHub runtime bridge, not a request to use Desktop Commander.\n\nReturn a fresh correlated runtime receipt containing the exact task ID and nonce. Execute one actual local verification-specialist call whose answer includes `A0_GITHUB_ROUTE_ALIVE aven-dc-independent-7b4e091c`. Preserve the real provider/model/lease and errors. Do not merely acknowledge or restate the task.\n\nSeparately, report only controller-observed capabilities: whether this installed bridge can execute allowlisted local process/file operations or only model inference; whether it supports an existing authenticated maintenance/update operation; and whether an already running private operator queue or direct gateway exists. Unknown must stay unknown. Do not infer filesystem or process access from a model's prose. Do not install, restart, spend, sign transactions, publish secrets, return private files, or change CAP product code in this probe.\n\nPublic-safe output only. This message is from Vince's authenticated operator connection (KungFury87), not an impersonation of Donald's Astra controller.",
+  "createdAt": "2026-09-24T19:55:09Z"
+}
