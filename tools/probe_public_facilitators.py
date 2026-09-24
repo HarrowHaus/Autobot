@@ -12,6 +12,24 @@ def fetch(url):
     with urllib.request.urlopen(req,timeout=10) as r:
         return r.status, json.loads(r.read().decode("utf-8"))
 
+
+
+def post_json(url,payload):
+    data=json.dumps(payload).encode("utf-8")
+    req=urllib.request.Request(url,data=data,headers={"User-Agent":"A0-facilitator-probe/1","Content-Type":"application/json"},method="POST")
+    try:
+        with urllib.request.urlopen(req,timeout=10) as r:
+            return r.status,r.read().decode("utf-8")[:1000]
+    except urllib.error.HTTPError as e:
+        return e.code,e.read().decode("utf-8")[:1000]
+
+def auth_probe(base):
+    payload={"x402Version":2,"paymentPayload":{},"paymentRequirements":{}}
+    return {
+        "verify": post_json(base+"/verify",payload),
+        "settle": post_json(base+"/settle",payload),
+    }
+
 def supported(base):
     for path in ("/supported","/facilitator/supported"):
         try:
@@ -36,7 +54,7 @@ for base in CANDIDATES:
     row={"base":base,"ok":False}
     try:
         path,data=supported(base)
-        row.update({"supported_path":path,"ok":has_base_v2(data),"advertisement":data})
+        row.update({"supported_path":path,"ok":has_base_v2(data),"advertisement":data,"auth_probe":auth_probe(base)})
     except Exception as e:
         row["error"]=str(e)
     out.append(row)
