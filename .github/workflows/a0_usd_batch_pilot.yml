@@ -1,0 +1,28 @@
+name: A0 direct USD batch pilot evidence
+on:
+  push:
+    branches: ['revenue/usd-batch-pilot-20260924']
+    paths:
+      - 'buyer-deliverables/clawlancer-profile-validator/**'
+      - '.github/workflows/a0_usd_batch_pilot.yml'
+permissions:
+  contents: read
+jobs:
+  test-and-measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install existing declared dependency
+        run: python -m pip install -r buyer-deliverables/clawlancer-profile-validator/requirements.txt
+      - name: Preserve original 32 tests and run 18 batch tests
+        working-directory: buyer-deliverables/clawlancer-profile-validator
+        run: python -m unittest -v
+      - name: Produce synthetic control report and measurements
+        working-directory: buyer-deliverables/clawlancer-profile-validator
+        run: python benchmark_batch.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a0-batch-pilot-measurements
+          path: buyer-deliverables/clawlancer-profile-validator/demo-output
+          retention-days: 7
