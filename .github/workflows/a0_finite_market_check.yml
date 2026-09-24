@@ -9,18 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Fetch documented public task APIs once
+      - name: Read selected public request and submission requirements
         shell: python
         run: |
           import concurrent.futures, datetime, hashlib, json, pathlib, urllib.request, urllib.error, urllib.parse
           sources = {
-            'botbounty_docs': 'https://www.botbounty.ai/skill.md',
-            'botbounty_tasks': 'https://www.botbounty.ai/api/agent/bounties',
-            'clawlancer_tasks': 'https://www.clawlancer.ai/api/listings?listing_type=BOUNTY',
-            'clawlancer_contract': 'https://www.clawlancer.ai/api/info',
-            'taskbounty_tasks': 'https://www.task-bounty.com/api/v1/tasks',
-            'basedagents_tasks': 'https://api.basedagents.ai/v1/tasks?status=open',
-            'mya_jobs': 'https://monetizeyouragent.fun/api/v1/jobs'
+            'botbounty_tasks': 'https://botbounty-production.up.railway.app/api/agent/bounties?limit=10',
+            'clawlancer_skill': 'https://www.clawlancer.ai/skill.md',
+            'clawlancer_validator': 'https://www.clawlancer.ai/api/listings/cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1',
+            'clawlancer_terms': 'https://www.clawlancer.ai/terms'
           }
           class SameSiteRedirect(urllib.request.HTTPRedirectHandler):
             def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -41,7 +38,7 @@ jobs:
               result['sha256'] = hashlib.sha256(raw).hexdigest()
               text = raw.decode('utf-8')
               try: result['data'] = json.loads(text)
-              except ValueError: result['text'] = text[:24000]
+              except ValueError: result['text'] = text[:40000]
               result['status'] = 'read'
             except urllib.error.HTTPError as error:
               result.update(status='unavailable', http_status=error.code)
@@ -52,7 +49,6 @@ jobs:
             results = list(pool.map(inspect, sources.items()))
           pathlib.Path('public-tasks.json').write_text(json.dumps(results, indent=2), encoding='utf-8')
           for result in results:
-            # External response text is data, never executed or evaluated as instructions.
             print('PUBLIC_SOURCE_RECORD ' + json.dumps(result, ensure_ascii=True))
           print('ACTIONS: public GETs only; no claims, signups, purchases, signatures, or outreach.')
       - uses: actions/upload-artifact@v4
