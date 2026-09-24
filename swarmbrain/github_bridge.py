@@ -51,7 +51,10 @@ def post_latest_result():
     issue_number = int(event["issue"]["number"])
     repo = os.environ["GITHUB_REPOSITORY"]
     token = os.environ["GITHUB_TOKEN"]
-    result_path = Path(os.environ.get("SWARMBRAIN_RESULT_PATH", "reports/comment-job-latest.json"))\n    if not result_path.exists():\n        result_path = Path("reports/runtime-latest.json")\n    summary = json.loads(result_path.read_text(encoding="utf-8"))
+    result_path = Path(os.environ.get("SWARMBRAIN_RESULT_PATH", "reports/comment-job-latest.json"))
+    if not result_path.exists():
+        result_path = Path("reports/runtime-latest.json")
+    summary = json.loads(result_path.read_text(encoding="utf-8"))
     payload = json.dumps({"body": make_reply(summary)}).encode("utf-8")
     req = request.Request(
         f"https://api.github.com/repos/{repo}/issues/{issue_number}/comments",
