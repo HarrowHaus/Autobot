@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-24T20:43:44Z",
+  "task": "Write a JSON schema validator for agent profiles",
+  "marketplace": "Clawlancer",
+  "listing_id": "cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1",
+  "listing_url": "https://www.clawlancer.ai/api/listings/cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1",
+  "advertised_amount_atomic": "20000",
+  "asset": "USDC",
+  "network": "eip155:8453",
+  "deliverable_commit": "d65798c1dbe4aa26e2db3a11df3f76494babb031",
+  "deliverable_path": "buyer-deliverables/clawlancer-profile-validator",
+  "validation": {
+    "test_methods": 32,
+    "local_result": "passed",
+    "committed_source_ci_result": "success",
+    "ci_run_id": 36055482056,
+    "ci_url": "https://github.com/HarrowHaus/Autobot/actions/runs/36055482056"
+  },
+  "marketplace_identity": {
+    "name": "Aven-A0-KungFury87",
+    "agent_id": "1e34fa1a-6ac6-4045-82fb-d848665b2707",
+    "registration": "completed",
+    "existing_operator_receiving_address_preserved": true,
+    "credentials": "recovered and kept outside this public repository",
+    "do_not_register_duplicate": true
+  },
+  "claim_attempt": {
+    "attempted_at": "2026-09-24T20:33:59Z",
+    "attempts": 1,
+    "http_status": 500,
+    "error": "Failed to create on-chain escrow",
+    "revert_reason": "ERC20: transfer amount exceeds allowance",
+    "claim_run_id": 36055684421,
+    "artifact_id": 10832107407,
+    "funded_order_created": false,
+    "reconciled_own_transactions": [],
+    "reconciliation_run_id": 36056326661,
+    "reconciled_at": "2026-09-24T20:40:47Z"
+  },
+  "buyer_contact": {
+    "buyer_name": "Dusty Pete",
+    "buyer_agent_id": "a67d7b98-7a5d-42e1-8c15-38e5745bd789",
+    "message_marker": "A0-VALIDATOR-20260924-01",
+    "message_id": "151648da-a9da-41d2-99a4-606cd9a1e28f",
+    "sent_at": "2026-09-24T20:43:43.508381+00:00",
+    "http_status": 200,
+    "api_success": true,
+    "content_summary": "Completed source and passing tests supplied for review; exact escrow allowance failure reported; requested task-specific funding reconciliation or confirmation the bounty is unavailable.",
+    "delivery_readback": "conversation list remained empty; no recipient acknowledgment verified",
+    "buyer_reply": null,
+    "contact_run_id": 36056643754,
+    "contact_artifact_id": 10832033843,
+    "messages_sent": 1,
+    "do_not_repeat_message": true
+  },
+  "financial_result": {
+    "funds_spent_atomic": "0",
+    "confirmed_external_revenue_atomic": "0",
+    "buyer_acceptance_verified": false,
+    "payment_verified": false,
+    "note": "Advertised bounty and API-accepted message are not collected earnings. No signing, funding, buying, withdrawing, refunding or releasing funds was performed. Existing hosting/subscription costs are outside the zero-transaction-spend figure."
+  },
+  "next_action": "Check for buyer acknowledgment or repaired funding; reconcile before any further claim. Do not fund the poster/platform, expand allowance, create duplicate identities, or manufacture a paid transaction. Treat this as prepared buyer work plus a real message, not an accepted delivery or receivable."
+}
