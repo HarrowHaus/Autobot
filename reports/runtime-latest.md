@@ -1,15 +1,15 @@
 # SwarmBrain live peer run
 
-Generated: 2026-09-24T03:41:29Z
+Generated: 2026-09-24T12:56:21Z
 
 {
   "registered_peers": 19,
   "connected_peers": 13,
-  "results_received": 29,
+  "results_received": 30,
   "verified_task_results": 4,
-  "run_key": "comment-5807133693",
-  "at": "2026-09-24T03:41:29Z",
-  "mode": "route",
+  "run_key": "comment-5814537723",
+  "at": "2026-09-24T12:56:21Z",
+  "mode": "request",
   "background_service": false
 }
 
@@ -71,6 +71,7 @@ Generated: 2026-09-24T03:41:29Z
 - g-96fa7007eca3407639db72463f8674da: response_received; receipt: reports/task-receipts/g-96fa7007eca3407639db72463f8674da.json
 - g-253cb4e96aaba2e80cadf6194ae82524: response_received; receipt: reports/task-receipts/g-253cb4e96aaba2e80cadf6194ae82524.json
 - g-synthesis-62aa36c441fb84d5e63cb4772cc6: response_received; receipt: reports/task-receipts/g-synthesis-62aa36c441fb84d5e63cb4772cc6.json
+- comment-5814537723: response_received; receipt: reports/task-receipts/comment-5814537723.json
 
 ## Limits
 
