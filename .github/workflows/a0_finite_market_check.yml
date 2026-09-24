@@ -4,53 +4,116 @@ on:
     branches: ['revenue/live-market-check-20260924']
     paths: ['.github/workflows/a0_finite_market_check.yml']
 permissions: {}
+concurrency:
+  group: a0-finite-read-only-revenue-check
+  cancel-in-progress: false
 jobs:
   inspect-public-tasks:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Read selected public request and submission requirements
+      - name: Check existing buyer and receiving balance once
         shell: python
         run: |
-          import concurrent.futures, datetime, hashlib, json, pathlib, urllib.request, urllib.error, urllib.parse
-          sources = {
-            'botbounty_tasks': 'https://botbounty-production.up.railway.app/api/agent/bounties?limit=10',
-            'clawlancer_skill': 'https://www.clawlancer.ai/skill.md',
-            'clawlancer_validator': 'https://www.clawlancer.ai/api/listings/cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1',
-            'clawlancer_terms': 'https://www.clawlancer.ai/terms'
-          }
-          class SameSiteRedirect(urllib.request.HTTPRedirectHandler):
-            def redirect_request(self, req, fp, code, msg, headers, newurl):
-              old = urllib.parse.urlsplit(req.full_url)
-              new = urllib.parse.urlsplit(newurl)
-              if new.scheme != 'https' or new.hostname.removeprefix('www.') != old.hostname.removeprefix('www.'):
-                raise ValueError('cross-site redirect not followed')
-              return super().redirect_request(req, fp, code, msg, headers, newurl)
-          def inspect(item):
-            name, url = item
-            result = {'name': name, 'url': url, 'observed_at': datetime.datetime.now(datetime.timezone.utc).isoformat()}
-            try:
-              req = urllib.request.Request(url, headers={'Accept':'application/json, text/markdown;q=0.9, text/plain;q=0.8', 'User-Agent':'A0-Public-Buyer-Check/1'})
-              with urllib.request.build_opener(SameSiteRedirect()).open(req, timeout=20) as response:
-                raw = response.read(1500001)
-                result['http_status'] = response.status
-              if len(raw) > 1500000: raise ValueError('response_too_large')
-              result['sha256'] = hashlib.sha256(raw).hexdigest()
-              text = raw.decode('utf-8')
-              try: result['data'] = json.loads(text)
-              except ValueError: result['text'] = text[:40000]
-              result['status'] = 'read'
-            except urllib.error.HTTPError as error:
-              result.update(status='unavailable', http_status=error.code)
-            except Exception as error:
-              result.update(status='unavailable', error_type=type(error).__name__)
-            return result
+          import concurrent.futures, datetime, hashlib, json, pathlib, re, urllib.request, urllib.error
+          from decimal import Decimal
+          AGENT = '1e34fa1a-6ac6-4045-82fb-d848665b2707'
+          LISTING = 'cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1'
+          PAYEE = '0xa47930496923574a33325b9be28fe84fa8d2b1c6'
+          TOKEN = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+          RPC = 'https://mainnet.base.org'
+          BASE = 'https://www.clawlancer.ai/api'
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *args, **kwargs):
+                  return None
+          def get_json(url, payload=None):
+              req = urllib.request.Request(url, data=None if payload is None else json.dumps(payload).encode(),
+                  headers={'Accept':'application/json', 'Content-Type':'application/json', 'User-Agent':'A0-ReadOnly-Revenue-Check/1'})
+              with urllib.request.build_opener(NoRedirect()).open(req, timeout=15) as response:
+                  raw = response.read(1_000_001)
+              if len(raw)>1_000_000:
+                  raise ValueError('response_too_large')
+              return json.loads(raw), hashlib.sha256(raw).hexdigest()
+          def rpc(method, params):
+              if method not in {'eth_chainId', 'eth_getBlockByNumber', 'eth_call'}:
+                  raise ValueError('non_readonly_method_rejected')
+              response, _ = get_json(RPC, {'jsonrpc':'2.0', 'id':1, 'method':method, 'params':params})
+              if response.get('error') or 'result' not in response:
+                  raise ValueError('rpc_read_unavailable')
+              return response['result']
+          def chain_check():
+              if int(rpc('eth_chainId', []), 16)!=8453:
+                  raise ValueError('wrong_rpc_chain')
+              block = rpc('eth_getBlockByNumber', ['finalized', False])
+              if not isinstance(block,dict) or not re.fullmatch(r'0x[0-9a-fA-F]+',str(block.get('number',''))):
+                  raise ValueError('finalized_block_unavailable')
+              height = block['number']
+              decimals = int(rpc('eth_call', [{'to':TOKEN,'data':'0x313ce567'},height]),16)
+              if decimals!=6:
+                  raise ValueError('unexpected_token_decimals')
+              balance = int(rpc('eth_call',[{'to':TOKEN,'data':'0x70a08231'+'0'*24+PAYEE[2:]},height]),16)
+              check = rpc('eth_getBlockByNumber',[height,False])
+              if check.get('hash')!=block.get('hash'):
+                  raise ValueError('block_changed')
+              return {'network':'eip155:8453','asset':'native_USDC','token':TOKEN,
+                  'finalized_block':int(height,16),'block_hash':block['hash'],
+                  'block_timestamp_utc':datetime.datetime.fromtimestamp(int(block['timestamp'],16),datetime.timezone.utc).isoformat(),
+                  'balance_atomic':str(balance),'balance_usdc':str(Decimal(balance)/1_000_000),
+                  'source':RPC,'revenue_attribution':'not_established_by_a_balance_read',
+                  'note':'One RPC and native USDC only; no other assets, exchange cash balance, lifetime income or buyer payment attribution inferred.'}
+          def market_check(name):
+              if name=='existing_listing':
+                  data,sha=get_json(BASE+'/listings/'+LISTING)
+                  row=data.get('listing')
+                  if not isinstance(row,dict) or row.get('id')!=LISTING:
+                      raise ValueError('listing_shape_unknown')
+                  tx=data.get('transaction')
+                  return {'source':BASE+'/listings/'+LISTING,'response_sha256':sha,'listing_id':LISTING,
+                      'active':row.get('is_active'),'price_atomic':str(row.get('price_wei')),
+                      'currency':row.get('currency'),'visible_transaction_id':tx.get('id') if isinstance(tx,dict) else None,
+                      'funding_independently_verified':False,'note':'Public unauthenticated view may omit account-specific transaction state.'}
+              if name=='existing_conversation':
+                  data,sha=get_json(BASE+'/messages?agent_id='+AGENT)
+                  conv=data.get('conversations')
+                  if data.get('agent_id')!=AGENT or not isinstance(conv,list):
+                      raise ValueError('conversation_shape_unknown')
+                  return {'source':BASE+'/messages?agent_id='+AGENT,'response_sha256':sha,
+                      'visible_conversation_count':len(conv),'public_read_only':True,
+                      'recipient_acknowledgment_verified':False,
+                      'note':'No duplicate message sent. Absence from public view alone is not proof of no private reply.'}
+              data,sha=get_json(BASE+'/listings?listing_type=BOUNTY&sort=expensive&limit=20')
+              rows=data.get('listings')
+              if not isinstance(rows,list):raise ValueError('listing_collection_shape_unknown')
+              candidates=[]
+              for row in rows[:20]:
+                  price=row.get('price_wei')
+                  if row.get('currency')!='USDC' or not str(price).isdigit() or row.get('is_active') is not True:
+                      continue
+                  if str(row.get('title','')).lower().startswith('welcome to'):
+                      continue
+                  candidates.append({'id':row.get('id'),'title':str(row.get('title',''))[:250],
+                      'description':str(row.get('description',''))[:1200],
+                      'advertised_usdc':str(Decimal(str(price))/1_000_000),
+                      'poster_agent_id':row.get('agent_id'),'created_at':row.get('created_at'),
+                      'funding_independently_verified':False})
+              return {'source':BASE+'/listings?listing_type=BOUNTY&sort=expensive&limit=20',
+                  'response_sha256':sha,'bounded_rows_examined':min(20,len(rows)),'candidates':candidates,
+                  'claims':0,'note':'Advertised budgets only; no reward or escrow proof inferred.'}
+          def run(name):
+              row={'check':name,'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+              try:
+                  row.update(status='read',result=chain_check() if name=='native_usdc_balance' else market_check(name))
+              except urllib.error.HTTPError as e:
+                  row.update(status='unavailable',http_status=e.code)
+              except Exception as e:
+                  row.update(status='unavailable',error_type=type(e).__name__)
+              return row
           with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-            results = list(pool.map(inspect, sources.items()))
-          pathlib.Path('public-tasks.json').write_text(json.dumps(results, indent=2), encoding='utf-8')
-          for result in results:
-            print('PUBLIC_SOURCE_RECORD ' + json.dumps(result, ensure_ascii=True))
-          print('ACTIONS: public GETs only; no claims, signups, purchases, signatures, or outreach.')
+              checks=list(pool.map(run,['existing_listing','existing_conversation','native_usdc_balance','other_public_work']))
+          result={'checks':checks,'paid_calls':0,'claims':0,'messages_sent':0,'wallet_transactions_signed':0,
+              'status':'ok' if all(row['status']=='read' for row in checks) else 'degraded'}
+          pathlib.Path('public-tasks.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+          print('A0_READONLY_REVENUE_RESULT '+json.dumps(result,ensure_ascii=True))
       - uses: actions/upload-artifact@v4
         if: always()
         with:
