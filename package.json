@@ -1,0 +1,7 @@
+{
+  "name":"a0-cloudflare-merchant",
+  "private":true,
+  "type":"module",
+  "scripts":{"test:worker":"node --test tests/test_cloudflare_merchant.mjs","deploy":"wrangler deploy"},
+  "devDependencies":{"wrangler":"^4.68.0"}
+}
