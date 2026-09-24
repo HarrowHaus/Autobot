@@ -1,0 +1,22 @@
+name: Create public callback
+on:
+  push:
+    paths:
+      - '.github/workflows/a0_create_public_callback.yml'
+permissions:
+  contents: read
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create anonymous callback
+        shell: bash
+        run: |
+          set -euo pipefail
+          response=$(curl -fsS -X POST https://webhook.site/token)
+          python - <<'PY' "$response"
+          import json,sys
+          x=json.loads(sys.argv[1])
+          print("CALLBACK_UUID="+x["uuid"])
+          print("CALLBACK_URL=https://webhook.site/"+x["uuid"])
+          PY
