@@ -1,0 +1,59 @@
+name: A0 direct USDC settlement watcher
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: a0-direct-usdc-settlement
+  cancel-in-progress: false
+
+jobs:
+  settle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - name: Verify Base transfers and fulfill paid routes
+        run: python3 -m swarmbrain.direct_usdc scan --orders-dir direct-usdc/orders --pay-to "$A0_PAY_TO" > scan.json
+      - name: Persist settlement receipts
+        run: |
+          git config user.name 'A0 Direct USDC'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add direct-usdc/orders
+          if ! git diff --cached --quiet; then
+            git commit -m 'Reconcile direct Base USDC settlements [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
+      - name: Publish fulfilled results
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs=require('fs');
+            const scan=JSON.parse(fs.readFileSync('scan.json','utf8'));
+            for(const o of scan.fulfilled||[]){
+              const body=[
+                'A0 paid route fulfilled',
+                '',
+                'Order: '+o.order_id,
+                'Confirmed payment: '+o.amount_usdc+' USDC on Base',
+                'Transaction: '+o.settlement.transaction,
+                'Receipt hash: '+o.receipt_hash,
+                '',
+                'Result:',
+                '```json',
+                JSON.stringify(o.result,null,2).slice(0,50000),
+                '```'
+              ].join('\n');
+              await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:Number(o.issue_number),body});
+            }
