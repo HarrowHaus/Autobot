@@ -28,7 +28,7 @@ class GitHubBridgeTests(unittest.TestCase):
             parse_comment_job(self.event(body='{"mode":"route"}'))
 
     def test_reply_contains_persisted_result(self):
-        text = make_reply({"job_id":"x","generated_at":"now","job_result":{"routes":[]}})
+        text = make_reply({"job_id":"x","generated_at":"now","job_result":{"mode":"route","routes":[]}})
         self.assertIn("SwarmBrain automatic result", text)
         self.assertIn('"routes": []', text)
 
@@ -45,7 +45,7 @@ class GitHubBridgeTests(unittest.TestCase):
             },
             "economics":{"recorded":False,"reason":"none"},
         }
-        reply = github_bridge.make_reply(summary)
+        reply = make_reply(summary)
         self.assertIn('"peer": "p1"', reply)
         self.assertIn('"registered_peers": 19', reply)
         self.assertNotIn("should-not-appear", reply)
