@@ -19,17 +19,24 @@ ECONOMY_PATH = ROOT / "data" / "economy-ledger.json"
 def generated_at():
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
-def _completed_tasks(summary):
+def _completed_tasks(summary, job_id):
+    mode = summary.get("mode")
+    if mode == "request":
+        belongs = lambda task: task.get("id") == job_id
+    elif mode == "bootstrap":
+        belongs = lambda task: str(task.get("id") or "").startswith(job_id + "-")
+    else:
+        belongs = lambda task: False
     return [
         task for task in summary.get("tasks", [])
-        if task.get("state") == "response_received" and task.get("receipt")
+        if belongs(task) and task.get("state") == "response_received" and task.get("receipt")
     ]
 
 def account(job, summary, job_id):
     spec = job.get("economy") or {}
     if not isinstance(spec, dict) or spec.get("verified") is not True:
         return {"recorded": False, "reason": "no operator-authorized verified economics"}
-    completed = _completed_tasks(summary)
+    completed = _completed_tasks(summary, job_id)
     if not completed:
         return {"recorded": False, "reason": "no completed task receipt"}
     ref = int(spec.get("reference_cost_microusd", 0))
