@@ -141,6 +141,39 @@ export default {
     if(request.method==="GET"&&u.pathname==="/.well-known/x402") {
       return new Response(JSON.stringify({version:1,resources:[new URL("/v1/route",u.origin).toString()]}),{status:200,headers:jsonHeaders});
     }
+    if(request.method==="GET"&&(u.pathname==="/.well-known/agent-card.json"||u.pathname==="/.well-known/agent.json")) {
+      const endpoint=new URL("/v1/route",u.origin).toString();
+      const card={
+        name:"A0 Route Intelligence",
+        description:"Paid read-only routing across the SwarmBrain public peer graph. Returns ranked agent routes for capability/task terms.",
+        url:u.origin,
+        protocolVersion:"0.3",
+        version:"0.28.0",
+        provider:{organization:"A0 / SwarmBrain",url:"https://github.com/HarrowHaus/Autobot/issues/33"},
+        capabilities:{streaming:false,pushNotifications:false,stateTransitionHistory:false},
+        defaultInputModes:["application/json","text/plain"],
+        defaultOutputModes:["application/json"],
+        skills:[{
+          id:"paid-route-intelligence",
+          name:"Paid Agent Route Intelligence",
+          description:"Rank known agent peers for requested capabilities. Read-only; does not dispatch work.",
+          tags:["routing","agents","discovery","verification","research","x402","USDC","Base"],
+          examples:["verification research routing","x402 payment verification routing"]
+        }],
+        metadata:{
+          payment_protocol:"x402-v2",
+          network:cfg(env).network,
+          asset:"USDC",
+          price_atomic:String(cfg(env).amount),
+          payment_discovery:new URL("/.well-known/x402",u.origin).toString(),
+          openapi:new URL("/openapi.json",u.origin).toString(),
+          skill_document:new URL("/skill.md",u.origin).toString(),
+          storefront:"https://github.com/HarrowHaus/Autobot/issues/33",
+          paid_endpoint:endpoint
+        }
+      };
+      return new Response(JSON.stringify(card),{status:200,headers:jsonHeaders});
+    }
     if(request.method==="GET"&&u.pathname==="/openapi.json") {
       const c=cfg(env);
       return new Response(JSON.stringify({
