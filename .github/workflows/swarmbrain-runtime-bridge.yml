@@ -59,7 +59,10 @@ jobs:
         run: |
           git config user.name 'SwarmBrain-Harrow'
           git config user.email '285251944+HarrowHaus@users.noreply.github.com'
-          git add -- data/mesh-state.json data/economy-ledger.json reports/runtime-latest.json reports/runtime-latest.md reports/comment-job-latest.json
+          git add -- data/mesh-state.json reports/runtime-latest.json reports/runtime-latest.md reports/comment-job-latest.json
+          if [ -f data/economy-ledger.json ]; then
+            git add -- data/economy-ledger.json
+          fi
           git diff --cached --check
           if ! git diff --cached --quiet; then
             git commit -m "Persist autonomous SwarmBrain issue job [skip ci]"
