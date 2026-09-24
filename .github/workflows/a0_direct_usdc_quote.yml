@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   quote:
-    if: github.event.issue.number == 19 && startsWith(github.event.comment.body, 'SwarmBrain paid route:')
+    if: github.event.issue.number == 33 && startsWith(github.event.comment.body, 'SwarmBrain paid route:')
     runs-on: ubuntu-latest
     env:
       A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
