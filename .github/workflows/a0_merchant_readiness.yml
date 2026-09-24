@@ -1,0 +1,51 @@
+name: A0 merchant readiness
+
+on:
+  push:
+    paths:
+      - 'swarmbrain/economy.py'
+      - 'swarmbrain/x402.py'
+      - 'swarmbrain/merchant.py'
+      - 'swarmbrain/merchant_server.py'
+      - 'tests/test_economy.py'
+      - 'tests/test_x402.py'
+      - 'tests/test_merchant.py'
+      - 'tests/test_merchant_server.py'
+      - 'Dockerfile.merchant'
+      - 'deploy/**'
+      - '.github/workflows/a0_merchant_readiness.yml'
+  pull_request:
+    paths:
+      - 'swarmbrain/economy.py'
+      - 'swarmbrain/x402.py'
+      - 'swarmbrain/merchant.py'
+      - 'swarmbrain/merchant_server.py'
+      - 'tests/test_economy.py'
+      - 'tests/test_x402.py'
+      - 'tests/test_merchant.py'
+      - 'tests/test_merchant_server.py'
+      - 'Dockerfile.merchant'
+      - 'deploy/**'
+      - '.github/workflows/a0_merchant_readiness.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run economy and x402 tests
+        run: |
+          python -m unittest             tests.test_economy             tests.test_x402             tests.test_merchant             tests.test_merchant_server
+      - name: Build merchant container
+        run: docker build -f Dockerfile.merchant -t a0-merchant:test .
+      - name: Confirm fail-closed startup without live config
+        run: |
+          set +e
+          docker run --rm a0-merchant:test >/tmp/merchant.out 2>&1
+          code=$?
+          set -e
+          test "$code" -ne 0
+          grep -q "Merchant server is disabled" /tmp/merchant.out
