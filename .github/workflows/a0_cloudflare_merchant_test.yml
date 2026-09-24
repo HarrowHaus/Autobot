@@ -1,0 +1,29 @@
+name: Test Cloudflare merchant
+on:
+  push:
+    paths:
+      - 'cloudflare/**'
+      - 'tests/test_cloudflare_merchant.mjs'
+      - 'package.json'
+      - 'wrangler.jsonc'
+      - '.github/workflows/a0_cloudflare_merchant_test.yml'
+  pull_request:
+    paths:
+      - 'cloudflare/**'
+      - 'tests/test_cloudflare_merchant.mjs'
+      - 'package.json'
+      - 'wrangler.jsonc'
+      - '.github/workflows/a0_cloudflare_merchant_test.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts
+      - run: npm run test:worker
+      - run: npx wrangler deploy --dry-run
