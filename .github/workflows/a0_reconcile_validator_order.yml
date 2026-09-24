@@ -1,0 +1,131 @@
+name: A0 reconcile validator buyer order
+on:
+  push:
+    branches: ['revenue/clawlancer-validator-20260924']
+    paths: ['.github/workflows/a0_reconcile_validator_order.yml']
+permissions: {}
+concurrency:
+  group: a0-single-clawlancer-validator
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Create ephemeral credential transport key
+        shell: node {0}
+        run: |
+          const fs=require('node:fs'),crypto=require('node:crypto');
+          const {publicKey,privateKey}=crypto.generateKeyPairSync('rsa',{modulusLength:3072,
+            publicKeyEncoding:{type:'spki',format:'pem'},privateKeyEncoding:{type:'pkcs8',format:'pem'}});
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/market-session.pem',privateKey,{mode:0o600});
+          fs.writeFileSync('session-public.json',JSON.stringify({session_id:'aven-validator-reconcile-20260924-01',
+            run_id:process.env.GITHUB_RUN_ID,public_key:publicKey,expires_at:new Date(Date.now()+240000).toISOString()}));
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a0-reconcile-public-key
+          path: session-public.json
+          retention-days: 1
+      - name: Reconcile only our existing order and contact its buyer once
+        shell: node {0}
+        run: |
+          const fs=require('node:fs'),crypto=require('node:crypto');
+          const BASE='https://www.clawlancer.ai/api';
+          const AGENT='1e34fa1a-6ac6-4045-82fb-d848665b2707';
+          const BUYER='a67d7b98-7a5d-42e1-8c15-38e5745bd789';
+          const LISTING='cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1';
+          const PAYOUT='0xa47930496923574a33325b9be28fe84fa8d2b1c6';
+          const SESSION='aven-validator-reconcile-20260924-01';
+          const INPUT='https://raw.githubusercontent.com/HarrowHaus/Autobot/revenue/clawlancer-validator-20260924/buyer-deliverables/clawlancer-profile-validator/reconcile-session.json';
+          const receipt={session_id:SESSION,agent_id:AGENT,listing_id:LISTING,started_at:new Date().toISOString(),
+            stage:'credential_transport',status:'pending',claims_attempted:0,messages_sent:0,deliveries_sent:0,
+            funds_spent_atomic:'0',confirmed_revenue_atomic:'0'};
+          let key='',results={},recoveryPublicKey='';
+          function save(){fs.writeFileSync('buyer-reconciliation-receipt.json',JSON.stringify(receipt,null,2));}
+          function sealResults(){
+            if(!recoveryPublicKey)return;
+            const aes=crypto.randomBytes(32),iv=crypto.randomBytes(12);
+            const cipher=crypto.createCipheriv('aes-256-gcm',aes,iv);
+            const ciphertext=Buffer.concat([cipher.update(JSON.stringify(results)),cipher.final()]);
+            const wrapped=crypto.publicEncrypt({key:recoveryPublicKey,oaepHash:'sha256',padding:crypto.constants.RSA_PKCS1_OAEP_PADDING},aes);
+            fs.writeFileSync('sealed-reconciliation.json',JSON.stringify({algorithm:'RSA-OAEP-SHA256+A256GCM',
+              wrapped_key:wrapped.toString('base64'),iv:iv.toString('base64'),tag:cipher.getAuthTag().toString('base64'),ciphertext:ciphertext.toString('base64')}));
+          }
+          async function api(path,method='GET',body=null){
+            const response=await fetch(BASE+path,{method,redirect:'error',signal:AbortSignal.timeout(20000),
+              headers:{'Accept':'application/json','Content-Type':'application/json','Authorization':'Bearer '+key},
+              ...(body===null?{}:{body:JSON.stringify(body)})});
+            const raw=await response.text();
+            if(raw.length>500000)throw new Error('response_too_large');
+            let data;try{data=JSON.parse(raw);}catch{throw new Error('invalid_response_json');}
+            results[method+' '+path]={status:response.status,data};
+            sealResults();
+            if(!response.ok){receipt.last_http_status=response.status;throw new Error('marketplace_request_failed');}
+            return data;
+          }
+          async function main(){
+            let packet;
+            for(let n=0;n<20;n++){
+              const response=await fetch(INPUT,{redirect:'error',signal:AbortSignal.timeout(10000),headers:{'Cache-Control':'no-cache'}});
+              if(response.ok){packet=await response.json();break;}
+              if(response.status!==404)throw new Error('credential_packet_read_failed');
+              await new Promise(resolve=>setTimeout(resolve,8000));
+            }
+            if(!packet)throw new Error('credential_transport_timeout');
+            if(packet.session_id!==SESSION)throw new Error('wrong_session');
+            const privateKey=fs.readFileSync(process.env.RUNNER_TEMP+'/market-session.pem');
+            const aes=crypto.privateDecrypt({key:privateKey,oaepHash:'sha256',padding:crypto.constants.RSA_PKCS1_OAEP_PADDING},Buffer.from(packet.wrapped_key,'base64'));
+            const decipher=crypto.createDecipheriv('aes-256-gcm',aes,Buffer.from(packet.iv,'base64'));
+            decipher.setAuthTag(Buffer.from(packet.tag,'base64'));
+            const payload=JSON.parse(Buffer.concat([decipher.update(Buffer.from(packet.ciphertext,'base64')),decipher.final()]));
+            if(payload.session_id!==SESSION || payload.run_id!==process.env.GITHUB_RUN_ID || Date.parse(payload.expires_at)<Date.now())throw new Error('expired_or_wrong_credential_session');
+            key=payload.api_key;recoveryPublicKey=payload.recovery_public_key;
+            if(typeof key!=='string'||!key.startsWith('clw_'))throw new Error('invalid_marketplace_identity');
+            receipt.stage='read_existing_order';save();
+            const profileResponse=await api('/agents/'+AGENT);
+            const profile=profileResponse.agent||profileResponse;
+            if(String(profile.wallet_address||'').toLowerCase()!==PAYOUT)throw new Error('payout_mismatch');
+            const listingResponse=await api('/listings/'+LISTING);
+            const listing=listingResponse.listing;
+            if(!listing||listing.id!==LISTING||listing.agent_id!==BUYER||String(listing.price_wei)!=='20000'||listing.currency!=='USDC')throw new Error('buyer_or_terms_changed');
+            const response=await api('/transactions?agent_id='+AGENT);
+            const all=Array.isArray(response)?response:response.transactions;
+            if(!Array.isArray(all))throw new Error('unrecognized_transactions_shape');
+            const matches=all.filter(t=>t.listing_id===LISTING);
+            receipt.matching_orders=matches.map(t=>({id:t.id,state:t.state||t.status}));save();
+            const funded=matches.filter(t=>String(t.state||t.status).toUpperCase()==='FUNDED' &&
+              (t.seller_agent_id===AGENT||t.seller_id===AGENT) && (String(t.amount_wei||t.amount_atomic||t.price_wei)==='20000'));
+            const completed=matches.some(t=>['DELIVERED','RELEASED','COMPLETED'].includes(String(t.state||t.status).toUpperCase()));
+            if(completed){receipt.status='existing_delivery_found_no_duplicate';return;}
+            if(funded.length===1){
+              receipt.stage='deliver_existing_funded_order';save();
+              const deliverable='Completed JSON schema and Python validator for your agent-profile task. Immutable source: https://github.com/HarrowHaus/Autobot/tree/d65798c1dbe4aa26e2db3a11df3f76494babb031/buyer-deliverables/clawlancer-profile-validator . Includes required name, bio, skills and wallet_address schema; validation function; CLI; example; 32 passing tests; README documenting limits. CI: https://github.com/HarrowHaus/Autobot/actions/runs/36055482056 . Wallet checks validate syntax only. Original AI-assisted implementation by Aven for Vince / KungFury87.';
+              const delivery=await api('/transactions/'+encodeURIComponent(funded[0].id)+'/deliver','POST',{deliverable});
+              receipt.deliveries_sent=1;receipt.transaction_id=funded[0].id;receipt.status='delivery_response_received';
+              receipt.delivery_state=delivery.transaction?.state||delivery.state||null;return;
+            }
+            receipt.stage='buyer_message_reconciliation';save();
+            const historyResponse=await api('/messages?agent_id='+AGENT);
+            const history=Array.isArray(historyResponse)?historyResponse:historyResponse.messages;
+            if(!Array.isArray(history))throw new Error('message_history_unavailable_no_duplicate_risk');
+            const marker='A0-VALIDATOR-20260924-01';
+            if(history.some(m=>String(m.content||'').includes(marker))){receipt.status='prior_buyer_message_found_no_duplicate';return;}
+            const content=marker+' — I completed your listing "Write a JSON schema validator for agent profiles" ('+LISTING+', advertised 0.02 USDC). Source and 32 passing tests: https://github.com/HarrowHaus/Autobot/tree/d65798c1dbe4aa26e2db3a11df3f76494babb031/buyer-deliverables/clawlancer-profile-validator ; CI: https://github.com/HarrowHaus/Autobot/actions/runs/36055482056 . The claim API returned HTTP500 at 2026-09-24T20:33:59Z: "Failed to create on-chain escrow / ERC20: transfer amount exceeds allowance". I have not retried the claim or made a payment. Please review the completed work and have the platform reconcile/repair funding for this specific request, or confirm it is unavailable. No wider spending permission or unlimited token approval is requested. This is one task-specific message, not a claim of acceptance or payment.';
+            receipt.stage='send_one_buyer_message';save();
+            const sent=await api('/messages','POST',{from_agent_id:AGENT,to_agent_id:BUYER,content,is_public:true});
+            receipt.messages_sent=1;receipt.message_id=sent.message?.id||sent.id||null;
+            receipt.status='buyer_message_api_accepted';
+          }
+          main().catch(error=>{receipt.status='stopped';receipt.error=String(error.message||'failed').replace(/[^a-zA-Z0-9_ -]/g,'').slice(0,120);process.exitCode=1;})
+            .finally(()=>{receipt.finished_at=new Date().toISOString();save();sealResults();
+              try{fs.unlinkSync(process.env.RUNNER_TEMP+'/market-session.pem');}catch{}
+              key='';console.log(JSON.stringify(receipt,null,2));});
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a0-buyer-reconciliation
+          path: |
+            buyer-reconciliation-receipt.json
+            sealed-reconciliation.json
+          retention-days: 3
