@@ -2,7 +2,10 @@
 """Run a finite public-peer task batch; state is preserved by the Actions workflow."""
 import json, os, re, sys
 from pathlib import Path
-from mesh import Mesh, Network, ROOT, now, write_json, parts_of
+try:
+    from .mesh import Mesh, Network, ROOT, now, write_json, parts_of
+except ImportError:
+    from mesh import Mesh, Network, ROOT, now, write_json, parts_of
 
 CATALOG={
  'allagents':('https://allagents.app/.well-known/agent-card.json','directory_agent','discovery','0.3'),
