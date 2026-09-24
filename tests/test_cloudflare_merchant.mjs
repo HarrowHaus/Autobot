@@ -17,3 +17,17 @@ test("rankPeers returns only relevant connected peers",()=>{
   assert.equal(rows.length,1); assert.equal(rows[0].peer,"a");
 });
 test("tokenizer deduplicates",()=>assert.deepEqual(tokenize("Agent agent ROUTING"),["agent","routing"]));
+
+test("worker exposes discovery documents",async()=>{
+  const mod=(await import("../cloudflare/merchant-worker.js")).default;
+  const origin="https://merchant.example";
+  const a=await mod.fetch(new Request(origin+"/.well-known/x402"),{});
+  assert.equal(a.status,200);
+  assert.deepEqual((await a.json()).resources,[origin+"/v1/route"]);
+  const o=await mod.fetch(new Request(origin+"/openapi.json"),{});
+  const doc=await o.json();
+  assert.equal(doc.paths["/v1/route"].post["x-payment-info"].amount,"0.01");
+  const s=await mod.fetch(new Request(origin+"/skill.md"),{});
+  assert.equal(s.status,200);
+  assert.match(await s.text(),/x402 v2/);
+});
