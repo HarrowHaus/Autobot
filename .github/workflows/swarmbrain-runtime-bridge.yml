@@ -118,7 +118,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add direct-usdc/orders
           if ! git diff --cached --quiet; then
-            git commit -m "Create direct USDC quote for comment ${COMMENT_ID} [skip ci]"
+            git commit -m "Create direct USDC quote for comment ${COMMENT_ID}"
             git pull --rebase origin claude/monetizable-project-concepts-b97bv2
             git push origin HEAD:claude/monetizable-project-concepts-b97bv2
           fi

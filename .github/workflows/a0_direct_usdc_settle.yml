@@ -1,6 +1,12 @@
 name: A0 direct USDC settlement watcher
 
 on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - 'direct-usdc/orders/**'
+      - 'swarmbrain/direct_usdc.py'
+      - '.github/workflows/a0_direct_usdc_settle.yml'
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
