@@ -47,3 +47,14 @@ test("worker exposes Agent Card for discovery",async()=>{
     assert.equal(card.metadata.paid_endpoint,origin+"/v1/route");
   }
 });
+
+
+test("worker llms.txt cross-links the public directory listing",async()=>{
+  const mod=(await import("../cloudflare/merchant-worker.js")).default;
+  const r=await mod.fetch(new Request("https://merchant.example/llms.txt"),{});
+  assert.equal(r.status,200);
+  const body=await r.text();
+  assert.match(body,/allagents\.app\/agent\/a0-route-intelligence/);
+  assert.match(body,/Paid endpoint:/);
+  assert.match(body,/0\.01 USDC/);
+});
