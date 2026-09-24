@@ -1,0 +1,35 @@
+test_application_error_not_answer (test_groups.GroupTests.test_application_error_not_answer) ... ok
+test_bad_group_job_cannot_dispatch (test_groups.GroupTests.test_bad_group_job_cannot_dispatch) ... ok
+test_bad_synthesis_type (test_groups.GroupTests.test_bad_synthesis_type) ... ok
+test_budget (test_groups.GroupTests.test_budget) ... ok
+test_changed_request_id (test_groups.GroupTests.test_changed_request_id) ... ok
+test_cycle_rollback (test_groups.GroupTests.test_cycle_rollback) ... ok
+test_duplicate_children (test_groups.GroupTests.test_duplicate_children) ... ok
+test_empty_question (test_groups.GroupTests.test_empty_question) ... ok
+test_export (test_groups.GroupTests.test_export) ... ok
+test_hash_id_stable (test_groups.GroupTests.test_hash_id_stable) ... ok
+test_invalid_budget (test_groups.GroupTests.test_invalid_budget) ... ok
+test_name_collision (test_groups.GroupTests.test_name_collision) ... ok
+test_no_adapter (test_groups.GroupTests.test_no_adapter) ... ok
+test_no_fake_consensus (test_groups.GroupTests.test_no_fake_consensus) ... ok
+test_persistence (test_groups.GroupTests.test_persistence) ... ok
+test_provider_envelope_decoded (test_groups.GroupTests.test_provider_envelope_decoded) ... ok
+test_request_replay (test_groups.GroupTests.test_request_replay) ... ok
+test_shared_peer_called_once (test_groups.GroupTests.test_shared_peer_called_once) ... ok
+test_unavailable (test_groups.GroupTests.test_unavailable) ... ok
+test_unknown_child (test_groups.GroupTests.test_unknown_child) ... ok
+test_direct_message (test_mesh.ProtocolTests.test_direct_message) ... ok
+test_http200_rpcerror (test_mesh.ProtocolTests.test_http200_rpcerror) ... ok
+test_id_mismatch (test_mesh.ProtocolTests.test_id_mismatch) ... ok
+test_input_required (test_mesh.ProtocolTests.test_input_required) ... ok
+test_legacy (test_mesh.ProtocolTests.test_legacy) ... ok
+test_no_random_routing (test_mesh.ProtocolTests.test_no_random_routing) ... ok
+test_parts_nested (test_mesh.ProtocolTests.test_parts_nested) ... ok
+test_pending_not_complete (test_mesh.ProtocolTests.test_pending_not_complete) ... ok
+test_registry_persists (test_mesh.ProtocolTests.test_registry_persists) ... ok
+test_v1 (test_mesh.ProtocolTests.test_v1) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.095s
+
+OK

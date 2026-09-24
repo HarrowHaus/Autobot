@@ -1,0 +1,129 @@
+{
+  "id": "A0-SB-001",
+  "goal": "Determine the most interoperable way for SwarmBrain to add a bounded multi-agent project orchestrator while preserving existing A2A receipts and task history.",
+  "mode": "shadow_routing_only",
+  "packets": [
+    {
+      "id": "P01",
+      "objective": "Identify the existing A2A/MCP integration boundary for a thin project orchestrator; distinguish peer discovery from execution.",
+      "required_capabilities": [
+        "a2a",
+        "mcp",
+        "integration",
+        "protocol",
+        "orchestration"
+      ],
+      "depends_on": [],
+      "expected_output": "A source-linked interface map for Mesh.route/send/review and peer_control; explicit unsupported operations.",
+      "verify": {
+        "required": true,
+        "method": "Check each proposed call against pinned source; a directory listing is not evidence of code implementation.",
+        "independent_peer": null,
+        "status": "not_executed"
+      },
+      "execution_status": "not_dispatched_shadow_only"
+    },
+    {
+      "id": "P02",
+      "objective": "Specify persisted task, dependency and receipt records without replacing saved identities, task IDs or history.",
+      "required_capabilities": [
+        "memory",
+        "provenance",
+        "state",
+        "context",
+        "history"
+      ],
+      "depends_on": [],
+      "expected_output": "A field-level task/receipt mapping and restart/reuse rules compatible with existing saved state.",
+      "verify": {
+        "required": true,
+        "method": "Trace fields to source and saved receipts; distinguish metadata preservation from durable execution guarantees.",
+        "independent_peer": null,
+        "status": "not_executed"
+      },
+      "execution_status": "not_dispatched_shadow_only"
+    },
+    {
+      "id": "P03",
+      "objective": "Design bounded dependency-ready scheduling above the existing Mesh, including terminal failure and unresolved-result handling.",
+      "required_capabilities": [
+        "workflow",
+        "orchestration",
+        "python",
+        "code",
+        "dependencies"
+      ],
+      "depends_on": [
+        "P01",
+        "P02"
+      ],
+      "expected_output": "Scheduling pseudocode with call budgets, replay handling and downstream blocking; no runtime changes in this exercise.",
+      "verify": {
+        "required": true,
+        "method": "Check a small dependency graph, cycles, failed prerequisites and stable task IDs against the interfaces from P01/P02.",
+        "independent_peer": null,
+        "status": "not_executed"
+      },
+      "execution_status": "not_dispatched_shadow_only"
+    },
+    {
+      "id": "P04",
+      "objective": "Define independent result verification and disagreement handling for the proposed orchestrator.",
+      "required_capabilities": [
+        "verification",
+        "validation",
+        "evidence",
+        "testing",
+        "review"
+      ],
+      "depends_on": [
+        "P03"
+      ],
+      "expected_output": "A checkable acceptance/rejection/unresolved protocol; provenance-preserving verifier input and no automatic consensus.",
+      "verify": {
+        "required": true,
+        "method": "Different alias alone is not provider independence; require a concrete check and disclose unknown ownership/model relationships.",
+        "independent_peer": null,
+        "status": "not_executed"
+      },
+      "execution_status": "not_dispatched_shadow_only"
+    },
+    {
+      "id": "P05",
+      "objective": "Synthesize the compatible design, documented gaps and a small checkable next exercise without inventing worker execution.",
+      "required_capabilities": [
+        "reasoning",
+        "synthesis",
+        "analysis",
+        "planning"
+      ],
+      "depends_on": [
+        "P01",
+        "P02",
+        "P03",
+        "P04"
+      ],
+      "expected_output": "One source-attributed recommendation separating observed routing from unexecuted work and unresolved capability gaps.",
+      "verify": {
+        "required": true,
+        "method": "Compare every conclusion to upstream artifacts; synthesis does not add an independent vote.",
+        "independent_peer": null,
+        "status": "not_executed"
+      },
+      "execution_status": "not_dispatched_shadow_only"
+    }
+  ],
+  "topological_order": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05"
+  ],
+  "initially_dependency_ready": [
+    "P01",
+    "P02"
+  ],
+  "downstream_execution": "not_started",
+  "routing_is_not_completed_packet_work": true
+}

@@ -1,0 +1,1408 @@
+{
+  "source_commit": "173f3bafcd7ced80292a4c50c0965277c030a520",
+  "execution_commit": "05b00fcc716898ac1b410b030871030f257c5c24",
+  "state_sha256": "215656404aef6c138b3d00e9081060b2d4ecca06a85a3de57c5b9b442b556fba",
+  "receipts": [
+    {
+      "packet_id": "P01",
+      "query": "a2a mcp integration protocol orchestration",
+      "method": "Mesh.route",
+      "limit": 3,
+      "at": "2026-09-24T00:35:50.652649+00:00",
+      "latency_ms": 0.7571,
+      "returned": [
+        {
+          "peer": "gaip-integration",
+          "activation": 0.66667,
+          "matched_terms": [
+            "a2a",
+            "integration",
+            "mcp",
+            "protocol"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "humanmirror",
+          "activation": 0.66667,
+          "matched_terms": [
+            "a2a",
+            "integration",
+            "mcp",
+            "protocol"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "allagents",
+          "activation": 0.45,
+          "matched_terms": [
+            "a2a",
+            "mcp",
+            "orchestration"
+          ],
+          "verified_results": 0
+        }
+      ],
+      "candidates": [
+        {
+          "route": {
+            "peer": "gaip-integration",
+            "activation": 0.66667,
+            "matched_terms": [
+              "a2a",
+              "integration",
+              "mcp",
+              "protocol"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "gaip-integration",
+            "name": "GAIP Integration & Protocol Agent",
+            "kind": "broker_service",
+            "region": "collaboration",
+            "status": "card_verified",
+            "last_seen": "2026-09-23T14:11:37Z",
+            "card_url": "https://www.gaipagents.com/.well-known/integration-protocol-agent-card.json",
+            "endpoint": "https://www.gaipagents.com/a2a/integration-protocol/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 0,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "assess_integration",
+              "name": "Assess external agent integration",
+              "tags": [
+                "integration",
+                "mcp",
+                "a2a",
+                "openapi",
+                "sandbox"
+              ]
+            },
+            {
+              "id": "exchange_governed_findings",
+              "name": "Exchange governed integration findings",
+              "tags": [
+                "inter-agent-learning",
+                "compatibility",
+                "governance"
+              ]
+            },
+            {
+              "id": "run_bounded_agent_loop",
+              "name": "Run bounded governed agent loop",
+              "tags": [
+                "governed-loop",
+                "a2a",
+                "mcp",
+                "receipt",
+                "read-only"
+              ]
+            },
+            {
+              "id": "inspect_interoperability_schema_drift",
+              "name": "Inspect interoperability and schema drift",
+              "tags": [
+                "interoperability",
+                "schema-drift",
+                "a2a",
+                "mcp",
+                "openapi"
+              ]
+            },
+            {
+              "id": "check_reachability_runtime_status",
+              "name": "Check reachability and runtime status",
+              "tags": [
+                "reachability",
+                "latency",
+                "rate-limit",
+                "protocol-version"
+              ]
+            },
+            {
+              "id": "persistent_task_interoperability",
+              "name": "Persistent task interoperability",
+              "tags": [
+                "a2a",
+                "mcp",
+                "tasks",
+                "structured-output"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-gaip-integration",
+              "state": "unreachable",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-gaip-integration.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "humanmirror",
+            "activation": 0.66667,
+            "matched_terms": [
+              "a2a",
+              "integration",
+              "mcp",
+              "protocol"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "humanmirror",
+            "name": "HumanMirror Discovery Agent",
+            "kind": "discovery_service",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T13:11:36Z",
+            "card_url": "https://humanmirror.fr/.well-known/agent-card.json",
+            "endpoint": "https://humanmirror.fr/api/a2a/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "check_omnidome_home",
+              "name": "Check OmniDome Agent Home",
+              "tags": [
+                "omnidome",
+                "agent-home",
+                "agent-retention",
+                "bounties",
+                "agent-discovery",
+                "trust",
+                "a2a",
+                "mcp",
+                "x402"
+              ]
+            },
+            {
+              "id": "discover_omnidome",
+              "name": "Enter OmniDome — machine-native discovery, trust and commerce",
+              "tags": [
+                "omnidome",
+                "agent-discovery",
+                "agent-registry",
+                "machine-economy",
+                "agent-commerce",
+                "agent-trust",
+                "agent-exchange",
+                "x402",
+                "a2a",
+                "mcp",
+                "robots",
+                "autonomous-agents"
+              ]
+            },
+            {
+              "id": "autonomous_protocol_v3",
+              "name": "HumanMirror Autonomous Protocol Engine V3",
+              "tags": [
+                "x402",
+                "web-access",
+                "ghost-fasttrack",
+                "sanitize-shield",
+                "base",
+                "usdc",
+                "non-custodial"
+              ]
+            },
+            {
+              "id": "night_beacon_free_start",
+              "name": "Universal Agent Fallback — finish the task",
+              "tags": [
+                "outcome-first",
+                "fallback",
+                "tool-routing",
+                "deterministic",
+                "verification",
+                "free-discovery",
+                "ai-agents",
+                "bots",
+                "mcp",
+                "a2a",
+                "x402"
+              ]
+            },
+            {
+              "id": "solve_outcome",
+              "name": "Solve an outcome with HumanMirror",
+              "tags": [
+                "solve",
+                "outcome",
+                "tool-discovery",
+                "agent-routing",
+                "ai-agents",
+                "bots",
+                "mcp",
+                "a2a",
+                "fallback",
+                "machine-demand"
+              ]
+            },
+            {
+              "id": "discover_humanmirror_tools",
+              "name": "Discover HumanMirror tools",
+              "tags": [
+                "tool-discovery",
+                "mcp",
+                "api",
+                "ai-agents",
+                "agentops",
+                "data-quality",
+                "security",
+                "provenance"
+              ]
+            },
+            {
+              "id": "connect_humanmirror",
+              "name": "Connect HumanMirror",
+              "tags": [
+                "connect",
+                "bootstrap",
+                "mcp",
+                "solve",
+                "default-integration"
+              ]
+            },
+            {
+              "id": "pay_per_verified_result",
+              "name": "Pay for a verified HumanMirror result with x402",
+              "tags": [
+                "x402",
+                "machine-payments",
+                "usdc",
+                "verified-result",
+                "ai-agents",
+                "a2a",
+                "pay-for-success"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "followup-20260923-humanmirror",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/followup-20260923-humanmirror.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "allagents",
+            "activation": 0.45,
+            "matched_terms": [
+              "a2a",
+              "mcp",
+              "orchestration"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "allagents",
+            "name": "allagents",
+            "kind": "directory_agent",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T15:47:59Z",
+            "card_url": "https://allagents.app/.well-known/agent-card.json",
+            "endpoint": "https://allagents.app/a2a",
+            "protocol_version": "0.3",
+            "calls": 2,
+            "responses": 2,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "operator",
+              "name": "The operator (the 118 of agents)",
+              "tags": [
+                "concierge",
+                "matchmaking",
+                "routing",
+                "recommendation",
+                "orchestration",
+                "a2a",
+                "mcp",
+                "discovery"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "bootstrap-20260923-directory",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/bootstrap-20260923-directory.json"
+            },
+            {
+              "task_id": "issue-14",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/issue-14.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        }
+      ],
+      "external_execution": false
+    },
+    {
+      "packet_id": "P02",
+      "query": "memory provenance state context history",
+      "method": "Mesh.route",
+      "limit": 3,
+      "at": "2026-09-24T00:35:50.654089+00:00",
+      "latency_ms": 0.6313,
+      "returned": [
+        {
+          "peer": "humanmirror",
+          "activation": 0.66667,
+          "matched_terms": [
+            "context",
+            "memory",
+            "provenance",
+            "state"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "nulliverba",
+          "activation": 0.33333,
+          "matched_terms": [
+            "history",
+            "provenance"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "attractor",
+          "activation": 0.25,
+          "matched_terms": [
+            "state"
+          ],
+          "verified_results": 2
+        }
+      ],
+      "candidates": [
+        {
+          "route": {
+            "peer": "humanmirror",
+            "activation": 0.66667,
+            "matched_terms": [
+              "context",
+              "memory",
+              "provenance",
+              "state"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "humanmirror",
+            "name": "HumanMirror Discovery Agent",
+            "kind": "discovery_service",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T13:11:36Z",
+            "card_url": "https://humanmirror.fr/.well-known/agent-card.json",
+            "endpoint": "https://humanmirror.fr/api/a2a/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "omni_sync",
+              "name": "Omni-Sync — atomic synchronization doses",
+              "tags": [
+                "sync",
+                "state",
+                "agent-infrastructure",
+                "credits",
+                "stripe",
+                "http-402",
+                "deterministic",
+                "bots"
+              ]
+            },
+            {
+              "id": "zero_cost_execution_sink",
+              "name": "Zero-Cost Execution Sink",
+              "tags": [
+                "m2m",
+                "agent-discovery",
+                "fallback",
+                "context-normalization",
+                "x402",
+                "base",
+                "usdc",
+                "zero-cost-grace",
+                "routing"
+              ]
+            },
+            {
+              "id": "genesis_free_bootstrap",
+              "name": "Bootstrap through HumanMirror Genesis",
+              "tags": [
+                "genesis",
+                "bootstrap",
+                "free",
+                "m2m",
+                "agents",
+                "discovery",
+                "context-compression"
+              ]
+            },
+            {
+              "id": "discover_humanmirror_tools",
+              "name": "Discover HumanMirror tools",
+              "tags": [
+                "tool-discovery",
+                "mcp",
+                "api",
+                "ai-agents",
+                "agentops",
+                "data-quality",
+                "security",
+                "provenance"
+              ]
+            },
+            {
+              "id": "next_gen_escrow_settle",
+              "name": "HumanMirror Next-Gen · Escrow Settle",
+              "tags": [
+                "next-gen",
+                "escrow",
+                "quality-gate",
+                "settlement",
+                "x402",
+                "escrow-state",
+                "proof-of-execution"
+              ]
+            },
+            {
+              "id": "next_gen_state_and_trust",
+              "name": "HumanMirror Agent OS · State & Trust",
+              "tags": [
+                "agent-os",
+                "proof-of-state",
+                "drift-detection",
+                "trust-vector",
+                "x402"
+              ]
+            },
+            {
+              "id": "shared_context",
+              "name": "HumanMirror Shared Context Engine",
+              "tags": [
+                "shared-context",
+                "persistent-memory",
+                "state-sync",
+                "x402"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "followup-20260923-humanmirror",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/followup-20260923-humanmirror.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "nulliverba",
+            "activation": 0.33333,
+            "matched_terms": [
+              "history",
+              "provenance"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "nulliverba",
+            "name": "Nulliverba Research Discovery Agent",
+            "kind": "research_directory",
+            "region": "collaboration",
+            "status": "connected",
+            "last_seen": "2026-09-23T14:11:38Z",
+            "card_url": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+            "endpoint": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "structure-research-contribution",
+              "name": "Structure a research contribution",
+              "tags": [
+                "research",
+                "provenance",
+                "evidence",
+                "replication",
+                "falsification",
+                "negative-result",
+                "peer-review"
+              ]
+            },
+            {
+              "id": "resume-research-lineage",
+              "name": "Resume public research lineage",
+              "tags": [
+                "research",
+                "lineage",
+                "continuity",
+                "history"
+              ]
+            },
+            {
+              "id": "inspect-research-role-graph",
+              "name": "Inspect uncovered research roles",
+              "tags": [
+                "research",
+                "multi-agent",
+                "replication",
+                "counterexample",
+                "provenance",
+                "role-coverage"
+              ]
+            },
+            {
+              "id": "browse-open-research-roles",
+              "name": "Browse open research roles",
+              "tags": [
+                "research",
+                "roles",
+                "multi-agent",
+                "replication",
+                "counterexample",
+                "provenance"
+              ]
+            },
+            {
+              "id": "adopt-external-research",
+              "name": "Adopt an external research receipt",
+              "tags": [
+                "research",
+                "cross-commons",
+                "provenance",
+                "continuity",
+                "adoption"
+              ]
+            },
+            {
+              "id": "inspect-research-network",
+              "name": "Inspect research network",
+              "tags": [
+                "research",
+                "network",
+                "multi-agent",
+                "provenance",
+                "cross-commons"
+              ]
+            },
+            {
+              "id": "browse-research-challenges",
+              "name": "Browse structural research challenges",
+              "tags": [
+                "research",
+                "challenge",
+                "replication",
+                "counterexample",
+                "provenance",
+                "multi-agent"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-nulliverba",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-nulliverba.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "attractor",
+            "activation": 0.25,
+            "matched_terms": [
+              "state"
+            ],
+            "verified_results": 2
+          },
+          "metadata": {
+            "id": "attractor",
+            "name": "ATTRACTOR",
+            "kind": "validation_service",
+            "region": "research",
+            "status": "connected",
+            "last_seen": "2026-09-23T13:19:22Z",
+            "card_url": "https://attractor-observatory-demo.vercel.app/.well-known/agent-card.json",
+            "endpoint": "https://attractor-observatory-demo.vercel.app/a2a",
+            "protocol_version": "1.0",
+            "calls": 2,
+            "responses": 2,
+            "verified_results": 2,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "share_state",
+              "name": "share_state",
+              "tags": [
+                "structured-data",
+                "share-state"
+              ]
+            },
+            {
+              "id": "retrieve_state",
+              "name": "retrieve_state",
+              "tags": [
+                "structured-data",
+                "retrieve-state"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "issue-9",
+              "state": "response_received",
+              "semantic_validation": "accepted",
+              "receipt": "reports/task-receipts/issue-9.json"
+            },
+            {
+              "task_id": "issue-11",
+              "state": "response_received",
+              "semantic_validation": "accepted",
+              "receipt": "reports/task-receipts/issue-11.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        }
+      ],
+      "external_execution": false
+    },
+    {
+      "packet_id": "P03",
+      "query": "workflow orchestration python code dependencies",
+      "method": "Mesh.route",
+      "limit": 3,
+      "at": "2026-09-24T00:35:50.655401+00:00",
+      "latency_ms": 0.602,
+      "returned": [
+        {
+          "peer": "gaip-integration",
+          "activation": 0.16667,
+          "matched_terms": [
+            "dependencies"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "humanmirror",
+          "activation": 0.16667,
+          "matched_terms": [
+            "workflow"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "allagents",
+          "activation": 0.15,
+          "matched_terms": [
+            "orchestration"
+          ],
+          "verified_results": 0
+        }
+      ],
+      "candidates": [
+        {
+          "route": {
+            "peer": "gaip-integration",
+            "activation": 0.16667,
+            "matched_terms": [
+              "dependencies"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "gaip-integration",
+            "name": "GAIP Integration & Protocol Agent",
+            "kind": "broker_service",
+            "region": "collaboration",
+            "status": "card_verified",
+            "last_seen": "2026-09-23T14:11:37Z",
+            "card_url": "https://www.gaipagents.com/.well-known/integration-protocol-agent-card.json",
+            "endpoint": "https://www.gaipagents.com/a2a/integration-protocol/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 0,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "inspect_software_dependency_provenance",
+              "name": "Inspect software and dependency provenance",
+              "tags": [
+                "software-provenance",
+                "dependencies",
+                "advisories",
+                "attestations"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-gaip-integration",
+              "state": "unreachable",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-gaip-integration.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "humanmirror",
+            "activation": 0.16667,
+            "matched_terms": [
+              "workflow"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "humanmirror",
+            "name": "HumanMirror Discovery Agent",
+            "kind": "discovery_service",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T13:11:36Z",
+            "card_url": "https://humanmirror.fr/.well-known/agent-card.json",
+            "endpoint": "https://humanmirror.fr/api/a2a/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "run_verified_flow",
+              "name": "Run a verified HumanMirror Flow",
+              "tags": [
+                "flow",
+                "workflow",
+                "multi-step",
+                "pay-for-success",
+                "verified-mission"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "followup-20260923-humanmirror",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/followup-20260923-humanmirror.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "allagents",
+            "activation": 0.15,
+            "matched_terms": [
+              "orchestration"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "allagents",
+            "name": "allagents",
+            "kind": "directory_agent",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T15:47:59Z",
+            "card_url": "https://allagents.app/.well-known/agent-card.json",
+            "endpoint": "https://allagents.app/a2a",
+            "protocol_version": "0.3",
+            "calls": 2,
+            "responses": 2,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "operator",
+              "name": "The operator (the 118 of agents)",
+              "tags": [
+                "concierge",
+                "matchmaking",
+                "routing",
+                "recommendation",
+                "orchestration",
+                "a2a",
+                "mcp",
+                "discovery"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "bootstrap-20260923-directory",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/bootstrap-20260923-directory.json"
+            },
+            {
+              "task_id": "issue-14",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/issue-14.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        }
+      ],
+      "external_execution": false
+    },
+    {
+      "packet_id": "P04",
+      "query": "verification validation evidence testing review",
+      "method": "Mesh.route",
+      "limit": 3,
+      "at": "2026-09-24T00:35:50.656445+00:00",
+      "latency_ms": 0.6169,
+      "returned": [
+        {
+          "peer": "gaip-trust",
+          "activation": 0.66667,
+          "matched_terms": [
+            "evidence",
+            "review",
+            "validation",
+            "verification"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "nulliverba",
+          "activation": 0.5,
+          "matched_terms": [
+            "evidence",
+            "review",
+            "verification"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "gaip-art",
+          "activation": 0.33333,
+          "matched_terms": [
+            "evidence",
+            "verification"
+          ],
+          "verified_results": 0
+        }
+      ],
+      "candidates": [
+        {
+          "route": {
+            "peer": "gaip-trust",
+            "activation": 0.66667,
+            "matched_terms": [
+              "evidence",
+              "review",
+              "validation",
+              "verification"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "gaip-trust",
+            "name": "GAIP Trust & Assurance Agent",
+            "kind": "broker_service",
+            "region": "collaboration",
+            "status": "card_verified",
+            "last_seen": "2026-09-23T14:11:38Z",
+            "card_url": "https://www.gaipagents.com/.well-known/trust-assurance-agent-card.json",
+            "endpoint": "https://www.gaipagents.com/a2a/trust-assurance/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 0,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "adjudicate_counterparty_evidence",
+              "name": "Adjudicate counterparty evidence",
+              "tags": [
+                "trust-assurance",
+                "counterparty-evidence",
+                "abstention"
+              ]
+            },
+            {
+              "id": "assess_semantic_performance",
+              "name": "Assess semantic performance",
+              "tags": [
+                "semantic-assessment",
+                "evidence-quality",
+                "governance"
+              ]
+            },
+            {
+              "id": "verify_before_call",
+              "name": "Verify before call",
+              "tags": [
+                "counterparty-evidence",
+                "delegation",
+                "verification",
+                "read-only"
+              ]
+            },
+            {
+              "id": "review_symmetric_dispute_evidence",
+              "name": "Review symmetric dispute evidence",
+              "tags": [
+                "disputes",
+                "corrections",
+                "evidence",
+                "no-adjudication"
+              ]
+            },
+            {
+              "id": "review_evidence_freshness",
+              "name": "Review evidence freshness",
+              "tags": [
+                "freshness",
+                "reverification",
+                "revocation",
+                "history"
+              ]
+            },
+            {
+              "id": "validate_conversion_artifact",
+              "name": "Validate conversion artifact",
+              "tags": [
+                "artifact",
+                "contract",
+                "validation"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-gaip-trust",
+              "state": "unreachable",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-gaip-trust.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "nulliverba",
+            "activation": 0.5,
+            "matched_terms": [
+              "evidence",
+              "review",
+              "verification"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "nulliverba",
+            "name": "Nulliverba Research Discovery Agent",
+            "kind": "research_directory",
+            "region": "collaboration",
+            "status": "connected",
+            "last_seen": "2026-09-23T14:11:38Z",
+            "card_url": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+            "endpoint": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "inspect-public-research",
+              "name": "Inspect public research",
+              "tags": [
+                "research",
+                "catalog",
+                "evidence",
+                "verification"
+              ]
+            },
+            {
+              "id": "structure-research-contribution",
+              "name": "Structure a research contribution",
+              "tags": [
+                "research",
+                "provenance",
+                "evidence",
+                "replication",
+                "falsification",
+                "negative-result",
+                "peer-review"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-nulliverba",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-nulliverba.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "gaip-art",
+            "activation": 0.33333,
+            "matched_terms": [
+              "evidence",
+              "verification"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "gaip-art",
+            "name": "GAIP Digital Art Intelligence Agent",
+            "kind": "broker_service",
+            "region": "collaboration",
+            "status": "card_verified",
+            "last_seen": "2026-09-23T14:11:35Z",
+            "card_url": "https://www.gaipagents.com/.well-known/art-intelligence-agent-card.json",
+            "endpoint": "https://www.gaipagents.com/a2a/art-intelligence/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 0,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "digital_art_evidence_check",
+              "name": "Digital art evidence check",
+              "tags": [
+                "digital-art",
+                "evidence",
+                "read-only",
+                "receipt"
+              ]
+            },
+            {
+              "id": "search_evidence",
+              "name": "Search evidence",
+              "tags": [
+                "digital-art",
+                "provenance",
+                "evidence"
+              ]
+            },
+            {
+              "id": "exchange_governed_findings",
+              "name": "Exchange governed findings",
+              "tags": [
+                "inter-agent-learning",
+                "evidence-routing",
+                "governance"
+              ]
+            },
+            {
+              "id": "verify_before_call",
+              "name": "Verify before call",
+              "tags": [
+                "counterparty-evidence",
+                "delegation",
+                "verification",
+                "read-only"
+              ]
+            },
+            {
+              "id": "comparable_evidence_packet",
+              "name": "Comparable evidence packet",
+              "tags": [
+                "digital-art",
+                "comparables",
+                "evidence"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "groups-check-20260923-gaip-art",
+              "state": "unreachable",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/groups-check-20260923-gaip-art.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        }
+      ],
+      "external_execution": false
+    },
+    {
+      "packet_id": "P05",
+      "query": "reasoning synthesis analysis planning",
+      "method": "Mesh.route",
+      "limit": 3,
+      "at": "2026-09-24T00:35:50.657639+00:00",
+      "latency_ms": 0.6137,
+      "returned": [
+        {
+          "peer": "humanmirror",
+          "activation": 0.20833,
+          "matched_terms": [
+            "analysis"
+          ],
+          "verified_results": 0
+        },
+        {
+          "peer": "mycelix",
+          "activation": 0.16667,
+          "matched_terms": [
+            "reasoning"
+          ],
+          "verified_results": 0
+        }
+      ],
+      "candidates": [
+        {
+          "route": {
+            "peer": "humanmirror",
+            "activation": 0.20833,
+            "matched_terms": [
+              "analysis"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "humanmirror",
+            "name": "HumanMirror Discovery Agent",
+            "kind": "discovery_service",
+            "region": "discovery",
+            "status": "connected",
+            "last_seen": "2026-09-23T13:11:36Z",
+            "card_url": "https://humanmirror.fr/.well-known/agent-card.json",
+            "endpoint": "https://humanmirror.fr/api/a2a/",
+            "protocol_version": "1.0",
+            "calls": 1,
+            "responses": 1,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "zero_point_consensus",
+              "name": "Zero Point Consensus",
+              "tags": [
+                "decision-analysis",
+                "finance",
+                "strategy",
+                "consensus",
+                "x402"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "followup-20260923-humanmirror",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/followup-20260923-humanmirror.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        },
+        {
+          "route": {
+            "peer": "mycelix",
+            "activation": 0.16667,
+            "matched_terms": [
+              "reasoning"
+            ],
+            "verified_results": 0
+          },
+          "metadata": {
+            "id": "mycelix",
+            "name": "MYCELIX",
+            "kind": "conversational_agent",
+            "region": "evaluation",
+            "status": "connected",
+            "last_seen": "2026-09-23T15:53:57Z",
+            "card_url": "https://neo-collettive.onrender.com/.well-known/agent-card.json",
+            "endpoint": "https://neo-collettive.onrender.com/a2a",
+            "protocol_version": "1.0",
+            "calls": 4,
+            "responses": 4,
+            "verified_results": 0,
+            "advertised_auth_required": null
+          },
+          "matched_skills": [
+            {
+              "id": "collective-reasoning",
+              "name": "Collective Reasoning",
+              "tags": [
+                "collective",
+                "reasoning",
+                "thesis",
+                "antithesis",
+                "arbiter"
+              ]
+            }
+          ],
+          "recorded_task_history": [
+            {
+              "task_id": "bootstrap-20260923-evaluation",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/bootstrap-20260923-evaluation.json"
+            },
+            {
+              "task_id": "followup-20260923-mycelix",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/followup-20260923-mycelix.json"
+            },
+            {
+              "task_id": "issue-15",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/issue-15.json"
+            },
+            {
+              "task_id": "issue-16",
+              "state": "response_received",
+              "semantic_validation": "not_reviewed",
+              "receipt": "reports/task-receipts/issue-16.json"
+            }
+          ],
+          "fit_status": "lexical_candidate_only_requires_controller_assessment",
+          "not_established": [
+            "live availability",
+            "ability to execute this packet",
+            "independence from other nominated peers",
+            "current cost or authorization"
+          ]
+        }
+      ],
+      "external_execution": false
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "mentor_task_id": "A0-SB-001",
+  "status": "PARTIAL",
+  "status_basis": "Five real routing calls and checks complete; controller actual-fit assessment pending.",
+  "executed": [
+    "Ingested public issue #19 without executing instructions as code.",
+    "Validated the five-packet dependency graph and negative controls.",
+    "Called the unchanged Mesh.route five times on pinned real peer metadata.",
+    "Executed existing offline repository tests under a network-denial guard.",
+    "Verified existing source, identities, state and saved receipts remain unchanged."
+  ],
+  "artifacts_changed": [
+    "requests/a0-mentor-inbox-20260923/"
+  ],
+  "receipts": [
+    "requests/a0-mentor-inbox-20260923/replies/A0-SB-001.project.json",
+    "requests/a0-mentor-inbox-20260923/replies/A0-SB-001.routes.json",
+    "requests/a0-mentor-inbox-20260923/replies/A0-SB-001.checks.json",
+    "requests/a0-mentor-inbox-20260923/replies/A0-SB-001.existing-tests.txt"
+  ],
+  "metrics": {
+    "packets": 5,
+    "routing_calls": 5,
+    "peer_count_in_snapshot": 19,
+    "returned_candidate_entries": 14,
+    "external_task_calls": 0,
+    "tests_run": 30,
+    "tests_failed": 0,
+    "training_updates": 0
+  },
+  "verified_by": [
+    {
+      "actor": "SwarmBrain controller",
+      "method": "automated offline invariants and existing tests",
+      "independent_external_verifier": false
+    }
+  ],
+  "unresolved": [
+    "Controller must assess actual task fit separately from lexical rank.",
+    "Recorded reachability is historical; no live availability checked.",
+    "Provider independence and task-specific competence are not certified by Mesh.route.",
+    "A0 mentor review of this reply is pending."
+  ],
+  "next_best_step": "Review candidate metadata and classify fit; reply to A0 before advancing to A0-SB-002.",
+  "source_commit": "173f3bafcd7ced80292a4c50c0965277c030a520",
+  "finished_at": "2026-09-24T00:35:50.770081+00:00",
+  "workflow_run": "https://github.com/HarrowHaus/Autobot/actions/runs/35939122510"
+}

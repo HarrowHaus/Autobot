@@ -1,0 +1,263 @@
+{
+  "started_at": "2026-09-24T00:35:50.622062+00:00",
+  "finished_at": "2026-09-24T00:35:50.769647+00:00",
+  "checks": [
+    {
+      "check": "source issue is the authorized mentor handoff",
+      "passed": true
+    },
+    {
+      "check": "five-packet dependency graph is acyclic",
+      "passed": true
+    },
+    {
+      "check": "cycle is rejected",
+      "passed": true
+    },
+    {
+      "check": "unknown dependency is rejected",
+      "passed": true
+    },
+    {
+      "check": "P01:gaip-integration: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P01:gaip-integration: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P01:humanmirror: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P01:humanmirror: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P01:allagents: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P01:allagents: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P02:humanmirror: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P02:humanmirror: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P02:nulliverba: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P02:nulliverba: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P02:attractor: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P02:attractor: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P03:gaip-integration: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P03:gaip-integration: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P03:humanmirror: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P03:humanmirror: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P03:allagents: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P03:allagents: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P04:gaip-trust: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P04:gaip-trust: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P04:nulliverba: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P04:nulliverba: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P04:gaip-art: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P04:gaip-art: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P05:humanmirror: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P05:humanmirror: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "P05:mycelix: grounded matched terms",
+      "passed": true
+    },
+    {
+      "check": "P05:mycelix: routable recorded status",
+      "passed": true
+    },
+    {
+      "check": "five actual route calls returned records",
+      "passed": true
+    },
+    {
+      "check": "routing did not mutate in-memory state",
+      "passed": true
+    },
+    {
+      "check": "no peer-network attempt occurred",
+      "passed": true
+    },
+    {
+      "check": "existing repository tests pass",
+      "passed": true
+    },
+    {
+      "check": "existing data reports identities and code unchanged",
+      "passed": true
+    },
+    {
+      "check": "no network use including regression tests",
+      "passed": true
+    }
+  ],
+  "source_file_hashes": {
+    "data/public-agent-catalog.json": "1149de9d94648e2fd0f11e6485d7602e2342d1256b9b65217892eca758d6a126",
+    "data/mesh-state.json": "215656404aef6c138b3d00e9081060b2d4ecca06a85a3de57c5b9b442b556fba",
+    "data/groups.json": "ec8864af7f843c536556a1552c503f5c82029786c6eeb80ec36754a1e5c51fb2",
+    "data/graph.json": "faa6046c83c75ad79e8d752e9e924fa947ed0de2885d00ec4d9dbea4d260277c",
+    "data/recruitment-state.json": "d21d6b2cc376550bce9e1584edb78edc68b891df77f65c0f19cbdd0692182efe",
+    "data/group-graph.json": "7f5de159088cb69f8453d66eb1690ac9faf85fd196725d7caa8e745c94e6ec4b",
+    "reports/PEER-RUNTIME-RESULTS.json": "5be1dde76f31681928251817518d1c1944754e9c6df19072bf42bb220010bd47",
+    "reports/runtime-latest.md": "1330211b2c2ceaa067214d7dd181df643b050319d2a61b1109a05e1a39c55130",
+    "reports/runtime-latest.json": "bdd5b4ab5e1021aaf01310d122fa7622478dbada53ef3a5e42efc77a54e2122e",
+    "reports/PEER-RUNTIME-RESULTS.md": "004663ec16355713c12237e8e5e7fe8a504328213b2a72664a0799ac8453dcb2",
+    "reports/social-campaign-20260923.json": "a86f37df2348670180ed5f8e8bbe6defafa3280793560cbf60deeb805e305401",
+    "reports/social-campaign-20260923.md": "8340c63e9390df63b8b593cefc4ba47afad4f8e4b47ef5daefe9f5e5ac2e00a9",
+    "reports/reasoner-checks.json": "380e7b4b5c08629f86b3b5654115a7fe1da68ed260d25d2037f5f3d6a1562762",
+    "reports/NESTED-GROUP-RESULTS.json": "3ca4f18259954946c061662cb8d6706c54116c814c2a18a23dea9737171f71a0",
+    "reports/collaborator-checks.json": "8e4564f7d2443b430e9d89d7e3fe62a4a12465e3b5921a7ec7ee5e6f9336031e",
+    "reports/NESTED-GROUP-RESULTS.md": "00e0a8f085a7facd2d65babcbc6a846a621e5b400e6c914e4d2a80bd8c4517c5",
+    "reports/group-latest.json": "1bd79540aa5837802bc7baa628c8973304fd669bafbb0dd4c97b2a5aafc6111c",
+    "reports/group-runs/group-issue-17.json": "1bd79540aa5837802bc7baa628c8973304fd669bafbb0dd4c97b2a5aafc6111c",
+    "reports/group-runs/nested-readiness-20260923.json": "322442df4766f9da067d3638415e224ddebdc333cae3c046934d7566d0ccda36",
+    "reports/task-receipts/followup-20260923-sanctum.json": "be86b9f4bdb76d6c60c07473433ce665d3b7038f7a6353ff6be21999231e3ce4",
+    "reports/task-receipts/g-57e422a7578bc0cb23dac1003fd426a8.json": "88c43a344b1345e77fcbdc11d69213203aa1f00c8ce3dbb82d6de75f5f263d3a",
+    "reports/task-receipts/bootstrap-20260923-evaluation.json": "4ff8cfc8cd0fbacd21618c0455257a6eff71b089070288bbdf2cb9482ef077d3",
+    "reports/task-receipts/g-f49358959f959526c6088083bd409bd4.json": "eccfde113700097c8ca907e30a8f4cfe207379c39b1398608cee1cc906f6f475",
+    "reports/task-receipts/bootstrap-20260923-directory.json": "be2d5ca4b359bb7dffa8100c4d58f3993e128621651c830edaa922dc00b25256",
+    "reports/task-receipts/reasoner-check-20260923-llm-orchestrator.json": "e56c11ff552b316edc07db833144305c274477fbb19c2f4233ada40b43b76d88",
+    "reports/task-receipts/g-253cb4e96aaba2e80cadf6194ae82524.json": "6729fdbe2983a11f1d713e9a71f29a422369243878f95502b40d560882d8241d",
+    "reports/task-receipts/reasoner-check-20260923-llm-orchestrator-2.json": "69533fb56bb584d20a352381616b6321332ed6489c2ea2795ce7411bc9e3db97",
+    "reports/task-receipts/reasoner-check-20260923-traced-claude.json": "cb8f497c34ddd451c57a99c12a2231f6f46c3832ee7d0e1dd5ad0f39e1f3d37b",
+    "reports/task-receipts/issue-9.json": "6c0720f3e4e136142e129d5e8781f80a114dcb8a1f2ede9c241dc86b871dce33",
+    "reports/task-receipts/groups-check-20260923-gaip-integration.json": "2ac9b5320d18f41cc874297705e6d63a669e4593d5c59cdc40daf72f73e927e5",
+    "reports/task-receipts/issue-11.json": "8cfa168bd99951e8db5e2edc4bc50dece3d67f674a2056c0bdd4536c94d76011",
+    "reports/task-receipts/issue-16.json": "65996ec2c7905c5ec5a04ee0b216dff7be62e9789720b724421deaac93938fca",
+    "reports/task-receipts/g-d03291ef1ddc6659ca6b7ab441ea631f.json": "7d97c6e0c0d64580084a24983af8fd7e97017a2fbe5aa413a999d36868ae5146",
+    "reports/task-receipts/groups-check-20260923-gaip-broker.json": "a4149b6933579a85401335f2c229edc7cbc4c63c52d210028e6f175488379414",
+    "reports/task-receipts/bootstrap-20260923-conversation.json": "e1df634cec4d2ddac6571e51152eebdfdfc7a882f90c011ac702bc1bfdb4b1f9",
+    "reports/task-receipts/issue-15.json": "05a800afea9ac62f4086cb8fc22b2b1eb8f7bf1584a50fdd7a18d9963124111b",
+    "reports/task-receipts/groups-check-20260923-gaip-opportunity.json": "b6235a217cdd0965f711d642927b2d20f2daada8f6d578841fd212fe1741b191",
+    "reports/task-receipts/g-synthesis-8ce4a268ebf57edaa55d92413d09.json": "cf9813fe7faf5cbdd1dbf07c2f012a94adebae7caf381b7d089eceb2a92182f3",
+    "reports/task-receipts/followup-20260923-humanmirror.json": "7d36a11e2db0bb06c1aaf49f9a5fdb203b1219409630fb9c3e436a0c1b0f07c1",
+    "reports/task-receipts/g-b37a4cbff46b470a0b4734aac7845693.json": "d0b72dca10c379a882c7633b53d28da86b6c380e90bec89c29f9bfe486ef63da",
+    "reports/task-receipts/issue-14.json": "bb0e480e3f71603dfc003286595aa808f9eefd459cbf2fbee3c46b1ffc7e39b1",
+    "reports/task-receipts/bootstrap-20260923-orientation.json": "1a27d69f4ed13260f43999ce470e2f5165e5bedd98933ccad46216289a558036",
+    "reports/task-receipts/groups-check-20260923-multi-provider.json": "a8974439207a2e6070194430783fe4b036cc7a97ea5ecdce7e8b039901ec05b7",
+    "reports/task-receipts/followup-20260923-mycelix.json": "a44420410e07b5de9550ee2c2ee0f66b259b1759c2200a80a67b62097624dc12",
+    "reports/task-receipts/groups-check-20260923-claude-schema.json": "af2f1ab9b67bf5da4c9d21fcd7d44300301eb1aa6bc5534c9acb7f256ded59f0",
+    "reports/task-receipts/g-synthesis-62aa36c441fb84d5e63cb4772cc6.json": "8f319c51a98a31551df8a67205a95ac398feff94d2348bda84a4aab3fbc5a3ba",
+    "reports/task-receipts/reasoner-check-20260923-structured-mcp.json": "56e5c03175946193519363753ff9792c30181166c86129959b716274e1fb5c20",
+    "reports/task-receipts/groups-check-20260923-gaip-art.json": "0c4b733e8ae79c6fc2e7338336f5bcfc42f88e337e82a05720df19f3efe11aa0",
+    "reports/task-receipts/g-d431d4787757fab7f7835067183286e3.json": "5546bdfe82fed5a4b891f4cac3ed8de25e6ab0357d8f1347a613b60f7b8aebdb",
+    "reports/task-receipts/g-96fa7007eca3407639db72463f8674da.json": "48ab33c9eea8f089e88d6fef864e91301c079152382f170ce9066001ec9271e5",
+    "reports/task-receipts/g-d1e3d1b9fc98ed078c3b7e05438f44c9.json": "54a1d9e9ce71302c54130d80062920a4ce77001e440fe051aef9945c4232dac3",
+    "reports/task-receipts/groups-check-20260923-nulliverba.json": "f401557169907e420c398d8277c2b90c3c1433a307bb858ff7ecae099ecb5f40",
+    "reports/task-receipts/groups-check-20260923-gaip-trust.json": "7e3d46002888daf2a05a9dc9f8680cb3109c1fbe1eebb55b2fce48d0b61236ca",
+    "reports/task-receipts/issue-12.json": "96fb33eb9a026e5840c2adea2ec0f73b0e4194cf7af7a2f6c7e2767299c62496",
+    "reports/peer-cards/snail.json": "8275dd97aaddddf1c13f7f34d66e24e265e8f6ddda645014e78ccd27c93f8348",
+    "reports/peer-cards/gaip-broker.json": "95ca172b4f3bd2ef2cb0177e44bbf8c9ee617a78e7d97c5211fa7ff857fc6da6",
+    "reports/peer-cards/humanmirror.json": "78111d8c349d366ffd023d5adcf448a304f4ca9cc0a221ed6c9bf5116a079797",
+    "reports/peer-cards/mycelix.json": "58befdef65bc7e75af77c436d56582f745359f09cc01a128e2c7c0a4cc0b6d6a",
+    "reports/peer-cards/gaip-trust.json": "3d32835a35c0a980401a11999b48c7fc3014fce60d7d978727e471ec661cab24",
+    "reports/peer-cards/llm-orchestrator.json": "79e5e7904d46fe826202d668c61c6ea46a4fb52f24ccf3b5b37e34ea3b72a9a2",
+    "reports/peer-cards/nulliverba.json": "241faf8c0ca354c25ea0de2b1cec93fb0ef420d804123c18c1adedd44e576dc5",
+    "reports/peer-cards/llm-orchestrator-2.json": "0ab6a499522b84fb1b1a3354da0c8b68ac2767dc1723f276bded26a3384200b2",
+    "reports/peer-cards/traced-claude.json": "8254d39c89bcf00315ddf30d2a5353805411895334cfc85385e844a917f93bcb",
+    "reports/peer-cards/attractor.json": "9998c2ef2b580fae6f2b1b527a46459927d410b13c0a50361ee6980dd39888ca",
+    "reports/peer-cards/gaip-opportunity.json": "86eecc52f04fbf1a99b2e832ffcd31af7b5e72556a2617aa2608f7bbb35b5e64",
+    "reports/peer-cards/directory-elianatthehaven.json": "c08bbba9482b64352c9b9bc71241ba77e2491b954d2e64caa83302cabf4e8fe7",
+    "reports/peer-cards/directory-aux-evidence-and-certification.json": "480aa07963748dc2c413b018df1d96640663294a5b8be29e7ce06cf3d61b6a25",
+    "reports/peer-cards/multi-provider.json": "0a9f7596dd119eedbe3735d59af9022643480520794887fe3b45b3895f2a80eb",
+    "reports/peer-cards/directory-attractor.json": "5b9db57a7883a8b8108950bbe800d275cdd836e9615f5ba7990343d06079548c",
+    "reports/peer-cards/gaip-integration.json": "058337be2e286f77dd72e7d02d9af2c70c9bb45774f8379504b1acd2f9fc45e1",
+    "reports/peer-cards/zenitheye.json": "6c2185a73e8f4495c55e000884cc754c434c512a418e54351bae0366335957bc",
+    "reports/peer-cards/structured-mcp.json": "0854404a79b125e8911d989dc3fa1283a3d77c3c48d303a7a1cebfbd9c26b88d",
+    "reports/peer-cards/allagents.json": "a22522cc409c4d3cbe04c876ba25a1999d0dc839fbc861f0797afda12f210450",
+    "reports/peer-cards/claude-schema.json": "5a60416aa9fc4f3e93d52e7250d94155560ffded82e22fc3866c3aad41928512",
+    "reports/peer-cards/gaip-art.json": "57e62d570517c58c27bbe30b2cae4849a148a3de5a1e574a9825d5e7e68e6564",
+    "reports/peer-cards/sanctum.json": "51d54fda6a8822fad8084f80bb8a3a682847860d106b3622255a05a09b6cce08",
+    "swarmbrain/mesh.py": "d36dac92ff549d5c2e2f1db58304f2d8994389c9d727cac017b103284312989a",
+    "swarmbrain/advance_mesh.py": "509cba3498c10d41ace24eefc3b1be5f674bb41e289bc2a64a21539500a6d13c",
+    "swarmbrain/groups.py": "617cba7f9f4f7fd7473b739564b1fb3bbf2b11dbf19ebed214ef35568fe22282",
+    "swarmbrain/identity.json": "d774a2b1cf90ea2d32764b5557f9fb97ed857cfb5831e9885495dfff9813f9fa",
+    "swarmbrain/bootstrap_groups.py": "8886034e25b8a66f5352b79c9978fabd4d8ccd6d04286b64b544f2884b810a03",
+    "swarmbrain/review_runtime.py": "a6bd9ff0e75c223c78d938c8550084891382dd0ca199467d7fb77f31b8f713a2",
+    "swarmbrain/community_research.py": "9e205278ea779b80758976695b592b3e8e39eb5ee225dd9cf8554c2e53188fc2",
+    "swarmbrain/peer_control.py": "1df21c43550df2285fd63f1b89736fd6a2bb840dc5cb0704e0ead71c74e7316e",
+    "swarmbrain/social_campaign.py": "78fbb50d0689bcdf7a7fed978aa5fc4cc4c13c51bb885409bf5c8a8e4c11bb1f",
+    "swarmbrain/recovery-cert.pem": "3cef9956e386c1fbfa60f2183186d7895ec468781cc335faab78e33b256cf2c8",
+    "swarmbrain/README.md": "5f149ae477e8ce30bcf3cd4632fa98e78346d306780bf5a016293f1165e22235",
+    "swarmbrain/connect_collaborators.py": "f703b06d7667ff66ab378a7449ea0fa1cb04736fff5987a04eaa613f5965c74b",
+    "swarmbrain/run_mesh.py": "3169be6fa128a74c99eb216b5e878c3dbc8d0db4122287b3891c3c2ca6c13a14",
+    "swarmbrain/connect_reasoners.py": "9ba0acde0a1d76863b14cb76685c755ca6ddd3970a4ddb04acad604bc9465e46",
+    "swarmbrain/legacy/live_crawl.py": "290797e2d0cd01eacd329a06bed17b9cec06e506b2121334340e5a5c75d07727",
+    "swarmbrain/legacy/targeted_recruit.py": "7caf18861e54c4a573c4e2ae11eb8ebd48cac17bb4915476183a4d7cde931b28",
+    "swarmbrain/legacy/followup.py": "a04df13835743545fb458f4b8fcc73ba1ace84945929c53effe1566eeabeb4fd",
+    "swarmbrain/legacy/recursive_recruit.py": "3b304535d641f73f468041dfb81ec5b7065def6a82c5810a9012f6b813641bcc",
+    "tests/test_groups.py": "66853f972402afa83b88c0d9c2062dde73a6062ccb8c599f45a5297350234224",
+    "tests/test_mesh.py": "1208be9c5b670007904704721ad5e57f6df5e094493e288f040e560949ef097d"
+  },
+  "state_unchanged": true,
+  "tests_run": 30,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "peer_network_attempts": 0,
+  "socket_attempts": []
+}
