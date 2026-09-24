@@ -1,0 +1,31 @@
+name: A0 buyer growth readiness
+on:
+  push:
+    paths: ['swarmbrain/revenue_growth.py', 'swarmbrain/revenue_discovery.py', 'swarmbrain/bounty_scout.py', 'tests/test_revenue_growth.py', 'tests/test_bounty_scout.py', '.github/workflows/a0_growth_readiness.yml']
+  pull_request:
+    paths: ['swarmbrain/revenue_growth.py', 'swarmbrain/revenue_discovery.py', 'swarmbrain/bounty_scout.py', 'tests/test_revenue_growth.py', 'tests/test_bounty_scout.py', '.github/workflows/a0_growth_readiness.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-and-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test buyer qualification and experiment accounting
+        run: |
+          python -m unittest discover -s tests -p test_bounty_scout.py -v
+          python -m unittest discover -s tests -p test_revenue_growth.py -v
+      - name: Read public opportunities and aggregate demand signals
+        run: |
+          python -m swarmbrain.revenue_discovery > growth-scan.json
+          cat growth-scan.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a0-public-growth-scan
+          path: growth-scan.json
+          retention-days: 7
