@@ -4,9 +4,14 @@ from __future__ import annotations
 import json, os, time
 from pathlib import Path
 
-from economy import EconomyLedger
-from github_bridge import parse_comment_job
-from run_mesh import execute, ROOT
+try:
+    from .economy import EconomyLedger
+    from .github_bridge import parse_comment_job
+    from .run_mesh import execute, ROOT
+except ImportError:
+    from economy import EconomyLedger
+    from github_bridge import parse_comment_job
+    from run_mesh import execute, ROOT
 
 RESULT_PATH = ROOT / "reports" / "comment-job-latest.json"
 ECONOMY_PATH = ROOT / "data" / "economy-ledger.json"
