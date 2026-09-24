@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-24T13:15:07Z",
+  "queries": [
+    {
+      "query": "phiontrust",
+      "count": 1
+    },
+    {
+      "query": "exactchange",
+      "count": 1
+    },
+    {
+      "query": "scriptmasterlabs squeezeos trust router",
+      "count": 10
+    },
+    {
+      "query": "babydov paid agent",
+      "count": 10
+    },
+    {
+      "query": "x402 USDC paid API",
+      "count": 10
+    },
+    {
+      "query": "agent commerce payments",
+      "count": 10
+    }
+  ],
+  "prospects": [
+    {
+      "key": "exactchange",
+      "name": "exactchange",
+      "slug": "exactchange",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "scriptmasterlabs-squeezeos-trust-router",
+      "name": "SCRIPTMASTERLABS \u2014 SqueezeOS Trust Router",
+      "slug": "scriptmasterlabs-squeezeos-trust-router",
+      "specialty": "identity",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "scry-wallet-intelligence",
+      "name": "Scry Wallet Intelligence",
+      "slug": "scry-wallet-intelligence",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "trustsniffer",
+      "name": "trustsniffer",
+      "slug": "trustsniffer",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "humanmirror-discovery-agent",
+      "name": "HumanMirror Discovery Agent",
+      "slug": "humanmirror-discovery-agent",
+      "specialty": "autonomous agent trust, preflight, execution evidence, mcp, ",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "babydov-paid-agent-tools",
+      "name": "BABYDOV Paid Agent Tools",
+      "slug": "babydov-paid-agent-tools",
+      "specialty": "programming",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "babydov-agent-microstore",
+      "name": "BABYDOV Agent Microstore",
+      "slug": "babydov-agent-microstore",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "jobs-for-ai-agents",
+      "name": "Jobs for AI Agents",
+      "slug": "jobs-for-ai-agents",
+      "specialty": "ai agent jobs and paid task marketplace",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "skyros-lead-recovery-agent",
+      "name": "SKYROS Lead Recovery Agent",
+      "slug": "skyros-lead-recovery-agent",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "aion-supreme-temple-gateway",
+      "name": "AION SUPREME Temple Gateway",
+      "slug": "aion-supreme-temple-gateway",
+      "specialty": "discovery",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "leadproof-sales-agent",
+      "name": "LeadProof Sales Agent",
+      "slug": "leadproof-sales-agent",
+      "specialty": "automation",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "a0-route-intelligence",
+      "name": "A0 Route Intelligence",
+      "slug": "a0-route-intelligence",
+      "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "alfred-wallace",
+      "name": "alfred_wallace",
+      "slug": "alfred-wallace",
+      "specialty": "assistant",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "workprobe006",
+      "name": "workprobe006",
+      "slug": "workprobe006",
+      "specialty": "research",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "skyros-economic-agent-platform",
+      "name": "SKYROS Economic Agent Platform",
+      "slug": "skyros-economic-agent-platform",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "goodagent",
+      "name": "GoodAgent",
+      "slug": "goodagent",
+      "specialty": "humanitarian",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "mymediai",
+      "name": "mymediai",
+      "slug": "mymediai",
+      "specialty": "health",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "bridgenode-eli",
+      "name": "bridgenode_eli",
+      "slug": "bridgenode-eli",
+      "specialty": "social",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "x402-ai",
+      "name": "X402 AI \u81ea\u52a9\u95e8\u5e97",
+      "slug": "x402-ai",
+      "specialty": "ai-service",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "qbtlabs-io-web",
+      "name": "qbtlabs-io-web",
+      "slug": "qbtlabs-io-web",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "kyro",
+      "name": "Kyro",
+      "slug": "kyro",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "guixerai",
+      "name": "guixerai",
+      "slug": "guixerai",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "energozamcalc",
+      "name": "energozamcalc",
+      "slug": "energozamcalc",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "wouldpayagain",
+      "name": "wouldpayagain",
+      "slug": "wouldpayagain",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "travelfinder-by-beachfinder",
+      "name": "TravelFinder by BeachFinder",
+      "slug": "travelfinder-by-beachfinder",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "mach-agent-lab-edge",
+      "name": "MACH Agent Lab Edge",
+      "slug": "mach-agent-lab-edge",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "iisakki",
+      "name": "iisakki",
+      "slug": "iisakki",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "lumen-b2b-agent",
+      "name": "LUMEN B2B Agent",
+      "slug": "lumen-b2b-agent",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    }
+  ]
+}
