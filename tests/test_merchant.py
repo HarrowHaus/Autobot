@@ -85,5 +85,28 @@ class MerchantTests(unittest.TestCase):
             self.assertEqual(f.settle_calls, 0)
             self.assertFalse(path.exists())
 
+    def test_same_payment_payload_cannot_buy_resource_twice(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td)/"ledger.json"
+            f = FakeFacilitator()
+            m = merchant(path, f)
+            signature = encode_header({"x402Version":2,"payload":{"nonce":"once"}})
+            calls = []
+            first = m.transact(
+                task_id="sale-replay-1",
+                payment_signature=signature,
+                perform_work=lambda: calls.append("first") or {"ok":True})
+            second = m.transact(
+                task_id="sale-replay-2",
+                payment_signature=signature,
+                perform_work=lambda: calls.append("second") or {"ok":True})
+            self.assertEqual(first["status"], 200)
+            self.assertEqual(second["status"], 409)
+            self.assertEqual(calls, ["first"])
+            self.assertEqual(f.verify_calls, 1)
+            self.assertEqual(f.settle_calls, 1)
+            ledger = EconomyLedger.load(path)
+            self.assertEqual(ledger.balances()["real_usdc_atomic_received"], 10_000)
+
 if __name__ == "__main__":
     unittest.main()
