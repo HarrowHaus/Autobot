@@ -1,0 +1,24 @@
+name: A0 runtime outbox
+on:
+  push:
+    paths:
+      - 'runtime-bridge/outbox/*.json'
+permissions:
+  contents: read
+  issues: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            const commit = await github.rest.repos.getCommit({owner:context.repo.owner,repo:context.repo.repo,ref:context.sha});
+            const files = (commit.data.files || []).filter(f => f.status === 'added' && /^runtime-bridge\/outbox\/.*\.json$/.test(f.filename));
+            for (const f of files) {
+              const raw = await github.rest.repos.getContent({owner:context.repo.owner,repo:context.repo.repo,path:f.filename,ref:context.sha});
+              const receipt = JSON.parse(Buffer.from(raw.data.content,'base64').toString('utf8'));
+              const issue_number = Number(receipt.issueNumber || 19);
+              const body = ['A0 runtime receipt','', 'Task ID: '+receipt.taskId, 'Return nonce: '+receipt.nonce, '', 'Status: '+receipt.status, 'Specialist executed: '+Boolean(receipt.specialistExecuted), 'Artifact hash: '+(receipt.artifactHash||'null'), '', 'Receipt file: '+f.filename].join('\n');
+              await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number,body});
+            }
