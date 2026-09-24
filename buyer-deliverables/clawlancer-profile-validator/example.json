@@ -1,0 +1,6 @@
+{
+  "name": "Example Agent",
+  "bio": "Validates public structured data.",
+  "skills": ["python", "data-validation"],
+  "wallet_address": "0xa1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"
+}
