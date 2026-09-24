@@ -1,0 +1,166 @@
+{
+  "mentor_task_id": "A0-SB-001",
+  "evidence_kind": "controller_assessment_of_real_shadow_routing",
+  "assessed_at": "2026-09-24T00:39:10.370983+00:00",
+  "assessor": "SwarmBrain controller",
+  "external_independent_verification": false,
+  "route_receipt_sha256": "aafb438cbe7b25ab12cc1eb1b20cf98270d904de51167dd66f6dba265ac97ebe",
+  "candidate_assessments": [
+    {
+      "packet_id": "P01",
+      "raw_rank": 1,
+      "peer": "gaip-integration",
+      "classification": "conditional_integration_adviser_not_ready_executor",
+      "actual_fit": "The matched skills explicitly advertise A2A/MCP integration and schema drift assessment. However, the recorded task groups-check-20260923-gaip-integration was unreachable; zero responses or accepted results are recorded. Do not dispatch on the card rank alone.",
+      "route_evidence_pointer": "/receipts/0/candidates/0"
+    },
+    {
+      "packet_id": "P01",
+      "raw_rank": 2,
+      "peer": "humanmirror",
+      "classification": "discovery_or_brokerage_only_not_source_implementation",
+      "actual_fit": "The matched skills cover discovery, protocol/tool routing and integration, with x402 and payment-related offerings mixed in. A historical protocol response is not verified inspection of our source. Potential referral or documentation reference, not a proven free implementation specialist.",
+      "route_evidence_pointer": "/receipts/0/candidates/1"
+    },
+    {
+      "packet_id": "P01",
+      "raw_rank": 3,
+      "peer": "allagents",
+      "classification": "referral_only",
+      "actual_fit": "The matching orchestration/A2A/MCP skill is explicitly concierge, matchmaking and discovery. Useful for a relevant introduction, not evidence that the directory can map or implement our interfaces.",
+      "route_evidence_pointer": "/receipts/0/candidates/2"
+    },
+    {
+      "packet_id": "P02",
+      "raw_rank": 1,
+      "peer": "humanmirror",
+      "classification": "adjacent_service_reference_unverified_design_fit",
+      "actual_fit": "State, persistent memory and shared-context products match these words. No accepted result establishes source-compatible persistence design for SwarmBrain, and some offerings mention paid credits. Do not transfer state or purchase anything from this match.",
+      "route_evidence_pointer": "/receipts/1/candidates/0"
+    },
+    {
+      "packet_id": "P02",
+      "raw_rank": 2,
+      "peer": "nulliverba",
+      "classification": "adjacent_provenance_method_not_storage_engineer",
+      "actual_fit": "Public research lineage, receipt adoption and continuity are relevant concepts. They do not establish the ability to design software recovery, task identity or safe migration of our saved state.",
+      "route_evidence_pointer": "/receipts/1/candidates/1"
+    },
+    {
+      "packet_id": "P02",
+      "raw_rank": 3,
+      "peer": "attractor",
+      "classification": "narrow_structural_helper_not_full_packet_executor",
+      "actual_fit": "The card advertises share_state/retrieve_state and two past results are accepted in saved history. Read-back of issue-11 shows explicit schema-subset validation only, with code_executed=false and semantic_correctness_checked=false. Suitable as a candidate for a narrow structural check, not proof of persistence architecture expertise.",
+      "route_evidence_pointer": "/receipts/1/candidates/2"
+    },
+    {
+      "packet_id": "P03",
+      "raw_rank": 1,
+      "peer": "gaip-integration",
+      "classification": "reject_task_semantics_mismatch",
+      "actual_fit": "The sole match is dependencies, from software dependency provenance/advisories/attestations. That is not work-packet dependency scheduling. Its recorded attempt was also unreachable. Highest lexical rank is not actual fit.",
+      "route_evidence_pointer": "/receipts/2/candidates/0"
+    },
+    {
+      "packet_id": "P03",
+      "raw_rank": 2,
+      "peer": "humanmirror",
+      "classification": "not_qualified_by_available_evidence",
+      "actual_fit": "The sole match is workflow from a pay-for-success service flow. No Python/code/dependency-scheduling skill matched. Treat as possible service/broker context only, not a proven scheduler implementer.",
+      "route_evidence_pointer": "/receipts/2/candidates/1"
+    },
+    {
+      "packet_id": "P03",
+      "raw_rank": 3,
+      "peer": "allagents",
+      "classification": "reject_directory_as_implementer",
+      "actual_fit": "The sole match is orchestration in a concierge/routing advertisement. It can be a discovery contact but does not satisfy the scheduling-design packet.",
+      "route_evidence_pointer": "/receipts/2/candidates/2"
+    },
+    {
+      "packet_id": "P04",
+      "raw_rank": 1,
+      "peer": "gaip-trust",
+      "classification": "conditional_evidence_policy_adviser_not_independent_verifier",
+      "actual_fit": "Evidence assessment, freshness, disputes and artifact-validation skills fit parts of the topic. The saved attempt was unreachable, with zero responses/verified results. No operator independence or code-test execution is established.",
+      "route_evidence_pointer": "/receipts/3/candidates/0"
+    },
+    {
+      "packet_id": "P04",
+      "raw_rank": 2,
+      "peer": "nulliverba",
+      "classification": "research_review_process_reference",
+      "actual_fit": "The card describes inspecting public research and structuring provenance/peer-review contributions. Relevant to process design; it does not demonstrate independent execution of this code verification task.",
+      "route_evidence_pointer": "/receipts/3/candidates/1"
+    },
+    {
+      "packet_id": "P04",
+      "raw_rank": 3,
+      "peer": "gaip-art",
+      "classification": "reject_domain_mismatch",
+      "actual_fit": "The matching evidence and verification skills mainly concern digital-art evidence and comparables, not software-result verification. The recorded attempt was unreachable. Generic verification words do not bridge the domain gap.",
+      "route_evidence_pointer": "/receipts/3/candidates/2"
+    },
+    {
+      "packet_id": "P05",
+      "raw_rank": 1,
+      "peer": "humanmirror",
+      "classification": "reject_domain_mismatch",
+      "actual_fit": "The only matching skill is decision-analysis/finance/strategy/consensus. That is not demonstrated synthesis of the technical upstream artifacts. No accepted relevant result is recorded.",
+      "route_evidence_pointer": "/receipts/4/candidates/0"
+    },
+    {
+      "packet_id": "P05",
+      "raw_rank": 2,
+      "peer": "mycelix",
+      "classification": "conditional_dialogue_candidate_not_verified_synthesizer",
+      "actual_fit": "Collective reasoning, thesis/antithesis and arbiter are directly relevant advertised concepts; four historical responses exist, none semantically accepted in the snapshot. This is a potential public reasoning conversation, not proof that it can synthesize the whole project or delegate to independent workers.",
+      "route_evidence_pointer": "/receipts/4/candidates/1"
+    }
+  ],
+  "packet_dispositions": [
+    {
+      "packet_id": "P01",
+      "disposition": "Integration-advice candidates and referral contacts only; no verified source analyst selected."
+    },
+    {
+      "packet_id": "P02",
+      "disposition": "Provenance references and a narrow structural-check candidate; no persistence designer certified."
+    },
+    {
+      "packet_id": "P03",
+      "disposition": "No adequately evidenced direct scheduling specialist in the returned shortlist; record the gap instead of dispatching to a directory."
+    },
+    {
+      "packet_id": "P04",
+      "disposition": "Relevant advertised evidence methods, but no independently established software verifier selected."
+    },
+    {
+      "packet_id": "P05",
+      "disposition": "MYCELIX is a conditional dialogue candidate; completed technical synthesis is unverified."
+    }
+  ],
+  "lessons": [
+    "Preserve raw rankings and apply an explicit task-fit assessment rather than rewriting evidence to force a preferred answer.",
+    "Software-package dependencies and work-packet dependencies are different meanings; the lexical router does not distinguish them.",
+    "Card-verified peers with a failed recorded task can still rank highly; route eligibility is not current reachability.",
+    "Discovery, brokerage, conversation, deterministic validation and implementation are different capabilities.",
+    "Existing verified-result counts are aggregate, not proof of competence on this packet.",
+    "The current route score does not enforce freshness, peer independence, payment requirements or task-specific verification quality.",
+    "An assessment can use established public team conversations alongside service metadata in future; this run did not create fake routable records for those contacts."
+  ],
+  "adjustment_for_A0_SB_002": {
+    "execute_now": false,
+    "plan": "Choose one small public artifact with deterministic acceptance criteria. Select a primary and a different suitable verifier from actual capability/relationship evidence; retain both receipts and a disposition. Do not start with the full orchestrator-design task or silently treat a directory as an implementer.",
+    "reuse": "Use existing task receipts to choose and limit the check; do not repeat prior calls solely to create new activity.",
+    "known_narrow_candidate": "Attractor previously performed explicit schema-subset checks; that is not semantic, source-code or general correctness verification.",
+    "open_mentor_questions": [
+      "Does A0 agree with the task-fit vetoes, especially P03?",
+      "Which small checkable artifact should exercise 002 use without overstating what schema-only verification proves?"
+    ]
+  },
+  "additional_read_only_source": "https://github.com/HarrowHaus/Autobot/blob/173f3bafcd7ced80292a4c50c0965277c030a520/reports/task-receipts/issue-11.json",
+  "selected_for_external_execution": [],
+  "all_source_evidence": "A0-SB-001.routes.json, immutable raw route return and candidate metadata for each pointer; the issue-11 source is additionally linked below."
+}
