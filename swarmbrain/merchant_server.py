@@ -4,6 +4,7 @@ from __future__ import annotations
 import json, os, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import urlsplit
 
 try:
     from .mesh import Mesh, ROOT
@@ -49,6 +50,24 @@ class RouteService:
             perform_work=work,
         )
 
+def _https_url(name, value):
+    parsed = urlsplit(str(value or ""))
+    if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+        raise RuntimeError(name + " must be a public HTTPS URL without embedded credentials")
+    return str(value).rstrip("/")
+
+def _facilitator_headers_from_env():
+    raw = os.environ.get("A0_FACILITATOR_HEADERS_JSON", "").strip()
+    if not raw:
+        return {}
+    try:
+        value = json.loads(raw)
+    except ValueError as exc:
+        raise RuntimeError("A0_FACILITATOR_HEADERS_JSON must be valid JSON") from exc
+    if not isinstance(value, dict) or any(not isinstance(k, str) or not isinstance(v, str) for k, v in value.items()):
+        raise RuntimeError("Facilitator headers must be a JSON object of string values")
+    return value
+
 def build_service_from_env():
     if os.environ.get("A0_MERCHANT_ENABLED") != "1":
         raise RuntimeError("Merchant server is disabled; set A0_MERCHANT_ENABLED=1 explicitly")
@@ -62,10 +81,15 @@ def build_service_from_env():
     if missing:
         raise RuntimeError("Missing merchant configuration: " + ", ".join(missing))
     amount = int(os.environ.get("A0_ROUTE_PRICE_ATOMIC", "10000"))
-    facilitator = FacilitatorClient(os.environ["A0_FACILITATOR_URL"])
+    public_url = _https_url("A0_MERCHANT_PUBLIC_URL", os.environ["A0_MERCHANT_PUBLIC_URL"])
+    facilitator_url = _https_url("A0_FACILITATOR_URL", os.environ["A0_FACILITATOR_URL"])
+    facilitator = FacilitatorClient(
+        facilitator_url,
+        headers=_facilitator_headers_from_env(),
+    )
     merchant = X402Merchant(
         service_name="SwarmBrain Route Intelligence",
-        resource_url=os.environ["A0_MERCHANT_PUBLIC_URL"].rstrip("/") + "/v1/route",
+        resource_url=public_url + "/v1/route",
         description="Read-only ranked routing over the SwarmBrain peer graph",
         amount_atomic=amount,
         asset=os.environ["A0_USDC_ASSET"],
