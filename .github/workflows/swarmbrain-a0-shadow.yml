@@ -1,0 +1,59 @@
+name: A0 mentor shadow routing only
+on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - 'requests/a0-mentor-inbox-20260923/run_shadow.py'
+      - '.github/workflows/swarmbrain-a0-shadow.yml'
+permissions:
+  contents: write
+concurrency:
+  group: swarmbrain-peer-state
+  cancel-in-progress: false
+jobs:
+  shadow-routing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+      - name: Ingest the authorized public mentor handoff as data
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, urllib.request
+          from pathlib import Path
+          home = Path('requests/a0-mentor-inbox-20260923')
+          if (home/'replies/A0-SB-001.json').exists():
+              raise SystemExit('Existing reply found; preserve it rather than rerun.')
+          url = 'https://api.github.com/repos/HarrowHaus/Autobot/issues/19'
+          req = urllib.request.Request(url, headers={'Accept':'application/vnd.github+json','User-Agent':'SwarmBrain-A0-mentor-ingest'})
+          with urllib.request.urlopen(req, timeout=30) as response:
+              data = json.load(response)
+          assert data['number'] == 19 and data['user']['login'] == 'KungFury87'
+          assert data['updated_at'] == '2026-09-24T00:24:41Z', 'Mentor handoff changed; inspect before running.'
+          body = data['body']
+          source = {k:data[k] for k in ('number','title','html_url','created_at','updated_at','body')}
+          source.update(author=data['user']['login'],body_sha256=hashlib.sha256(body.encode()).hexdigest(),
+                        treatment='User-authorized mentor handoff; provider/model/confidence claims remain sender-attributed.')
+          (home/'source-issue.json').write_text(json.dumps(source,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          (home/'HANDOFF.md').write_text(body+'\n',encoding='utf-8')
+          PY
+      - name: Execute A0-SB-001 and existing offline tests
+        run: python3 requests/a0-mentor-inbox-20260923/run_shadow.py
+      - name: Preserve only the mentor artifacts on the active branch
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- requests/a0-mentor-inbox-20260923/source-issue.json requests/a0-mentor-inbox-20260923/HANDOFF.md requests/a0-mentor-inbox-20260923/replies
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record A0-SB-001 real shadow routing and unchanged-state checks [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: A0-SB-001-shadow-routing
+          path: requests/a0-mentor-inbox-20260923/
+          retention-days: 14
