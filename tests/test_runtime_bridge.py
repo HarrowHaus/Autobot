@@ -7,11 +7,12 @@ from swarmbrain.economy import EconomyLedger
 class RuntimeBridgeTests(unittest.TestCase):
     def summary(self):
         return {
+            "mode": "request",
             "tasks": [
                 {
-                    "id": "task-1",
+                    "id": "job-2",
                     "state": "response_received",
-                    "receipt": "reports/receipts/task-1.json",
+                    "receipt": "reports/receipts/job-2.json",
                     "peer_id": "peer-a",
                 }
             ]
@@ -55,6 +56,51 @@ class RuntimeBridgeTests(unittest.TestCase):
                 result = runtime_bridge.account(job, {"tasks":[]}, "job-3")
                 self.assertFalse(result["recorded"])
                 self.assertFalse(path.exists())
+
+    def test_historical_receipt_cannot_back_new_job(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "economy.json"
+            job = {"economy": {
+                "verified": True,
+                "reference_cost_microusd": 50,
+                "actual_cost_microusd": 10,
+                "acc_microunits": 100,
+            }}
+            summary = {
+                "mode":"request",
+                "tasks":[{
+                    "id":"old-job",
+                    "state":"response_received",
+                    "receipt":"reports/old.json",
+                    "peer_id":"peer-a",
+                }]
+            }
+            with patch.object(runtime_bridge, "ECONOMY_PATH", path):
+                result = runtime_bridge.account(job, summary, "new-job")
+                self.assertFalse(result["recorded"])
+                self.assertFalse(path.exists())
+
+    def test_route_mode_never_issues_acc_from_prior_receipts(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "economy.json"
+            job = {"economy": {
+                "verified": True,
+                "reference_cost_microusd": 50,
+                "actual_cost_microusd": 10,
+                "acc_microunits": 100,
+            }}
+            summary = {
+                "mode":"route",
+                "tasks":[{
+                    "id":"new-job",
+                    "state":"response_received",
+                    "receipt":"reports/prior.json",
+                    "peer_id":"peer-a",
+                }]
+            }
+            with patch.object(runtime_bridge, "ECONOMY_PATH", path):
+                result = runtime_bridge.account(job, summary, "new-job")
+                self.assertFalse(result["recorded"])
 
 if __name__ == "__main__":
     unittest.main()
