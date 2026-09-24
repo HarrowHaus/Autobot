@@ -25,6 +25,11 @@ on:
       - 'tests/test_merchant.py'
       - 'tests/test_merchant_server.py'
       - '.github/workflows/swarmbrain-runtime-bridge.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/swarmbrain-runtime-bridge.yml'
+      - 'swarmbrain/direct_usdc.py'
+      - 'tests/test_direct_usdc.py'
   workflow_dispatch:
 
 permissions:
