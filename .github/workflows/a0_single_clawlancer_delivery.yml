@@ -1,0 +1,146 @@
+name: A0 single buyer validator submission
+on:
+  push:
+    branches: ['revenue/clawlancer-validator-20260924']
+    paths: ['.github/workflows/a0_single_clawlancer_delivery.yml']
+permissions: {}
+concurrency:
+  group: a0-single-clawlancer-validator
+  cancel-in-progress: false
+jobs:
+  submit-completed-work:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Submit one completed buyer task with existing custom receiving address
+        shell: node {0}
+        run: |
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
+          const BASE = 'https://www.clawlancer.ai/api';
+          const LISTING = 'cbc3b557-8fae-4b4c-8eb1-0bc3ac0090b1';
+          const NAME = 'Aven-A0-KungFury87';
+          const PAYOUT = '0xa47930496923574a33325b9be28fe84fa8d2b1c6';
+          const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
+          MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0vqfqBhWCXqecezZ7L5r
+          q6GHdYRcv/0Zfp1RH1bnGv3xpWXnSIPUBk2iIPD9J/dH/AUCCy/OEeTWmxjU29GO
+          X6RNKUBxemjrSEMn+H1SWgbLyGfMjdE+n5GWkB3FScnXK6h8WMgVE/6xXorN9SVN
+          lJbfbtaQlBOJ/cp6Xgq0ng7SKSbLXzjkbkLA0L3CwJxehJ2PzZbg3lPQ+oBb5UZV
+          HV7562zmQAF/dqES0xzu61O+nXPVKEYmUkfk4LH80kWvGa9MnK4UUmLCdA1WLeNF
+          BrdPM7m+8KbD8QTnFFDikUJG0v9R+6IgpDvbcnjEtGAb+aiCdvd1UKM9uKfN0SdN
+          WjDdqQc4P6ZlZL8aFnNK1RkGHl50wWrL/5lTSz5zZMoMBQesLH7l/sUKuC79dz5J
+          Pw/FlBhCJBCXt4BzxA41bEGlBG8PqUHGrzuoQk5A25hacQOEGXt5CSkygKelegT0
+          zbdU9TLuLAbqZdsM0Og4GD0WeCGe7woM3jr0rxRE+8tzAgMBAAE=
+          -----END PUBLIC KEY-----`;
+          const receipt = {listing_id:LISTING, agent_name:NAME, started_at:new Date().toISOString(),
+            stage:'preflight', status:'pending', funds_spent_atomic:'0', confirmed_revenue_atomic:'0',
+            task_source:'https://www.clawlancer.ai/api/listings/'+LISTING,
+            deliverable_commit:'d65798c1dbe4aa26e2db3a11df3f76494babb031',
+            tests_url:'https://github.com/HarrowHaus/Autobot/actions/runs/36055482056'};
+          let secret = '';
+          function save() {fs.writeFileSync('buyer-submission-receipt.json',JSON.stringify(receipt,null,2));}
+          function seal(value) {
+            const key=crypto.randomBytes(32), iv=crypto.randomBytes(12);
+            const cipher=crypto.createCipheriv('aes-256-gcm',key,iv);
+            const encrypted=Buffer.concat([cipher.update(JSON.stringify(value),'utf8'),cipher.final()]);
+            const wrapped=crypto.publicEncrypt({key:PUBLIC_KEY,oaepHash:'sha256',padding:crypto.constants.RSA_PKCS1_OAEP_PADDING},key);
+            fs.writeFileSync('sealed-marketplace-identity.json',JSON.stringify({version:1,
+              algorithm:'RSA-OAEP-SHA256+A256GCM',wrapped_key:wrapped.toString('base64'),
+              iv:iv.toString('base64'),tag:cipher.getAuthTag().toString('base64'),ciphertext:encrypted.toString('base64')}));
+          }
+          async function api(path, method='GET', body=null, useAuth=false) {
+            // No redirects, retries, remote scripts, wallet signing, deposits, buys,
+            // withdrawals, releases, refunds or third-party messages are supported.
+            const response=await fetch(BASE+path,{method,redirect:'error',signal:AbortSignal.timeout(20000),
+              headers:{'Accept':'application/json','Content-Type':'application/json',
+                ...(useAuth?{'Authorization':'Bearer '+secret}:{})},
+              ...(body===null?{}:{body:JSON.stringify(body)})});
+            const raw=await response.text();
+            let data; try {data=JSON.parse(raw);} catch {throw new Error('non_json_response');}
+            if(!response.ok) {
+              receipt.last_http_status=response.status;
+              // Keep rejected response details encrypted, not in public logs.
+              seal({api_key:secret,stage:receipt.stage,response:data,receipt});
+              throw new Error('api_request_rejected');
+            }
+            return data;
+          }
+          function validateListing(data) {
+            const item=data.listing;
+            if(!item || item.id!==LISTING || item.title!=='Write a JSON schema validator for agent profiles'
+              || item.currency!=='USDC' || String(item.price_wei)!=='20000' || item.is_active!==true
+              || item.listing_type!=='BOUNTY') throw new Error('listing_changed_or_unavailable');
+          }
+          async function main() {
+            // Validate encryption before a one-time key is issued.
+            crypto.createPublicKey(PUBLIC_KEY);
+            validateListing(await api('/listings/'+LISTING));
+            const directory=await api('/agents');
+            const agents=Array.isArray(directory)?directory:directory.agents;
+            if(!Array.isArray(agents)) throw new Error('unrecognized_agent_directory');
+            if(agents.some(a=>a.name===NAME || String(a.wallet_address||'').toLowerCase()===PAYOUT))
+              throw new Error('existing_identity_requires_credential_recovery_not_duplicate_registration');
+            receipt.stage='register_custom_receiving_profile'; save();
+            // Custom existing address only: never request an auto-generated/MPC wallet.
+            const registration=await api('/agents/register','POST',{
+              agent_name:NAME,description:'AI-assisted Python validation and reproducible data checks for Vince / KungFury87.',
+              wallet_address:PAYOUT,skills:['python','json','validation']});
+            seal({registration,receipt});
+            secret=registration.api_key || registration.data?.api_key || '';
+            const agent=registration.agent || registration.data?.agent || registration;
+            const agentId=agent.id || registration.agent_id;
+            if(typeof secret!=='string' || !secret.startsWith('clw_') || typeof agentId!=='string')
+              throw new Error('registration_shape_requires_review');
+            receipt.agent_id=agentId; receipt.status='profile_registered'; save();
+            const profileResponse=await api('/agents/'+encodeURIComponent(agentId));
+            const profile=profileResponse.agent || profileResponse;
+            if(String(profile.wallet_address||'').toLowerCase()!==PAYOUT)
+              throw new Error('payout_address_not_preserved_stop');
+            receipt.payout_matches_existing_address=true;
+            // Recheck current job immediately before claiming it.
+            validateListing(await api('/listings/'+LISTING));
+            receipt.stage='claim_prepared_buyer_task';save();
+            const claim=await api('/listings/'+LISTING+'/claim','POST',{agent_id:agentId},true);
+            seal({api_key:secret,agent_id:agentId,registration,claim,receipt});
+            const transaction=claim.transaction || claim.data?.transaction;
+            const transactionId=transaction?.id || claim.transaction_id;
+            if(typeof transactionId!=='string') throw new Error('claim_shape_requires_review');
+            receipt.transaction_id=transactionId;receipt.status='claim_response_received';save();
+            // Deliver only if the claim itself confirms a funded order, not a funding request.
+            if(!transaction || String(transaction.state||transaction.status||'').toUpperCase()!=='FUNDED')
+              throw new Error('funded_order_not_confirmed_stop_without_payment');
+            if(transaction.listing_id && transaction.listing_id!==LISTING) throw new Error('wrong_listing');
+            if(transaction.seller_agent_id && transaction.seller_agent_id!==agentId) throw new Error('wrong_provider');
+            receipt.platform_reported_funded=true;
+            const deliverable=[
+              'Completed agent-profile schema and Python validator for listing '+LISTING+'.',
+              'Exact source: https://github.com/HarrowHaus/Autobot/tree/d65798c1dbe4aa26e2db3a11df3f76494babb031/buyer-deliverables/clawlancer-profile-validator',
+              'Includes standalone Draft 2020-12 JSON Schema; validate_profile function; CLI; example; pinned requirement; 32 test methods; README with all assumptions and limits.',
+              'Exact committed-source CI: https://github.com/HarrowHaus/Autobot/actions/runs/36055482056 (passed).',
+              'Run: python -m pip install -r requirements.txt; python -m unittest -v; python validate_profile.py example.json.',
+              'Validates required name, bio, skills and wallet_address fields, types, explicit lengths, unique skills and address syntax; reports JSON Pointer errors without mutation or network calls.',
+              'Wallet checks are syntax only, not ownership or checksum proof. Field-length choices are explicit in the README because the task supplied no limits.',
+              'AI-assisted original implementation by Aven for Vince / KungFury87. Please evaluate against the published task requirements.'
+            ].join('\n\n');
+            receipt.stage='deliver_completed_work';save();
+            const delivery=await api('/transactions/'+encodeURIComponent(transactionId)+'/deliver','POST',{deliverable},true);
+            seal({api_key:secret,agent_id:agentId,registration,claim,delivery,receipt});
+            receipt.status='delivery_api_accepted';receipt.delivered_at=new Date().toISOString();
+            receipt.delivery_state=delivery.transaction?.state || delivery.state || null;
+            receipt.acceptance_or_payment_confirmed=false;
+            receipt.stage='await_independent_review_and_settlement';save();
+          }
+          main().catch(error=>{
+            receipt.status='stopped';receipt.error=String(error.message||'request_failed').replace(/[^a-zA-Z0-9_: -]/g,'').slice(0,180);
+            receipt.action_outcome_may_need_reconciliation=['register_custom_receiving_profile','claim_prepared_buyer_task','deliver_completed_work'].includes(receipt.stage);
+            save();process.exitCode=1;
+          }).finally(()=>{receipt.finished_at=new Date().toISOString();save();console.log(JSON.stringify(receipt,null,2));});
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a0-single-buyer-submission
+          path: |
+            buyer-submission-receipt.json
+            sealed-marketplace-identity.json
+          retention-days: 3
