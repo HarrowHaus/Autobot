@@ -2,8 +2,6 @@ name: SwarmBrain peer tasks
 on:
   issues:
     types: [opened]
-  issue_comment:
-    types: [created]
   workflow_dispatch:
     inputs:
       job:
@@ -22,11 +20,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' &&
        github.event.issue.user.login == github.repository_owner &&
-       startsWith(github.event.issue.title, 'SwarmBrain task:')) ||
-      (github.event_name == 'issue_comment' &&
-       startsWith(github.event.comment.body, 'SwarmBrain job:') &&
-       (github.event.comment.user.login == github.repository_owner ||
-        github.event.comment.user.login == 'KungFury87'))
+       startsWith(github.event.issue.title, 'SwarmBrain task:'))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
@@ -54,7 +48,7 @@ jobs:
             git push origin "HEAD:${STATE_BRANCH}"
           fi
       - name: Post automatic issue result
-        if: always() && (github.event_name == 'issues' || github.event_name == 'issue_comment')
+        if: always() && github.event_name == 'issues'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 swarmbrain/github_bridge.py post
