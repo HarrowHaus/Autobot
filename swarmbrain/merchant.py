@@ -130,20 +130,21 @@ class X402Merchant:
                 }
 
             record = settlement_record(settlement, self.accepted)
-            ledger = EconomyLedger.load(self.ledger_path)
-            event = ledger.record_usdc_settlement(
-                task_id=task_id,
-                amount_atomic=record["amount_atomic"],
-                network=record["network"],
-                transaction=record["transaction"],
-                payer=record.get("payer"),
-                evidence={
-                    "x402_version": 2,
-                    "payment_payload_sha256": fingerprint,
-                    "verification": verification,
-                    "settlement": settlement,
-                },
-            )
+            with self._replay_lock:
+                ledger = EconomyLedger.load(self.ledger_path)
+                event = ledger.record_usdc_settlement(
+                    task_id=task_id,
+                    amount_atomic=record["amount_atomic"],
+                    network=record["network"],
+                    transaction=record["transaction"],
+                    payer=record.get("payer"),
+                    evidence={
+                        "x402_version": 2,
+                        "payment_payload_sha256": fingerprint,
+                        "verification": verification,
+                        "settlement": settlement,
+                    },
+                )
             return {
                 "status": 200,
                 "headers": {PAYMENT_RESPONSE: encode_header(settlement)},
