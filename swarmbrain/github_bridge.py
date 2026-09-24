@@ -30,8 +30,33 @@ def parse_comment_job(event):
         raise ValueError("Task body must decode to a JSON object")
     return job, "comment-" + str(comment["id"]), int(issue["number"])
 
+def compact_result(summary):
+    result = summary.get("job_result") or {}
+    mode = result.get("mode")
+    compact = {"mode": mode}
+    if mode == "route":
+        compact["routes"] = result.get("routes") or []
+        compact["registered_peers"] = result.get("registered_peers")
+        compact["connected_peers"] = result.get("connected_peers")
+    elif mode == "request":
+        run_key = result.get("run_key")
+        compact["run_key"] = run_key
+        tasks = result.get("tasks") or []
+        compact["task"] = next((t for t in reversed(tasks) if t.get("id") == run_key), None)
+        compact["errors"] = result.get("errors") or []
+    else:
+        compact.update({
+            "registered_peers": result.get("registered_peers"),
+            "connected_peers": result.get("connected_peers"),
+            "results_received": result.get("results_received"),
+            "verified_task_results": result.get("verified_task_results"),
+            "errors": result.get("errors") or [],
+        })
+    compact["economics"] = summary.get("economics") or {"recorded": False}
+    return compact
+
 def make_reply(summary):
-    result = summary.get("job_result", {})
+    result = compact_result(summary)
     body = [
         "SwarmBrain automatic result",
         "",
@@ -39,10 +64,10 @@ def make_reply(summary):
         f"Generated: {summary.get('generated_at','unknown')}",
         "",
         "```json",
-        json.dumps(result, indent=2, ensure_ascii=False)[:12000],
+        json.dumps(result, indent=2, ensure_ascii=False)[:6000],
         "```",
         "",
-        "This is the persisted SwarmBrain job result; it is not a claim about peer ownership or model identity."
+        "Full receipts remain persisted in the repository. This result does not claim peer ownership or model identity."
     ]
     return "\n".join(body)
 
