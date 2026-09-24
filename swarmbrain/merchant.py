@@ -5,7 +5,7 @@ No wallet private key is held here. A configured facilitator verifies and settle
 client-signed payments; only successful settlement becomes real USDC revenue.
 """
 from __future__ import annotations
-import json
+import hashlib, json, threading
 from pathlib import Path
 from urllib import request
 
@@ -64,6 +64,8 @@ class X402Merchant:
         self.accepted = self.requirement["accepts"][0]
         self.facilitator = facilitator
         self.ledger_path = Path(ledger_path)
+        self._replay_lock = threading.Lock()
+        self._inflight = set()
 
     def challenge(self, reason=None):
         body = {"error": reason or "payment_required", "x402Version": 2}
@@ -73,6 +75,20 @@ class X402Merchant:
             "body": body,
         }
 
+    def _payment_fingerprint(self, payment_payload):
+        raw = json.dumps(payment_payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+    def _already_consumed(self, fingerprint):
+        ledger = EconomyLedger.load(self.ledger_path)
+        for event in ledger.events:
+            if event.get("type") != "usdc_settlement":
+                continue
+            evidence = event.get("payload", {}).get("evidence") or {}
+            if evidence.get("payment_payload_sha256") == fingerprint:
+                return True
+        return False
+
     def transact(self, *, task_id, payment_signature, perform_work):
         if not payment_signature:
             return self.challenge()
@@ -81,50 +97,69 @@ class X402Merchant:
         except Exception:
             return self.challenge("invalid_payment_signature_header")
 
-        verification = self.facilitator.verify(payment_payload, self.accepted)
-        if verification.get("isValid") is not True:
-            return self.challenge(verification.get("invalidReason") or "payment_invalid")
+        fingerprint = self._payment_fingerprint(payment_payload)
+        with self._replay_lock:
+            if fingerprint in self._inflight or self._already_consumed(fingerprint):
+                return {
+                    "status": 409,
+                    "headers": {},
+                    "body": {"error": "payment_already_consumed"},
+                }
+            self._inflight.add(fingerprint)
 
         try:
-            resource = perform_work()
-        except Exception as exc:
-            return {
-                "status": 500,
-                "headers": {},
-                "body": {"error": "resource_execution_failed", "detail": str(exc)[:300]},
-            }
+            verification = self.facilitator.verify(payment_payload, self.accepted)
+            if verification.get("isValid") is not True:
+                return self.challenge(verification.get("invalidReason") or "payment_invalid")
 
-        settlement = self.facilitator.settle(payment_payload, self.accepted)
-        if settlement.get("success") is not True:
-            return {
-                "status": 502,
-                "headers": {},
-                "body": {"error": "payment_settlement_failed", "settlement": settlement},
-            }
+            try:
+                resource = perform_work()
+            except Exception as exc:
+                return {
+                    "status": 500,
+                    "headers": {},
+                    "body": {"error": "resource_execution_failed", "detail": str(exc)[:300]},
+                }
 
-        record = settlement_record(settlement, self.accepted)
-        ledger = EconomyLedger.load(self.ledger_path)
-        event = ledger.record_usdc_settlement(
-            task_id=task_id,
-            amount_atomic=record["amount_atomic"],
-            network=record["network"],
-            transaction=record["transaction"],
-            payer=record.get("payer"),
-            evidence={"x402_version": 2, "verification": verification, "settlement": settlement},
-        )
-        return {
-            "status": 200,
-            "headers": {PAYMENT_RESPONSE: encode_header(settlement)},
-            "body": {
-                "result": resource,
-                "payment": {
-                    "event_id": event["event_id"],
-                    "amount_atomic": record["amount_atomic"],
-                    "network": record["network"],
-                    "transaction": record["transaction"],
+            settlement = self.facilitator.settle(payment_payload, self.accepted)
+            if settlement.get("success") is not True:
+                return {
+                    "status": 502,
+                    "headers": {},
+                    "body": {"error": "payment_settlement_failed", "settlement": settlement},
+                }
+
+            record = settlement_record(settlement, self.accepted)
+            ledger = EconomyLedger.load(self.ledger_path)
+            event = ledger.record_usdc_settlement(
+                task_id=task_id,
+                amount_atomic=record["amount_atomic"],
+                network=record["network"],
+                transaction=record["transaction"],
+                payer=record.get("payer"),
+                evidence={
+                    "x402_version": 2,
+                    "payment_payload_sha256": fingerprint,
+                    "verification": verification,
+                    "settlement": settlement,
                 },
-            },
-        }
+            )
+            return {
+                "status": 200,
+                "headers": {PAYMENT_RESPONSE: encode_header(settlement)},
+                "body": {
+                    "result": resource,
+                    "payment": {
+                        "event_id": event["event_id"],
+                        "amount_atomic": record["amount_atomic"],
+                        "network": record["network"],
+                        "transaction": record["transaction"],
+                    },
+                },
+            }
+        finally:
+            with self._replay_lock:
+                self._inflight.discard(fingerprint)
 
 __all__ = [
     "FacilitatorClient", "X402Merchant",
