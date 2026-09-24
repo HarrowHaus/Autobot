@@ -1,8 +1,17 @@
-import tempfile, unittest
+import hashlib, tempfile, threading, unittest
 from pathlib import Path
 from swarmbrain.economy import EconomyLedger
 from swarmbrain.merchant import X402Merchant
 from swarmbrain.x402 import encode_header
+
+class DistinctTxFacilitator:
+    def verify(self, payment_payload, requirement):
+        return {"isValid": True, "payer": "0x" + "3" * 40}
+    def settle(self, payment_payload, requirement):
+        nonce = str(payment_payload.get("payload", {}).get("nonce", "0"))
+        tx = hashlib.sha256(nonce.encode()).hexdigest()
+        return {"success":True,"payer":"0x" + "3" * 40,
+                "transaction":"0x" + tx,"network":requirement["network"]}
 
 class FakeFacilitator:
     def __init__(self, valid=True, settled=True):
@@ -107,6 +116,43 @@ class MerchantTests(unittest.TestCase):
             self.assertEqual(f.settle_calls, 1)
             ledger = EconomyLedger.load(path)
             self.assertEqual(ledger.balances()["real_usdc_atomic_received"], 10_000)
+
+    def test_concurrent_distinct_payments_both_persist(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td)/"ledger.json"
+            m = merchant(path, DistinctTxFacilitator())
+            barrier = threading.Barrier(2)
+            results = []
+            errors = []
+            lock = threading.Lock()
+
+            def run(nonce):
+                try:
+                    signature = encode_header({"x402Version":2,"payload":{"nonce":nonce}})
+                    def work():
+                        barrier.wait(timeout=5)
+                        return {"nonce":nonce}
+                    result = m.transact(
+                        task_id="sale-" + nonce,
+                        payment_signature=signature,
+                        perform_work=work)
+                    with lock:
+                        results.append(result)
+                except Exception as exc:
+                    with lock:
+                        errors.append(exc)
+
+            threads = [threading.Thread(target=run,args=(nonce,)) for nonce in ("a","b")]
+            for thread in threads: thread.start()
+            for thread in threads: thread.join(timeout=10)
+
+            self.assertEqual(errors, [])
+            self.assertEqual(sorted(r["status"] for r in results), [200,200])
+            ledger = EconomyLedger.load(path)
+            self.assertEqual(ledger.balances()["real_usdc_atomic_received"], 20_000)
+            self.assertEqual(
+                len([e for e in ledger.events if e["type"]=="usdc_settlement"]), 2)
+            self.assertTrue(ledger.verify()["ok"])
 
 if __name__ == "__main__":
     unittest.main()
