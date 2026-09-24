@@ -3,6 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 from swarmbrain import runtime_bridge
 from swarmbrain.economy import EconomyLedger
+from swarmbrain.pricing import RateCard
 
 class RuntimeBridgeTests(unittest.TestCase):
     def summary(self):
@@ -25,10 +26,18 @@ class RuntimeBridgeTests(unittest.TestCase):
     def test_verified_receipt_backed_work_records_acc_not_usdc(self):
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "economy.json"
+            rate_card = {
+                "currency":"USD",
+                "source":"https://provider.example/pricing",
+                "effective_at":"2026-09-24",
+                "rates":{"model-a":{"input_usd_per_million_tokens":"50","output_usd_per_million_tokens":"0"}}
+            }
+            quote = RateCard(rate_card).quote(rate_key="model-a", input_tokens=1000)
             job = {
                 "economy": {
                     "verified": True,
-                    "reference_cost_microusd": 50_000,
+                    "rate_card": rate_card,
+                    "reference_quote": quote,
                     "actual_cost_microusd": 6_000,
                     "acc_microunits": 1_000_000,
                     "verification_scope": "receipt-backed test",
@@ -101,6 +110,20 @@ class RuntimeBridgeTests(unittest.TestCase):
             with patch.object(runtime_bridge, "ECONOMY_PATH", path):
                 result = runtime_bridge.account(job, summary, "new-job")
                 self.assertFalse(result["recorded"])
+
+    def test_bare_reference_cost_is_rejected_for_current_verified_job(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "economy.json"
+            job = {"economy": {
+                "verified": True,
+                "reference_cost_microusd": 50_000,
+                "actual_cost_microusd": 6_000,
+                "acc_microunits": 100,
+            }}
+            with patch.object(runtime_bridge, "ECONOMY_PATH", path):
+                with self.assertRaises(ValueError):
+                    runtime_bridge.account(job, self.summary(), "job-2")
+                self.assertFalse(path.exists())
 
 if __name__ == "__main__":
     unittest.main()
