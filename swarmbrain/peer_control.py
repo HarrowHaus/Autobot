@@ -4,6 +4,7 @@ from __future__ import annotations
 import json, os, re, sys
 from pathlib import Path
 from mesh import Mesh, Network, ROOT, now, write_json, normalize, digest, parts_of
+from github_bridge import parse_comment_job
 
 
 def poll_task(mesh, task_id, request_id):
@@ -126,6 +127,9 @@ def main():
         if issue['user']['login'] != event['repository']['owner']['login'] or not issue['title'].startswith('SwarmBrain task:'):
             raise SystemExit('Only owner-authored SwarmBrain task issues dispatch work')
         return execute(json.loads(issue.get('body') or '{}'), 'issue-' + str(issue['number']))
+    if event_name == 'issue_comment':
+        job, job_id, _issue_number = parse_comment_job(event)
+        return execute(job, job_id)
     if event_name == 'workflow_dispatch':
         return execute(json.loads(event.get('inputs', {}).get('job', '{"mode":"route"}')), 'manual-' + os.environ['GITHUB_RUN_ID'])
     raise SystemExit('Unsupported event; no remote requests performed')
