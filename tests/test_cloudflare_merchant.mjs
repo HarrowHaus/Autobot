@@ -31,3 +31,19 @@ test("worker exposes discovery documents",async()=>{
   assert.equal(s.status,200);
   assert.match(await s.text(),/x402 v2/);
 });
+
+
+test("worker exposes Agent Card for discovery",async()=>{
+  const mod=(await import("../cloudflare/merchant-worker.js")).default;
+  const origin="https://merchant.example";
+  for(const path of ["/.well-known/agent-card.json","/.well-known/agent.json"]){
+    const r=await mod.fetch(new Request(origin+path),{});
+    assert.equal(r.status,200);
+    const card=await r.json();
+    assert.equal(card.name,"A0 Route Intelligence");
+    assert.equal(card.url,origin);
+    assert.equal(card.skills[0].id,"paid-route-intelligence");
+    assert.equal(card.metadata.payment_protocol,"x402-v2");
+    assert.equal(card.metadata.paid_endpoint,origin+"/v1/route");
+  }
+});
