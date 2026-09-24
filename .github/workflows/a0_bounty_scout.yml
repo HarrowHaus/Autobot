@@ -1,6 +1,12 @@
 name: A0 bounty scout
 
 on:
+  push:
+    branches:
+      - claude/monetizable-project-concepts-b97bv2
+    paths:
+      - 'swarmbrain/bounty_scout.py'
+      - '.github/workflows/a0_bounty_scout.yml'
   schedule:
     - cron: '7,37 * * * *'
   workflow_dispatch:
