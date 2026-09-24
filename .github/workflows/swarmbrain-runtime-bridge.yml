@@ -11,12 +11,14 @@ on:
       - 'swarmbrain/mesh.py'
       - 'swarmbrain/github_bridge.py'
       - 'swarmbrain/economy.py'
+      - 'swarmbrain/pricing.py'
       - 'swarmbrain/x402.py'
       - 'swarmbrain/merchant.py'
       - 'swarmbrain/merchant_server.py'
       - 'tests/test_runtime_bridge.py'
       - 'tests/test_github_bridge.py'
       - 'tests/test_economy.py'
+      - 'tests/test_pricing.py'
       - 'tests/test_x402.py'
       - 'tests/test_merchant.py'
       - 'tests/test_merchant_server.py'
@@ -41,7 +43,7 @@ jobs:
         with:
           ref: claude/monetizable-project-concepts-b97bv2
       - name: Run bridge and economy tests
-        run: python3 -m unittest tests.test_github_bridge tests.test_economy tests.test_x402 tests.test_runtime_bridge tests.test_merchant tests.test_merchant_server
+        run: python3 -m unittest tests.test_github_bridge tests.test_economy tests.test_x402 tests.test_runtime_bridge tests.test_merchant tests.test_merchant_server tests.test_pricing
 
   execute-comment:
     if: github.event_name == 'issue_comment' && startsWith(github.event.comment.body, 'SwarmBrain job:')
