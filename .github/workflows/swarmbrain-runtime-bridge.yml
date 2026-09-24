@@ -1,0 +1,68 @@
+name: SwarmBrain autonomous issue bridge
+
+on:
+  issue_comment:
+    types: [created]
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - 'swarmbrain/runtime_bridge.py'
+      - 'swarmbrain/github_bridge.py'
+      - 'swarmbrain/economy.py'
+      - 'swarmbrain/x402.py'
+      - 'tests/test_runtime_bridge.py'
+      - 'tests/test_github_bridge.py'
+      - 'tests/test_economy.py'
+      - 'tests/test_x402.py'
+      - '.github/workflows/swarmbrain-runtime-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: swarmbrain-autonomous-issue-bridge
+  cancel-in-progress: false
+
+jobs:
+  test:
+    if: github.event_name != 'issue_comment' || startsWith(github.event.comment.body, 'SwarmBrain job:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - name: Run bridge and economy tests
+        run: python3 -m unittest tests.test_github_bridge tests.test_economy tests.test_x402 tests.test_runtime_bridge
+
+  execute-comment:
+    if: github.event_name == 'issue_comment' && startsWith(github.event.comment.body, 'SwarmBrain job:')
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      SWARMBRAIN_TRUSTED_COMMENTERS: KungFury87
+      SWARMBRAIN_RESULT_PATH: reports/comment-job-latest.json
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - name: Execute trusted finite SwarmBrain job
+        run: python3 swarmbrain/runtime_bridge.py
+      - name: Persist state and receipts
+        run: |
+          git config user.name 'SwarmBrain-Harrow'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data/mesh-state.json data/economy-ledger.json reports/runtime-latest.json reports/runtime-latest.md reports/comment-job-latest.json
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist autonomous SwarmBrain issue job [skip ci]"
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
+      - name: Reply with persisted result
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 swarmbrain/github_bridge.py post
