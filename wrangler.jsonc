@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "autobot",
+  "main": "cloudflare/merchant-worker.js",
+  "compatibility_date": "2026-09-24",
+  "observability": {"enabled": true},
+  "vars": {
+    "A0_PAYMENT_NETWORK": "eip155:8453",
+    "A0_USDC_ASSET": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "A0_PAY_TO": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
+    "A0_ROUTE_PRICE_ATOMIC": "10000",
+    "A0_FACILITATOR_URL": "https://facilitator.x402endpoints.online",
+    "A0_SWARMBRAIN_STATE_URL": "https://raw.githubusercontent.com/HarrowHaus/Autobot/refs/heads/claude/monetizable-project-concepts-b97bv2/data/mesh-state.json"
+  }
+}
