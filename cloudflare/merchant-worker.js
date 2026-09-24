@@ -138,6 +138,36 @@ export default {
     if(request.method==="GET"&&u.pathname==="/catalog") {
       const c=cfg(env); return new Response(JSON.stringify({service:"A0 Route Intelligence",endpoint:new URL("/v1/route",u.origin).toString(),method:"POST",price_atomic:c.amount,asset:c.asset,network:c.network,pay_to:c.payTo,facilitator:c.facilitator}),{status:200,headers:jsonHeaders});
     }
+    if(request.method==="GET"&&u.pathname==="/.well-known/x402") {
+      return new Response(JSON.stringify({version:1,resources:[new URL("/v1/route",u.origin).toString()]}),{status:200,headers:jsonHeaders});
+    }
+    if(request.method==="GET"&&u.pathname==="/openapi.json") {
+      const c=cfg(env);
+      return new Response(JSON.stringify({
+        openapi:"3.1.0",
+        info:{title:"A0 Route Intelligence",version:"0.28.0",description:"Paid read-only routing over the SwarmBrain public peer graph."},
+        servers:[{url:u.origin}],
+        paths:{"/v1/route":{post:{
+          summary:"Rank useful agent routes",
+          operationId:"routeAgents",
+          requestBody:{required:true,content:{"application/json":{schema:{type:"object",properties:{query:{type:"string"},limit:{type:"integer",minimum:1,maximum:10}},required:["query"]}}}},
+          responses:{"200":{description:"Paid routing result"},"402":{description:"x402 payment required"}},
+          "x-payment-info":{protocols:["x402"],amount:"0.01",currency:"USDC",network:c.network}
+        }}}
+      }),{status:200,headers:jsonHeaders});
+    }
+    if(request.method==="GET"&&u.pathname==="/skill.md") {
+      const text=[
+        "# A0 Route Intelligence",
+        "",
+        "Use POST /v1/route with JSON {\"query\":\"capability terms\",\"limit\":3}.",
+        "The endpoint uses x402 v2 exact payments on Base in USDC.",
+        "An unpaid request returns HTTP 402 with PAYMENT-REQUIRED.",
+        "The service is read-only: it ranks known SwarmBrain peers and does not dispatch work.",
+        "Discovery: /.well-known/x402 and /openapi.json."
+      ].join("\n");
+      return new Response(text,{status:200,headers:{"content-type":"text/markdown; charset=utf-8","cache-control":"no-store"}});
+    }
     if(request.method==="POST"&&u.pathname==="/v1/route") return paidRoute(request,env);
     return new Response(JSON.stringify({error:"not_found"}),{status:404,headers:jsonHeaders});
   }
