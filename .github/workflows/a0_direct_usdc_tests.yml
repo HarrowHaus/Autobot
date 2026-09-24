@@ -1,26 +1,40 @@
 name: A0 direct USDC collector tests
-
 on:
   push:
-    paths:
-      - 'swarmbrain/direct_usdc.py'
-      - 'tests/test_direct_usdc.py'
-      - '.github/workflows/a0_direct_usdc_*.yml'
+    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', '.github/workflows/a0_direct_usdc_*.yml']
   pull_request:
-    paths:
-      - 'swarmbrain/direct_usdc.py'
-      - 'tests/test_direct_usdc.py'
-      - '.github/workflows/a0_direct_usdc_*.yml'
-
+    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', '.github/workflows/a0_direct_usdc_*.yml']
 permissions:
   contents: read
-
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest tests.test_direct_usdc
+      - name: Run 37 payment-recovery and discovery regressions
+        run: |
+          python -m unittest discover -s tests -p test_direct_usdc.py -v
+          python -m unittest discover -s tests -p test_payment_recovery.py -v
+          python -m unittest discover -s tests -p test_collection_probe.py -v
+      - name: Probe current buyer tasks without claiming or paying
+        run: python -m swarmbrain.collection_probe > collection-probe.json
+      - name: Read-only historical payment reconciliation in disposable checkout
+        continue-on-error: true
+        run: python -m swarmbrain.direct_usdc scan --orders-dir direct-usdc/orders --pay-to 0xa47930496923574a33325b9be28fe84fa8d2b1c6 > scan-readonly.json
+      - name: Show source and recovery results
+        if: always()
+        run: |
+          test ! -f collection-probe.json || cat collection-probe.json
+          test ! -f scan-readonly.json || cat scan-readonly.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a0-collection-readiness
+          path: |
+            collection-probe.json
+            scan-readonly.json
+          retention-days: 7

@@ -1,65 +1,77 @@
 name: A0 direct USDC settlement watcher
-
 on:
   push:
     branches: ['claude/monetizable-project-concepts-b97bv2']
-    paths:
-      - 'direct-usdc/orders/**'
-      - 'swarmbrain/direct_usdc.py'
-      - '.github/workflows/a0_direct_usdc_settle.yml'
+    paths: ['direct-usdc/orders/**', 'swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', '.github/workflows/a0_direct_usdc_settle.yml']
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '2-57/5 * * * *'
   workflow_dispatch:
-
 permissions:
   contents: write
   issues: write
-
 concurrency:
   group: a0-direct-usdc-settlement
   cancel-in-progress: false
-
 jobs:
   settle:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     env:
       A0_PAY_TO: '0xa47930496923574a33325b9be28fe84fa8d2b1c6'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: claude/monetizable-project-concepts-b97bv2
-      - name: Verify Base transfers and fulfill paid routes
+      - name: Test reconciliation before observing payments
+        run: python3 -m unittest discover -s tests -p test_payment_recovery.py
+      - name: Reconcile incoming transfers
+        id: scan
+        continue-on-error: true
         run: python3 -m swarmbrain.direct_usdc scan --orders-dir direct-usdc/orders --pay-to "$A0_PAY_TO" > scan.json
-      - name: Persist settlement receipts
+      - name: Persist recoverable payment and delivery state
         run: |
           git config user.name 'A0 Direct USDC'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add direct-usdc/orders
           if ! git diff --cached --quiet; then
-            git commit -m 'Reconcile direct Base USDC settlements [skip ci]'
+            git commit -m 'Persist incoming-payment reconciliation and recovery [skip ci]'
             git pull --rebase origin claude/monetizable-project-concepts-b97bv2
             git push origin HEAD:claude/monetizable-project-concepts-b97bv2
           fi
-      - name: Publish fulfilled results
+      - name: Publish durable recovery alerts and delivery receipts
         uses: actions/github-script@v8
         with:
           script: |
-            const fs=require('fs');
-            const scan=JSON.parse(fs.readFileSync('scan.json','utf8'));
-            for(const o of scan.fulfilled||[]){
-              const body=[
-                'A0 paid route fulfilled',
-                '',
-                'Order: '+o.order_id,
-                'Confirmed payment: '+o.amount_usdc+' USDC on Base',
-                'Transaction: '+o.settlement.transaction,
-                'Receipt hash: '+o.receipt_hash,
-                '',
-                'Result:',
-                '```json',
-                JSON.stringify(o.result,null,2).slice(0,50000),
-                '```'
-              ].join('\n');
-              await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:Number(o.issue_number),body});
+            const fs = require('fs');
+            const scan = JSON.parse(fs.readFileSync('scan.json','utf8'));
+            const cache = new Map();
+            async function comments(issue_number) {
+              if (!cache.has(issue_number)) cache.set(issue_number, await github.paginate(github.rest.issues.listComments,
+                {owner:context.repo.owner,repo:context.repo.repo,issue_number,per_page:100}));
+              return cache.get(issue_number);
             }
+            for (const e of scan.events || []) {
+              const issue_number = e.kind === 'fulfilled' ? Number(e.issue_number) : 19;
+              const marker = '<!-- a0-payment-event:'+e.id+' -->';
+              if ((await comments(issue_number)).some(c=>c.user?.login==='github-actions[bot]' && c.body?.includes(marker))) continue;
+              let o = (scan.fulfilled || []).find(o=>o.order_id===e.order_id);
+              if (!o && e.kind==='fulfilled' && /^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$/.test(e.order_id)) o=JSON.parse(fs.readFileSync('direct-usdc/orders/'+e.order_id+'.json','utf8'));
+              let body = [marker, 'A0 payment recovery: '+e.kind, 'Order: '+e.order_id, '', e.detail].join('\n');
+              if (o) body += '\n\nTransaction: '+o.settlement.transaction+'\nReceipt hash: '+o.receipt_hash+'\n\n```json\n'+JSON.stringify(o.result,null,2).slice(0,40000)+'\n```';
+              const result=await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number,body});
+              cache.get(issue_number).push(result.data);
+            }
+            const marker='<!-- a0-payment-monitor-health -->';
+            const body=marker+'\nA0 payment monitor: '+scan.status+'\n'+JSON.stringify(scan.errors || [])+'\nA failed or incomplete scan is not evidence of no payment.';
+            const prior=(await comments(19)).find(c=>c.user?.login==='github-actions[bot]' && c.body?.includes(marker));
+            if (prior && prior.body!==body) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:prior.id,body});
+            else if (!prior) await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:19,body});
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a0-payment-recovery-scan
+          path: scan.json
+          retention-days: 7
+      - name: Keep incomplete or failed scan visibly failed
+        if: steps.scan.outcome == 'failure'
+        run: exit 1
