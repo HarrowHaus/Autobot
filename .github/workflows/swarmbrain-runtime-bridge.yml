@@ -16,6 +16,7 @@ on:
       - 'swarmbrain/x402.py'
       - 'swarmbrain/merchant.py'
       - 'swarmbrain/merchant_server.py'
+      - 'swarmbrain/direct_usdc.py'
       - 'tests/test_runtime_bridge.py'
       - 'tests/test_github_bridge.py'
       - 'tests/test_economy.py'
@@ -24,7 +25,10 @@ on:
       - 'tests/test_x402.py'
       - 'tests/test_merchant.py'
       - 'tests/test_merchant_server.py'
+      - 'tests/test_direct_usdc.py'
       - '.github/workflows/swarmbrain-runtime-bridge.yml'
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -37,7 +41,7 @@ concurrency:
 
 jobs:
   test:
-    if: github.event_name != 'issue_comment' || startsWith(github.event.comment.body, 'SwarmBrain job:')
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'issue_comment' && startsWith(github.event.comment.body, 'SwarmBrain job:')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -48,7 +52,7 @@ jobs:
         run: python3 -m unittest discover -s tests -v
 
   execute-comment:
-    if: github.event_name == 'issue_comment' && startsWith(github.event.comment.body, 'SwarmBrain job:')
+    if: ${{ github.event_name == 'issue_comment' && startsWith(github.event.comment.body, 'SwarmBrain job:') }}
     needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 6
@@ -66,12 +70,10 @@ jobs:
           git config user.name 'SwarmBrain-Harrow'
           git config user.email '285251944+HarrowHaus@users.noreply.github.com'
           git add -- data/mesh-state.json data/graph.json reports/runtime-latest.json reports/runtime-latest.md reports/comment-job-latest.json
-          if [ -f data/economy-ledger.json ]; then
-            git add -- data/economy-ledger.json
-          fi
+          if [ -f data/economy-ledger.json ]; then git add -- data/economy-ledger.json; fi
           git diff --cached --check
           if ! git diff --cached --quiet; then
-            git commit -m "Persist autonomous SwarmBrain issue job [skip ci]"
+            git commit -m 'Persist autonomous SwarmBrain issue job [skip ci]'
             git pull --rebase origin claude/monetizable-project-concepts-b97bv2
             git push origin HEAD:claude/monetizable-project-concepts-b97bv2
           fi
@@ -79,3 +81,106 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 swarmbrain/github_bridge.py post
+
+  quote-paid-route:
+    if: ${{ github.event_name == 'issue_comment' && github.event.issue.number == 33 && startsWith(github.event.comment.body, 'SwarmBrain paid route:') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
+      COMMENT_BODY: ${{ github.event.comment.body }}
+      REQUESTER: ${{ github.event.comment.user.login }}
+      COMMENT_ID: ${{ github.event.comment.id }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - name: Create unique Base USDC quote
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from swarmbrain.direct_usdc import create_quote
+          prefix='SwarmBrain paid route:'
+          body=os.environ['COMMENT_BODY']
+          query=body[len(prefix):].strip()
+          if not query or len(query)>1000: raise SystemExit('paid route query must be 1..1000 characters')
+          order_id='paid-route-'+os.environ['COMMENT_ID']
+          quote=create_quote(orders_dir='direct-usdc/orders',order_id=order_id,query=query,requester=os.environ['REQUESTER'],comment_id=int(os.environ['COMMENT_ID']),issue_number=int(os.environ['ISSUE_NUMBER']),pay_to=os.environ['A0_PAY_TO'])
+          open('quote.json','w',encoding='utf-8').write(json.dumps(quote,indent=2)+'\n')
+          PY
+      - name: Persist quote receipt
+        run: |
+          git config user.name 'A0 Direct USDC'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add direct-usdc/orders
+          if ! git diff --cached --quiet; then
+            git commit -m "Create direct USDC quote for comment ${COMMENT_ID} [skip ci]"
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
+      - name: Return payment instructions
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs=require('fs');
+            const q=JSON.parse(fs.readFileSync('quote.json','utf8'));
+            const body=[
+              'A0 direct USDC quote',
+              '',
+              'Order: '+q.order_id,
+              'Service: read-only swarm route selection',
+              'Amount: '+q.amount_usdc+' USDC',
+              'Network: Base mainnet (eip155:8453)',
+              'Pay to: '+q.pay_to,
+              'USDC contract: '+q.token_contract,
+              'Quote expires after Base block '+q.expires_after_block+'.',
+              '',
+              'The watcher releases the result only after the exact USDC transfer is confirmed on-chain. Do not send ETH, USDbC, or a different amount.'
+            ].join('\n');
+            await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:context.issue.number,body});
+
+  settle-paid-routes:
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - name: Verify Base transfers and fulfill paid routes
+        run: python3 -m swarmbrain.direct_usdc scan --orders-dir direct-usdc/orders --pay-to "$A0_PAY_TO" > scan.json
+      - name: Persist settlement receipts
+        run: |
+          git config user.name 'A0 Direct USDC'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add direct-usdc/orders
+          if ! git diff --cached --quiet; then
+            git commit -m 'Reconcile direct Base USDC settlements [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
+      - name: Publish fulfilled results
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs=require('fs');
+            const scan=JSON.parse(fs.readFileSync('scan.json','utf8'));
+            for(const o of scan.fulfilled||[]){
+              const body=[
+                'A0 paid route fulfilled',
+                '',
+                'Order: '+o.order_id,
+                'Confirmed payment: '+o.amount_usdc+' USDC on Base',
+                'Transaction: '+o.settlement.transaction,
+                'Receipt hash: '+o.receipt_hash,
+                '',
+                'Result:',
+                '```json',
+                JSON.stringify(o.result,null,2).slice(0,50000),
+                '```'
+              ].join('\n');
+              await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:Number(o.issue_number),body});
+            }
