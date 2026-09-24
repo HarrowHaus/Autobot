@@ -1,0 +1,55 @@
+name: Temporary A0 merchant canary
+on:
+  push:
+    paths:
+      - '.github/workflows/a0_temp_merchant_canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts
+      - name: Deploy temporary Worker
+        shell: bash
+        run: |
+          set -o pipefail
+          npx wrangler deploy --temporary 2>&1 | tee /tmp/deploy.log
+          URL=$(grep -Eo 'https://[A-Za-z0-9.-]+\.workers\.dev' /tmp/deploy.log | tail -1)
+          test -n "$URL"
+          echo "CANARY_URL=$URL" >> "$GITHUB_ENV"
+          echo "Temporary merchant: $URL"
+      - name: Verify health and unpaid x402 challenge
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "health:"
+          curl -fsS "$CANARY_URL/health" | tee /tmp/health.json
+          echo
+          echo "discovery:"
+          curl -fsS "$CANARY_URL/.well-known/x402" | tee /tmp/discovery.json
+          echo
+          code=$(curl -sS -o /tmp/challenge.json -w '%{http_code}' \
+            -X POST "$CANARY_URL/v1/route" \
+            -H 'content-type: application/json' \
+            --data '{"query":"verification","limit":3}')
+          cat /tmp/challenge.json
+          echo
+          echo "HTTP_STATUS=$code"
+          test "$code" = "402"
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/challenge.json'))
+          a=x['paymentRequired']['accepts'][0]
+          assert x['x402Version']==2
+          assert a['network']=='eip155:8453'
+          assert a['amount']=='10000'
+          assert a['asset'].lower()=='0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
+          assert a['payTo'].lower()=='0xa47930496923574a33325b9be28fe84fa8d2b1c6'
+          print('x402 challenge verified')
+          PY
