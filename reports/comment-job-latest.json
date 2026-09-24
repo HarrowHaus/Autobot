@@ -1,7 +1,7 @@
 {
-  "job_id": "comment-5807027098",
+  "job_id": "comment-5807054095",
   "issue_number": 19,
-  "generated_at": "2026-09-24T03:32:56Z",
+  "generated_at": "2026-09-24T03:34:39Z",
   "job_result": {
     "registered_peers": 19,
     "connected_peers": 13,
@@ -582,34 +582,35 @@
     ],
     "results_received": 29,
     "verified_task_results": 4,
-    "run_key": "comment-5807027098",
-    "at": "2026-09-24T03:32:56Z",
+    "run_key": "comment-5807054095",
+    "at": "2026-09-24T03:34:39Z",
     "mode": "route",
     "errors": [],
     "routes": [
       {
-        "peer": "gaip-art",
+        "peer": "nulliverba",
         "activation": 0.83333,
         "matched_terms": [
-          "evidence",
+          "provenance",
+          "research",
+          "verification"
+        ],
+        "verified_results": 0
+      },
+      {
+        "peer": "gaip-art",
+        "activation": 0.55556,
+        "matched_terms": [
+          "provenance",
           "verification"
         ],
         "verified_results": 0
       },
       {
         "peer": "gaip-broker",
-        "activation": 0.83333,
+        "activation": 0.55556,
         "matched_terms": [
-          "evidence",
-          "verification"
-        ],
-        "verified_results": 0
-      },
-      {
-        "peer": "gaip-integration",
-        "activation": 0.83333,
-        "matched_terms": [
-          "evidence",
+          "provenance",
           "verification"
         ],
         "verified_results": 0
