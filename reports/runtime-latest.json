@@ -4,22 +4,15 @@
   "results_received": 29,
   "verified_task_results": 4,
   "task_count": 34,
-  "generated_at": "2026-09-24T03:28:48Z",
-  "job_id": "comment-5806986688",
+  "generated_at": "2026-09-24T03:32:14Z",
+  "job_id": "comment-5807027098",
   "job_result": {
     "routes": [
-      {
-        "peer": "claude-schema",
-        "activation": 0.83333,
-        "matched_terms": [
-          "verification"
-        ],
-        "verified_results": 0
-      },
       {
         "peer": "gaip-art",
         "activation": 0.83333,
         "matched_terms": [
+          "evidence",
           "verification"
         ],
         "verified_results": 0
@@ -28,6 +21,16 @@
         "peer": "gaip-broker",
         "activation": 0.83333,
         "matched_terms": [
+          "evidence",
+          "verification"
+        ],
+        "verified_results": 0
+      },
+      {
+        "peer": "gaip-integration",
+        "activation": 0.83333,
+        "matched_terms": [
+          "evidence",
           "verification"
         ],
         "verified_results": 0

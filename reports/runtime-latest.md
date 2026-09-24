@@ -1,6 +1,6 @@
 # SwarmBrain current peer state
 
-Generated: 2026-09-24T03:28:48Z
+Generated: 2026-09-24T03:32:14Z
 
 Registered peers: 19. Connected peers: 13. Request records: 34. Returned responses: 29. Validated task results: 4.
 
@@ -10,17 +10,10 @@ Registered peers: 19. Connected peers: 13. Request records: 34. Returned respons
 {
   "routes": [
     {
-      "peer": "claude-schema",
-      "activation": 0.83333,
-      "matched_terms": [
-        "verification"
-      ],
-      "verified_results": 0
-    },
-    {
       "peer": "gaip-art",
       "activation": 0.83333,
       "matched_terms": [
+        "evidence",
         "verification"
       ],
       "verified_results": 0
@@ -29,6 +22,16 @@ Registered peers: 19. Connected peers: 13. Request records: 34. Returned respons
       "peer": "gaip-broker",
       "activation": 0.83333,
       "matched_terms": [
+        "evidence",
+        "verification"
+      ],
+      "verified_results": 0
+    },
+    {
+      "peer": "gaip-integration",
+      "activation": 0.83333,
+      "matched_terms": [
+        "evidence",
         "verification"
       ],
       "verified_results": 0
