@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     env:
-      A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
+      A0_PAY_TO: '0xa47930496923574a33325b9be28fe84fa8d2b1c6'
       COMMENT_BODY: ${{ github.event.comment.body }}
       REQUESTER: ${{ github.event.comment.user.login }}
       COMMENT_ID: ${{ github.event.comment.id }}
