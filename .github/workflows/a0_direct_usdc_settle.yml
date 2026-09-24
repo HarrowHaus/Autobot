@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      A0_PAY_TO: 0xa47930496923574a33325b9be28fe84fa8d2b1c6
+      A0_PAY_TO: '0xa47930496923574a33325b9be28fe84fa8d2b1c6'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
