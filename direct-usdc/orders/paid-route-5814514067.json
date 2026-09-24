@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "order_id": "paid-route-5814514067",
+  "issue_number": 33,
+  "comment_id": 5814514067,
+  "requester": "KungFury87",
+  "service": "read_only_route_selection",
+  "query": "verification research routing",
+  "limit": 3,
+  "network": "eip155:8453",
+  "chain_id": 8453,
+  "asset": "USDC",
+  "token_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
+  "amount_atomic": 14438,
+  "amount_usdc": "0.014438",
+  "from_block": 51732563,
+  "expires_after_block": 51734363,
+  "confirmations": 5,
+  "status": "awaiting_payment",
+  "created_at": "2026-09-24T12:54:34Z",
+  "quote_hash": "7ccc95026e02a524c752ee930e78cb44055058572d1f8b95965d0f18c5a54850"
+}
