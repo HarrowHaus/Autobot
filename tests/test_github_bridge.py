@@ -1,0 +1,36 @@
+import json, os, unittest
+from unittest.mock import patch
+from swarmbrain.github_bridge import parse_comment_job, make_reply
+
+class GitHubBridgeTests(unittest.TestCase):
+    def event(self, login="KungFury87", body='SwarmBrain job: {"mode":"route","query":"verification"}'):
+        return {
+            "repository": {"owner": {"login": "HarrowHaus"}},
+            "issue": {"number": 19},
+            "comment": {"id": 5800000000, "body": body, "user": {"login": login}},
+        }
+
+    @patch.dict(os.environ, {"SWARMBRAIN_TRUSTED_COMMENTERS":"KungFury87"})
+    def test_trusted_comment_dispatches(self):
+        job, job_id, issue = parse_comment_job(self.event())
+        self.assertEqual(job["mode"], "route")
+        self.assertEqual(job_id, "comment-5800000000")
+        self.assertEqual(issue, 19)
+
+    @patch.dict(os.environ, {"SWARMBRAIN_TRUSTED_COMMENTERS":"KungFury87"})
+    def test_untrusted_comment_is_rejected(self):
+        with self.assertRaises(ValueError):
+            parse_comment_job(self.event(login="random-user"))
+
+    @patch.dict(os.environ, {"SWARMBRAIN_TRUSTED_COMMENTERS":"KungFury87"})
+    def test_prefix_is_required(self):
+        with self.assertRaises(ValueError):
+            parse_comment_job(self.event(body='{"mode":"route"}'))
+
+    def test_reply_contains_persisted_result(self):
+        text = make_reply({"job_id":"x","generated_at":"now","job_result":{"routes":[]}})
+        self.assertIn("SwarmBrain automatic result", text)
+        self.assertIn('"routes": []', text)
+
+if __name__ == "__main__":
+    unittest.main()
