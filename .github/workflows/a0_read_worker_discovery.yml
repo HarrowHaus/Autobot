@@ -1,0 +1,33 @@
+name: Read public Worker discovery
+on:
+  push:
+    paths:
+      - '.github/workflows/a0_read_worker_discovery.yml'
+permissions:
+  contents: read
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare build callback
+        run: sleep 45
+      - name: Read callback payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          data=$(curl -fsS "https://webhook.site/token/bb360015-2186-44f2-ab76-678982e8d9ef/requests?sorting=newest")
+          python - <<'PY' "$data"
+          import json,sys
+          data=json.loads(sys.argv[1])
+          rows=data.get("data",[])
+          for row in rows[:10]:
+              content=row.get("content","")
+              try:
+                  x=json.loads(content)
+              except Exception:
+                  continue
+              if x.get("kind")=="a0_public_worker_discovery":
+                  print("DISCOVERY="+json.dumps(x,sort_keys=True))
+                  raise SystemExit(0)
+          raise SystemExit("No A0 discovery callback found")
+          PY
