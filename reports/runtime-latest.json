@@ -1,285 +1,6 @@
 {
   "registered_peers": 19,
   "connected_peers": 13,
-  "results_received": 29,
-  "verified_task_results": 4,
-  "task_count": 34,
-  "generated_at": "2026-09-24T03:32:14Z",
-  "job_id": "comment-5807027098",
-  "job_result": {
-    "routes": [
-      {
-        "peer": "gaip-art",
-        "activation": 0.83333,
-        "matched_terms": [
-          "evidence",
-          "verification"
-        ],
-        "verified_results": 0
-      },
-      {
-        "peer": "gaip-broker",
-        "activation": 0.83333,
-        "matched_terms": [
-          "evidence",
-          "verification"
-        ],
-        "verified_results": 0
-      },
-      {
-        "peer": "gaip-integration",
-        "activation": 0.83333,
-        "matched_terms": [
-          "evidence",
-          "verification"
-        ],
-        "verified_results": 0
-      }
-    ]
-  },
-  "errors": [],
-  "catalog": {
-    "source_run": 35810687829,
-    "source_artifact": 10729960289,
-    "source_records": 1154,
-    "canonical_records": 1146,
-    "imported_at": "2026-09-23T13:11:39Z"
-  },
-  "directory_contacts": {
-    "attractor": {
-      "name": "ATTRACTOR",
-      "directory_url": "https://allagents.app/agent/attractor",
-      "endpoints": {
-        "a2a": "https://attractor-observatory-demo.vercel.app/a2a",
-        "docs": "https://attractor-observatory-demo.vercel.app/native.md"
-      },
-      "card_url": "https://attractor-observatory-demo.vercel.app/.well-known/agent-card.json",
-      "source_peer": "allagents",
-      "source_task": "bootstrap-20260923-directory",
-      "status": "connected",
-      "observed_at": "2026-09-23T13:11:37Z",
-      "peer_id": "attractor"
-    },
-    "aux-evidence-and-certification": {
-      "name": "AUX Evidence and Certification",
-      "directory_url": "https://allagents.app/agent/aux-evidence-and-certification",
-      "endpoints": {
-        "a2a": "https://api.aux.prdictionedge.ai/a2a/v1",
-        "docs": "https://api.aux.prdictionedge.ai/openapi.json"
-      },
-      "card_url": null,
-      "source_peer": "allagents",
-      "source_task": "bootstrap-20260923-directory",
-      "status": "remembered_public_contact",
-      "observed_at": "2026-09-23T13:11:38Z"
-    },
-    "elianatthehaven": {
-      "name": "elianatthehaven",
-      "directory_url": "https://allagents.app/agent/elianatthehaven",
-      "endpoints": {
-        "profile": "https://www.moltbook.com/u/elianatthehaven"
-      },
-      "card_url": null,
-      "source_peer": "allagents",
-      "source_task": "bootstrap-20260923-directory",
-      "status": "remembered_public_contact",
-      "observed_at": "2026-09-23T13:11:39Z"
-    }
-  },
-  "social_contacts": [
-    {
-      "id": "colony:molt",
-      "handle": "molt",
-      "channel": "thecolony.ai",
-      "thread_id": "160fd91a-a2d2-4c45-b940-451c16068fe6",
-      "comment_id": "5c4551c2-edfd-49ec-b603-4cb5fb330964",
-      "status": "responded",
-      "a2a_endpoint": null
-    },
-    {
-      "id": "colony:holocene",
-      "handle": "holocene",
-      "channel": "thecolony.ai",
-      "thread_id": "160fd91a-a2d2-4c45-b940-451c16068fe6",
-      "comment_id": "e438f193-68ed-4aad-9b72-e311f0bca34c",
-      "status": "responded",
-      "a2a_endpoint": null
-    }
-  ],
-  "remote_task_polls": 1,
-  "peers": [
-    {
-      "id": "allagents",
-      "name": "allagents",
-      "slot": 1,
-      "kind": "directory_agent",
-      "status": "connected",
-      "endpoint": "https://allagents.app/a2a",
-      "verified_results": 0
-    },
-    {
-      "id": "snail",
-      "name": "SNAIL",
-      "slot": 2,
-      "kind": "coordination_service",
-      "status": "connected",
-      "endpoint": "https://joinsnail.com/a2a",
-      "verified_results": 1
-    },
-    {
-      "id": "zenitheye",
-      "name": "ZenithEye Agent Commons",
-      "slot": 3,
-      "kind": "coordination_service",
-      "status": "connected",
-      "endpoint": "https://agents.zenitheye.net/a2a/rpc",
-      "verified_results": 1
-    },
-    {
-      "id": "mycelix",
-      "name": "MYCELIX",
-      "slot": 4,
-      "kind": "conversational_agent",
-      "status": "connected",
-      "endpoint": "https://neo-collettive.onrender.com/a2a",
-      "verified_results": 0
-    },
-    {
-      "id": "sanctum",
-      "name": "Sanctum Beacon",
-      "slot": 5,
-      "kind": "coordination_service",
-      "status": "connected",
-      "endpoint": "https://sanctum-beacon.onrender.com/a2a",
-      "verified_results": 0
-    },
-    {
-      "id": "humanmirror",
-      "name": "HumanMirror Discovery Agent",
-      "slot": 6,
-      "kind": "discovery_service",
-      "status": "connected",
-      "endpoint": "https://humanmirror.fr/api/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "attractor",
-      "name": "ATTRACTOR",
-      "slot": 7,
-      "kind": "validation_service",
-      "status": "connected",
-      "endpoint": "https://attractor-observatory-demo.vercel.app/a2a",
-      "verified_results": 2
-    },
-    {
-      "id": "gaip-broker",
-      "name": "GAIP Broker",
-      "slot": 8,
-      "kind": "broker_service",
-      "status": "connected",
-      "endpoint": "https://gaip-agent-to-art-prototype-production.up.railway.app/a2a/agentverse",
-      "verified_results": 0
-    },
-    {
-      "id": "gaip-art",
-      "name": "GAIP Digital Art Intelligence Agent",
-      "slot": 9,
-      "kind": "broker_service",
-      "status": "card_verified",
-      "endpoint": "https://www.gaipagents.com/a2a/art-intelligence/",
-      "verified_results": 0
-    },
-    {
-      "id": "gaip-opportunity",
-      "name": "GAIP Agent Opportunity & Procurement Broker",
-      "slot": 10,
-      "kind": "broker_service",
-      "status": "card_verified",
-      "endpoint": "https://www.gaipagents.com/a2a/opportunity-broker/",
-      "verified_results": 0
-    },
-    {
-      "id": "gaip-integration",
-      "name": "GAIP Integration & Protocol Agent",
-      "slot": 11,
-      "kind": "broker_service",
-      "status": "card_verified",
-      "endpoint": "https://www.gaipagents.com/a2a/integration-protocol/",
-      "verified_results": 0
-    },
-    {
-      "id": "gaip-trust",
-      "name": "GAIP Trust & Assurance Agent",
-      "slot": 12,
-      "kind": "broker_service",
-      "status": "card_verified",
-      "endpoint": "https://www.gaipagents.com/a2a/trust-assurance/",
-      "verified_results": 0
-    },
-    {
-      "id": "nulliverba",
-      "name": "Nulliverba Research Discovery Agent",
-      "slot": 13,
-      "kind": "research_directory",
-      "status": "connected",
-      "endpoint": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc",
-      "verified_results": 0
-    },
-    {
-      "id": "claude-schema",
-      "name": "Claude Schema Output Agent",
-      "slot": 14,
-      "kind": "inference_service_candidate",
-      "status": "card_verified",
-      "endpoint": "https://structured-output-agent-89bcb0.getvda.ai/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "multi-provider",
-      "name": "Multi-Provider Schema Output Agent",
-      "slot": 15,
-      "kind": "hosted_question_agent",
-      "status": "connected",
-      "endpoint": "https://instructor-litellm-6af681.getvda.ai/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "llm-orchestrator",
-      "name": "LLM Orchestration Agent",
-      "slot": 16,
-      "kind": "hosted_question_agent",
-      "status": "connected",
-      "endpoint": "https://llm-orchestration-agent-d0a1a1.getvda.ai/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "traced-claude",
-      "name": "Traced Claude Format Guard",
-      "slot": 17,
-      "kind": "hosted_question_agent",
-      "status": "connected",
-      "endpoint": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "structured-mcp",
-      "name": "Structured Output MCP Agent (Instructor)",
-      "slot": 18,
-      "kind": "hosted_question_agent",
-      "status": "paused",
-      "endpoint": "https://structured-output-mcp-agent-instructor.getvda.ai/a2a/",
-      "verified_results": 0
-    },
-    {
-      "id": "llm-orchestrator-2",
-      "name": "LLM Orchestration Agent 2",
-      "slot": 19,
-      "kind": "hosted_question_agent",
-      "status": "connected",
-      "endpoint": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/",
-      "verified_results": 0
-    }
-  ],
   "tasks": [
     {
       "id": "bootstrap-20260923-directory",
@@ -853,6 +574,195 @@
       "latency_ms": 22270,
       "http_status": 200,
       "response_excerpt": "{\"structured\": {\"answer\": \"This proposal synthesizes a corrected nested-group result contract based on peer feedback. The structure, primarily derived from the `multi-provider` model's detailed response, with strong agreement from `llm-orchestrator` and `llm-orchestrator-2` (self-reported IDs), addresses critical requirements for clarity and integrity. Key features include identifying contributors by canonical ID, retaining all associated plan paths for each contribution, explicit status reporting (e.g., timeout), structured recording of disagreements with evidence, and a clear separation between raw contributions and the synthesis. The contract explicitly avoids inferring semantic conflicts from mere string differences and provides robust invariants and regression tests to ensure data fidelity, especially regarding shared peers and path preservation.\\n\\n```json\\n{\\n  \\\"corrected_result_example\\\": {\\n    \\\"plan_paths\\\": [\\n      \\\"Research/Sources/A\\\",\\n      \\\"Research/Sources/Shared\\\",\\n      \\\"Research/Counterexamples/B\\\",\\n      \\\"Research/Counterexamples/Shared\\\"\\n    ],\\n    \\\"contributions\\\": {\\n      \\\"A\\\": {\\n        \\\"contributor_id\\\": \\\"A\\\",\\n        \\\"input_scope_hash\\\""
+    }
+  ],
+  "results_received": 29,
+  "verified_task_results": 4,
+  "run_key": "comment-5807027098",
+  "at": "2026-09-24T03:32:56Z",
+  "mode": "route",
+  "errors": [],
+  "routes": [
+    {
+      "peer": "gaip-art",
+      "activation": 0.83333,
+      "matched_terms": [
+        "evidence",
+        "verification"
+      ],
+      "verified_results": 0
+    },
+    {
+      "peer": "gaip-broker",
+      "activation": 0.83333,
+      "matched_terms": [
+        "evidence",
+        "verification"
+      ],
+      "verified_results": 0
+    },
+    {
+      "peer": "gaip-integration",
+      "activation": 0.83333,
+      "matched_terms": [
+        "evidence",
+        "verification"
+      ],
+      "verified_results": 0
+    }
+  ],
+  "peers": [
+    {
+      "id": "allagents",
+      "name": "allagents",
+      "kind": "directory_agent",
+      "status": "connected",
+      "slot": 1,
+      "endpoint": "https://allagents.app/a2a"
+    },
+    {
+      "id": "snail",
+      "name": "SNAIL",
+      "kind": "coordination_service",
+      "status": "connected",
+      "slot": 2,
+      "endpoint": "https://joinsnail.com/a2a"
+    },
+    {
+      "id": "zenitheye",
+      "name": "ZenithEye Agent Commons",
+      "kind": "coordination_service",
+      "status": "connected",
+      "slot": 3,
+      "endpoint": "https://agents.zenitheye.net/a2a/rpc"
+    },
+    {
+      "id": "mycelix",
+      "name": "MYCELIX",
+      "kind": "conversational_agent",
+      "status": "connected",
+      "slot": 4,
+      "endpoint": "https://neo-collettive.onrender.com/a2a"
+    },
+    {
+      "id": "sanctum",
+      "name": "Sanctum Beacon",
+      "kind": "coordination_service",
+      "status": "connected",
+      "slot": 5,
+      "endpoint": "https://sanctum-beacon.onrender.com/a2a"
+    },
+    {
+      "id": "humanmirror",
+      "name": "HumanMirror Discovery Agent",
+      "kind": "discovery_service",
+      "status": "connected",
+      "slot": 6,
+      "endpoint": "https://humanmirror.fr/api/a2a/"
+    },
+    {
+      "id": "attractor",
+      "name": "ATTRACTOR",
+      "kind": "validation_service",
+      "status": "connected",
+      "slot": 7,
+      "endpoint": "https://attractor-observatory-demo.vercel.app/a2a"
+    },
+    {
+      "id": "gaip-broker",
+      "name": "GAIP Broker",
+      "kind": "broker_service",
+      "status": "connected",
+      "slot": 8,
+      "endpoint": "https://gaip-agent-to-art-prototype-production.up.railway.app/a2a/agentverse"
+    },
+    {
+      "id": "gaip-art",
+      "name": "GAIP Digital Art Intelligence Agent",
+      "kind": "broker_service",
+      "status": "card_verified",
+      "slot": 9,
+      "endpoint": "https://www.gaipagents.com/a2a/art-intelligence/"
+    },
+    {
+      "id": "gaip-opportunity",
+      "name": "GAIP Agent Opportunity & Procurement Broker",
+      "kind": "broker_service",
+      "status": "card_verified",
+      "slot": 10,
+      "endpoint": "https://www.gaipagents.com/a2a/opportunity-broker/"
+    },
+    {
+      "id": "gaip-integration",
+      "name": "GAIP Integration & Protocol Agent",
+      "kind": "broker_service",
+      "status": "card_verified",
+      "slot": 11,
+      "endpoint": "https://www.gaipagents.com/a2a/integration-protocol/"
+    },
+    {
+      "id": "gaip-trust",
+      "name": "GAIP Trust & Assurance Agent",
+      "kind": "broker_service",
+      "status": "card_verified",
+      "slot": 12,
+      "endpoint": "https://www.gaipagents.com/a2a/trust-assurance/"
+    },
+    {
+      "id": "nulliverba",
+      "name": "Nulliverba Research Discovery Agent",
+      "kind": "research_directory",
+      "status": "connected",
+      "slot": 13,
+      "endpoint": "https://nulliverba.ol-lo.workers.dev/a2a/jsonrpc"
+    },
+    {
+      "id": "claude-schema",
+      "name": "Claude Schema Output Agent",
+      "kind": "inference_service_candidate",
+      "status": "card_verified",
+      "slot": 14,
+      "endpoint": "https://structured-output-agent-89bcb0.getvda.ai/a2a/"
+    },
+    {
+      "id": "multi-provider",
+      "name": "Multi-Provider Schema Output Agent",
+      "kind": "hosted_question_agent",
+      "status": "connected",
+      "slot": 15,
+      "endpoint": "https://instructor-litellm-6af681.getvda.ai/a2a/"
+    },
+    {
+      "id": "llm-orchestrator",
+      "name": "LLM Orchestration Agent",
+      "kind": "hosted_question_agent",
+      "status": "connected",
+      "slot": 16,
+      "endpoint": "https://llm-orchestration-agent-d0a1a1.getvda.ai/a2a/"
+    },
+    {
+      "id": "traced-claude",
+      "name": "Traced Claude Format Guard",
+      "kind": "hosted_question_agent",
+      "status": "connected",
+      "slot": 17,
+      "endpoint": "https://traced-llm-proxy-anthropic.getvda.ai/a2a/"
+    },
+    {
+      "id": "structured-mcp",
+      "name": "Structured Output MCP Agent (Instructor)",
+      "kind": "hosted_question_agent",
+      "status": "paused",
+      "slot": 18,
+      "endpoint": "https://structured-output-mcp-agent-instructor.getvda.ai/a2a/"
+    },
+    {
+      "id": "llm-orchestrator-2",
+      "name": "LLM Orchestration Agent 2",
+      "kind": "hosted_question_agent",
+      "status": "connected",
+      "slot": 19,
+      "endpoint": "https://llm-orchestration-agent-2-df5979.getvda.ai/a2a/"
     }
   ],
   "background_service": false
