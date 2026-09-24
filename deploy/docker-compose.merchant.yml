@@ -1,0 +1,15 @@
+services:
+  a0-merchant:
+    build:
+      context: ..
+      dockerfile: Dockerfile.merchant
+    restart: unless-stopped
+    env_file:
+      - merchant.env
+    ports:
+      - "8787:8787"
+    volumes:
+      - a0-merchant-ledger:/app/data
+
+volumes:
+  a0-merchant-ledger:
