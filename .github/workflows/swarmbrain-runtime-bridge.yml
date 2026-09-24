@@ -7,6 +7,8 @@ on:
     branches: ['claude/monetizable-project-concepts-b97bv2']
     paths:
       - 'swarmbrain/runtime_bridge.py'
+      - 'swarmbrain/run_mesh.py'
+      - 'swarmbrain/mesh.py'
       - 'swarmbrain/github_bridge.py'
       - 'swarmbrain/economy.py'
       - 'swarmbrain/x402.py'
