@@ -1,0 +1,22 @@
+name: A0 runtime inbox
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: write
+  issues: read
+jobs:
+  capture:
+    if: github.event.issue.number == 19 && contains(github.event.comment.body, 'Task ID:') && contains(github.event.comment.body, 'Return nonce:')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            const body = context.payload.comment.body || '';
+            const taskId = body.match(/Task ID:\s*\x60?([^\n\x60]+)/i)?.[1]?.trim();
+            const nonce = body.match(/Return nonce:\s*\x60?([^\n\x60]+)/i)?.[1]?.trim();
+            if (!taskId || !nonce) core.setFailed('missing task id or nonce');
+            const envelope = {schemaVersion:1, issueNumber:context.issue.number, commentId:context.payload.comment.id, sourceUrl:context.payload.comment.html_url, author:context.payload.comment.user.login, taskId, nonce, task:body, createdAt:context.payload.comment.created_at};
+            const path = 'runtime-bridge/inbox/' + context.payload.comment.id + '.json';
+            await github.rest.repos.createOrUpdateFileContents({owner:context.repo.owner,repo:context.repo.repo,path,message:'capture A0 runtime task '+taskId,content:Buffer.from(JSON.stringify(envelope,null,2)).toString('base64'),branch:context.ref.replace('refs/heads/','')});
