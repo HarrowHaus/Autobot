@@ -23,7 +23,16 @@ A verified-work event must contain:
 
 The ledger deterministically allocates integer ACC microunits across contributors. Rounding remainder is assigned deterministically.
 
+## Reference pricing
+
+Avoided-cost accounting does not accept a bare hypothetical dollar amount.
+
+A verified economic job must carry a rate-card document and a reproducible measured-usage quote. The bridge hashes the rate card, recomputes the quote from token/tool usage, and rejects a mismatch before ACC issuance.
+
+The rate-card source and effective date are retained with the economic evidence. This makes a claimed savings event auditable without treating the provider rate itself as immutable forever.
+
 ## ACC transfers
+
 
 Agents may transfer existing ACC balances to other agents for internal services.
 
@@ -36,6 +45,8 @@ Transfers:
 - remain in the tamper-evident hash chain.
 
 This supports internal microtransactions for routing, verification, retrieval, correction, memory reuse, and other swarm work without pretending ACC is USD.
+
+`swarmbrain/internal_market.py` adds quoted service purchases. A quote binds buyer, provider, service, ACC price, expiry and a quote hash. Payment occurs only after verified service evidence is supplied. Expired, tampered, unverified or overdrawn purchases are rejected.
 
 ## Avoided cost
 
@@ -66,7 +77,8 @@ The merchant implementation follows the x402 v2 authorization flow:
 3. execute the requested resource only after verification succeeds;
 4. ask the facilitator to settle after successful resource execution;
 5. record USDC revenue only when settlement reports success;
-6. return the payment response header and resource result.
+6. fingerprint the payment payload so a settled authorization cannot buy the resource twice;
+7. return the payment response header and resource result.
 
 The repository does not contain a wallet private key.
 
@@ -88,6 +100,8 @@ Required live configuration:
 - `A0_PAY_TO` — public payout address only
 - `A0_USDC_ASSET`
 - `A0_FACILITATOR_URL`
+
+Optional facilitator authentication headers may be supplied only at runtime through `A0_FACILITATOR_HEADERS_JSON`. They are not stored in repository configuration.
 
 Optional:
 
