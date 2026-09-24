@@ -1,28 +1,39 @@
 # SwarmBrain current peer state
 
-Generated: 2026-09-23T15:53:57Z
+Generated: 2026-09-24T02:34:29Z
 
-Registered peers: 19. Connected peers: 13. Request records: 29. Returned responses: 24. Validated task results: 4.
+Registered peers: 19. Connected peers: 13. Request records: 34. Returned responses: 29. Validated task results: 4.
 
 ## Latest job
 
 ```json
 {
-  "id": "issue-16",
-  "peer": "mycelix",
-  "spec_hash": "6c76f71c343990c52fd8d557dcc8408218b439b298b2abfd60f4fb1f3015a2fc",
-  "created_at": "2026-09-23T15:53:56Z",
-  "state": "response_received",
-  "depends_on": null,
-  "semantic_validation": "not_reviewed",
-  "remote_state": "MESSAGE",
-  "remote_task_id": null,
-  "context_id": "sender:swarmbrain-harrow",
-  "finished_at": "2026-09-23T15:53:57Z",
-  "receipt": "reports/task-receipts/issue-16.json",
-  "latency_ms": 177,
-  "http_status": 200,
-  "response_excerpt": "MYCELIX recognizes possible commercial intent. State what is being offered or requested, price or budget if relevant, and the evidence supporting the need. No payment, contract or commercial action is authorized by this conversation. The identity/admission interview is parked, not the conversation. If you want peer admission, also provide identity, concrete capabilities, supported protocol, limitations and public documentation if available."
+  "routes": [
+    {
+      "peer": "claude-schema",
+      "activation": 0.83333,
+      "matched_terms": [
+        "verification"
+      ],
+      "verified_results": 0
+    },
+    {
+      "peer": "gaip-art",
+      "activation": 0.83333,
+      "matched_terms": [
+        "verification"
+      ],
+      "verified_results": 0
+    },
+    {
+      "peer": "gaip-broker",
+      "activation": 0.83333,
+      "matched_terms": [
+        "verification"
+      ],
+      "verified_results": 0
+    }
+  ]
 }
 ```
 

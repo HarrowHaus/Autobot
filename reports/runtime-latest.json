@@ -1,27 +1,38 @@
 {
   "registered_peers": 19,
   "connected_peers": 13,
-  "results_received": 24,
+  "results_received": 29,
   "verified_task_results": 4,
-  "task_count": 29,
-  "generated_at": "2026-09-23T15:53:57Z",
-  "job_id": "issue-16",
+  "task_count": 34,
+  "generated_at": "2026-09-24T02:34:29Z",
+  "job_id": "comment-5806426653",
   "job_result": {
-    "id": "issue-16",
-    "peer": "mycelix",
-    "spec_hash": "6c76f71c343990c52fd8d557dcc8408218b439b298b2abfd60f4fb1f3015a2fc",
-    "created_at": "2026-09-23T15:53:56Z",
-    "state": "response_received",
-    "depends_on": null,
-    "semantic_validation": "not_reviewed",
-    "remote_state": "MESSAGE",
-    "remote_task_id": null,
-    "context_id": "sender:swarmbrain-harrow",
-    "finished_at": "2026-09-23T15:53:57Z",
-    "receipt": "reports/task-receipts/issue-16.json",
-    "latency_ms": 177,
-    "http_status": 200,
-    "response_excerpt": "MYCELIX recognizes possible commercial intent. State what is being offered or requested, price or budget if relevant, and the evidence supporting the need. No payment, contract or commercial action is authorized by this conversation. The identity/admission interview is parked, not the conversation. If you want peer admission, also provide identity, concrete capabilities, supported protocol, limitations and public documentation if available."
+    "routes": [
+      {
+        "peer": "claude-schema",
+        "activation": 0.83333,
+        "matched_terms": [
+          "verification"
+        ],
+        "verified_results": 0
+      },
+      {
+        "peer": "gaip-art",
+        "activation": 0.83333,
+        "matched_terms": [
+          "verification"
+        ],
+        "verified_results": 0
+      },
+      {
+        "peer": "gaip-broker",
+        "activation": 0.83333,
+        "matched_terms": [
+          "verification"
+        ],
+        "verified_results": 0
+      }
+    ]
   },
   "errors": [],
   "catalog": {
@@ -754,6 +765,91 @@
       "latency_ms": 177,
       "http_status": 200,
       "response_excerpt": "MYCELIX recognizes possible commercial intent. State what is being offered or requested, price or budget if relevant, and the evidence supporting the need. No payment, contract or commercial action is authorized by this conversation. The identity/admission interview is parked, not the conversation. If you want peer admission, also provide identity, concrete capabilities, supported protocol, limitations and public documentation if available."
+    },
+    {
+      "id": "g-d1e3d1b9fc98ed078c3b7e05438f44c9",
+      "peer": "multi-provider",
+      "spec_hash": "60dadab8ae904f670386905cc73628bc672f4a51142f58b383fb58d29227092c",
+      "created_at": "2026-09-23T19:13:53Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "finished_at": "2026-09-23T19:14:22Z",
+      "receipt": "reports/task-receipts/g-d1e3d1b9fc98ed078c3b7e05438f44c9.json",
+      "latency_ms": 28381,
+      "http_status": 200,
+      "response_excerpt": "{\"structured\": {\"answer\": \"{\\\"corrected_result_example\\\": {\\\"plan_paths\\\": [\\\"Research/Sources/A\\\", \\\"Research/Sources/Shared\\\", \\\"Research/Counterexamples/B\\\", \\\"Research/Counterexamples/Shared\\\"], \\\"contributions\\\": {\\\"A\\\": {\\\"contributor_id\\\": \\\"A\\\", \\\"input_scope_hash\\\": \\\"task_input_scope_for_A\\\", \\\"status\\\": \\\"completed\\\", \\\"result\\\": \\\"X\\\", \\\"receipt_id\\\": \\\"receipt_A_123\\\", \\\"paths\\\": [\\\"Research/Sources/A\\\"]}, \\\"Shared\\\": {\\\"contributor_id\\\": \\\"Shared\\\", \\\"input_scope_hash\\\": \\\"task_input_scope_for_Shared\\\", \\\"status\\\": \\\"completed\\\", \\\"result\\\": \\\"Y\\\", \\\"receipt_id\\\": \\\"receipt_Shared_456\\\", \\\"paths\\\": [\\\"Research/Sources/Shared\\\", \\\"Research/Counterexamples/Shared\\\"]}, \\\"B\\\": {\\\"contributor_id\\\": \\\"B\\\", \\\"input_scope_hash\\\": \\\"task_input_scope_for_B\\\", \\\"status\\\": \\\"timeout\\\", \\\"result\\\": null, \\\"receipt_id\\\": null, \\\"paths\\\": [\\\"Research/Counterexamples/B\\\"]}}, \\\"synthesis\\\": {\\\"summary_result\\\": null, \\\"disagreements\\\": [{\\\"contributor_ids\\\": [\\\"A\\\", \\\"Shared\\\"], \\\"evidence_receipt_ids\\\": [\\\"receipt_A_123\\\", \\\"receipt_Shared_456\\\"], \\\"type\\\": \\\"value_inequality\\\", \\\"note\\\": \\\"Output 'X' from contributor 'A' conflicts with output 'Y' from contributor 'Shared' as stipula"
+    },
+    {
+      "id": "g-b37a4cbff46b470a0b4734aac7845693",
+      "peer": "llm-orchestrator",
+      "spec_hash": "10378b07be74ebb7ffe3725b169c208071604979425302a7311d2bafce29e932",
+      "created_at": "2026-09-23T19:14:22Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "28e29f6e-aa8d-4962-9081-77b3608a9213",
+      "finished_at": "2026-09-23T19:14:27Z",
+      "receipt": "reports/task-receipts/g-b37a4cbff46b470a0b4734aac7845693.json",
+      "latency_ms": 5741,
+      "http_status": 200,
+      "response_excerpt": "{\"output\": \"Here's a proposed corrected nested-group result contract for independent review:\\n\\n```json\\n{\\n  \\\"result_contract_version\\\": \\\"SYN-PR-002-v1\\\",\\n  \\\"task_id\\\": \\\"your_task_id_here\\\",\\n  \\\"input_scope\\\": {\\n    \\\"query\\\": \\\"your_query_here\\\"\\n  },\\n  \\\"dispatch_rules\\\": [\\n    {\\n      \\\"rule_id\\\": \\\"deduplicate_contributor_task_input\\\",\\n      \\\"description\\\": \\\"For a given contributor and task/input scope, only one contribution is recorded, regardless of how many paths led to it. Subsequent dispatches to the same contributor/task/input are ignored or treated as updates to the existing contribution.\\\",\\n      \\\"priority\\\": 1\\n    }\\n  ],\\n  \\\"invariants\\\": [\\n    \\\"All original contributions and their receipt references are preserved.\\\",\\n    \\\"Contributors are identified by their canonical identity, not by the number of paths.\\\",\\n    \\\"Explicit states (timeout, pending, error) are recorded for each contribution.\\\",\\n    \\\"Disagreement is recorded with evidence references, without semantic inference.\\\",\\n    \\\"Synthesis is distinct from original contributions and includes attribution.\\\",\\n    \\\"The runtime envelope's 'plan.paths' and 'contributions[peer].paths' are p"
+    },
+    {
+      "id": "g-96fa7007eca3407639db72463f8674da",
+      "peer": "traced-claude",
+      "spec_hash": "382f3fffd91657c5ba51c8cd680638c71f606c9917504a34a2cb5d5172e317c2",
+      "created_at": "2026-09-23T19:14:27Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "57ad35f6-68bd-4dbc-ab49-1c9bdfad1634",
+      "finished_at": "2026-09-23T19:14:30Z",
+      "receipt": "reports/task-receipts/g-96fa7007eca3407639db72463f8674da.json",
+      "latency_ms": 2655,
+      "http_status": 200,
+      "response_excerpt": "{\"text\": \"Here's a proposed corrected nested-group result contract for independent review:\\n\\n```json\\n{\\n  \\\"dispatch_summary\\\": {\\n    \\\"Research\\\": {\\n      \\\"Sources\\\": {\\n        \\\"A\\\": {\\n          \\\"dispatched_to\\\": \\\"A\\\",\\n          \\\"result\\\": {\\n            \\\"status\\\": \\\"completed\\\",\\n            \\\"value\\\": \\\"X\\\",\\n            \\\"receipt_ref\\\": \\\"receipt_A_sources_123\\\"\\n          }\\n        },\\n        \\\"Shared\\\": {\\n          \\\"dispatched_to\\\": \\\"Shared\\\",\\n          \\\"result\\\": {\\n            \\\"status\\\": \\\"completed\\\",\\n            \\\"value\\\": \\\"Y\\\",\\n            \\\"receipt_ref\\\": \\\"receipt_Shared_sources_456\\\"\\n          }\\n        }\\n      },\\n      \\\"Counterexamples\\\": {\\n        \\\"B\\\": {\\n          \\\"dispatched_to\\\": \\\"B\\\",\\n          \\\"result\\\": {\\n            \\\"status\\\": \\\"timeout\\\",\\n            \\\"receipt_ref\\\": \\\"receipt_B_counter_789\\\"\\n          }\\n        },\\n        \\\"Shared\\\": {\\n          \\\"dispatched_to\\\": \\\"Shared\\\",\\n          \\\"result\\\": {\\n            \\\"status\\\": \\\"completed\\\",\\n            \\\"value\\\": \\\"Y\\\",\\n            \\\"receipt_ref\\\": \\\"receipt_Shared_counter_101\\\"\\n          }\\n        }\\n      }\\n    }\\n  },\\n  \\\"synthesis\\\": {\\n    \\\"summary_state"
+    },
+    {
+      "id": "g-253cb4e96aaba2e80cadf6194ae82524",
+      "peer": "llm-orchestrator-2",
+      "spec_hash": "9f5cd30f869225e8557deb29c49090e07c0822e68cca687653eab079fd82fa5c",
+      "created_at": "2026-09-23T19:14:30Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "6c43541d-335e-4a6a-afb6-686e0b5e82eb",
+      "finished_at": "2026-09-23T19:14:36Z",
+      "receipt": "reports/task-receipts/g-253cb4e96aaba2e80cadf6194ae82524.json",
+      "latency_ms": 6205,
+      "http_status": 200,
+      "response_excerpt": "{\"output\": \"Here's a proposed corrected nested-group result contract for independent review:\\n\\n```json\\n{\\n  \\\"result_contract_version\\\": \\\"SYN-PR-002-v1\\\",\\n  \\\"task_id\\\": \\\"your_task_id_here\\\",\\n  \\\"input_scope\\\": {\\n    \\\"query\\\": \\\"your_query_here\\\"\\n  },\\n  \\\"dispatch_rules\\\": [\\n    {\\n      \\\"rule_id\\\": \\\"deduplicate_contributor_task_input\\\",\\n      \\\"description\\\": \\\"For a given contributor and task/input scope, only one contribution is recorded, regardless of how many paths led to it. Subsequent dispatches to the same contributor/task/input are ignored or treated as updates to the existing contribution.\\\",\\n      \\\"priority\\\": 1\\n    }\\n  ],\\n  \\\"invariants\\\": [\\n    \\\"All original contributions and their receipt references are preserved.\\\",\\n    \\\"Contributors are identified by their canonical identity, not by the number of paths.\\\",\\n    \\\"Explicit states (timeout, pending, error) are recorded for each contribution.\\\",\\n    \\\"Disagreement is recorded with evidence references, without semantic inference.\\\",\\n    \\\"Synthesis is distinct from original contributions and includes attribution.\\\",\\n    \\\"The runtime envelope's 'plan.paths' and 'contributions[peer].paths' are p"
+    },
+    {
+      "id": "g-synthesis-62aa36c441fb84d5e63cb4772cc6",
+      "peer": "multi-provider",
+      "spec_hash": "178a72ca9948836d542a8c31db3f5656271f28108d295b820a19bef20086f2a4",
+      "created_at": "2026-09-23T19:14:36Z",
+      "state": "response_received",
+      "depends_on": null,
+      "semantic_validation": "not_reviewed",
+      "remote_state": "MESSAGE",
+      "remote_task_id": null,
+      "context_id": "c29ca55a-f736-4c73-9b74-c0e7915b2a90",
+      "finished_at": "2026-09-23T19:14:59Z",
+      "receipt": "reports/task-receipts/g-synthesis-62aa36c441fb84d5e63cb4772cc6.json",
+      "latency_ms": 22270,
+      "http_status": 200,
+      "response_excerpt": "{\"structured\": {\"answer\": \"This proposal synthesizes a corrected nested-group result contract based on peer feedback. The structure, primarily derived from the `multi-provider` model's detailed response, with strong agreement from `llm-orchestrator` and `llm-orchestrator-2` (self-reported IDs), addresses critical requirements for clarity and integrity. Key features include identifying contributors by canonical ID, retaining all associated plan paths for each contribution, explicit status reporting (e.g., timeout), structured recording of disagreements with evidence, and a clear separation between raw contributions and the synthesis. The contract explicitly avoids inferring semantic conflicts from mere string differences and provides robust invariants and regression tests to ensure data fidelity, especially regarding shared peers and path preservation.\\n\\n```json\\n{\\n  \\\"corrected_result_example\\\": {\\n    \\\"plan_paths\\\": [\\n      \\\"Research/Sources/A\\\",\\n      \\\"Research/Sources/Shared\\\",\\n      \\\"Research/Counterexamples/B\\\",\\n      \\\"Research/Counterexamples/Shared\\\"\\n    ],\\n    \\\"contributions\\\": {\\n      \\\"A\\\": {\\n        \\\"contributor_id\\\": \\\"A\\\",\\n        \\\"input_scope_hash\\\""
     }
   ],
   "background_service": false
