@@ -1,0 +1,76 @@
+name: A0 x402 Bazaar discovery monitor
+
+on:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - '.github/workflows/a0_bazaar_monitor.yml'
+      - 'cloudflare/merchant-worker.js'
+      - 'wrangler.jsonc'
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: a0-bazaar-monitor
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      A0_PAY_TO: '0xa47930496923574a33325b9be28fe84fa8d2b1c6'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe Bazaar discovery sources
+        run: |
+          python - <<'PY'
+          import json, os, time, urllib.parse, urllib.request, urllib.error
+          pay=os.environ['A0_PAY_TO']
+          sources=[
+            ('configured','https://facilitator.x402endpoints.online'),
+            ('x402-foundation','https://x402.org/facilitator'),
+          ]
+          report={'schema_version':1,'generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'pay_to':pay,'sources':[]}
+          for name,base in sources:
+            url=base+'/discovery/resources?'+urllib.parse.urlencode({'payTo':pay,'limit':100})
+            row={'name':name,'base_url':base,'url':url,'ok':False,'matches':[]}
+            try:
+              req=urllib.request.Request(url,headers={'accept':'application/json','user-agent':'A0-Bazaar-Monitor/1'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                body=json.loads(r.read().decode())
+              items=body.get('items') or body.get('resources') or []
+              matches=[]
+              for item in items:
+                accepts=item.get('accepts') or []
+                if any(str(a.get('payTo','')).lower()==pay.lower() for a in accepts):
+                  matches.append(item)
+              row.update(ok=True,http_status=200,total_returned=len(items),matches=matches)
+            except urllib.error.HTTPError as e:
+              row.update(http_status=e.code,error=e.read(500).decode('utf-8','replace'))
+            except Exception as e:
+              row.update(error=str(e)[:500])
+            report['sources'].append(row)
+          os.makedirs('reports',exist_ok=True)
+          open('reports/bazaar-discovery.json','w',encoding='utf-8').write(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Persist discovery status
+        run: |
+          git config user.name 'A0 Bazaar Monitor'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/bazaar-discovery.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update x402 Bazaar discovery status [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
