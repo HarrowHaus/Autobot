@@ -1,0 +1,59 @@
+name: A0 bounty scout
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan public paid tasks
+        env:
+          A0_MIN_BOUNTY_USDC: '0.01'
+          A0_BOUNTY_CAPABILITIES: verification,research,planning,coding,data-analysis,reasoning
+        run: |
+          python swarmbrain/bounty_scout.py > bounty-scout.json
+          cat bounty-scout.json
+      - name: Surface paid candidates
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const scan = JSON.parse(fs.readFileSync('bounty-scout.json','utf8'));
+            if (!scan.candidate_count) return;
+            const marker = '<!-- a0-bounty-scout -->';
+            const lines = scan.candidates.slice(0,10).map(x =>
+              '- `' + x.task_id + '` — ' + x.bounty_usdc + ' USDC — ' + (x.title || 'untitled') + ' — match: ' + x.matches.join(', ')
+            );
+            const body = [
+              marker,
+              'A0 bounty scout found **' + scan.candidate_count + '** funded/claimable capability matches.',
+              '',
+              ...lines,
+              '',
+              'Candidates only; claiming is gated on A0 private marketplace identity.'
+            ].join('\n');
+            const {data: comments} = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 19,
+              per_page: 100
+            });
+            const prior = [...comments].reverse().find(c => c.body && c.body.includes(marker));
+            if (prior && prior.body === body) return;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 19,
+              body
+            });
