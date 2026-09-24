@@ -1,65 +1,51 @@
 name: A0 bounty scout
-
 on:
   push:
-    branches:
-      - claude/monetizable-project-concepts-b97bv2
-    paths:
-      - 'swarmbrain/bounty_scout.py'
-      - '.github/workflows/a0_bounty_scout.yml'
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths: ['swarmbrain/bounty_scout.py', '.github/workflows/a0_bounty_scout.yml']
   schedule:
     - cron: '7,37 * * * *'
   workflow_dispatch:
-
 permissions:
   contents: read
   issues: write
-
+concurrency:
+  group: a0-bounty-scout
+  cancel-in-progress: false
 jobs:
   scout:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Scan public paid tasks
-        env:
-          A0_MIN_BOUNTY_USDC: '0.01'
-          A0_BOUNTY_CAPABILITIES: verification,research,planning,coding,data-analysis,reasoning
-        run: |
-          python swarmbrain/bounty_scout.py > bounty-scout.json
-          cat bounty-scout.json
-      - name: Surface paid candidates
+      - name: Run scout regression tests
+        run: python -m unittest discover -s tests -p test_bounty_scout.py
+      - name: Scan advertised paid tasks
+        run: python -m swarmbrain.bounty_scout > bounty-scout.json
+      - name: Surface changed candidate set
         uses: actions/github-script@v8
         with:
           script: |
-            const fs = require('fs');
-            const scan = JSON.parse(fs.readFileSync('bounty-scout.json','utf8'));
-            if (!scan.candidate_count) return;
+            const scan = JSON.parse(require('fs').readFileSync('bounty-scout.json', 'utf8'));
+            if (scan.status !== 'ok' || !scan.candidate_count) return;
             const marker = '<!-- a0-bounty-scout -->';
-            const lines = scan.candidates.slice(0,10).map(x =>
-              '- `' + x.task_id + '` — ' + x.bounty_usdc + ' USDC — ' + (x.title || 'untitled') + ' — match: ' + x.matches.join(', ')
-            );
-            const body = [
-              marker,
-              'A0 bounty scout found **' + scan.candidate_count + '** funded/claimable capability matches.',
-              '',
-              ...lines,
-              '',
-              'Candidates only; claiming is gated on A0 private marketplace identity.'
-            ].join('\n');
-            const {data: comments} = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 19,
-              per_page: 100
-            });
-            const prior = [...comments].reverse().find(c => c.body && c.body.includes(marker));
-            if (prior && prior.body === body) return;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 19,
-              body
-            });
+            const clean = x => String(x ?? '').replace(/[@<>`\r\n]/g, '').slice(0, 300);
+            const lines = scan.candidates.slice(0, 10).map(x =>
+              '- ' + clean(x.task_id) + ' | advertised ' + clean(x.bounty_usdc) + ' USDC | ' + clean(x.title) + ' | ' + clean(x.funding_evidence));
+            const body = [marker, 'A0 found ' + scan.candidate_count + ' advertised budget matches in the inspected response.', '', ...lines,
+              '', 'Not earned revenue. Claimability is not proof of funding. Escrow labels are platform reports, not chain verification.',
+              'Permission, identity, acceptance terms, deadline, fulfillment and payment readiness still require qualification.'].join('\n');
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner, repo: context.repo.repo, issue_number: 19, per_page: 100});
+            const prior = [...comments].reverse().find(c => c.user?.login === 'github-actions[bot]' && c.body?.includes(marker));
+            if (prior?.body === body) return;
+            await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: 19, body});
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a0-bounty-scan
+          path: bounty-scout.json
+          retention-days: 7
