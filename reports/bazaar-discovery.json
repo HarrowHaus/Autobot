@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-24T13:07:41Z",
+  "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
+  "sources": [
+    {
+      "name": "configured",
+      "base_url": "https://facilitator.x402endpoints.online",
+      "url": "https://facilitator.x402endpoints.online/discovery/resources?payTo=0xa47930496923574a33325b9be28fe84fa8d2b1c6&limit=100",
+      "ok": true,
+      "matches": [],
+      "http_status": 200,
+      "total_returned": 1
+    },
+    {
+      "name": "x402-foundation",
+      "base_url": "https://x402.org/facilitator",
+      "url": "https://x402.org/facilitator/discovery/resources?payTo=0xa47930496923574a33325b9be28fe84fa8d2b1c6&limit=100",
+      "ok": false,
+      "matches": [],
+      "http_status": 404,
+      "error": "<!DOCTYPE html><html data-dpl-id=\"dpl_5w4k719n78vAvQYBExBxC9Q7Rr5p\" lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/0mj3d2945i_~p.js?dpl=dpl_5w4k719n78vAvQYBExBxC9Q7Rr5p\"/><script src=\"/_next/static/chunks/13i8obl-2om37.js?dpl=dpl_5w4k719n78vAvQYBExBxC9Q7Rr5p\" async=\"\"></script><script src=\"/_next/static/chunks/00k5-gycn~qn7.js?dpl=dpl_5w4k719n78vAvQYBExBxC9Q"
+    }
+  ]
+}
