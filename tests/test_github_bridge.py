@@ -32,5 +32,24 @@ class GitHubBridgeTests(unittest.TestCase):
         self.assertIn("SwarmBrain automatic result", text)
         self.assertIn('"routes": []', text)
 
+    def test_compact_route_reply_does_not_dump_runtime_tasks(self):
+        summary = {
+            "job_id":"comment-1",
+            "generated_at":"2026-09-24T00:00:00Z",
+            "job_result":{
+                "mode":"route",
+                "registered_peers":19,
+                "connected_peers":13,
+                "routes":[{"peer":"p1","activation":0.8}],
+                "tasks":[{"id":"should-not-appear","response_excerpt":"huge"}],
+            },
+            "economics":{"recorded":False,"reason":"none"},
+        }
+        reply = github_bridge.make_reply(summary)
+        self.assertIn('"peer": "p1"', reply)
+        self.assertIn('"registered_peers": 19', reply)
+        self.assertNotIn("should-not-appear", reply)
+        self.assertLess(len(reply), 6000)
+
 if __name__ == "__main__":
     unittest.main()
