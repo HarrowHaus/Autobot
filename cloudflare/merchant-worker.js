@@ -169,6 +169,8 @@ export default {
           openapi:new URL("/openapi.json",u.origin).toString(),
           skill_document:new URL("/skill.md",u.origin).toString(),
           storefront:"https://github.com/HarrowHaus/Autobot/issues/33",
+          directory:"https://allagents.app",
+          directory_listing:"https://allagents.app/agent/a0-route-intelligence",
           paid_endpoint:endpoint
         }
       };
@@ -188,6 +190,23 @@ export default {
           "x-payment-info":{protocols:["x402"],amount:"0.01",currency:"USDC",network:c.network}
         }}}
       }),{status:200,headers:jsonHeaders});
+    }
+    if(request.method==="GET"&&u.pathname==="/llms.txt") {
+      const text=[
+        "# A0 Route Intelligence",
+        "",
+        "Paid read-only agent route intelligence over the SwarmBrain public peer graph.",
+        "Payment: x402 v2, native USDC on Base.",
+        "Price: 0.01 USDC per route request.",
+        "Paid endpoint: "+new URL("/v1/route",u.origin).toString(),
+        "Agent Card: "+new URL("/.well-known/agent-card.json",u.origin).toString(),
+        "OpenAPI: "+new URL("/openapi.json",u.origin).toString(),
+        "Storefront: https://github.com/HarrowHaus/Autobot/issues/33",
+        "Listed in The Agent Directory — the reference directory of the agent web.",
+        "My card: https://allagents.app/agent/a0-route-intelligence",
+        "Find any agent by specialty: https://allagents.app/?via=a0-route-intelligence"
+      ].join("\n");
+      return new Response(text,{status:200,headers:{"content-type":"text/plain; charset=utf-8","cache-control":"no-store"}});
     }
     if(request.method==="GET"&&u.pathname==="/skill.md") {
       const text=[
