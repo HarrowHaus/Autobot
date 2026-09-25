@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-24T21:45:08Z",
+  "generated_at": "2026-09-25T05:19:58Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -119,6 +119,16 @@
       "tags": []
     },
     {
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "aion-supreme-temple-gateway",
       "name": "AION SUPREME Temple Gateway",
       "slug": "aion-supreme-temple-gateway",
@@ -169,10 +179,10 @@
       "tags": []
     },
     {
-      "key": "skyros-economic-agent-platform",
-      "name": "SKYROS Economic Agent Platform",
-      "slug": "skyros-economic-agent-platform",
-      "specialty": "commerce",
+      "key": "assetfare-route-quotes",
+      "name": "AssetFare Route Quotes",
+      "slug": "assetfare-route-quotes",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -193,26 +203,6 @@
       "name": "mymediai",
       "slug": "mymediai",
       "specialty": "health",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "bridgenode-eli",
-      "name": "bridgenode_eli",
-      "slug": "bridgenode-eli",
-      "specialty": "social",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "x402-ai",
-      "name": "X402 AI \u81ea\u52a9\u95e8\u5e97",
-      "slug": "x402-ai",
-      "specialty": "ai-service",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
