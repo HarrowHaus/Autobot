@@ -62,7 +62,7 @@ jobs:
               cache.get(issue_number).push(result.data);
             }
             const marker='<!-- a0-payment-monitor-health -->';
-            const body=marker+'\nA0 payment monitor: '+scan.status+'\n'+JSON.stringify(scan.errors || [])+'\nA failed or incomplete scan is not evidence of no payment.';
+            const body=marker+'\nA0 payment monitor: '+scan.status+'\n'+JSON.stringify({errors:scan.errors || [],backlog_order_ids:scan.backlog_order_ids || [],review_order_ids:scan.review_order_ids || []})+'\nA failed or incomplete scan is not evidence of no payment.';
             const prior=(await comments(19)).find(c=>c.user?.login==='github-actions[bot]' && c.body?.includes(marker));
             if (prior && prior.body!==body) await github.rest.issues.updateComment({owner:context.repo.owner,repo:context.repo.repo,comment_id:prior.id,body});
             else if (!prior) await github.rest.issues.createComment({owner:context.repo.owner,repo:context.repo.repo,issue_number:19,body});
@@ -75,3 +75,4 @@ jobs:
       - name: Keep incomplete or failed scan visibly failed
         if: steps.scan.outcome == 'failure'
         run: exit 1
+

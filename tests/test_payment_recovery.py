@@ -121,10 +121,81 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(self.saved()['status'],'fulfilled')
         self.assertEqual(self.saved()['settlement'],old)
 
+    def test_reincluded_payment_after_expiry_requires_review(self):
+        self.scan(RPC(300,[transfer(block=180)]))
+        old=self.saved()['settlement']
+        calls=[]
+        out=self.scan(RPC(400,[transfer(block=220)]),lambda *_:calls.append(1) or [{'peer':'test'}])
+        saved=self.saved()
+        self.assertEqual(calls,[])
+        self.assertEqual(out['fulfilled'],[])
+        self.assertEqual(saved['status'],'late_payment_review')
+        self.assertEqual(saved['settlement']['block_number'],220)
+        self.assertEqual(saved['prior_settlements'],[old])
+
+    def test_reincluded_on_time_payment_updates_evidence_before_delivery(self):
+        self.scan(RPC(300,[transfer(block=180)]))
+        def route(*_):
+            self.assertEqual(self.saved()['settlement']['block_number'],190)
+            return [{'peer':'test'}]
+        self.scan(RPC(400,[transfer(block=190)]),route)
+        self.assertEqual(self.saved()['status'],'fulfilled')
+        self.assertEqual(self.saved()['settlement']['block_number'],190)
+
+    def test_noncanonical_match_does_not_skip_corrected_payment(self):
+        rpc=RPC(300,[transfer()])
+        rpc.canonical_override={180:bh(999180),295:bh(999295)}
+        out=self.scan(rpc)
+        self.assertEqual(out['status'],'degraded')
+        self.assertNotIn('reconciliation',self.saved())
+        corrected=transfer();corrected['blockHash']=bh(999180)
+        rpc=RPC(300,[corrected]);rpc.canonical_override={180:bh(999180),295:bh(999295)}
+        self.scan(rpc,lambda *_:[{'peer':'test'}])
+        self.assertEqual(self.saved()['status'],'fulfilled')
+
+    def test_midscan_reorg_does_not_advance_cursor(self):
+        class ChangingRPC(RPC):
+            high_reads=0
+            def __call__(self,method,params):
+                if method=='eth_getBlockByNumber' and params[0]==hex(295):
+                    self.high_reads+=1
+                    return {'hash':bh(295 if self.high_reads==1 else 999295)}
+                return super().__call__(method,params)
+        out=self.scan(ChangingRPC(300))
+        self.assertEqual(out['status'],'degraded')
+        self.assertNotIn('reconciliation',self.saved())
+
+    def test_inconsistent_receipt_does_not_skip_retry(self):
+        class WrongTransactionRPC(RPC):
+            def __call__(self,method,params):
+                value=super().__call__(method,params)
+                if method=='eth_getTransactionReceipt':
+                    value['transactionHash']='0x'+'99'*32
+                return value
+        failed=RPC(300,[transfer()]);failed.receipt_status='0x0'
+        for stale in (failed,WrongTransactionRPC(300,[transfer()])):
+            with self.subTest(type=type(stale).__name__):
+                self.save(quote())
+                out=self.scan(stale)
+                self.assertEqual(out['status'],'degraded')
+                self.assertNotIn('reconciliation',self.saved())
+                self.scan(RPC(310,[transfer()]),lambda *_:[{'peer':'test'}])
+                self.assertEqual(self.saved()['status'],'fulfilled')
+
+    def test_backlog_is_degraded_until_scan_catches_up(self):
+        out=self.scan(RPC(1400),max_chunks=1)
+        self.assertEqual(out['status'],'degraded')
+        self.assertEqual(out['backlog_order_ids'],['o1'])
+        out=self.scan(RPC(1400))
+        self.assertEqual(out['status'],'ok')
+        self.assertEqual(out['backlog_order_ids'],[])
+
     def test_payment_recheck_blocks_disappearing_transfer(self):
         self.scan(RPC(300,[transfer()]))
         rpc=RPC(400,[transfer()]);rpc.receipt_status='0x0'
-        self.scan(rpc,lambda *_:[{'peer':'test'}])
+        out=self.scan(rpc,lambda *_:[{'peer':'test'}])
+        self.assertEqual(out['status'],'degraded')
+        self.assertEqual(out['review_order_ids'],['o1'])
         self.assertEqual(self.saved()['status'],'paid_delivery_pending')
         self.assertTrue(any(e['kind']=='payment_recheck_required' for e in self.saved()['recovery_events'].values()))
 

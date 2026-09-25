@@ -103,14 +103,14 @@ def verified_hit(order, log, low, high, rpc_fn):
     if not isinstance(receipt, dict) or not isinstance(canonical, dict):
         raise ValueError('receipt_or_block_unavailable')
     if receipt.get('status') != '0x1' or str(receipt.get('transactionHash', '')).lower() != tx:
-        return None
+        raise ValueError('receipt_status_or_transaction_mismatch')
     if int(receipt.get('blockNumber', '-1'), 16) != block or str(receipt.get('blockHash', '')).lower() != block_hash:
-        return None
+        raise ValueError('receipt_inclusion_changed')
     if str(canonical.get('hash', '')).lower() != block_hash:
-        return None
+        raise ValueError('noncanonical_payment_log')
     keys = ('address', 'topics', 'data', 'transactionHash', 'blockHash', 'blockNumber', 'logIndex')
     if not any(all(entry.get(k) == log.get(k) for k in keys) for entry in receipt.get('logs', []) if isinstance(entry, dict)):
-        return None
+        raise ValueError('receipt_log_changed')
     return {'transaction': tx, 'block_number': block, 'block_hash': block_hash,
             'log_index': index, 'event_id': f'eip155:8453:{tx}:{index}',
             'amount_atomic': order['amount_atomic'], 'payer': '0x'+topics[1][-40:],
@@ -153,7 +153,8 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
         except Exception as error:
             errors.append({'file': path.name, 'error': type(error).__name__+': '+str(error)[:100]})
     report = {'observed_at': now(), 'fulfilled': [], 'expired': [], 'events': [],
-              'errors': errors, 'orders_examined': len(rows), 'verified_external_revenue_atomic': 0}
+              'errors': errors, 'backlog_order_ids': [], 'review_order_ids': [],
+              'orders_examined': len(rows), 'verified_external_revenue_atomic': 0}
     if not rows:
         report['status'] = 'degraded' if errors else 'ok'
         return report
@@ -181,7 +182,17 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
                     if checked is None or checked['event_id'] != saved['event_id']:
                         event(order, 'payment_recheck_required', 'Previously observed transfer cannot currently be verified; hold delivery and investigate.')
                     else:
-                        deliver(order, route_fn)
+                        inclusion = ('block_number', 'block_hash', 'payer', 'amount_atomic')
+                        if any(checked[k] != saved.get(k) for k in inclusion):
+                            order.setdefault('prior_settlements', []).append(copy.deepcopy(saved))
+                            order['settlement'] = {**checked, 'confirmed_latest_block': latest}
+                            event(order, 'payment_inclusion_changed', 'Canonical payment inclusion changed; original evidence retained and quote deadline rechecked.')
+                        if checked['block_number'] > order['expires_after_block']:
+                            order['status'] = 'late_payment_review'
+                            event(order, 'late_payment_review', 'Canonical transfer is after quote validity. Hold delivery for review; do not recharge.')
+                        else:
+                            atomic_write(path, order)
+                            deliver(order, route_fn)
             elif order['status'] not in TERMINAL:
                 safe = latest - order['confirmations']
                 previous = state.get('last_scanned_block')
@@ -200,6 +211,9 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
                 while low <= safe and chunks < max_chunks and remaining_chunks > 0:
                     high = min(safe, low+CHUNK-1)
                     remaining_chunks -= 1
+                    anchor = rpc_fn('eth_getBlockByNumber', [hex(high), False])
+                    if not isinstance(anchor, dict) or not re.fullmatch(r'0x[0-9a-fA-F]{64}', str(anchor.get('hash', ''))):
+                        raise ValueError('checkpoint_unavailable')
                     logs = rpc_fn('eth_getLogs', [{'address': TOKEN, 'fromBlock': hex(low), 'toBlock': hex(high),
                          'topics': [TOPIC, None, '0x'+'0'*24+address(pay_to)[2:]]}])
                     if not isinstance(logs, list):
@@ -209,6 +223,9 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
                         hit = verified_hit(order, log, low, high, rpc_fn)
                         if hit and hit['event_id'] not in used and hit['transaction'] not in legacy_used_txs:
                             hits.append(hit)
+                    checkpoint = rpc_fn('eth_getBlockByNumber', [hex(high), False])
+                    if not isinstance(checkpoint, dict) or checkpoint.get('hash') != anchor['hash']:
+                        raise ValueError('scan_range_reorg')
                     if hits:
                         hit = sorted(hits, key=lambda h: (h['block_number'], h['log_index']))[0]
                         collisions = [o['order_id'] for _, o in rows if o['order_id'] != order['order_id'] and o['amount_atomic'] == order['amount_atomic']]
@@ -229,9 +246,6 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
                                 atomic_write(path, order)
                                 deliver(order, route_fn)
                         break
-                    checkpoint = rpc_fn('eth_getBlockByNumber', [hex(high), False])
-                    if not isinstance(checkpoint, dict) or not re.fullmatch(r'0x[0-9a-fA-F]{64}', str(checkpoint.get('hash', ''))):
-                        raise ValueError('checkpoint_unavailable')
                     state['last_scanned_block'] = high
                     state['last_scanned_block_hash'] = checkpoint['hash']
                     low = high+1
@@ -244,6 +258,7 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
                         order.setdefault('expired_at', now())
                         event(order, 'quote_elapsed_reconciled', 'No matching transfer found through the quote deadline. Historical monitoring remains open; this is not lost earned revenue.')
                     if low <= safe:
+                        report['backlog_order_ids'].append(order['order_id'])
                         event(order, 'scan_backlog', 'Historical scan has a bounded backlog; resume at its persisted cursor. Never equate incomplete coverage with no payment.')
             if order['status'] == 'fulfilled' and original['status'] != 'fulfilled':
                 report['fulfilled'].append(order)
@@ -253,8 +268,13 @@ def scan_orders(orders_dir, pay_to, rpc_fn, route_fn=None, max_chunks=MAX_CHUNKS
             # Do not expire or advance the failed range; previously saved progress is intact.
             report['errors'].append({'order_id': original['order_id'], 'error': type(error).__name__})
             order = json.loads(path.read_text(encoding='utf-8'))
+            if order['status'] in ('paid', 'paid_delivery_pending'):
+                event(order, 'payment_recheck_required', 'Payment verification could not complete; hold delivery and investigate.')
+                atomic_write(path, order)
+        if order['status'] in ('paid', 'paid_delivery_pending', 'late_payment_review', 'ambiguous_payment_review'):
+            report['review_order_ids'].append(order['order_id'])
         report['events'].extend(order.get('recovery_events', {}).values())
-    report['status'] = 'degraded' if report['errors'] else 'ok'
+    report['status'] = 'degraded' if report['errors'] or report['backlog_order_ids'] or report['review_order_ids'] else 'ok'
     return report
 
 
