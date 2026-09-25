@@ -1,9 +1,9 @@
 name: A0 direct USDC collector tests
 on:
   push:
-    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', '.github/workflows/a0_direct_usdc_*.yml']
+    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'swarmbrain/mesh.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', 'tests/test_payment_mesh_integration.py', '.github/workflows/a0_direct_usdc_*.yml']
   pull_request:
-    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', '.github/workflows/a0_direct_usdc_*.yml']
+    paths: ['swarmbrain/direct_usdc.py', 'swarmbrain/payment_recovery.py', 'swarmbrain/collection_probe.py', 'swarmbrain/mesh.py', 'tests/test_direct_usdc.py', 'tests/test_payment_recovery.py', 'tests/test_collection_probe.py', 'tests/test_payment_mesh_integration.py', '.github/workflows/a0_direct_usdc_*.yml']
 permissions:
   contents: read
 jobs:
@@ -15,11 +15,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run 37 payment-recovery and discovery regressions
+      - name: Run payment-recovery, routing and discovery regressions
         run: |
           python -m unittest discover -s tests -p test_direct_usdc.py -v
           python -m unittest discover -s tests -p test_payment_recovery.py -v
           python -m unittest discover -s tests -p test_collection_probe.py -v
+          python -m unittest discover -s tests -p test_payment_mesh_integration.py -v
       - name: Probe current buyer tasks without claiming or paying
         run: python -m swarmbrain.collection_probe > collection-probe.json
       - name: Read-only historical payment reconciliation in disposable checkout
