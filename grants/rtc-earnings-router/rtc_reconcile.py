@@ -311,7 +311,7 @@ th,td{{border:1px solid #ccc;padding:.45rem;text-align:left}}code{{background:#e
 <ul><li>Native <code>{esc(native['identity'])}</code>: {esc(native['amount_rtc'])} RTC</li>
 <li>Hosted <code>{esc(hosted['identity'])}</code>: {esc(hosted['amount_rtc'])} RTC</li></ul>
 <h2>Payout states</h2>
-<table><thead><tr><th>Issue</th><th>Claim</th><th>State</th><th>RTC</th><th>Pending ID</th><th>Confirmation time</th></tr></thead>
+<table><thead><tr><th>Issue</th><th>Claim</th><th>State</th><th>RTC</th><th>pending ID</th><th>Confirmation time</th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>
 <p>Generated read-only from public evidence. No signing or transfer operations are performed.</p>
 </body></html>"""
