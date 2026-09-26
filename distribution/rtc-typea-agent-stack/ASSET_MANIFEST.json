@@ -1,0 +1,143 @@
+﻿{
+    "voiceover":  [
+                      {
+                          "file":  "section-01.wav",
+                          "duration_seconds":  58.31,
+                          "bytes":  2571706,
+                          "sha256":  "3292b50d9a65cde0175b6bc06d84658062c417d2976d9fbeb3802c991e43e178"
+                      },
+                      {
+                          "file":  "section-02.wav",
+                          "duration_seconds":  63.67,
+                          "bytes":  2807984,
+                          "sha256":  "5cd15dd2cf9676ae9e900656578f320d82a4868bbbea704b9054b2d43eaa08f9"
+                      },
+                      {
+                          "file":  "section-03.wav",
+                          "duration_seconds":  58.59,
+                          "bytes":  2583830,
+                          "sha256":  "46cafcd1c2b46325bcac37903870ece3250869c9bc5b350a2b9dc15094eeabee"
+                      },
+                      {
+                          "file":  "section-04.wav",
+                          "duration_seconds":  54.55,
+                          "bytes":  2405878,
+                          "sha256":  "d4be4f641e846e299bdf38435b3f647f15e6e6d9cd2c0bed655459ccc14e2872"
+                      },
+                      {
+                          "file":  "section-05.wav",
+                          "duration_seconds":  53.68,
+                          "bytes":  2367320,
+                          "sha256":  "b83a90fcbd753454e2b3ea484fe03f97a58abadf8276e9b6af018af94bf44c2a"
+                      },
+                      {
+                          "file":  "section-06.wav",
+                          "duration_seconds":  58.21,
+                          "bytes":  2567068,
+                          "sha256":  "34b410c99e1a0a4b47100d8f4e35866d2c2df076ce829d4af2f32e0919480d8e"
+                      },
+                      {
+                          "file":  "section-07.wav",
+                          "duration_seconds":  58.57,
+                          "bytes":  2583134,
+                          "sha256":  "260361c8c5c695a73a9a7f3386f7058732d022711ab1a0bc5c9d850a3d2548bc"
+                      }
+                  ],
+    "total_voiceover_seconds":  405.58,
+    "images":  [
+                   {
+                       "file":  "visuals/01-stack-overview.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  58203,
+                       "sha256":  "f19ed933b084c067d2fce2aa9cae3330df573479c71bedd9ed7d6f06008ea351"
+                   },
+                   {
+                       "file":  "visuals/02-rustchain-layer.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  48532,
+                       "sha256":  "9780b4b6ba789fa5e9bc53a465c8545fca47a21d2e7a38b88d92b3cc11c39fbf"
+                   },
+                   {
+                       "file":  "visuals/03-mcp-layer.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  51634,
+                       "sha256":  "e470fc4b3e523dd71a6b934214d1b77e7c8f3c65a597a31de805bff57c928b70"
+                   },
+                   {
+                       "file":  "visuals/04-beacon-layer.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  47528,
+                       "sha256":  "e46147184bb18ff1bda95a91243eccaedaf898a29617adf40d7d0ff929d6c5e2"
+                   },
+                   {
+                       "file":  "visuals/05-bottube-layer.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  44424,
+                       "sha256":  "71ef52bfb597a6205669a92b2507138f830ed3e418e815328b86b776c6e81cd4"
+                   },
+                   {
+                       "file":  "visuals/06-handoff.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  48229,
+                       "sha256":  "1f6c15e825c02961c16cd89200b02e45de6792e29e27c88a378ed0e97a7dc394"
+                   },
+                   {
+                       "file":  "visuals/07-workflow.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  51911,
+                       "sha256":  "770165fae7683c9db6a91e39b1114b190e8cab581f1597aa69edb8caa1cbdb51"
+                   },
+                   {
+                       "file":  "visuals/08-verify.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  52000,
+                       "sha256":  "a79ad5951869b3c372491838999bc053e4f662f39b688052d4425c3d6a0291a9"
+                   },
+                   {
+                       "file":  "visuals/09-separation.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  53389,
+                       "sha256":  "3931d3a280dfbb7bfce05391f87178b33a694bd5697ce35a6e8624d972e216b3"
+                   },
+                   {
+                       "file":  "visuals/10-endcard.png",
+                       "width":  1920,
+                       "height":  1080,
+                       "bytes":  54460,
+                       "sha256":  "c5dae7dba14fa4f76061226bdeaf307f2e4da3a60d8b6f8b53ff999b5183defb"
+                   },
+                   {
+                       "file":  "thumbnail-alt-1.png",
+                       "width":  1280,
+                       "height":  720,
+                       "bytes":  28364,
+                       "sha256":  "735734c3510855d6f09fa11c9287f0b1573c4102d2b6b016e3c621b9bd8d5653"
+                   },
+                   {
+                       "file":  "thumbnail-alt-2.png",
+                       "width":  1280,
+                       "height":  720,
+                       "bytes":  29863,
+                       "sha256":  "beec0e7cffe7f949955372ff1a14c321441b6fdb3e154894ffaf26ebffcdb672"
+                   },
+                   {
+                       "file":  "thumbnail.png",
+                       "width":  1280,
+                       "height":  720,
+                       "bytes":  30796,
+                       "sha256":  "5b3c67b027fa06d0a57a38d1a174a70283366f7067f7173c1df99e4e782e3be2"
+                   }
+               ],
+    "script_words":  955,
+    "engine":  "Microsoft System.Speech / Microsoft David Desktop",
+    "generated_on":  "WulfPC"
+}
