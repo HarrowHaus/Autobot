@@ -83,5 +83,5 @@ test("HTTP and JSON errors are explicit", async () => {
 
 test("missing wallet fails before network", async () => {
   const c = new RustChainAgentEconomy({fetchImpl: async () => { throw new Error("must not call network"); }});
-  await assert.rejects(() => c.claimJob("j1"), /worker wallet required/);
+  assert.throws(() => c.claimJob("j1"), /worker wallet required/);
 });
