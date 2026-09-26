@@ -228,6 +228,35 @@ def dedupe_claims(records: Iterable[Claim]) -> list[Claim]:
     return sorted(merged, key=lambda c: (c.issue_number or 0, c.key))
 
 
+def external_evidence(path: Path | None) -> list[Claim]:
+    """Load an optional offline export of issue/email evidence.
+
+    This never connects to mail. It lets a contributor provide previously
+    exported evidence so the same payout mentioned in GitHub and email can be
+    deterministically deduplicated.
+    """
+    if path is None:
+        return []
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(raw, list):
+        raise ValueError("evidence JSON must be a list")
+    claims: list[Claim] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            raise ValueError("each evidence record must be an object")
+        issue = {
+            "number": item.get("issue_number"),
+            "title": item.get("title") or "external-evidence",
+            "html_url": item.get("issue_url"),
+        }
+        claims.append(claim_from_record(
+            issue,
+            str(item.get("body") or ""),
+            str(item.get("evidence_url") or "offline:evidence"),
+        ))
+    return claims
+
+
 def totals(claims: Iterable[Claim]) -> dict[str, float]:
     result = {state: 0.0 for state in ("accepted", "queued", "pending", "confirmed")}
     for c in claims:
@@ -296,6 +325,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--native-wallet", required=True)
     p.add_argument("--repo", default=DEFAULT_REPO)
     p.add_argument("--fixture-dir", type=Path)
+    p.add_argument("--evidence-json", type=Path, help="optional offline issue/email evidence export")
     p.add_argument("--out-json", type=Path, required=True)
     p.add_argument("--out-html", type=Path, required=True)
     return p.parse_args(argv)
@@ -306,7 +336,10 @@ def main(argv: list[str] | None = None) -> int:
     http: HTTP = FixtureHTTP(args.fixture_dir) if args.fixture_dir else HTTP()
     native = balance(http, args.native_wallet)
     hosted = balance(http, args.hosted_handle)
-    claims = github_claims(http, args.github_handle, args.repo)
+    claims = dedupe_claims(
+        github_claims(http, args.github_handle, args.repo)
+        + external_evidence(args.evidence_json)
+    )
     data = receipt(native, hosted, claims, args.github_handle)
 
     args.out_json.parent.mkdir(parents=True, exist_ok=True)
