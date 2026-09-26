@@ -1,0 +1,15 @@
+{
+  "name": "rustchain-agent-economy-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "rustchain-agent-economy-mcp": "./server.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
