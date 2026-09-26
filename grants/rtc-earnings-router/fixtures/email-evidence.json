@@ -1,0 +1,9 @@
+[
+  {
+    "issue_number": 9001,
+    "title": "Example accepted then confirmed claim",
+    "issue_url": "https://github.com/Scottcjn/rustchain-bounties/issues/9001",
+    "evidence_url": "email:receipt-5001",
+    "body": "Email receipt for @KungFury87: payout pending 15 RTC to RTC8a13ce90490828d7954ba1038df4873b73f7c049; pending_id 5001; tx abcdef0123456789"
+  }
+]
