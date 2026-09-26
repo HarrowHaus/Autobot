@@ -26,7 +26,10 @@ HISTORY_URL = "https://rustchain.org/wallet/history?miner_id={}&limit=200"
 MAINTAINERS = {"scottcjn", "sophiaeagent-beep"}
 RTC_RE = re.compile(r"(?<![A-Za-z0-9])([0-9]+(?:\.[0-9]+)?)\s*RTC\b", re.I)
 WALLET_RE = re.compile(r"\b(RTC[0-9A-Fa-f]{40})\b")
-ACCEPTED_RE = re.compile(r"\baccepted\b", re.I)
+ACCEPTED_LINE_RE = re.compile(
+    r"(?im)^.*\baccepted\b[^\n]{0,100}\b[0-9]+(?:\.[0-9]+)?\s*RTC\b.*$|"
+    r"(?im)^.*\b[0-9]+(?:\.[0-9]+)?\s*RTC\b[^\n]{0,100}\baccepted\b.*$"
+)
 NEGATED_ACCEPT_RE = re.compile(
     r"\b(?:not|isn't|is not|wasn't|was not)\s+(?:yet\s+)?accepted\b|"
     r"\b(?:cannot|can't|can not)\s+be\s+accepted\b|"
@@ -209,7 +212,9 @@ def first_rtc(text: str) -> float | None:
 
 
 def accepted_text(text: str) -> bool:
-    return bool(ACCEPTED_RE.search(text)) and not bool(NEGATED_ACCEPT_RE.search(text))
+    if NEGATED_ACCEPT_RE.search(text):
+        return False
+    return bool(ACCEPTED_LINE_RE.search(text))
 
 
 def maintainer_accepted(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Accepted]:
