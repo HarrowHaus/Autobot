@@ -85,7 +85,7 @@ class ReconcileTests(unittest.TestCase):
             self.assertNotIn("usd", json.dumps(data).lower())
             html_text = out_html.read_text(encoding="utf-8")
             self.assertIn("Wallet-history payout states", html_text)
-            self.assertIn("119.0", html_text)
+            self.assertIn("f1992a97d853486328b9a26d44435ed1", html_text)
 
     def test_dedupe_is_tx_hash_only_for_ledger(self):
         row = rr.Transfer(
