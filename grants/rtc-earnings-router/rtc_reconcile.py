@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Read-only RTC payout reconciliation for one contributor.
 
-Uses only public RustChain and GitHub GET endpoints. It never signs, transfers,
+Payout settlement state comes from RustChain wallet history. GitHub is used only
+for maintainer-authored accepted evidence. This tool never signs, transfers,
 withdraws, wraps, trades, or modifies wallet state.
 """
 from __future__ import annotations
@@ -9,29 +10,29 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import re
 import sys
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 GITHUB_API = "https://api.github.com"
 DEFAULT_REPO = "Scottcjn/rustchain-bounties"
 BALANCE_URL = "https://rustchain.org/wallet/balance?miner_id={}"
-STATE_RANK = {"unknown": 0, "accepted": 1, "queued": 2, "pending": 3, "confirmed": 4}
-
+HISTORY_URL = "https://rustchain.org/wallet/history?miner_id={}&limit=200"
+MAINTAINERS = {"scottcjn", "sophiaeagent-beep"}
 RTC_RE = re.compile(r"(?<![A-Za-z0-9])([0-9]+(?:\.[0-9]+)?)\s*RTC\b", re.I)
-PENDING_RE = re.compile(r"pending[_ -]?id\s*[:=#]?\s*`?([A-Za-z0-9._-]+)", re.I)
-TX_RE = re.compile(r"(?:tx(?:_hash)?|transaction(?: hash)?)\s*[:=#]?\s*`?([A-Fa-f0-9]{8,64})", re.I)
-CONFIRM_RE = re.compile(
-    r"(?:confirm(?:ed|s|ation)?(?:\s+(?:automatically|at|time))?)\s*[:=]?\s*"
-    r"(\d{4}-\d{2}-\d{2}[T ][0-9:.+-]+(?:Z|UTC)?)",
+WALLET_RE = re.compile(r"\b(RTC[0-9A-Fa-f]{40})\b")
+ACCEPTED_RE = re.compile(r"\baccepted\b", re.I)
+NEGATED_ACCEPT_RE = re.compile(
+    r"\b(?:not|isn't|is not|wasn't|was not)\s+(?:yet\s+)?accepted\b|"
+    r"\b(?:cannot|can't|can not)\s+be\s+accepted\b|"
+    r"\bneeds?\s+(?:a\s+)?revision\b|\bnot\s+payable\b|\brejected\b|\breturned\b",
     re.I,
 )
-IDEM_RE = re.compile(r"(?:idem|idempotency(?:[_ -]?key)?)\s*[:= ]+`?([A-Za-z0-9._:/-]+)", re.I)
-WALLET_RE = re.compile(r"\b(RTC[0-9A-Fa-f]{40})\b")
 
 
 @dataclass(frozen=True)
@@ -41,75 +42,165 @@ class Balance:
     source: str
 
 
-@dataclass
-class Claim:
-    key: str
-    issue_number: int | None
+@dataclass(frozen=True)
+class Transfer:
+    identity: str
+    tx_hash: str
+    amount_rtc: float
+    state: str
+    created_at: int | None
+    confirmation_time: int | None
+    confirmation_time_source: str | None
+    pending_id: str | None
+    direction: str
+    counterparty: str | None
+    source: str
+
+
+@dataclass(frozen=True)
+class Accepted:
+    issue_number: int
     issue_url: str | None
     title: str
-    state: str
     amount_rtc: float | None
-    payout_identity: str | None
-    pending_id: str | None
-    tx_hash: str | None
-    confirmation_time: str | None
-    evidence_urls: list[str]
-
-    def merge(self, other: "Claim") -> None:
-        if STATE_RANK.get(other.state, 0) > STATE_RANK.get(self.state, 0):
-            self.state = other.state
-        for field in ("amount_rtc", "payout_identity", "pending_id", "tx_hash", "confirmation_time"):
-            if getattr(self, field) in (None, "") and getattr(other, field) not in (None, ""):
-                setattr(self, field, getattr(other, field))
-        self.evidence_urls = sorted(set(self.evidence_urls + other.evidence_urls))
+    comment_id: int
+    comment_url: str
+    maintainer: str
 
 
 class HTTP:
+    def __init__(self, token: str | None = None):
+        self.token = token
+
     def get_json(self, url: str) -> Any:
-        req = urllib.request.Request(url, headers={"User-Agent": "rtc-reconciler/1.0"})
+        headers = {"User-Agent": "rtc-reconciler/2.0"}
+        if self.token and url.startswith(GITHUB_API):
+            headers["Authorization"] = f"Bearer {self.token}"
+        req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=20) as resp:
             return json.load(resp)
 
+    def list_pages(self, url: str) -> list[Any]:
+        out: list[Any] = []
+        page = 1
+        while True:
+            sep = "&" if "?" in url else "?"
+            batch = self.get_json(f"{url}{sep}page={page}")
+            if not isinstance(batch, list):
+                raise ValueError(f"expected list response for {url}")
+            out.extend(batch)
+            if len(batch) < 100:
+                return out
+            page += 1
+
+    def search_items(self, url: str) -> list[dict[str, Any]]:
+        out: list[dict[str, Any]] = []
+        page = 1
+        while True:
+            sep = "&" if "?" in url else "?"
+            data = self.get_json(f"{url}{sep}page={page}")
+            batch = data.get("items", [])
+            out.extend(batch)
+            if len(batch) < 100:
+                return out
+            page += 1
+
 
 class FixtureHTTP(HTTP):
-    """URL-to-file deterministic fixture transport."""
-
     def __init__(self, fixture_dir: Path):
+        super().__init__(None)
         self.fixture_dir = fixture_dir
         self.index = json.loads((fixture_dir / "http-index.json").read_text(encoding="utf-8"))
 
     def get_json(self, url: str) -> Any:
-        try:
-            rel = self.index[url]
-        except KeyError as exc:
-            raise KeyError(f"fixture URL not mapped: {url}") from exc
-        return json.loads((self.fixture_dir / rel).read_text(encoding="utf-8"))
+        rel = self.index.get(url)
+        if rel is None and url.endswith("&page=1"):
+            rel = self.index.get(url[:-7])
+        if rel is None and url.endswith("?page=1"):
+            rel = self.index.get(url[:-7])
+        if rel is not None:
+            return json.loads((self.fixture_dir / rel).read_text(encoding="utf-8"))
+        if re.search(r"[?&]page=\d+$", url):
+            return [] if "/comments?" in url else {"items": []}
+        raise KeyError(f"fixture URL not mapped: {url}")
 
 
 def balance(http: HTTP, identity: str) -> Balance:
     url = BALANCE_URL.format(urllib.parse.quote(identity, safe=""))
     data = http.get_json(url)
-    amount = data.get("amount_rtc")
-    if amount is None and "balance_rtc" in data:
-        amount = data["balance_rtc"]
+    amount = data.get("amount_rtc", data.get("balance_rtc"))
     if amount is None:
-        amount_i64 = data.get("amount_i64", 0)
-        amount = float(amount_i64) / 1_000_000
-    return Balance(identity=identity, amount_rtc=float(amount), source=url)
+        amount = float(data.get("amount_i64", 0)) / 1_000_000
+    return Balance(identity, float(amount), url)
 
 
-def state_from_text(text: str) -> str:
-    lower = text.lower()
-    # Strongest state wins; "pending" must not overwrite explicit confirmation.
-    if any(word in lower for word in ("confirmed", "confirmation complete", "transfer complete")):
-        return "confirmed"
-    if "pending_id" in lower or "pending id" in lower or " pending " in f" {lower} ":
-        return "pending"
-    if any(word in lower for word in ("queued", "payout queued", "queue payout")):
-        return "queued"
-    if any(word in lower for word in ("accepted", "approved", "greenlit")):
-        return "accepted"
-    return "unknown"
+def _history_payload(data: Any) -> list[dict[str, Any]]:
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        rows = data.get("transactions", data.get("history", []))
+        if isinstance(rows, list):
+            return rows
+    raise ValueError("wallet history response has no transaction list")
+
+
+def wallet_transfers(http: HTTP, identity: str) -> list[Transfer]:
+    url = HISTORY_URL.format(urllib.parse.quote(identity, safe=""))
+    rows = _history_payload(http.get_json(url))
+    out: list[Transfer] = []
+    for row in rows:
+        tx_type = str(row.get("type") or row.get("direction") or "").lower()
+        if tx_type not in {"transfer_in", "received"}:
+            continue
+        tx_hash = str(row.get("tx_hash") or row.get("tx_id") or "").strip()
+        if not tx_hash:
+            continue
+        raw_state = str(row.get("status") or "").lower()
+        state = raw_state if raw_state in {"pending", "confirmed", "failed"} else "confirmed"
+        amount = row.get("amount_rtc", row.get("amount"))
+        if amount is None:
+            amount = abs(int(row.get("amount_i64", 0))) / 1_000_000
+        created = row.get("created_at", row.get("timestamp"))
+        confirmed = row.get("confirmed_at")
+        confirms = row.get("confirms_at")
+        source_name = None
+        confirmation = None
+        if state == "confirmed" and confirmed is not None:
+            confirmation, source_name = int(confirmed), "confirmed_at"
+        elif state == "pending" and confirms is not None:
+            confirmation, source_name = int(confirms), "confirms_at"
+        elif state == "pending" and created is not None:
+            # Current live history omits confirms_at for pending ledger rows even
+            # though the public signed-transfer contract uses a 24h confirmation window.
+            confirmation, source_name = int(created) + 86400, "derived_24h"
+        pending_id = row.get("pending_id")
+        tx_id = str(row.get("tx_id") or "")
+        if pending_id is None and tx_id.startswith("pending_"):
+            pending_id = tx_id.removeprefix("pending_")
+        counterparty = row.get("from") or row.get("counterparty")
+        out.append(
+            Transfer(
+                identity=identity,
+                tx_hash=tx_hash,
+                amount_rtc=float(amount),
+                state=state,
+                created_at=int(created) if created is not None else None,
+                confirmation_time=confirmation,
+                confirmation_time_source=source_name,
+                pending_id=str(pending_id) if pending_id is not None else None,
+                direction="received",
+                counterparty=str(counterparty) if counterparty else None,
+                source=url,
+            )
+        )
+    return out
+
+
+def dedupe_transfers(rows: list[Transfer]) -> list[Transfer]:
+    by_hash: dict[str, Transfer] = {}
+    for row in rows:
+        by_hash.setdefault(row.tx_hash.lower(), row)
+    return sorted(by_hash.values(), key=lambda x: (x.created_at or 0, x.tx_hash), reverse=True)
 
 
 def first_rtc(text: str) -> float | None:
@@ -117,168 +208,68 @@ def first_rtc(text: str) -> float | None:
     return float(m.group(1)) if m else None
 
 
-def first_match(pattern: re.Pattern[str], text: str) -> str | None:
-    m = pattern.search(text)
-    return m.group(1) if m else None
+def accepted_text(text: str) -> bool:
+    return bool(ACCEPTED_RE.search(text)) and not bool(NEGATED_ACCEPT_RE.search(text))
 
 
-def payout_identity(text: str) -> str | None:
-    native = WALLET_RE.search(text)
-    if native:
-        return native.group(1)
-    for label in ("wallet:", "destination:", "payout target:", "hosted handle wallet"):
-        idx = text.lower().find(label)
-        if idx >= 0:
-            tail = text[idx + len(label):].strip().splitlines()[0].strip(" `*_")
-            if tail:
-                return tail[:128]
-    return None
-
-
-def make_key(issue_number: int | None, title: str, text: str) -> str:
-    idem = first_match(IDEM_RE, text)
-    if idem:
-        return f"idem:{idem.lower()}"
-    pid = first_match(PENDING_RE, text)
-    if pid:
-        return f"pending:{pid.lower()}"
-    normalized = re.sub(r"\s+", " ", title.strip().lower())
-    return f"issue:{issue_number}:{normalized}"
-
-
-def claim_from_record(issue: dict[str, Any], text: str, evidence_url: str) -> Claim:
-    issue_number = issue.get("number")
-    title = str(issue.get("title") or f"issue-{issue_number}")
-    return Claim(
-        key=make_key(issue_number, title, text),
-        issue_number=issue_number,
-        issue_url=issue.get("html_url"),
-        title=title,
-        state=state_from_text(text),
-        amount_rtc=first_rtc(text),
-        payout_identity=payout_identity(text),
-        pending_id=first_match(PENDING_RE, text),
-        tx_hash=first_match(TX_RE, text),
-        confirmation_time=first_match(CONFIRM_RE, text),
-        evidence_urls=[evidence_url],
-    )
-
-
-def github_claims(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Claim]:
+def maintainer_accepted(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Accepted]:
     q = urllib.parse.quote(f"repo:{repo} {handle} is:issue")
-    search_url = f"{GITHUB_API}/search/issues?q={q}&per_page=100"
-    search = http.get_json(search_url)
-    records: list[Claim] = []
-
-    for item in search.get("items", []):
+    items = http.search_items(f"{GITHUB_API}/search/issues?q={q}&per_page=100")
+    accepted: list[Accepted] = []
+    seen: set[int] = set()
+    for item in items:
         issue_number = int(item["number"])
-        issue = {
-            "number": issue_number,
-            "title": item.get("title", ""),
-            "html_url": item.get("html_url"),
-        }
-        issue_text = item.get("body") or ""
-        issue_claim = claim_from_record(issue, issue_text, item.get("html_url") or "")
-        if handle.lower() in issue_text.lower():
-            records.append(issue_claim)
-
         comments_url = f"{GITHUB_API}/repos/{repo}/issues/{issue_number}/comments?per_page=100"
-        for comment in http.get_json(comments_url):
-            body = comment.get("body") or ""
+        for comment in http.list_pages(comments_url):
+            cid = int(comment.get("id", 0))
+            if not cid or cid in seen:
+                continue
+            author = str((comment.get("user") or {}).get("login") or "").lower()
+            body = str(comment.get("body") or "")
+            if author not in MAINTAINERS:
+                continue
             if handle.lower() not in body.lower():
                 continue
-            c = claim_from_record(issue, body, comment.get("html_url") or comments_url)
-            records.append(c)
-
-    return dedupe_claims(records)
-
-
-def _same_claim(a: Claim, b: Claim) -> bool:
-    """Return True when two evidence records describe the same payout claim."""
-    if a.key.startswith("idem:") and a.key == b.key:
-        return True
-    if a.pending_id and b.pending_id and a.pending_id.lower() == b.pending_id.lower():
-        return True
-    if a.tx_hash and b.tx_hash and a.tx_hash.lower() == b.tx_hash.lower():
-        return True
-    if a.issue_number != b.issue_number:
-        return False
-    # Within an issue, the same amount + compatible payout identity is treated as
-    # one state progression (accepted -> queued/pending -> confirmed).
-    if a.amount_rtc is not None and b.amount_rtc is not None and a.amount_rtc == b.amount_rtc:
-        if not a.payout_identity or not b.payout_identity:
-            return True
-        return a.payout_identity.lower() == b.payout_identity.lower()
-    return False
+            if not accepted_text(body):
+                continue
+            seen.add(cid)
+            accepted.append(
+                Accepted(
+                    issue_number=issue_number,
+                    issue_url=item.get("html_url"),
+                    title=str(item.get("title") or f"issue-{issue_number}"),
+                    amount_rtc=first_rtc(body),
+                    comment_id=cid,
+                    comment_url=str(comment.get("html_url") or comments_url),
+                    maintainer=author,
+                )
+            )
+    return sorted(accepted, key=lambda x: (x.issue_number, x.comment_id))
 
 
-def dedupe_claims(records: Iterable[Claim]) -> list[Claim]:
-    merged: list[Claim] = []
-    for record in records:
-        match = next((existing for existing in merged if _same_claim(existing, record)), None)
-        if match is None:
-            merged.append(record)
-        else:
-            match.merge(record)
-            # Prefer the strongest durable identifier as the canonical key.
-            if record.key.startswith("idem:"):
-                match.key = record.key
-            elif record.pending_id and not match.key.startswith("idem:"):
-                match.key = f"pending:{record.pending_id.lower()}"
-    return sorted(merged, key=lambda c: (c.issue_number or 0, c.key))
+def payout_totals(rows: list[Transfer]) -> dict[str, float]:
+    totals = {"pending": 0.0, "confirmed": 0.0, "failed": 0.0}
+    for row in rows:
+        if row.state in totals:
+            totals[row.state] += row.amount_rtc
+    return totals
 
 
-def external_evidence(path: Path | None) -> list[Claim]:
-    """Load an optional offline export of issue/email evidence.
-
-    This never connects to mail. It lets a contributor provide previously
-    exported evidence so the same payout mentioned in GitHub and email can be
-    deterministically deduplicated.
-    """
-    if path is None:
-        return []
-    raw = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(raw, list):
-        raise ValueError("evidence JSON must be a list")
-    claims: list[Claim] = []
-    for item in raw:
-        if not isinstance(item, dict):
-            raise ValueError("each evidence record must be an object")
-        issue = {
-            "number": item.get("issue_number"),
-            "title": item.get("title") or "external-evidence",
-            "html_url": item.get("issue_url"),
-        }
-        claims.append(claim_from_record(
-            issue,
-            str(item.get("body") or ""),
-            str(item.get("evidence_url") or "offline:evidence"),
-        ))
-    return claims
-
-
-def totals(claims: Iterable[Claim]) -> dict[str, float]:
-    result = {state: 0.0 for state in ("accepted", "queued", "pending", "confirmed")}
-    for c in claims:
-        if c.state in result and c.amount_rtc is not None:
-            result[c.state] += c.amount_rtc
-    return result
-
-
-def receipt(native: Balance, hosted: Balance, claims: list[Claim], handle: str) -> dict[str, Any]:
+def receipt(native: Balance, hosted: Balance, transfers: list[Transfer], accepted: list[Accepted], handle: str) -> dict[str, Any]:
     return {
-        "schema": "rtc-reconciliation/v1",
+        "schema": "rtc-reconciliation/v2",
         "contributor": handle,
-        "balances": {
-            "native": asdict(native),
-            "hosted": asdict(hosted),
-        },
-        "claims": [asdict(c) for c in claims],
-        "claim_totals_rtc": totals(claims),
+        "balances": {"native": asdict(native), "hosted": asdict(hosted)},
+        "payout_transfers": [asdict(x) for x in transfers],
+        "payout_totals_rtc": payout_totals(transfers),
+        "accepted_evidence": [asdict(x) for x in accepted],
         "rules": {
-            "balances_are_separate_identities": True,
-            "claim_dedupe_precedence": ["idempotency", "pending_id", "issue+title"],
-            "state_precedence": ["confirmed", "pending", "queued", "accepted", "unknown"],
+            "payout_state_source": "wallet_history",
+            "accepted_source": "maintainer_github_comments_only",
+            "maintainers": sorted(MAINTAINERS),
+            "ledger_dedupe": "tx_hash",
+            "accepted_dedupe": "comment_id",
+            "distinct_ledger_rows_never_merge_by_amount": True,
         },
     }
 
@@ -286,34 +277,35 @@ def receipt(native: Balance, hosted: Balance, claims: list[Claim], handle: str) 
 def render_html(data: dict[str, Any]) -> str:
     def esc(v: Any) -> str:
         return html.escape("" if v is None else str(v))
-
     rows = []
-    for c in data["claims"]:
+    for t in data["payout_transfers"]:
         rows.append(
             "<tr>"
-            f"<td>{esc(c['issue_number'])}</td>"
-            f"<td>{esc(c['title'])}</td>"
-            f"<td>{esc(c['state'])}</td>"
-            f"<td>{esc(c['amount_rtc'])}</td>"
-            f"<td>{esc(c['pending_id'])}</td>"
-            f"<td>{esc(c['confirmation_time'])}</td>"
+            f"<td>{esc(t['identity'])}</td><td>{esc(t['tx_hash'])}</td>"
+            f"<td>{esc(t['state'])}</td><td>{esc(t['amount_rtc'])}</td>"
+            f"<td>{esc(t['pending_id'])}</td><td>{esc(t['confirmation_time'])}</td>"
             "</tr>"
         )
-    native = data["balances"]["native"]
-    hosted = data["balances"]["hosted"]
+    accepted = "".join(
+        f"<li>#{esc(a['issue_number'])} — {esc(a['title'])} — {esc(a['amount_rtc'])} RTC "
+        f"(<a href=\"{esc(a['comment_url'])}\">maintainer evidence</a>)</li>"
+        for a in data["accepted_evidence"]
+    ) or "<li>None</li>"
+    n = data["balances"]["native"]
+    h = data["balances"]["hosted"]
     return f"""<!doctype html>
 <html><head><meta charset="utf-8"><title>RTC reconciliation</title>
-<style>body{{font-family:system-ui;margin:2rem;max-width:1100px}}table{{border-collapse:collapse;width:100%}}
-th,td{{border:1px solid #ccc;padding:.45rem;text-align:left}}code{{background:#eee;padding:.1rem .25rem}}</style></head>
+<style>body{{font-family:system-ui;margin:2rem;max-width:1200px}}table{{border-collapse:collapse;width:100%}}th,td{{border:1px solid #ccc;padding:.45rem;text-align:left}}code{{background:#eee;padding:.1rem .25rem}}</style></head>
 <body><h1>RTC reconciliation</h1>
 <p>Contributor: <code>{esc(data['contributor'])}</code></p>
-<h2>Balances</h2>
-<ul><li>Native <code>{esc(native['identity'])}</code>: {esc(native['amount_rtc'])} RTC</li>
-<li>Hosted <code>{esc(hosted['identity'])}</code>: {esc(hosted['amount_rtc'])} RTC</li></ul>
-<h2>Payout states</h2>
-<table><thead><tr><th>Issue</th><th>Claim</th><th>State</th><th>RTC</th><th>pending ID</th><th>Confirmation time</th></tr></thead>
+<h2>Balances</h2><ul>
+<li>Native <code>{esc(n['identity'])}</code>: {esc(n['amount_rtc'])} RTC</li>
+<li>Hosted <code>{esc(h['identity'])}</code>: {esc(h['amount_rtc'])} RTC</li></ul>
+<h2>Wallet-history payout states</h2>
+<table><thead><tr><th>Identity</th><th>tx hash</th><th>State</th><th>RTC</th><th>pending ID</th><th>Confirmation time</th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>
-<p>Generated read-only from public evidence. No signing or transfer operations are performed.</p>
+<h2>Maintainer accepted evidence</h2><ul>{accepted}</ul>
+<p>Read-only public evidence only. No signing or transfer operations are performed.</p>
 </body></html>"""
 
 
@@ -324,7 +316,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--native-wallet", required=True)
     p.add_argument("--repo", default=DEFAULT_REPO)
     p.add_argument("--fixture-dir", type=Path)
-    p.add_argument("--evidence-json", type=Path, help="optional offline issue/email evidence export")
+    p.add_argument("--github-token", default=os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN"))
     p.add_argument("--out-json", type=Path, required=True)
     p.add_argument("--out-html", type=Path, required=True)
     return p.parse_args(argv)
@@ -332,24 +324,23 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    http: HTTP = FixtureHTTP(args.fixture_dir) if args.fixture_dir else HTTP()
+    http: HTTP = FixtureHTTP(args.fixture_dir) if args.fixture_dir else HTTP(args.github_token)
     native = balance(http, args.native_wallet)
     hosted = balance(http, args.hosted_handle)
-    claims = dedupe_claims(
-        github_claims(http, args.github_handle, args.repo)
-        + external_evidence(args.evidence_json)
-    )
-    data = receipt(native, hosted, claims, args.github_handle)
-
+    transfers = dedupe_transfers(wallet_transfers(http, args.native_wallet) + wallet_transfers(http, args.hosted_handle))
+    accepted = maintainer_accepted(http, args.github_handle, args.repo)
+    data = receipt(native, hosted, transfers, accepted, args.github_handle)
     args.out_json.parent.mkdir(parents=True, exist_ok=True)
     args.out_html.parent.mkdir(parents=True, exist_ok=True)
     args.out_json.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     args.out_html.write_text(render_html(data), encoding="utf-8")
     print(json.dumps({
         "status": "ok",
-        "claims": len(claims),
         "native_rtc": native.amount_rtc,
         "hosted_rtc": hosted.amount_rtc,
+        "pending_rtc": data["payout_totals_rtc"]["pending"],
+        "confirmed_rtc": data["payout_totals_rtc"]["confirmed"],
+        "accepted_records": len(accepted),
         "out_json": str(args.out_json),
         "out_html": str(args.out_html),
     }, sort_keys=True))
