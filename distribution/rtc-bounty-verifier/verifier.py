@@ -3,6 +3,7 @@
 This tool verifies evidence only. It never approves or executes payments.
 """
 from __future__ import annotations
+import html
 import json
 import re
 import urllib.error
@@ -88,11 +89,22 @@ class Verifier:
         if status<200 or status>=400:
             return Check("article",False,f"HTTP {status}")
         text=raw.decode("utf-8",errors="replace")
+        paragraph_count=len(re.findall(r"<p\b",text,flags=re.I))
         cleaned=re.sub(r"<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>"," ",text,flags=re.I|re.S)
         cleaned=re.sub(r"<[^>]+>"," ",cleaned)
-        cleaned=re.sub(r"&[a-zA-Z#0-9]+;"," ",cleaned)
+        cleaned=html.unescape(cleaned)
         words=re.findall(r"\b[\w'-]+\b",cleaned)
-        return Check("article",len(words)>=min_words,f"HTTP {status}; words={len(words)}; minimum={min_words}")
+        normalized=[w.lower() for w in words if len(w)>2]
+        unique_ratio=(len(set(normalized))/len(normalized)) if normalized else 0.0
+        placeholder=bool(re.search(r"\b(?:lorem ipsum|todo|tbd|placeholder)\b",cleaned,re.I))
+        quality_ok=(not placeholder and (len(words)<100 or unique_ratio>=0.08))
+        ok=len(words)>=min_words and quality_ok
+        detail=(
+            f"HTTP {status}; words={len(words)}; minimum={min_words}; "
+            f"unique_ratio={unique_ratio:.3f}; paragraphs={paragraph_count}; "
+            f"placeholder={placeholder}"
+        )
+        return Check("article",ok,detail)
 
     def duplicate_claims(self,repo,issue,user,marker=None,max_pages=10):
         matches=[]
