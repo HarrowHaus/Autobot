@@ -8,9 +8,9 @@ The tool reconciles, for one contributor:
 
 - a native RTC balance;
 - a hosted-handle RTC balance;
-- bounty payout evidence across `accepted -> queued/pending -> confirmed`;
+- bounty payout evidence with **wallet history as the pending/confirmed source of truth** and maintainer GitHub comments used only for accepted evidence;
 - pending IDs, transaction hashes, and confirmation times;
-- duplicate mentions of the same claim across GitHub comments and optional offline email evidence.
+- exact ledger-row preservation keyed by transaction hash, so same-amount payouts never collapse into one record.
 
 It does **not** rank earning opportunities, calculate investment returns, expose private keys, sign transactions, move funds, or emit USD values.
 
@@ -35,12 +35,9 @@ python rtc_reconcile.py \
   --hosted-handle tivince82 \
   --native-wallet RTC8a13ce90490828d7954ba1038df4873b73f7c049 \
   --fixture-dir fixtures \
-  --evidence-json fixtures/email-evidence.json \
   --out-json output/example-receipt.json \
   --out-html output/example-report.html
 ```
-
-`--evidence-json` is an optional **offline export**. The program never logs into email or reads credentials. It exists only so a payout receipt repeated in email and GitHub can be deduplicated.
 
 ## Tests
 
@@ -51,22 +48,20 @@ python -m unittest discover -s tests -v
 The fixture suite verifies:
 
 - native/hosted balances remain separate;
-- accepted/pending/confirmed state precedence;
-- one claim repeated across issue body, GitHub comments, and offline email evidence is counted once;
-- pending ID and transaction hash are preserved;
+- the real recorded payout fixture reconciles to **25 RTC confirmed / 119 RTC pending**;
+- four separate 15 RTC pending transfers remain four distinct rows;
+- grant approval / "needs revision" language does not become a false confirmed payout;
+- transaction hash and confirmation time are preserved;
 - JSON and static HTML outputs are generated;
 - no USD field appears.
 
-## Dedupe
+## Evidence rules
 
-Strongest identifiers win in this order:
-
-1. explicit idempotency key;
-2. pending ID;
-3. transaction hash;
-4. same issue + same RTC amount + compatible payout identity.
-
-State precedence is `confirmed > pending > queued > accepted > unknown`.
+- `/wallet/history` is authoritative for `pending`, `confirmed`, and `failed` transfer state.
+- Incoming payout rows are deduplicated **only by transaction hash**; same issue + same amount is never enough to merge them.
+- GitHub contributes only maintainer-authored `accepted` evidence. The accepted matcher is word-boundary and negation-aware.
+- GitHub comments are paginated. `--github-token` (or `GITHUB_TOKEN` / `GH_TOKEN`) is optional for higher API limits.
+- The current live node omits `confirms_at` on pending rows; while that remains true, the report transparently derives the scheduled confirmation time as `created_at + 24h` and marks the source as `derived_24h`.
 
 ## Safety
 
