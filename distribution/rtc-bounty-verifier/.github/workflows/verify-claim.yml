@@ -1,0 +1,22 @@
+name: verify-bounty-claim
+on:
+  workflow_dispatch:
+    inputs:
+      claim_json:
+        description: "Path to a checked-in claim JSON fixture"
+        required: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify evidence (read-only)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUSTCHAIN_NODE_URL: ${{ vars.RUSTCHAIN_NODE_URL || 'https://50.28.86.131' }}
+        run: python verify_claim.py --claim-json "${{ inputs.claim_json }}"
