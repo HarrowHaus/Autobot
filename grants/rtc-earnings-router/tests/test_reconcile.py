@@ -63,6 +63,7 @@ class ReconcileTests(unittest.TestCase):
         self.assertFalse(rr.accepted_text("This cannot be accepted as written."))
         self.assertFalse(rr.accepted_text("Needs a revision before the 100 RTC completion payment."))
         self.assertFalse(rr.accepted_text("Approved as a grant, payable on completion."))
+        self.assertFalse(rr.accepted_text("Track accepted -> queued/pending -> confirmed state for 100 RTC."))
 
     def test_main_writes_json_and_html_offline(self):
         with tempfile.TemporaryDirectory() as td:
