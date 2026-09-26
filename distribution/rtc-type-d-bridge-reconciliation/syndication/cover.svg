@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+  <title id="title">RustChain cross-chain accounting drift article cover</title>
+  <desc id="desc">A dark technical cover showing two ledgers reconciling through a bridge.</desc>
+  <rect width="1000" height="420" fill="#0b1020"/>
+  <rect x="54" y="72" width="260" height="240" rx="22" fill="#151d34" stroke="#8aa4ff" stroke-width="3"/>
+  <rect x="686" y="72" width="260" height="240" rx="22" fill="#151d34" stroke="#f4b860" stroke-width="3"/>
+  <text x="184" y="128" text-anchor="middle" fill="#dbe5ff" font-family="sans-serif" font-size="26" font-weight="700">LEDGER A</text>
+  <text x="816" y="128" text-anchor="middle" fill="#ffe7ba" font-family="sans-serif" font-size="26" font-weight="700">LEDGER B</text>
+  <g fill="#7e92bf">
+    <rect x="88" y="164" width="192" height="20" rx="5"/>
+    <rect x="88" y="202" width="192" height="20" rx="5"/>
+    <rect x="88" y="240" width="192" height="20" rx="5"/>
+  </g>
+  <g fill="#b98b47">
+    <rect x="720" y="164" width="192" height="20" rx="5"/>
+    <rect x="720" y="202" width="192" height="20" rx="5"/>
+    <rect x="720" y="240" width="192" height="20" rx="5"/>
+  </g>
+  <path d="M314 190 C430 130 570 130 686 190" fill="none" stroke="#68d6c5" stroke-width="8"/>
+  <path d="M686 238 C570 298 430 298 314 238" fill="none" stroke="#68d6c5" stroke-width="8"/>
+  <polygon points="680,179 704,190 680,201" fill="#68d6c5"/>
+  <polygon points="320,227 296,238 320,249" fill="#68d6c5"/>
+  <text x="500" y="201" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="30" font-weight="800">RECONCILIATION</text>
+  <text x="500" y="352" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="34" font-weight="800">Cross-Chain Accounting Drift</text>
+  <text x="500" y="389" text-anchor="middle" fill="#9cb3df" font-family="sans-serif" font-size="20">RustChain • source-backed systems analysis</text>
+</svg>
