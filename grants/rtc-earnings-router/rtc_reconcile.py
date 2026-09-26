@@ -27,7 +27,7 @@ PENDING_RE = re.compile(r"pending[_ -]?id\s*[:=#]?\s*`?([A-Za-z0-9._-]+)", re.I)
 TX_RE = re.compile(r"(?:tx(?:_hash)?|transaction(?: hash)?)\s*[:=#]?\s*`?([A-Fa-f0-9]{8,64})", re.I)
 CONFIRM_RE = re.compile(
     r"(?:confirm(?:ed|s|ation)?(?:\s+(?:automatically|at|time))?)\s*[:=]?\s*"
-    r"(d{4}-d{2}-d{2}[T ][0-9:.+-]+(?:Z|UTC)?)",
+    r"(\d{4}-\d{2}-\d{2}[T ][0-9:.+-]+(?:Z|UTC)?)",
     re.I,
 )
 IDEM_RE = re.compile(r"(?:idem|idempotency(?:[_ -]?key)?)\s*[:= ]+`?([A-Za-z0-9._:/-]+)", re.I)
@@ -279,7 +279,6 @@ def receipt(native: Balance, hosted: Balance, claims: list[Claim], handle: str) 
             "balances_are_separate_identities": True,
             "claim_dedupe_precedence": ["idempotency", "pending_id", "issue+title"],
             "state_precedence": ["confirmed", "pending", "queued", "accepted", "unknown"],
-            "usd_fields_prohibited": True,
         },
     }
 
