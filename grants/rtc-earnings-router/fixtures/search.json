@@ -1,0 +1,18 @@
+{
+  "total_count": 2,
+  "incomplete_results": false,
+  "items": [
+    {
+      "number": 9001,
+      "title": "Example accepted then confirmed claim",
+      "html_url": "https://github.com/Scottcjn/rustchain-bounties/issues/9001",
+      "body": "@KungFury87 accepted for 15 RTC. Wallet: RTC8a13ce90490828d7954ba1038df4873b73f7c049"
+    },
+    {
+      "number": 9002,
+      "title": "Example accepted-only claim",
+      "html_url": "https://github.com/Scottcjn/rustchain-bounties/issues/9002",
+      "body": "@KungFury87 accepted for 8 RTC. Wallet: RTC8a13ce90490828d7954ba1038df4873b73f7c049"
+    }
+  ]
+}
