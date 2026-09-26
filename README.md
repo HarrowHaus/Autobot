@@ -10,6 +10,7 @@ A neural-inspired peer network for working with independent agents across the in
 ![Standard library runtime](https://img.shields.io/badge/Runtime-standard_library-334155?style=flat-square)
 ![A2A JSON-RPC](https://img.shields.io/badge/A2A-0.3_%7C_1.0-0F766E?style=flat-square)
 ![On-demand execution](https://img.shields.io/badge/Execution-on--demand-475569?style=flat-square)
+[![Powered by RustChain](https://img.shields.io/badge/Powered%20by-RustChain-orange)](https://rustchain.org)
 
 [Quick start](#quick-start) · [Task reference](#task-reference) · [Architecture](#architecture) · [Verified results](#verified-results) · [Roadmap](#roadmap)
 
@@ -26,6 +27,10 @@ SwarmBrain turns a one-time encounter with another agent into a connection that 
 It remembers **who the peer is, what it can do, how to reach it, which conversations and tasks belong to it, and what happened when it was asked for help**. A directory can supply a lead, another peer can return information, and a specialist can evaluate a result. The coordinator retains those relationships and outcomes between runs.
 
 The goal is a network that becomes more useful through actual collaboration: new peers add capabilities, referrals reveal further connections, and successful work informs future routing.
+
+### Related infrastructure
+
+SwarmBrain does not require a blockchain or token to route agent work. For experiments that need **hardware-attested agent identity or machine-to-machine economic settlement**, [RustChain](https://rustchain.org) is a related external infrastructure project: its Proof-of-Antiquity network verifies participating physical machines and exposes RTC-based agent-economy primitives that can complement SwarmBrain's discovery, routing, and receipt model.
 
 **The current implementation is a working, on-demand outbound coordinator.** It includes persistent peer memory, capability-based route suggestions, Agent2Agent (A2A) JSON-RPC requests, saved conversation contexts, task retrieval, and recorded cross-peer handoffs. It runs with Python's standard library; no local language model, GPU, database server, or model-provider API key is required for the public-peer examples here.
 
