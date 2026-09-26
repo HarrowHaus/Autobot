@@ -168,7 +168,7 @@ def github_claims(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Cla
     q = urllib.parse.quote(f"repo:{repo} {handle} is:issue")
     search_url = f"{GITHUB_API}/search/issues?q={q}&per_page=100"
     search = http.get_json(search_url)
-    dedup: dict[str, Claim] = {}
+    records: list[Claim] = []
 
     for item in search.get("items", []):
         issue_number = int(item["number"])
@@ -180,7 +180,7 @@ def github_claims(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Cla
         issue_text = item.get("body") or ""
         issue_claim = claim_from_record(issue, issue_text, item.get("html_url") or "")
         if handle.lower() in issue_text.lower():
-            dedup.setdefault(issue_claim.key, issue_claim).merge(issue_claim)
+            records.append(issue_claim)
 
         comments_url = f"{GITHUB_API}/repos/{repo}/issues/{issue_number}/comments?per_page=100"
         for comment in http.get_json(comments_url):
@@ -188,9 +188,44 @@ def github_claims(http: HTTP, handle: str, repo: str = DEFAULT_REPO) -> list[Cla
             if handle.lower() not in body.lower():
                 continue
             c = claim_from_record(issue, body, comment.get("html_url") or comments_url)
-            dedup.setdefault(c.key, c).merge(c)
+            records.append(c)
 
-    return sorted(dedup.values(), key=lambda c: (c.issue_number or 0, c.key))
+    return dedupe_claims(records)
+
+
+def _same_claim(a: Claim, b: Claim) -> bool:
+    """Return True when two evidence records describe the same payout claim."""
+    if a.key.startswith("idem:") and a.key == b.key:
+        return True
+    if a.pending_id and b.pending_id and a.pending_id.lower() == b.pending_id.lower():
+        return True
+    if a.tx_hash and b.tx_hash and a.tx_hash.lower() == b.tx_hash.lower():
+        return True
+    if a.issue_number != b.issue_number:
+        return False
+    # Within an issue, the same amount + compatible payout identity is treated as
+    # one state progression (accepted -> queued/pending -> confirmed).
+    if a.amount_rtc is not None and b.amount_rtc is not None and a.amount_rtc == b.amount_rtc:
+        if not a.payout_identity or not b.payout_identity:
+            return True
+        return a.payout_identity.lower() == b.payout_identity.lower()
+    return False
+
+
+def dedupe_claims(records: Iterable[Claim]) -> list[Claim]:
+    merged: list[Claim] = []
+    for record in records:
+        match = next((existing for existing in merged if _same_claim(existing, record)), None)
+        if match is None:
+            merged.append(record)
+        else:
+            match.merge(record)
+            # Prefer the strongest durable identifier as the canonical key.
+            if record.key.startswith("idem:"):
+                match.key = record.key
+            elif record.pending_id and not match.key.startswith("idem:"):
+                match.key = f"pending:{record.pending_id.lower()}"
+    return sorted(merged, key=lambda c: (c.issue_number or 0, c.key))
 
 
 def totals(claims: Iterable[Claim]) -> dict[str, float]:
