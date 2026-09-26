@@ -1,0 +1,12 @@
+[
+  {
+    "source": "https://github.com/Scottcjn/rustchain-bounties/issues/16497",
+    "created_at": "2026-09-25T19:15:20Z",
+    "body": "claim_id: article-bridge-1\n@tivince82 accepted — 13 RTC\nWallet: RTC8a13ce90490828d7954ba1038df4873b73f7c049"
+  },
+  {
+    "source": "https://github.com/Scottcjn/rustchain-bounties/issues/398",
+    "created_at": "2026-09-24T20:00:00Z",
+    "body": "idempotency: quest-398-vince\n@tivince82 payout queued — pending_id 4999, tx abcdef1234567890; confirms automatically 2026-09-25 20:00 UTC\nWallet: RTC8a13ce90490828d7954ba1038df4873b73f7c049"
+  }
+]
