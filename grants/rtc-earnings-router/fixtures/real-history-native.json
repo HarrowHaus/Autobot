@@ -1,0 +1,95 @@
+{
+  "miner_id": "RTC8a13ce90490828d7954ba1038df4873b73f7c049",
+  "ok": true,
+  "total": 10,
+  "transactions": [
+    {
+      "amount": 0.090791,
+      "epoch": 297,
+      "reason": "epoch_297_reward",
+      "timestamp": 1790454600,
+      "tx_hash": null,
+      "type": "ledger"
+    },
+    {
+      "amount": 15,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790442828,
+      "tx_hash": "22c1b9f36a0ccabc31a4abdfe7ec2002",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 15,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790442822,
+      "tx_hash": "be05893cec21556c622abbe24056549a",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 15,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790442817,
+      "tx_hash": "cd905743c577c1e2af7af97fb193a923",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 15,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790442811,
+      "tx_hash": "923d801460a7580ee9911a41cc8ea9f5",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 40,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790442806,
+      "tx_hash": "f1992a97d853486328b9a26d44435ed1",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 5,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790391509,
+      "tx_hash": "d989b0a9d12081ec8629351beced37d0",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 13,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790382843,
+      "tx_hash": "66c974883ef1d3f3afaa483b197aafce",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 1,
+      "epoch": null,
+      "from": "founder_community",
+      "status": "pending",
+      "timestamp": 1790382837,
+      "tx_hash": "c39bb38369d64a3644418802cba8f08d",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 0.087524,
+      "epoch": 296,
+      "reason": "epoch_296_reward",
+      "timestamp": 1790368200,
+      "tx_hash": null,
+      "type": "ledger"
+    }
+  ]
+}
