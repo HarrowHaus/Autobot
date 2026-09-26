@@ -5,7 +5,7 @@
   "scripts": {
     "test:worker": "node --test tests/test_cloudflare_merchant.mjs",
     "deploy": "wrangler deploy",
-    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\""
+    "generate:pages": "node tools/cloudflare_public_url_discovery.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.68.0"
