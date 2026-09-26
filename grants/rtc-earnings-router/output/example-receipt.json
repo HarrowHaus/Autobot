@@ -1,0 +1,72 @@
+{
+  "balances": {
+    "hosted": {
+      "amount_rtc": 20.0,
+      "identity": "tivince82",
+      "source": "https://rustchain.org/wallet/balance?miner_id=tivince82"
+    },
+    "native": {
+      "amount_rtc": 0.087524,
+      "identity": "RTC8a13ce90490828d7954ba1038df4873b73f7c049",
+      "source": "https://rustchain.org/wallet/balance?miner_id=RTC8a13ce90490828d7954ba1038df4873b73f7c049"
+    }
+  },
+  "claim_totals_rtc": {
+    "accepted": 8.0,
+    "confirmed": 15.0,
+    "pending": 0.0,
+    "queued": 0.0
+  },
+  "claims": [
+    {
+      "amount_rtc": 15.0,
+      "confirmation_time": "2026-09-27T12:00:00Z",
+      "evidence_urls": [
+        "email:receipt-5001",
+        "https://github.com/Scottcjn/rustchain-bounties/issues/9001",
+        "https://github.com/example/9001#c1",
+        "https://github.com/example/9001#c2"
+      ],
+      "issue_number": 9001,
+      "issue_url": "https://github.com/Scottcjn/rustchain-bounties/issues/9001",
+      "key": "pending:5001",
+      "payout_identity": "RTC8a13ce90490828d7954ba1038df4873b73f7c049",
+      "pending_id": "5001",
+      "state": "confirmed",
+      "title": "Example accepted then confirmed claim",
+      "tx_hash": "abcdef0123456789"
+    },
+    {
+      "amount_rtc": 8.0,
+      "confirmation_time": null,
+      "evidence_urls": [
+        "https://github.com/Scottcjn/rustchain-bounties/issues/9002"
+      ],
+      "issue_number": 9002,
+      "issue_url": "https://github.com/Scottcjn/rustchain-bounties/issues/9002",
+      "key": "issue:9002:example accepted-only claim",
+      "payout_identity": "RTC8a13ce90490828d7954ba1038df4873b73f7c049",
+      "pending_id": null,
+      "state": "accepted",
+      "title": "Example accepted-only claim",
+      "tx_hash": null
+    }
+  ],
+  "contributor": "KungFury87",
+  "rules": {
+    "balances_are_separate_identities": true,
+    "claim_dedupe_precedence": [
+      "idempotency",
+      "pending_id",
+      "issue+title"
+    ],
+    "state_precedence": [
+      "confirmed",
+      "pending",
+      "queued",
+      "accepted",
+      "unknown"
+    ]
+  },
+  "schema": "rtc-reconciliation/v1"
+}
