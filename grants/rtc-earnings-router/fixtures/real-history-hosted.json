@@ -1,0 +1,25 @@
+{
+  "miner_id": "tivince82",
+  "ok": true,
+  "total": 2,
+  "transactions": [
+    {
+      "amount": 5,
+      "epoch": 42765,
+      "from": "founder_community",
+      "reason": "transfer_in:founder_community:d5229925c1926aa944b2cf479cde65b0",
+      "timestamp": 1790452801,
+      "tx_hash": "d5229925c1926aa944b2cf479cde65b0",
+      "type": "transfer_in"
+    },
+    {
+      "amount": 20,
+      "epoch": 42635,
+      "from": "founder_community",
+      "reason": "transfer_in:founder_community:914ef6770343e1c8f62d38025211ebc2",
+      "timestamp": 1790377201,
+      "tx_hash": "914ef6770343e1c8f62d38025211ebc2",
+      "type": "transfer_in"
+    }
+  ]
+}
