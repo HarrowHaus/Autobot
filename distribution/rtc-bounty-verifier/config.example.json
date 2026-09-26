@@ -1,0 +1,10 @@
+{
+  "owner": "Scottcjn",
+  "rustchain_node_url": "https://50.28.86.131",
+  "rules": {
+    "min_article_words": 500,
+    "max_star_pages": 10,
+    "human_approval_required": true,
+    "payment_execution_enabled": false
+  }
+}
