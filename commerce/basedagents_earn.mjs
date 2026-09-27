@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { basename } from "node:path";
 import {
   RegistryClient,
   deserializeKeypair,
@@ -244,7 +245,7 @@ async function main() {
   throw new Error("usage: basedagents_earn.mjs <claim-deliver|reconcile> ...");
 }
 
-if (process.argv[1]?.endsWith("basedagents_earn.mjs")) {
+if (basename(process.argv[1] || "") === "basedagents_earn.mjs") {
   main().catch(error => {
     process.stdout.write(JSON.stringify({
       status: "failed",
