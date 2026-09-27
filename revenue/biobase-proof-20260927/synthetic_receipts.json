@@ -1,0 +1,6 @@
+[
+  {"task_id":"settled-1","state":"paid","verification":"accepted","payment":"settled"},
+  {"task_id":"running-1","state":"running","verification":""},
+  {"task_id":"delivery-1","state":"delivered","verification":"rejected"},
+  {"task_id":"payment-1","state":"paid","verification":"accepted","payment":"pending"}
+]
