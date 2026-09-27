@@ -27,7 +27,7 @@ jobs:
       - name: Install official marketplace SDK
         run: npm install --ignore-scripts
       - name: Scan open paid work through BasedAgents SDK
-        run: npm run scan:basedagents > basedagents-scan.json
+        run: npm --silent run scan:basedagents > basedagents-scan.json
       - name: Surface changed candidate set
         uses: actions/github-script@v8
         with:
