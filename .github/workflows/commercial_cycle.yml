@@ -40,14 +40,14 @@ jobs:
       - name: Observe x402 Bazaar
         run: |
           mkdir -p reports/commerce
-          npm run scan:bazaar > reports/commerce/bazaar-latest.json || true
+          npm --silent run scan:bazaar > reports/commerce/bazaar-latest.json || true
           if [ ! -s reports/commerce/bazaar-latest.json ]; then
             printf '%s\n' '{"source":"x402-official-bazaar-client","status":"unavailable","error":"scanner_produced_no_report"}' > reports/commerce/bazaar-latest.json
           fi
 
       - name: Observe BasedAgents paid work
         run: |
-          npm run scan:basedagents > reports/commerce/basedagents-latest.json || true
+          npm --silent run scan:basedagents > reports/commerce/basedagents-latest.json || true
           if [ ! -s reports/commerce/basedagents-latest.json ]; then
             printf '%s\n' '{"source":"basedagents-official-sdk","status":"unavailable","error":"scanner_produced_no_report","candidates":[]}' > reports/commerce/basedagents-latest.json
           fi
