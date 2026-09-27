@@ -1,0 +1,38 @@
+name: RTC Grazer local node evidence
+on:
+  push:
+    branches: ['earn/rtc-grazer-local-evidence-20260927']
+    paths:
+      - 'distribution/rip302-grazer-integration/**.py'
+      - 'distribution/rip302-grazer-integration/tests/**'
+      - '.github/workflows/rtc_grazer_local_evidence.yml'
+permissions:
+  contents: read
+concurrency:
+  group: rtc-grazer-local-evidence-20260927
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'HarrowHaus/Autobot' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: distribution/rip302-grazer-integration
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Scottcjn/Rustchain
+          ref: a4d39e9604897caf30693b05a79181018521811f
+          path: .upstream-rip302
+          persist-credentials: false
+          sparse-checkout: rip302_agent_economy.py
+          sparse-checkout-cone-mode: false
+      - name: Install local test dependency
+        run: python3 -m pip install --disable-pip-version-check 'Flask==3.1.2'
+      - name: Run original and added offline client tests
+        run: python3 -m unittest discover -s distribution/rip302-grazer-integration/tests -v
+      - name: Verify against actual upstream node over loopback HTTP
+        run: python3 distribution/rip302-grazer-integration/verify_local_node.py --node-module .upstream-rip302/rip302_agent_economy.py
