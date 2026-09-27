@@ -1,6 +1,9 @@
 name: A0 hybrid revenue state
 
 on:
+  pull_request:
+    branches:
+      - 'claude/monetizable-project-concepts-b97bv2'
   push:
     branches:
       - 'revenue/a0-hybrid-engine-20260927'
