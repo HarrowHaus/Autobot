@@ -1,0 +1,52 @@
+{
+  "source": "x402-official-bazaar-client",
+  "sdk": "@x402/extensions/bazaar",
+  "observed_at": "2026-09-27T02:52:51.226Z",
+  "facilitator": "https://facilitator.x402endpoints.online",
+  "network": "eip155:8453",
+  "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
+  "status": "partial",
+  "list": {
+    "resources_seen": 1,
+    "our_resources_seen": 0,
+    "pagination": {
+      "limit": 100,
+      "offset": 0,
+      "total": 1
+    },
+    "our_resources": []
+  },
+  "searches": [
+    {
+      "query": "agent routing",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "research verification",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "audio music",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "art nft",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "data analysis",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    }
+  ],
+  "errors": []
+}

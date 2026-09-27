@@ -1,0 +1,60 @@
+{
+  "next_actions": [
+    {
+      "action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
+      "gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
+      "opportunity_id": "distribution:x402-bazaar",
+      "score": 35.0
+    }
+  ],
+  "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
+  "opportunities": [
+    {
+      "advertised_value": null,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "facilitator": "https://facilitator.x402endpoints.online",
+        "our_resources_seen": 0,
+        "resources_seen": 1
+      },
+      "execution_gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
+      "first_seen_at": "2026-09-27T02:52:51.226Z",
+      "funding_evidence": "none",
+      "id": "distribution:x402-bazaar",
+      "kind": "distribution",
+      "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
+      "observed_at": "2026-09-27T02:52:51.226Z",
+      "score": 35.0,
+      "source": "x402-bazaar",
+      "status": "observed",
+      "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
+    }
+  ],
+  "revenue": {
+    "settlement_count": 0,
+    "settlements": [],
+    "verified_external_usdc_atomic": "0",
+    "verified_external_usdc_display": "0.000000"
+  },
+  "schema_version": 1,
+  "sources": {
+    "basedagents": {
+      "candidate_count": 0,
+      "observed_at": "2026-09-27T02:52:52.752Z",
+      "status": "ok"
+    },
+    "x402_bazaar": {
+      "observed_at": "2026-09-27T02:52:51.226Z",
+      "our_resources_seen": 0,
+      "status": "partial"
+    }
+  },
+  "truth_rules": {
+    "advertised_bounty_is_not_revenue": true,
+    "asking_price_is_not_revenue": true,
+    "internal_acc_is_not_revenue": true,
+    "only_settlement_events_enter_verified_external_revenue": true,
+    "platform_reported_escrow_is_not_independent_chain_verification": true
+  },
+  "updated_at": "2026-09-27T02:52:53Z"
+}
