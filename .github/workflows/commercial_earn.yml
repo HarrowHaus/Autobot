@@ -41,6 +41,11 @@ jobs:
 
       - name: Pre-fulfill and independently verify one candidate
         run: |
+          if [ -z "$BASEDAGENTS_KEYPAIR_JSON" ] && { [ -z "$BASEDAGENTS_BOT_PUBLIC_KEY" ] || [ -z "$BASEDAGENTS_BOT_PRIVATE_KEY" ]; }; then
+            rm -f reports/commerce/earn-plan.json
+            printf '%s\n' '{"status":"blocked","reason":"basedagents_identity_secret_missing"}' > reports/commerce/earn-preflight.json
+            exit 0
+          fi
           python -m swarmbrain.earning_cycle \
             --basedagents reports/commerce/basedagents-latest.json \
             --plan reports/commerce/earn-plan.json \
@@ -50,6 +55,8 @@ jobs:
         run: |
           if [ -f reports/commerce/earn-plan.json ]; then
             node commerce/basedagents_earn.mjs claim-deliver reports/commerce/earn-plan.json > reports/commerce/earn-execution.json
+          elif grep -q '"reason":"basedagents_identity_secret_missing"' reports/commerce/earn-preflight.json 2>/dev/null; then
+            cp reports/commerce/earn-preflight.json reports/commerce/earn-execution.json
           else
             printf '%s\n' '{"status":"not_executed","reason":"no_verified_prefulfilled_plan"}' > reports/commerce/earn-execution.json
           fi
