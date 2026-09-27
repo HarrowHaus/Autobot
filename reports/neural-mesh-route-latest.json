@@ -1,7 +1,7 @@
 [
   {
     "peer": "nulliverba",
-    "activation": 0.68755,
+    "activation": 0.68106,
     "matched_terms": [
       "provenance",
       "research",
@@ -9,11 +9,11 @@
     ],
     "verified_results": 0,
     "routing_mode": "capability_gate+gnn_prior",
-    "neural_prior": 0.75021
+    "neural_prior": 0.72424
   },
   {
     "peer": "humanmirror",
-    "activation": 0.68376,
+    "activation": 0.67689,
     "matched_terms": [
       "provenance",
       "routing",
@@ -21,11 +21,11 @@
     ],
     "verified_results": 0,
     "routing_mode": "capability_gate+gnn_prior",
-    "neural_prior": 0.73505
+    "neural_prior": 0.70758
   },
   {
     "peer": "gaip-art",
-    "activation": 0.65718,
+    "activation": 0.64663,
     "matched_terms": [
       "provenance",
       "routing",
@@ -33,6 +33,6 @@
     ],
     "verified_results": 0,
     "routing_mode": "capability_gate+gnn_prior",
-    "neural_prior": 0.62872
+    "neural_prior": 0.58653
   }
 ]
