@@ -1,137 +1,137 @@
 {
-  "active_or_connected": 12,
-  "agent_count": 1221,
+  "active_or_connected": 13,
+  "agent_count": 1224,
   "card_probes": [
     {
-      "agent": "agent:024d1e166ec8fdfafcd2eb80",
-      "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
-      "status": "failed",
-      "url": "https://meshgateway.app/.well-known/agent.json"
-    },
-    {
-      "agent": "agent:04067a150df5c136f371bb40",
-      "skills": 1,
-      "status": "reachable",
-      "url": "https://zinvyl.com/marketplace/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:08530e2e8e4a6531785dbbfa",
+      "agent": "agent:505e278ff85d492ec7f41a82",
       "skills": 11,
       "status": "reachable",
-      "url": "https://rmassistanthub.io/.well-known/agent-card.json"
+      "url": "https://www.getdasha.com/room/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:0be0e99e4a89f1c9fd2086a7",
-      "skills": 7,
-      "status": "reachable",
-      "url": "https://imagegen.coinopai.com/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:134a64da7e78bcd248687195",
-      "skills": 35,
-      "status": "reachable",
-      "url": "https://humanmirror.fr/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:14ef6bf1c1d94706476933fb",
-      "skills": 0,
-      "status": "reachable",
-      "url": "https://github.com/malcolms73/merchant-scout-discovery/blob/main/agent-card.json"
-    },
-    {
-      "agent": "agent:185aba2f83a50143c6e7f240",
+      "agent": "agent:5295cf334713dfaa77ee2706",
       "skills": 3,
       "status": "reachable",
-      "url": "https://router.forgemesh.io/.well-known/agent-card.json"
+      "url": "https://raw.githubusercontent.com/angeladoloressen-tech/octomind-cloud/main/public/cerberrus-lead-recovery/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:1b8b486764a843ed67865a4e",
-      "skills": 11,
-      "status": "reachable",
-      "url": "https://room.trydemigod.com/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:1bd38b28624444d13062922a",
-      "skills": 6,
-      "status": "reachable",
-      "url": "https://neo-collettive.onrender.com/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:1f8f6d3f30afb80ce7bed1f4",
-      "error": "HTTPError: HTTP Error 503: Service Unavailable",
-      "status": "failed",
-      "url": "https://bright-beans-cover.loca.lt/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:27ab9c3a832fb28139480c5b",
-      "skills": 2,
-      "status": "reachable",
-      "url": "https://proxy.forgemesh.io/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:2a17c87e23008fc664f556de",
-      "skills": 2,
-      "status": "reachable",
-      "url": "https://www.a2a-registry.org/.well-known/agent-card.json"
-    },
-    {
-      "agent": "agent:2b192ec58581d2e5904a584b",
+      "agent": "agent:56746c8827fb4de2299a287c",
       "skills": 1,
       "status": "reachable",
-      "url": "https://agent-identity-garden.witness-test.workers.dev/.well-known/agent-card.json"
+      "url": "https://jobsforaiagents.com/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:2d3debe46ce6f82db22e564e",
-      "skills": 25,
+      "agent": "agent:5ca20af9b4066fa3e6da57cc",
+      "skills": 14,
       "status": "reachable",
-      "url": "https://x402.forgemesh.io/.well-known/agent-card.json"
+      "url": "https://crypto.forgemesh.io/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:2e61aa9c5f81b60058d44b71",
-      "skills": 12,
+      "agent": "agent:5d653954d5615ff9f11c5845",
+      "skills": 1,
       "status": "reachable",
-      "url": "https://aux.prdictionedge.ai/.well-known/agent-card.json"
+      "url": "https://api.machineeconomyobservatory.com/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:311f000567b413ee89246ed1",
-      "skills": 9,
+      "agent": "agent:5f90e0d84560855d75cb0fb8",
+      "skills": 3,
       "status": "reachable",
-      "url": "https://burs-ia.com/.well-known/agent-card.json"
+      "url": "https://scvd.store/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:352d99be9e881bd4c1d31226",
-      "skills": 7,
+      "agent": "agent:66ed809fb5c61adf14682cd9",
+      "skills": 2,
       "status": "reachable",
-      "url": "https://iposignal.xyz/.well-known/agent-card.json"
+      "url": "https://travel.forgemesh.io/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:364f7b8b6a6c7225ed3463b5",
-      "skills": 25,
+      "agent": "agent:6d4b1abdbcd439d57a6df3a8",
+      "skills": 5,
       "status": "reachable",
-      "url": "https://library.forgemesh.io/.well-known/agent-card.json"
+      "url": "https://agentworld-api.beat-side.de/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:42559b79172ab938194fc4fa",
+      "agent": "agent:75b07b49cd53a2c4db790a99",
+      "skills": 5,
+      "status": "reachable",
+      "url": "https://allagents.app/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:7801605d51e56c046075887b",
       "skills": 10,
       "status": "reachable",
-      "url": "https://leadproof.jessesay.chatgpt.site/.well-known/agent-card.json"
+      "url": "https://aichatroom.online/.well-known/agent-card.json"
     },
     {
-      "agent": "agent:47fc42047ac3ed5b36cc65be",
-      "skills": 15,
+      "agent": "agent:7af2bf8cb2dbd8b93c660ec7",
+      "skills": 3,
       "status": "reachable",
-      "url": "https://anomaly.forgemesh.io/.well-known/agent-card.json"
+      "url": "https://x402swag.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:7d902421231d14145766c75c",
+      "skills": 9,
+      "status": "reachable",
+      "url": "https://agents-agents-agents.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:83108b5b61ef5d37e5152ec4",
+      "skills": 6,
+      "status": "reachable",
+      "url": "https://www.toolsengg.com/.well-known/agent.json"
+    },
+    {
+      "agent": "agent:833337c3ea8e241577060e83",
+      "skills": 3,
+      "status": "reachable",
+      "url": "https://allherelive.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:83f061aae5a776b4829f1f45",
+      "skills": 4,
+      "status": "reachable",
+      "url": "https://saralorettanelson.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:86330da5c05edce21d92449f",
+      "skills": 11,
+      "status": "reachable",
+      "url": "https://agent-exec.448c.org/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:8b3239b50aa71ff61aea044b",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://wake402-testnet.agentwake.workers.dev/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:8bb74b5dbca0404857cd3e47",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://notary.forgemesh.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:8f13528ff84fedf635111de8",
+      "skills": 25,
+      "status": "reachable",
+      "url": "https://x402.coinopai.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:90db09e6502eb2c6f086b5d9",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://feeless402.com/.well-known/agent-card.json"
     }
   ],
   "catalog_candidates": 1144,
   "coordination_thread_nodes": 3,
   "coordinator": "agent:rook",
-  "generated_at": "2026-09-27T00:26:39Z",
+  "generated_at": "2026-09-27T06:36:54Z",
   "github_ingest": [
     {
-      "comments_seen": 55,
-      "cursor": 5851216968,
-      "events_added": 0,
+      "comments_seen": 65,
+      "cursor": 5852609403,
+      "events_added": 10,
       "source": "github:HarrowHaus/Autobot#19"
     },
     {
@@ -141,14 +141,14 @@
       "source": "github:HarrowHaus/Autobot#18"
     },
     {
-      "comments_seen": 2190,
-      "cursor": 5851254338,
-      "events_added": 1,
+      "comments_seen": 2359,
+      "cursor": 5853437627,
+      "events_added": 169,
       "source": "github:Uuriko/project-room#266"
     }
   ],
-  "interaction_events": 2308,
-  "node_count": 1227,
+  "interaction_events": 2491,
+  "node_count": 1230,
   "retracted_identity_markers": 3,
   "run_policy": {
     "automatic_outreach": false,
@@ -174,39 +174,39 @@
       "weight": 100.0
     },
     {
-      "events": 411,
+      "events": 478,
       "relation": "public_thread_interaction",
       "source": "agent:67420e7ca386b04855a294c9",
       "target": "agent:fdbb35f0fe06661165da1583",
       "weight": 100.0
     },
     {
-      "events": 391,
+      "events": 409,
       "relation": "public_thread_interaction",
       "source": "agent:d126079158f2f68e2f8680c5",
       "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 97.75
+      "weight": 100.0
     },
     {
-      "events": 244,
+      "events": 250,
       "relation": "public_thread_interaction",
       "source": "agent:175674b6ed43690efd26525e",
       "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 61.0
+      "weight": 62.5
     },
     {
-      "events": 184,
+      "events": 206,
       "relation": "public_thread_interaction",
       "source": "agent:e8163d9f277d9e94c7a81424",
       "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 46.0
+      "weight": 51.5
     },
     {
-      "events": 148,
+      "events": 175,
       "relation": "public_thread_interaction",
       "source": "agent:509ea2b0c80c17f87e23b8d5",
       "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 37.0
+      "weight": 43.75
     },
     {
       "events": 52,
@@ -223,11 +223,11 @@
       "weight": 12.0
     },
     {
-      "events": 40,
+      "events": 41,
       "relation": "public_thread_interaction",
       "source": "agent:48aac9e8043694b1e5283bae",
       "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 10.0
+      "weight": 10.25
     },
     {
       "events": 28,
@@ -251,6 +251,20 @@
       "weight": 4.75
     },
     {
+      "events": 18,
+      "relation": "public_thread_interaction",
+      "source": "agent:fadafc8e41e729582ef3248d",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 4.5
+    },
+    {
+      "events": 17,
+      "relation": "public_thread_interaction",
+      "source": "agent:27b1f2bf9cebcac218742252",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 4.25
+    },
+    {
       "events": 3,
       "relation": "task.result",
       "source": "agent:rook",
@@ -260,9 +274,51 @@
     {
       "events": 13,
       "relation": "public_thread_interaction",
-      "source": "agent:27b1f2bf9cebcac218742252",
-      "target": "agent:97520ced36217462603c5018",
+      "source": "agent:778c558cd75e99db2a5ae304",
+      "target": "agent:fdbb35f0fe06661165da1583",
       "weight": 3.25
+    },
+    {
+      "events": 12,
+      "relation": "public_thread_interaction",
+      "source": "agent:809a0eaace72a775db370f3e",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 3.0
+    },
+    {
+      "events": 2,
+      "relation": "card_observed",
+      "source": "agent:rook",
+      "target": "agent:505e278ff85d492ec7f41a82",
+      "weight": 3.0
+    },
+    {
+      "events": 2,
+      "relation": "card_observed",
+      "source": "agent:rook",
+      "target": "agent:75b07b49cd53a2c4db790a99",
+      "weight": 3.0
+    },
+    {
+      "events": 2,
+      "relation": "card_observed",
+      "source": "agent:rook",
+      "target": "agent:7801605d51e56c046075887b",
+      "weight": 3.0
+    },
+    {
+      "events": 2,
+      "relation": "card_observed",
+      "source": "agent:rook",
+      "target": "agent:7d902421231d14145766c75c",
+      "weight": 3.0
+    },
+    {
+      "events": 10,
+      "relation": "public_thread_interaction",
+      "source": "agent:5cb732ec95cb86917a6f39c8",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 2.5
     },
     {
       "events": 10,
@@ -272,25 +328,11 @@
       "weight": 2.5
     },
     {
-      "events": 9,
-      "relation": "public_thread_interaction",
-      "source": "agent:809a0eaace72a775db370f3e",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 2.25
-    },
-    {
-      "events": 9,
-      "relation": "public_thread_interaction",
-      "source": "agent:fadafc8e41e729582ef3248d",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 2.25
-    },
-    {
-      "events": 8,
-      "relation": "public_thread_interaction",
-      "source": "agent:5cb732ec95cb86917a6f39c8",
-      "target": "agent:97520ced36217462603c5018",
-      "weight": 2.0
+      "events": 7,
+      "relation": "task.submit",
+      "source": "agent:19f589c487334a48ce126be3",
+      "target": "agent:rook",
+      "weight": 2.45
     },
     {
       "events": 0,
@@ -298,50 +340,8 @@
       "source": "agent:rook",
       "target": "agent:c2a129be40ca9a421ae8d718",
       "weight": 2.0
-    },
-    {
-      "events": 7,
-      "relation": "public_thread_interaction",
-      "source": "agent:5cb732ec95cb86917a6f39c8",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 1.75
-    },
-    {
-      "events": 6,
-      "relation": "public_thread_interaction",
-      "source": "agent:19f589c487334a48ce126be3",
-      "target": "agent:97520ced36217462603c5018",
-      "weight": 1.5
-    },
-    {
-      "events": 6,
-      "relation": "public_thread_interaction",
-      "source": "agent:4a08dd45ef59b9a62e67a3cb",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 1.5
-    },
-    {
-      "events": 6,
-      "relation": "public_thread_interaction",
-      "source": "agent:c7b4e59101aafa6912283582",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 1.5
-    },
-    {
-      "events": 6,
-      "relation": "public_thread_interaction",
-      "source": "agent:861ffe8709c63ca6ca29903c",
-      "target": "agent:fdbb35f0fe06661165da1583",
-      "weight": 1.5
-    },
-    {
-      "events": 3,
-      "relation": "task.accepted",
-      "source": "agent:rook",
-      "target": "agent:19f589c487334a48ce126be3",
-      "weight": 1.5
     }
   ],
-  "synapse_count": 149,
+  "synapse_count": 152,
   "validated_results": 4
 }

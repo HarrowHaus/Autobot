@@ -48,6 +48,18 @@
       "validated_events": 0,
       "weight": 1.5
     },
+    "0ca8c1211e1963dac4dfeb06": {
+      "events": 1,
+      "first_seen": "2026-09-27T06:36:44Z",
+      "id": "0ca8c1211e1963dac4dfeb06",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5852584867",
+      "last_seen": "2026-09-27T06:36:44Z",
+      "relation": "public_thread_interaction",
+      "source": "agent:ecb98f071281d1e2941fc9cf",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "validated_events": 0,
+      "weight": 0.25
+    },
     "0db63bc62af17096db13f520": {
       "events": 2,
       "first_seen": "2026-09-27T00:17:15Z",
@@ -226,28 +238,28 @@
       "weight": 0.25
     },
     "1ee63f08989a2af03d8fd173": {
-      "events": 391,
+      "events": 409,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "1ee63f08989a2af03d8fd173",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5850977828",
-      "last_seen": "2026-09-27T00:17:18Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853437627",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:d126079158f2f68e2f8680c5",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 97.75
+      "weight": 100.0
     },
     "1f801239ca949dd958695f8f": {
-      "events": 9,
+      "events": 12,
       "first_seen": "2026-09-27T00:17:17Z",
       "id": "1f801239ca949dd958695f8f",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5850149968",
-      "last_seen": "2026-09-27T00:17:17Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853260963",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:809a0eaace72a775db370f3e",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 2.25
+      "weight": 3.0
     },
     "2016a89c94838488dea8104b": {
       "events": 5,
@@ -402,28 +414,28 @@
       "weight": 0.2
     },
     "36906e9a595850d724ee8068": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:22:09Z",
       "id": "36906e9a595850d724ee8068",
-      "last_event_id": "card-probe:agent:7801605d51e56c046075887b:13ca218d45030d92",
-      "last_seen": "2026-09-27T00:22:09Z",
+      "last_event_id": "card-probe:agent:7801605d51e56c046075887b:3257ea945859098a",
+      "last_seen": "2026-09-27T06:36:50Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:7801605d51e56c046075887b",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     },
     "37a3ca456d5c3a76b880ae1e": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:22:06Z",
       "id": "37a3ca456d5c3a76b880ae1e",
-      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:274ee074b30108f5",
-      "last_seen": "2026-09-27T00:22:06Z",
+      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:371a61920aac2615",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:505e278ff85d492ec7f41a82",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     },
     "392c365585d94f3c690b49b8": {
       "events": 0,
@@ -437,16 +449,16 @@
       "weight": 0.65
     },
     "39837070be0b55a92161ef82": {
-      "events": 5,
+      "events": 13,
       "first_seen": "2026-09-27T00:17:17Z",
       "id": "39837070be0b55a92161ef82",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5851254338",
-      "last_seen": "2026-09-27T00:26:24Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5851873614",
+      "last_seen": "2026-09-27T06:36:44Z",
       "relation": "public_thread_interaction",
       "source": "agent:778c558cd75e99db2a5ae304",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 1.25
+      "weight": 3.25
     },
     "3d25f4ace70c409b33b577d1": {
       "events": 1,
@@ -471,6 +483,18 @@
       "target": "agent:8bb74b5dbca0404857cd3e47",
       "validated_events": 0,
       "weight": 1.5
+    },
+    "41471d2bfb4dc2288c6ddafd": {
+      "events": 1,
+      "first_seen": "2026-09-27T06:36:44Z",
+      "id": "41471d2bfb4dc2288c6ddafd",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5852215058",
+      "last_seen": "2026-09-27T06:36:44Z",
+      "relation": "public_thread_interaction",
+      "source": "agent:69ecd73ab47a63d32b085383",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "validated_events": 0,
+      "weight": 0.25
     },
     "41e189f2303782e4da4bf31b": {
       "events": 6,
@@ -521,16 +545,16 @@
       "weight": 1.5
     },
     "46e841aec0e3a3790a63db48": {
-      "events": 13,
+      "events": 17,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "46e841aec0e3a3790a63db48",
-      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5825316494",
-      "last_seen": "2026-09-27T00:17:10Z",
+      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5852609403",
+      "last_seen": "2026-09-27T06:36:32Z",
       "relation": "public_thread_interaction",
       "source": "agent:27b1f2bf9cebcac218742252",
       "target": "agent:97520ced36217462603c5018",
       "validated_events": 0,
-      "weight": 3.25
+      "weight": 4.25
     },
     "4b82c867fabae466fe19debc": {
       "events": 1,
@@ -543,6 +567,18 @@
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
       "weight": 0.25
+    },
+    "4e595c2cf49e84bd69db6154": {
+      "events": 6,
+      "first_seen": "2026-09-27T06:36:45Z",
+      "id": "4e595c2cf49e84bd69db6154",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853367562",
+      "last_seen": "2026-09-27T06:36:45Z",
+      "relation": "public_thread_interaction",
+      "source": "agent:17523e7c992c78b10ea7732a",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "validated_events": 0,
+      "weight": 1.5
     },
     "508ea124e09706028c333b3e": {
       "events": 28,
@@ -605,16 +641,16 @@
       "weight": 1.5
     },
     "566d00bf048f51868d40f518": {
-      "events": 9,
+      "events": 18,
       "first_seen": "2026-09-27T00:17:17Z",
       "id": "566d00bf048f51868d40f518",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5850666023",
-      "last_seen": "2026-09-27T00:17:18Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5852677564",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:fadafc8e41e729582ef3248d",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 2.25
+      "weight": 4.5
     },
     "57dea9f7e172f5d986e18cd2": {
       "events": 1,
@@ -700,16 +736,16 @@
       "weight": 0.25
     },
     "650786e28522e0de2b294188": {
-      "events": 40,
+      "events": 41,
       "first_seen": "2026-09-27T00:17:14Z",
       "id": "650786e28522e0de2b294188",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5850910630",
-      "last_seen": "2026-09-27T00:17:18Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5851361479",
+      "last_seen": "2026-09-27T06:36:43Z",
       "relation": "public_thread_interaction",
       "source": "agent:48aac9e8043694b1e5283bae",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 10.0
+      "weight": 10.25
     },
     "65accffe9a2ed7fee2fbbc29": {
       "events": 0,
@@ -723,11 +759,11 @@
       "weight": 0.35
     },
     "6666947d259cbd09b99151d1": {
-      "events": 411,
+      "events": 478,
       "first_seen": "2026-09-27T00:17:13Z",
       "id": "6666947d259cbd09b99151d1",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5851224684",
-      "last_seen": "2026-09-27T00:22:05Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853198220",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:67420e7ca386b04855a294c9",
       "target": "agent:fdbb35f0fe06661165da1583",
@@ -770,16 +806,16 @@
       "weight": 0.65
     },
     "676c6f26cd3a85fb56c6a39b": {
-      "events": 148,
+      "events": 175,
       "first_seen": "2026-09-27T00:17:15Z",
       "id": "676c6f26cd3a85fb56c6a39b",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5850919210",
-      "last_seen": "2026-09-27T00:17:18Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853006861",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:509ea2b0c80c17f87e23b8d5",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 37.0
+      "weight": 43.75
     },
     "68c3e33b3c3fe6733e009e81": {
       "events": 6,
@@ -901,16 +937,16 @@
       "weight": 1.0
     },
     "7a4c37d2ce95e9da608f9d17": {
-      "events": 244,
+      "events": 250,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "7a4c37d2ce95e9da608f9d17",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5851131023",
-      "last_seen": "2026-09-27T00:17:18Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853071221",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:175674b6ed43690efd26525e",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 61.0
+      "weight": 62.5
     },
     "7adbc94da336a1889db59062": {
       "events": 1,
@@ -1139,16 +1175,16 @@
       "weight": 1.5
     },
     "a6fcb367a91c09dcefd6abd5": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:22:09Z",
       "id": "a6fcb367a91c09dcefd6abd5",
-      "last_event_id": "card-probe:agent:7d902421231d14145766c75c:7815ff2a6b58a4fd",
-      "last_seen": "2026-09-27T00:22:09Z",
+      "last_event_id": "card-probe:agent:7d902421231d14145766c75c:e8eb5727f8093490",
+      "last_seen": "2026-09-27T06:36:51Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:7d902421231d14145766c75c",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     },
     "a7b12f39f859f13ec3382604": {
       "events": 1,
@@ -1186,16 +1222,16 @@
       "weight": 0.25
     },
     "abff2e7a983c1ecbc3af1cc9": {
-      "events": 3,
+      "events": 7,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "abff2e7a983c1ecbc3af1cc9",
-      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5822221524",
-      "last_seen": "2026-09-27T00:17:10Z",
+      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5852588608",
+      "last_seen": "2026-09-27T06:36:32Z",
       "relation": "task.submit",
       "source": "agent:19f589c487334a48ce126be3",
       "target": "agent:rook",
       "validated_events": 0,
-      "weight": 1.05
+      "weight": 2.45
     },
     "ad2bec458bdc254ca8c1c416": {
       "events": 2,
@@ -1543,16 +1579,16 @@
       "weight": 0.25
     },
     "df5919170370b10142999a59": {
-      "events": 8,
+      "events": 10,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "df5919170370b10142999a59",
-      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5851216968",
-      "last_seen": "2026-09-27T00:21:59Z",
+      "last_event_id": "github-comment:HarrowHaus/Autobot:19:5852583314",
+      "last_seen": "2026-09-27T06:36:32Z",
       "relation": "public_thread_interaction",
       "source": "agent:5cb732ec95cb86917a6f39c8",
       "target": "agent:97520ced36217462603c5018",
       "validated_events": 0,
-      "weight": 2.0
+      "weight": 2.5
     },
     "e3c03413eae656061104df7a": {
       "events": 1,
@@ -1615,16 +1651,16 @@
       "weight": 1.5
     },
     "ee0a439974bddf8ebb0e9ec0": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:22:09Z",
       "id": "ee0a439974bddf8ebb0e9ec0",
-      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:eef810ece283fdf7",
-      "last_seen": "2026-09-27T00:22:09Z",
+      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:6ea635b09bca5546",
+      "last_seen": "2026-09-27T06:36:50Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:75b07b49cd53a2c4db790a99",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     },
     "ee457be40f49223871ff2fa4": {
       "events": 10,
@@ -1639,16 +1675,16 @@
       "weight": 2.5
     },
     "eea72ea458beac35ece4197b": {
-      "events": 184,
+      "events": 206,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "eea72ea458beac35ece4197b",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5851229741",
-      "last_seen": "2026-09-27T00:22:05Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5853390241",
+      "last_seen": "2026-09-27T06:36:45Z",
       "relation": "public_thread_interaction",
       "source": "agent:e8163d9f277d9e94c7a81424",
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
-      "weight": 46.0
+      "weight": 51.5
     },
     "f0486adb06637b2f56bb8108": {
       "events": 1,
@@ -1771,5 +1807,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-09-27T00:26:39Z"
+  "updated_at": "2026-09-27T06:36:54Z"
 }
