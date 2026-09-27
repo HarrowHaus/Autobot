@@ -13,10 +13,7 @@ const DEFAULTS = {
   stateUrl: "https://raw.githubusercontent.com/HarrowHaus/Autobot/refs/heads/claude/monetizable-project-concepts-b97bv2/data/mesh-state.json",
 };
 
-const SDK_VERSION = "2.27.0";
-const paymentGates = new Map();
-
-export function cfg(env = {}) {
+function cfg(env = {}) {
   return {
     network: env.A0_PAYMENT_NETWORK || DEFAULTS.network,
     asset: env.A0_USDC_ASSET || DEFAULTS.asset,
@@ -27,14 +24,12 @@ export function cfg(env = {}) {
   };
 }
 
-export function atomicUsdcToDollar(value) {
-  const raw = String(value ?? "");
-  if (!/^\d+$/.test(raw)) throw new Error("USDC atomic amount must be a non-negative integer");
-  const atomic = BigInt(raw);
-  if (atomic <= 0n) throw new Error("USDC atomic amount must be positive");
-  const whole = atomic / 1_000_000n;
-  const fraction = (atomic % 1_000_000n).toString().padStart(6, "0").replace(/0+$/, "");
-  return "$" + whole.toString() + (fraction ? "." + fraction : "");
+export function atomicUsdcToDollarPrice(value) {
+  const atomic = BigInt(String(value));
+  if (atomic <= 0n) throw new Error("A0_ROUTE_PRICE_ATOMIC must be positive");
+  const whole = atomic / 1000000n;
+  const fraction = String(atomic % 1000000n).padStart(6, "0");
+  return "$" + whole.toString() + "." + fraction;
 }
 
 export function tokenize(value) {
@@ -45,26 +40,27 @@ export function rankPeers(state, query, limit = 3) {
   const terms = tokenize(query);
   const peers = Object.values(state?.peers || {});
   const rows = [];
-  for (const peer of peers) {
-    if (!["connected", "card_verified"].includes(peer.status)) continue;
-    const caps = (peer.capabilities || []).flatMap(cap => [cap.id, cap.name, ...(cap.tags || [])]);
-    const haystack = new Set(tokenize([peer.id, peer.name, peer.kind, peer.region, ...caps].join(" ")));
-    const matched = terms.filter(term => haystack.has(term));
+  for (const p of peers) {
+    if (!["connected", "card_verified"].includes(p.status)) continue;
+    const caps = (p.capabilities || []).flatMap(c => [c.id, c.name, ...(c.tags || [])]);
+    const hay = tokenize([p.id, p.name, p.kind, p.region, ...caps].join(" "));
+    const h = new Set(hay);
+    const matched = terms.filter(t => h.has(t));
     if (matched.length === 0) continue;
     const overlap = matched.length / Math.max(1, terms.length);
-    const calls = Number(peer.calls || 0);
-    const accepted = Number(peer.verified_results || 0);
-    const outcomeWeight = (accepted + 1) / (calls + 2);
-    const activation = overlap * (0.5 + outcomeWeight);
+    const calls = Number(p.calls || 0);
+    const accepted = Number(p.verified_results || 0);
+    const outcome = (accepted + 1) / (calls + 2);
+    const activation = overlap * (0.5 + outcome);
     rows.push({
-      peer: peer.id,
-      name: peer.name || peer.id,
+      peer: p.id,
+      name: p.name || p.id,
       activation: Number(activation.toFixed(6)),
       matched_terms: matched,
-      capabilities: (peer.capabilities || []).map(cap => cap.id || cap.name).filter(Boolean).slice(0, 12),
-      protocol_version: peer.protocol_version || null,
-      endpoint: peer.endpoint || null,
-      observed_reliability: peer.response_reliability ?? null,
+      capabilities: (p.capabilities || []).map(c => c.id || c.name).filter(Boolean).slice(0, 12),
+      protocol_version: p.protocol_version || null,
+      endpoint: p.endpoint || null,
+      observed_reliability: p.response_reliability ?? null,
     });
   }
   return rows
@@ -72,40 +68,27 @@ export function rankPeers(state, query, limit = 3) {
     .slice(0, Math.max(1, Math.min(10, Number(limit) || 3)));
 }
 
-function routeOutputSchema() {
-  return {
-    type: "object",
-    properties: {
-      query: { type: "string" },
-      routes: { type: "array" },
-      scope: { type: "string" },
-      state_coordinator: {},
-    },
-    required: ["query", "routes", "scope"],
-  };
-}
-
-export function buildRouteConfig(origin, env = {}) {
+export function buildRouteConfig(env = {}, origin = "https://merchant.invalid") {
   const c = cfg(env);
   const resource = new URL("/v1/route", origin).toString();
   return {
     "POST /v1/route": {
       accepts: {
         scheme: "exact",
-        price: atomicUsdcToDollar(c.amount),
+        price: atomicUsdcToDollarPrice(c.amount),
         network: c.network,
         payTo: c.payTo,
         maxTimeoutSeconds: 60,
       },
       resource,
-      description: "Read-only ranked routing over the SwarmBrain public peer graph",
+      description: "Read-only ranked routing over the SwarmBrain peer graph",
       mimeType: "application/json",
       serviceName: "A0 Route Intelligence",
-      tags: ["agents", "routing", "swarm", "research", "verification"],
+      tags: ["agents", "routing", "swarm", "x402", "discovery"],
       extensions: {
         ...declareDiscoveryExtension({
           method: "POST",
-          input: { query: "verification research", limit: 3 },
+          input: { query: "verification", limit: 3 },
           inputSchema: {
             type: "object",
             properties: {
@@ -117,12 +100,19 @@ export function buildRouteConfig(origin, env = {}) {
           bodyType: "json",
           output: {
             example: {
-              query: "verification research",
+              query: "verification",
               routes: [{ peer: "attractor", activation: 0.75 }],
               scope: "read_only_route_selection",
-              state_coordinator: null,
             },
-            schema: routeOutputSchema(),
+            schema: {
+              type: "object",
+              properties: {
+                query: { type: "string" },
+                routes: { type: "array" },
+                scope: { type: "string" },
+              },
+              required: ["query", "routes", "scope"],
+            },
           },
         }),
       },
@@ -130,22 +120,9 @@ export function buildRouteConfig(origin, env = {}) {
   };
 }
 
-function paymentGate(env, origin) {
-  const c = cfg(env);
-  const key = [origin, c.network, c.payTo.toLowerCase(), c.amount, c.facilitator].join("|");
-  if (paymentGates.has(key)) return paymentGates.get(key);
-
-  const facilitator = new HTTPFacilitatorClient({ url: c.facilitator });
-  const resourceServer = new x402ResourceServer(facilitator)
-    .register(c.network, new ExactEvmScheme());
-  const gate = paymentMiddleware(buildRouteConfig(origin, env), resourceServer);
-  paymentGates.set(key, gate);
-  return gate;
-}
-
 async function routeWork(c, query, limit) {
   const response = await fetch(c.stateUrl, {
-    headers: { "user-agent": "SwarmBrain-Commerce/1" },
+    headers: { "user-agent": "A0-merchant-worker/0.29" },
   });
   if (!response.ok) throw new Error("peer_state_unavailable:" + response.status);
   const state = await response.json();
@@ -157,100 +134,95 @@ async function routeWork(c, query, limit) {
   };
 }
 
-function noStore(c) {
-  c.header("cache-control", "no-store");
+function buildAgentCard(origin, env) {
+  const c = cfg(env);
+  const endpoint = new URL("/v1/route", origin).toString();
+  return {
+    name: "A0 Route Intelligence",
+    description: "Paid read-only routing across the SwarmBrain public peer graph. Returns ranked agent routes for capability/task terms.",
+    url: origin,
+    protocolVersion: "0.3",
+    version: "0.29.0",
+    provider: {
+      organization: "A0 / SwarmBrain",
+      url: "https://github.com/HarrowHaus/Autobot/issues/33",
+    },
+    capabilities: {
+      streaming: false,
+      pushNotifications: false,
+      stateTransitionHistory: false,
+    },
+    defaultInputModes: ["application/json", "text/plain"],
+    defaultOutputModes: ["application/json"],
+    skills: [{
+      id: "paid-route-intelligence",
+      name: "Paid Agent Route Intelligence",
+      description: "Rank known agent peers for requested capabilities. Read-only; does not dispatch work.",
+      tags: ["routing", "agents", "discovery", "verification", "research", "x402", "USDC", "Base"],
+      examples: ["verification research routing", "x402 payment verification routing"],
+    }],
+    metadata: {
+      payment_protocol: "x402-v2",
+      x402_implementation: "official-x402-sdk",
+      network: c.network,
+      asset: "USDC",
+      price_atomic: c.amount,
+      payment_discovery: new URL("/.well-known/x402", origin).toString(),
+      openapi: new URL("/openapi.json", origin).toString(),
+      skill_document: new URL("/skill.md", origin).toString(),
+      storefront: "https://github.com/HarrowHaus/Autobot/issues/33",
+      paid_endpoint: endpoint,
+    },
+  };
 }
 
-const app = new Hono();
+export function buildApp(env = {}, origin = "https://merchant.invalid") {
+  const c = cfg(env);
+  const app = new Hono();
+  const facilitator = new HTTPFacilitatorClient({ url: c.facilitator });
+  const server = new x402ResourceServer(facilitator)
+    .register(c.network, new ExactEvmScheme());
 
-app.get("/health", c => {
-  noStore(c);
-  return c.json({
+  // The official x402 middleware owns challenge creation, PaymentPayload parsing,
+  // verification, settlement and Bazaar extension handling. syncFacilitatorOnStart
+  // stays false so a Cloudflare Worker does not perform outbound I/O at module load.
+  app.use(paymentMiddleware(buildRouteConfig(env, origin), server, undefined, undefined, false));
+
+  app.get("/health", context => context.json({
     ok: true,
     service: "a0-route-intelligence",
     payments: "x402-v2",
-    payment_runtime: "@x402/hono",
-    x402_sdk_version: SDK_VERSION,
-    network: cfg(c.env).network,
-  });
-});
+    x402_implementation: "official-x402-sdk",
+    network: c.network,
+  }));
 
-app.get("/catalog", c => {
-  noStore(c);
-  const config = cfg(c.env);
-  return c.json({
+  app.get("/catalog", context => context.json({
     service: "A0 Route Intelligence",
-    endpoint: new URL("/v1/route", c.req.url).toString(),
+    endpoint: new URL("/v1/route", origin).toString(),
     method: "POST",
-    price_atomic: config.amount,
-    price_usd: atomicUsdcToDollar(config.amount),
-    asset: config.asset,
-    network: config.network,
-    pay_to: config.payTo,
-    facilitator: config.facilitator,
-    payment_runtime: "@x402/hono",
-    x402_sdk_version: SDK_VERSION,
-  });
-});
+    price_atomic: c.amount,
+    price: atomicUsdcToDollarPrice(c.amount),
+    asset: c.asset,
+    network: c.network,
+    pay_to: c.payTo,
+    facilitator: c.facilitator,
+  }));
 
-app.get("/.well-known/x402", c => {
-  noStore(c);
-  return c.json({
+  app.get("/.well-known/x402", context => context.json({
     x402Version: 2,
-    resources: [new URL("/v1/route", c.req.url).toString()],
-    payment_runtime: "@x402/hono",
-    sdk_version: SDK_VERSION,
-  });
-});
+    resources: [{
+      url: new URL("/v1/route", origin).toString(),
+      method: "POST",
+      description: "Paid read-only SwarmBrain route intelligence",
+      network: c.network,
+      price: atomicUsdcToDollarPrice(c.amount),
+    }],
+  }));
 
-for (const path of ["/.well-known/agent-card.json", "/.well-known/agent.json"]) {
-  app.get(path, c => {
-    noStore(c);
-    const config = cfg(c.env);
-    const origin = new URL(c.req.url).origin;
-    const endpoint = new URL("/v1/route", origin).toString();
-    return c.json({
-      name: "A0 Route Intelligence",
-      description: "Paid read-only routing across the SwarmBrain public peer graph. Returns ranked agent routes for capability or task terms.",
-      url: origin,
-      protocolVersion: "0.3",
-      version: "0.29.0",
-      provider: {
-        organization: "A0 / SwarmBrain",
-        url: "https://github.com/HarrowHaus/Autobot/issues/33",
-      },
-      capabilities: { streaming: false, pushNotifications: false, stateTransitionHistory: false },
-      defaultInputModes: ["application/json", "text/plain"],
-      defaultOutputModes: ["application/json"],
-      skills: [{
-        id: "paid-route-intelligence",
-        name: "Paid Agent Route Intelligence",
-        description: "Rank known SwarmBrain peers for requested capabilities. Read-only; does not dispatch work.",
-        tags: ["routing", "agents", "discovery", "verification", "research", "x402", "USDC", "Base"],
-        examples: ["verification research routing", "x402 payment verification routing"],
-      }],
-      metadata: {
-        payment_protocol: "x402-v2",
-        payment_runtime: "@x402/hono",
-        x402_sdk_version: SDK_VERSION,
-        network: config.network,
-        asset: "USDC",
-        price_atomic: config.amount,
-        payment_discovery: new URL("/.well-known/x402", origin).toString(),
-        openapi: new URL("/openapi.json", origin).toString(),
-        skill_document: new URL("/skill.md", origin).toString(),
-        storefront: "https://github.com/HarrowHaus/Autobot/issues/33",
-        paid_endpoint: endpoint,
-      },
-    });
-  });
-}
+  app.get("/.well-known/agent-card.json", context => context.json(buildAgentCard(origin, env)));
+  app.get("/.well-known/agent.json", context => context.json(buildAgentCard(origin, env)));
 
-app.get("/openapi.json", c => {
-  noStore(c);
-  const config = cfg(c.env);
-  const origin = new URL(c.req.url).origin;
-  return c.json({
+  app.get("/openapi.json", context => context.json({
     openapi: "3.1.0",
     info: {
       title: "A0 Route Intelligence",
@@ -280,72 +252,55 @@ app.get("/openapi.json", c => {
           },
           responses: {
             "200": { description: "Paid routing result" },
-            "400": { description: "Invalid route request" },
             "402": { description: "x402 payment required" },
-            "502": { description: "Swarm state unavailable" },
           },
           "x-payment-info": {
             protocols: ["x402"],
-            amount: atomicUsdcToDollar(config.amount).slice(1),
+            amount: atomicUsdcToDollarPrice(c.amount),
             currency: "USDC",
-            network: config.network,
-            implementation: "@x402/hono",
+            network: c.network,
           },
         },
       },
     },
-  });
-});
+  }));
 
-app.get("/skill.md", c => {
-  noStore(c);
-  return c.text([
+  app.get("/skill.md", context => context.text([
     "# A0 Route Intelligence",
     "",
     "Use POST /v1/route with JSON {\"query\":\"capability terms\",\"limit\":3}.",
-    "The endpoint uses the official x402 v2 Hono middleware with exact USDC payments on Base.",
-    "An unpaid request receives the x402 payment challenge from the SDK middleware.",
+    "The endpoint uses the official x402 v2 SDK with exact USDC payments on Base.",
+    "An unpaid request returns HTTP 402 using the official x402 middleware.",
     "The service is read-only: it ranks known SwarmBrain peers and does not dispatch work.",
-    "Discovery: /.well-known/x402 and /openapi.json.",
-  ].join("\n"), 200, {
-    "content-type": "text/markdown; charset=utf-8",
-    "cache-control": "no-store",
+    "Discovery: /.well-known/x402, /.well-known/agent-card.json, /openapi.json.",
+  ].join("\n"), 200, { "content-type": "text/markdown; charset=utf-8" }));
+
+  app.post("/v1/route", async context => {
+    let body;
+    try {
+      body = await context.req.json();
+    } catch {
+      return context.json({ error: "invalid_json" }, 400);
+    }
+    const query = String(body?.query || "").trim();
+    if (!query || query.length > 1000) return context.json({ error: "query_required" }, 400);
+    const limit = Math.max(1, Math.min(10, Number(body?.limit) || 3));
+    try {
+      return context.json(await routeWork(c, query, limit));
+    } catch (error) {
+      return context.json({
+        error: "resource_execution_failed",
+        detail: String(error?.message || error).slice(0, 200),
+      }, 502);
+    }
   });
-});
 
-app.use("/v1/route", async (c, next) => {
-  const origin = new URL(c.req.url).origin;
-  return paymentGate(c.env, origin)(c, next);
-});
-
-app.post("/v1/route", async c => {
-  noStore(c);
-  let body;
-  try {
-    body = await c.req.json();
-  } catch {
-    return c.json({ error: "invalid_json" }, 400);
-  }
-  const query = String(body?.query || "").trim();
-  if (!query || query.length > 1000) return c.json({ error: "query_required" }, 400);
-  const limit = Math.max(1, Math.min(10, Number(body?.limit) || 3));
-  try {
-    return c.json(await routeWork(cfg(c.env), query, limit));
-  } catch (error) {
-    return c.json({
-      error: "resource_execution_failed",
-      detail: String(error?.message || error).slice(0, 200),
-    }, 502);
-  }
-});
-
-app.notFound(c => {
-  noStore(c);
-  return c.json({ error: "not_found" }, 404);
-});
+  return app;
+}
 
 export default {
-  fetch(request, env, executionCtx) {
-    return app.fetch(request, env, executionCtx);
+  fetch(request, env, executionContext) {
+    const origin = new URL(request.url).origin;
+    return buildApp(env, origin).fetch(request, env, executionContext);
   },
 };
