@@ -585,6 +585,27 @@ def resolve_candidate_ids(agents: dict[str, Any], names: list[str]) -> dict[str,
     return {name: lookup.get(name.strip().lower(), "") for name in names}
 
 
+def neural_scores_for_names(query: str, names: list[str], source_id: str = "agent:rook", relation: str = "task_sent") -> dict[str, float]:
+    model, h, ledger, agents, node_ids, node_index, relation_ids, rel_index, edge_prior = load_model_for_inference()
+    if source_id not in node_index:
+        return {}
+    mapping = resolve_candidate_ids(agents, names)
+    rel_name = relation if relation in rel_index else "task_sent"
+    rel_id = rel_index[rel_name]
+    task = text_features(query)
+    valid = [(name, aid) for name, aid in mapping.items() if aid and aid in node_index]
+    if not valid:
+        return {}
+    src = torch.full((len(valid),), node_index[source_id], dtype=torch.long)
+    dst = torch.tensor([node_index[aid] for _, aid in valid], dtype=torch.long)
+    rel = torch.full((len(valid),), rel_id, dtype=torch.long)
+    task_batch = task.unsqueeze(0).repeat(len(valid), 1)
+    prior = torch.tensor([edge_prior.get((source_id, aid, rel_name), 0.0) for _, aid in valid], dtype=torch.float32)
+    with torch.no_grad():
+        scores = torch.sigmoid(model.score(h, src, dst, rel, task_batch, prior))
+    return {name: float(score) for (name, _), score in zip(valid, scores.tolist())}
+
+
 def rank_candidates(query: str, top_k: int = 20, source_id: str = "agent:rook", relation: str = "task_sent"):
     model, h, ledger, agents, node_ids, node_index, relation_ids, rel_index, edge_prior = load_model_for_inference()
     candidates = [
