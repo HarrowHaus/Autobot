@@ -8,7 +8,9 @@
     "deploy": "wrangler deploy",
     "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\"",
     "scan:basedagents": "node commerce/basedagents_scan.mjs",
-    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs"
+    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs",
+    "activate:earning": "node tools/bootstrap_basedagents_identity.mjs",
+    "test:activation": "node --test tests/test_activation_bootstrap.mjs"
   },
   "dependencies": {
     "@x402/core": "2.27.0",
