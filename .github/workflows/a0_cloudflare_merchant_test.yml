@@ -4,6 +4,9 @@ on:
     paths:
       - 'cloudflare/**'
       - 'commerce/**'
+      - 'tools/bootstrap_basedagents_identity.mjs'
+      - 'docs/ACTIVATE_EARNING.md'
+      - 'tests/test_activation_bootstrap.mjs'
       - 'swarmbrain/commercial_controller.py'
       - 'swarmbrain/earning_cycle.py'
       - '.github/workflows/commercial_earn.yml'
@@ -46,5 +49,6 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run test:worker
       - run: npm run test:commerce
+      - run: npm run test:activation
       - run: python -m unittest tests.test_commercial_controller tests.test_earning_cycle
       - run: npx wrangler deploy --dry-run
