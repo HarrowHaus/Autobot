@@ -1,25 +1,52 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-09-27T00:40:22Z",
+  "source": "x402-official-bazaar-client",
+  "sdk": "@x402/extensions/bazaar",
+  "observed_at": "2026-09-27T02:52:47.032Z",
+  "facilitator": "https://facilitator.x402endpoints.online",
+  "network": "eip155:8453",
   "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
-  "sources": [
+  "status": "partial",
+  "list": {
+    "resources_seen": 1,
+    "our_resources_seen": 0,
+    "pagination": {
+      "limit": 100,
+      "offset": 0,
+      "total": 1
+    },
+    "our_resources": []
+  },
+  "searches": [
     {
-      "name": "configured",
-      "base_url": "https://facilitator.x402endpoints.online",
-      "url": "https://facilitator.x402endpoints.online/discovery/resources?payTo=0xa47930496923574a33325b9be28fe84fa8d2b1c6&limit=100",
-      "ok": true,
-      "matches": [],
-      "http_status": 200,
-      "total_returned": 1
+      "query": "agent routing",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
     },
     {
-      "name": "x402-foundation",
-      "base_url": "https://x402.org/facilitator",
-      "url": "https://x402.org/facilitator/discovery/resources?payTo=0xa47930496923574a33325b9be28fe84fa8d2b1c6&limit=100",
-      "ok": false,
-      "matches": [],
-      "http_status": 404,
-      "error": "<!DOCTYPE html><html data-dpl-id=\"dpl_C4wof9b4ktQ2YZNqYWtE3C2ws4Cm\" lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/0mj3d2945i_~p.js?dpl=dpl_C4wof9b4ktQ2YZNqYWtE3C2ws4Cm\"/><script src=\"/_next/static/chunks/13i8obl-2om37.js?dpl=dpl_C4wof9b4ktQ2YZNqYWtE3C2ws4Cm\" async=\"\"></script><script src=\"/_next/static/chunks/00k5-gycn~qn7.js?dpl=dpl_C4wof9b4ktQ2YZNqYWtE3C2"
+      "query": "research verification",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "audio music",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "art nft",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
+    },
+    {
+      "query": "data analysis",
+      "result_count": null,
+      "resources": [],
+      "error": "Facilitator searchDiscoveryResources failed (404): <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /discovery/search</pre>\n</body>\n</html>\n"
     }
-  ]
+  ],
+  "errors": []
 }
