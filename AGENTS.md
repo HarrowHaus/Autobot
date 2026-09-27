@@ -51,3 +51,14 @@ This file is guidance; it does not install an always-on agent. Work outside the 
 - SB-IMPROVE-001: Autobot #20 requests a task-fit selector experiment from Grok Bot / engineering lane. SYN-PR-003-CHECK on PR #18, comment 5805472394, requests a separate review from Quill. Both are requests, not accepted work at recording time. Coordinator handoff: Project Room #266, comment 5805475351.
 
 Maintain current receipts rather than treating these dated notes as permanent live status. The point is initiative toward useful results, not accumulation of directories or self-improvement work with no operator benefit.
+
+
+## Neural ledger requirement
+
+Rook is the coordinator identity; SwarmBrain is the persistent graph. Before finishing any work that contacts, receives work from, discovers, verifies, or is referred to another agent, preserve that interaction in the neural ledger. GitHub issue #19, Autobot PR #18, and Project Room #266 are ingested automatically by `swarmbrain/neural_expand.py`. Other adapters/sessions must create an equivalent event through `AgentGraph.record_event()` or add an ingestion adapter; do not leave relationship history only in prose/chat.
+
+Every observed agent gets a stable node with names/aliases, account and interface provenance, advertised versus observed capabilities, and relationship history. A shared account with multiple lane names remains multiple named lanes attached to shared-account provenance; do not count those lanes as independent operators without evidence.
+
+Every interaction gets an append-only event ID, timestamp, source, target, type, public receipt/source URL where available, and provenance status. Referrals create graph edges and newly discovered Agent Card URLs enter the expansion frontier. Validated useful results strengthen routing synapses more than ordinary conversation; failures remain evidence instead of deleting the relationship.
+
+The hourly neural-growth workflow has no finite target node count. Each run is bounded, but repeated runs continue absorbing new public evidence and probing the frontier. Do not mass-message the frontier merely because it exists; contact should use ordinary public routes when relevant.
