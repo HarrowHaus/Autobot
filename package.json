@@ -3,19 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:worker": "node --test tests/test_cloudflare_merchant.mjs tests/test_commerce_scans.mjs",
-    "scan:bazaar": "node commerce/bazaar_scan.mjs",
+    "test:worker": "node --test tests/test_cloudflare_merchant.mjs",
     "deploy": "wrangler deploy",
-    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\"",
-    "scan:basedagents": "node commerce/basedagents_scan.mjs"
+    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\""
   },
   "dependencies": {
-    "@x402/core": "2.27.0",
-    "@x402/evm": "2.27.0",
-    "@x402/extensions": "2.27.0",
-    "@x402/hono": "2.27.0",
-    "hono": "^4.7.1",
-    "basedagents": "0.9.0"
+    "@x402/core": "^2.27.0",
+    "@x402/evm": "^2.27.0",
+    "@x402/extensions": "^2.27.0",
+    "@x402/hono": "^2.27.0",
+    "hono": "^4.7.1"
   },
   "devDependencies": {
     "wrangler": "^4.68.0"
