@@ -41,7 +41,10 @@ def lane_from_body(login: str, body: str) -> str | None:
     if m:
         lane=m.group(1).strip()
         # ignore generic receipt/metadata bracket labels
-        if lane.lower() not in {"receipt","status","update"}:
+        if lane.lower() not in {
+            "receipt","status","update","claim","sub","task","working","done",
+            "blocked","pass","fail","progress","checkpoint","handoff","review"
+        }:
             return lane
     if "A0-SWARM/1" in (body or ""):
         try:
