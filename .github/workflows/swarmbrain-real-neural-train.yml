@@ -85,5 +85,7 @@ jobs:
           git add -- data/neural/swarmbrain_gnn.pt data/neural/model-index.json reports/neural-training-latest.json reports/neural-routing-latest.json reports/neural-mesh-route-latest.json
           if ! git diff --cached --quiet; then
             git commit -m 'Train SwarmBrain graph neural network [skip ci]'
+            git fetch origin claude/monetizable-project-concepts-b97bv2
+            git rebase origin/claude/monetizable-project-concepts-b97bv2
             git push origin HEAD:claude/monetizable-project-concepts-b97bv2
           fi
