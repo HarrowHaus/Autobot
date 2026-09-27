@@ -7,6 +7,7 @@ on:
     paths:
       - 'swarmbrain/neural_graph.py'
       - 'swarmbrain/neural_expand.py'
+      - 'swarmbrain/neural_cleanup.py'
       - 'tests/test_neural_graph.py'
       - 'data/public-agent-catalog.json'
       - 'data/mesh-state.json'
@@ -34,6 +35,9 @@ jobs:
 
       - name: Test neural graph
         run: python3 -m unittest tests.test_neural_graph -v
+
+      - name: Clean parser identity artifacts without deleting history
+        run: python3 swarmbrain/neural_cleanup.py
 
       - name: Expand persistent graph
         env:
