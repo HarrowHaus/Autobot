@@ -37,5 +37,6 @@ jobs:
           python-version: '3.12'
       - run: npm install --ignore-scripts
       - run: npm run test:worker
-      - run: python -m unittest tests.test_commercial_controller
+      - run: npm run test:commerce
+      - run: python -m unittest tests.test_commercial_controller tests.test_earning_cycle
       - run: npx wrangler deploy --dry-run
