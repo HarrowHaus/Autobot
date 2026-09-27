@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reclassify known parser metadata markers without deleting historical events."""
+"""Reclassify known parser metadata markers without deleting historical events.\nRuns before each neural growth pass."""
 from neural_graph import AgentGraph
 
 INVALID = {
