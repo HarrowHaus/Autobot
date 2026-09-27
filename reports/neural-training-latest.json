@@ -1,0 +1,50 @@
+{
+  "architecture": "DynamicAgentGNN",
+  "architecture_version": 1,
+  "framework": "PyTorch 2.13.0+cpu",
+  "real_backpropagation": true,
+  "optimizer": "AdamW",
+  "epochs": 35,
+  "learning_rate": 0.004,
+  "parameter_count": 85329,
+  "trainable_parameter_count": 85329,
+  "node_count": 1227,
+  "agent_count": 1221,
+  "relation_count": 14,
+  "edge_count": 149,
+  "sample_count": 2308,
+  "train_count": 1897,
+  "holdout_count": 411,
+  "expansion": {
+    "checkpoint_found": false,
+    "reused_node_embeddings": 0,
+    "new_node_embeddings": 1227,
+    "reused_relation_embeddings": 0,
+    "new_relation_embeddings": 14
+  },
+  "initial_holdout": {
+    "loss": 0.0326954647898674,
+    "mae": 0.15858368575572968,
+    "count": 411,
+    "prediction_mean": 0.5344234704971313,
+    "target_mean": 0.39399033784866333
+  },
+  "final_train": {
+    "loss": 0.0008600028231739998,
+    "mae": 0.011272014118731022,
+    "count": 1897,
+    "prediction_mean": 0.38684120774269104,
+    "target_mean": 0.39327362179756165
+  },
+  "final_holdout": {
+    "loss": 0.0009928441140800714,
+    "mae": 0.011487211100757122,
+    "count": 411,
+    "prediction_mean": 0.3887787163257599,
+    "target_mean": 0.39399033784866333
+  },
+  "train_loss_first": 0.03333442285656929,
+  "train_loss_last": 0.0008481992408633232,
+  "checkpoint": "data/neural/swarmbrain_gnn.pt",
+  "model_index": "data/neural/model-index.json"
+}
