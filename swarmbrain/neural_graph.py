@@ -297,15 +297,20 @@ class AgentGraph:
     def summary(self) -> dict:
         agents=self.ledger["agents"]
         edges=self.synapses["edges"]
+        non_agent_kinds={"public_coordination_thread","invalid_identity_marker"}
+        agent_nodes=[a for a in agents.values() if a.get("kind") not in non_agent_kinds]
         return {
             "generated_at":now(),
             "coordinator":ROOK_ID,
-            "agent_count":len(agents),
+            "node_count":len(agents),
+            "agent_count":len(agent_nodes),
+            "coordination_thread_nodes":sum(a.get("kind")=="public_coordination_thread" for a in agents.values()),
+            "retracted_identity_markers":sum(a.get("kind")=="invalid_identity_marker" for a in agents.values()),
             "synapse_count":len(edges),
             "interaction_events":self.event_count(),
-            "validated_results":sum(a.get("validated_result_count",0) for a in agents.values()),
-            "catalog_candidates":sum(a.get("kind")=="catalog_candidate" for a in agents.values()),
-            "active_or_connected":sum(a.get("status") in ("active","connected") for a in agents.values()),
+            "validated_results":sum(a.get("validated_result_count",0) for a in agent_nodes),
+            "catalog_candidates":sum(a.get("kind")=="catalog_candidate" for a in agent_nodes),
+            "active_or_connected":sum(a.get("status") in ("active","connected") for a in agent_nodes),
             "strongest_synapses":sorted(
                 [{"source":e["source"],"target":e["target"],"relation":e["relation"],"weight":e["weight"],"events":e["events"]}
                  for e in edges.values()],
