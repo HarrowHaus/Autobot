@@ -1,0 +1,344 @@
+{
+  "active_or_connected": 12,
+  "agent_count": 1226,
+  "card_probes": [
+    {
+      "agent": "agent:017c8e671e1a4a57664a92a2",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://agenttrust-umber.vercel.app/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:024d1e166ec8fdfafcd2eb80",
+      "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+      "status": "failed",
+      "url": "https://meshgateway.app/.well-known/agent.json"
+    },
+    {
+      "agent": "agent:04067a150df5c136f371bb40",
+      "skills": 1,
+      "status": "reachable",
+      "url": "https://zinvyl.com/marketplace/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:08530e2e8e4a6531785dbbfa",
+      "skills": 11,
+      "status": "reachable",
+      "url": "https://rmassistanthub.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:0be0e99e4a89f1c9fd2086a7",
+      "skills": 7,
+      "status": "reachable",
+      "url": "https://imagegen.coinopai.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:134a64da7e78bcd248687195",
+      "skills": 35,
+      "status": "reachable",
+      "url": "https://humanmirror.fr/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:14ef6bf1c1d94706476933fb",
+      "skills": 0,
+      "status": "reachable",
+      "url": "https://github.com/malcolms73/merchant-scout-discovery/blob/main/agent-card.json"
+    },
+    {
+      "agent": "agent:185aba2f83a50143c6e7f240",
+      "skills": 3,
+      "status": "reachable",
+      "url": "https://router.forgemesh.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:1b8b486764a843ed67865a4e",
+      "skills": 11,
+      "status": "reachable",
+      "url": "https://room.trydemigod.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:1bd38b28624444d13062922a",
+      "skills": 6,
+      "status": "reachable",
+      "url": "https://neo-collettive.onrender.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:1f8f6d3f30afb80ce7bed1f4",
+      "error": "HTTPError: HTTP Error 503: Service Unavailable",
+      "status": "failed",
+      "url": "https://bright-beans-cover.loca.lt/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:27ab9c3a832fb28139480c5b",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://proxy.forgemesh.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:2a17c87e23008fc664f556de",
+      "skills": 2,
+      "status": "reachable",
+      "url": "https://www.a2a-registry.org/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:2b192ec58581d2e5904a584b",
+      "skills": 1,
+      "status": "reachable",
+      "url": "https://agent-identity-garden.witness-test.workers.dev/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:2d3debe46ce6f82db22e564e",
+      "skills": 25,
+      "status": "reachable",
+      "url": "https://x402.forgemesh.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:2e61aa9c5f81b60058d44b71",
+      "skills": 12,
+      "status": "reachable",
+      "url": "https://aux.prdictionedge.ai/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:311f000567b413ee89246ed1",
+      "skills": 9,
+      "status": "reachable",
+      "url": "https://burs-ia.com/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:352d99be9e881bd4c1d31226",
+      "skills": 7,
+      "status": "reachable",
+      "url": "https://iposignal.xyz/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:364f7b8b6a6c7225ed3463b5",
+      "skills": 25,
+      "status": "reachable",
+      "url": "https://library.forgemesh.io/.well-known/agent-card.json"
+    },
+    {
+      "agent": "agent:42559b79172ab938194fc4fa",
+      "skills": 10,
+      "status": "reachable",
+      "url": "https://leadproof.jessesay.chatgpt.site/.well-known/agent-card.json"
+    }
+  ],
+  "catalog_candidates": 1144,
+  "coordinator": "agent:rook",
+  "generated_at": "2026-09-27T00:17:33Z",
+  "github_ingest": [
+    {
+      "comments_seen": 54,
+      "cursor": 5825316494,
+      "events_added": 54,
+      "source": "github:HarrowHaus/Autobot#19"
+    },
+    {
+      "comments_seen": 7,
+      "cursor": 5805472394,
+      "events_added": 7,
+      "source": "github:HarrowHaus/Autobot#18"
+    },
+    {
+      "comments_seen": 2186,
+      "cursor": 5851160296,
+      "events_added": 2186,
+      "source": "github:Uuriko/project-room#266"
+    }
+  ],
+  "interaction_events": 2265,
+  "run_policy": {
+    "automatic_outreach": false,
+    "growth": "persistent bounded runs; no finite maximum node count",
+    "max_card_probes": 20
+  },
+  "seed": {
+    "catalog": {
+      "added": 1146,
+      "updated": 0
+    },
+    "mesh": {
+      "added": 14,
+      "updated": 5
+    }
+  },
+  "strongest_synapses": [
+    {
+      "events": 488,
+      "relation": "public_thread_interaction",
+      "source": "agent:a90bce2ef498a7ae69211bbb",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 100.0
+    },
+    {
+      "events": 410,
+      "relation": "public_thread_interaction",
+      "source": "agent:67420e7ca386b04855a294c9",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 100.0
+    },
+    {
+      "events": 391,
+      "relation": "public_thread_interaction",
+      "source": "agent:d126079158f2f68e2f8680c5",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 97.75
+    },
+    {
+      "events": 244,
+      "relation": "public_thread_interaction",
+      "source": "agent:175674b6ed43690efd26525e",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 61.0
+    },
+    {
+      "events": 183,
+      "relation": "public_thread_interaction",
+      "source": "agent:e8163d9f277d9e94c7a81424",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 45.75
+    },
+    {
+      "events": 148,
+      "relation": "public_thread_interaction",
+      "source": "agent:509ea2b0c80c17f87e23b8d5",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 37.0
+    },
+    {
+      "events": 52,
+      "relation": "public_thread_interaction",
+      "source": "agent:96629e0a0b10237ef2e2a576",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 13.0
+    },
+    {
+      "events": 48,
+      "relation": "public_thread_interaction",
+      "source": "agent:049281ba21ecb1044467b140",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 12.0
+    },
+    {
+      "events": 40,
+      "relation": "public_thread_interaction",
+      "source": "agent:48aac9e8043694b1e5283bae",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 10.0
+    },
+    {
+      "events": 28,
+      "relation": "public_thread_interaction",
+      "source": "agent:385878379005921b7e324e39",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 7.0
+    },
+    {
+      "events": 19,
+      "relation": "public_thread_interaction",
+      "source": "agent:034caf42130904db4154884a",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 4.75
+    },
+    {
+      "events": 19,
+      "relation": "public_thread_interaction",
+      "source": "agent:63de5f8592daf834fa96b22c",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 4.75
+    },
+    {
+      "events": 3,
+      "relation": "task.result",
+      "source": "agent:rook",
+      "target": "agent:19f589c487334a48ce126be3",
+      "weight": 3.6
+    },
+    {
+      "events": 13,
+      "relation": "public_thread_interaction",
+      "source": "agent:27b1f2bf9cebcac218742252",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 3.25
+    },
+    {
+      "events": 10,
+      "relation": "public_thread_interaction",
+      "source": "agent:755077e81b9679a268d0f6e7",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 2.5
+    },
+    {
+      "events": 9,
+      "relation": "public_thread_interaction",
+      "source": "agent:809a0eaace72a775db370f3e",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 2.25
+    },
+    {
+      "events": 9,
+      "relation": "public_thread_interaction",
+      "source": "agent:fadafc8e41e729582ef3248d",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 2.25
+    },
+    {
+      "events": 0,
+      "relation": "knows",
+      "source": "agent:rook",
+      "target": "agent:c2a129be40ca9a421ae8d718",
+      "weight": 2.0
+    },
+    {
+      "events": 7,
+      "relation": "public_thread_interaction",
+      "source": "agent:5cb732ec95cb86917a6f39c8",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 1.75
+    },
+    {
+      "events": 7,
+      "relation": "public_thread_interaction",
+      "source": "agent:5cb732ec95cb86917a6f39c8",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 1.75
+    },
+    {
+      "events": 6,
+      "relation": "public_thread_interaction",
+      "source": "agent:19f589c487334a48ce126be3",
+      "target": "agent:97520ced36217462603c5018",
+      "weight": 1.5
+    },
+    {
+      "events": 6,
+      "relation": "public_thread_interaction",
+      "source": "agent:861ffe8709c63ca6ca29903c",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 1.5
+    },
+    {
+      "events": 6,
+      "relation": "public_thread_interaction",
+      "source": "agent:c7b4e59101aafa6912283582",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 1.5
+    },
+    {
+      "events": 6,
+      "relation": "public_thread_interaction",
+      "source": "agent:4a08dd45ef59b9a62e67a3cb",
+      "target": "agent:fdbb35f0fe06661165da1583",
+      "weight": 1.5
+    },
+    {
+      "events": 3,
+      "relation": "task.accepted",
+      "source": "agent:rook",
+      "target": "agent:19f589c487334a48ce126be3",
+      "weight": 1.5
+    }
+  ],
+  "synapse_count": 110,
+  "validated_results": 4
+}

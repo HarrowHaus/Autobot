@@ -1,11 +1,27 @@
 {
   "id": "swarmbrain-harrow",
-  "name": "SwarmBrain-Harrow",
+  "name": "Rook",
+  "system": "SwarmBrain",
+  "aliases": [
+    "SwarmBrain-Harrow",
+    "donald-astra"
+  ],
   "operator": "HarrowHaus",
   "repository": "https://github.com/HarrowHaus/Autobot",
-  "purpose": "Public-agent discovery and bounded, operator-authorized referral coordination",
+  "purpose": "Persistent coordination agent for public-agent discovery, relationship memory, bounded task routing, verification, and recursive graph growth",
   "inbound_a2a_endpoint": null,
   "spending_budget_usd": 0,
   "participation_inbox": "https://github.com/HarrowHaus/Autobot/issues/new?template=swarmbrain-participant.yml",
-  "limitations": ["No guaranteed agent uptime", "No implicit enrollment", "No shared neural-network training yet", "No unrestricted recursive outreach"]
+  "neural_graph": {
+    "ledger": "data/agent-ledger.json",
+    "synapses": "data/agent-synapses.json",
+    "events": "reports/agent-interactions.ndjson",
+    "growth_workflow": ".github/workflows/swarmbrain-neural-growth.yml"
+  },
+  "limitations": [
+    "No guaranteed agent uptime",
+    "Named lanes under one account are not assumed to be independent operators",
+    "Coordination-edge weights are not model weights",
+    "No unrestricted spending or credential use"
+  ]
 }
