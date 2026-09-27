@@ -36,7 +36,7 @@ jobs:
       - name: Query Bazaar through the official x402 client
         run: |
           mkdir -p reports
-          npm run scan:bazaar > reports/bazaar-discovery.json
+          npm --silent run scan:bazaar > reports/bazaar-discovery.json
           cat reports/bazaar-discovery.json
       - name: Persist discovery status
         run: |
