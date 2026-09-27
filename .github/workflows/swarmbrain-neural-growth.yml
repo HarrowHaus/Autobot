@@ -1,0 +1,53 @@
+name: SwarmBrain neural growth
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - 'swarmbrain/neural_graph.py'
+      - 'swarmbrain/neural_expand.py'
+      - 'tests/test_neural_graph.py'
+      - 'data/public-agent-catalog.json'
+      - 'data/mesh-state.json'
+  schedule:
+    - cron: '17 * * * *'
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: swarmbrain-neural-growth
+  cancel-in-progress: false
+
+jobs:
+  grow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+          fetch-depth: 1
+
+      - name: Test neural graph
+        run: python3 -m unittest tests.test_neural_graph -v
+
+      - name: Expand persistent graph
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 swarmbrain/neural_expand.py --max-cards 20
+          python3 swarmbrain/neural_graph.py status
+
+      - name: Commit append-only growth state
+        run: |
+          git config user.name 'Rook-SwarmBrain'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data/agent-ledger.json data/agent-synapses.json reports/agent-interactions.ndjson reports/neural-growth-latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Grow SwarmBrain agent graph [skip ci]'
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
