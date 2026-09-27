@@ -2,7 +2,10 @@ name: A0 bounty scout
 on:
   push:
     branches: ['claude/monetizable-project-concepts-b97bv2']
-    paths: ['swarmbrain/bounty_scout.py', '.github/workflows/a0_bounty_scout.yml']
+    paths:
+      - 'commerce/basedagents_scan.mjs'
+      - 'package.json'
+      - '.github/workflows/a0_bounty_scout.yml'
   schedule:
     - cron: '7,37 * * * *'
   workflow_dispatch:
@@ -15,29 +18,36 @@ concurrency:
 jobs:
   scout:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
-      - name: Run scout regression tests
-        run: python -m unittest discover -s tests -p test_bounty_scout.py
-      - name: Scan advertised paid tasks
-        run: python -m swarmbrain.bounty_scout > bounty-scout.json
+          node-version: '22'
+      - name: Install official marketplace SDK
+        run: npm install --ignore-scripts
+      - name: Scan open paid work through BasedAgents SDK
+        run: npm run scan:basedagents > basedagents-scan.json
       - name: Surface changed candidate set
         uses: actions/github-script@v8
         with:
           script: |
-            const scan = JSON.parse(require('fs').readFileSync('bounty-scout.json', 'utf8'));
+            const scan = JSON.parse(require('fs').readFileSync('basedagents-scan.json', 'utf8'));
             if (scan.status !== 'ok' || !scan.candidate_count) return;
             const marker = '<!-- a0-bounty-scout -->';
-            const clean = x => String(x ?? '').replace(/[@<>`\r\n]/g, '').slice(0, 300);
+            const clean = x => String(x ?? '').replace(/[@<>\x60\r\n]/g, '').slice(0, 300);
             const lines = scan.candidates.slice(0, 10).map(x =>
-              '- ' + clean(x.task_id) + ' | advertised ' + clean(x.bounty_usdc) + ' USDC | ' + clean(x.title) + ' | ' + clean(x.funding_evidence));
-            const body = [marker, 'A0 found ' + scan.candidate_count + ' advertised budget matches in the inspected response.', '', ...lines,
-              '', 'Not earned revenue. Claimability is not proof of funding. Escrow labels are platform reports, not chain verification.',
-              'Permission, identity, acceptance terms, deadline, fulfillment and payment readiness still require qualification.'].join('\n');
+              '- ' + clean(x.task_id) + ' | advertised ' + clean(x.bounty?.amount_display) + ' ' +
+              clean(x.bounty?.token) + ' | ' + clean(x.title) + ' | ' + clean(x.funding_evidence) +
+              ' | matches ' + clean((x.matched_capabilities || []).join(',')));
+            const body = [
+              marker,
+              'A0 found ' + scan.candidate_count + ' claimable paid-work candidates through the official BasedAgents SDK.',
+              '',
+              ...lines,
+              '',
+              'Not earned revenue. Platform-reported escrow remains attributed as such until independently verified; the controller must still qualify fulfillment before claiming.'
+            ].join('\n');
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner, repo: context.repo.repo, issue_number: 19, per_page: 100});
             const prior = [...comments].reverse().find(c => c.user?.login === 'github-actions[bot]' && c.body?.includes(marker));
@@ -46,6 +56,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: a0-bounty-scan
-          path: bounty-scout.json
+          name: a0-basedagents-scan
+          path: basedagents-scan.json
           retention-days: 7
