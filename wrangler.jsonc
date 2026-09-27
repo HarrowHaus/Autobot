@@ -3,6 +3,7 @@
   "name": "autobot",
   "main": "cloudflare/merchant-worker.js",
   "compatibility_date": "2026-09-24",
+  "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true
   },
