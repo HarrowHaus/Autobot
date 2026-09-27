@@ -4,15 +4,18 @@
   "type": "module",
   "scripts": {
     "test:worker": "node --test tests/test_cloudflare_merchant.mjs",
+    "scan:bazaar": "node commerce/bazaar_scan.mjs",
     "deploy": "wrangler deploy",
-    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\""
+    "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\"",
+    "scan:basedagents": "node commerce/basedagents_scan.mjs"
   },
   "dependencies": {
-    "@x402/core": "^2.27.0",
-    "@x402/evm": "^2.27.0",
-    "@x402/extensions": "^2.27.0",
-    "@x402/hono": "^2.27.0",
-    "hono": "^4.7.1"
+    "@x402/core": "2.27.0",
+    "@x402/evm": "2.27.0",
+    "@x402/extensions": "2.27.0",
+    "@x402/hono": "2.27.0",
+    "hono": "^4.7.1",
+    "basedagents": "0.9.0"
   },
   "devDependencies": {
     "wrangler": "^4.68.0"
