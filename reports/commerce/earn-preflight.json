@@ -1,1 +1,4 @@
-{"status":"blocked","reason":"basedagents_identity_secret_missing"}
+{
+  "status": "no_candidate",
+  "at": "2026-09-27T16:14:15Z"
+}
