@@ -248,11 +248,22 @@ def run_preflight(mesh: Mesh, report: dict[str, Any]) -> dict[str, Any]:
             "plan": None,
         }
 
-    mesh.review(
-        primary_task["id"],
-        True,
-        "Independent pre-claim verifier accepted the task-specific candidate deliverable.",
-    )
+    prior_review = primary_task.get("semantic_validation", "not_reviewed")
+    if prior_review == "not_reviewed":
+        mesh.review(
+            primary_task["id"],
+            True,
+            "Independent pre-claim verifier accepted the task-specific candidate deliverable.",
+        )
+    elif prior_review != "accepted":
+        return {
+            "status": "primary_previously_rejected",
+            "at": now(),
+            "task_id": candidate.get("task_id"),
+            "primary_peer": primary,
+            "verifier_peer": verifier,
+            "plan": None,
+        }
     bounty = candidate.get("bounty") or {}
     plan = {
         "schema_version": 1,
