@@ -1,0 +1,101 @@
+name: SwarmBrain commercial cycle
+
+on:
+  push:
+    branches:
+      - 'claude/monetizable-project-concepts-b97bv2'
+      - 'commerce/autonomous-loop-20260926'
+    paths:
+      - 'commerce/**'
+      - 'swarmbrain/commercial_controller.py'
+      - 'package.json'
+      - '.github/workflows/commercial_cycle.yml'
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: swarmbrain-commercial-cycle
+  cancel-in-progress: false
+
+jobs:
+  cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install reused commerce SDKs
+        run: npm install --ignore-scripts
+
+      - name: Observe x402 Bazaar
+        run: |
+          mkdir -p reports/commerce
+          npm --silent run scan:bazaar > reports/commerce/bazaar-latest.json || true
+          if [ ! -s reports/commerce/bazaar-latest.json ]; then
+            printf '%s\n' '{"source":"x402-official-bazaar-client","status":"unavailable","error":"scanner_produced_no_report"}' > reports/commerce/bazaar-latest.json
+          fi
+
+      - name: Observe BasedAgents paid work
+        run: |
+          npm --silent run scan:basedagents > reports/commerce/basedagents-latest.json || true
+          if [ ! -s reports/commerce/basedagents-latest.json ]; then
+            printf '%s\n' '{"source":"basedagents-official-sdk","status":"unavailable","error":"scanner_produced_no_report","candidates":[]}' > reports/commerce/basedagents-latest.json
+          fi
+
+      - name: Update commercial opportunity graph
+        run: |
+          args=(
+            --basedagents reports/commerce/basedagents-latest.json
+            --bazaar reports/commerce/bazaar-latest.json
+            --state reports/commercial-state.json
+          )
+          if [ -f data/economy-ledger.json ]; then
+            args+=(--economy-ledger data/economy-ledger.json)
+          fi
+          python -m swarmbrain.commercial_controller "${args[@]}" > reports/commerce/cycle-output.json
+
+      - name: Show bounded cycle result
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('reports/commercial-state.json',encoding='utf-8'))
+          print(json.dumps({
+            'verified_external_usdc_atomic': s['revenue']['verified_external_usdc_atomic'],
+            'opportunity_count': len(s['opportunities']),
+            'next_actions': s['next_actions'][:5],
+            'sources': s['sources'],
+          },indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swarmbrain-commercial-cycle
+          path: |
+            reports/commerce/bazaar-latest.json
+            reports/commerce/basedagents-latest.json
+            reports/commerce/cycle-output.json
+            reports/commercial-state.json
+          retention-days: 14
+
+      - name: Persist state on the operational branch
+        if: github.ref_name == 'claude/monetizable-project-concepts-b97bv2'
+        run: |
+          git config user.name 'SwarmBrain Commerce'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/commercial-state.json reports/commerce/bazaar-latest.json reports/commerce/basedagents-latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update autonomous commercial state [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi

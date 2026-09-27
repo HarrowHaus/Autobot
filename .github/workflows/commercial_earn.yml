@@ -1,0 +1,91 @@
+name: SwarmBrain earning cycle
+
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: swarmbrain-earning-cycle
+  cancel-in-progress: false
+
+jobs:
+  earn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      BASEDAGENTS_KEYPAIR_JSON: ${{ secrets.BASEDAGENTS_KEYPAIR_JSON }}
+      BASEDAGENTS_BOT_PUBLIC_KEY: ${{ secrets.BASEDAGENTS_BOT_PUBLIC_KEY }}
+      BASEDAGENTS_BOT_PRIVATE_KEY: ${{ secrets.BASEDAGENTS_BOT_PRIVATE_KEY }}
+      A0_PAYOUT_WALLET: ${{ secrets.A0_PAYOUT_WALLET }}
+      A0_ALLOW_PAYOUT_WALLET_CHANGE: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install official marketplace SDK
+        run: npm install --ignore-scripts
+
+      - name: Refresh funded paid-work candidates
+        run: |
+          mkdir -p reports/commerce
+          npm --silent run scan:basedagents > reports/commerce/basedagents-latest.json
+
+      - name: Pre-fulfill and independently verify one candidate
+        run: |
+          if [ -z "$BASEDAGENTS_KEYPAIR_JSON" ] && { [ -z "$BASEDAGENTS_BOT_PUBLIC_KEY" ] || [ -z "$BASEDAGENTS_BOT_PRIVATE_KEY" ]; }; then
+            rm -f reports/commerce/earn-plan.json
+            printf '%s\n' '{"status":"blocked","reason":"basedagents_identity_secret_missing"}' > reports/commerce/earn-preflight.json
+            exit 0
+          fi
+          python -m swarmbrain.earning_cycle \
+            --basedagents reports/commerce/basedagents-latest.json \
+            --plan reports/commerce/earn-plan.json \
+            --result reports/commerce/earn-preflight.json
+
+      - name: Claim and immediately deliver through official BasedAgents SDK
+        run: |
+          if [ -f reports/commerce/earn-plan.json ]; then
+            node commerce/basedagents_earn.mjs claim-deliver reports/commerce/earn-plan.json > reports/commerce/earn-execution.json
+          elif grep -q '"reason":"basedagents_identity_secret_missing"' reports/commerce/earn-preflight.json 2>/dev/null; then
+            cp reports/commerce/earn-preflight.json reports/commerce/earn-execution.json
+          else
+            printf '%s\n' '{"status":"not_executed","reason":"no_verified_prefulfilled_plan"}' > reports/commerce/earn-execution.json
+          fi
+          cat reports/commerce/earn-execution.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swarmbrain-earning-cycle
+          path: |
+            reports/commerce/basedagents-latest.json
+            reports/commerce/earn-preflight.json
+            reports/commerce/earn-plan.json
+            reports/commerce/earn-execution.json
+            reports/task-receipts/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Persist public-safe receipts on operational branch
+        run: |
+          if [ "$GITHUB_REF_NAME" != "claude/monetizable-project-concepts-b97bv2" ]; then
+            echo "Not the operational branch; artifact-only run."
+            exit 0
+          fi
+          git config user.name 'SwarmBrain Commerce'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/mesh-state.json data/graph.json reports/commerce reports/task-receipts
+          if ! git diff --cached --quiet; then
+            git commit -m 'Persist autonomous earning-cycle receipts [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
