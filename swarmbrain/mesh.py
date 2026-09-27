@@ -201,7 +201,21 @@ class Mesh:
             if not overlap:continue
             reliability=(peer['verified_results']+1)/(peer['calls']+2)
             choices.append({'peer':peer['id'],'activation':round(overlap*(0.5+reliability),5),
-                            'matched_terms':sorted(words&features),'verified_results':peer['verified_results']})
+                            'matched_terms':sorted(words&features),'verified_results':peer['verified_results'],
+                            'routing_mode':'capability_gate'})
+        checkpoint=ROOT/'data/neural/swarmbrain_gnn.pt'
+        if choices and self.root.resolve()==ROOT.resolve() and checkpoint.exists():
+            try:
+                from real_neural_net import neural_scores_for_names
+                priors=neural_scores_for_names(query,[c['peer'] for c in choices])
+                for choice in choices:
+                    prior=priors.get(choice['peer'])
+                    if prior is None:continue
+                    choice['neural_prior']=round(float(prior),5)
+                    choice['activation']=round(choice['activation']*(0.8+0.4*float(prior)),5)
+                    choice['routing_mode']='capability_gate+gnn_prior'
+            except Exception as exc:
+                for choice in choices:choice['neural_unavailable']=type(exc).__name__
         return sorted(choices,key=lambda x:(-x['activation'],x['peer']))[:max(1,min(limit,10))]
     def review(self,task_id,accepted,evidence):
         if not evidence.strip():raise ValueError('Review evidence is required')
