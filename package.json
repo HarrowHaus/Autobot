@@ -8,8 +8,10 @@
     "deploy": "wrangler deploy",
     "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\"",
     "scan:basedagents": "node commerce/basedagents_scan.mjs",
-    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs",
+    "scan:bountybook": "node commerce/bountybook_scan.mjs",
+    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs tests/test_bountybook.mjs",
     "activate:earning": "node tools/bootstrap_basedagents_identity.mjs",
+    "activate:bountybook": "node tools/bootstrap_bountybook_wallet.mjs",
     "test:activation": "node --test tests/test_activation_bootstrap.mjs"
   },
   "dependencies": {
@@ -18,7 +20,8 @@
     "@x402/extensions": "2.27.0",
     "@x402/hono": "2.27.0",
     "hono": "^4.7.1",
-    "basedagents": "0.9.0"
+    "basedagents": "0.9.0",
+    "viem": "^2.37.9"
   },
   "devDependencies": {
     "wrangler": "^4.68.0"
