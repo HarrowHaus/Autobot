@@ -1,0 +1,83 @@
+name: SwarmBrain real neural training
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 * * * *'
+  push:
+    branches: ['claude/monetizable-project-concepts-b97bv2']
+    paths:
+      - '.github/workflows/swarmbrain-real-neural-train.yml'
+      - 'swarmbrain/real_neural_net.py'
+      - 'tests/test_real_neural_net.py'
+      - 'data/agent-ledger.json'
+      - 'data/agent-synapses.json'
+      - 'reports/agent-interactions.ndjson'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: swarmbrain-real-neural-training
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: claude/monetizable-project-concepts-b97bv2
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install CPU PyTorch
+        run: python -m pip install --disable-pip-version-check --quiet 'torch==2.13.0' --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Verify actual gradient training primitives
+        run: python -m unittest tests.test_real_neural_net -v
+
+      - name: Train dynamic graph neural network
+        run: |
+          python swarmbrain/real_neural_net.py train --epochs 35 --lr 0.004 --seed 7
+          python swarmbrain/real_neural_net.py route 'verification research provenance routing implementation' --top-k 25
+
+      - name: Assert checkpoint and learned metrics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import torch
+          report=json.loads(Path('reports/neural-training-latest.json').read_text())
+          checkpoint=Path(report['checkpoint'])
+          assert checkpoint.exists() and checkpoint.stat().st_size > 1000
+          payload=torch.load(checkpoint,map_location='cpu',weights_only=False)
+          assert payload['state_dict']['node_embedding.weight'].shape[0] == report['node_count']
+          assert report['real_backpropagation'] is True
+          assert report['train_loss_last'] < report['train_loss_first']
+          assert report['parameter_count'] > report['node_count']
+          print(json.dumps({
+            'checkpoint_bytes': checkpoint.stat().st_size,
+            'nodes': report['node_count'],
+            'parameters': report['parameter_count'],
+            'train_loss_first': report['train_loss_first'],
+            'train_loss_last': report['train_loss_last'],
+            'holdout_before': report['initial_holdout']['loss'],
+            'holdout_after': report['final_holdout']['loss'],
+            'expansion': report['expansion'],
+          }, indent=2))
+          PY
+
+      - name: Persist learned weights
+        run: |
+          git config user.name 'Rook-SwarmBrain'
+          git config user.email '285251944+HarrowHaus@users.noreply.github.com'
+          git add -- data/neural/swarmbrain_gnn.pt data/neural/model-index.json reports/neural-training-latest.json reports/neural-routing-latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Train SwarmBrain graph neural network [skip ci]'
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
