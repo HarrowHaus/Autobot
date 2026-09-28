@@ -6,45 +6,45 @@
   "optimizer": "AdamW",
   "epochs": 35,
   "learning_rate": 0.004,
-  "parameter_count": 85473,
-  "trainable_parameter_count": 85473,
-  "node_count": 1230,
-  "agent_count": 1224,
-  "relation_count": 14,
-  "edge_count": 152,
-  "sample_count": 2534,
-  "train_count": 2087,
-  "holdout_count": 447,
+  "parameter_count": 85777,
+  "trainable_parameter_count": 85777,
+  "node_count": 1235,
+  "agent_count": 1229,
+  "relation_count": 18,
+  "edge_count": 158,
+  "sample_count": 2618,
+  "train_count": 2149,
+  "holdout_count": 469,
   "expansion": {
     "checkpoint_found": true,
     "reused_node_embeddings": 1230,
-    "new_node_embeddings": 0,
+    "new_node_embeddings": 5,
     "reused_relation_embeddings": 14,
-    "new_relation_embeddings": 0
+    "new_relation_embeddings": 4
   },
   "initial_holdout": {
-    "loss": 0.00012146865628892556,
-    "mae": 0.002462458098307252,
-    "count": 447,
-    "prediction_mean": 0.3950155973434448,
-    "target_mean": 0.39384791254997253
+    "loss": 0.0016774609684944153,
+    "mae": 0.006419540848582983,
+    "count": 469,
+    "prediction_mean": 0.39763525128364563,
+    "target_mean": 0.3952239155769348
   },
   "final_train": {
-    "loss": 4.067500412929803e-06,
-    "mae": 0.0017277980223298073,
-    "count": 2087,
-    "prediction_mean": 0.3926285207271576,
-    "target_mean": 0.3941926658153534
+    "loss": 7.104893938958412e-06,
+    "mae": 0.002388607244938612,
+    "count": 2149,
+    "prediction_mean": 0.39623695611953735,
+    "target_mean": 0.39389485120773315
   },
   "final_holdout": {
-    "loss": 9.866622713161632e-05,
-    "mae": 0.0026302188634872437,
-    "count": 447,
-    "prediction_mean": 0.39246436953544617,
-    "target_mean": 0.39384791254997253
+    "loss": 0.00021307068527676165,
+    "mae": 0.0035722004249691963,
+    "count": 469,
+    "prediction_mean": 0.3968949615955353,
+    "target_mean": 0.3952239155769348
   },
-  "train_loss_first": 1.6555015463382006e-05,
-  "train_loss_last": 1.1481089131848421e-05,
+  "train_loss_first": 0.000448517530458048,
+  "train_loss_last": 3.7222023365757195e-06,
   "checkpoint": "data/neural/swarmbrain_gnn.pt",
   "model_index": "data/neural/model-index.json"
 }
