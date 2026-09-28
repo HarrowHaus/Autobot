@@ -11,6 +11,7 @@ const DEFAULTS = {
   amount: "10000",
   facilitator: "https://facilitator.x402endpoints.online",
   stateUrl: "https://raw.githubusercontent.com/HarrowHaus/Autobot/refs/heads/claude/monetizable-project-concepts-b97bv2/data/mesh-state.json",
+  productUrl: "https://raw.githubusercontent.com/HarrowHaus/Autobot/refs/heads/merchantbrain-opportunity-factory/reports/merchantbrain/product.json",
 };
 
 function cfg(env = {}) {
@@ -21,6 +22,7 @@ function cfg(env = {}) {
     amount: String(env.A0_ROUTE_PRICE_ATOMIC || DEFAULTS.amount),
     facilitator: (env.A0_FACILITATOR_URL || DEFAULTS.facilitator).replace(/\/$/, ""),
     stateUrl: env.A0_SWARMBRAIN_STATE_URL || DEFAULTS.stateUrl,
+    productUrl: env.A0_PRODUCT_URL || DEFAULTS.productUrl,
   };
 }
 
@@ -71,6 +73,7 @@ export function rankPeers(state, query, limit = 3) {
 export function buildRouteConfig(env = {}, origin = "https://merchant.invalid") {
   const c = cfg(env);
   const resource = new URL("/v1/route", origin).toString();
+  const productResource = new URL("/v1/product", origin).toString();
   return {
     "POST /v1/route": {
       accepts: {
@@ -114,6 +117,21 @@ export function buildRouteConfig(env = {}, origin = "https://merchant.invalid") 
               required: ["query", "routes", "scope"],
             },
           },
+        }),
+      },
+    },
+    "POST /v1/product": {
+      accepts: { scheme: "exact", price: atomicUsdcToDollarPrice(c.amount), network: c.network, payTo: c.payTo, maxTimeoutSeconds: 60 },
+      resource: productResource,
+      description: "Latest autonomously selected MerchantBrain digital signal pack",
+      mimeType: "application/json",
+      serviceName: "MerchantBrain Product",
+      tags: ["agents","merchant","research","signals","x402"],
+      extensions: {
+        ...declareDiscoveryExtension({
+          method: "POST", input: {},
+          inputSchema: { type: "object", properties: {} }, bodyType: "json",
+          output: { example: { status: "publishable", title: "Signal Pack", payload: {} }, schema: { type: "object" } },
         }),
       },
     },
@@ -274,6 +292,18 @@ export function buildApp(env = {}, origin = "https://merchant.invalid") {
     "The service is read-only: it ranks known SwarmBrain peers and does not dispatch work.",
     "Discovery: /.well-known/x402, /.well-known/agent-card.json, /openapi.json.",
   ].join("\n"), 200, { "content-type": "text/markdown; charset=utf-8" }));
+
+  app.post("/v1/product", async context => {
+    try {
+      const response = await fetch(c.productUrl, { headers: { "user-agent": "MerchantBrain-product-delivery/1.0" } });
+      if (!response.ok) return context.json({ error: "product_unavailable", status: response.status }, 502);
+      const product = await response.json();
+      if (product?.status !== "publishable") return context.json({ error: "no_product_published" }, 404);
+      return context.json(product);
+    } catch (error) {
+      return context.json({ error: "product_delivery_failed", detail: String(error?.message || error).slice(0, 200) }, 502);
+    }
+  });
 
   app.post("/v1/route", async context => {
     let body;
