@@ -33,4 +33,16 @@ Push-Location $aicom
 try { bash ./start.sh --no-open } finally { Pop-Location }
 Write-Host ""
 Write-Host "AI-Factory: http://localhost:9080"
-Write-Host "MerchantBrain discovery: python -m swarmbrain.opportunity_factory"
+Push-Location $root
+try { python -m swarmbrain.opportunity_factory } finally { Pop-Location }
+$product = Get-Content (Join-Path $root "reports/merchantbrain/product.json") -Raw | ConvertFrom-Json
+if ($product.status -eq "publishable") {
+  $idea = "$($product.promise) Buyer: $($product.buyer). Evidence-led opportunity selected autonomously by MerchantBrain. Build the smallest polished saleable web product that fulfills this need."
+  Push-Location $aicom
+  try {
+    $env:DEMO_BASE_URL="http://localhost:9080"
+    bash ./demo.sh --landing --no-open --compose $idea
+  } finally { Pop-Location }
+} else {
+  Write-Host "MerchantBrain abstained: no opportunity passed the evidence threshold."
+}
