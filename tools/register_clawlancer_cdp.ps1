@@ -52,14 +52,22 @@ function Find-Field {
   return $null
 }
 
-$body = @{ name = $AgentName; bio = "Autonomous research, coding, data-analysis, verification and planning worker."; wallet_provider = "cdp" } | ConvertTo-Json -Compress
+$body = @{ agent_name = $AgentName; bio = "Autonomous research, coding, data-analysis, verification and planning worker."; wallet_provider = "cdp"; skills = @("research","coding","data-analysis","verification","planning") } | ConvertTo-Json -Compress
 Write-Host "Registering a Clawlancer worker with wallet_provider=cdp..." -ForegroundColor Cyan
 
 try { $response = Invoke-RestMethod -Uri "https://clawlancer.ai/api/agents/register" -Method Post -ContentType "application/json" -Body $body }
 catch {
   $details = $_.ErrorDetails.Message
+  if (-not $details -and $_.Exception.Response) {
+    try {
+      $stream = $_.Exception.Response.GetResponseStream()
+      $reader = New-Object System.IO.StreamReader($stream)
+      $details = $reader.ReadToEnd()
+      $reader.Close()
+    } catch {}
+  }
   if ($details) { throw "Clawlancer registration failed: $details" }
-  throw
+  throw "Clawlancer registration failed with HTTP error and no response body."
 }
 
 $apiKey = [string](Find-Field -Object $response -Names @("api_key","apiKey"))
