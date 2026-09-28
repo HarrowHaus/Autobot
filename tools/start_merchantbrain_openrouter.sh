@@ -25,3 +25,7 @@ cp "$ROOT/integrations/aicom/model_providers.openrouter-free.yaml" "$AICOM/data/
 cd "$AICOM"
 ./start.sh --no-open
 echo "AI-Factory: http://localhost:9080"
+
+cd "$ROOT"
+python -m swarmbrain.opportunity_factory
+echo "Discovery complete. If a product was selected, open reports/merchantbrain/product.json and submit its promise to the upstream AICOM demo.sh runner."
