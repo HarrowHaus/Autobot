@@ -156,22 +156,68 @@ async function connectMcp(apiKey) {
   return { client, transport };
 }
 
-async function authFetch(apiKey, path) {
-  const res = await fetch(API + path, {
+export function publicError(value, apiKey = "") {
+  // Only retain diagnostic fields; never persist headers, request bodies or stacks.
+  if (typeof value === "string") {
+    let text = apiKey ? value.split(apiKey).join("[redacted]") : value;
+    return text.replace(/clw_[\w-]+/g, "[redacted]")
+      .replace(/Bearer\s+\S+/gi, "Bearer [redacted]")
+      .replace(/0x[a-fA-F0-9]{64}\b/g, "[redacted]")
+      .replace(/eyJ[\w-]+\.[\w-]+\.[\w-]+/g, "[redacted]").slice(0, 1200);
+  }
+  if (typeof value === "number" || typeof value === "boolean") return value;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return Object.fromEntries(["error", "message", "code", "details", "reason", "hint"]
+    .filter(key => value[key] !== undefined)
+    .map(key => [key, publicError(value[key], apiKey)]));
+}
+
+export async function authFetch(apiKey, path, { method = "GET", body, fetchImpl = fetch } = {}) {
+  const res = await fetchImpl(API + path, {
+    method,
+    signal: AbortSignal.timeout(30_000),
     headers: {
       accept: "application/json",
+      "content-type": "application/json",
       authorization: "Bearer " + apiKey,
       "user-agent": "SwarmBrain/1.0",
     },
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   });
   const text = await res.text();
   const data = safeJson(text) ?? { raw: text.slice(0, 2000) };
   if (!res.ok) {
     const error = new Error("HTTP " + res.status + " " + path);
-    error.data = data;
+    error.data = publicError(data, apiKey);
+    error.httpStatus = res.status;
     throw error;
   }
   return data;
+}
+
+async function walletDiagnostic(apiKey) {
+  const agentId = process.env.CLAWLANCER_AGENT_ID;
+  if (!agentId) return null;
+  try {
+    const data = await authFetch(apiKey, "/wallet/balance?agent_id=" + encodeURIComponent(agentId));
+    const numeric = {};
+    const visit = (value, path = []) => {
+      if (!value || typeof value !== "object") return;
+      for (const [key, child] of Object.entries(value)) {
+        const next = [...path, key];
+        if (/secret|token|key|seed|phrase|address|owner|wallet_id/i.test(key)) continue;
+        if (child && typeof child === "object") visit(child, next);
+        else if (typeof child === "number" || typeof child === "boolean" ||
+          (typeof child === "string" && /^\d+(\.\d+)?$/.test(child))) {
+          numeric[next.join(".")] = child;
+        }
+      }
+    };
+    visit(data);
+    return numeric;
+  } catch (error) {
+    return { http_status: error.httpStatus || null, error: error.data || "balance_read_failed" };
+  }
 }
 
 function transactionsFrom(data) {
@@ -244,6 +290,7 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
     }
 
     let tx = await findTransaction(apiKey, plan.task_id);
+    let claimResult = null;
     let transactionId = idOf(tx);
     const existingStatus = statusOf(tx);
     if (transactionId && ["released", "completed", "paid", "settled"].includes(existingStatus)) {
@@ -267,14 +314,20 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
     }
 
     if (!transactionId) {
-      const claimResultRaw = await client.callTool({ name: claimTool.name, arguments: claimBuilt.args });
-      const claimResult = resultValue(claimResultRaw);
-      if (claimResultRaw?.isError) {
+      // The official MCP drops everything except data.error on HTTP failure.
+      // Make the same documented claim request once, preserving safe diagnostics.
+      try {
+        claimResult = await authFetch(apiKey, "/listings/" + encodeURIComponent(plan.task_id) + "/claim", {
+          method: "POST", body: {},
+        });
+      } catch (error) {
         return {
           status: "claim_failed",
           task_id: plan.task_id,
-          claim_tool: claimTool.name,
-          error: claimResult,
+          claim_tool: "POST /api/listings/{id}/claim",
+          http_status: error.httpStatus || null,
+          error: error.data || publicError(String(error.message), apiKey),
+          wallet_diagnostic: await walletDiagnostic(apiKey),
         };
       }
 
@@ -347,6 +400,11 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
   }
 }
 
+export function executionExitCode(result) {
+  return ["claim_failed", "claimed_delivery_failed", "claimed_transaction_unresolved", "error"]
+    .includes(result?.status) ? 1 : 0;
+}
+
 if (process.argv[1]?.endsWith("clawlancer_earn.mjs")) {
   const planPath = process.argv[2];
   if (!planPath) {
@@ -356,6 +414,7 @@ if (process.argv[1]?.endsWith("clawlancer_earn.mjs")) {
     try {
       const result = await claimDeliver(planPath);
       process.stdout.write(JSON.stringify(result, null, 2) + "\n");
+      process.exitCode = executionExitCode(result);
     } catch (error) {
       process.stdout.write(JSON.stringify({
         status: "error",
