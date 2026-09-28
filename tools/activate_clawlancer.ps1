@@ -28,8 +28,14 @@ $secure = Read-Host "CLAWLANCER_API_KEY" -AsSecureString
 $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
 try {
   $plain = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
+  $plain = $plain.Trim()
+
+  if (($plain.StartsWith('"') -and $plain.EndsWith('"')) -or ($plain.StartsWith("'") -and $plain.EndsWith("'"))) {
+    $plain = $plain.Substring(1, $plain.Length - 2).Trim()
+  }
+
   if (-not $plain.StartsWith("clw_")) {
-    throw "That does not look like a Clawlancer API key."
+    throw "That does not look like a Clawlancer API key. Paste only the key itself, beginning with clw_."
   }
 
   $plain | gh secret set CLAWLANCER_API_KEY --repo $Repo
