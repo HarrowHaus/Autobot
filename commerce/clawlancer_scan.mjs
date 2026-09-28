@@ -127,7 +127,11 @@ export function prioritize(rows) {
     });
 }
 
-export async function scanClawlancer({ apiUrl = API } = {}) {
+export async function scanClawlancer({
+  apiUrl = API,
+  apiKey = process.env.CLAWLANCER_API_KEY || "",
+  agentName = process.env.CLAWLANCER_AGENT_NAME || "",
+} = {}) {
   const observedAt = new Date().toISOString();
   try {
     const res = await fetch(apiUrl + "/listings?listing_type=BOUNTY", {
@@ -139,7 +143,56 @@ export async function scanClawlancer({ apiUrl = API } = {}) {
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
     const listings = arrayFromResponse(data);
-    const candidates = prioritize(listings);
+
+    let transactions = [];
+    if (apiKey) {
+      try {
+        const txRes = await fetch(apiUrl + "/transactions", {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + apiKey,
+            "user-agent": "SwarmBrain/1.0",
+          },
+        });
+        if (txRes.ok) {
+          const txData = await txRes.json();
+          transactions = Array.isArray(txData)
+            ? txData
+            : Array.isArray(txData?.transactions)
+              ? txData.transactions
+              : Array.isArray(txData?.data)
+                ? txData.data
+                : Array.isArray(txData?.results)
+                  ? txData.results
+                  : [];
+        }
+      } catch {}
+    }
+
+    const terminal = new Set(["delivered", "released", "completed", "paid", "settled", "refunded", "cancelled", "canceled", "disputed"]);
+    const txByListing = new Map();
+    for (const tx of transactions) {
+      const listingId = tx?.listing_id || tx?.listingId || tx?.listing?.id || tx?.bounty_id || tx?.bountyId || null;
+      if (!listingId) continue;
+      txByListing.set(String(listingId), String(tx?.status || tx?.state || "").toLowerCase());
+    }
+
+    let candidates = prioritize(listings).filter(row => !terminal.has(txByListing.get(String(row.task_id))));
+    const normalizedAgent = String(agentName || "").trim().toLowerCase();
+    if (normalizedAgent) {
+      candidates = candidates.sort((a, b) => {
+        const at = String(a?.title || "").toLowerCase();
+        const bt = String(b?.title || "").toLowerCase();
+        const aw = at.includes("welcome to clawlancer") && at.includes(normalizedAgent) ? 1 : 0;
+        const bw = bt.includes("welcome to clawlancer") && bt.includes(normalizedAgent) ? 1 : 0;
+        if (aw !== bw) return bw - aw;
+        const av = BigInt(a?.bounty?.amount_atomic || "0");
+        const bv = BigInt(b?.bounty?.amount_atomic || "0");
+        if (av !== bv) return av > bv ? -1 : 1;
+        return String(a.task_id).localeCompare(String(b.task_id));
+      });
+    }
+
     return {
       source: "clawlancer-official-rest-api",
       api: apiUrl,
@@ -147,6 +200,8 @@ export async function scanClawlancer({ apiUrl = API } = {}) {
       status: "ok",
       capabilities: ["research", "verification", "planning", "coding", "data-analysis", "reasoning"],
       tasks_examined: listings.length,
+      owned_transaction_count: transactions.length,
+      terminal_transaction_excluded_count: [...txByListing.values()].filter(status => terminal.has(status)).length,
       candidate_count: candidates.length,
       candidates: candidates.slice(0, 100),
       independently_verified_funding_count: 0,
