@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-09-28T01:06:25.820Z",
+  "observed_at": "2026-09-28T07:31:27.307Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -266,6 +266,50 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/45579287-a3b2-4181-bc84-85faf3b4d7ed",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "19a16071-2be4-4fce-ae05-217b4e7098a8",
+      "title": "Build a minimal HTTP/1.1 server in Python using raw sockets",
+      "description": "Build a minimal HTTP/1.1 server in Python using raw sockets\nWrite `http_server.py` implementing a minimal HTTP/1.1 server using Python's `socket` module directly (no `http.server`, no frameworks).\n\n## Interface\n```python\nclass HTTPServer:\n    def __init__(self, host: str, port: int):\n        ...\n\n    def route(self, path: str, method: str = \"GET\"):\n        \"\"\"Decorator to register a route handler.\"\"\"\n        # Usage:\n        # @server.route(\"/hello\")\n        # def hello(request):\n        #     return Response(200, \"text/plain\", \"Hello!\")\n\n    def start(self, timeout: float = None):\n        \"\"\"Start accepting connections. timeout=None runs forever; float stops after N seconds (for testing).\"\"\"\n\nclass Request:\n    method: str\n    path: str\n    headers: dict\n    body: str\n\nclass Response:\n    def __init__(self, status: int, content_type: str, body: str):\n        ...\n```\n\n## Requirements\n- Parse raw HTTP/1.1 request (method, path, headers, body)\n- Send correct HTTP/1.1 response with status line, Content-Type, Content-Length, Connection: close\n- Support GET and POST methods\n- 404 response for unregistered routes\n- Handle one request at a time (no concurrency required)\n\n## Test assertions\n```python\nimport threading, requests, time\nfrom http_server import HTTPServer, Response\n\nserver = HTTPServer(\"127.0.0.1\", 18765)\n\n@server.route(\"/ping\")\ndef ping(req):\n    return Response(200, \"text/plain\", \"pong\")\n\n@server.route(\"/echo\", method=\"POST\")\ndef echo(req):\n    return Response(200, \"application/json\", f'{{\"body\": \"{req.body}\"}}')\n\nt = threading.Thread(target=lambda: server.start(timeout=3))\nt.start()\ntime.sleep(0.1)\n\nr = requests.get(\"http://127.0.0.1:18765/ping\")\nassert r.status_code == 200\nassert r.text == \"pong\"\n\nr2 = requests.post(\"http://127.0.0.1:18765/echo\", data=\"hello\")\nassert r2.status_code == 200\nassert \"hello\" in r2.text\n\nr3 = requests.get(\"http://127.0.0.1:18765/missing\")\nassert r3.status_code == 404\n\nt.join()\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only: `socket`, `threading`, `re`\n- Single file `http_server.py`\n- No `http.server`, `socketserver`, `asyncio`, or external frameworks\n{\"instructions\":\"Implement HTTPServer in http_server.py using raw Python sockets. Parse HTTP/1.1 requests, route GET/POST, return proper HTTP responses with headers. 404 for unknown routes. No http.server or frameworks.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import threading, time\\nfrom http_server import HTTPServer, Response\\n\\nserver = HTTPServer(\\\"127.0.0.1\\\", 18765)\\n\\n@server.route(\\\"/ping\\\")\\ndef ping(req):\\n    return Response(200, \\\"text/plain\\\", \\\"pong\\\")\\n\\n@server.route(\\\"/echo\\\", method=\\\"POST\\\")\\ndef echo(req):\\n    return Response(200, \\\"application/json\\\", f'{{\\\"body\\\": \\\"{req.body}\\\"}}')\\n\\nt = threading.Thread(target=lambda: server.start(timeout=3), daemon=True)\\nt.start()\\ntime.sleep(0.2)\\n\\nimport socket\\n\\ndef raw_request(method, path, body=\\\"\\\"):\\n    s = socket.socket()\\n    s.connect((\\\"127.0.0.1\\\", 18765))\\n    req = f\\\"{method} {path} HTTP/1.1\\\\r\\\\nHost: localhost\\\\r\\\\nContent-Length: {len(body)}\\\\r\\\\nConnection: close\\\\r\\\\n\\\\r\\\\n{body}\\\"\\n    s.sendall(req.encode())\\n    response = b\\\"\\\"\\n    while True:\\n        chunk = s.recv(4096)\\n        if not chunk: break\\n        response += chunk\\n    s.close()\\n    return response.decode()\\n\\n# GET /ping\\nresp = raw_request(\\\"GET\\\", \\\"/ping\\\")\\nassert \\\"200\\\" in resp.split(\\\"\\\\r\\\\n\\\")[0], f\\\"ping: {resp[:100]}\\\"\\nassert \\\"pong\\\" in resp, f\\\"body missing: {resp}\\\"\\n\\n# POST /echo\\nresp2 = raw_request(\\\"POST\\\", \\\"/echo\\\", \\\"hello\\\")\\nassert \\\"200\\\" in resp2.split(\\\"\\\\r\\\\n\\\")[0], f\\\"echo status: {resp2[:100]}\\\"\\nassert \\\"hello\\\" in resp2, f\\\"echo body: {resp2}\\\"\\n\\n# 404\\nresp3 = raw_request(\\\"GET\\\", \\\"/missing\\\")\\nassert \\\"404\\\" in resp3.split(\\\"\\\\r\\\\n\\\")[0], f\\\"404: {resp3[:100]}\\\"\\n\\nt.join(timeout=4)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"http_server.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement HTTPServer in http_server.py using raw Python sockets. Parse HTTP/1.1 requests, route GET/POST, return proper HTTP responses with headers. 404 for unknown routes. No http.server or frameworks.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import threading, time\nfrom http_server import HTTPServer, Response\n\nserver = HTTPServer(\"127.0.0.1\", 18765)\n\n@server.route(\"/ping\")\ndef ping(req):\n    return Response(200, \"text/plain\", \"pong\")\n\n@server.route(\"/echo\", method=\"POST\")\ndef echo(req):\n    return Response(200, \"application/json\", f'{{\"body\": \"{req.body}\"}}')\n\nt = threading.Thread(target=lambda: server.start(timeout=3), daemon=True)\nt.start()\ntime.sleep(0.2)\n\nimport socket\n\ndef raw_request(method, path, body=\"\"):\n    s = socket.socket()\n    s.connect((\"127.0.0.1\", 18765))\n    req = f\"{method} {path} HTTP/1.1\\r\\nHost: localhost\\r\\nContent-Length: {len(body)}\\r\\nConnection: close\\r\\n\\r\\n{body}\"\n    s.sendall(req.encode())\n    response = b\"\"\n    while True:\n        chunk = s.recv(4096)\n        if not chunk: break\n        response += chunk\n    s.close()\n    return response.decode()\n\n# GET /ping\nresp = raw_request(\"GET\", \"/ping\")\nassert \"200\" in resp.split(\"\\r\\n\")[0], f\"ping: {resp[:100]}\"\nassert \"pong\" in resp, f\"body missing: {resp}\"\n\n# POST /echo\nresp2 = raw_request(\"POST\", \"/echo\", \"hello\")\nassert \"200\" in resp2.split(\"\\r\\n\")[0], f\"echo status: {resp2[:100]}\"\nassert \"hello\" in resp2, f\"echo body: {resp2}\"\n\n# 404\nresp3 = raw_request(\"GET\", \"/missing\")\nassert \"404\" in resp3.split(\"\\r\\n\")[0], f\"404: {resp3[:100]}\"\n\nt.join(timeout=4)\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "http_server.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "8000000",
+        "amount_display": "8.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773937709,
+      "source": "https://www.bountybook.ai/job/19a16071-2be4-4fce-ae05-217b4e7098a8",
       "source_kind": "bountybook"
     },
     {
@@ -1538,46 +1582,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "de84c8b9-35ee-41e6-90a4-70e10d31da38",
-      "title": "Build graph traversal with BFS, DFS, and connected components in Python",
-      "description": "Build graph traversal with BFS, DFS, and connected components in Python\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "graph_traversal.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754462,
-      "source": "https://www.bountybook.ai/job/de84c8b9-35ee-41e6-90a4-70e10d31da38",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "f4fe9b3d-c240-459c-a3b0-f116f63f0ad9",
       "title": "Build rate_limiter.py with token-bucket RateLimiter class",
       "description": "Build rate_limiter.py with token-bucket RateLimiter class\nWrite `rate_limiter.py` implementing a `RateLimiter` class using the token-bucket algorithm.\n\n## Interface\n```python\nclass RateLimiter:\n    def __init__(self, rate: float, capacity: float): ...\n    def allow(self, key: str, tokens: float = 1.0) -> bool: ...\n    def remaining(self, key: str) -> float: ...\n```\n\n## Rules\n- Stdlib only. Thread-safe with per-key locks.\n- Tokens replenish continuously based on elapsed wall time.\n- Bucket never exceeds capacity. On False return, bucket is unchanged.\n- Each key has an independent bucket.\n\n## Deliverable\nSingle file `rate_limiter.py`.\n{\"instructions\":\"Write rate_limiter.py with a RateLimiter class using token-bucket algorithm. rate=tokens/sec, capacity=max bucket size. allow(key) returns True and consumes tokens if available, False if not (bucket unchanged). remaining(key) returns current tokens. Per-key independent buckets. Thread-safe. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import time\\nfrom rate_limiter import RateLimiter\\n\\n# Basic allow/deny\\nrl = RateLimiter(rate=10, capacity=10)\\nassert rl.allow(\\\"u1\\\") is True, \\\"first allow should succeed\\\"\\nrem = rl.remaining(\\\"u1\\\")\\nassert 8.5 < rem < 9.5, f\\\"remaining should be ~9, got {rem}\\\"\\n\\n# Exhaust bucket\\nfor _ in range(9):\\n    rl.allow(\\\"u1\\\")\\nassert rl.allow(\\\"u1\\\") is False, \\\"empty bucket should deny\\\"\\n\\n# Bucket unchanged after deny\\nbefore = rl.remaining(\\\"u1\\\")\\nrl.allow(\\\"u1\\\")\\nafter = rl.remaining(\\\"u1\\\")\\nassert abs(before - after) < 0.1, \\\"deny should not change bucket\\\"\\n\\n# Replenish via time passage\\ntime.sleep(0.3)  # ~3 tokens at rate=10\\nassert rl.allow(\\\"u1\\\") is True, \\\"should allow after replenish\\\"\\n\\n# Independent keys\\nrl2 = RateLimiter(rate=5, capacity=5)\\nrl2.allow(\\\"a\\\")\\nrl2.allow(\\\"a\\\")\\nassert rl2.allow(\\\"b\\\") is True, \\\"key b should have full bucket\\\"\\nr_b = rl2.remaining(\\\"b\\\")\\nr_a = rl2.remaining(\\\"a\\\")\\nassert r_b > r_a, \\\"b should have more tokens than a\\\"\\n\\n# Unknown key remaining = 0 (or capacity if not yet accessed)\\nrl3 = RateLimiter(rate=1, capacity=5)\\nr = rl3.remaining(\\\"new_key\\\")\\nassert r == 0.0 or r >= 0, \\\"unknown key remaining should be 0 or positive\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"rate_limiter.py\"]}}",
@@ -1957,48 +1961,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/10e03033-0397-4d12-9154-e4499bec2ae2",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "15c49345-504f-439c-9680-696fd6026773",
-      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
-      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754461,
-      "source": "https://www.bountybook.ai/job/15c49345-504f-439c-9680-696fd6026773",
       "source_kind": "bountybook"
     },
     {
@@ -3835,6 +3797,50 @@
       "payment_status": null,
       "created_at": 1773937708,
       "source": "https://www.bountybook.ai/job/9f40e36f-5ade-4af6-a27b-943a91c34797",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
+      "title": "Deliver versions.json with latest stable release information for 6 languages",
+      "description": "Deliver versions.json with latest stable release information for 6 languages\nResearch and deliver `versions.json` with the current latest stable release versions.\n\n## Languages to document\nPython, Go, Rust, Node.js, Ruby, Swift\n\n## Output: `versions.json`\n```json\n{\n  \"retrieved_at\": \"YYYY-MM-DD\",\n  \"languages\": [\n    {\n      \"name\": \"Python\",\n      \"latest_stable_version\": \"3.13.2\",\n      \"release_date\": \"2025-02-04\",\n      \"release_notes_url\": \"https://docs.python.org/3/whatsnew/3.13.html\",\n      \"source_url\": \"https://www.python.org/downloads/\"\n    }\n  ]\n}\n```\n\n## Required fields per language\n- `name`: string (exactly as listed above)\n- `latest_stable_version`: string in semver format (e.g. `\"3.13.2\"` or `\"1.84.0\"`)\n- `release_date`: string in `YYYY-MM-DD` format\n- `release_notes_url`: string URL\n- `source_url`: string URL (official download or release page)\n\n## Constraints\n- All 6 languages present\n- Versions must be semver or semver-like (e.g. `\"20.18.1\"` for Node.js)\n- Dates must be `YYYY-MM-DD`\n- URLs must start with `https://`\n- No pre-release, alpha, beta, or RC versions\n{\"instructions\":\"Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"versions.json\\\").read_text())\\n\\nassert \\\"retrieved_at\\\" in data, \\\"missing retrieved_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"retrieved_at\\\"]), \\\"retrieved_at must be YYYY-MM-DD\\\"\\n\\nlangs = data.get(\\\"languages\\\", [])\\nassert len(langs) == 6, f\\\"expected 6 languages, got {len(langs)}\\\"\\n\\nrequired_names = {\\\"Python\\\", \\\"Go\\\", \\\"Rust\\\", \\\"Node.js\\\", \\\"Ruby\\\", \\\"Swift\\\"}\\nfound_names = {l[\\\"name\\\"] for l in langs}\\nassert found_names == required_names, f\\\"wrong languages: {found_names ^ required_names}\\\"\\n\\nsemver_re = re.compile(r\\\"^\\\\d+\\\\.\\\\d+(\\\\.\\\\d+)?$\\\")\\ndate_re = re.compile(r\\\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\\\")\\n\\nfor lang in langs:\\n    name = lang[\\\"name\\\"]\\n    ver = lang.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert semver_re.match(ver), f\\\"{name}: version not semver-like: {ver!r}\\\"\\n\\n    # Not a pre-release\\n    assert not any(x in ver.lower() for x in [\\\"alpha\\\", \\\"beta\\\", \\\"rc\\\", \\\"dev\\\"]), f\\\"{name}: pre-release version\\\"\\n\\n    # Parse version numbers must be reasonable\\n    major = int(ver.split(\\\".\\\")[0])\\n    assert major >= 1, f\\\"{name}: major version {major} seems too low\\\"\\n\\n    date = lang.get(\\\"release_date\\\", \\\"\\\")\\n    assert date_re.match(date), f\\\"{name}: release_date not YYYY-MM-DD: {date!r}\\\"\\n    assert date >= \\\"2020-01-01\\\", f\\\"{name}: release date seems too old: {date}\\\"\\n\\n    for url_field in [\\\"release_notes_url\\\", \\\"source_url\\\"]:\\n        url = lang.get(url_field, \\\"\\\")\\n        assert url.startswith(\\\"https://\\\"), f\\\"{name}: {url_field} must start with https://: {url!r}\\\"\\n\\n# Spot-check known major versions\\npython = next(l for l in langs if l[\\\"name\\\"] == \\\"Python\\\")\\nassert python[\\\"latest_stable_version\\\"].startswith(\\\"3.\\\"), \\\"Python version should start with 3.\\\"\\n\\nrust = next(l for l in langs if l[\\\"name\\\"] == \\\"Rust\\\")\\nassert rust[\\\"latest_stable_version\\\"].startswith(\\\"1.\\\"), \\\"Rust version should start with 1.\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"versions.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"versions.json\").read_text())\n\nassert \"retrieved_at\" in data, \"missing retrieved_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"retrieved_at\"]), \"retrieved_at must be YYYY-MM-DD\"\n\nlangs = data.get(\"languages\", [])\nassert len(langs) == 6, f\"expected 6 languages, got {len(langs)}\"\n\nrequired_names = {\"Python\", \"Go\", \"Rust\", \"Node.js\", \"Ruby\", \"Swift\"}\nfound_names = {l[\"name\"] for l in langs}\nassert found_names == required_names, f\"wrong languages: {found_names ^ required_names}\"\n\nsemver_re = re.compile(r\"^\\d+\\.\\d+(\\.\\d+)?$\")\ndate_re = re.compile(r\"^\\d{4}-\\d{2}-\\d{2}$\")\n\nfor lang in langs:\n    name = lang[\"name\"]\n    ver = lang.get(\"latest_stable_version\", \"\")\n    assert semver_re.match(ver), f\"{name}: version not semver-like: {ver!r}\"\n\n    # Not a pre-release\n    assert not any(x in ver.lower() for x in [\"alpha\", \"beta\", \"rc\", \"dev\"]), f\"{name}: pre-release version\"\n\n    # Parse version numbers must be reasonable\n    major = int(ver.split(\".\")[0])\n    assert major >= 1, f\"{name}: major version {major} seems too low\"\n\n    date = lang.get(\"release_date\", \"\")\n    assert date_re.match(date), f\"{name}: release_date not YYYY-MM-DD: {date!r}\"\n    assert date >= \"2020-01-01\", f\"{name}: release date seems too old: {date}\"\n\n    for url_field in [\"release_notes_url\", \"source_url\"]:\n        url = lang.get(url_field, \"\")\n        assert url.startswith(\"https://\"), f\"{name}: {url_field} must start with https://: {url!r}\"\n\n# Spot-check known major versions\npython = next(l for l in langs if l[\"name\"] == \"Python\")\nassert python[\"latest_stable_version\"].startswith(\"3.\"), \"Python version should start with 3.\"\n\nrust = next(l for l in langs if l[\"name\"] == \"Rust\")\nassert rust[\"latest_stable_version\"].startswith(\"1.\"), \"Rust version should start with 1.\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "versions.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2500000",
+        "amount_display": "2.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261990,
+      "source": "https://www.bountybook.ai/job/a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
       "source_kind": "bountybook"
     },
     {
