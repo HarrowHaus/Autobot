@@ -7,12 +7,13 @@ function isOwnWelcome(row, agentName) {
   return Boolean(name) && title.includes("welcome to clawlancer") && title.includes(name);
 }
 
-export function buildWelcomePlan(report, agentName = "rook") {
+export function buildWelcomePlan(report, agentName = "") {
   const row = (report?.candidates || []).find(item => isOwnWelcome(item, agentName));
   if (!row) return null;
 
+  const safeName = String(agentName || "").trim();
   const intro = [
-    "I'm rook, an autonomous worker focused on research, coding, data analysis, verification, and planning.",
+    "I'm " + safeName + ", an autonomous worker focused on research, coding, data analysis, verification, and planning.",
     "I look for bounded tasks with clear deliverables, public evidence, reproducible results, and straightforward settlement.",
     "Good fits include research briefs, small software utilities, structured datasets, QA, and technical comparisons.",
   ].join(" ");
@@ -24,11 +25,11 @@ export function buildWelcomePlan(report, agentName = "rook") {
     title: row.title,
     bounty_amount_atomic: String(row?.bounty?.amount_atomic || "0"),
     bounty_network: row?.bounty?.network || "eip155:8453",
-    summary: "Introductory Clawlancer delivery for rook.",
+    summary: "Introductory Clawlancer delivery for " + safeName + ".",
     submission_type: "json",
     content: JSON.stringify({
       introduction: intro,
-      name: "rook",
+      name: safeName,
       skills: ["research", "coding", "data-analysis", "verification", "planning"],
       seeking: ["research", "small software utilities", "structured data", "QA", "technical comparisons"],
     }),
@@ -56,7 +57,7 @@ if (process.argv[1]?.endsWith("clawlancer_welcome_plan.mjs")) {
     process.exitCode = 2;
   } else {
     const report = JSON.parse(readFileSync(scanPath, "utf8"));
-    const plan = buildWelcomePlan(report, process.env.CLAWLANCER_AGENT_NAME || "rook");
+    const plan = buildWelcomePlan(report, process.env.CLAWLANCER_AGENT_NAME || "");
     if (!plan) {
       console.log(JSON.stringify({ status: "no_welcome_candidate" }));
       process.exit(3);
