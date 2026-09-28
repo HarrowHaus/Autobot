@@ -1,0 +1,37 @@
+# MerchantBrain override for upstream alexar76/aicom.
+# Copy/merge into AICOM data/config/model_providers.yaml.
+default_provider: openrouter_api
+providers:
+  openrouter_api:
+    api_key: null
+    api_key_env: OPENROUTER_API_KEY
+    base_url: https://openrouter.ai/api/v1
+    capabilities:
+      context_window: 200000
+      context_window_light: 200000
+      max_tokens: 32000
+      supports_streaming: true
+      supports_vision: false
+    enabled: true
+    health_check_endpoint: /v1/models
+    models:
+      heavy: openrouter/free
+      light: openrouter/free
+    priority: 100
+    provider_type: openai_compatible
+    extra_headers:
+      HTTP-Referer: https://github.com/HarrowHaus/Autobot
+      X-Title: MerchantBrain
+routing_rules:
+  - {task_type: architecture_design, model_role: heavy, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 180}
+  - {task_type: code_generation, model_role: heavy, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 600}
+  - {task_type: marketing_copy, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 90}
+  - {task_type: qa_testing, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
+  - {task_type: pm_analysis, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
+  - {task_type: market_research, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 180}
+  - {task_type: devops_setup, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
+  - {task_type: sales_response, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 90}
+  - {task_type: evolution_analysis, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
+  - {task_type: security_scan, model_role: heavy, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 180}
+  - {task_type: design_critic, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
+  - {task_type: methodology_review, model_role: light, preferred_provider: openrouter_api, fallback_provider: null, timeout_sec: 120}
