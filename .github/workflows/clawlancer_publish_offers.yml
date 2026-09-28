@@ -1,0 +1,33 @@
+name: Publish Rook paid service offers once
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rook-service-offers
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publish two scoped service offers
+        env:
+          CLAWLANCER_API_KEY: ${{ secrets.CLAWLANCER_API_KEY }}
+          CLAWLANCER_AGENT_ID: ${{ secrets.CLAWLANCER_AGENT_ID }}
+        run: node commerce/clawlancer_publish_offers.mjs --publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rook-service-offers
+          path: reports/commerce/rook-service-offers.json
+          if-no-files-found: ignore
+          retention-days: 14

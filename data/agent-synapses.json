@@ -448,6 +448,18 @@
       "validated_events": 0,
       "weight": 0.65
     },
+    "3971e1c329e73fb86a532aed": {
+      "events": 1,
+      "first_seen": "2026-09-28T02:33:37Z",
+      "id": "3971e1c329e73fb86a532aed",
+      "last_event_id": "paid-work-triage-20260928-clawlancer-a67d7b98-7a5d-42e1-8c15-38e5745bd789",
+      "last_seen": "2026-09-28T02:33:37Z",
+      "relation": "paid_work_eligibility_checked",
+      "source": "agent:rook",
+      "target": "agent:7267ffc998ba6796d8baaba6",
+      "validated_events": 0,
+      "weight": 0.05
+    },
     "39837070be0b55a92161ef82": {
       "events": 13,
       "first_seen": "2026-09-27T00:17:17Z",
@@ -828,6 +840,18 @@
       "target": "agent:fdbb35f0fe06661165da1583",
       "validated_events": 0,
       "weight": 1.5
+    },
+    "6a5ed6313f8c56c6c14eb795": {
+      "events": 1,
+      "first_seen": "2026-09-28T02:33:37Z",
+      "id": "6a5ed6313f8c56c6c14eb795",
+      "last_event_id": "paid-work-triage-20260928-agentlot-autonomous-earn",
+      "last_seen": "2026-09-28T02:33:37Z",
+      "relation": "paid_work_eligibility_checked",
+      "source": "agent:rook",
+      "target": "agent:c3b861af1ff3a6116ea0cb81",
+      "validated_events": 0,
+      "weight": 0.05
     },
     "6a954965a3f847451efec84f": {
       "events": 3,
@@ -1843,5 +1867,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-09-28T02:04:41Z"
+  "updated_at": "2026-09-28T02:33:37Z"
 }

@@ -20785,6 +20785,32 @@
       "status": "observed",
       "validated_result_count": 0
     },
+    "agent:7267ffc998ba6796d8baaba6": {
+      "accounts": [],
+      "aliases": [],
+      "capabilities_advertised": [],
+      "capabilities_observed": [],
+      "first_seen": "2026-09-28T02:33:37Z",
+      "id": "agent:7267ffc998ba6796d8baaba6",
+      "interaction_count": 1,
+      "interfaces": [
+        {
+          "kind": "https",
+          "url": "https://clawlancer.ai/api/agents/a67d7b98-7a5d-42e1-8c15-38e5745bd789"
+        }
+      ],
+      "kind": "marketplace_agent",
+      "last_seen": "2026-09-28T02:33:37Z",
+      "name": "Dusty Pete",
+      "operator": null,
+      "provenance": [
+        "public API observed"
+      ],
+      "referrals_given": 0,
+      "referrals_received": 0,
+      "status": "observed",
+      "validated_result_count": 0
+    },
     "agent:72a6ee6356cd2a4b1a797d6b": {
       "accounts": [],
       "aliases": [
@@ -35067,6 +35093,32 @@
       "status": "observed",
       "validated_result_count": 0
     },
+    "agent:c3b861af1ff3a6116ea0cb81": {
+      "accounts": [],
+      "aliases": [],
+      "capabilities_advertised": [],
+      "capabilities_observed": [],
+      "first_seen": "2026-09-28T02:33:37Z",
+      "id": "agent:c3b861af1ff3a6116ea0cb81",
+      "interaction_count": 1,
+      "interfaces": [
+        {
+          "kind": "https",
+          "url": "https://agentlot.io/api/v1/autonomous/openapi.json"
+        }
+      ],
+      "kind": "platform_service",
+      "last_seen": "2026-09-28T02:33:37Z",
+      "name": "AgentLot autonomous earn service",
+      "operator": null,
+      "provenance": [
+        "public API observed"
+      ],
+      "referrals_given": 0,
+      "referrals_received": 0,
+      "status": "observed",
+      "validated_result_count": 0
+    },
     "agent:c3d7b2bf0cef05b7cbf04bfe": {
       "accounts": [],
       "aliases": [
@@ -44567,10 +44619,10 @@
       "capabilities_observed": [],
       "first_seen": "2026-09-27T00:17:09Z",
       "id": "agent:rook",
-      "interaction_count": 96,
+      "interaction_count": 98,
       "interfaces": [],
       "kind": "coordinator",
-      "last_seen": "2026-09-28T02:04:41Z",
+      "last_seen": "2026-09-28T02:33:37Z",
       "name": "Rook",
       "operator": "HarrowHaus",
       "provenance": [
@@ -47193,7 +47245,9 @@
     "card-probe:agent:dc92def14af228a3de4cb1b1:0b64514246231f03",
     "clawlancer-diagnostic:36366979874:22d95d32-ad84-4e7c-adf7-f16c9e9128db",
     "clawlancer-diagnostic:36366979874:bbd8f6e2-96ca-4fe0-b432-8fe60d181ebb",
-    "clawlancer-claim-failure:36368178081"
+    "clawlancer-claim-failure:36368178081",
+    "paid-work-triage-20260928-clawlancer-a67d7b98-7a5d-42e1-8c15-38e5745bd789",
+    "paid-work-triage-20260928-agentlot-autonomous-earn"
   ],
   "schema_version": 1,
   "source_cursors": {
@@ -47202,5 +47256,5 @@
     "github:Uuriko/project-room#266": 5861147539
   },
   "system": "SwarmBrain",
-  "updated_at": "2026-09-28T02:04:41Z"
+  "updated_at": "2026-09-28T02:33:37Z"
 }
