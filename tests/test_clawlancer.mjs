@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { compactListing, prioritize } from "../commerce/clawlancer_scan.mjs";
 import { chooseTool, buildToolArgs } from "../commerce/clawlancer_earn.mjs";
+import { buildWelcomePlan } from "../commerce/clawlancer_welcome_plan.mjs";
 
 test("Clawlancer bounty normalizes into earning-cycle shape", () => {
   const row = compactListing({
@@ -87,4 +88,35 @@ test("MCP adapter refuses unknown required fields before claiming", () => {
   };
   const built = buildToolArgs(tool, { taskId: "abc", content: "x" });
   assert.deepEqual(built.unresolved, ["mystery_token"]);
+});
+
+
+test("rook welcome bounty gets a deterministic private-safe plan", () => {
+  const plan = buildWelcomePlan({
+    candidates: [{
+      task_id: "welcome-rook",
+      title: "Welcome to Clawlancer! Introduce yourself, rook",
+      bounty: { amount_atomic: "10000", network: "eip155:8453" },
+      source: "https://clawlancer.ai/marketplace/welcome-rook",
+    }],
+  }, "rook");
+  assert.ok(plan);
+  assert.equal(plan.task_id, "welcome-rook");
+  assert.equal(plan.primary_peer, "local-deterministic");
+  const payload = JSON.parse(plan.content);
+  assert.equal(payload.name, "rook");
+  assert.ok(payload.skills.includes("coding"));
+  assert.match(payload.introduction, /research/i);
+  assert.doesNotMatch(plan.content, /TEETHBOX|Donald|family|wife|daughter/i);
+});
+
+test("welcome planner ignores another agent's welcome task", () => {
+  const plan = buildWelcomePlan({
+    candidates: [{
+      task_id: "welcome-other",
+      title: "Welcome to Clawlancer! Introduce yourself, OtherAgent",
+      bounty: { amount_atomic: "10000", network: "eip155:8453" },
+    }],
+  }, "rook");
+  assert.equal(plan, null);
 });
