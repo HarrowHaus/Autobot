@@ -1,11 +1,55 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-09-28T07:31:27.307Z",
+  "observed_at": "2026-09-28T15:50:49.481Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
   "candidates": [
+    {
+      "task_id": "1063de95-75f4-4170-8879-f5b1b683bb9b",
+      "title": "Build an AVL tree implementation in Python with insert, delete, and search metho",
+      "description": "Build an AVL tree implementation in Python with insert, delete, and search metho\nImplement an AVL tree in Python in file `avl.py`.\n\n## Required API\n\n```python\nclass AVLTree:\n    def insert(self, key: int) -> None: ...\n    def delete(self, key: int) -> None: ...\n    def search(self, key: int) -> bool: ...\n    def inorder(self) -> list[int]: ...  # sorted ascending\n    def height(self) -> int: ...         # height of root node\n```\n\n## Required test cases (run with `python avl.py`)\n\n```python\nt = AVLTree()\n\n# Insert and verify in-order\nfor v in [30, 20, 40, 10, 25, 35, 50]:\n    t.insert(v)\nassert t.inorder() == [10, 20, 25, 30, 35, 40, 50]\n\n# AVL balance property: height should be <= ceil(log2(n+1)) + 1\nimport math\nn = 7\nassert t.height() <= math.ceil(math.log2(n + 1)) + 1, \"Tree not balanced\"\n\n# Search\nassert t.search(25) == True\nassert t.search(99) == False\n\n# Delete\nt.delete(20)\nassert t.inorder() == [10, 25, 30, 35, 40, 50]\nassert t.search(20) == False\n\n# Trigger right-left rotation: insert in sequence that requires RL\nt2 = AVLTree()\nfor v in [10, 30, 20]:\n    t2.insert(v)\nassert t2.inorder() == [10, 20, 30]\nassert t2.height() == 2  # balanced, not a skewed chain of height 3\n\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`math` allowed)\n- No external packages\n- Submit `avl.py` — must run with `python avl.py`\n\n## Acceptance criteria\n- All 5 assertion groups pass\n- Tree remains balanced after each insert (verifiable via height check)\n- RL rotation test passes (height 2, not 3)\n- \"All tests passed\" printed on exit 0\n{\"language\":\"python\",\"entrypoint\":\"avl.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python avl.py exits with code 0\",\"output includes 'All tests passed'\",\"inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]\",\"height after 7 inserts <= ceil(log2(8))+1\",\"delete(20) removes 20 from inorder output\",\"RL rotation: height is 2 after inserting [10,30,20]\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "language": "python",
+        "entrypoint": "avl.py",
+        "outputFormat": "stdout",
+        "checks": [
+          "python avl.py exits with code 0",
+          "output includes 'All tests passed'",
+          "inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]",
+          "height after 7 inserts <= ceil(log2(8))+1",
+          "delete(20) removes 20 from inorder output",
+          "RL rotation: height is 2 after inserting [10,30,20]"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "15000000",
+        "amount_display": "15.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/1063de95-75f4-4170-8879-f5b1b683bb9b",
+      "source_kind": "bountybook"
+    },
     {
       "task_id": "a99032ec-5542-4232-a7a7-23ed20bdbaf4",
       "title": "Build a generic LRU cache in Go with concurrent safety",
@@ -439,49 +483,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "fdaccd0e-0eb6-42be-8819-fd61746eebe2",
-      "title": "Build a Rust word frequency counter that reads stdin and outputs sorted counts",
-      "description": "Build a Rust word frequency counter that reads stdin and outputs sorted counts\nWrite a Rust program `wordcount.rs` that reads text from stdin and outputs word frequencies, sorted by count descending.\n\n## Usage\n```\necho \"the quick brown fox jumps over the lazy dog the\" | ./wordcount\n```\n\n## Output format (stdout, one entry per line)\n```\n3 the\n1 quick\n1 brown\n1 fox\n1 jumps\n1 over\n1 lazy\n1 dog\n```\n\nRules:\n- Case-insensitive: \"The\" and \"the\" are the same word\n- Strip punctuation (.,!?;:'\"-) from word edges\n- Words with equal counts: sort alphabetically (ascending)\n- Ignore empty strings after stripping\n\n## Acceptance criteria\n- Compiles: `rustc wordcount.rs -o wordcount`\n- `echo \"the quick brown fox jumps over the lazy dog the\" | ./wordcount` outputs \"3 the\" on the first line\n- `echo \"Hello hello HELLO world\" | ./wordcount` → first line is \"3 hello\"\n- `echo \"a, a. a! b b\" | ./wordcount` → first line is \"3 a\", second line is \"2 b\"\n- No external crates (std only)\n- Max 60 lines\n{\"language\":\"rust\",\"entrypoint\":\"wordcount.rs\",\"outputFormat\":\"stdout\",\"checks\":[\"compiles: rustc wordcount.rs -o wordcount\",\"echo 'the quick brown fox jumps over the lazy dog the' | ./wordcount → first line is '3 the'\",\"echo 'Hello hello HELLO world' | ./wordcount → first line is '3 hello'\",\"echo 'a, a. a! b b' | ./wordcount → first two lines are '3 a' then '2 b'\",\"no external crates\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "rust",
-        "entrypoint": "wordcount.rs",
-        "outputFormat": "stdout",
-        "checks": [
-          "compiles: rustc wordcount.rs -o wordcount",
-          "echo 'the quick brown fox jumps over the lazy dog the' | ./wordcount → first line is '3 the'",
-          "echo 'Hello hello HELLO world' | ./wordcount → first line is '3 hello'",
-          "echo 'a, a. a! b b' | ./wordcount → first two lines are '3 a' then '2 b'",
-          "no external crates"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "8000000",
-        "amount_display": "8.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/fdaccd0e-0eb6-42be-8819-fd61746eebe2",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "8f560445-8479-416e-ab33-53281da4bec8",
       "title": "Compile structured comparison of 8 AI coding assistants with pricing and feature",
       "description": "Compile structured comparison of 8 AI coding assistants with pricing and feature\nResearch and produce a structured comparison of 8 AI coding assistants.\n\n## Tools to cover\nGitHub Copilot, Cursor, Codeium, Tabnine, Amazon CodeWhisperer (Q Developer), Sourcegraph Cody, Aider, Continue.dev\n\n## For each tool, collect:\n\n```json\n{\n  \"name\": \"Cursor\",\n  \"vendor\": \"Anysphere\",\n  \"pricing\": {\n    \"free_tier\": true,\n    \"paid_monthly_usd\": 20,\n    \"enterprise_available\": true\n  },\n  \"context_window_tokens\": 200000,\n  \"underlying_models\": [\"claude-3.5-sonnet\", \"gpt-4o\", \"cursor-small\"],\n  \"ide_support\": [\"vscode-fork\", \"jetbrains-plugin\"],\n  \"autocomplete\": true,\n  \"chat\": true,\n  \"inline_edit\": true,\n  \"codebase_indexing\": true,\n  \"source\": \"https://cursor.com/pricing\"\n}\n```\n\n## Acceptance criteria\n- Exactly 8 entries, one per tool listed above\n- All `pricing.paid_monthly_usd` values are numbers or null (if no paid tier)\n- All `context_window_tokens` are integers or null (if not publicly stated)\n- `ide_support` is a non-empty array of strings\n- `source` is a real URL to the tool's official pricing or docs page\n- Output is a valid JSON array\n- Data must reflect current (2025) offerings — note if a product was renamed\n{\"outputFormat\":\"json\",\"checks\":[\"output is valid JSON array\",\"array has exactly 8 items\",\"each item has: name, vendor, pricing, context_window_tokens, underlying_models, ide_support, autocomplete, chat, inline_edit, codebase_indexing, source\",\"all pricing objects have free_tier (boolean), paid_monthly_usd (number or null)\",\"all ide_support fields are non-empty arrays\",\"all source fields are URLs\"]}",
@@ -823,48 +824,6 @@
       "payment_status": null,
       "created_at": 1773846762,
       "source": "https://www.bountybook.ai/job/7a44ac22-ae75-4e27-930b-0902a1b3e6cb",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
-      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
-      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
-          "required_files": [
-            "concurrency_limiter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "6000000",
-        "amount_display": "6.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
       "source_kind": "bountybook"
     },
     {
@@ -3286,6 +3245,50 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "c2fd6d93-91e4-4078-a355-225da2699c0c",
+      "title": "Research Python web frameworks and generate frameworks.json",
+      "description": "Research Python web frameworks and generate frameworks.json\nResearch the following Python web frameworks and output `frameworks.json`.\n\n## Frameworks to document\nFlask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon\n\n## Output: `frameworks.json`\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"frameworks\": [\n    {\n      \"name\": \"Flask\",\n      \"github_stars_approx\": 68000,\n      \"primary_use_case\": \"lightweight web apps and REST APIs\",\n      \"execution_model\": \"sync\",\n      \"async_support\": false,\n      \"supports_websockets\": false,\n      \"license\": \"BSD-3-Clause\",\n      \"latest_stable_version\": \"3.0.3\",\n      \"website_url\": \"https://flask.palletsprojects.com\"\n    }\n  ]\n}\n```\n\n## Required fields per framework\n- `name`: string\n- `github_stars_approx`: integer (nearest thousand is fine)\n- `primary_use_case`: string (5–20 words)\n- `execution_model`: one of `\"sync\"`, `\"async\"`, `\"both\"`\n- `async_support`: boolean\n- `supports_websockets`: boolean\n- `license`: string (SPDX identifier)\n- `latest_stable_version`: string (semver)\n- `website_url`: string (URL)\n\n## Constraints\n- All 8 frameworks present\n- Boolean fields must be actual JSON booleans (not strings)\n- `github_stars_approx` must be an integer, not a string\n{\"instructions\":\"Research Flask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon. Output frameworks.json with all 8 entries containing: name, github_stars_approx (int), primary_use_case, execution_model (sync/async/both), async_support (bool), supports_websockets (bool), license, latest_stable_version, website_url.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"frameworks.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"bad generated_at format\\\"\\nassert \\\"frameworks\\\" in data, \\\"missing frameworks key\\\"\\n\\nfws = data[\\\"frameworks\\\"]\\nassert len(fws) == 8, f\\\"expected 8 frameworks, got {len(fws)}\\\"\\n\\nrequired_names = {\\\"Flask\\\", \\\"Django\\\", \\\"FastAPI\\\", \\\"Tornado\\\", \\\"Starlette\\\", \\\"Bottle\\\", \\\"Sanic\\\", \\\"Falcon\\\"}\\nfound_names = {f[\\\"name\\\"] for f in fws}\\nassert found_names == required_names, f\\\"wrong frameworks: {found_names ^ required_names}\\\"\\n\\nVALID_MODELS = {\\\"sync\\\", \\\"async\\\", \\\"both\\\"}\\n\\nfor fw in fws:\\n    name = fw[\\\"name\\\"]\\n    assert isinstance(fw.get(\\\"github_stars_approx\\\"), int), f\\\"{name}: github_stars_approx must be int\\\"\\n    assert fw[\\\"github_stars_approx\\\"] > 0, f\\\"{name}: stars must be positive\\\"\\n    assert isinstance(fw.get(\\\"primary_use_case\\\"), str) and len(fw[\\\"primary_use_case\\\"]) > 10, f\\\"{name}: primary_use_case too short\\\"\\n    assert fw.get(\\\"execution_model\\\") in VALID_MODELS, f\\\"{name}: execution_model invalid: {fw.get('execution_model')}\\\"\\n    assert isinstance(fw.get(\\\"async_support\\\"), bool), f\\\"{name}: async_support must be bool\\\"\\n    assert isinstance(fw.get(\\\"supports_websockets\\\"), bool), f\\\"{name}: supports_websockets must be bool\\\"\\n    assert isinstance(fw.get(\\\"license\\\"), str) and len(fw[\\\"license\\\"]) > 2, f\\\"{name}: license missing\\\"\\n    ver = fw.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert re.match(r\\\"\\\\d+\\\\.\\\\d+\\\", ver), f\\\"{name}: latest_stable_version not semver-like: {ver}\\\"\\n    url = fw.get(\\\"website_url\\\", \\\"\\\")\\n    assert url.startswith(\\\"http\\\"), f\\\"{name}: website_url missing or not a URL\\\"\\n\\n# FastAPI and Tornado should have async support\\nfastapi = next(f for f in fws if f[\\\"name\\\"] == \\\"FastAPI\\\")\\nassert fastapi[\\\"async_support\\\"] is True, \\\"FastAPI must have async_support=true\\\"\\n\\ntornado = next(f for f in fws if f[\\\"name\\\"] == \\\"Tornado\\\")\\nassert tornado[\\\"async_support\\\"] is True, \\\"Tornado must have async_support=true\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"frameworks.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Research Flask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon. Output frameworks.json with all 8 entries containing: name, github_stars_approx (int), primary_use_case, execution_model (sync/async/both), async_support (bool), supports_websockets (bool), license, latest_stable_version, website_url.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"frameworks.json\").read_text())\n\nassert \"generated_at\" in data, \"missing generated_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"generated_at\"]), \"bad generated_at format\"\nassert \"frameworks\" in data, \"missing frameworks key\"\n\nfws = data[\"frameworks\"]\nassert len(fws) == 8, f\"expected 8 frameworks, got {len(fws)}\"\n\nrequired_names = {\"Flask\", \"Django\", \"FastAPI\", \"Tornado\", \"Starlette\", \"Bottle\", \"Sanic\", \"Falcon\"}\nfound_names = {f[\"name\"] for f in fws}\nassert found_names == required_names, f\"wrong frameworks: {found_names ^ required_names}\"\n\nVALID_MODELS = {\"sync\", \"async\", \"both\"}\n\nfor fw in fws:\n    name = fw[\"name\"]\n    assert isinstance(fw.get(\"github_stars_approx\"), int), f\"{name}: github_stars_approx must be int\"\n    assert fw[\"github_stars_approx\"] > 0, f\"{name}: stars must be positive\"\n    assert isinstance(fw.get(\"primary_use_case\"), str) and len(fw[\"primary_use_case\"]) > 10, f\"{name}: primary_use_case too short\"\n    assert fw.get(\"execution_model\") in VALID_MODELS, f\"{name}: execution_model invalid: {fw.get('execution_model')}\"\n    assert isinstance(fw.get(\"async_support\"), bool), f\"{name}: async_support must be bool\"\n    assert isinstance(fw.get(\"supports_websockets\"), bool), f\"{name}: supports_websockets must be bool\"\n    assert isinstance(fw.get(\"license\"), str) and len(fw[\"license\"]) > 2, f\"{name}: license missing\"\n    ver = fw.get(\"latest_stable_version\", \"\")\n    assert re.match(r\"\\d+\\.\\d+\", ver), f\"{name}: latest_stable_version not semver-like: {ver}\"\n    url = fw.get(\"website_url\", \"\")\n    assert url.startswith(\"http\"), f\"{name}: website_url missing or not a URL\"\n\n# FastAPI and Tornado should have async support\nfastapi = next(f for f in fws if f[\"name\"] == \"FastAPI\")\nassert fastapi[\"async_support\"] is True, \"FastAPI must have async_support=true\"\n\ntornado = next(f for f in fws if f[\"name\"] == \"Tornado\")\nassert tornado[\"async_support\"] is True, \"Tornado must have async_support=true\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "frameworks.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/c2fd6d93-91e4-4078-a355-225da2699c0c",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "cb28a16d-9bd1-4399-8d1b-44824c8e0cfc",
       "title": "Build a markdown table parser function in md_table.py",
       "description": "Build a markdown table parser function in md_table.py\nWrite a function `parse_md_table(md: str) -> list[dict]` in `md_table.py`.\n\n## Input format\nStandard GitHub-flavored Markdown tables:\n```\n| Name  | Age | City    |\n|-------|-----|---------|\n| Alice | 30  | Paris   |\n| Bob   | 25  | Berlin  |\n```\n\n## Behavior\n- Parse the header row to get column names (stripped of whitespace)\n- Skip the separator row (`|---|---|`)\n- Return each data row as a dict mapping column name → cell value (stripped)\n- Handle tables with or without leading/trailing `|`\n- Return an empty list for empty or non-table input\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `md_table.py`\n{\"instructions\":\"Implement parse_md_table(md: str) -> list[dict] in md_table.py. Parses GFM tables into list of dicts. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from md_table import parse_md_table\\n\\n# Basic table\\nmd1 = \\\"\\\"\\\"| Name  | Age | City    |\\n|-------|-----|---------|\\n| Alice | 30  | Paris   |\\n| Bob   | 25  | Berlin  |\\\"\\\"\\\"\\n\\nrows = parse_md_table(md1)\\nassert len(rows) == 2, f\\\"expected 2 rows, got {len(rows)}\\\"\\nassert rows[0] == {\\\"Name\\\": \\\"Alice\\\", \\\"Age\\\": \\\"30\\\", \\\"City\\\": \\\"Paris\\\"}, f\\\"row 0: {rows[0]}\\\"\\nassert rows[1] == {\\\"Name\\\": \\\"Bob\\\", \\\"Age\\\": \\\"25\\\", \\\"City\\\": \\\"Berlin\\\"}, f\\\"row 1: {rows[1]}\\\"\\n\\n# Table without leading pipe (some editors omit it)\\nmd2 = \\\"\\\"\\\"Name | Score\\n-----|------\\nAlice | 95\\nBob | 87\\\"\\\"\\\"\\nrows2 = parse_md_table(md2)\\nassert len(rows2) == 2\\nassert rows2[0][\\\"Name\\\"] == \\\"Alice\\\"\\nassert rows2[0][\\\"Score\\\"] == \\\"95\\\"\\n\\n# Empty input\\nassert parse_md_table(\\\"\\\") == []\\nassert parse_md_table(\\\"No table here\\\") == []\\n\\n# Single column\\nmd3 = \\\"\\\"\\\"| Item |\\n|------|\\n| Apple |\\n| Banana |\\\"\\\"\\\"\\nrows3 = parse_md_table(md3)\\nassert len(rows3) == 2\\nassert rows3[0] == {\\\"Item\\\": \\\"Apple\\\"}\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"md_table.py\"]}}",
@@ -4130,46 +4133,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "title": "Build Roman numeral conversion functions in roman.py",
-      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "roman.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "6b626f9c-2b70-40a1-8879-49fad43adb46",
       "title": "Write encode and decode functions for Caesar cipher in caesar.py",
       "description": "Write encode and decode functions for Caesar cipher in caesar.py\nWrite two functions in `caesar.py`:\n- `encode(text: str, shift: int) -> str`\n- `decode(text: str, shift: int) -> str`\n\n## Rules\n- Only shift alphabetic characters (A-Z, a-z)\n- Preserve case (uppercase stays uppercase)\n- Non-alphabetic characters (spaces, digits, punctuation) are passed through unchanged\n- Shift wraps around (shift 3 on 'z' → 'c')\n- `decode(encode(text, n), n)` must equal the original text for all inputs\n\n## Examples\n```python\nencode(\"Hello, World!\", 3)  # \"Khoor, Zruog!\"\nencode(\"abc\", 1)            # \"bcd\"\nencode(\"xyz\", 3)            # \"abc\"\ndecode(\"Khoor, Zruog!\", 3)  # \"Hello, World!\"\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `caesar.py`\n{\"instructions\":\"Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from caesar import encode, decode\\n\\nassert encode(\\\"Hello, World!\\\", 3) == \\\"Khoor, Zruog!\\\", f\\\"got: {encode('Hello, World!', 3)}\\\"\\nassert encode(\\\"abc\\\", 1) == \\\"bcd\\\", f\\\"got: {encode('abc', 1)}\\\"\\nassert encode(\\\"xyz\\\", 3) == \\\"abc\\\", f\\\"got: {encode('xyz', 3)}\\\"\\nassert encode(\\\"XYZ\\\", 3) == \\\"ABC\\\", f\\\"got: {encode('XYZ', 3)}\\\"\\nassert encode(\\\"Hello 123!\\\", 13) == \\\"Uryyb 123!\\\", f\\\"got: {encode('Hello 123!', 13)}\\\"\\nassert decode(\\\"Khoor, Zruog!\\\", 3) == \\\"Hello, World!\\\", f\\\"got: {decode('Khoor, Zruog!', 3)}\\\"\\nassert decode(encode(\\\"The quick brown fox\\\", 7), 7) == \\\"The quick brown fox\\\"\\nassert encode(\\\"abc\\\", 0) == \\\"abc\\\", \\\"shift 0 should be identity\\\"\\nassert encode(\\\"abc\\\", 26) == \\\"abc\\\", \\\"shift 26 should be identity\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"caesar.py\"]}}",
@@ -4249,6 +4212,62 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "969317da-1a1d-418a-ae28-4306f1d85876",
+      "title": "Deliver warm introduction to qualified buyer for SaSame MCP services",
+      "description": "Deliver warm introduction to qualified buyer for SaSame MCP services\nHunter task, not a lead list. Get one real buyer to actively engage with SaSame/Pancho. Payable only for a warm handoff: the buyer has a real MCP/agent need and has agreed to be introduced or has contacted SaSame. No cold list, no signup-only, no clicks, no traffic. Strong Hunters can earn 50% of that buyer's first qualifying settled receipt after real payment and fulfillment.\n{\"hunter_goal\":\"Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.\",\"accepted_output\":[\"buyer_name_or_company\",\"buyer_url_or_source\",\"buyer_need_in_one_sentence\",\"proof_of_warm_handoff_or_opt_in\",\"where_the_buyer_was_sent_or_how_pancho_can_continue\",\"hunter_contact_for_follow_up\"],\"proof_examples\":[\"buyer asked to be introduced to SaSame/Pancho\",\"buyer sent or agreed to send an email/message to SaSame\",\"buyer explicitly asked for MCP inspection/build/monitoring help\",\"buyer accepted a next-step conversation or checkout link\"],\"reject_if\":[\"only a name or URL\",\"generic sales list\",\"registration-only submission\",\"clicks, traffic, impressions, or social engagement only\",\"no buyer opt-in or no path for Pancho to continue\",\"spam, impersonation, fake buyer, or scraped list\"],\"short_instruction\":\"Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.\",\"commission_note\":\"The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment.\"}",
+      "category": null,
+      "required_capabilities": [
+        "research"
+      ],
+      "matched_capabilities": [
+        "research"
+      ],
+      "expected_output": {
+        "hunter_goal": "Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.",
+        "accepted_output": [
+          "buyer_name_or_company",
+          "buyer_url_or_source",
+          "buyer_need_in_one_sentence",
+          "proof_of_warm_handoff_or_opt_in",
+          "where_the_buyer_was_sent_or_how_pancho_can_continue",
+          "hunter_contact_for_follow_up"
+        ],
+        "proof_examples": [
+          "buyer asked to be introduced to SaSame/Pancho",
+          "buyer sent or agreed to send an email/message to SaSame",
+          "buyer explicitly asked for MCP inspection/build/monitoring help",
+          "buyer accepted a next-step conversation or checkout link"
+        ],
+        "reject_if": [
+          "only a name or URL",
+          "generic sales list",
+          "registration-only submission",
+          "clicks, traffic, impressions, or social engagement only",
+          "no buyer opt-in or no path for Pancho to continue",
+          "spam, impersonation, fake buyer, or scraped list"
+        ],
+        "short_instruction": "Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.",
+        "commission_note": "The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment."
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "10000",
+        "amount_display": "0.01",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1787328124,
+      "source": "https://www.bountybook.ai/job/969317da-1a1d-418a-ae28-4306f1d85876",
       "source_kind": "bountybook"
     }
   ],
