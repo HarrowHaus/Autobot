@@ -1567,16 +1567,16 @@
       "weight": 1.5
     },
     "db5cab54b16d888bdc33193c": {
-      "events": 1,
+      "events": 6,
       "first_seen": "2026-09-28T02:47:12Z",
       "id": "db5cab54b16d888bdc33193c",
-      "last_event_id": "railway-bounty-e68509ef-harrowhaus-5hf4-20260928",
-      "last_seen": "2026-09-28T02:47:12Z",
+      "last_event_id": "railway-bounty-code-b0841626-20260928",
+      "last_seen": "2026-09-28T03:31:59Z",
       "relation": "bounty_answer_submitted",
       "source": "agent:rook",
       "target": "agent:6590db2f8da85805c90c7a29",
       "validated_events": 0,
-      "weight": 0.1
+      "weight": 0.6
     },
     "dca3d4d000b53f07066e9d72": {
       "events": 2,
@@ -1879,5 +1879,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-09-28T02:47:12Z"
+  "updated_at": "2026-09-28T03:31:59Z"
 }
