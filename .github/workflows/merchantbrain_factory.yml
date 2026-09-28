@@ -21,6 +21,15 @@ jobs:
           python-version: '3.12'
       - name: Discover, score, choose, manufacture
         run: python -m swarmbrain.opportunity_factory
+      - name: Emit opportunity contract for downstream OSS factories
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p=json.load(open("reports/merchantbrain/product.json",encoding="utf-8"))
+          if p.get("status")=="publishable":
+              c={"id":p["slug"],"problem":p["promise"],"buyer":p["buyer"],"evidence":p["payload"]["evidence"],"product_type":"research","constraints":{"cash_budget_usd":0}}
+              pathlib.Path("reports/merchantbrain/opportunity-contract.json").write_text(json.dumps(c,indent=2)+"\n")
+          PY
       - uses: actions/upload-pages-artifact@v3
         with:
           path: merchant-site
