@@ -1,0 +1,98 @@
+name: SwarmBrain Clawlancer earning cycle
+
+on:
+  schedule:
+    - cron: '53 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: swarmbrain-clawlancer-earning-cycle
+  cancel-in-progress: false
+
+jobs:
+  earn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      CLAWLANCER_API_KEY: ${{ secrets.CLAWLANCER_API_KEY }}
+      CLAWLANCER_AGENT_NAME: rook
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install commerce dependencies
+        run: npm install --ignore-scripts
+
+      - name: Scan live Clawlancer bounties
+        run: |
+          mkdir -p reports/commerce
+          npm --silent run scan:clawlancer > reports/commerce/clawlancer-latest.json
+          node -e "const r=require('./reports/commerce/clawlancer-latest.json'); console.log(JSON.stringify({status:r.status,tasks_examined:r.tasks_examined,candidate_count:r.candidate_count,first:r.candidates?.[0]&&{id:r.candidates[0].task_id,title:r.candidates[0].title,bounty:r.candidates[0].bounty?.amount_display}},null,2))"
+
+      - name: Pre-fulfill and independently verify one bounty
+        run: |
+          if [ -z "$CLAWLANCER_API_KEY" ]; then
+            rm -f reports/commerce/clawlancer-earn-plan.json
+            printf '%s\n' '{"status":"blocked","reason":"clawlancer_api_key_missing"}' > reports/commerce/clawlancer-earn-preflight.json
+            exit 0
+          fi
+
+          python -m swarmbrain.earning_cycle             --basedagents reports/commerce/clawlancer-latest.json             --plan reports/commerce/clawlancer-earn-plan.json             --result reports/commerce/clawlancer-earn-preflight.json
+
+          cat reports/commerce/clawlancer-earn-preflight.json
+
+      - name: Claim and deliver through official Clawlancer MCP
+        run: |
+          if [ -f reports/commerce/clawlancer-earn-plan.json ]; then
+            node commerce/clawlancer_earn.mjs reports/commerce/clawlancer-earn-plan.json > reports/commerce/clawlancer-earn-execution.json
+          elif grep -q '"reason":"clawlancer_api_key_missing"' reports/commerce/clawlancer-earn-preflight.json 2>/dev/null; then
+            cp reports/commerce/clawlancer-earn-preflight.json reports/commerce/clawlancer-earn-execution.json
+          else
+            printf '%s\n' '{"status":"not_executed","reason":"no_verified_prefulfilled_plan"}' > reports/commerce/clawlancer-earn-execution.json
+          fi
+          cat reports/commerce/clawlancer-earn-execution.json
+
+      - name: Remove transient claim plan
+        if: always()
+        run: rm -f reports/commerce/clawlancer-earn-plan.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swarmbrain-clawlancer-earning-cycle
+          path: |
+            reports/commerce/clawlancer-latest.json
+            reports/commerce/clawlancer-earn-preflight.json
+            reports/commerce/clawlancer-earn-execution.json
+            reports/task-receipts/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Persist public-safe receipts on operational branch
+        if: always()
+        run: |
+          if [ "$GITHUB_REF_NAME" != "claude/monetizable-project-concepts-b97bv2" ]; then
+            echo "Not the operational branch; artifact-only run."
+            exit 0
+          fi
+
+          git config user.name 'SwarmBrain Commerce'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/mesh-state.json data/graph.json reports/task-receipts reports/commerce/clawlancer-latest.json reports/commerce/clawlancer-earn-preflight.json reports/commerce/clawlancer-earn-execution.json
+
+          if ! git diff --cached --quiet; then
+            git commit -m 'Persist Clawlancer earning-cycle receipts [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
