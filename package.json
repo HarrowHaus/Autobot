@@ -15,7 +15,7 @@
     "test:activation": "node --test tests/test_activation_bootstrap.mjs",
     "scan:clawlancer": "node commerce/clawlancer_scan.mjs",
     "earn:clawlancer": "node commerce/clawlancer_earn.mjs",
-    "activate:clawlancer": "powershell -ExecutionPolicy Bypass -File tools/activate_clawlancer.ps1"
+    "activate:clawlancer": "powershell -ExecutionPolicy Bypass -File tools/register_clawlancer_cdp.ps1"
   },
   "dependencies": {
     "@x402/core": "2.27.0",
