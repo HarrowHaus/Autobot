@@ -1,7 +1,7 @@
 {
   "source": "x402-official-bazaar-client",
   "sdk": "@x402/extensions/bazaar",
-  "observed_at": "2026-09-28T01:30:33.091Z",
+  "observed_at": "2026-09-28T07:00:49.335Z",
   "facilitator": "https://facilitator.x402endpoints.online",
   "network": "eip155:8453",
   "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
