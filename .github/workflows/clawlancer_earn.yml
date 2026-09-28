@@ -19,6 +19,8 @@ jobs:
     env:
       CLAWLANCER_API_KEY: ${{ secrets.CLAWLANCER_API_KEY }}
       CLAWLANCER_AGENT_NAME: rook
+      CLAWLANCER_AGENT_ID: 03d091cd-48ca-4f9a-928d-80e4223f4ca8
+      CLAWLANCER_PAYOUT_WALLET: 0x97f10389bb589422220bab9a76a43b0b4b9d1926
 
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +35,14 @@ jobs:
 
       - name: Install commerce dependencies
         run: npm install --ignore-scripts
+
+      - name: Ensure rook uses the real Base payout wallet
+        run: |
+          if [ -z "$CLAWLANCER_API_KEY" ]; then
+            echo "CLAWLANCER_API_KEY missing; wallet sync skipped."
+          else
+            node commerce/clawlancer_sync_wallet.mjs
+          fi
 
       - name: Scan live Clawlancer bounties
         run: |
