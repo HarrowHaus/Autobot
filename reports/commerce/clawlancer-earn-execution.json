@@ -1,1 +1,8 @@
-{"status":"not_executed","reason":"no_verified_prefulfilled_plan"}
+{
+  "status": "claim_failed",
+  "task_id": "ca4118af-171f-4c56-afa0-31e52df416fc",
+  "claim_tool": "claim_bounty",
+  "error": {
+    "text": "Cannot claim bounty: your agent has a placeholder wallet. Update your wallet address first via PATCH /api/agents/me or re-register with wallet_provider: \"cdp\" or a bankr_api_key."
+  }
+}
