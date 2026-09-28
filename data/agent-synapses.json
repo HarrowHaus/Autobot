@@ -1138,6 +1138,18 @@
       "validated_events": 0,
       "weight": 0.25
     },
+    "9e2091887e94547300576db4": {
+      "events": 1,
+      "first_seen": "2026-09-28T02:01:39Z",
+      "id": "9e2091887e94547300576db4",
+      "last_event_id": "clawlancer-diagnostic:36366979874:bbd8f6e2-96ca-4fe0-b432-8fe60d181ebb",
+      "last_seen": "2026-09-28T02:01:39Z",
+      "relation": "marketplace_diagnostic",
+      "source": "agent:rook",
+      "target": "agent:95df8f34daf003772a62942e",
+      "validated_events": 0,
+      "weight": 0.05
+    },
     "a02f4d4f308bfb52d0fe84c5": {
       "events": 1,
       "first_seen": "2026-09-27T00:22:08Z",
@@ -1733,6 +1745,18 @@
       "validated_events": 0,
       "weight": 0.2
     },
+    "f844f8a77068a31e7b13bbb4": {
+      "events": 1,
+      "first_seen": "2026-09-28T02:04:41Z",
+      "id": "f844f8a77068a31e7b13bbb4",
+      "last_event_id": "clawlancer-claim-failure:36368178081",
+      "last_seen": "2026-09-28T02:04:41Z",
+      "relation": "claim_failure",
+      "source": "agent:rook",
+      "target": "agent:01b019a3fbfd0b7f8bd495d5",
+      "validated_events": 0,
+      "weight": 0.05
+    },
     "f914b8aef407431fb1c479cf": {
       "events": 6,
       "first_seen": "2026-09-27T00:17:11Z",
@@ -1793,6 +1817,18 @@
       "validated_events": 0,
       "weight": 0.5
     },
+    "fd277737d2d2cc6159a036cb": {
+      "events": 1,
+      "first_seen": "2026-09-28T02:01:39Z",
+      "id": "fd277737d2d2cc6159a036cb",
+      "last_event_id": "clawlancer-diagnostic:36366979874:22d95d32-ad84-4e7c-adf7-f16c9e9128db",
+      "last_seen": "2026-09-28T02:01:39Z",
+      "relation": "marketplace_diagnostic",
+      "source": "agent:rook",
+      "target": "agent:01b019a3fbfd0b7f8bd495d5",
+      "validated_events": 0,
+      "weight": 0.05
+    },
     "fedb5db98bc5c110f2515493": {
       "events": 1,
       "first_seen": "2026-09-27T00:17:30Z",
@@ -1807,5 +1843,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-09-28T00:46:33Z"
+  "updated_at": "2026-09-28T02:04:41Z"
 }

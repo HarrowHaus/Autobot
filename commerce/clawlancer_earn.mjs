@@ -156,6 +156,13 @@ async function connectMcp(apiKey) {
   return { client, transport };
 }
 
+export function claimFailureReason(data) {
+  const text = JSON.stringify(data || {});
+  return /createEscrow/.test(text) && /ERC20: transfer amount exceeds balance/i.test(text)
+    ? "escrow_funder_token_balance_insufficient"
+    : "claim_failed_unclassified";
+}
+
 export function publicError(value, apiKey = "") {
   // Only retain diagnostic fields; never persist headers, request bodies or stacks.
   if (typeof value === "string") {
@@ -326,6 +333,7 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
           task_id: plan.task_id,
           claim_tool: "POST /api/listings/{id}/claim",
           http_status: error.httpStatus || null,
+          reason: claimFailureReason(error.data),
           error: error.data || publicError(String(error.message), apiKey),
           wallet_diagnostic: await walletDiagnostic(apiKey),
         };
@@ -341,7 +349,7 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
       return {
         status: "claimed_transaction_unresolved",
         task_id: plan.task_id,
-        claim_tool: claimTool.name,
+        claim_tool: "POST /api/listings/{id}/claim",
         claim_result: claimResult,
         truth_boundary: "The claim call returned successfully but no transaction identifier could be resolved; no revenue is claimed.",
       };
@@ -360,7 +368,7 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
         status: "claimed_delivery_failed",
         task_id: plan.task_id,
         transaction_id: transactionId,
-        claim_tool: claimTool.name,
+        claim_tool: "POST /api/listings/{id}/claim",
         deliver_tool: deliverTool.name,
         error: deliverResult,
       };
@@ -386,7 +394,7 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
       transaction_id: String(transactionId),
       marketplace_status: finalStatus,
       payout_transaction: payoutTx,
-      claim_tool: claimTool.name,
+      claim_tool: "POST /api/listings/{id}/claim",
       deliver_tool: deliverTool.name,
       available_mcp_tools: tools.map(t => t.name).sort(),
       advertised_bounty_atomic: String(plan?.bounty_amount_atomic || "0"),

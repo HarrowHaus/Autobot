@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { compactListing, prioritize } from "../commerce/clawlancer_scan.mjs";
-import { chooseTool, buildToolArgs, authFetch, publicError, executionExitCode } from "../commerce/clawlancer_earn.mjs";
+import { chooseTool, buildToolArgs, authFetch, publicError, executionExitCode, claimFailureReason } from "../commerce/clawlancer_earn.mjs";
 import { buildWelcomePlan } from "../commerce/clawlancer_welcome_plan.mjs";
 
 test("claim failure preserves HTTP diagnostics without retrying or leaking credentials", async () => {
@@ -154,4 +154,13 @@ test("welcome planner ignores another agent's welcome task", () => {
     }],
   }, "rook");
   assert.equal(plan, null);
+});
+
+test("escrow token shortfall is distinguished from worker gas or other contract failures", () => {
+  assert.equal(claimFailureReason({
+    error: "Failed to create on-chain escrow",
+    details: 'The contract function "createEscrow" reverted: ERC20: transfer amount exceeds balance',
+  }), "escrow_funder_token_balance_insufficient");
+  assert.equal(claimFailureReason({ details: "insufficient funds for gas * price + value" }), "claim_failed_unclassified");
+  assert.equal(claimFailureReason({ details: "createEscrow reverted: ERC20: insufficient allowance" }), "claim_failed_unclassified");
 });
