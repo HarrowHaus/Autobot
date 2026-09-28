@@ -9,10 +9,16 @@ if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
   throw "GitHub CLI (gh) is not installed."
 }
 
-gh auth status | Out-Null
-if ($LASTEXITCODE -ne 0) {
-  throw "GitHub CLI is not authenticated. Run: gh auth login"
+$activeLogin = (gh api user --jq .login 2>$null)
+if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($activeLogin)) {
+  throw "GitHub CLI has no usable active account. Run: gh auth login"
 }
+
+if ($activeLogin.Trim() -ne "HarrowHaus") {
+  throw "GitHub CLI active account is '$($activeLogin.Trim())', but this repo expects HarrowHaus."
+}
+
+Write-Host "GitHub active account: $($activeLogin.Trim())" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Paste rook's Clawlancer API key." -ForegroundColor Cyan
