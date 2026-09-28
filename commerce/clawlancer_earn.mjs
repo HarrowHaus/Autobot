@@ -243,22 +243,46 @@ export async function claimDeliver(planPath, { apiKey = process.env.CLAWLANCER_A
       throw new Error("Unsupported required deliver fields: " + deliverPreflight.unresolved.join(","));
     }
 
-    const claimResultRaw = await client.callTool({ name: claimTool.name, arguments: claimBuilt.args });
-    const claimResult = resultValue(claimResultRaw);
-    if (claimResultRaw?.isError) {
+    let tx = await findTransaction(apiKey, plan.task_id);
+    let transactionId = idOf(tx);
+    const existingStatus = statusOf(tx);
+    if (transactionId && ["released", "completed", "paid", "settled"].includes(existingStatus)) {
       return {
-        status: "claim_failed",
+        status: "already_released",
         task_id: plan.task_id,
-        claim_tool: claimTool.name,
-        error: claimResult,
+        transaction_id: String(transactionId),
+        marketplace_status: existingStatus,
+        payout_transaction: tx?.payout_tx_hash || tx?.payoutTxHash || tx?.release_tx_hash || tx?.releaseTxHash || null,
+        truth_boundary: "Existing marketplace transaction is already terminal; no duplicate claim or delivery was attempted.",
+      };
+    }
+    if (transactionId && existingStatus === "delivered") {
+      return {
+        status: "already_delivered",
+        task_id: plan.task_id,
+        transaction_id: String(transactionId),
+        marketplace_status: existingStatus,
+        truth_boundary: "Existing marketplace transaction is already delivered; no duplicate claim or delivery was attempted.",
       };
     }
 
-    let transactionId = transactionIdFrom(claimResult);
-    let tx = null;
     if (!transactionId) {
-      tx = await findTransaction(apiKey, plan.task_id);
-      transactionId = idOf(tx);
+      const claimResultRaw = await client.callTool({ name: claimTool.name, arguments: claimBuilt.args });
+      const claimResult = resultValue(claimResultRaw);
+      if (claimResultRaw?.isError) {
+        return {
+          status: "claim_failed",
+          task_id: plan.task_id,
+          claim_tool: claimTool.name,
+          error: claimResult,
+        };
+      }
+
+      transactionId = transactionIdFrom(claimResult);
+      if (!transactionId) {
+        tx = await findTransaction(apiKey, plan.task_id);
+        transactionId = idOf(tx);
+      }
     }
     if (!transactionId) {
       return {
