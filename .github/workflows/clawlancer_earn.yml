@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '53 * * * *'
   workflow_dispatch:
+    inputs:
+      welcome_only:
+        description: Only attempt the deterministic welcome bounty; do not invoke remote workers
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -50,6 +55,8 @@ jobs:
           node -e "const r=require('./reports/commerce/clawlancer-latest.json'); console.log(JSON.stringify({status:r.status,tasks_examined:r.tasks_examined,candidate_count:r.candidate_count,first:r.candidates?.[0]&&{id:r.candidates[0].task_id,title:r.candidates[0].title,bounty:r.candidates[0].bounty?.amount_display}},null,2))"
 
       - name: Pre-fulfill and independently verify one bounty
+        env:
+          WELCOME_ONLY: ${{ inputs.welcome_only }}
         run: |
           if [ -z "$CLAWLANCER_API_KEY" ]; then
             rm -f reports/commerce/clawlancer-earn-plan.json
@@ -64,14 +71,21 @@ jobs:
           fi
 
           rm -f reports/commerce/clawlancer-earn-plan.json
+          if [ "$WELCOME_ONLY" = "true" ]; then
+            printf '%s\n' '{"status":"not_executed","reason":"no_welcome_candidate"}' > reports/commerce/clawlancer-earn-preflight.json
+            exit 0
+          fi
           python -m swarmbrain.earning_cycle             --basedagents reports/commerce/clawlancer-latest.json             --plan reports/commerce/clawlancer-earn-plan.json             --result reports/commerce/clawlancer-earn-preflight.json
 
           cat reports/commerce/clawlancer-earn-preflight.json
 
-      - name: Claim and deliver through official Clawlancer MCP
+      - name: Claim through Clawlancer API and deliver through MCP
         run: |
           if [ -f reports/commerce/clawlancer-earn-plan.json ]; then
-            node commerce/clawlancer_earn.mjs reports/commerce/clawlancer-earn-plan.json > reports/commerce/clawlancer-earn-execution.json
+            claim_exit=0
+            node commerce/clawlancer_earn.mjs reports/commerce/clawlancer-earn-plan.json > reports/commerce/clawlancer-earn-execution.json || claim_exit=$?
+            cat reports/commerce/clawlancer-earn-execution.json
+            exit "$claim_exit"
           elif grep -q '"reason":"clawlancer_api_key_missing"' reports/commerce/clawlancer-earn-preflight.json 2>/dev/null; then
             cp reports/commerce/clawlancer-earn-preflight.json reports/commerce/clawlancer-earn-execution.json
           else

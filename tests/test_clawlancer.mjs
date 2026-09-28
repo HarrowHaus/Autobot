@@ -1,8 +1,43 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { compactListing, prioritize } from "../commerce/clawlancer_scan.mjs";
-import { chooseTool, buildToolArgs } from "../commerce/clawlancer_earn.mjs";
+import { chooseTool, buildToolArgs, authFetch, publicError, executionExitCode, claimFailureReason } from "../commerce/clawlancer_earn.mjs";
 import { buildWelcomePlan } from "../commerce/clawlancer_welcome_plan.mjs";
+
+test("claim failure preserves HTTP diagnostics without retrying or leaking credentials", async () => {
+  let calls = 0;
+  const apiKey = "clw_test_only_not_a_real_secret";
+  const fetchImpl = async (_url, options) => {
+    calls++;
+    assert.equal(options.method, "POST");
+    assert.equal(options.body, "{}");
+    return new Response(JSON.stringify({
+      error: "Failed to create on-chain escrow",
+      details: { code: "insufficient_funds", message: `Rejected ${apiKey}`, headers: { authorization: apiKey } },
+      stack: "must not be logged",
+    }), { status: 500 });
+  };
+  await assert.rejects(authFetch(apiKey, "/listings/test/claim", { method: "POST", body: {}, fetchImpl }), error => {
+    assert.equal(error.httpStatus, 500);
+    assert.equal(error.data.details.code, "insufficient_funds");
+    assert.equal(error.data.details.message, "Rejected [redacted]");
+    assert.equal(error.data.stack, undefined);
+    assert.equal(error.data.details.headers, undefined);
+    return true;
+  });
+  assert.equal(calls, 1);
+});
+
+test("diagnostics redact key-shaped values and failed execution exits nonzero", () => {
+  assert.equal(publicError("Bearer token123"), "Bearer [redacted]");
+  assert.equal(publicError("0x" + "a".repeat(64)), "[redacted]");
+  for (const status of ["claim_failed", "claimed_delivery_failed", "claimed_transaction_unresolved", "error"]) {
+    assert.equal(executionExitCode({ status }), 1);
+  }
+  for (const status of ["delivered", "already_delivered", "release_observed", "already_released"]) {
+    assert.equal(executionExitCode({ status }), 0);
+  }
+});
 
 test("Clawlancer bounty normalizes into earning-cycle shape", () => {
   const row = compactListing({
@@ -119,4 +154,13 @@ test("welcome planner ignores another agent's welcome task", () => {
     }],
   }, "rook");
   assert.equal(plan, null);
+});
+
+test("escrow token shortfall is distinguished from worker gas or other contract failures", () => {
+  assert.equal(claimFailureReason({
+    error: "Failed to create on-chain escrow",
+    details: 'The contract function "createEscrow" reverted: ERC20: transfer amount exceeds balance',
+  }), "escrow_funder_token_balance_insufficient");
+  assert.equal(claimFailureReason({ details: "insufficient funds for gas * price + value" }), "claim_failed_unclassified");
+  assert.equal(claimFailureReason({ details: "createEscrow reverted: ERC20: insufficient allowance" }), "claim_failed_unclassified");
 });

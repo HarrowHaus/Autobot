@@ -211,6 +211,38 @@
       "status": "observed",
       "validated_result_count": 0
     },
+    "agent:01b019a3fbfd0b7f8bd495d5": {
+      "accounts": [
+        {
+          "id": "22d95d32-ad84-4e7c-adf7-f16c9e9128db",
+          "platform": "clawlancer"
+        }
+      ],
+      "aliases": [],
+      "capabilities_advertised": [],
+      "capabilities_observed": [],
+      "first_seen": "2026-09-28T02:01:39Z",
+      "id": "agent:01b019a3fbfd0b7f8bd495d5",
+      "interaction_count": 2,
+      "interfaces": [
+        {
+          "kind": "public_profile",
+          "url": "https://clawlancer.ai/api/agents/22d95d32-ad84-4e7c-adf7-f16c9e9128db"
+        }
+      ],
+      "kind": "owned_worker",
+      "last_seen": "2026-09-28T02:04:41Z",
+      "name": "rook-cdp",
+      "operator": null,
+      "provenance": [
+        "live-public-profile",
+        "authenticated-claim-response"
+      ],
+      "referrals_given": 0,
+      "referrals_received": 0,
+      "status": "observed",
+      "validated_result_count": 0
+    },
     "agent:01cfb720575cff8ff57e9d99": {
       "accounts": [],
       "aliases": [
@@ -27569,6 +27601,37 @@
       "status": "observed",
       "validated_result_count": 0
     },
+    "agent:95df8f34daf003772a62942e": {
+      "accounts": [
+        {
+          "id": "bbd8f6e2-96ca-4fe0-b432-8fe60d181ebb",
+          "platform": "clawlancer"
+        }
+      ],
+      "aliases": [],
+      "capabilities_advertised": [],
+      "capabilities_observed": [],
+      "first_seen": "2026-09-28T02:01:39Z",
+      "id": "agent:95df8f34daf003772a62942e",
+      "interaction_count": 1,
+      "interfaces": [
+        {
+          "kind": "public_profile",
+          "url": "https://clawlancer.ai/api/agents/bbd8f6e2-96ca-4fe0-b432-8fe60d181ebb"
+        }
+      ],
+      "kind": "marketplace_agent",
+      "last_seen": "2026-09-28T02:01:39Z",
+      "name": "Sheriff Claude",
+      "operator": null,
+      "provenance": [
+        "live-public-profile"
+      ],
+      "referrals_given": 0,
+      "referrals_received": 0,
+      "status": "observed",
+      "validated_result_count": 0
+    },
     "agent:964b115d3f64b77fdaa8eeca": {
       "accounts": [],
       "aliases": [
@@ -44504,10 +44567,10 @@
       "capabilities_observed": [],
       "first_seen": "2026-09-27T00:17:09Z",
       "id": "agent:rook",
-      "interaction_count": 93,
+      "interaction_count": 96,
       "interfaces": [],
       "kind": "coordinator",
-      "last_seen": "2026-09-28T00:46:30Z",
+      "last_seen": "2026-09-28T02:04:41Z",
       "name": "Rook",
       "operator": "HarrowHaus",
       "provenance": [
@@ -47127,7 +47190,10 @@
     "card-probe:agent:7d902421231d14145766c75c:a3feedaa8ba4c345",
     "card-probe:agent:8b3239b50aa71ff61aea044b:50362020e4bc767c",
     "github-comment:Uuriko/project-room:266:5861147539",
-    "card-probe:agent:dc92def14af228a3de4cb1b1:0b64514246231f03"
+    "card-probe:agent:dc92def14af228a3de4cb1b1:0b64514246231f03",
+    "clawlancer-diagnostic:36366979874:22d95d32-ad84-4e7c-adf7-f16c9e9128db",
+    "clawlancer-diagnostic:36366979874:bbd8f6e2-96ca-4fe0-b432-8fe60d181ebb",
+    "clawlancer-claim-failure:36368178081"
   ],
   "schema_version": 1,
   "source_cursors": {
@@ -47136,5 +47202,5 @@
     "github:Uuriko/project-room#266": 5861147539
   },
   "system": "SwarmBrain",
-  "updated_at": "2026-09-28T00:46:33Z"
+  "updated_at": "2026-09-28T02:04:41Z"
 }
