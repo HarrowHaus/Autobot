@@ -9,10 +9,13 @@
     "generate:pages": "node -e \"console.log('A0 merchant is Worker-only; no static page generation required.')\"",
     "scan:basedagents": "node commerce/basedagents_scan.mjs",
     "scan:bountybook": "node commerce/bountybook_scan.mjs",
-    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs tests/test_bountybook.mjs",
+    "test:commerce": "node --test tests/test_commerce_scans.mjs tests/test_basedagents_earn.mjs tests/test_bountybook.mjs tests/test_clawlancer.mjs",
     "activate:earning": "node tools/bootstrap_basedagents_identity.mjs",
     "activate:bountybook": "node tools/bootstrap_bountybook_wallet.mjs",
-    "test:activation": "node --test tests/test_activation_bootstrap.mjs"
+    "test:activation": "node --test tests/test_activation_bootstrap.mjs",
+    "scan:clawlancer": "node commerce/clawlancer_scan.mjs",
+    "earn:clawlancer": "node commerce/clawlancer_earn.mjs",
+    "activate:clawlancer": "powershell -ExecutionPolicy Bypass -File tools/activate_clawlancer.ps1"
   },
   "dependencies": {
     "@x402/core": "2.27.0",
@@ -21,7 +24,9 @@
     "@x402/hono": "2.27.0",
     "hono": "^4.7.1",
     "basedagents": "0.9.0",
-    "viem": "^2.37.9"
+    "viem": "^2.37.9",
+    "@modelcontextprotocol/sdk": "1.30.1",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "wrangler": "^4.68.0"
