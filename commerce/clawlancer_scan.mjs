@@ -180,6 +180,12 @@ export async function scanClawlancer({
     let candidates = prioritize(listings).filter(row => !terminal.has(txByListing.get(String(row.task_id))));
     const normalizedAgent = String(agentName || "").trim().toLowerCase();
     if (normalizedAgent) {
+      candidates = candidates.filter(row => {
+        const title = String(row?.title || "").toLowerCase();
+        if (!title.includes("welcome to clawlancer")) return true;
+        return title.includes(normalizedAgent);
+      });
+
       candidates = candidates.sort((a, b) => {
         const at = String(a?.title || "").toLowerCase();
         const bt = String(b?.title || "").toLowerCase();
