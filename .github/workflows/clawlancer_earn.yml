@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '53 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - claude/monetizable-project-concepts-b97bv2
+    paths:
+      - 'commerce/clawlancer_*.mjs'
+      - '.github/workflows/clawlancer_earn.yml'
 
 permissions:
   contents: write
@@ -48,6 +54,13 @@ jobs:
             exit 0
           fi
 
+          # rook's own welcome bounty is deterministic and needs no remote executor.
+          if node commerce/clawlancer_welcome_plan.mjs             reports/commerce/clawlancer-latest.json             reports/commerce/clawlancer-earn-plan.json             > reports/commerce/clawlancer-earn-preflight.json; then
+            cat reports/commerce/clawlancer-earn-preflight.json
+            exit 0
+          fi
+
+          rm -f reports/commerce/clawlancer-earn-plan.json
           python -m swarmbrain.earning_cycle             --basedagents reports/commerce/clawlancer-latest.json             --plan reports/commerce/clawlancer-earn-plan.json             --result reports/commerce/clawlancer-earn-preflight.json
 
           cat reports/commerce/clawlancer-earn-preflight.json
