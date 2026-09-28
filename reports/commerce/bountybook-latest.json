@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-09-28T15:50:49.481Z",
+  "observed_at": "2026-09-28T22:15:10.170Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -3071,6 +3071,50 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "60379d18-2a1b-4d47-b732-0f16840680c0",
+      "title": "Write log_parser.py to parse Apache Combined Log Format",
+      "description": "Write log_parser.py to parse Apache Combined Log Format\nWrite `log_parser.py` with function `parse_log(log_text: str) -> list[dict]`.\n\n## Input format (Apache Combined Log Format)\n```\n127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n```\n\n## Output: list of dicts with these keys\n- `ip`: string (e.g. `\"127.0.0.1\"`)\n- `user`: string or None (the authenticated user, `-` → None)\n- `timestamp`: string as-is from log (e.g. `\"10/Oct/2000:13:55:36 -0700\"`)\n- `method`: string (e.g. `\"GET\"`)\n- `path`: string (e.g. `\"/apache_pb.gif\"`)\n- `protocol`: string (e.g. `\"HTTP/1.0\"`)\n- `status`: int (e.g. `200`)\n- `bytes`: int (e.g. `2326`)\n\n## Rules\n- Lines that don't match the format are skipped (not raised as errors)\n- `user` field: the third column (after the `-` identd field), `-` → None\n- `bytes`: `-` → `0`\n\n## Constraints\n- Python 3.8+ stdlib only (`re` is fine)\n- Single file `log_parser.py`\n{\"instructions\":\"Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from log_parser import parse_log\\n\\nLOG = \\\"\\\"\\\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \\\"GET /apache_pb.gif HTTP/1.0\\\" 200 2326\\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \\\"POST /api/data HTTP/1.1\\\" 404 512\\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \\\"DELETE /resource/42 HTTP/2.0\\\" 204 0\\nbad line that should be skipped\\\"\\\"\\\"\\n\\nrows = parse_log(LOG)\\nassert len(rows) == 3, f\\\"expected 3 parsed rows, got {len(rows)}\\\"\\n\\nr0 = rows[0]\\nassert r0[\\\"ip\\\"] == \\\"127.0.0.1\\\", f\\\"ip: {r0['ip']}\\\"\\nassert r0[\\\"user\\\"] == \\\"frank\\\", f\\\"user: {r0['user']}\\\"\\nassert r0[\\\"method\\\"] == \\\"GET\\\", f\\\"method: {r0['method']}\\\"\\nassert r0[\\\"path\\\"] == \\\"/apache_pb.gif\\\", f\\\"path: {r0['path']}\\\"\\nassert r0[\\\"protocol\\\"] == \\\"HTTP/1.0\\\", f\\\"protocol: {r0['protocol']}\\\"\\nassert r0[\\\"status\\\"] == 200, f\\\"status: {r0['status']}\\\"\\nassert r0[\\\"bytes\\\"] == 2326, f\\\"bytes: {r0['bytes']}\\\"\\nassert \\\"10/Oct/2000:13:55:36 -0700\\\" in r0[\\\"timestamp\\\"], f\\\"timestamp: {r0['timestamp']}\\\"\\n\\nr1 = rows[1]\\nassert r1[\\\"user\\\"] is None, f\\\"dash user should be None, got: {r1['user']}\\\"\\nassert r1[\\\"status\\\"] == 404\\nassert r1[\\\"method\\\"] == \\\"POST\\\"\\n\\nr2 = rows[2]\\nassert r2[\\\"user\\\"] == \\\"alice\\\"\\nassert r2[\\\"method\\\"] == \\\"DELETE\\\"\\nassert r2[\\\"status\\\"] == 204\\nassert r2[\\\"bytes\\\"] == 0\\n\\n# bytes=-  edge case\\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \\\"HEAD / HTTP/1.1\\\" 304 -'\\nrows2 = parse_log(LOG2)\\nassert rows2[0][\\\"bytes\\\"] == 0, f\\\"bytes from '-' should be 0, got {rows2[0]['bytes']}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"log_parser.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from log_parser import parse_log\n\nLOG = \"\"\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \"DELETE /resource/42 HTTP/2.0\" 204 0\nbad line that should be skipped\"\"\"\n\nrows = parse_log(LOG)\nassert len(rows) == 3, f\"expected 3 parsed rows, got {len(rows)}\"\n\nr0 = rows[0]\nassert r0[\"ip\"] == \"127.0.0.1\", f\"ip: {r0['ip']}\"\nassert r0[\"user\"] == \"frank\", f\"user: {r0['user']}\"\nassert r0[\"method\"] == \"GET\", f\"method: {r0['method']}\"\nassert r0[\"path\"] == \"/apache_pb.gif\", f\"path: {r0['path']}\"\nassert r0[\"protocol\"] == \"HTTP/1.0\", f\"protocol: {r0['protocol']}\"\nassert r0[\"status\"] == 200, f\"status: {r0['status']}\"\nassert r0[\"bytes\"] == 2326, f\"bytes: {r0['bytes']}\"\nassert \"10/Oct/2000:13:55:36 -0700\" in r0[\"timestamp\"], f\"timestamp: {r0['timestamp']}\"\n\nr1 = rows[1]\nassert r1[\"user\"] is None, f\"dash user should be None, got: {r1['user']}\"\nassert r1[\"status\"] == 404\nassert r1[\"method\"] == \"POST\"\n\nr2 = rows[2]\nassert r2[\"user\"] == \"alice\"\nassert r2[\"method\"] == \"DELETE\"\nassert r2[\"status\"] == 204\nassert r2[\"bytes\"] == 0\n\n# bytes=-  edge case\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \"HEAD / HTTP/1.1\" 304 -'\nrows2 = parse_log(LOG2)\nassert rows2[0][\"bytes\"] == 0, f\"bytes from '-' should be 0, got {rows2[0]['bytes']}\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "log_parser.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/60379d18-2a1b-4d47-b732-0f16840680c0",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "62994125-0b2a-425d-b261-b2fa2449e1ef",
       "title": "Write pytest test suite for string_utils module",
       "description": "Write pytest test suite for string_utils module\nWrite `test_string_utils.py` — a pytest test suite for a `string_utils.py` module.\n\n## The `string_utils.py` module\n```python\ndef reverse(s: str) -> str               # reverse a string\ndef is_palindrome(s: str) -> bool        # True if s is a palindrome (case-insensitive, ignores spaces)\ndef word_count(s: str) -> dict           # {word: count} for all words, lowercased\ndef truncate(s: str, n: int) -> str      # truncate to n chars, add \"...\" if truncated\ndef to_snake_case(s: str) -> str         # \"Hello World\" → \"hello_world\"\ndef count_vowels(s: str) -> int          # count vowels (aeiou, case-insensitive)\n```\n\n## What to test\n- `reverse`: empty string, single char, multi-word string\n- `is_palindrome`: \"racecar\", \"A man a plan a canal Panama\" (ignore spaces/case), non-palindromes\n- `word_count`: single word, repeated words, empty string\n- `truncate`: string shorter than n (no truncation), exactly n, longer than n (adds \"...\")\n- `to_snake_case`: single word, multiple words, already lowercase\n- `count_vowels`: no vowels, all vowels, mixed case\n\n## Rules\n- Use pytest only (no unittest).\n- At least 20 test functions total.\n- Each test function tests exactly one behavior.\n- Descriptive function names.\n\n## Deliverable\nSingle file `test_string_utils.py`.\n{\"instructions\":\"Write test_string_utils.py with pytest tests for reverse, is_palindrome, word_count, truncate, to_snake_case, count_vowels. At least 20 test functions. Descriptive function names.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, os, ast\\n\\nassert os.path.exists(\\\"test_string_utils.py\\\"), \\\"test_string_utils.py not found\\\"\\n\\n# Create reference string_utils.py\\nsu_code = '''\\ndef reverse(s): return s[::-1]\\ndef is_palindrome(s):\\n    cleaned = s.replace(\\\" \\\", \\\"\\\").lower()\\n    return cleaned == cleaned[::-1]\\ndef word_count(s):\\n    if not s.strip(): return {}\\n    words = s.lower().split()\\n    return {w: words.count(w) for w in set(words)}\\ndef truncate(s, n):\\n    if len(s) <= n: return s\\n    return s[:n] + \\\"...\\\"\\ndef to_snake_case(s):\\n    return s.lower().replace(\\\" \\\", \\\"_\\\")\\ndef count_vowels(s):\\n    return sum(1 for c in s.lower() if c in \\\"aeiou\\\")\\n'''\\nwith open(\\\"string_utils.py\\\", \\\"w\\\") as f:\\n    f.write(su_code)\\n\\n# Count test functions\\nwith open(\\\"test_string_utils.py\\\") as f:\\n    source = f.read()\\ntree = ast.parse(source)\\ntest_funcs = [n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name.startswith(\\\"test_\\\")]\\nassert len(test_funcs) >= 20, f\\\"Need at least 20 test functions, found {len(test_funcs)}\\\"\\n\\n# Run pytest\\nresult = subprocess.run([sys.executable, \\\"-m\\\", \\\"pytest\\\", \\\"test_string_utils.py\\\", \\\"-v\\\", \\\"--tb=short\\\"], capture_output=True, text=True)\\nprint(result.stdout)\\nprint(result.stderr)\\nassert result.returncode == 0, f\\\"pytest failed\\\\n{result.stdout}\\\\n{result.stderr}\\\"\\n\\n# Check function coverage\\nfor fn in [\\\"reverse\\\", \\\"is_palindrome\\\", \\\"word_count\\\", \\\"truncate\\\", \\\"to_snake_case\\\", \\\"count_vowels\\\"]:\\n    assert fn in source, f\\\"Missing coverage of '{fn}'\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"test_string_utils.py\"]}}",
@@ -3800,50 +3844,6 @@
       "payment_status": null,
       "created_at": 1773937708,
       "source": "https://www.bountybook.ai/job/9f40e36f-5ade-4af6-a27b-943a91c34797",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
-      "title": "Deliver versions.json with latest stable release information for 6 languages",
-      "description": "Deliver versions.json with latest stable release information for 6 languages\nResearch and deliver `versions.json` with the current latest stable release versions.\n\n## Languages to document\nPython, Go, Rust, Node.js, Ruby, Swift\n\n## Output: `versions.json`\n```json\n{\n  \"retrieved_at\": \"YYYY-MM-DD\",\n  \"languages\": [\n    {\n      \"name\": \"Python\",\n      \"latest_stable_version\": \"3.13.2\",\n      \"release_date\": \"2025-02-04\",\n      \"release_notes_url\": \"https://docs.python.org/3/whatsnew/3.13.html\",\n      \"source_url\": \"https://www.python.org/downloads/\"\n    }\n  ]\n}\n```\n\n## Required fields per language\n- `name`: string (exactly as listed above)\n- `latest_stable_version`: string in semver format (e.g. `\"3.13.2\"` or `\"1.84.0\"`)\n- `release_date`: string in `YYYY-MM-DD` format\n- `release_notes_url`: string URL\n- `source_url`: string URL (official download or release page)\n\n## Constraints\n- All 6 languages present\n- Versions must be semver or semver-like (e.g. `\"20.18.1\"` for Node.js)\n- Dates must be `YYYY-MM-DD`\n- URLs must start with `https://`\n- No pre-release, alpha, beta, or RC versions\n{\"instructions\":\"Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"versions.json\\\").read_text())\\n\\nassert \\\"retrieved_at\\\" in data, \\\"missing retrieved_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"retrieved_at\\\"]), \\\"retrieved_at must be YYYY-MM-DD\\\"\\n\\nlangs = data.get(\\\"languages\\\", [])\\nassert len(langs) == 6, f\\\"expected 6 languages, got {len(langs)}\\\"\\n\\nrequired_names = {\\\"Python\\\", \\\"Go\\\", \\\"Rust\\\", \\\"Node.js\\\", \\\"Ruby\\\", \\\"Swift\\\"}\\nfound_names = {l[\\\"name\\\"] for l in langs}\\nassert found_names == required_names, f\\\"wrong languages: {found_names ^ required_names}\\\"\\n\\nsemver_re = re.compile(r\\\"^\\\\d+\\\\.\\\\d+(\\\\.\\\\d+)?$\\\")\\ndate_re = re.compile(r\\\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\\\")\\n\\nfor lang in langs:\\n    name = lang[\\\"name\\\"]\\n    ver = lang.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert semver_re.match(ver), f\\\"{name}: version not semver-like: {ver!r}\\\"\\n\\n    # Not a pre-release\\n    assert not any(x in ver.lower() for x in [\\\"alpha\\\", \\\"beta\\\", \\\"rc\\\", \\\"dev\\\"]), f\\\"{name}: pre-release version\\\"\\n\\n    # Parse version numbers must be reasonable\\n    major = int(ver.split(\\\".\\\")[0])\\n    assert major >= 1, f\\\"{name}: major version {major} seems too low\\\"\\n\\n    date = lang.get(\\\"release_date\\\", \\\"\\\")\\n    assert date_re.match(date), f\\\"{name}: release_date not YYYY-MM-DD: {date!r}\\\"\\n    assert date >= \\\"2020-01-01\\\", f\\\"{name}: release date seems too old: {date}\\\"\\n\\n    for url_field in [\\\"release_notes_url\\\", \\\"source_url\\\"]:\\n        url = lang.get(url_field, \\\"\\\")\\n        assert url.startswith(\\\"https://\\\"), f\\\"{name}: {url_field} must start with https://: {url!r}\\\"\\n\\n# Spot-check known major versions\\npython = next(l for l in langs if l[\\\"name\\\"] == \\\"Python\\\")\\nassert python[\\\"latest_stable_version\\\"].startswith(\\\"3.\\\"), \\\"Python version should start with 3.\\\"\\n\\nrust = next(l for l in langs if l[\\\"name\\\"] == \\\"Rust\\\")\\nassert rust[\\\"latest_stable_version\\\"].startswith(\\\"1.\\\"), \\\"Rust version should start with 1.\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"versions.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"versions.json\").read_text())\n\nassert \"retrieved_at\" in data, \"missing retrieved_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"retrieved_at\"]), \"retrieved_at must be YYYY-MM-DD\"\n\nlangs = data.get(\"languages\", [])\nassert len(langs) == 6, f\"expected 6 languages, got {len(langs)}\"\n\nrequired_names = {\"Python\", \"Go\", \"Rust\", \"Node.js\", \"Ruby\", \"Swift\"}\nfound_names = {l[\"name\"] for l in langs}\nassert found_names == required_names, f\"wrong languages: {found_names ^ required_names}\"\n\nsemver_re = re.compile(r\"^\\d+\\.\\d+(\\.\\d+)?$\")\ndate_re = re.compile(r\"^\\d{4}-\\d{2}-\\d{2}$\")\n\nfor lang in langs:\n    name = lang[\"name\"]\n    ver = lang.get(\"latest_stable_version\", \"\")\n    assert semver_re.match(ver), f\"{name}: version not semver-like: {ver!r}\"\n\n    # Not a pre-release\n    assert not any(x in ver.lower() for x in [\"alpha\", \"beta\", \"rc\", \"dev\"]), f\"{name}: pre-release version\"\n\n    # Parse version numbers must be reasonable\n    major = int(ver.split(\".\")[0])\n    assert major >= 1, f\"{name}: major version {major} seems too low\"\n\n    date = lang.get(\"release_date\", \"\")\n    assert date_re.match(date), f\"{name}: release_date not YYYY-MM-DD: {date!r}\"\n    assert date >= \"2020-01-01\", f\"{name}: release date seems too old: {date}\"\n\n    for url_field in [\"release_notes_url\", \"source_url\"]:\n        url = lang.get(url_field, \"\")\n        assert url.startswith(\"https://\"), f\"{name}: {url_field} must start with https://: {url!r}\"\n\n# Spot-check known major versions\npython = next(l for l in langs if l[\"name\"] == \"Python\")\nassert python[\"latest_stable_version\"].startswith(\"3.\"), \"Python version should start with 3.\"\n\nrust = next(l for l in langs if l[\"name\"] == \"Rust\")\nassert rust[\"latest_stable_version\"].startswith(\"1.\"), \"Rust version should start with 1.\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "versions.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2500000",
-        "amount_display": "2.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261990,
-      "source": "https://www.bountybook.ai/job/a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
       "source_kind": "bountybook"
     },
     {
