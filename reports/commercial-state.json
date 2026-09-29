@@ -1,68 +1,34 @@
 {
   "next_actions": [
     {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_03jvIlKLuHpbDfbelJk0l",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_3SF6Q1N5uhhfSr9creRsw",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_3iOAcWrT5N808k5wg9lYE",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_5VxstxQ30CAWDOmvULyEG",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_5bPQltQZqOya7F3mZU6Dz",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_6DmV0uI13xtnke9zO3cwG",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_7YrXhRNmVZxrAaiJ7T5l9",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_870Ib2uU263K3tKq1UQdg",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_AW9LV63o2jv3ZSxnTrWYY",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_BUug3bfseC2mUj2bKqA9c",
-      "score": 65.331
+      "action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
+      "gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
+      "opportunity_id": "distribution:x402-bazaar",
+      "score": 35.0
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
   "opportunities": [
+    {
+      "advertised_value": null,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "facilitator": "https://facilitator.x402endpoints.online",
+        "our_resources_seen": 0,
+        "resources_seen": 1
+      },
+      "execution_gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
+      "first_seen_at": "2026-09-27T02:52:51.226Z",
+      "funding_evidence": "none",
+      "id": "distribution:x402-bazaar",
+      "kind": "distribution",
+      "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
+      "observed_at": "2026-09-29T02:20:09.972Z",
+      "score": 35.0,
+      "source": "x402-bazaar",
+      "status": "observed",
+      "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
+    },
     {
       "advertised_value": {
         "amount_atomic": "100000",
@@ -86,16 +52,16 @@
       "id": "basedagents:task_03jvIlKLuHpbDfbelJk0l",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_03jvIlKLuHpbDfbelJk0l",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.internationalcall/dialing ($0.10, single run)"
     },
     {
@@ -121,16 +87,16 @@
       "id": "basedagents:task_3SF6Q1N5uhhfSr9creRsw",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_3SF6Q1N5uhhfSr9creRsw",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 biz.nibiashara/shelves ($0.10, single run)"
     },
     {
@@ -156,16 +122,16 @@
       "id": "basedagents:task_3iOAcWrT5N808k5wg9lYE",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_3iOAcWrT5N808k5wg9lYE",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.justdomain/just-domain ($0.10, single run)"
     },
     {
@@ -191,16 +157,16 @@
       "id": "basedagents:task_5VxstxQ30CAWDOmvULyEG",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_5VxstxQ30CAWDOmvULyEG",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.safe4/safe4 ($0.10, single run)"
     },
     {
@@ -226,16 +192,16 @@
       "id": "basedagents:task_5bPQltQZqOya7F3mZU6Dz",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_5bPQltQZqOya7F3mZU6Dz",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.afg/afg ($0.10, single run)"
     },
     {
@@ -261,16 +227,16 @@
       "id": "basedagents:task_6DmV0uI13xtnke9zO3cwG",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_6DmV0uI13xtnke9zO3cwG",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 care.vitena/directory ($0.10, single run)"
     },
     {
@@ -296,16 +262,16 @@
       "id": "basedagents:task_7YrXhRNmVZxrAaiJ7T5l9",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_7YrXhRNmVZxrAaiJ7T5l9",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.pandough/mcp ($0.10, single run)"
     },
     {
@@ -331,16 +297,16 @@
       "id": "basedagents:task_870Ib2uU263K3tKq1UQdg",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_870Ib2uU263K3tKq1UQdg",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.satoshidata/wallet-intelligence ($0.10, single run)"
     },
     {
@@ -366,16 +332,16 @@
       "id": "basedagents:task_AW9LV63o2jv3ZSxnTrWYY",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_AW9LV63o2jv3ZSxnTrWYY",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ca.findmyfarmer/farms ($0.10, single run)"
     },
     {
@@ -401,16 +367,16 @@
       "id": "basedagents:task_BUug3bfseC2mUj2bKqA9c",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_BUug3bfseC2mUj2bKqA9c",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.blast-radius/blast-radius ($0.10, single run)"
     },
     {
@@ -436,16 +402,16 @@
       "id": "basedagents:task_Cysa2D2l6OD0BvZ8dKZjT",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_Cysa2D2l6OD0BvZ8dKZjT",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.typesearch/news ($0.10, single run)"
     },
     {
@@ -471,16 +437,16 @@
       "id": "basedagents:task_FHyM9bkfsqNWu2ZcIYB73",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_FHyM9bkfsqNWu2ZcIYB73",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.truemarkets/marketdata ($0.10, single run)"
     },
     {
@@ -506,16 +472,16 @@
       "id": "basedagents:task_J2s7ol0Y1tZjVNqcYEXTJ",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_J2s7ol0Y1tZjVNqcYEXTJ",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.prepublish/script-audit ($0.10, single run)"
     },
     {
@@ -541,16 +507,16 @@
       "id": "basedagents:task_J7BVHhaoADzXRiPCe5DYg",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_J7BVHhaoADzXRiPCe5DYg",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.deepsearch/deepsearch ($0.10, single run)"
     },
     {
@@ -576,16 +542,16 @@
       "id": "basedagents:task_JCjolDUdtF9xhiUf3w0Uc",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_JCjolDUdtF9xhiUf3w0Uc",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.trendsmcp/npm ($0.10, single run)"
     },
     {
@@ -611,16 +577,16 @@
       "id": "basedagents:task_JlnYS3U6EWAuSOhez6jqg",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_JlnYS3U6EWAuSOhez6jqg",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.mainroom/meeting-agents ($0.10, single run)"
     },
     {
@@ -646,16 +612,16 @@
       "id": "basedagents:task_KyQqxa0jf5oRKMIfMhDM4",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_KyQqxa0jf5oRKMIfMhDM4",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.rowb.registry-lag/reflection ($0.10, single run)"
     },
     {
@@ -681,16 +647,16 @@
       "id": "basedagents:task_LWqqoBRqlDPjLg3YPBS38",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_LWqqoBRqlDPjLg3YPBS38",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 by.ai-tender/tenders ($0.10, single run)"
     },
     {
@@ -716,16 +682,16 @@
       "id": "basedagents:task_NNmZ1aMjA6kNqkqIwOCHy",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_NNmZ1aMjA6kNqkqIwOCHy",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.meetclair/clair ($0.10, single run)"
     },
     {
@@ -751,16 +717,16 @@
       "id": "basedagents:task_OWAQtPdx0DLGtq9YNjHFl",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_OWAQtPdx0DLGtq9YNjHFl",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 agency.ottobot/licensed-house-painters ($0.10, single run)"
     },
     {
@@ -786,16 +752,16 @@
       "id": "basedagents:task_RPQg3LLSzFrh9lEJfCOiC",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_RPQg3LLSzFrh9lEJfCOiC",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.awardcast/federal-contracts ($0.10, single run)"
     },
     {
@@ -821,16 +787,16 @@
       "id": "basedagents:task_RinfzpGg1DZovUMNMHiYE",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_RinfzpGg1DZovUMNMHiYE",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ac.tandem/docs-mcp ($0.10, single run)"
     },
     {
@@ -856,16 +822,16 @@
       "id": "basedagents:task_Sux1ppIf6memCazjNDZ4A",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_Sux1ppIf6memCazjNDZ4A",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.droneintelligence/drone-intelligence ($0.10, single run)"
     },
     {
@@ -891,16 +857,16 @@
       "id": "basedagents:task_TepT6nnWMEKuphGPZOsWo",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_TepT6nnWMEKuphGPZOsWo",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.ainumbers/tools ($0.10, single run)"
     },
     {
@@ -926,16 +892,16 @@
       "id": "basedagents:task_UaSpTyjaF3fGiUJLcXzHs",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_UaSpTyjaF3fGiUJLcXzHs",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.getvda/nginx-redis-stack-generator ($0.10, single run)"
     },
     {
@@ -961,16 +927,16 @@
       "id": "basedagents:task_UzInXWw0waQhZrtrHNEPF",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_UzInXWw0waQhZrtrHNEPF",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.robowrite/mcp ($0.10, single run)"
     },
     {
@@ -996,16 +962,16 @@
       "id": "basedagents:task_VW4siiZMevfXn9QjfgvN3",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_VW4siiZMevfXn9QjfgvN3",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.decisionlog/mcp ($0.10, single run)"
     },
     {
@@ -1031,16 +997,16 @@
       "id": "basedagents:task_VjXO0NiFn6wzXdTPKIx4w",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_VjXO0NiFn6wzXdTPKIx4w",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.ravenmcp/raven-mcp ($0.10, single run)"
     },
     {
@@ -1066,16 +1032,16 @@
       "id": "basedagents:task_WhhpnnUwYBQhXW1LdKOYt",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_WhhpnnUwYBQhXW1LdKOYt",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.nanocorp.agentarena/agent-coliseum-mcp ($0.10, single run)"
     },
     {
@@ -1101,16 +1067,16 @@
       "id": "basedagents:task_XvhUNX8tK7P6tHxtSC8KE",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_XvhUNX8tK7P6tHxtSC8KE",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.childpsychiatry/library ($0.10, single run)"
     },
     {
@@ -1136,16 +1102,16 @@
       "id": "basedagents:task_b6hZ5jOmkn0nFpwSRaoRP",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_b6hZ5jOmkn0nFpwSRaoRP",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.yentaknows/directory ($0.10, single run)"
     },
     {
@@ -1171,16 +1137,16 @@
       "id": "basedagents:task_cQSEP1WTCW7uARQ5cp68m",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_cQSEP1WTCW7uARQ5cp68m",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.drillr/drillr ($0.10, single run)"
     },
     {
@@ -1206,16 +1172,16 @@
       "id": "basedagents:task_curpH2JHhmKbgh5mqsNe3",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_curpH2JHhmKbgh5mqsNe3",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.edge-agents/intelligence ($0.10, single run)"
     },
     {
@@ -1241,16 +1207,16 @@
       "id": "basedagents:task_eBtoMWoYZBXqiy5afFeZU",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_eBtoMWoYZBXqiy5afFeZU",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.htmldrop/mcp ($0.10, single run)"
     },
     {
@@ -1276,16 +1242,16 @@
       "id": "basedagents:task_ex0ZelquJgA6XIW0FjV1I",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_ex0ZelquJgA6XIW0FjV1I",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.roamtime/foliage ($0.10, single run)"
     },
     {
@@ -1311,16 +1277,16 @@
       "id": "basedagents:task_gKweLmJomKP38js8gBSod",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_gKweLmJomKP38js8gBSod",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.kooma/kooma ($0.10, single run)"
     },
     {
@@ -1346,16 +1312,16 @@
       "id": "basedagents:task_h0JQYKXaMXjhk7mrCXDtx",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_h0JQYKXaMXjhk7mrCXDtx",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.echoloc/company-technographics ($0.10, single run)"
     },
     {
@@ -1381,16 +1347,16 @@
       "id": "basedagents:task_hEHn5mexUU2ClZiPUlQRi",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_hEHn5mexUU2ClZiPUlQRi",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 au.com.travellersgroup/agent ($0.10, single run)"
     },
     {
@@ -1416,16 +1382,16 @@
       "id": "basedagents:task_hOtUCMDIH51krg1qXykAa",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_hOtUCMDIH51krg1qXykAa",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.hologallery.pocket/pokemon-tcg-pocket-catalog ($0.10, single run)"
     },
     {
@@ -1451,16 +1417,16 @@
       "id": "basedagents:task_imaLoGG3vIBnMkA4MfDGM",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_imaLoGG3vIBnMkA4MfDGM",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.trovefield/solved ($0.10, single run)"
     },
     {
@@ -1486,16 +1452,16 @@
       "id": "basedagents:task_l3b6Pkw34f5Jfy1t1PiXJ",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_l3b6Pkw34f5Jfy1t1PiXJ",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 app.vercel.cloakcheck-wheat/cloakcheck ($0.10, single run)"
     },
     {
@@ -1521,317 +1487,17 @@
       "id": "basedagents:task_ojc0jdUvbQ9TKwv9iiGLD",
       "kind": "paid_task",
       "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
+      "next_action": "none",
       "observed_at": "2026-09-28T22:17:31.581Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
       ],
-      "score": 65.331,
+      "score": 0.0,
       "source": "basedagents",
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_ojc0jdUvbQ9TKwv9iiGLD",
-      "status": "observed",
+      "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.spelunking/hub ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x170f41f4b1ac426d27fa261390d1f1d9fc61d91d855a8259b54a584c99191597",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://japan-data-mcp.netlify.app/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_qMQZgJbeoK85D2m7mPVdm",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_qMQZgJbeoK85D2m7mPVdm",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 app.netlify.japan-data-mcp/japan-data-mcp ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0xbba32b58ccfcbee834a47def578396f89b1c84bc2d73aa914bd160854931ad14",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://spark-apps.co/api/mcp/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_sAqTMelinoUk0BORDqUAN",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_sAqTMelinoUk0BORDqUAN",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 co.spark-apps/spark-apps ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x6b02e9871cfa52c6527af0186f7943ea9cd04c3512a5a8e432e0273b4f870885",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://google-trends.api.trendsapi.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_u4XmAQn5QBbrUDAjaooph",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_u4XmAQn5QBbrUDAjaooph",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 ai.trendsapi/google-trends ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x33ded06947d7b3760067a75189ec6a4e38e9eddd16181270d37039b84490b130",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://igoyal.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_uAfRjWxSATqsB7zw6Ldjo",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_uAfRjWxSATqsB7zw6Ldjo",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 ai.igoyal/public-context ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x79663496bec569d91959651a1568a057b9ef3742ba6d9873adf1eb278b438f1f",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://structured-output-agent.getvda.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_uxgfaYEjdXANqtrJTpqm3",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_uxgfaYEjdXANqtrJTpqm3",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 ai.getvda/structured-output-agent ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0xea876e72b2b580151c9cf8c623d5090293f48d11d73f46468c01ea804132f011",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://mcp.fedlex-connector.ch/: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_y5QDFohfC5IImILueIv3g",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_y5QDFohfC5IImILueIv3g",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 ch.fedlex-connector/fedlex-connector ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0xa83a38d9f0fbb182698b5385488d6ace5b47ead4cfb8e32e68c477f1cfde3b8d",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://agentbit.app/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_yYgiWkDE8HJtbGgFiJUKg",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_yYgiWkDE8HJtbGgFiJUKg",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 app.agentbit/mcp ($0.10, single run)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x7f73351666f30ae56500fdcf1ab88a432c259e0bb3addf8f090ae9a57898bffe",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON for https://mcp.close.city/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
-      "first_seen_at": "2026-09-28T22:17:31.581Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_z1q1zbkEJYGplIzzke8Sy",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-09-28T22:17:31.581Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_z1q1zbkEJYGplIzzke8Sy",
-      "status": "observed",
-      "title": "Micro MCP interop probe \u2014 city.close/close-api ($0.10, single run)"
-    },
-    {
-      "advertised_value": null,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "facilitator": "https://facilitator.x402endpoints.online",
-        "our_resources_seen": 0,
-        "resources_seen": 1
-      },
-      "execution_gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
-      "first_seen_at": "2026-09-27T02:52:51.226Z",
-      "funding_evidence": "none",
-      "id": "distribution:x402-bazaar",
-      "kind": "distribution",
-      "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "observed_at": "2026-09-28T22:17:29.531Z",
-      "score": 35.0,
-      "source": "x402-bazaar",
-      "status": "observed",
-      "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
     },
     {
       "advertised_value": {
@@ -1867,6 +1533,286 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_pA3aBSkAORbVbqSkoBybX",
       "status": "stale",
       "title": "Independent agent compatibility test \u2014 claude-code / mcp (slot 1 of 3)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x170f41f4b1ac426d27fa261390d1f1d9fc61d91d855a8259b54a584c99191597",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://japan-data-mcp.netlify.app/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_qMQZgJbeoK85D2m7mPVdm",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_qMQZgJbeoK85D2m7mPVdm",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 app.netlify.japan-data-mcp/japan-data-mcp ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0xbba32b58ccfcbee834a47def578396f89b1c84bc2d73aa914bd160854931ad14",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://spark-apps.co/api/mcp/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_sAqTMelinoUk0BORDqUAN",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_sAqTMelinoUk0BORDqUAN",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 co.spark-apps/spark-apps ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x6b02e9871cfa52c6527af0186f7943ea9cd04c3512a5a8e432e0273b4f870885",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://google-trends.api.trendsapi.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_u4XmAQn5QBbrUDAjaooph",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_u4XmAQn5QBbrUDAjaooph",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 ai.trendsapi/google-trends ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x33ded06947d7b3760067a75189ec6a4e38e9eddd16181270d37039b84490b130",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://igoyal.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_uAfRjWxSATqsB7zw6Ldjo",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_uAfRjWxSATqsB7zw6Ldjo",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 ai.igoyal/public-context ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x79663496bec569d91959651a1568a057b9ef3742ba6d9873adf1eb278b438f1f",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://structured-output-agent.getvda.ai/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_uxgfaYEjdXANqtrJTpqm3",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_uxgfaYEjdXANqtrJTpqm3",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 ai.getvda/structured-output-agent ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0xea876e72b2b580151c9cf8c623d5090293f48d11d73f46468c01ea804132f011",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://mcp.fedlex-connector.ch/: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_y5QDFohfC5IImILueIv3g",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_y5QDFohfC5IImILueIv3g",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 ch.fedlex-connector/fedlex-connector ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0xa83a38d9f0fbb182698b5385488d6ace5b47ead4cfb8e32e68c477f1cfde3b8d",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://agentbit.app/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_yYgiWkDE8HJtbGgFiJUKg",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_yYgiWkDE8HJtbGgFiJUKg",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 app.agentbit/mcp ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x7f73351666f30ae56500fdcf1ab88a432c259e0bb3addf8f090ae9a57898bffe",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON for https://mcp.close.city/mcp: real tools/list results or an honestly evidenced failure; hashes verify.",
+      "first_seen_at": "2026-09-28T22:17:31.581Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_z1q1zbkEJYGplIzzke8Sy",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-09-28T22:17:31.581Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_z1q1zbkEJYGplIzzke8Sy",
+      "status": "stale",
+      "title": "Micro MCP interop probe \u2014 city.close/close-api ($0.10, single run)"
     }
   ],
   "revenue": {
@@ -1878,12 +1824,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 50,
-      "observed_at": "2026-09-28T22:17:31.581Z",
+      "candidate_count": 0,
+      "observed_at": "2026-09-29T02:20:12.234Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-09-28T22:17:29.531Z",
+      "observed_at": "2026-09-29T02:20:09.972Z",
       "our_resources_seen": 0,
       "status": "partial"
     }
@@ -1895,5 +1841,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-09-28T22:17:32Z"
+  "updated_at": "2026-09-29T02:20:12Z"
 }
