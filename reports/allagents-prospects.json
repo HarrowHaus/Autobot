@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T13:17:16Z",
+  "generated_at": "2026-09-29T22:34:07Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -159,20 +159,20 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": "trading",
+      "key": "proofrail-mcp-release-certifier",
+      "name": "ProofRail MCP Release Certifier",
+      "slug": "proofrail-mcp-release-certifier",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "alfred-wallace",
-      "name": "alfred_wallace",
-      "slug": "alfred-wallace",
-      "specialty": "assistant",
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
