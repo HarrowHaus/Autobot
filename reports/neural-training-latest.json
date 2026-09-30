@@ -12,9 +12,9 @@
   "agent_count": 1229,
   "relation_count": 18,
   "edge_count": 158,
-  "sample_count": 2641,
-  "train_count": 2170,
-  "holdout_count": 471,
+  "sample_count": 2644,
+  "train_count": 2172,
+  "holdout_count": 472,
   "expansion": {
     "checkpoint_found": true,
     "reused_node_embeddings": 1235,
@@ -23,28 +23,28 @@
     "new_relation_embeddings": 0
   },
   "initial_holdout": {
-    "loss": 9.271724411519244e-05,
-    "mae": 0.0016503751976415515,
-    "count": 471,
-    "prediction_mean": 0.39714476466178894,
-    "target_mean": 0.3970276415348053
+    "loss": 0.00010714064410421997,
+    "mae": 0.0024390132166445255,
+    "count": 472,
+    "prediction_mean": 0.3969986140727997,
+    "target_mean": 0.3979237675666809
   },
   "final_train": {
-    "loss": 5.423136371973669e-06,
-    "mae": 0.0015644252998754382,
-    "count": 2170,
-    "prediction_mean": 0.39594799280166626,
-    "target_mean": 0.39720743894577026
+    "loss": 6.663006388407666e-06,
+    "mae": 0.0023554277140647173,
+    "count": 2172,
+    "prediction_mean": 0.39527538418769836,
+    "target_mean": 0.39739418029785156
   },
   "final_holdout": {
-    "loss": 8.40736465761438e-05,
-    "mae": 0.0023789340630173683,
-    "count": 471,
-    "prediction_mean": 0.3961353302001953,
-    "target_mean": 0.3970276415348053
+    "loss": 0.00011833496682811528,
+    "mae": 0.0033793863840401173,
+    "count": 472,
+    "prediction_mean": 0.39619603753089905,
+    "target_mean": 0.3979237675666809
   },
-  "train_loss_first": 3.9778878999641165e-06,
-  "train_loss_last": 3.8344537642842624e-06,
+  "train_loss_first": 6.136527190392371e-06,
+  "train_loss_last": 5.593834885075921e-06,
   "checkpoint": "data/neural/swarmbrain_gnn.pt",
   "model_index": "data/neural/model-index.json"
 }

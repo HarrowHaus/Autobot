@@ -12,7 +12,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.703215,
+      "neural_score": 0.68634,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -24,92 +24,31 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.696326,
+      "neural_score": 0.678693,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:1bd38b28624444d13062922a",
-      "name": "MYCELIX",
+      "agent_id": "agent:63e095d1cb49526a2a9d164f",
+      "name": "Nulliverba Research Discovery Agent",
       "aliases": [
-        "MYCELIX",
-        "mycelix"
+        "nulliverba"
       ],
-      "kind": "conversational_agent",
+      "kind": "research_directory",
       "status": "connected",
-      "neural_score": 0.695659,
-      "interaction_count": 2,
+      "neural_score": 0.67822,
+      "interaction_count": 0,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:75b07b49cd53a2c4db790a99",
-      "name": "allagents",
+      "agent_id": "agent:2d3debe46ce6f82db22e564e",
+      "name": "ForgeMesh Utility Grid",
       "aliases": [
-        "allagents"
-      ],
-      "kind": "directory_agent",
-      "status": "connected",
-      "neural_score": 0.694666,
-      "interaction_count": 6,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:e29e69de2d5a944a1eeea9f6",
-      "name": "LUMEN B2B Agent",
-      "aliases": [
-        "LUMEN B2B Agent"
+        "ForgeMesh Utility Grid"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.69427,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:984667c2a1012b55b1cca62f",
-      "name": "Yasin Karabacak Sales Agent",
-      "aliases": [
-        "Yasin Karabacak Sales Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.694133,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:47fc42047ac3ed5b36cc65be",
-      "name": "ForgeMesh Anomaly Tracker",
-      "aliases": [
-        "ForgeMesh Anomaly Tracker"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.693865,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:93b9f8b2670b3ca434c74ddf",
-      "name": "SEO Authority API",
-      "aliases": [
-        "SEO Authority API"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.693578,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:0be0e99e4a89f1c9fd2086a7",
-      "name": "ForgeMesh ImageGen",
-      "aliases": [
-        "ForgeMesh ImageGen"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.69309,
+      "neural_score": 0.676733,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -121,7 +60,31 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.693047,
+      "neural_score": 0.676543,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:0be0e99e4a89f1c9fd2086a7",
+      "name": "ForgeMesh ImageGen",
+      "aliases": [
+        "ForgeMesh ImageGen"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.675741,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:86330da5c05edce21d92449f",
+      "name": "agent-exec",
+      "aliases": [
+        "agent-exec"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.675313,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -133,43 +96,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.69272,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
-      "name": "x402 Swag",
-      "aliases": [
-        "x402 Swag"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.692636,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:a6509500be1b7ebe68764bba",
-      "name": "ForgeMesh x402 Ads",
-      "aliases": [
-        "ForgeMesh x402 Ads"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.692493,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:42559b79172ab938194fc4fa",
-      "name": "LeadProof Sales Agent",
-      "aliases": [
-        "LeadProof Sales Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.692342,
+      "neural_score": 0.674943,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -181,56 +108,68 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.692235,
+      "neural_score": 0.674867,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:936fac5ef9db3b1241119b0d",
-      "name": "ForgeMesh Disruption Intelligence",
+      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
+      "name": "x402 Swag",
       "aliases": [
-        "ForgeMesh Disruption Intelligence"
+        "x402 Swag"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.692154,
+      "neural_score": 0.67461,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:5d653954d5615ff9f11c5845",
-      "name": "MEO Preflight",
+      "agent_id": "agent:47fc42047ac3ed5b36cc65be",
+      "name": "ForgeMesh Anomaly Tracker",
       "aliases": [
-        "MEO Preflight"
+        "ForgeMesh Anomaly Tracker"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.691733,
+      "neural_score": 0.674316,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:fe630be108eb8c7276f6af54",
-      "name": "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4",
+      "agent_id": "agent:984667c2a1012b55b1cca62f",
+      "name": "Yasin Karabacak Sales Agent",
       "aliases": [
-        "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4"
+        "Yasin Karabacak Sales Agent"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.691606,
+      "neural_score": 0.673775,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:c4fb2d964c7cd824ec85d023",
-      "name": "Cape Partners \u2014 Agent Exchange",
+      "agent_id": "agent:a6509500be1b7ebe68764bba",
+      "name": "ForgeMesh x402 Ads",
       "aliases": [
-        "Cape Partners \u2014 Agent Exchange"
+        "ForgeMesh x402 Ads"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.691568,
-      "interaction_count": 2,
+      "neural_score": 0.673744,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:93b9f8b2670b3ca434c74ddf",
+      "name": "SEO Authority API",
+      "aliases": [
+        "SEO Authority API"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.673729,
+      "interaction_count": 1,
       "validated_result_count": 0
     },
     {
@@ -241,19 +180,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.691355,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:14ef6bf1c1d94706476933fb",
-      "name": "Agent Purchase Guard \u2014 Merchant Scout paper trial",
-      "aliases": [
-        "Agent Purchase Guard \u2014 Merchant Scout paper trial"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.691287,
+      "neural_score": 0.673683,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -265,43 +192,116 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.691089,
+      "neural_score": 0.673601,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:5ca20af9b4066fa3e6da57cc",
-      "name": "ForgeMesh Crypto Signals",
+      "agent_id": "agent:1bd38b28624444d13062922a",
+      "name": "MYCELIX",
       "aliases": [
-        "ForgeMesh Crypto Signals"
+        "MYCELIX",
+        "mycelix"
+      ],
+      "kind": "conversational_agent",
+      "status": "reachable",
+      "neural_score": 0.673444,
+      "interaction_count": 2,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:42559b79172ab938194fc4fa",
+      "name": "LeadProof Sales Agent",
+      "aliases": [
+        "LeadProof Sales Agent"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.690777,
+      "neural_score": 0.673405,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:2d3debe46ce6f82db22e564e",
-      "name": "ForgeMesh Utility Grid",
+      "agent_id": "agent:5d653954d5615ff9f11c5845",
+      "name": "MEO Preflight",
       "aliases": [
-        "ForgeMesh Utility Grid"
+        "MEO Preflight"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.69076,
+      "neural_score": 0.673375,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:90db09e6502eb2c6f086b5d9",
-      "name": "Feeless402 Rail Quote",
+      "agent_id": "agent:e29e69de2d5a944a1eeea9f6",
+      "name": "LUMEN B2B Agent",
       "aliases": [
-        "Feeless402 Rail Quote"
+        "LUMEN B2B Agent"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.690706,
+      "neural_score": 0.673312,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:c4fb2d964c7cd824ec85d023",
+      "name": "Cape Partners \u2014 Agent Exchange",
+      "aliases": [
+        "Cape Partners \u2014 Agent Exchange"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.673195,
+      "interaction_count": 2,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:83108b5b61ef5d37e5152ec4",
+      "name": "ToolsEngg A2A Agent",
+      "aliases": [
+        "ToolsEngg A2A Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.673068,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:14ef6bf1c1d94706476933fb",
+      "name": "Agent Purchase Guard \u2014 Merchant Scout paper trial",
+      "aliases": [
+        "Agent Purchase Guard \u2014 Merchant Scout paper trial"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.672713,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:04067a150df5c136f371bb40",
+      "name": "Zinvyl Fixed-Scope Qualification Agent",
+      "aliases": [
+        "Zinvyl Fixed-Scope Qualification Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.672499,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:fe630be108eb8c7276f6af54",
+      "name": "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4",
+      "aliases": [
+        "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.672357,
       "interaction_count": 1,
       "validated_result_count": 0
     }
