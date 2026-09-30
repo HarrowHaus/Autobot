@@ -1,0 +1,73 @@
+name: A0 hybrid revenue state
+
+on:
+  pull_request:
+    branches:
+      - 'claude/monetizable-project-concepts-b97bv2'
+  push:
+    branches:
+      - 'revenue/a0-hybrid-engine-20260927'
+      - 'claude/monetizable-project-concepts-b97bv2'
+    paths:
+      - 'swarmbrain/hybrid_revenue_engine.py'
+      - 'reports/a0-connector-opportunities.json'
+      - 'reports/commercial-state.json'
+      - 'tests/test_hybrid_revenue_engine.py'
+      - '.github/workflows/a0_hybrid_revenue_state.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: a0-hybrid-revenue-state
+  cancel-in-progress: false
+
+jobs:
+  state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run hybrid revenue tests
+        run: python -m unittest tests.test_hybrid_revenue_engine -v
+
+      - name: Build persistent hybrid state and action queue
+        run: |
+          python -m swarmbrain.hybrid_revenue_engine             --intake reports/a0-connector-opportunities.json             --commercial reports/commercial-state.json             --state reports/hybrid-revenue-state.json             --plan reports/hybrid-revenue-plan.json
+
+      - name: Show top actions
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open("reports/hybrid-revenue-state.json", encoding="utf-8"))
+          print(json.dumps({
+              "architecture": s["architecture"],
+              "revenue": s["revenue"],
+              "top_actions": s["action_queue"][:10],
+          }, indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a0-hybrid-revenue-state
+          path: |
+            reports/hybrid-revenue-state.json
+            reports/hybrid-revenue-plan.json
+          retention-days: 14
+
+      - name: Persist state on operational branch only
+        if: github.ref_name == 'claude/monetizable-project-concepts-b97bv2'
+        run: |
+          git config user.name 'A0 Hybrid Revenue'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/hybrid-revenue-state.json reports/hybrid-revenue-plan.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update A0 hybrid revenue state [skip ci]'
+            git pull --rebase origin claude/monetizable-project-concepts-b97bv2
+            git push origin HEAD:claude/monetizable-project-concepts-b97bv2
+          fi
