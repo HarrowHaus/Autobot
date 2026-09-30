@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-09-30T07:18:35.102Z",
+  "observed_at": "2026-09-30T14:10:56.445Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1290,48 +1290,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "734626a0-26b5-478b-b9cf-fb575aea8adc",
-      "title": "Build a generic EventBus class in TypeScript with event registration, removal, a",
-      "description": "Build a generic EventBus class in TypeScript with event registration, removal, a\nWrite `event_bus.ts` with a generic `EventBus<T extends Record<string, unknown[]>>` class.\n\n## Interface\n```typescript\nclass EventBus<T extends Record<string, unknown[]>> {\n  on<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  off<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  emit<K extends keyof T>(event: K, ...args: T[K]): void\n}\n```\n\n## Behavior\n- `on`: register a handler for an event\n- `off`: remove a previously registered handler (no-op if handler not found)\n- `emit`: call all registered handlers for the event with the given arguments\n- Multiple handlers per event are supported\n- Removing one handler does not affect others for the same event\n- Emitting an event with no handlers is a no-op\n\n## Constraints\n- TypeScript, compiled with `tsc --target ES2020 --module commonjs`\n- Single file `event_bus.ts`\n- No external dependencies\n- Export the class: `export class EventBus`\n{\"instructions\":\"Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { execSync } from 'child_process';\\nimport { writeFileSync, existsSync } from 'fs';\\nimport assert from 'assert';\\n\\n// Compile TypeScript\\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\\n\\n// Load compiled JS\\nconst { EventBus } = await import('./event_bus.js');\\n\\n// Basic on/emit\\nconst bus = new EventBus();\\nconst calls = [];\\nconst h1 = (x) => calls.push(x);\\nbus.on('greet', h1);\\nbus.emit('greet', 'hello');\\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\\n\\n// Multiple handlers\\nconst h2 = (x) => calls.push('h2:' + x);\\nbus.on('greet', h2);\\nbus.emit('greet', 'world');\\nassert.ok(calls.includes('world'), 'h1 called on second emit');\\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\\n\\n// off removes only the specified handler\\nbus.off('greet', h1);\\ncalls.length = 0;\\nbus.emit('greet', 'again');\\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\\n\\n// off no-op for unknown handler\\nbus.off('greet', () => {});  // should not throw\\n\\n// emit unknown event is no-op\\nbus.emit('unknown_event');\\n\\n// Multi-arg emit\\nconst bus2 = new EventBus();\\nlet received = null;\\nbus2.on('data', (a, b) => { received = [a, b]; });\\nbus2.emit('data', 42, 'hello');\\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_bus.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import { execSync } from 'child_process';\nimport { writeFileSync, existsSync } from 'fs';\nimport assert from 'assert';\n\n// Compile TypeScript\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\n\n// Load compiled JS\nconst { EventBus } = await import('./event_bus.js');\n\n// Basic on/emit\nconst bus = new EventBus();\nconst calls = [];\nconst h1 = (x) => calls.push(x);\nbus.on('greet', h1);\nbus.emit('greet', 'hello');\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\n\n// Multiple handlers\nconst h2 = (x) => calls.push('h2:' + x);\nbus.on('greet', h2);\nbus.emit('greet', 'world');\nassert.ok(calls.includes('world'), 'h1 called on second emit');\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\n\n// off removes only the specified handler\nbus.off('greet', h1);\ncalls.length = 0;\nbus.emit('greet', 'again');\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\n\n// off no-op for unknown handler\nbus.off('greet', () => {});  // should not throw\n\n// emit unknown event is no-op\nbus.emit('unknown_event');\n\n// Multi-arg emit\nconst bus2 = new EventBus();\nlet received = null;\nbus2.on('data', (a, b) => { received = [a, b]; });\nbus2.emit('data', 42, 'hello');\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\n\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_bus.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261990,
-      "source": "https://www.bountybook.ai/job/734626a0-26b5-478b-b9cf-fb575aea8adc",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "784345ae-fd58-481e-93cd-c1f6226ffd0d",
       "title": "Build a PubSub class with wildcard pattern subscription and publish/subscribe me",
       "description": "Build a PubSub class with wildcard pattern subscription and publish/subscribe me\nWrite `pubsub.ts` (or `pubsub.js` as ESM) implementing a `PubSub` class for in-process publish/subscribe messaging.\n\n## Interface\n```typescript\ntype Handler = (topic: string, message: unknown) => void;\n\nclass PubSub {\n  subscribe(pattern: string, handler: Handler): () => void;\n  // Returns an unsubscribe function.\n  // Pattern can be:\n  //   - exact: \"user.created\"\n  //   - single-level wildcard: \"user.*\" matches \"user.created\", \"user.deleted\" but NOT \"user.x.y\"\n  //   - multi-level wildcard: \"user.#\" matches \"user.created\", \"user.profile.updated\", etc.\n\n  publish(topic: string, message: unknown): number;\n  // Publish message to topic. Returns number of handlers called.\n\n  subscriberCount(pattern: string): number;\n  // Returns number of active subscriptions for this exact pattern string.\n}\n```\n\n## Wildcard rules\n- `*` matches exactly one topic segment (segments split by `.`)\n- `#` matches zero or more segments at the end\n- `user.*` matches `user.login` but not `user.login.success`\n- `user.#` matches `user.login`, `user.login.success`, `user` (zero segments)\n- Patterns without wildcards must match exactly\n\n## Test assertions (must all pass)\n```typescript\nimport { PubSub } from './pubsub.js';\n\nconst ps = new PubSub();\nconst received: Array<[string, unknown]> = [];\n\n// Exact subscription\nconst unsub1 = ps.subscribe(\"user.login\", (t, m) => received.push([t, m]));\nps.publish(\"user.login\", { userId: 1 });\nps.publish(\"user.logout\", { userId: 1 }); // no match\n\n// Wildcard *\nconst unsub2 = ps.subscribe(\"order.*\", (t, m) => received.push([t, m]));\nps.publish(\"order.created\", { id: 42 });\nps.publish(\"order.updated\", { id: 42 });\nps.publish(\"order.item.added\", { id: 42 }); // no match for order.*\n\n// Wildcard #\nconst unsub3 = ps.subscribe(\"log.#\", (t, m) => received.push([t, m]));\nps.publish(\"log.error\", \"crash\");\nps.publish(\"log.db.query.slow\", \"slow query\");\n\nconsole.assert(received.length === 5, `expected 5 messages, got ${received.length}`);\n\n// Unsubscribe\nunsub1();\nreceived.length = 0;\nps.publish(\"user.login\", \"x\");\nconsole.assert(received.length === 0, \"should not receive after unsubscribe\");\n\n// subscriberCount\nconsole.assert(ps.subscriberCount(\"order.*\") === 1);\nconsole.assert(ps.subscriberCount(\"log.#\") === 1);\nunsub2();\nconsole.assert(ps.subscriberCount(\"order.*\") === 0);\n\n// publish returns count\nunsub3();\nconst count = ps.publish(\"any.topic\", \"hi\");\nconsole.assert(count === 0, \"count should be 0 with no subscribers\");\n\nconsole.log(\"ALL TESTS PASSED\");\n```\n\n## Constraints\n- No external packages — Node.js stdlib only\n- Single file `pubsub.ts` or `pubsub.js` (ES module with named export)\n{\"instructions\":\"Implement PubSub class in pubsub.js as ES module. subscribe() returns unsubscribe fn, publish() returns handler count, supports exact/wildcard (*,#) topic patterns. No external packages.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { PubSub } from './pubsub.js';\\n\\nconst ps = new PubSub();\\nconst received = [];\\n\\nconst unsub1 = ps.subscribe(\\\"user.login\\\", (t, m) => received.push([t, m]));\\nlet count = ps.publish(\\\"user.login\\\", { userId: 1 });\\nconsole.assert(count === 1, `publish should hit 1 handler, got ${count}`);\\nps.publish(\\\"user.logout\\\", { userId: 1 });\\nconsole.assert(received.length === 1, \\\"only user.login should match\\\");\\n\\nconst unsub2 = ps.subscribe(\\\"order.*\\\", (t, m) => received.push([t, m]));\\nps.publish(\\\"order.created\\\", { id: 42 });\\nps.publish(\\\"order.updated\\\", { id: 42 });\\nps.publish(\\\"order.item.added\\\", { id: 42 });\\n\\nconst unsub3 = ps.subscribe(\\\"log.#\\\", (t, m) => received.push([t, m]));\\nps.publish(\\\"log.error\\\", \\\"crash\\\");\\nps.publish(\\\"log.db.query.slow\\\", \\\"slow query\\\");\\n\\nconsole.assert(received.length === 5, `expected 5, got ${received.length}`);\\n\\nunsub1();\\nreceived.length = 0;\\nps.publish(\\\"user.login\\\", \\\"x\\\");\\nconsole.assert(received.length === 0, \\\"unsubscribe should work\\\");\\n\\nconsole.assert(ps.subscriberCount(\\\"order.*\\\") === 1, \\\"order.* should have 1 sub\\\");\\nconsole.assert(ps.subscriberCount(\\\"log.#\\\") === 1, \\\"log.# should have 1 sub\\\");\\nunsub2();\\nconsole.assert(ps.subscriberCount(\\\"order.*\\\") === 0, \\\"order.* should have 0 subs after unsub\\\");\\n\\nunsub3();\\nconst finalCount = ps.publish(\\\"anything\\\", \\\"hi\\\");\\nconsole.assert(finalCount === 0, \\\"no handlers, count should be 0\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"pubsub.js\"]}}",
@@ -1795,6 +1753,48 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "title": "Build extract_products.py parser for HTML product listings to JSON",
+      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "extract_products.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
