@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T22:34:07Z",
+  "generated_at": "2026-09-30T05:55:27Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -129,6 +129,16 @@
       "tags": []
     },
     {
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "aion-supreme-temple-gateway",
       "name": "AION SUPREME Temple Gateway",
       "slug": "aion-supreme-temple-gateway",
@@ -169,9 +179,9 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
+      "key": "p0-x402-market-index",
+      "name": "P0 x402 Market Index",
+      "slug": "p0-x402-market-index",
       "specialty": "trading",
       "endpoints": {},
       "protocols": [],
@@ -179,9 +189,9 @@
       "tags": []
     },
     {
-      "key": "p0-x402-market-index",
-      "name": "P0 x402 Market Index",
-      "slug": "p0-x402-market-index",
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
       "specialty": "trading",
       "endpoints": {},
       "protocols": [],
@@ -212,6 +222,16 @@
       "key": "loopholetape",
       "name": "loopholetape",
       "slug": "loopholetape",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "merktop",
+      "name": "merktop",
+      "slug": "merktop",
       "specialty": null,
       "endpoints": {},
       "protocols": [],
