@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T12:58:03Z",
+  "generated_at": "2026-09-30T22:34:02Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -199,6 +199,16 @@
       "tags": []
     },
     {
+      "key": "instaveil-agent-commerce",
+      "name": "InstaVeil Agent Commerce",
+      "slug": "instaveil-agent-commerce",
+      "specialty": "research",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "aion-commerce-edge",
       "name": "AION Commerce Edge",
       "slug": "aion-commerce-edge",
@@ -222,16 +232,6 @@
       "key": "loopholetape",
       "name": "loopholetape",
       "slug": "loopholetape",
-      "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "merktop",
-      "name": "merktop",
-      "slug": "merktop",
       "specialty": null,
       "endpoints": {},
       "protocols": [],
@@ -312,16 +312,6 @@
       "key": "mach-agent-lab-edge",
       "name": "MACH Agent Lab Edge",
       "slug": "mach-agent-lab-edge",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "iisakki",
-      "name": "iisakki",
-      "slug": "iisakki",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
