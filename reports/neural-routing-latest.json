@@ -12,7 +12,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.68634,
+      "neural_score": 0.659012,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -24,103 +24,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.678693,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:63e095d1cb49526a2a9d164f",
-      "name": "Nulliverba Research Discovery Agent",
-      "aliases": [
-        "nulliverba"
-      ],
-      "kind": "research_directory",
-      "status": "connected",
-      "neural_score": 0.67822,
-      "interaction_count": 0,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:2d3debe46ce6f82db22e564e",
-      "name": "ForgeMesh Utility Grid",
-      "aliases": [
-        "ForgeMesh Utility Grid"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.676733,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:f1a920b40a21302efa24f522",
-      "name": "Travel Planning & Trip Intelligence",
-      "aliases": [
-        "Travel Planning & Trip Intelligence"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.676543,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:0be0e99e4a89f1c9fd2086a7",
-      "name": "ForgeMesh ImageGen",
-      "aliases": [
-        "ForgeMesh ImageGen"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.675741,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:86330da5c05edce21d92449f",
-      "name": "agent-exec",
-      "aliases": [
-        "agent-exec"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.675313,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:185aba2f83a50143c6e7f240",
-      "name": "x402 Router",
-      "aliases": [
-        "x402 Router"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.674943,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:27ab9c3a832fb28139480c5b",
-      "name": "x402 Proxy",
-      "aliases": [
-        "x402 Proxy"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.674867,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
-      "name": "x402 Swag",
-      "aliases": [
-        "x402 Swag"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.67461,
+      "neural_score": 0.652574,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -132,19 +36,31 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.674316,
+      "neural_score": 0.648702,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:984667c2a1012b55b1cca62f",
-      "name": "Yasin Karabacak Sales Agent",
+      "agent_id": "agent:2d3debe46ce6f82db22e564e",
+      "name": "ForgeMesh Utility Grid",
       "aliases": [
-        "Yasin Karabacak Sales Agent"
+        "ForgeMesh Utility Grid"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673775,
+      "neural_score": 0.648576,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f1a920b40a21302efa24f522",
+      "name": "Travel Planning & Trip Intelligence",
+      "aliases": [
+        "Travel Planning & Trip Intelligence"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.647775,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -156,31 +72,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673744,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:93b9f8b2670b3ca434c74ddf",
-      "name": "SEO Authority API",
-      "aliases": [
-        "SEO Authority API"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.673729,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:8bb74b5dbca0404857cd3e47",
-      "name": "x402 Notary",
-      "aliases": [
-        "x402 Notary"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.673683,
+      "neural_score": 0.647728,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -192,69 +84,32 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673601,
+      "neural_score": 0.647678,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:1bd38b28624444d13062922a",
-      "name": "MYCELIX",
+      "agent_id": "agent:90db09e6502eb2c6f086b5d9",
+      "name": "Feeless402 Rail Quote",
       "aliases": [
-        "MYCELIX",
-        "mycelix"
-      ],
-      "kind": "conversational_agent",
-      "status": "reachable",
-      "neural_score": 0.673444,
-      "interaction_count": 2,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:42559b79172ab938194fc4fa",
-      "name": "LeadProof Sales Agent",
-      "aliases": [
-        "LeadProof Sales Agent"
+        "Feeless402 Rail Quote"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673405,
+      "neural_score": 0.647647,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:5d653954d5615ff9f11c5845",
-      "name": "MEO Preflight",
+      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
+      "name": "x402 Swag",
       "aliases": [
-        "MEO Preflight"
+        "x402 Swag"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673375,
+      "neural_score": 0.647383,
       "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:e29e69de2d5a944a1eeea9f6",
-      "name": "LUMEN B2B Agent",
-      "aliases": [
-        "LUMEN B2B Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.673312,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:c4fb2d964c7cd824ec85d023",
-      "name": "Cape Partners \u2014 Agent Exchange",
-      "aliases": [
-        "Cape Partners \u2014 Agent Exchange"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.673195,
-      "interaction_count": 2,
       "validated_result_count": 0
     },
     {
@@ -265,7 +120,19 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.673068,
+      "neural_score": 0.647242,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:936fac5ef9db3b1241119b0d",
+      "name": "ForgeMesh Disruption Intelligence",
+      "aliases": [
+        "ForgeMesh Disruption Intelligence"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.64713,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -277,32 +144,160 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.672713,
+      "neural_score": 0.647095,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:04067a150df5c136f371bb40",
-      "name": "Zinvyl Fixed-Scope Qualification Agent",
+      "agent_id": "agent:2b192ec58581d2e5904a584b",
+      "name": "Agent Identity Garden",
       "aliases": [
-        "Zinvyl Fixed-Scope Qualification Agent"
+        "Agent Identity Garden"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.672499,
+      "neural_score": 0.647024,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:fe630be108eb8c7276f6af54",
-      "name": "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4",
+      "agent_id": "agent:8bb74b5dbca0404857cd3e47",
+      "name": "x402 Notary",
       "aliases": [
-        "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4"
+        "x402 Notary"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.672357,
+      "neural_score": 0.646933,
       "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:93b9f8b2670b3ca434c74ddf",
+      "name": "SEO Authority API",
+      "aliases": [
+        "SEO Authority API"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646927,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:0be0e99e4a89f1c9fd2086a7",
+      "name": "ForgeMesh ImageGen",
+      "aliases": [
+        "ForgeMesh ImageGen"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646799,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:a82c25d464897ff1d41c80cb",
+      "name": "Summus Code Network",
+      "aliases": [
+        "Summus Code"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646708,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:5f90e0d84560855d75cb0fb8",
+      "name": "SCVD Evidence Agent",
+      "aliases": [
+        "SCVD Evidence Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646668,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:2e61aa9c5f81b60058d44b71",
+      "name": "AUX Evidence and Certification",
+      "aliases": [
+        "AUX Evidence and Certification"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646596,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:185aba2f83a50143c6e7f240",
+      "name": "x402 Router",
+      "aliases": [
+        "x402 Router"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646576,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f41a96b0b0853c12f0c36faf",
+      "name": "Unknown Agent",
+      "aliases": [
+        "Unknown Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646557,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:1b8b486764a843ed67865a4e",
+      "name": "Uuriko Project Room",
+      "aliases": [],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646476,
+      "interaction_count": 5,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:5d653954d5615ff9f11c5845",
+      "name": "MEO Preflight",
+      "aliases": [
+        "MEO Preflight"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646268,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:e29e69de2d5a944a1eeea9f6",
+      "name": "LUMEN B2B Agent",
+      "aliases": [
+        "LUMEN B2B Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646255,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:505e278ff85d492ec7f41a82",
+      "name": "Uuriko Project Room",
+      "aliases": [],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.646221,
+      "interaction_count": 6,
       "validated_result_count": 0
     }
   ]
