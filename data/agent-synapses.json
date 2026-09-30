@@ -426,16 +426,16 @@
       "weight": 4.5
     },
     "37a3ca456d5c3a76b880ae1e": {
-      "events": 5,
+      "events": 6,
       "first_seen": "2026-09-27T00:22:06Z",
       "id": "37a3ca456d5c3a76b880ae1e",
-      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:b48bbae34b08399e",
-      "last_seen": "2026-09-29T01:57:12Z",
+      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:2285ac0fda762fa1",
+      "last_seen": "2026-09-30T13:43:34Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:505e278ff85d492ec7f41a82",
       "validated_events": 0,
-      "weight": 7.5
+      "weight": 9.0
     },
     "392c365585d94f3c690b49b8": {
       "events": 0,
@@ -771,11 +771,11 @@
       "weight": 0.35
     },
     "6666947d259cbd09b99151d1": {
-      "events": 504,
+      "events": 505,
       "first_seen": "2026-09-27T00:17:13Z",
       "id": "6666947d259cbd09b99151d1",
-      "last_event_id": "github-comment:Uuriko/project-room:266:5859841192",
-      "last_seen": "2026-09-27T21:20:53Z",
+      "last_event_id": "github-comment:Uuriko/project-room:266:5909638054",
+      "last_seen": "2026-09-30T13:43:27Z",
       "relation": "public_thread_interaction",
       "source": "agent:67420e7ca386b04855a294c9",
       "target": "agent:fdbb35f0fe06661165da1583",
@@ -1687,16 +1687,16 @@
       "weight": 0.75
     },
     "edbc1d9a4f6a1f209303a0f6": {
-      "events": 4,
+      "events": 5,
       "first_seen": "2026-09-27T00:17:30Z",
       "id": "edbc1d9a4f6a1f209303a0f6",
-      "last_event_id": "card-probe:agent:1b8b486764a843ed67865a4e:b48bbae34b08399e",
-      "last_seen": "2026-09-29T01:57:09Z",
+      "last_event_id": "card-probe:agent:1b8b486764a843ed67865a4e:2285ac0fda762fa1",
+      "last_seen": "2026-09-30T13:43:28Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:1b8b486764a843ed67865a4e",
       "validated_events": 0,
-      "weight": 6.0
+      "weight": 7.5
     },
     "ee0a439974bddf8ebb0e9ec0": {
       "events": 6,
@@ -1879,5 +1879,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-09-30T06:43:37Z"
+  "updated_at": "2026-09-30T13:43:36Z"
 }
