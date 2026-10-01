@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T22:34:02Z",
+  "generated_at": "2026-10-01T06:29:24Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -189,6 +189,16 @@
       "tags": []
     },
     {
+      "key": "bounty-engineer-agent-security-revenue",
+      "name": "Bounty Engineer Agent Security & Revenue",
+      "slug": "bounty-engineer-agent-security-revenue",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "flux-apex-on-x1-arc",
       "name": "Flux \u00b7 APEX on X1 & Arc",
       "slug": "flux-apex-on-x1-arc",
@@ -223,16 +233,6 @@
       "name": "Anokha Web Tools",
       "slug": "anokha-web-tools",
       "specialty": "research",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "loopholetape",
-      "name": "loopholetape",
-      "slug": "loopholetape",
-      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
