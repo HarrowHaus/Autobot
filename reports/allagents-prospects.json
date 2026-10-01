@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-01T06:29:24Z",
+  "generated_at": "2026-10-01T13:50:51Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -49,30 +49,40 @@
       "tags": []
     },
     {
+      "key": "proofline-evidence-router",
+      "name": "Proofline Evidence Router",
+      "slug": "proofline-evidence-router",
+      "specialty": "research",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "packrift-a2a-packaging-procurement-router",
+      "name": "Packrift A2A Packaging Procurement Router",
+      "slug": "packrift-a2a-packaging-procurement-router",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "agoragentic",
+      "name": "Agoragentic",
+      "slug": "agoragentic",
+      "specialty": "discovery",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "scry-wallet-intelligence",
       "name": "Scry Wallet Intelligence",
       "slug": "scry-wallet-intelligence",
       "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "trustsniffer",
-      "name": "trustsniffer",
-      "slug": "trustsniffer",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "humanmirror-discovery-agent",
-      "name": "HumanMirror Discovery Agent",
-      "slug": "humanmirror-discovery-agent",
-      "specialty": "autonomous agent trust, preflight, execution evidence, mcp, ",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -139,9 +149,29 @@
       "tags": []
     },
     {
-      "key": "aion-supreme-temple-gateway",
-      "name": "AION SUPREME Temple Gateway",
-      "slug": "aion-supreme-temple-gateway",
+      "key": "agent-zero",
+      "name": "Agent Zero",
+      "slug": "agent-zero",
+      "specialty": "search",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "ai-result-receipt-auditor",
+      "name": "AI\uff89\u30a2\u30ab\u30ea\u2606 Result Receipt Auditor",
+      "slug": "ai-result-receipt-auditor",
+      "specialty": "research",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "agent-guild",
+      "name": "Agent Guild",
+      "slug": "agent-guild",
       "specialty": "discovery",
       "endpoints": {},
       "protocols": [],
@@ -149,19 +179,29 @@
       "tags": []
     },
     {
-      "key": "leadproof-sales-agent",
-      "name": "LeadProof Sales Agent",
-      "slug": "leadproof-sales-agent",
-      "specialty": "automation",
+      "key": "tessa-marketing-technology",
+      "name": "TESSA Marketing & Technology",
+      "slug": "tessa-marketing-technology",
+      "specialty": "discovery",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "a0-route-intelligence",
-      "name": "A0 Route Intelligence",
-      "slug": "a0-route-intelligence",
+      "key": "hostdefi-token-risk-api",
+      "name": "HostDeFi Token Risk API",
+      "slug": "hostdefi-token-risk-api",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "hilt-pay-agent-gateway",
+      "name": "Hilt Pay Agent Gateway",
+      "slug": "hilt-pay-agent-gateway",
       "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
@@ -169,9 +209,9 @@
       "tags": []
     },
     {
-      "key": "proofrail-mcp-release-certifier",
-      "name": "ProofRail MCP Release Certifier",
-      "slug": "proofrail-mcp-release-certifier",
+      "key": "bounty-engineer-agent-commerce",
+      "name": "Bounty Engineer Agent Commerce",
+      "slug": "bounty-engineer-agent-commerce",
       "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
@@ -199,9 +239,9 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
+      "key": "kronos-quant-signal-api",
+      "name": "Kronos Quant Signal API",
+      "slug": "kronos-quant-signal-api",
       "specialty": "trading",
       "endpoints": {},
       "protocols": [],
@@ -209,10 +249,40 @@
       "tags": []
     },
     {
-      "key": "instaveil-agent-commerce",
-      "name": "InstaVeil Agent Commerce",
-      "slug": "instaveil-agent-commerce",
-      "specialty": "research",
+      "key": "a0-route-intelligence",
+      "name": "A0 Route Intelligence",
+      "slug": "a0-route-intelligence",
+      "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "ghost-web-search-for-agents-one-x402-payment",
+      "name": "Ghost \u2014 web search for agents, one x402 payment",
+      "slug": "ghost-web-search-for-agents-one-x402-payment",
+      "specialty": "search",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "swarmsync-commerce-demo-agent",
+      "name": "SwarmSync Commerce Demo Agent",
+      "slug": "swarmsync-commerce-demo-agent",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "a2a-commerce-gateway",
+      "name": "A2A Commerce Gateway",
+      "slug": "a2a-commerce-gateway",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -229,9 +299,9 @@
       "tags": []
     },
     {
-      "key": "anokha-web-tools",
-      "name": "Anokha Web Tools",
-      "slug": "anokha-web-tools",
+      "key": "instaveil-agent-commerce",
+      "name": "InstaVeil Agent Commerce",
+      "slug": "instaveil-agent-commerce",
       "specialty": "research",
       "endpoints": {},
       "protocols": [],
@@ -249,69 +319,9 @@
       "tags": []
     },
     {
-      "key": "qbtlabs-io-web",
-      "name": "qbtlabs-io-web",
-      "slug": "qbtlabs-io-web",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "kyro",
-      "name": "Kyro",
-      "slug": "kyro",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "guixerai",
-      "name": "guixerai",
-      "slug": "guixerai",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "energozamcalc",
-      "name": "energozamcalc",
-      "slug": "energozamcalc",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "wouldpayagain",
-      "name": "wouldpayagain",
-      "slug": "wouldpayagain",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "travelfinder-by-beachfinder",
-      "name": "TravelFinder by BeachFinder",
-      "slug": "travelfinder-by-beachfinder",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "mach-agent-lab-edge",
-      "name": "MACH Agent Lab Edge",
-      "slug": "mach-agent-lab-edge",
+      "key": "algovoi-payable-rail",
+      "name": "AlgoVoi Payable Rail",
+      "slug": "algovoi-payable-rail",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
