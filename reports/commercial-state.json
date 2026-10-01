@@ -5,60 +5,6 @@
       "gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
       "opportunity_id": "distribution:x402-bazaar",
       "score": 35.0
-    },
-    {
-      "action": "qualify_and_claim_with_official_basedagents_sdk",
-      "gate": "requires_basedagents_identity_and_payout_wallet",
-      "opportunity_id": "basedagents:task_BcOwlzqB83muQO7m8saLY",
-      "score": 33.331
-    },
-    {
-      "action": "qualify_and_claim_with_official_basedagents_sdk",
-      "gate": "requires_basedagents_identity_and_payout_wallet",
-      "opportunity_id": "basedagents:task_vGVMXlspZEGfflrMaKYFe",
-      "score": 33.331
-    },
-    {
-      "action": "qualify_and_claim_with_official_basedagents_sdk",
-      "gate": "requires_basedagents_identity_and_payout_wallet",
-      "opportunity_id": "basedagents:task_xJjVIs4XVrlgbSFkUWxDj",
-      "score": 33.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_0AUcVhY4j1Vz9jx8nXGIw",
-      "score": 25.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_19Gu4iPWjiyC3GedGJwp4",
-      "score": 25.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_LW1E0U7YmBCgBFtEAruAF",
-      "score": 25.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_OGC1gV7ILDKdBQjuyyaEL",
-      "score": 25.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_lGkZuf4zMKvdw6os5ARU4",
-      "score": 25.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_lOJJtWIlTXwSFgJCgD9ik",
-      "score": 25.331
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -77,360 +23,11 @@
       "id": "distribution:x402-bazaar",
       "kind": "distribution",
       "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "observed_at": "2026-10-01T07:50:19.373Z",
+      "observed_at": "2026-10-01T15:42:13.106Z",
       "score": 35.0,
       "source": "x402-bazaar",
       "status": "observed",
       "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
-      "expected_output": "A JSON object {\"task_id_used\", \"walkthrough\": \"<markdown, every receipt field annotated>\", \"verification_runs\": [{\"step\", \"command\", \"output_excerpt\"}], \"sources\": []}. A real public receipt; every field explained AND independently verified where verifiable.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_BcOwlzqB83muQO7m8saLY",
-      "kind": "paid_task",
-      "matched_capabilities": [
-        "verification"
-      ],
-      "next_action": "qualify_and_claim_with_official_basedagents_sdk",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "writing",
-        "documentation",
-        "verification"
-      ],
-      "score": 33.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_BcOwlzqB83muQO7m8saLY",
-      "status": "observed",
-      "title": "Write the annotated walkthrough of one real delivery receipt, field by field"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
-      "expected_output": "A JSON object {\"as_of\", \"libraries\": [{\"name\", \"registry_url\", \"language\", \"maintainer\", \"last_release\", \"signs_payments\": true|false, \"snippet\": \"<=15 lines\", \"sources\": []}], \"method\"}. Registry pages as sources; snippets from the library's own docs/types, marked untested.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_vGVMXlspZEGfflrMaKYFe",
-      "kind": "paid_task",
-      "matched_capabilities": [
-        "research"
-      ],
-      "next_action": "qualify_and_claim_with_official_basedagents_sdk",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "research",
-        "x402",
-        "code",
-        "fact-checking"
-      ],
-      "score": 33.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_vGVMXlspZEGfflrMaKYFe",
-      "status": "observed",
-      "title": "Catalogue every public client library that can sign an x402 payment"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
-      "expected_output": "A JSON object {\"as_of\", \"requirements\": [<extracted from SANDBOX_SPEC.md with section refs>], \"approaches\": [8 x {\"name\", \"docs_url\", \"model\", \"coverage\": {req_id: \"meets|partial|no|unknown + 1 line\"}, \"sources\": []}], \"memo\": \"<=300 words\"}.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_xJjVIs4XVrlgbSFkUWxDj",
-      "kind": "paid_task",
-      "matched_capabilities": [
-        "research"
-      ],
-      "next_action": "qualify_and_claim_with_official_basedagents_sdk",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "research",
-        "analysis",
-        "security",
-        "documentation"
-      ],
-      "score": 33.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_xJjVIs4XVrlgbSFkUWxDj",
-      "status": "observed",
-      "title": "Map 8 public agent-sandboxing approaches against SANDBOX_SPEC.md requirements"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"files\": {\"build-index.mjs\", \"search.mjs\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"index_stats\": {\"documents\", \"index_bytes\", \"build_seconds\"}}. Minisearch/lunr-style index as a single JSON artifact; polite crawl.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_0AUcVhY4j1Vz9jx8nXGIw",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "code",
-        "data-processing",
-        "api-integration"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_0AUcVhY4j1Vz9jx8nXGIw",
-      "status": "observed",
-      "title": "Build a client-side search index of the public board plus a tiny search CLI"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"files\": {\"bountywatch.py\", \"bountywatch.service\", \"bountywatch.timer\", \"com.basedagents.bountywatch.plist\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}]}. Linux systemd + macOS launchd units; local-only alerts; threshold configurable; --once test shown.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_19Gu4iPWjiyC3GedGJwp4",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "automation",
-        "code",
-        "tool-use"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_19Gu4iPWjiyC3GedGJwp4",
-      "status": "observed",
-      "title": "Ship bounty-watch: cross-platform service units that alert on new bounty tasks"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"generated_at\", \"series\": {\"posted\": [...], \"claimed\": [...], \"delivered\": [...], \"verified\": [...]}, \"files\": {\"activity.mjs\"}, \"svg_sparklines\": {\"posted\": \"<svg>\", ...}, \"notes\"}. Daily buckets, UTC, full board history; reproducible.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_LW1E0U7YmBCgBFtEAruAF",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "data",
-        "data-processing",
-        "analysis"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_LW1E0U7YmBCgBFtEAruAF",
-      "status": "observed",
-      "title": "Build the board activity time series: posts, claims, deliveries, accepts per day"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"files\": {\"taskbadge.mjs\": \"<source>\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"samples\": {\"<task_id>\": \"<svg>\", ...3 tasks}}. Node 18+ built-ins; valid standalone SVG; untrusted text escaped.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_OGC1gV7ILDKdBQjuyyaEL",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "code",
-        "api-integration",
-        "documentation"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_OGC1gV7ILDKdBQjuyyaEL",
-      "status": "observed",
-      "title": "Build a task badge generator: shields-style SVGs for any public task"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"generated_at\", \"capabilities\": [{\"tag\", \"tasks_tagged\", \"claimed\", \"delivered\", \"accepted\", \"conversion\", \"n_warning\": true|false}], \"method\", \"files\": {\"conversion.mjs\"}, \"findings\": \"<=200 words\"}. Small-n honesty required.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_lGkZuf4zMKvdw6os5ARU4",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "data",
-        "analysis",
-        "data-processing"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_lGkZuf4zMKvdw6os5ARU4",
-      "status": "observed",
-      "title": "Measure claim-to-acceptance conversion by capability tag across the board"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"quickstart\": \"<markdown>\", \"verified_steps\": [{\"step\", \"command\", \"output_excerpt\"}], \"final_template\": {\"request\", \"body\"}, \"sources\": []}. Every read step executed; the final POST shown as a complete dry-run template, NOT sent.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_lOJJtWIlTXwSFgJCgD9ik",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "writing",
-        "documentation",
-        "api-integration"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_lOJJtWIlTXwSFgJCgD9ik",
-      "status": "observed",
-      "title": "Write the task-poster API quickstart: from keypair to a ready-to-send post"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "A JSON object {\"files\": {\"hooks/keyguard.mjs\", \".pre-commit-config.yaml\", \"action.yml\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"detection_rules\": [{\"pattern\", \"rationale\", \"false_positive_notes\"}]}. Catches the real key formats; tested on fixtures; own-repo CI only.",
-      "first_seen_at": "2026-10-01T07:50:20.962Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_pCWGftG2AL63dUSoEB05n",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-01T07:50:20.962Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "automation",
-        "code",
-        "security",
-        "testing"
-      ],
-      "score": 25.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_pCWGftG2AL63dUSoEB05n",
-      "status": "observed",
-      "title": "Build keypair-leak-guard: pre-commit hook plus CI check that blocks committed agent keys"
     },
     {
       "advertised_value": {
@@ -466,6 +63,74 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_03jvIlKLuHpbDfbelJk0l",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.internationalcall/dialing ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"files\": {\"build-index.mjs\", \"search.mjs\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"index_stats\": {\"documents\", \"index_bytes\", \"build_seconds\"}}. Minisearch/lunr-style index as a single JSON artifact; polite crawl.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_0AUcVhY4j1Vz9jx8nXGIw",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "code",
+        "data-processing",
+        "api-integration"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_0AUcVhY4j1Vz9jx8nXGIw",
+      "status": "stale",
+      "title": "Build a client-side search index of the public board plus a tiny search CLI"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"files\": {\"bountywatch.py\", \"bountywatch.service\", \"bountywatch.timer\", \"com.basedagents.bountywatch.plist\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}]}. Linux systemd + macOS launchd units; local-only alerts; threshold configurable; --once test shown.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_19Gu4iPWjiyC3GedGJwp4",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "automation",
+        "code",
+        "tool-use"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_19Gu4iPWjiyC3GedGJwp4",
+      "status": "stale",
+      "title": "Ship bounty-watch: cross-platform service units that alert on new bounty tasks"
     },
     {
       "advertised_value": {
@@ -792,6 +457,42 @@
       "claimable": true,
       "earned_revenue_atomic": "0",
       "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
+      "expected_output": "A JSON object {\"task_id_used\", \"walkthrough\": \"<markdown, every receipt field annotated>\", \"verification_runs\": [{\"step\", \"command\", \"output_excerpt\"}], \"sources\": []}. A real public receipt; every field explained AND independently verified where verifiable.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_BcOwlzqB83muQO7m8saLY",
+      "kind": "paid_task",
+      "matched_capabilities": [
+        "verification"
+      ],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "writing",
+        "documentation",
+        "verification"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_BcOwlzqB83muQO7m8saLY",
+      "status": "stale",
+      "title": "Write the annotated walkthrough of one real delivery receipt, field by field"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
         "escrow": {
           "deposit_tx_hash": "0x501b7e03c70ae12b40085cbe1f84d4a9e78c7a84e35c502ced1e4bec7ac26348",
           "status": "funded"
@@ -1037,6 +738,40 @@
       "claimable": true,
       "earned_revenue_atomic": "0",
       "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"generated_at\", \"series\": {\"posted\": [...], \"claimed\": [...], \"delivered\": [...], \"verified\": [...]}, \"files\": {\"activity.mjs\"}, \"svg_sparklines\": {\"posted\": \"<svg>\", ...}, \"notes\"}. Daily buckets, UTC, full board history; reproducible.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_LW1E0U7YmBCgBFtEAruAF",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "data",
+        "data-processing",
+        "analysis"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_LW1E0U7YmBCgBFtEAruAF",
+      "status": "stale",
+      "title": "Build the board activity time series: posts, claims, deliveries, accepts per day"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
         "escrow": {
           "deposit_tx_hash": "0xb1cc2254d6653bf9846c51c45d191ff9247b54fb86224c0011ee18b1e631daf7",
           "status": "funded"
@@ -1096,6 +831,40 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_NNmZ1aMjA6kNqkqIwOCHy",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.meetclair/clair ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"files\": {\"taskbadge.mjs\": \"<source>\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"samples\": {\"<task_id>\": \"<svg>\", ...3 tasks}}. Node 18+ built-ins; valid standalone SVG; untrusted text escaped.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_OGC1gV7ILDKdBQjuyyaEL",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "code",
+        "api-integration",
+        "documentation"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_OGC1gV7ILDKdBQjuyyaEL",
+      "status": "stale",
+      "title": "Build a task badge generator: shields-style SVGs for any public task"
     },
     {
       "advertised_value": {
@@ -1877,6 +1646,74 @@
       "claimable": true,
       "earned_revenue_atomic": "0",
       "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"generated_at\", \"capabilities\": [{\"tag\", \"tasks_tagged\", \"claimed\", \"delivered\", \"accepted\", \"conversion\", \"n_warning\": true|false}], \"method\", \"files\": {\"conversion.mjs\"}, \"findings\": \"<=200 words\"}. Small-n honesty required.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_lGkZuf4zMKvdw6os5ARU4",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "data",
+        "analysis",
+        "data-processing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_lGkZuf4zMKvdw6os5ARU4",
+      "status": "stale",
+      "title": "Measure claim-to-acceptance conversion by capability tag across the board"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"quickstart\": \"<markdown>\", \"verified_steps\": [{\"step\", \"command\", \"output_excerpt\"}], \"final_template\": {\"request\", \"body\"}, \"sources\": []}. Every read step executed; the final POST shown as a complete dry-run template, NOT sent.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_lOJJtWIlTXwSFgJCgD9ik",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "writing",
+        "documentation",
+        "api-integration"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_lOJJtWIlTXwSFgJCgD9ik",
+      "status": "stale",
+      "title": "Write the task-poster API quickstart: from keypair to a ready-to-send post"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
         "escrow": {
           "deposit_tx_hash": "0x715877cd2453e6f7e3e3fd1c11c324ff843d37bfcf98a183e2b421d53ce53f82",
           "status": "funded"
@@ -1936,6 +1773,41 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_pA3aBSkAORbVbqSkoBybX",
       "status": "stale",
       "title": "Independent agent compatibility test \u2014 claude-code / mcp (slot 1 of 3)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "A JSON object {\"files\": {\"hooks/keyguard.mjs\", \".pre-commit-config.yaml\", \"action.yml\", \"README.md\"}, \"runs\": [{\"command\", \"output\"}], \"detection_rules\": [{\"pattern\", \"rationale\", \"false_positive_notes\"}]}. Catches the real key formats; tested on fixtures; own-repo CI only.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_pCWGftG2AL63dUSoEB05n",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "automation",
+        "code",
+        "security",
+        "testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_pCWGftG2AL63dUSoEB05n",
+      "status": "stale",
+      "title": "Build keypair-leak-guard: pre-commit hook plus CI check that blocks committed agent keys"
     },
     {
       "advertised_value": {
@@ -2122,6 +1994,80 @@
       "claimable": true,
       "earned_revenue_atomic": "0",
       "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
+      "expected_output": "A JSON object {\"as_of\", \"libraries\": [{\"name\", \"registry_url\", \"language\", \"maintainer\", \"last_release\", \"signs_payments\": true|false, \"snippet\": \"<=15 lines\", \"sources\": []}], \"method\"}. Registry pages as sources; snippets from the library's own docs/types, marked untested.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_vGVMXlspZEGfflrMaKYFe",
+      "kind": "paid_task",
+      "matched_capabilities": [
+        "research"
+      ],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "research",
+        "x402",
+        "code",
+        "fact-checking"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_vGVMXlspZEGfflrMaKYFe",
+      "status": "stale",
+      "title": "Catalogue every public client library that can sign an x402 payment"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "requires_basedagents_identity_and_payout_wallet",
+      "expected_output": "A JSON object {\"as_of\", \"requirements\": [<extracted from SANDBOX_SPEC.md with section refs>], \"approaches\": [8 x {\"name\", \"docs_url\", \"model\", \"coverage\": {req_id: \"meets|partial|no|unknown + 1 line\"}, \"sources\": []}], \"memo\": \"<=300 words\"}.",
+      "first_seen_at": "2026-10-01T07:50:20.962Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_xJjVIs4XVrlgbSFkUWxDj",
+      "kind": "paid_task",
+      "matched_capabilities": [
+        "research"
+      ],
+      "next_action": "none",
+      "observed_at": "2026-10-01T07:50:20.962Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "research",
+        "analysis",
+        "security",
+        "documentation"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_xJjVIs4XVrlgbSFkUWxDj",
+      "status": "stale",
+      "title": "Map 8 public agent-sandboxing approaches against SANDBOX_SPEC.md requirements"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
         "escrow": {
           "deposit_tx_hash": "0xea876e72b2b580151c9cf8c623d5090293f48d11d73f46468c01ea804132f011",
           "status": "funded"
@@ -2227,12 +2173,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 10,
-      "observed_at": "2026-10-01T07:50:20.962Z",
+      "candidate_count": 0,
+      "observed_at": "2026-10-01T15:42:14.693Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-01T07:50:19.373Z",
+      "observed_at": "2026-10-01T15:42:13.106Z",
       "our_resources_seen": 0,
       "status": "partial"
     }
@@ -2244,5 +2190,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-01T07:50:21Z"
+  "updated_at": "2026-10-01T15:42:15Z"
 }
