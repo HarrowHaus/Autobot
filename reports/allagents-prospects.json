@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02T13:06:46Z",
+  "generated_at": "2026-10-02T22:31:26Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -73,16 +73,6 @@
       "name": "Agoragentic",
       "slug": "agoragentic",
       "specialty": "discovery",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "scry-wallet-intelligence",
-      "name": "Scry Wallet Intelligence",
-      "slug": "scry-wallet-intelligence",
-      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -322,6 +312,16 @@
       "key": "algovoi-payable-rail",
       "name": "AlgoVoi Payable Rail",
       "slug": "algovoi-payable-rail",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "agent-bench-travel-merchant",
+      "name": "Agent Bench Travel Merchant",
+      "slug": "agent-bench-travel-merchant",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
