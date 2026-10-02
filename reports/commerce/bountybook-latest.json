@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-02T08:54:58.585Z",
+  "observed_at": "2026-10-02T15:57:19.314Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -138,50 +138,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
-      "title": "Build a BloomFilter class in Python with add and contains methods",
-      "description": "Build a BloomFilter class in Python with add and contains methods\nImplement a `BloomFilter` class in Python in file `bloom.py`.\n\n## Required API\n\n```python\nclass BloomFilter:\n    def __init__(self, capacity: int, fp_rate: float):\n        \"\"\"\n        capacity: expected number of items\n        fp_rate: desired false-positive rate (e.g. 0.01 = 1%)\n        \"\"\"\n        ...\n\n    def add(self, item: str) -> None: ...\n    def contains(self, item: str) -> bool: ...\n\n    @property\n    def bit_array_size(self) -> int: ...   # m — number of bits\n\n    @property\n    def num_hash_functions(self) -> int: ...  # k\n```\n\n## Formulas to use\n- Optimal bit array size: `m = -(n * ln(p)) / (ln(2)^2)`\n- Optimal hash count: `k = (m/n) * ln(2)`\n- Use `hashlib.md5` and `hashlib.sha256` as base hashes, derive k hashes using the formula:\n  `h_i(x) = (hash1(x) + i * hash2(x)) % m`\n\n## Required test cases (run with `python bloom.py`)\n\n```python\nbf = BloomFilter(capacity=1000, fp_rate=0.01)\n\n# No false negatives (items we added must always be found)\nwords = [\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"]\nfor w in words:\n    bf.add(w)\nfor w in words:\n    assert bf.contains(w), f\"False negative: {w}\"\n\n# FP rate check: add 1000 items, test 1000 non-members, FP rate < 5%\nimport random, string\nadded = set()\nfor _ in range(1000):\n    w = ''.join(random.choices(string.ascii_lowercase, k=8))\n    bf.add(w)\n    added.add(w)\n\nfp_count = sum(\n    1 for _ in range(1000)\n    if bf.contains(''.join(random.choices(string.ascii_lowercase, k=10)))\n       and ''.join(random.choices(string.ascii_lowercase, k=10)) not in added\n)\n# Just check structure — actual FP rate is probabilistic\nassert bf.bit_array_size > 0\nassert bf.num_hash_functions >= 2\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`hashlib`, `math`, `array`)\n- No external packages\n- Submit `bloom.py` — must run cleanly with `python bloom.py`\n\n## Acceptance criteria\n- No false negatives for added items\n- `bit_array_size` and `num_hash_functions` match the optimal formulas (within integer rounding)\n- `python bloom.py` prints \"All tests passed\" and exits 0\n{\"language\":\"python\",\"entrypoint\":\"bloom.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python bloom.py exits with code 0\",\"output includes 'All tests passed'\",\"no false negatives for added items\",\"bit_array_size > 0\",\"num_hash_functions >= 2\",\"stdlib only — no pip packages\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "python",
-        "entrypoint": "bloom.py",
-        "outputFormat": "stdout",
-        "checks": [
-          "python bloom.py exits with code 0",
-          "output includes 'All tests passed'",
-          "no false negatives for added items",
-          "bit_array_size > 0",
-          "num_hash_functions >= 2",
-          "stdlib only — no pip packages"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "12000000",
-        "amount_display": "12.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
       "title": "Build a generic finite state machine in TypeScript with state transitions and gu",
       "description": "Build a generic finite state machine in TypeScript with state transitions and gu\nWrite `state_machine.ts` (ESM, TypeScript 5.x, no external deps) implementing a generic finite state machine.\n\n## Interface\n```typescript\nexport class StateMachine<S extends string, E extends string> {\n  constructor(states: Record<S, StateConfig<S, E>>, initialState: S, options?: StateMachineOptions);\n  getState(): S;\n  send(event: E): boolean;\n}\n```\n\nOn successful transition: currentState.onExit → transition.action → newState.onEnter.\nOn rejected transition (no definition or guard fails): return false, no side effects.\n\n## Deliverable\nSingle file `state_machine.ts`. Must compile with `tsc --strict`.\n{\"instructions\":\"Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { StateMachine } from './state_machine.js';\\n\\nconst log: string[] = [];\\n\\nconst sm = new StateMachine(\\n  {\\n    idle: {\\n      onExit: () => log.push(\\\"idle:exit\\\"),\\n      transitions: {\\n        START: { target: \\\"running\\\", action: () => log.push(\\\"action:start\\\") }\\n      }\\n    },\\n    running: {\\n      onEnter: () => log.push(\\\"running:enter\\\"),\\n      transitions: {\\n        PAUSE: { target: \\\"paused\\\" },\\n        STOP: { target: \\\"idle\\\", guard: () => false }\\n      }\\n    },\\n    paused: {\\n      transitions: {\\n        RESUME: { target: \\\"running\\\" }\\n      }\\n    }\\n  } as const,\\n  \\\"idle\\\" as const\\n);\\n\\nconsole.assert(sm.getState() === \\\"idle\\\", \\\"initial state\\\");\\nconsole.assert(sm.send(\\\"START\\\") === true, \\\"START should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running\\\");\\nconsole.assert(log.join(\\\",\\\") === \\\"idle:exit,action:start,running:enter\\\", `hook order wrong: ${log.join(\\\",\\\")}`);\\n\\nconsole.assert(sm.send(\\\"STOP\\\") === false, \\\"guarded STOP should fail\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"state unchanged after guard fail\\\");\\n\\nconst logLen = log.length;\\nsm.send(\\\"STOP\\\");\\nconsole.assert(log.length === logLen, \\\"no side effects on guard fail\\\");\\n\\nconsole.assert(sm.send(\\\"PAUSE\\\") === true, \\\"PAUSE should succeed\\\");\\nconsole.assert(sm.getState() === \\\"paused\\\", \\\"should be paused\\\");\\n\\nconsole.assert(sm.send(\\\"START\\\") === false, \\\"no START transition from paused\\\");\\n\\nconsole.assert(sm.send(\\\"RESUME\\\") === true, \\\"RESUME should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running again\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"state_machine.ts\"]}}",
@@ -221,95 +177,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
-      "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
-      "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "typescript",
-        "entrypoint": "heap.ts",
-        "outputFormat": "file",
-        "checks": [
-          "compiles: tsc --strict heap.ts",
-          "ts-node heap.ts exits with code 0",
-          "peek() returns minimum without removing",
-          "pop() returns minimum and removes it",
-          "toSortedArray([4,2,7,1]) returns [1,2,4,7]",
-          "toSortedArray is non-destructive (size unchanged)",
-          "custom comparator works for object types"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000000",
-        "amount_display": "10.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "45579287-a3b2-4181-bc84-85faf3b4d7ed",
-      "title": "Build ast_doc.py to parse Python files and generate structured JSON documentatio",
-      "description": "Build ast_doc.py to parse Python files and generate structured JSON documentatio\nWrite `ast_doc.py` that parses a Python source file using the `ast` module and outputs a structured JSON documentation summary.\n\n## CLI\n```\npython ast_doc.py <source_file.py>\n```\n\n## Output schema\n```json\n{\n  \"module\": { \"docstring\": \"...\" },\n  \"functions\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }],\n  \"classes\": [{ \"name\": \"...\", \"bases\": [...], \"docstring\": \"...\", \"lineno\": 1,\n    \"methods\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }] }]\n}\n```\n\n## Rules\n- Stdlib only. Top-level functions/classes only. Use ast.unparse() for annotations (Python 3.9+).\n- Exit 1 with error to stderr if file not parseable.\n\n## Deliverable\nSingle file `ast_doc.py`.\n{\"instructions\":\"Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, json, os, tempfile\\n\\n# Write sample Python file\\nsample = \\\"\\\"\\\"\\n\\\"\\\"\\\"Sample module for testing.\\\"\\\"\\\"\\n\\ndef add(x: int, y: int) -> int:\\n    \\\"\\\"\\\"Return sum of x and y.\\\"\\\"\\\"\\n    return x + y\\n\\ndef greet(name: str) -> None:\\n    pass\\n\\nclass Animal:\\n    \\\"\\\"\\\"Base animal class.\\\"\\\"\\\"\\n\\n    def __init__(self, name: str):\\n        \\\"\\\"\\\"Initialize with name.\\\"\\\"\\\"\\n        self.name = name\\n\\n    def speak(self) -> str:\\n        \\\"\\\"\\\"Return the animal's sound.\\\"\\\"\\\"\\n        return \\\"\\\"\\n\\nclass Dog(Animal):\\n    pass\\n\\\"\\\"\\\"\\n\\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\\n    f.write(sample)\\n    fname = f.name\\n\\ntry:\\n    result = subprocess.run([sys.executable, \\\"ast_doc.py\\\", fname],\\n                           capture_output=True, text=True)\\n    assert result.returncode == 0, f\\\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\\\"\\n\\n    doc = json.loads(result.stdout)\\n\\n    # Module docstring\\n    assert doc[\\\"module\\\"][\\\"docstring\\\"] == \\\"Sample module for testing.\\\", f\\\"Wrong module docstring: {doc['module']}\\\"\\n\\n    # Functions\\n    func_names = [f[\\\"name\\\"] for f in doc[\\\"functions\\\"]]\\n    assert \\\"add\\\" in func_names, f\\\"add not in functions: {func_names}\\\"\\n    assert \\\"greet\\\" in func_names, f\\\"greet not in functions: {func_names}\\\"\\n\\n    add_fn = next(f for f in doc[\\\"functions\\\"] if f[\\\"name\\\"] == \\\"add\\\")\\n    assert \\\"x\\\" in add_fn[\\\"args\\\"] and \\\"y\\\" in add_fn[\\\"args\\\"], f\\\"add args: {add_fn['args']}\\\"\\n    assert add_fn[\\\"docstring\\\"] == \\\"Return sum of x and y.\\\", f\\\"add docstring: {add_fn['docstring']}\\\"\\n    assert \\\"int\\\" in str(add_fn[\\\"returns\\\"]), f\\\"add return type: {add_fn['returns']}\\\"\\n\\n    # Classes\\n    class_names = [c[\\\"name\\\"] for c in doc[\\\"classes\\\"]]\\n    assert \\\"Animal\\\" in class_names, f\\\"Animal not in classes: {class_names}\\\"\\n    assert \\\"Dog\\\" in class_names, f\\\"Dog not in classes: {class_names}\\\"\\n\\n    animal_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Animal\\\")\\n    assert animal_cls[\\\"docstring\\\"] == \\\"Base animal class.\\\", f\\\"Animal docstring: {animal_cls['docstring']}\\\"\\n    method_names = [m[\\\"name\\\"] for m in animal_cls[\\\"methods\\\"]]\\n    assert \\\"__init__\\\" in method_names, f\\\"__init__ not in methods: {method_names}\\\"\\n    assert \\\"speak\\\" in method_names, f\\\"speak not in methods: {method_names}\\\"\\n\\n    dog_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Dog\\\")\\n    assert \\\"Animal\\\" in dog_cls[\\\"bases\\\"], f\\\"Dog bases: {dog_cls['bases']}\\\"\\n\\n    print(\\\"ALL TESTS PASSED\\\")\\nfinally:\\n    os.unlink(fname)\",\"required_files\":[\"ast_doc.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import subprocess, sys, json, os, tempfile\n\n# Write sample Python file\nsample = \"\"\"\n\"\"\"Sample module for testing.\"\"\"\n\ndef add(x: int, y: int) -> int:\n    \"\"\"Return sum of x and y.\"\"\"\n    return x + y\n\ndef greet(name: str) -> None:\n    pass\n\nclass Animal:\n    \"\"\"Base animal class.\"\"\"\n\n    def __init__(self, name: str):\n        \"\"\"Initialize with name.\"\"\"\n        self.name = name\n\n    def speak(self) -> str:\n        \"\"\"Return the animal's sound.\"\"\"\n        return \"\"\n\nclass Dog(Animal):\n    pass\n\"\"\"\n\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\n    f.write(sample)\n    fname = f.name\n\ntry:\n    result = subprocess.run([sys.executable, \"ast_doc.py\", fname],\n                           capture_output=True, text=True)\n    assert result.returncode == 0, f\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\"\n\n    doc = json.loads(result.stdout)\n\n    # Module docstring\n    assert doc[\"module\"][\"docstring\"] == \"Sample module for testing.\", f\"Wrong module docstring: {doc['module']}\"\n\n    # Functions\n    func_names = [f[\"name\"] for f in doc[\"functions\"]]\n    assert \"add\" in func_names, f\"add not in functions: {func_names}\"\n    assert \"greet\" in func_names, f\"greet not in functions: {func_names}\"\n\n    add_fn = next(f for f in doc[\"functions\"] if f[\"name\"] == \"add\")\n    assert \"x\" in add_fn[\"args\"] and \"y\" in add_fn[\"args\"], f\"add args: {add_fn['args']}\"\n    assert add_fn[\"docstring\"] == \"Return sum of x and y.\", f\"add docstring: {add_fn['docstring']}\"\n    assert \"int\" in str(add_fn[\"returns\"]), f\"add return type: {add_fn['returns']}\"\n\n    # Classes\n    class_names = [c[\"name\"] for c in doc[\"classes\"]]\n    assert \"Animal\" in class_names, f\"Animal not in classes: {class_names}\"\n    assert \"Dog\" in class_names, f\"Dog not in classes: {class_names}\"\n\n    animal_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Animal\")\n    assert animal_cls[\"docstring\"] == \"Base animal class.\", f\"Animal docstring: {animal_cls['docstring']}\"\n    method_names = [m[\"name\"] for m in animal_cls[\"methods\"]]\n    assert \"__init__\" in method_names, f\"__init__ not in methods: {method_names}\"\n    assert \"speak\" in method_names, f\"speak not in methods: {method_names}\"\n\n    dog_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Dog\")\n    assert \"Animal\" in dog_cls[\"bases\"], f\"Dog bases: {dog_cls['bases']}\"\n\n    print(\"ALL TESTS PASSED\")\nfinally:\n    os.unlink(fname)",
-          "required_files": [
-            "ast_doc.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "9000000",
-        "amount_display": "9.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773831865,
-      "source": "https://www.bountybook.ai/job/45579287-a3b2-4181-bc84-85faf3b4d7ed",
       "source_kind": "bountybook"
     },
     {
@@ -870,6 +737,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
+      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
+          "required_files": [
+            "concurrency_limiter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "047c5be8-f5df-47a5-8d98-65831622f5b9",
       "title": "Build a RateLimiter class that manages token bucket rate limiting",
       "description": "Build a RateLimiter class that manages token bucket rate limiting\nWrite `rate_limiter.js` that exports a `RateLimiter` class.\n\n## API\n```js\nconst limiter = new RateLimiter({ capacity: 5, refillRate: 2, refillInterval: 1000 });\n// capacity: max tokens\n// refillRate: tokens added per interval\n// refillInterval: ms between refills\n\nlimiter.tryConsume()          // → true if token available, false if bucket empty\nlimiter.tryConsume(2)         // → true if 2 tokens available, false otherwise\nlimiter.available()           // → current token count (integer)\n```\n\n## Rules\n- Tokens refill automatically over time (use `Date.now()` — no `setInterval`).\n- Never exceed capacity.\n- `tryConsume(n=1)` atomically checks and consumes. Returns `false` without consuming if insufficient tokens.\n- `available()` returns the current floor token count as an integer.\n- No external dependencies.\n- `module.exports = { RateLimiter };`\n\n## Deliverable\nSingle file `rate_limiter.js`.\n{\"instructions\":\"Write rate_limiter.js exporting RateLimiter class. Constructor: { capacity, refillRate, refillInterval }. Methods: tryConsume(n=1) → bool, available() → int. Token refill is time-based using Date.now(), no setInterval. Never exceeds capacity. module.exports = { RateLimiter }.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"const assert = require(\\\"assert\\\");\\nconst fs = require(\\\"fs\\\");\\n\\nassert(fs.existsSync(\\\"rate_limiter.js\\\"), \\\"rate_limiter.js not found\\\");\\nconst { RateLimiter } = require(\\\"./rate_limiter.js\\\");\\n\\n// Basic consume\\nconst lim = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim.available() === 3, \\\"Should start full\\\");\\nassert(lim.tryConsume() === true, \\\"First consume should succeed\\\");\\nassert(lim.available() === 2, \\\"Should have 2 after 1 consume\\\");\\n\\n// Consume multiple\\nassert(lim.tryConsume(2) === true, \\\"Consume 2 from bucket of 2\\\");\\nassert(lim.available() === 0, \\\"Should be empty\\\");\\nassert(lim.tryConsume() === false, \\\"Empty bucket should return false\\\");\\n\\n// Partial consume must not deplete\\nconst lim2 = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim2.tryConsume(2) === true);\\nassert(lim2.available() === 1);\\nassert(lim2.tryConsume(2) === false, \\\"Not enough tokens — should reject\\\");\\nassert(lim2.available() === 1, \\\"Tokens unchanged after failed consume\\\");\\n\\n// Capacity not exceeded on refill\\nconst lim3 = new RateLimiter({ capacity: 2, refillRate: 100, refillInterval: 1 });\\n// Wait for a few ms to let tokens refill\\nconst sleep = ms => new Promise(r => setTimeout(r, ms));\\n(async () => {\\n  await sleep(50);\\n  assert(lim3.available() <= 2, \\\"Tokens must not exceed capacity\\\");\\n  console.log(\\\"ALL TESTS PASSED\\\");\\n})().catch(err => { console.error(err); process.exit(1); });\",\"required_files\":[\"rate_limiter.js\"]}}",
@@ -1374,6 +1283,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "813cb071-dc7d-445b-871f-914236bbeb0d",
+      "title": "Build a Go CLI program that deep-merges two JSON object files",
+      "description": "Build a Go CLI program that deep-merges two JSON object files\nWrite `jsonmerge.go`: a Go CLI program that deep-merges two JSON object files, with the second file's values taking precedence.\n\n## Usage\n```bash\ngo run jsonmerge.go base.json override.json\n# Prints merged JSON to stdout\n```\n\n## Merge rules\n- Both inputs must be JSON objects (top-level `{}`)\n- Keys in `override.json` overwrite matching keys from `base.json`\n- Nested objects are merged recursively (not replaced wholesale)\n- Arrays are replaced entirely (not merged element by element)\n- Output is pretty-printed JSON with 2-space indent\n\n## Example\n`base.json`:\n```json\n{\"server\": {\"host\": \"localhost\", \"port\": 8080}, \"debug\": false, \"tags\": [\"a\"]}\n```\n`override.json`:\n```json\n{\"server\": {\"port\": 9090, \"timeout\": 30}, \"debug\": true}\n```\nExpected output:\n```json\n{\n  \"debug\": true,\n  \"server\": {\n    \"host\": \"localhost\",\n    \"port\": 9090,\n    \"timeout\": 30\n  },\n  \"tags\": [\"a\"]\n}\n```\n\n## Error handling\n- Non-existent file: `error: file not found: <path>` to stderr, exit 1\n- Non-object JSON (array, string, number): `error: expected JSON object in <path>` to stderr, exit 1\n- Invalid JSON: `error: invalid JSON in <path>: <detail>` to stderr, exit 1\n\n## Constraints\n- Go stdlib only (no external packages)\n- Single file `jsonmerge.go`\n- Go 1.21+\n\n## Deliverable\nSingle file: `jsonmerge.go`\n{\"instructions\":\"Implement jsonmerge.go: Go CLI tool that deep-merges two JSON object files. Second file takes precedence, nested objects merged recursively, arrays replaced. Pretty-printed output, proper error handling.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\n# Write test files\\ncat > /tmp/base.json << 'EOF'\\n{\\\"server\\\": {\\\"host\\\": \\\"localhost\\\", \\\"port\\\": 8080}, \\\"debug\\\": false, \\\"tags\\\": [\\\"a\\\"]}\\nEOF\\n\\ncat > /tmp/override.json << 'EOF'\\n{\\\"server\\\": {\\\"port\\\": 9090, \\\"timeout\\\": 30}, \\\"debug\\\": true}\\nEOF\\n\\n# Run merge\\nRESULT=$(go run jsonmerge.go /tmp/base.json /tmp/override.json)\\n\\n# Validate via python using a temp file\\ngo run jsonmerge.go /tmp/base.json /tmp/override.json > /tmp/merged_result.json\\n\\npython3 - /tmp/merged_result.json << 'PYEOF'\\nimport json, sys\\nresult = json.load(open(sys.argv[1]))\\n\\nassert result[\\\"debug\\\"] == True, \\\"debug should be true\\\"\\nassert result[\\\"server\\\"][\\\"host\\\"] == \\\"localhost\\\", \\\"host should be preserved\\\"\\nassert result[\\\"server\\\"][\\\"port\\\"] == 9090, \\\"port should be overridden\\\"\\nassert result[\\\"server\\\"][\\\"timeout\\\"] == 30, \\\"timeout should be added\\\"\\nassert result[\\\"tags\\\"] == [\\\"a\\\"], \\\"tags should be preserved\\\"\\nprint(\\\"JSON structure: OK\\\")\\nPYEOF\\n\\n# Test recursive merge preserved host\\npython3 -c \\\"import json; d=json.load(open('/tmp/merged_result.json')); assert d['server']['host']=='localhost'; print('host preserved: OK')\\\"\\n\\n# Test error: missing file\\ngo run jsonmerge.go /nonexistent.json /tmp/override.json 2>&1 | grep -qi \\\"error\\\" || { echo \\\"FAIL: should error on missing file\\\"; exit 1; }\\n\\n# Test error: non-object JSON\\necho '\\\"hello\\\"' > /tmp/bad.json\\ngo run jsonmerge.go /tmp/bad.json /tmp/override.json 2>&1 | grep -qi \\\"error\\\" || { echo \\\"FAIL: should error on non-object\\\"; exit 1; }\\n\\nrm -f /tmp/base.json /tmp/override.json /tmp/bad.json\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"jsonmerge.go\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement jsonmerge.go: Go CLI tool that deep-merges two JSON object files. Second file takes precedence, nested objects merged recursively, arrays replaced. Pretty-printed output, proper error handling.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "bash",
+          "test_code": "#!/bin/bash\nset -e\n\n# Write test files\ncat > /tmp/base.json << 'EOF'\n{\"server\": {\"host\": \"localhost\", \"port\": 8080}, \"debug\": false, \"tags\": [\"a\"]}\nEOF\n\ncat > /tmp/override.json << 'EOF'\n{\"server\": {\"port\": 9090, \"timeout\": 30}, \"debug\": true}\nEOF\n\n# Run merge\nRESULT=$(go run jsonmerge.go /tmp/base.json /tmp/override.json)\n\n# Validate via python using a temp file\ngo run jsonmerge.go /tmp/base.json /tmp/override.json > /tmp/merged_result.json\n\npython3 - /tmp/merged_result.json << 'PYEOF'\nimport json, sys\nresult = json.load(open(sys.argv[1]))\n\nassert result[\"debug\"] == True, \"debug should be true\"\nassert result[\"server\"][\"host\"] == \"localhost\", \"host should be preserved\"\nassert result[\"server\"][\"port\"] == 9090, \"port should be overridden\"\nassert result[\"server\"][\"timeout\"] == 30, \"timeout should be added\"\nassert result[\"tags\"] == [\"a\"], \"tags should be preserved\"\nprint(\"JSON structure: OK\")\nPYEOF\n\n# Test recursive merge preserved host\npython3 -c \"import json; d=json.load(open('/tmp/merged_result.json')); assert d['server']['host']=='localhost'; print('host preserved: OK')\"\n\n# Test error: missing file\ngo run jsonmerge.go /nonexistent.json /tmp/override.json 2>&1 | grep -qi \"error\" || { echo \"FAIL: should error on missing file\"; exit 1; }\n\n# Test error: non-object JSON\necho '\"hello\"' > /tmp/bad.json\ngo run jsonmerge.go /tmp/bad.json /tmp/override.json 2>&1 | grep -qi \"error\" || { echo \"FAIL: should error on non-object\"; exit 1; }\n\nrm -f /tmp/base.json /tmp/override.json /tmp/bad.json\necho \"ALL TESTS PASSED\"",
+          "required_files": [
+            "jsonmerge.go"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773826332,
+      "source": "https://www.bountybook.ai/job/813cb071-dc7d-445b-871f-914236bbeb0d",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "87459628-b42a-4b19-a997-20dc6fbddd6b",
       "title": "Build md_to_html.ts TypeScript module converting Markdown to HTML",
       "description": "Build md_to_html.ts TypeScript module converting Markdown to HTML\nWrite `md_to_html.ts` (ESM, TypeScript 5.x, no external deps) exporting a `mdToHtml` function.\n\n## Interface\n```typescript\nexport function mdToHtml(markdown: string): string;\n```\n\n## Supported syntax\n- `# H1` → `<h1>H1</h1>`, `## H2` → `<h2>H2</h2>`, `### H3` → `<h3>H3</h3>`\n- `**bold**` → `<strong>bold</strong>`\n- `*italic*` or `_italic_` → `<em>italic</em>`\n- Inline code → `<code>code</code>`\n- `[text](url)` → `<a href=\"url\">text</a>`\n- Other lines → wrapped in `<p>...</p>`\n\n## Rules\n- No external packages. Parse `**` before `*`.\n- Headings are NOT wrapped in `<p>`.\n\n## Deliverable\nSingle file `md_to_html.ts`. Must compile with `tsc --strict`.\n{\"instructions\":\"Write md_to_html.ts exporting mdToHtml(markdown: string): string. Process headings (#/##/###), bold (**), italic (* or _), inline code (backtick), and links ([text](url)). Non-heading lines wrap in <p>. Process ** before * to avoid conflicts. No external deps. TypeScript strict mode.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { mdToHtml } from './md_to_html.js';\\n\\nconsole.assert(mdToHtml(\\\"# Hello\\\") === \\\"<h1>Hello</h1>\\\", \\\"h1\\\");\\nconsole.assert(mdToHtml(\\\"## World\\\") === \\\"<h2>World</h2>\\\", \\\"h2\\\");\\nconsole.assert(mdToHtml(\\\"### Sub\\\") === \\\"<h3>Sub</h3>\\\", \\\"h3\\\");\\nconsole.assert(mdToHtml(\\\"**bold**\\\") === \\\"<p><strong>bold</strong></p>\\\", \\\"bold\\\");\\nconsole.assert(mdToHtml(\\\"*italic*\\\") === \\\"<p><em>italic</em></p>\\\", \\\"italic *\\\");\\nconsole.assert(mdToHtml(\\\"_italic_\\\") === \\\"<p><em>italic</em></p>\\\", \\\"italic _\\\");\\nconsole.assert(mdToHtml(\\\"[click](https://example.com)\\\") === '<p><a href=\\\"https://example.com\\\">click</a></p>', \\\"link\\\");\\nconsole.assert(mdToHtml(\\\"plain text\\\") === \\\"<p>plain text</p>\\\", \\\"plain paragraph\\\");\\nconsole.assert(mdToHtml(\\\"# **Bold Heading**\\\") === \\\"<h1><strong>Bold Heading</strong></h1>\\\", \\\"bold in heading\\\");\\n\\n// Bold does not bleed into italic\\nconst mixed = mdToHtml(\\\"**bold** and *italic*\\\");\\nconsole.assert(mixed.includes(\\\"<strong>bold</strong>\\\"), \\\"strong in mixed\\\");\\nconsole.assert(mixed.includes(\\\"<em>italic</em>\\\"), \\\"em in mixed\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"md_to_html.ts\"]}}",
@@ -1753,6 +1704,48 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "title": "Build extract_products.py parser for HTML product listings to JSON",
+      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "extract_products.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
