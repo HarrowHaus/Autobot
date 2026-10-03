@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-03T17:33:58.815Z",
+  "observed_at": "2026-10-03T20:09:19.450Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -570,6 +570,52 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "d47a42b6-8203-4bc7-8bbf-c22ef912c232",
+      "title": "Write a structured JSON comparison of 5 CI/CD platforms for open-source projects",
+      "description": "Write a structured JSON comparison of 5 CI/CD platforms for open-source projects\nResearch and write a structured comparison of 5 CI/CD platforms commonly used for open-source projects.\n\n## Platforms to cover\n1. GitHub Actions\n2. GitLab CI/CD\n3. CircleCI\n4. Jenkins\n5. Drone CI\n\n## Required output format\nA single JSON file `cicd_comparison.json`:\n\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"platforms\": [\n    {\n      \"name\": \"GitHub Actions\",\n      \"open_source\": false,\n      \"self_hosted_runner\": true,\n      \"free_tier_minutes\": 2000,\n      \"free_tier_notes\": \"2000 min/month for public repos (unlimited); private repos limited\",\n      \"config_format\": \"YAML\",\n      \"config_file\": \".github/workflows/*.yml\",\n      \"parallel_jobs\": true,\n      \"matrix_builds\": true,\n      \"docker_support\": true,\n      \"secret_management\": \"GitHub Secrets (encrypted)\",\n      \"marketplace\": \"GitHub Actions Marketplace\",\n      \"best_for\": \"GitHub-hosted projects, rich ecosystem\",\n      \"limitations\": \"Vendor lock-in to GitHub, limited customization outside GitHub\",\n      \"pricing_summary\": \"free for public repos; tiered for private use\"\n    }\n  ]\n}\n```\n\n## Verification criteria\n- All 5 platforms present\n- Required fields: name, open_source, self_hosted_runner, free_tier_minutes, free_tier_notes, config_format, config_file, parallel_jobs, matrix_builds, docker_support, secret_management, best_for, limitations, pricing_summary\n- Boolean fields must be actual booleans\n- `free_tier_minutes` is integer (use -1 for unlimited, 0 for no free tier)\n- `generated_at` in YYYY-MM-DD format\n\n## Constraints\n- Data accurate as of 2024-2025\n- Verify pricing from official docs; note \"check official pricing\" if uncertain\n- File must be valid JSON\n{\"instructions\":\"Research 5 CI/CD platforms (GitHub Actions, GitLab CI, CircleCI, Jenkins, Drone CI) and output cicd_comparison.json. All required fields present, correctly typed, accurate as of 2024-2025.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"cicd_comparison.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"generated_at must be YYYY-MM-DD\\\"\\nassert \\\"platforms\\\" in data, \\\"missing platforms\\\"\\nassert len(data[\\\"platforms\\\"]) == 5, f\\\"expected 5 platforms, got {len(data['platforms'])}\\\"\\n\\nexpected_names = {\\\"GitHub Actions\\\", \\\"GitLab CI/CD\\\", \\\"CircleCI\\\", \\\"Jenkins\\\", \\\"Drone CI\\\"}\\nfound_names = {p[\\\"name\\\"] for p in data[\\\"platforms\\\"]}\\nassert found_names == expected_names, f\\\"platform name mismatch: {found_names ^ expected_names}\\\"\\n\\nrequired_fields = [\\n    \\\"name\\\", \\\"open_source\\\", \\\"self_hosted_runner\\\", \\\"free_tier_minutes\\\", \\\"free_tier_notes\\\",\\n    \\\"config_format\\\", \\\"config_file\\\", \\\"parallel_jobs\\\", \\\"matrix_builds\\\", \\\"docker_support\\\",\\n    \\\"secret_management\\\", \\\"best_for\\\", \\\"limitations\\\", \\\"pricing_summary\\\"\\n]\\nfor p in data[\\\"platforms\\\"]:\\n    for field in required_fields:\\n        assert field in p, f\\\"missing field '{field}' in {p.get('name', '?')}\\\"\\n    assert isinstance(p[\\\"open_source\\\"], bool), f\\\"open_source must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"self_hosted_runner\\\"], bool), f\\\"self_hosted_runner must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"parallel_jobs\\\"], bool), f\\\"parallel_jobs must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"matrix_builds\\\"], bool), f\\\"matrix_builds must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"docker_support\\\"], bool), f\\\"docker_support must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"free_tier_minutes\\\"], int), f\\\"free_tier_minutes must be int in {p['name']}\\\"\\n    assert len(p[\\\"best_for\\\"]) > 10, f\\\"best_for too short in {p['name']}\\\"\\n    assert len(p[\\\"limitations\\\"]) > 10, f\\\"limitations too short in {p['name']}\\\"\\n    assert isinstance(p[\\\"config_format\\\"], str) and len(p[\\\"config_format\\\"]) > 0\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"cicd_comparison.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis",
+        "planning"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis",
+        "planning"
+      ],
+      "expected_output": {
+        "instructions": "Research 5 CI/CD platforms (GitHub Actions, GitLab CI, CircleCI, Jenkins, Drone CI) and output cicd_comparison.json. All required fields present, correctly typed, accurate as of 2024-2025.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"cicd_comparison.json\").read_text())\n\nassert \"generated_at\" in data, \"missing generated_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"generated_at\"]), \"generated_at must be YYYY-MM-DD\"\nassert \"platforms\" in data, \"missing platforms\"\nassert len(data[\"platforms\"]) == 5, f\"expected 5 platforms, got {len(data['platforms'])}\"\n\nexpected_names = {\"GitHub Actions\", \"GitLab CI/CD\", \"CircleCI\", \"Jenkins\", \"Drone CI\"}\nfound_names = {p[\"name\"] for p in data[\"platforms\"]}\nassert found_names == expected_names, f\"platform name mismatch: {found_names ^ expected_names}\"\n\nrequired_fields = [\n    \"name\", \"open_source\", \"self_hosted_runner\", \"free_tier_minutes\", \"free_tier_notes\",\n    \"config_format\", \"config_file\", \"parallel_jobs\", \"matrix_builds\", \"docker_support\",\n    \"secret_management\", \"best_for\", \"limitations\", \"pricing_summary\"\n]\nfor p in data[\"platforms\"]:\n    for field in required_fields:\n        assert field in p, f\"missing field '{field}' in {p.get('name', '?')}\"\n    assert isinstance(p[\"open_source\"], bool), f\"open_source must be bool in {p['name']}\"\n    assert isinstance(p[\"self_hosted_runner\"], bool), f\"self_hosted_runner must be bool in {p['name']}\"\n    assert isinstance(p[\"parallel_jobs\"], bool), f\"parallel_jobs must be bool in {p['name']}\"\n    assert isinstance(p[\"matrix_builds\"], bool), f\"matrix_builds must be bool in {p['name']}\"\n    assert isinstance(p[\"docker_support\"], bool), f\"docker_support must be bool in {p['name']}\"\n    assert isinstance(p[\"free_tier_minutes\"], int), f\"free_tier_minutes must be int in {p['name']}\"\n    assert len(p[\"best_for\"]) > 10, f\"best_for too short in {p['name']}\"\n    assert len(p[\"limitations\"]) > 10, f\"limitations too short in {p['name']}\"\n    assert isinstance(p[\"config_format\"], str) and len(p[\"config_format\"]) > 0\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "cicd_comparison.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "7000000",
+        "amount_display": "7.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773937709,
+      "source": "https://www.bountybook.ai/job/d47a42b6-8203-4bc7-8bbf-c22ef912c232",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "d6d3d8f1-dfaa-4a4c-9f65-df670bdfdb26",
       "title": "Build a dependency resolver module with cycle detection using DFS",
       "description": "Build a dependency resolver module with cycle detection using DFS\nWrite `dep_resolver.ts` (or `dep_resolver.js` as ESM) implementing a dependency resolver.\n\n## Interface\n```typescript\ntype DependencyGraph = Record<string, string[]>;\n// key = package name, value = list of direct dependencies\n\nclass DependencyResolver {\n  constructor(graph: DependencyGraph);\n\n  resolve(entryPoint: string): string[];\n  // Returns packages in installation order (topological sort):\n  // dependencies before dependents.\n  // Throws Error if entryPoint not in graph.\n  // Throws CyclicDependencyError (extends Error) if cycle detected.\n\n  resolveAll(): string[];\n  // Resolve entire graph. Returns topo-sorted list of all packages.\n  // Throws CyclicDependencyError if any cycle detected.\n}\n\nclass CyclicDependencyError extends Error {\n  cycle: string[]; // e.g. [\"a\", \"b\", \"c\", \"a\"]\n}\n```\n\n## Algorithm\n- Use DFS with grey/black coloring to detect cycles\n- Grey = currently in DFS stack (cycle detected if revisited)\n- Black = fully processed\n- Output order: a package appears after all its dependencies\n\n## Test assertions\n```typescript\nimport { DependencyResolver, CyclicDependencyError } from './dep_resolver.js';\n\n// Simple chain: c -> b -> a (a has no deps)\nconst g1 = { a: [], b: [\"a\"], c: [\"b\"] };\nconst r1 = new DependencyResolver(g1);\nconst order1 = r1.resolve(\"c\");\nconst aIdx = order1.indexOf(\"a\"), bIdx = order1.indexOf(\"b\"), cIdx = order1.indexOf(\"c\");\nconsole.assert(aIdx < bIdx, \"a before b\");\nconsole.assert(bIdx < cIdx, \"b before c\");\nconsole.assert(order1.includes(\"a\") && order1.includes(\"b\") && order1.includes(\"c\"));\n\n// Diamond dependency\nconst g2 = { a: [], b: [\"a\"], c: [\"a\"], d: [\"b\", \"c\"] };\nconst r2 = new DependencyResolver(g2);\nconst order2 = r2.resolve(\"d\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"b\"), \"a before b in diamond\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"c\"), \"a before c in diamond\");\nconsole.assert(order2.indexOf(\"b\") < order2.indexOf(\"d\"), \"b before d in diamond\");\nconsole.assert(order2.indexOf(\"c\") < order2.indexOf(\"d\"), \"c before d in diamond\");\n// No duplicates\nconsole.assert(new Set(order2).size === order2.length, \"no duplicates\");\n\n// Cycle detection\nconst g3 = { a: [\"b\"], b: [\"c\"], c: [\"a\"] };\nconst r3 = new DependencyResolver(g3);\ntry {\n  r3.resolve(\"a\");\n  console.assert(false, \"should throw CyclicDependencyError\");\n} catch (e) {\n  console.assert(e instanceof CyclicDependencyError, \"should be CyclicDependencyError\");\n  console.assert(Array.isArray(e.cycle) && e.cycle.length >= 3, \"cycle path present\");\n}\n\n// resolveAll\nconst g4 = { a: [], b: [\"a\"], c: [\"a\"], d: [] };\nconst r4 = new DependencyResolver(g4);\nconst all = r4.resolveAll();\nconsole.assert(all.length === 4, \"all 4 packages\");\nconsole.assert(all.indexOf(\"a\") < all.indexOf(\"b\"), \"a before b in resolveAll\");\n\nconsole.log(\"ALL TESTS PASSED\");\n```\n\n## Constraints\n- No external packages — Node.js stdlib only\n- Single file `dep_resolver.ts` or `dep_resolver.js` (ES module with named exports)\n{\"instructions\":\"Implement DependencyResolver and CyclicDependencyError in dep_resolver.js as ES module. Topological sort via DFS with grey/black cycle detection. resolve() and resolveAll() return packages in installation order. No duplicates.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { DependencyResolver, CyclicDependencyError } from './dep_resolver.js';\\n\\n// Simple chain\\nconst g1 = { a: [], b: [\\\"a\\\"], c: [\\\"b\\\"] };\\nconst r1 = new DependencyResolver(g1);\\nconst order1 = r1.resolve(\\\"c\\\");\\nconsole.assert(order1.indexOf(\\\"a\\\") < order1.indexOf(\\\"b\\\"), \\\"a before b\\\");\\nconsole.assert(order1.indexOf(\\\"b\\\") < order1.indexOf(\\\"c\\\"), \\\"b before c\\\");\\nconsole.assert(order1.includes(\\\"a\\\") && order1.includes(\\\"b\\\") && order1.includes(\\\"c\\\"), \\\"all packages present\\\");\\n\\n// Diamond\\nconst g2 = { a: [], b: [\\\"a\\\"], c: [\\\"a\\\"], d: [\\\"b\\\", \\\"c\\\"] };\\nconst r2 = new DependencyResolver(g2);\\nconst order2 = r2.resolve(\\\"d\\\");\\nconsole.assert(order2.indexOf(\\\"a\\\") < order2.indexOf(\\\"b\\\"), \\\"diamond: a before b\\\");\\nconsole.assert(order2.indexOf(\\\"a\\\") < order2.indexOf(\\\"c\\\"), \\\"diamond: a before c\\\");\\nconsole.assert(order2.indexOf(\\\"b\\\") < order2.indexOf(\\\"d\\\"), \\\"diamond: b before d\\\");\\nconsole.assert(order2.indexOf(\\\"c\\\") < order2.indexOf(\\\"d\\\"), \\\"diamond: c before d\\\");\\nconsole.assert(new Set(order2).size === order2.length, \\\"no duplicates in diamond\\\");\\n\\n// Cycle detection\\nconst g3 = { a: [\\\"b\\\"], b: [\\\"c\\\"], c: [\\\"a\\\"] };\\nconst r3 = new DependencyResolver(g3);\\ntry {\\n  r3.resolve(\\\"a\\\");\\n  console.assert(false, \\\"should throw on cycle\\\");\\n} catch (e) {\\n  console.assert(e instanceof CyclicDependencyError, `expected CyclicDependencyError, got ${e.constructor.name}`);\\n  console.assert(Array.isArray(e.cycle), \\\"cycle property should be array\\\");\\n  console.assert(e.cycle.length >= 3, `cycle too short: ${e.cycle}`);\\n}\\n\\n// Missing entry point\\nconst r3b = new DependencyResolver({ x: [] });\\ntry {\\n  r3b.resolve(\\\"nonexistent\\\");\\n  console.assert(false, \\\"should throw on missing entry point\\\");\\n} catch (e) {\\n  console.assert(!(e instanceof CyclicDependencyError), \\\"should not be cyclic error\\\");\\n}\\n\\n// resolveAll\\nconst g4 = { a: [], b: [\\\"a\\\"], c: [\\\"a\\\"], d: [] };\\nconst r4 = new DependencyResolver(g4);\\nconst all = r4.resolveAll();\\nconsole.assert(all.length === 4, `expected 4, got ${all.length}`);\\nconsole.assert(all.indexOf(\\\"a\\\") < all.indexOf(\\\"b\\\"), \\\"a before b in resolveAll\\\");\\nconsole.assert(new Set(all).size === all.length, \\\"no duplicates in resolveAll\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"dep_resolver.js\"]}}",
@@ -947,50 +993,6 @@
       "payment_status": null,
       "created_at": 1773907281,
       "source": "https://www.bountybook.ai/job/05972785-3be7-4b20-be73-acd7484767d3",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "0773e126-08fb-4b80-a3f7-ed67e2261cdf",
-      "title": "Research top 5 open-source vector databases and generate JSON comparison",
-      "description": "Research top 5 open-source vector databases and generate JSON comparison\nResearch the top 5 open-source vector databases and produce a structured JSON comparison document.\n\n## Required output: `vector_dbs.json`\n\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"databases\": [\n    {\n      \"name\": \"Chroma\",\n      \"github_url\": \"https://github.com/...\",\n      \"github_stars\": 12000,\n      \"license\": \"Apache-2.0\",\n      \"primary_language\": \"Python\",\n      \"embedding_support\": [\"openai\", \"huggingface\", \"cohere\"],\n      \"language_clients\": [\"python\", \"javascript\"],\n      \"storage_backends\": [\"in-memory\", \"duckdb\", \"s3\"],\n      \"highlights\": [\"easy local setup\", \"LangChain integration\"],\n      \"summary\": \"One-sentence description.\"\n    }\n  ]\n}\n```\n\n## Required databases to cover\nChroma, Weaviate, Qdrant, Milvus, and one more of your choice (e.g. Vespa, pgvector, LanceDB).\n\n## Rules\n- Valid JSON. All fields populated. github_stars as integer (approximate is fine).\n- Do not include proprietary/closed-source databases.\n\n## Deliverable\nSingle file `vector_dbs.json`.\n{\"instructions\":\"Research 5 open-source vector databases: Chroma, Weaviate, Qdrant, Milvus, and one more of your choice. For each: find GitHub URL, approximate star count, license (SPDX), primary language, supported embedding providers, language client libraries, storage backends, 2-3 highlights, and a one-sentence summary. Output as valid JSON matching the provided schema. generated_at = today's date.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, os\\n\\nassert os.path.exists(\\\"vector_dbs.json\\\"), \\\"vector_dbs.json not found\\\"\\n\\nwith open(\\\"vector_dbs.json\\\") as f:\\n    data = json.load(f)\\n\\nassert \\\"generated_at\\\" in data, \\\"Missing generated_at\\\"\\nassert \\\"databases\\\" in data, \\\"Missing databases key\\\"\\nassert len(data[\\\"databases\\\"]) >= 5, f\\\"Need at least 5 databases, got {len(data['databases'])}\\\"\\n\\nrequired_dbs = {\\\"chroma\\\", \\\"weaviate\\\", \\\"qdrant\\\", \\\"milvus\\\"}\\nfound_names = {d[\\\"name\\\"].lower() for d in data[\\\"databases\\\"]}\\nfor req in required_dbs:\\n    assert req in found_names, f\\\"Missing required database: {req}\\\"\\n\\nrequired_fields = [\\\"name\\\", \\\"github_url\\\", \\\"github_stars\\\", \\\"license\\\", \\\"primary_language\\\",\\n                   \\\"embedding_support\\\", \\\"language_clients\\\", \\\"highlights\\\", \\\"summary\\\"]\\nfor db in data[\\\"databases\\\"]:\\n    for field in required_fields:\\n        assert field in db, f\\\"Database '{db.get('name','?')}' missing field: {field}\\\"\\n    assert isinstance(db[\\\"github_stars\\\"], int) and db[\\\"github_stars\\\"] > 0, f\\\"github_stars must be positive int for {db['name']}\\\"\\n    assert isinstance(db[\\\"embedding_support\\\"], list) and len(db[\\\"embedding_support\\\"]) > 0, f\\\"embedding_support must be non-empty list for {db['name']}\\\"\\n    assert isinstance(db[\\\"language_clients\\\"], list) and len(db[\\\"language_clients\\\"]) > 0, f\\\"language_clients must be non-empty list for {db['name']}\\\"\\n    assert isinstance(db[\\\"highlights\\\"], list) and len(db[\\\"highlights\\\"]) >= 1, f\\\"highlights must be non-empty list for {db['name']}\\\"\\n    assert isinstance(db[\\\"summary\\\"], str) and len(db[\\\"summary\\\"]) > 20, f\\\"summary too short for {db['name']}\\\"\\n    assert db[\\\"github_url\\\"].startswith(\\\"https://github.com/\\\"), f\\\"github_url must be GitHub URL for {db['name']}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"vector_dbs.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Research 5 open-source vector databases: Chroma, Weaviate, Qdrant, Milvus, and one more of your choice. For each: find GitHub URL, approximate star count, license (SPDX), primary language, supported embedding providers, language client libraries, storage backends, 2-3 highlights, and a one-sentence summary. Output as valid JSON matching the provided schema. generated_at = today's date.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json, os\n\nassert os.path.exists(\"vector_dbs.json\"), \"vector_dbs.json not found\"\n\nwith open(\"vector_dbs.json\") as f:\n    data = json.load(f)\n\nassert \"generated_at\" in data, \"Missing generated_at\"\nassert \"databases\" in data, \"Missing databases key\"\nassert len(data[\"databases\"]) >= 5, f\"Need at least 5 databases, got {len(data['databases'])}\"\n\nrequired_dbs = {\"chroma\", \"weaviate\", \"qdrant\", \"milvus\"}\nfound_names = {d[\"name\"].lower() for d in data[\"databases\"]}\nfor req in required_dbs:\n    assert req in found_names, f\"Missing required database: {req}\"\n\nrequired_fields = [\"name\", \"github_url\", \"github_stars\", \"license\", \"primary_language\",\n                   \"embedding_support\", \"language_clients\", \"highlights\", \"summary\"]\nfor db in data[\"databases\"]:\n    for field in required_fields:\n        assert field in db, f\"Database '{db.get('name','?')}' missing field: {field}\"\n    assert isinstance(db[\"github_stars\"], int) and db[\"github_stars\"] > 0, f\"github_stars must be positive int for {db['name']}\"\n    assert isinstance(db[\"embedding_support\"], list) and len(db[\"embedding_support\"]) > 0, f\"embedding_support must be non-empty list for {db['name']}\"\n    assert isinstance(db[\"language_clients\"], list) and len(db[\"language_clients\"]) > 0, f\"language_clients must be non-empty list for {db['name']}\"\n    assert isinstance(db[\"highlights\"], list) and len(db[\"highlights\"]) >= 1, f\"highlights must be non-empty list for {db['name']}\"\n    assert isinstance(db[\"summary\"], str) and len(db[\"summary\"]) > 20, f\"summary too short for {db['name']}\"\n    assert db[\"github_url\"].startswith(\"https://github.com/\"), f\"github_url must be GitHub URL for {db['name']}\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "vector_dbs.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773846763,
-      "source": "https://www.bountybook.ai/job/0773e126-08fb-4b80-a3f7-ed67e2261cdf",
       "source_kind": "bountybook"
     },
     {
@@ -1491,50 +1493,6 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/a55bd7d2-b6a0-4bfc-80b5-f788d0ff312d",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "c8c58ea0-debb-46e3-b417-3377129bcc6d",
-      "title": "Write structured comparison of 5 vector databases for AI agents and RAG pipeline",
-      "description": "Write structured comparison of 5 vector databases for AI agents and RAG pipeline\nResearch and write a structured comparison of 5 vector databases commonly used in AI agent and RAG pipelines.\n\n## Databases to cover\n1. Chroma\n2. Pinecone\n3. Weaviate\n4. Qdrant\n5. Milvus\n\n## Required output format\nA single JSON file `vector_db_comparison.json` with this structure:\n\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"databases\": [\n    {\n      \"name\": \"Chroma\",\n      \"open_source\": true,\n      \"self_hosted\": true,\n      \"managed_cloud\": false,\n      \"free_tier\": true,\n      \"free_tier_limits\": \"unlimited local, no hosted free tier\",\n      \"embedding_storage\": \"local SQLite or server mode\",\n      \"max_dimensions\": 65536,\n      \"approximate_nearest_neighbor\": true,\n      \"filtering\": \"metadata filter via where clause\",\n      \"python_sdk\": true,\n      \"langchain_integration\": true,\n      \"llamaindex_integration\": true,\n      \"best_for\": \"local prototyping, open-source RAG\",\n      \"limitations\": \"no built-in auth, limited horizontal scaling\",\n      \"pricing_summary\": \"free open-source; hosted cloud in beta\"\n    }\n  ]\n}\n```\n\n## Verification criteria\n- All 5 databases present\n- Required fields present for each: name, open_source, self_hosted, managed_cloud, free_tier, python_sdk, langchain_integration, best_for, limitations, pricing_summary\n- `max_dimensions` must be a number (use 0 if unknown/unlimited)\n- `open_source` and other boolean fields must be actual booleans\n- `generated_at` in ISO date format\n\n## Constraints\n- Data must be accurate as of 2024-2025\n- Do not invent pricing — note \"check current pricing\" if uncertain\n- File must be valid JSON\n{\"instructions\":\"Research 5 vector databases (Chroma, Pinecone, Weaviate, Qdrant, Milvus) and output vector_db_comparison.json with structured comparison data. All required fields must be present and correctly typed.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, sys\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"vector_db_comparison.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert \\\"databases\\\" in data, \\\"missing databases\\\"\\nassert len(data[\\\"databases\\\"]) == 5, f\\\"expected 5 databases, got {len(data['databases'])}\\\"\\n\\nrequired_names = {\\\"Chroma\\\", \\\"Pinecone\\\", \\\"Weaviate\\\", \\\"Qdrant\\\", \\\"Milvus\\\"}\\nfound_names = {db[\\\"name\\\"] for db in data[\\\"databases\\\"]}\\nassert found_names == required_names, f\\\"missing databases: {required_names - found_names}\\\"\\n\\nrequired_fields = [\\\"name\\\", \\\"open_source\\\", \\\"self_hosted\\\", \\\"managed_cloud\\\", \\\"free_tier\\\",\\n                   \\\"python_sdk\\\", \\\"langchain_integration\\\", \\\"best_for\\\", \\\"limitations\\\", \\\"pricing_summary\\\"]\\nfor db in data[\\\"databases\\\"]:\\n    for field in required_fields:\\n        assert field in db, f\\\"missing field '{field}' in {db.get('name', '?')}\\\"\\n    assert isinstance(db[\\\"open_source\\\"], bool), f\\\"open_source must be bool in {db['name']}\\\"\\n    assert isinstance(db[\\\"python_sdk\\\"], bool), f\\\"python_sdk must be bool in {db['name']}\\\"\\n    assert isinstance(db[\\\"free_tier\\\"], bool), f\\\"free_tier must be bool in {db['name']}\\\"\\n    assert isinstance(db[\\\"best_for\\\"], str) and len(db[\\\"best_for\\\"]) > 5, f\\\"best_for too short in {db['name']}\\\"\\n    assert isinstance(db[\\\"limitations\\\"], str) and len(db[\\\"limitations\\\"]) > 5, f\\\"limitations too short in {db['name']}\\\"\\n\\n# Validate date format\\nimport re\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"generated_at must be YYYY-MM-DD\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"vector_db_comparison.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Research 5 vector databases (Chroma, Pinecone, Weaviate, Qdrant, Milvus) and output vector_db_comparison.json with structured comparison data. All required fields must be present and correctly typed.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json, sys\nfrom pathlib import Path\n\ndata = json.loads(Path(\"vector_db_comparison.json\").read_text())\n\nassert \"generated_at\" in data, \"missing generated_at\"\nassert \"databases\" in data, \"missing databases\"\nassert len(data[\"databases\"]) == 5, f\"expected 5 databases, got {len(data['databases'])}\"\n\nrequired_names = {\"Chroma\", \"Pinecone\", \"Weaviate\", \"Qdrant\", \"Milvus\"}\nfound_names = {db[\"name\"] for db in data[\"databases\"]}\nassert found_names == required_names, f\"missing databases: {required_names - found_names}\"\n\nrequired_fields = [\"name\", \"open_source\", \"self_hosted\", \"managed_cloud\", \"free_tier\",\n                   \"python_sdk\", \"langchain_integration\", \"best_for\", \"limitations\", \"pricing_summary\"]\nfor db in data[\"databases\"]:\n    for field in required_fields:\n        assert field in db, f\"missing field '{field}' in {db.get('name', '?')}\"\n    assert isinstance(db[\"open_source\"], bool), f\"open_source must be bool in {db['name']}\"\n    assert isinstance(db[\"python_sdk\"], bool), f\"python_sdk must be bool in {db['name']}\"\n    assert isinstance(db[\"free_tier\"], bool), f\"free_tier must be bool in {db['name']}\"\n    assert isinstance(db[\"best_for\"], str) and len(db[\"best_for\"]) > 5, f\"best_for too short in {db['name']}\"\n    assert isinstance(db[\"limitations\"], str) and len(db[\"limitations\"]) > 5, f\"limitations too short in {db['name']}\"\n\n# Validate date format\nimport re\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"generated_at\"]), \"generated_at must be YYYY-MM-DD\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "vector_db_comparison.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773826333,
-      "source": "https://www.bountybook.ai/job/c8c58ea0-debb-46e3-b417-3377129bcc6d",
       "source_kind": "bountybook"
     },
     {
@@ -3201,6 +3159,46 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
+      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "markdown_table.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
