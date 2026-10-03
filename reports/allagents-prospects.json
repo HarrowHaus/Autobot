@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-03T05:41:57Z",
+  "generated_at": "2026-10-03T11:58:26Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -63,6 +63,16 @@
       "name": "Packrift A2A Packaging Procurement Router",
       "slug": "packrift-a2a-packaging-procurement-router",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "intentguard-router",
+      "name": "IntentGuard Router",
+      "slug": "intentguard-router",
+      "specialty": "model-routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -179,26 +189,6 @@
       "tags": []
     },
     {
-      "key": "hostdefi-token-risk-api",
-      "name": "HostDeFi Token Risk API",
-      "slug": "hostdefi-token-risk-api",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "hilt-pay-agent-gateway",
-      "name": "Hilt Pay Agent Gateway",
-      "slug": "hilt-pay-agent-gateway",
-      "specialty": "agents-infra",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "bounty-engineer-agent-commerce",
       "name": "Bounty Engineer Agent Commerce",
       "slug": "bounty-engineer-agent-commerce",
@@ -219,16 +209,6 @@
       "tags": []
     },
     {
-      "key": "bounty-engineer-agent-security-revenue",
-      "name": "Bounty Engineer Agent Security & Revenue",
-      "slug": "bounty-engineer-agent-security-revenue",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "kronos-quant-signal-api",
       "name": "Kronos Quant Signal API",
       "slug": "kronos-quant-signal-api",
@@ -239,10 +219,40 @@
       "tags": []
     },
     {
-      "key": "a0-route-intelligence",
-      "name": "A0 Route Intelligence",
-      "slug": "a0-route-intelligence",
+      "key": "hostdefi-token-risk-api",
+      "name": "HostDeFi Token Risk API",
+      "slug": "hostdefi-token-risk-api",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "hilt-pay-agent-gateway",
+      "name": "Hilt Pay Agent Gateway",
+      "slug": "hilt-pay-agent-gateway",
       "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "nexus-intelligence",
+      "name": "NEXUS Intelligence",
+      "slug": "nexus-intelligence",
+      "specialty": "trading",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "bounty-engineer-agent-security-revenue",
+      "name": "Bounty Engineer Agent Security & Revenue",
+      "slug": "bounty-engineer-agent-security-revenue",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -299,30 +309,20 @@
       "tags": []
     },
     {
-      "key": "zambo",
-      "name": "Zambo",
-      "slug": "zambo",
-      "specialty": "commerce",
+      "key": "bounty-engineer-autonomous-mission-commerce",
+      "name": "Bounty Engineer Autonomous Mission Commerce",
+      "slug": "bounty-engineer-autonomous-mission-commerce",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "algovoi-payable-rail",
-      "name": "AlgoVoi Payable Rail",
-      "slug": "algovoi-payable-rail",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agent-bench-travel-merchant",
-      "name": "Agent Bench Travel Merchant",
-      "slug": "agent-bench-travel-merchant",
-      "specialty": "commerce",
+      "key": "machine-library",
+      "name": "Machine Library",
+      "slug": "machine-library",
+      "specialty": "research",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
