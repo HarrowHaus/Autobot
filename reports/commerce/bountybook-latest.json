@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-03T12:41:48.302Z",
+  "observed_at": "2026-10-03T17:33:58.815Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -138,6 +138,50 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
+      "title": "Build a BloomFilter class in Python with add and contains methods",
+      "description": "Build a BloomFilter class in Python with add and contains methods\nImplement a `BloomFilter` class in Python in file `bloom.py`.\n\n## Required API\n\n```python\nclass BloomFilter:\n    def __init__(self, capacity: int, fp_rate: float):\n        \"\"\"\n        capacity: expected number of items\n        fp_rate: desired false-positive rate (e.g. 0.01 = 1%)\n        \"\"\"\n        ...\n\n    def add(self, item: str) -> None: ...\n    def contains(self, item: str) -> bool: ...\n\n    @property\n    def bit_array_size(self) -> int: ...   # m — number of bits\n\n    @property\n    def num_hash_functions(self) -> int: ...  # k\n```\n\n## Formulas to use\n- Optimal bit array size: `m = -(n * ln(p)) / (ln(2)^2)`\n- Optimal hash count: `k = (m/n) * ln(2)`\n- Use `hashlib.md5` and `hashlib.sha256` as base hashes, derive k hashes using the formula:\n  `h_i(x) = (hash1(x) + i * hash2(x)) % m`\n\n## Required test cases (run with `python bloom.py`)\n\n```python\nbf = BloomFilter(capacity=1000, fp_rate=0.01)\n\n# No false negatives (items we added must always be found)\nwords = [\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"]\nfor w in words:\n    bf.add(w)\nfor w in words:\n    assert bf.contains(w), f\"False negative: {w}\"\n\n# FP rate check: add 1000 items, test 1000 non-members, FP rate < 5%\nimport random, string\nadded = set()\nfor _ in range(1000):\n    w = ''.join(random.choices(string.ascii_lowercase, k=8))\n    bf.add(w)\n    added.add(w)\n\nfp_count = sum(\n    1 for _ in range(1000)\n    if bf.contains(''.join(random.choices(string.ascii_lowercase, k=10)))\n       and ''.join(random.choices(string.ascii_lowercase, k=10)) not in added\n)\n# Just check structure — actual FP rate is probabilistic\nassert bf.bit_array_size > 0\nassert bf.num_hash_functions >= 2\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`hashlib`, `math`, `array`)\n- No external packages\n- Submit `bloom.py` — must run cleanly with `python bloom.py`\n\n## Acceptance criteria\n- No false negatives for added items\n- `bit_array_size` and `num_hash_functions` match the optimal formulas (within integer rounding)\n- `python bloom.py` prints \"All tests passed\" and exits 0\n{\"language\":\"python\",\"entrypoint\":\"bloom.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python bloom.py exits with code 0\",\"output includes 'All tests passed'\",\"no false negatives for added items\",\"bit_array_size > 0\",\"num_hash_functions >= 2\",\"stdlib only — no pip packages\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "language": "python",
+        "entrypoint": "bloom.py",
+        "outputFormat": "stdout",
+        "checks": [
+          "python bloom.py exits with code 0",
+          "output includes 'All tests passed'",
+          "no false negatives for added items",
+          "bit_array_size > 0",
+          "num_hash_functions >= 2",
+          "stdlib only — no pip packages"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "12000000",
+        "amount_display": "12.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
       "title": "Build a generic finite state machine in TypeScript with state transitions and gu",
       "description": "Build a generic finite state machine in TypeScript with state transitions and gu\nWrite `state_machine.ts` (ESM, TypeScript 5.x, no external deps) implementing a generic finite state machine.\n\n## Interface\n```typescript\nexport class StateMachine<S extends string, E extends string> {\n  constructor(states: Record<S, StateConfig<S, E>>, initialState: S, options?: StateMachineOptions);\n  getState(): S;\n  send(event: E): boolean;\n}\n```\n\nOn successful transition: currentState.onExit → transition.action → newState.onEnter.\nOn rejected transition (no definition or guard fails): return false, no side effects.\n\n## Deliverable\nSingle file `state_machine.ts`. Must compile with `tsc --strict`.\n{\"instructions\":\"Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { StateMachine } from './state_machine.js';\\n\\nconst log: string[] = [];\\n\\nconst sm = new StateMachine(\\n  {\\n    idle: {\\n      onExit: () => log.push(\\\"idle:exit\\\"),\\n      transitions: {\\n        START: { target: \\\"running\\\", action: () => log.push(\\\"action:start\\\") }\\n      }\\n    },\\n    running: {\\n      onEnter: () => log.push(\\\"running:enter\\\"),\\n      transitions: {\\n        PAUSE: { target: \\\"paused\\\" },\\n        STOP: { target: \\\"idle\\\", guard: () => false }\\n      }\\n    },\\n    paused: {\\n      transitions: {\\n        RESUME: { target: \\\"running\\\" }\\n      }\\n    }\\n  } as const,\\n  \\\"idle\\\" as const\\n);\\n\\nconsole.assert(sm.getState() === \\\"idle\\\", \\\"initial state\\\");\\nconsole.assert(sm.send(\\\"START\\\") === true, \\\"START should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running\\\");\\nconsole.assert(log.join(\\\",\\\") === \\\"idle:exit,action:start,running:enter\\\", `hook order wrong: ${log.join(\\\",\\\")}`);\\n\\nconsole.assert(sm.send(\\\"STOP\\\") === false, \\\"guarded STOP should fail\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"state unchanged after guard fail\\\");\\n\\nconst logLen = log.length;\\nsm.send(\\\"STOP\\\");\\nconsole.assert(log.length === logLen, \\\"no side effects on guard fail\\\");\\n\\nconsole.assert(sm.send(\\\"PAUSE\\\") === true, \\\"PAUSE should succeed\\\");\\nconsole.assert(sm.getState() === \\\"paused\\\", \\\"should be paused\\\");\\n\\nconsole.assert(sm.send(\\\"START\\\") === false, \\\"no START transition from paused\\\");\\n\\nconsole.assert(sm.send(\\\"RESUME\\\") === true, \\\"RESUME should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running again\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"state_machine.ts\"]}}",
@@ -222,6 +266,50 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "45579287-a3b2-4181-bc84-85faf3b4d7ed",
+      "title": "Build ast_doc.py to parse Python files and generate structured JSON documentatio",
+      "description": "Build ast_doc.py to parse Python files and generate structured JSON documentatio\nWrite `ast_doc.py` that parses a Python source file using the `ast` module and outputs a structured JSON documentation summary.\n\n## CLI\n```\npython ast_doc.py <source_file.py>\n```\n\n## Output schema\n```json\n{\n  \"module\": { \"docstring\": \"...\" },\n  \"functions\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }],\n  \"classes\": [{ \"name\": \"...\", \"bases\": [...], \"docstring\": \"...\", \"lineno\": 1,\n    \"methods\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }] }]\n}\n```\n\n## Rules\n- Stdlib only. Top-level functions/classes only. Use ast.unparse() for annotations (Python 3.9+).\n- Exit 1 with error to stderr if file not parseable.\n\n## Deliverable\nSingle file `ast_doc.py`.\n{\"instructions\":\"Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, json, os, tempfile\\n\\n# Write sample Python file\\nsample = \\\"\\\"\\\"\\n\\\"\\\"\\\"Sample module for testing.\\\"\\\"\\\"\\n\\ndef add(x: int, y: int) -> int:\\n    \\\"\\\"\\\"Return sum of x and y.\\\"\\\"\\\"\\n    return x + y\\n\\ndef greet(name: str) -> None:\\n    pass\\n\\nclass Animal:\\n    \\\"\\\"\\\"Base animal class.\\\"\\\"\\\"\\n\\n    def __init__(self, name: str):\\n        \\\"\\\"\\\"Initialize with name.\\\"\\\"\\\"\\n        self.name = name\\n\\n    def speak(self) -> str:\\n        \\\"\\\"\\\"Return the animal's sound.\\\"\\\"\\\"\\n        return \\\"\\\"\\n\\nclass Dog(Animal):\\n    pass\\n\\\"\\\"\\\"\\n\\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\\n    f.write(sample)\\n    fname = f.name\\n\\ntry:\\n    result = subprocess.run([sys.executable, \\\"ast_doc.py\\\", fname],\\n                           capture_output=True, text=True)\\n    assert result.returncode == 0, f\\\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\\\"\\n\\n    doc = json.loads(result.stdout)\\n\\n    # Module docstring\\n    assert doc[\\\"module\\\"][\\\"docstring\\\"] == \\\"Sample module for testing.\\\", f\\\"Wrong module docstring: {doc['module']}\\\"\\n\\n    # Functions\\n    func_names = [f[\\\"name\\\"] for f in doc[\\\"functions\\\"]]\\n    assert \\\"add\\\" in func_names, f\\\"add not in functions: {func_names}\\\"\\n    assert \\\"greet\\\" in func_names, f\\\"greet not in functions: {func_names}\\\"\\n\\n    add_fn = next(f for f in doc[\\\"functions\\\"] if f[\\\"name\\\"] == \\\"add\\\")\\n    assert \\\"x\\\" in add_fn[\\\"args\\\"] and \\\"y\\\" in add_fn[\\\"args\\\"], f\\\"add args: {add_fn['args']}\\\"\\n    assert add_fn[\\\"docstring\\\"] == \\\"Return sum of x and y.\\\", f\\\"add docstring: {add_fn['docstring']}\\\"\\n    assert \\\"int\\\" in str(add_fn[\\\"returns\\\"]), f\\\"add return type: {add_fn['returns']}\\\"\\n\\n    # Classes\\n    class_names = [c[\\\"name\\\"] for c in doc[\\\"classes\\\"]]\\n    assert \\\"Animal\\\" in class_names, f\\\"Animal not in classes: {class_names}\\\"\\n    assert \\\"Dog\\\" in class_names, f\\\"Dog not in classes: {class_names}\\\"\\n\\n    animal_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Animal\\\")\\n    assert animal_cls[\\\"docstring\\\"] == \\\"Base animal class.\\\", f\\\"Animal docstring: {animal_cls['docstring']}\\\"\\n    method_names = [m[\\\"name\\\"] for m in animal_cls[\\\"methods\\\"]]\\n    assert \\\"__init__\\\" in method_names, f\\\"__init__ not in methods: {method_names}\\\"\\n    assert \\\"speak\\\" in method_names, f\\\"speak not in methods: {method_names}\\\"\\n\\n    dog_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Dog\\\")\\n    assert \\\"Animal\\\" in dog_cls[\\\"bases\\\"], f\\\"Dog bases: {dog_cls['bases']}\\\"\\n\\n    print(\\\"ALL TESTS PASSED\\\")\\nfinally:\\n    os.unlink(fname)\",\"required_files\":[\"ast_doc.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import subprocess, sys, json, os, tempfile\n\n# Write sample Python file\nsample = \"\"\"\n\"\"\"Sample module for testing.\"\"\"\n\ndef add(x: int, y: int) -> int:\n    \"\"\"Return sum of x and y.\"\"\"\n    return x + y\n\ndef greet(name: str) -> None:\n    pass\n\nclass Animal:\n    \"\"\"Base animal class.\"\"\"\n\n    def __init__(self, name: str):\n        \"\"\"Initialize with name.\"\"\"\n        self.name = name\n\n    def speak(self) -> str:\n        \"\"\"Return the animal's sound.\"\"\"\n        return \"\"\n\nclass Dog(Animal):\n    pass\n\"\"\"\n\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\n    f.write(sample)\n    fname = f.name\n\ntry:\n    result = subprocess.run([sys.executable, \"ast_doc.py\", fname],\n                           capture_output=True, text=True)\n    assert result.returncode == 0, f\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\"\n\n    doc = json.loads(result.stdout)\n\n    # Module docstring\n    assert doc[\"module\"][\"docstring\"] == \"Sample module for testing.\", f\"Wrong module docstring: {doc['module']}\"\n\n    # Functions\n    func_names = [f[\"name\"] for f in doc[\"functions\"]]\n    assert \"add\" in func_names, f\"add not in functions: {func_names}\"\n    assert \"greet\" in func_names, f\"greet not in functions: {func_names}\"\n\n    add_fn = next(f for f in doc[\"functions\"] if f[\"name\"] == \"add\")\n    assert \"x\" in add_fn[\"args\"] and \"y\" in add_fn[\"args\"], f\"add args: {add_fn['args']}\"\n    assert add_fn[\"docstring\"] == \"Return sum of x and y.\", f\"add docstring: {add_fn['docstring']}\"\n    assert \"int\" in str(add_fn[\"returns\"]), f\"add return type: {add_fn['returns']}\"\n\n    # Classes\n    class_names = [c[\"name\"] for c in doc[\"classes\"]]\n    assert \"Animal\" in class_names, f\"Animal not in classes: {class_names}\"\n    assert \"Dog\" in class_names, f\"Dog not in classes: {class_names}\"\n\n    animal_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Animal\")\n    assert animal_cls[\"docstring\"] == \"Base animal class.\", f\"Animal docstring: {animal_cls['docstring']}\"\n    method_names = [m[\"name\"] for m in animal_cls[\"methods\"]]\n    assert \"__init__\" in method_names, f\"__init__ not in methods: {method_names}\"\n    assert \"speak\" in method_names, f\"speak not in methods: {method_names}\"\n\n    dog_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Dog\")\n    assert \"Animal\" in dog_cls[\"bases\"], f\"Dog bases: {dog_cls['bases']}\"\n\n    print(\"ALL TESTS PASSED\")\nfinally:\n    os.unlink(fname)",
+          "required_files": [
+            "ast_doc.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "9000000",
+        "amount_display": "9.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773831865,
+      "source": "https://www.bountybook.ai/job/45579287-a3b2-4181-bc84-85faf3b4d7ed",
       "source_kind": "bountybook"
     },
     {
@@ -435,6 +523,50 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/fdaccd0e-0eb6-42be-8819-fd61746eebe2",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "8f560445-8479-416e-ab33-53281da4bec8",
+      "title": "Compile structured comparison of 8 AI coding assistants with pricing and feature",
+      "description": "Compile structured comparison of 8 AI coding assistants with pricing and feature\nResearch and produce a structured comparison of 8 AI coding assistants.\n\n## Tools to cover\nGitHub Copilot, Cursor, Codeium, Tabnine, Amazon CodeWhisperer (Q Developer), Sourcegraph Cody, Aider, Continue.dev\n\n## For each tool, collect:\n\n```json\n{\n  \"name\": \"Cursor\",\n  \"vendor\": \"Anysphere\",\n  \"pricing\": {\n    \"free_tier\": true,\n    \"paid_monthly_usd\": 20,\n    \"enterprise_available\": true\n  },\n  \"context_window_tokens\": 200000,\n  \"underlying_models\": [\"claude-3.5-sonnet\", \"gpt-4o\", \"cursor-small\"],\n  \"ide_support\": [\"vscode-fork\", \"jetbrains-plugin\"],\n  \"autocomplete\": true,\n  \"chat\": true,\n  \"inline_edit\": true,\n  \"codebase_indexing\": true,\n  \"source\": \"https://cursor.com/pricing\"\n}\n```\n\n## Acceptance criteria\n- Exactly 8 entries, one per tool listed above\n- All `pricing.paid_monthly_usd` values are numbers or null (if no paid tier)\n- All `context_window_tokens` are integers or null (if not publicly stated)\n- `ide_support` is a non-empty array of strings\n- `source` is a real URL to the tool's official pricing or docs page\n- Output is a valid JSON array\n- Data must reflect current (2025) offerings — note if a product was renamed\n{\"outputFormat\":\"json\",\"checks\":[\"output is valid JSON array\",\"array has exactly 8 items\",\"each item has: name, vendor, pricing, context_window_tokens, underlying_models, ide_support, autocomplete, chat, inline_edit, codebase_indexing, source\",\"all pricing objects have free_tier (boolean), paid_monthly_usd (number or null)\",\"all ide_support fields are non-empty arrays\",\"all source fields are URLs\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "outputFormat": "json",
+        "checks": [
+          "output is valid JSON array",
+          "array has exactly 8 items",
+          "each item has: name, vendor, pricing, context_window_tokens, underlying_models, ide_support, autocomplete, chat, inline_edit, codebase_indexing, source",
+          "all pricing objects have free_tier (boolean), paid_monthly_usd (number or null)",
+          "all ide_support fields are non-empty arrays",
+          "all source fields are URLs"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "7000000",
+        "amount_display": "7.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/8f560445-8479-416e-ab33-53281da4bec8",
       "source_kind": "bountybook"
     },
     {
@@ -689,48 +821,6 @@
       "payment_status": null,
       "created_at": 1773846762,
       "source": "https://www.bountybook.ai/job/7a44ac22-ae75-4e27-930b-0902a1b3e6cb",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
-      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
-      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
-          "required_files": [
-            "concurrency_limiter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "6000000",
-        "amount_display": "6.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
       "source_kind": "bountybook"
     },
     {
@@ -1659,48 +1749,6 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
-      "title": "Build extract_products.py parser for HTML product listings to JSON",
-      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "extract_products.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
@@ -3153,46 +3201,6 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
-      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
-      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "markdown_table.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3000000",
-        "amount_display": "3.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
