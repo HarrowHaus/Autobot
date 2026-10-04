@@ -321,16 +321,16 @@
       "weight": 0.75
     },
     "27ab084245e8d91e28c44117": {
-      "events": 12,
+      "events": 13,
       "first_seen": "2026-09-27T00:24:45Z",
       "id": "27ab084245e8d91e28c44117",
-      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:739e21406c985842",
-      "last_seen": "2026-10-04T02:39:33Z",
+      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:6921902e52838d49",
+      "last_seen": "2026-10-04T15:22:31Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:dc92def14af228a3de4cb1b1",
       "validated_events": 0,
-      "weight": 18.0
+      "weight": 19.5
     },
     "280cb9d40e44159718efaf4f": {
       "events": 1,
@@ -473,16 +473,16 @@
       "weight": 3.25
     },
     "3d25f4ace70c409b33b577d1": {
-      "events": 3,
+      "events": 4,
       "first_seen": "2026-09-27T00:22:11Z",
       "id": "3d25f4ace70c409b33b577d1",
-      "last_event_id": "card-probe:agent:86330da5c05edce21d92449f:e6a9a77b9f5fa6e6",
-      "last_seen": "2026-10-03T23:04:46Z",
+      "last_event_id": "card-probe:agent:86330da5c05edce21d92449f:10219449b2131726",
+      "last_seen": "2026-10-04T15:22:25Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:86330da5c05edce21d92449f",
       "validated_events": 0,
-      "weight": 4.5
+      "weight": 6.0
     },
     "3eceaf5aae7c3489e7b568a6": {
       "events": 1,
@@ -866,16 +866,16 @@
       "weight": 0.75
     },
     "6b5b519f449aac65a6c737a9": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:22:11Z",
       "id": "6b5b519f449aac65a6c737a9",
-      "last_event_id": "card-probe:agent:83f061aae5a776b4829f1f45:cc3f479916abed53",
-      "last_seen": "2026-09-27T00:22:11Z",
+      "last_event_id": "card-probe:agent:83f061aae5a776b4829f1f45:aa44a84ada1ec542",
+      "last_seen": "2026-10-04T15:22:24Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:83f061aae5a776b4829f1f45",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     },
     "6deccca8217641e00873e5b9": {
       "events": 19,
@@ -1879,5 +1879,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-04T09:47:29Z"
+  "updated_at": "2026-10-04T15:22:31Z"
 }
