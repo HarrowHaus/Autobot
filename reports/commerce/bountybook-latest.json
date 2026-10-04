@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-04T10:03:31.484Z",
+  "observed_at": "2026-10-04T15:28:58.885Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1707,6 +1707,48 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "title": "Build extract_products.py parser for HTML product listings to JSON",
+      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "extract_products.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
@@ -4005,46 +4047,6 @@
       "payment_status": null,
       "created_at": 1773999157,
       "source": "https://www.bountybook.ai/job/6c541fc3-6425-4d70-9c4c-02a8ade90b1c",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "740fd768-1dcb-410c-a7ad-c64ac8be50af",
-      "title": "Build a dict flattening function in flatten.py",
-      "description": "Build a dict flattening function in flatten.py\nWrite a function `flatten_dict(d: dict, sep: str = '.') -> dict` in `flatten.py`.\n\n## Behavior\n- Recursively flatten nested dicts into a single-level dict\n- Keys in the output are joined with `sep` (default `'.'`)\n- Non-dict values are kept as-is (including lists, numbers, strings, None)\n- An empty nested dict produces no keys in the output\n\n## Examples\n```python\nflatten_dict({\"a\": {\"b\": 1, \"c\": 2}})\n# {\"a.b\": 1, \"a.c\": 2}\n\nflatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0})\n# {\"x.y.z\": 3, \"n\": 0}\n\nflatten_dict({\"a\": 1}, sep=\"/\")\n# {\"a\": 1}\n\nflatten_dict({\"a\": {\"b\": [1, 2, 3]}})\n# {\"a.b\": [1, 2, 3]}\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `flatten.py`\n- Handle arbitrarily deep nesting\n{\"instructions\":\"Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from flatten import flatten_dict\\n\\n# Basic nesting\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1, \\\"c\\\": 2}}) == {\\\"a.b\\\": 1, \\\"a.c\\\": 2}, \\\"basic nesting\\\"\\n\\n# Deep nesting\\nassert flatten_dict({\\\"x\\\": {\\\"y\\\": {\\\"z\\\": 3}}, \\\"n\\\": 0}) == {\\\"x.y.z\\\": 3, \\\"n\\\": 0}, \\\"deep nesting\\\"\\n\\n# Custom separator\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1}}, sep=\\\"/\\\") == {\\\"a/b\\\": 1}, \\\"custom sep\\\"\\n\\n# List values are not expanded\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": [1, 2, 3]}}) == {\\\"a.b\\\": [1, 2, 3]}, \\\"list value preserved\\\"\\n\\n# Already flat dict\\nassert flatten_dict({\\\"x\\\": 1, \\\"y\\\": 2}) == {\\\"x\\\": 1, \\\"y\\\": 2}, \\\"already flat\\\"\\n\\n# Empty dict\\nassert flatten_dict({}) == {}, \\\"empty dict\\\"\\n\\n# Nested empty dict produces no keys\\nresult = flatten_dict({\\\"a\\\": {}})\\nassert \\\"a\\\" not in result, \\\"empty nested dict adds no keys\\\"\\n\\n# None values\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": None}}) == {\\\"a.b\\\": None}, \\\"None value\\\"\\n\\n# Mixed depth\\nr = flatten_dict({\\\"a\\\": {\\\"b\\\": 1}, \\\"c\\\": 2, \\\"d\\\": {\\\"e\\\": {\\\"f\\\": 3}}})\\nassert r == {\\\"a.b\\\": 1, \\\"c\\\": 2, \\\"d.e.f\\\": 3}, f\\\"mixed: {r}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"flatten.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from flatten import flatten_dict\n\n# Basic nesting\nassert flatten_dict({\"a\": {\"b\": 1, \"c\": 2}}) == {\"a.b\": 1, \"a.c\": 2}, \"basic nesting\"\n\n# Deep nesting\nassert flatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0}) == {\"x.y.z\": 3, \"n\": 0}, \"deep nesting\"\n\n# Custom separator\nassert flatten_dict({\"a\": {\"b\": 1}}, sep=\"/\") == {\"a/b\": 1}, \"custom sep\"\n\n# List values are not expanded\nassert flatten_dict({\"a\": {\"b\": [1, 2, 3]}}) == {\"a.b\": [1, 2, 3]}, \"list value preserved\"\n\n# Already flat dict\nassert flatten_dict({\"x\": 1, \"y\": 2}) == {\"x\": 1, \"y\": 2}, \"already flat\"\n\n# Empty dict\nassert flatten_dict({}) == {}, \"empty dict\"\n\n# Nested empty dict produces no keys\nresult = flatten_dict({\"a\": {}})\nassert \"a\" not in result, \"empty nested dict adds no keys\"\n\n# None values\nassert flatten_dict({\"a\": {\"b\": None}}) == {\"a.b\": None}, \"None value\"\n\n# Mixed depth\nr = flatten_dict({\"a\": {\"b\": 1}, \"c\": 2, \"d\": {\"e\": {\"f\": 3}}})\nassert r == {\"a.b\": 1, \"c\": 2, \"d.e.f\": 3}, f\"mixed: {r}\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "flatten.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261989,
-      "source": "https://www.bountybook.ai/job/740fd768-1dcb-410c-a7ad-c64ac8be50af",
       "source_kind": "bountybook"
     },
     {
