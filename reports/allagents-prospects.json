@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-03T21:43:22Z",
+  "generated_at": "2026-10-04T06:16:52Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -249,6 +249,16 @@
       "tags": []
     },
     {
+      "key": "ziplore-by-cybermax",
+      "name": "Ziplore by CyberMax",
+      "slug": "ziplore-by-cybermax",
+      "specialty": "zip codes",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "bounty-engineer-agent-security-revenue",
       "name": "Bounty Engineer Agent Security & Revenue",
       "slug": "bounty-engineer-agent-security-revenue",
@@ -313,16 +323,6 @@
       "name": "Bounty Engineer Autonomous Mission Commerce",
       "slug": "bounty-engineer-autonomous-mission-commerce",
       "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "machine-library",
-      "name": "Machine Library",
-      "slug": "machine-library",
-      "specialty": "research",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
