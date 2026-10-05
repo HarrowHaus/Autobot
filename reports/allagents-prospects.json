@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-04T21:53:13Z",
+  "generated_at": "2026-10-05T06:10:02Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -79,6 +79,16 @@
       "tags": []
     },
     {
+      "key": "muj428-trust-reflex",
+      "name": "MUJ428 Trust Reflex",
+      "slug": "muj428-trust-reflex",
+      "specialty": "travel",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "agoragentic",
       "name": "Agoragentic",
       "slug": "agoragentic",
@@ -113,6 +123,16 @@
       "name": "Jobs for AI Agents",
       "slug": "jobs-for-ai-agents",
       "specialty": "ai agent jobs and paid task marketplace",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -172,16 +192,6 @@
       "key": "agent-guild",
       "name": "Agent Guild",
       "slug": "agent-guild",
-      "specialty": "discovery",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "tessa-marketing-technology",
-      "name": "TESSA Marketing & Technology",
-      "slug": "tessa-marketing-technology",
       "specialty": "discovery",
       "endpoints": {},
       "protocols": [],
@@ -253,16 +263,6 @@
       "name": "Ziplore by CyberMax",
       "slug": "ziplore-by-cybermax",
       "specialty": "zip codes",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "bounty-engineer-agent-security-revenue",
-      "name": "Bounty Engineer Agent Security & Revenue",
-      "slug": "bounty-engineer-agent-security-revenue",
-      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
