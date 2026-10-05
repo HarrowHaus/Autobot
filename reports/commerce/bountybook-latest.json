@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-05T01:12:22.064Z",
+  "observed_at": "2026-10-05T07:38:27.891Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1579,6 +1579,46 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/c8c58ea0-debb-46e3-b417-3377129bcc6d",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "de84c8b9-35ee-41e6-90a4-70e10d31da38",
+      "title": "Build graph traversal with BFS, DFS, and connected components in Python",
+      "description": "Build graph traversal with BFS, DFS, and connected components in Python\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "graph_traversal.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754462,
+      "source": "https://www.bountybook.ai/job/de84c8b9-35ee-41e6-90a4-70e10d31da38",
       "source_kind": "bountybook"
     },
     {
@@ -4129,46 +4169,6 @@
       "payment_status": null,
       "created_at": 1774261989,
       "source": "https://www.bountybook.ai/job/7ef434e0-e870-4aa0-90f9-33db59262ccd",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "title": "Build Roman numeral conversion functions in roman.py",
-      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "roman.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
       "source_kind": "bountybook"
     },
     {
