@@ -1,0 +1,32 @@
+{
+  "schema": "a0-revenue-catalog/1",
+  "as_of": "2026-09-24",
+  "mode": "development_not_live_offers",
+  "defaults": {"delivery_endpoint_verified": false, "payment_integration_verified": false, "price_status": "unquoted", "external_revenue_verified_atomic": 0},
+  "lanes": [
+    {"service_id":"csv-audit","modality":"data","unit":"file","implementation":"implemented_offline","scope":"CSV to records and integrity report"},
+    {"service_id":"subtitle-audit","modality":"audio_video_metadata","unit":"subtitle_file","implementation":"implemented_offline","scope":"SRT syntax/timing only"},
+    {"service_id":"svg-structure-audit","modality":"image_structure","unit":"SVG","implementation":"implemented_offline","scope":"XML lint, not image perception or sanitization"},
+    {"service_id":"document-extraction","modality":"document_image","unit":"document","implementation":"proposed"},
+    {"service_id":"source-research","modality":"text","unit":"accepted_answer","implementation":"proposed"},
+    {"service_id":"translation-localization","modality":"text_audio_video","unit":"segment","implementation":"proposed"},
+    {"service_id":"change-monitoring","modality":"event","unit":"useful_alert_or_period","implementation":"proposed"},
+    {"service_id":"audio-transcription","modality":"audio","unit":"minute","implementation":"proposed"},
+    {"service_id":"audio-cleanup","modality":"audio","unit":"minute","implementation":"proposed"},
+    {"service_id":"video-repurposing","modality":"video","unit":"clip","implementation":"proposed"},
+    {"service_id":"image-accessibility","modality":"image_text","unit":"image","implementation":"proposed"},
+    {"service_id":"creative-assets","modality":"image_design","unit":"asset_license","implementation":"proposed"},
+    {"service_id":"game-3d-assets","modality":"3d","unit":"asset_license","implementation":"proposed"},
+    {"service_id":"licensed-datasets","modality":"data","unit":"license_or_update","implementation":"proposed"},
+    {"service_id":"correction-evaluation","modality":"code_data_text","unit":"accepted_correction","implementation":"proposed"},
+    {"service_id":"code-bounties","modality":"code","unit":"accepted_fix","implementation":"proposed"},
+    {"service_id":"workflow-bundles","modality":"multimodal","unit":"accepted_job","implementation":"proposed"},
+    {"service_id":"reusable-cache","modality":"data_text","unit":"licensed_reuse","implementation":"proposed"},
+    {"service_id":"compute-rental","modality":"compute","unit":"used_compute_unit","implementation":"proposed"},
+    {"service_id":"storage-video-network","modality":"infrastructure","unit":"billed_resource","implementation":"proposed"},
+    {"service_id":"useful-work-rewards","modality":"network","unit":"validated_outcome","implementation":"proposed"},
+    {"service_id":"sponsorship-grants","modality":"code_content","unit":"approved_milestone","implementation":"proposed"},
+    {"service_id":"referral-matching","modality":"marketplace","unit":"authorized_referral","implementation":"proposed"},
+    {"service_id":"demand-aggregation","modality":"marketplace","unit":"fulfilled_group_job","implementation":"proposed"}
+  ]
+}
