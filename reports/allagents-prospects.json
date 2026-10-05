@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-05T06:10:02Z",
+  "generated_at": "2026-10-05T15:13:25Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -32,7 +32,7 @@
       "key": "exactchange",
       "name": "exactchange",
       "slug": "exactchange",
-      "specialty": "trading",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -43,6 +43,16 @@
       "name": "SCRIPTMASTERLABS \u2014 SqueezeOS Trust Router",
       "slug": "scriptmasterlabs-squeezeos-trust-router",
       "specialty": "identity",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "intentguard-router",
+      "name": "IntentGuard Router",
+      "slug": "intentguard-router",
+      "specialty": "model-routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -63,16 +73,6 @@
       "name": "Packrift A2A Packaging Procurement Router",
       "slug": "packrift-a2a-packaging-procurement-router",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "intentguard-router",
-      "name": "IntentGuard Router",
-      "slug": "intentguard-router",
-      "specialty": "model-routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -139,26 +139,6 @@
       "tags": []
     },
     {
-      "key": "skyros-lead-recovery-agent",
-      "name": "SKYROS Lead Recovery Agent",
-      "slug": "skyros-lead-recovery-agent",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "lumen-b2b-agent",
-      "name": "LUMEN B2B Agent",
-      "slug": "lumen-b2b-agent",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "muse",
       "name": "Muse",
       "slug": "muse",
@@ -179,6 +159,16 @@
       "tags": []
     },
     {
+      "key": "agent-guild",
+      "name": "Agent Guild",
+      "slug": "agent-guild",
+      "specialty": "discovery",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "ai-result-receipt-auditor",
       "name": "AI\uff89\u30a2\u30ab\u30ea\u2606 Result Receipt Auditor",
       "slug": "ai-result-receipt-auditor",
@@ -189,10 +179,20 @@
       "tags": []
     },
     {
-      "key": "agent-guild",
-      "name": "Agent Guild",
-      "slug": "agent-guild",
-      "specialty": "discovery",
+      "key": "lumen-b2b-agent",
+      "name": "LUMEN B2B Agent",
+      "slug": "lumen-b2b-agent",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "skyros-lead-recovery-agent",
+      "name": "SKYROS Lead Recovery Agent",
+      "slug": "skyros-lead-recovery-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -212,7 +212,7 @@
       "key": "p0-x402-market-index",
       "name": "P0 x402 Market Index",
       "slug": "p0-x402-market-index",
-      "specialty": "trading",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -279,16 +279,6 @@
       "tags": []
     },
     {
-      "key": "swarmsync-commerce-demo-agent",
-      "name": "SwarmSync Commerce Demo Agent",
-      "slug": "swarmsync-commerce-demo-agent",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "a2a-commerce-gateway",
       "name": "A2A Commerce Gateway",
       "slug": "a2a-commerce-gateway",
@@ -299,10 +289,10 @@
       "tags": []
     },
     {
-      "key": "aion-commerce-edge",
-      "name": "AION Commerce Edge",
-      "slug": "aion-commerce-edge",
-      "specialty": "verification",
+      "key": "swarmsync-commerce-demo-agent",
+      "name": "SwarmSync Commerce Demo Agent",
+      "slug": "swarmsync-commerce-demo-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -319,10 +309,20 @@
       "tags": []
     },
     {
-      "key": "bounty-engineer-autonomous-mission-commerce",
-      "name": "Bounty Engineer Autonomous Mission Commerce",
-      "slug": "bounty-engineer-autonomous-mission-commerce",
-      "specialty": "trading",
+      "key": "aion-commerce-edge",
+      "name": "AION Commerce Edge",
+      "slug": "aion-commerce-edge",
+      "specialty": "verification",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "algovoi-payment-agent",
+      "name": "AlgoVoi Payment Agent",
+      "slug": "algovoi-payment-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
