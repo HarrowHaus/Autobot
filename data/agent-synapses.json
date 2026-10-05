@@ -321,16 +321,16 @@
       "weight": 0.75
     },
     "27ab084245e8d91e28c44117": {
-      "events": 13,
+      "events": 14,
       "first_seen": "2026-09-27T00:24:45Z",
       "id": "27ab084245e8d91e28c44117",
-      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:6921902e52838d49",
-      "last_seen": "2026-10-04T15:22:31Z",
+      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:c59b762a005dcb72",
+      "last_seen": "2026-10-05T02:01:14Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:dc92def14af228a3de4cb1b1",
       "validated_events": 0,
-      "weight": 19.5
+      "weight": 21.0
     },
     "280cb9d40e44159718efaf4f": {
       "events": 1,
@@ -1879,5 +1879,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-04T23:10:16Z"
+  "updated_at": "2026-10-05T02:01:14Z"
 }
