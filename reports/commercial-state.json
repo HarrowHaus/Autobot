@@ -9,7 +9,31 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_05LE4so7mcJ6r0fLWuprn",
+      "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_1XyoCWh17Zn1TWlAC8E8b",
+      "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_YzhS2L2gCCpSVWTSaDWQU",
+      "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_a5m1QZ8U3pZyJ0phdu5zN",
+      "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_ie0cYRfwd7Oo8HZ3hFWPf",
       "score": 28.817
     },
     {
@@ -17,6 +41,24 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_jyOdrh474nQ5V3K3xumKf",
       "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_vr45efhdsoFyNHBpf8Wbu",
+      "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
+      "score": 25.775
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_PRGxeT66PotQxYJw7EPlL",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -35,11 +77,45 @@
       "id": "distribution:x402-bazaar",
       "kind": "distribution",
       "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "observed_at": "2026-10-06T03:21:11.482Z",
+      "observed_at": "2026-10-06T10:48:35.030Z",
       "score": 35.0,
       "source": "x402-bazaar",
       "status": "observed",
       "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_05LE4so7mcJ6r0fLWuprn",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 28.817,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_05LE4so7mcJ6r0fLWuprn",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Cashback 3"
     },
     {
       "advertised_value": {
@@ -62,7 +138,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-06T03:21:13.154Z",
+      "observed_at": "2026-10-06T10:48:36.971Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -88,6 +164,108 @@
         "payment_status": "pending"
       },
       "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_YzhS2L2gCCpSVWTSaDWQU",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 28.817,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_YzhS2L2gCCpSVWTSaDWQU",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Cashback 1"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_a5m1QZ8U3pZyJ0phdu5zN",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 28.817,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_a5m1QZ8U3pZyJ0phdu5zN",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Cashback 5"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_ie0cYRfwd7Oo8HZ3hFWPf",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 28.817,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_ie0cYRfwd7Oo8HZ3hFWPf",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Cashback 2"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
       "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
       "first_seen_at": "2026-10-06T03:21:13.154Z",
       "funding_evidence": "advertised_bounty",
@@ -95,7 +273,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-06T03:21:13.154Z",
+      "observed_at": "2026-10-06T10:48:36.971Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -106,6 +284,720 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_jyOdrh474nQ5V3K3xumKf",
       "status": "observed",
       "title": "Industrial Sentinel Paid External Deployment 22"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_vr45efhdsoFyNHBpf8Wbu",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 28.817,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_vr45efhdsoFyNHBpf8Wbu",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Cashback 4"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "250000",
+        "amount_display": "0.25",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.50 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.775,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Ix8t4HnjAhX6HilQxdVtZ",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard 5"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "250000",
+        "amount_display": "0.25",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.50 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_PRGxeT66PotQxYJw7EPlL",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.775,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_PRGxeT66PotQxYJw7EPlL",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard 3"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "250000",
+        "amount_display": "0.25",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.50 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_ToEmWubWjjfNICs4qnkYg",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.775,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_ToEmWubWjjfNICs4qnkYg",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard 1"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "250000",
+        "amount_display": "0.25",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.50 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_jqnmxHEcIGNHvANoCjtyZ",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.775,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_jqnmxHEcIGNHvANoCjtyZ",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard 2"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "250000",
+        "amount_display": "0.25",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.50 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_xunXTsWppfdx45xo6eIMx",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.775,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_xunXTsWppfdx45xo6eIMx",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard 4"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.16 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_13jaSLiQ8PWZBWmo2rDWp",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_13jaSLiQ8PWZBWmo2rDWp",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Micro Trial 3"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_DVOISQKim1g3ngY5wJonW",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_DVOISQKim1g3ngY5wJonW",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 10"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.16 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_HvmqXViyvFnjf5r7BRfe7",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_HvmqXViyvFnjf5r7BRfe7",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Micro Trial 1"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_ST9NGdV505CMvfXArNln2",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_ST9NGdV505CMvfXArNln2",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 3"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.16 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_XJbIXh5mSXxPfLL9xfLPD",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_XJbIXh5mSXxPfLL9xfLPD",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Micro Trial 4"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_aFCUUakClkB0hiHx0Cd0K",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_aFCUUakClkB0hiHx0Cd0K",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 4"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_aIj81UZeRWmVR0jxwpwE6",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_aIj81UZeRWmVR0jxwpwE6",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 1"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_bkD7FddMYhjKNlMVT70Sf",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_bkD7FddMYhjKNlMVT70Sf",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 8"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_iJ7HxoOc2DKLG8Ifcslmq",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_iJ7HxoOc2DKLG8Ifcslmq",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 2"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.16 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_jqpRSPLrgHyqzO0GJUHNU",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_jqpRSPLrgHyqzO0GJUHNU",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Micro Trial 5"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_ssR1lQveEPoyNq2lS4Tce",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_ssR1lQveEPoyNq2lS4Tce",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 9"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_vRU2OuGEtFJvAjU7mdHkM",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_vRU2OuGEtFJvAjU7mdHkM",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 7"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_wRb97knpBLyiT61lXRs5p",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_wRb97knpBLyiT61lXRs5p",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 5"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link proving genuine external Revenue Guard install, at least 0.16 USDC of attributable settled Industrial Platform revenue across two UTC dates, and a real Sentinel paid cycle on day two.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_x4DpieAeU9PWYtYJIg8ie",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_x4DpieAeU9PWYtYJIg8ie",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Micro Trial 2"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON proving five-gate qualification, genuine external Sentinel install, seller wallet/endpoint, and two 0.005 USDC Revenue Guard settlements from the same install across consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T10:48:36.971Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_y8yMI8cdSdCYh8U92X8mQ",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "inspect_fit_before_claim",
+      "observed_at": "2026-10-06T10:48:36.971Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation",
+        "x402"
+      ],
+      "score": 25.331,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_y8yMI8cdSdCYh8U92X8mQ",
+      "status": "observed",
+      "title": "Industrial Sentinel Revenue Guard Partner Trial 6"
     },
     {
       "advertised_value": {
@@ -2251,12 +3143,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 2,
-      "observed_at": "2026-10-06T03:21:13.154Z",
+      "candidate_count": 27,
+      "observed_at": "2026-10-06T10:48:36.971Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-06T03:21:11.482Z",
+      "observed_at": "2026-10-06T10:48:35.030Z",
       "our_resources_seen": 0,
       "status": "partial"
     }
@@ -2268,5 +3160,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-06T03:21:13Z"
+  "updated_at": "2026-10-06T10:48:37Z"
 }
