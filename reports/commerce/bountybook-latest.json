@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-06T10:43:52.837Z",
+  "observed_at": "2026-10-06T17:23:03.909Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -523,6 +523,50 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/fdaccd0e-0eb6-42be-8819-fd61746eebe2",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "8f560445-8479-416e-ab33-53281da4bec8",
+      "title": "Compile structured comparison of 8 AI coding assistants with pricing and feature",
+      "description": "Compile structured comparison of 8 AI coding assistants with pricing and feature\nResearch and produce a structured comparison of 8 AI coding assistants.\n\n## Tools to cover\nGitHub Copilot, Cursor, Codeium, Tabnine, Amazon CodeWhisperer (Q Developer), Sourcegraph Cody, Aider, Continue.dev\n\n## For each tool, collect:\n\n```json\n{\n  \"name\": \"Cursor\",\n  \"vendor\": \"Anysphere\",\n  \"pricing\": {\n    \"free_tier\": true,\n    \"paid_monthly_usd\": 20,\n    \"enterprise_available\": true\n  },\n  \"context_window_tokens\": 200000,\n  \"underlying_models\": [\"claude-3.5-sonnet\", \"gpt-4o\", \"cursor-small\"],\n  \"ide_support\": [\"vscode-fork\", \"jetbrains-plugin\"],\n  \"autocomplete\": true,\n  \"chat\": true,\n  \"inline_edit\": true,\n  \"codebase_indexing\": true,\n  \"source\": \"https://cursor.com/pricing\"\n}\n```\n\n## Acceptance criteria\n- Exactly 8 entries, one per tool listed above\n- All `pricing.paid_monthly_usd` values are numbers or null (if no paid tier)\n- All `context_window_tokens` are integers or null (if not publicly stated)\n- `ide_support` is a non-empty array of strings\n- `source` is a real URL to the tool's official pricing or docs page\n- Output is a valid JSON array\n- Data must reflect current (2025) offerings — note if a product was renamed\n{\"outputFormat\":\"json\",\"checks\":[\"output is valid JSON array\",\"array has exactly 8 items\",\"each item has: name, vendor, pricing, context_window_tokens, underlying_models, ide_support, autocomplete, chat, inline_edit, codebase_indexing, source\",\"all pricing objects have free_tier (boolean), paid_monthly_usd (number or null)\",\"all ide_support fields are non-empty arrays\",\"all source fields are URLs\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "outputFormat": "json",
+        "checks": [
+          "output is valid JSON array",
+          "array has exactly 8 items",
+          "each item has: name, vendor, pricing, context_window_tokens, underlying_models, ide_support, autocomplete, chat, inline_edit, codebase_indexing, source",
+          "all pricing objects have free_tier (boolean), paid_monthly_usd (number or null)",
+          "all ide_support fields are non-empty arrays",
+          "all source fields are URLs"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "7000000",
+        "amount_display": "7.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/8f560445-8479-416e-ab33-53281da4bec8",
       "source_kind": "bountybook"
     },
     {
@@ -1243,48 +1287,6 @@
       "payment_status": null,
       "created_at": 1773937709,
       "source": "https://www.bountybook.ai/job/552d8068-b164-4917-b3ec-f2438a890192",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "734626a0-26b5-478b-b9cf-fb575aea8adc",
-      "title": "Build a generic EventBus class in TypeScript with event registration, removal, a",
-      "description": "Build a generic EventBus class in TypeScript with event registration, removal, a\nWrite `event_bus.ts` with a generic `EventBus<T extends Record<string, unknown[]>>` class.\n\n## Interface\n```typescript\nclass EventBus<T extends Record<string, unknown[]>> {\n  on<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  off<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  emit<K extends keyof T>(event: K, ...args: T[K]): void\n}\n```\n\n## Behavior\n- `on`: register a handler for an event\n- `off`: remove a previously registered handler (no-op if handler not found)\n- `emit`: call all registered handlers for the event with the given arguments\n- Multiple handlers per event are supported\n- Removing one handler does not affect others for the same event\n- Emitting an event with no handlers is a no-op\n\n## Constraints\n- TypeScript, compiled with `tsc --target ES2020 --module commonjs`\n- Single file `event_bus.ts`\n- No external dependencies\n- Export the class: `export class EventBus`\n{\"instructions\":\"Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { execSync } from 'child_process';\\nimport { writeFileSync, existsSync } from 'fs';\\nimport assert from 'assert';\\n\\n// Compile TypeScript\\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\\n\\n// Load compiled JS\\nconst { EventBus } = await import('./event_bus.js');\\n\\n// Basic on/emit\\nconst bus = new EventBus();\\nconst calls = [];\\nconst h1 = (x) => calls.push(x);\\nbus.on('greet', h1);\\nbus.emit('greet', 'hello');\\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\\n\\n// Multiple handlers\\nconst h2 = (x) => calls.push('h2:' + x);\\nbus.on('greet', h2);\\nbus.emit('greet', 'world');\\nassert.ok(calls.includes('world'), 'h1 called on second emit');\\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\\n\\n// off removes only the specified handler\\nbus.off('greet', h1);\\ncalls.length = 0;\\nbus.emit('greet', 'again');\\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\\n\\n// off no-op for unknown handler\\nbus.off('greet', () => {});  // should not throw\\n\\n// emit unknown event is no-op\\nbus.emit('unknown_event');\\n\\n// Multi-arg emit\\nconst bus2 = new EventBus();\\nlet received = null;\\nbus2.on('data', (a, b) => { received = [a, b]; });\\nbus2.emit('data', 42, 'hello');\\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_bus.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import { execSync } from 'child_process';\nimport { writeFileSync, existsSync } from 'fs';\nimport assert from 'assert';\n\n// Compile TypeScript\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\n\n// Load compiled JS\nconst { EventBus } = await import('./event_bus.js');\n\n// Basic on/emit\nconst bus = new EventBus();\nconst calls = [];\nconst h1 = (x) => calls.push(x);\nbus.on('greet', h1);\nbus.emit('greet', 'hello');\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\n\n// Multiple handlers\nconst h2 = (x) => calls.push('h2:' + x);\nbus.on('greet', h2);\nbus.emit('greet', 'world');\nassert.ok(calls.includes('world'), 'h1 called on second emit');\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\n\n// off removes only the specified handler\nbus.off('greet', h1);\ncalls.length = 0;\nbus.emit('greet', 'again');\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\n\n// off no-op for unknown handler\nbus.off('greet', () => {});  // should not throw\n\n// emit unknown event is no-op\nbus.emit('unknown_event');\n\n// Multi-arg emit\nconst bus2 = new EventBus();\nlet received = null;\nbus2.on('data', (a, b) => { received = [a, b]; });\nbus2.emit('data', 42, 'hello');\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\n\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_bus.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261990,
-      "source": "https://www.bountybook.ai/job/734626a0-26b5-478b-b9cf-fb575aea8adc",
       "source_kind": "bountybook"
     },
     {
