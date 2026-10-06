@@ -1,0 +1,52 @@
+{
+  "mentor_task_id": "A0-SB-001",
+  "goal": "Determine the most interoperable way for SwarmBrain to add a bounded multi-agent project orchestrator while preserving existing A2A receipts and task history.",
+  "created_at": "2026-09-23T00:00:00Z",
+  "packets": [
+    {
+      "id": "P1",
+      "objective": "Analyze existing Mesh/peer_control interfaces and receipt schema",
+      "required_capabilities": ["architecture-analysis", "a2a-protocol"],
+      "depends_on": [],
+      "expected_output": "Interface inventory with receipt fields, task ID stability guarantees and history retention points",
+      "verify": true,
+      "verification_requirement": "Independent review of interface list against peer_control.py and mesh.py"
+    },
+    {
+      "id": "P2",
+      "objective": "Design bounded orchestrator contract project/packet schema",
+      "required_capabilities": ["system-design", "schema-design"],
+      "depends_on": ["P1"],
+      "expected_output": "project {id, goal, packets[]} and packet {id, objective, required_capabilities[], depends_on[], expected_output, verify} JSON schema",
+      "verify": true,
+      "verification_requirement": "Schema validates against existing task receipt shape"
+    },
+    {
+      "id": "P3",
+      "objective": "Map A0 controller loop steps to SwarmBrain Mesh.route and peer_control calls",
+      "required_capabilities": ["swarm-integration", "mapping"],
+      "depends_on": ["P1", "P2"],
+      "expected_output": "Mapping table A0 step -> Mesh/peer_control primitive with isolation notes",
+      "verify": true,
+      "verification_requirement": "Cross-check with Mesh.route() signature and peer_control call bounds"
+    },
+    {
+      "id": "P4",
+      "objective": "Assess preservation strategy for task history and receipts",
+      "required_capabilities": ["data-migration", "history-preservation"],
+      "depends_on": ["P1"],
+      "expected_output": "Preservation plan for A2A receipts, task IDs and historical graph with zero rewrite",
+      "verify": false,
+      "verification_requirement": null
+    }
+  ],
+  "dependency_graph": {
+    "edges": [
+      ["P2", "P1"],
+      ["P3", "P1"],
+      ["P3", "P2"],
+      ["P4", "P1"]
+    ],
+    "ready_initial": ["P1"]
+  }
+}
