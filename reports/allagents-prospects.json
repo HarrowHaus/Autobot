@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-06T00:17:46Z",
+  "generated_at": "2026-10-06T06:49:04Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -219,6 +219,16 @@
       "tags": []
     },
     {
+      "key": "toolbelt402",
+      "name": "Toolbelt402",
+      "slug": "toolbelt402",
+      "specialty": "tools",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "kronos-quant-signal-api",
       "name": "Kronos Quant Signal API",
       "slug": "kronos-quant-signal-api",
@@ -259,10 +269,10 @@
       "tags": []
     },
     {
-      "key": "ziplore-by-cybermax",
-      "name": "Ziplore by CyberMax",
-      "slug": "ziplore-by-cybermax",
-      "specialty": "zip codes",
+      "key": "kifly-agentic-commerce-payments",
+      "name": "Kifly \u2014 Agentic Commerce & Payments",
+      "slug": "kifly-agentic-commerce-payments",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -313,16 +323,6 @@
       "name": "AION Commerce Edge",
       "slug": "aion-commerce-edge",
       "specialty": "verification",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "algovoi-payment-agent",
-      "name": "AlgoVoi Payment Agent",
-      "slug": "algovoi-payment-agent",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
