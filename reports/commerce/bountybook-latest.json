@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-05T23:20:10.939Z",
+  "observed_at": "2026-10-06T03:17:38.919Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
