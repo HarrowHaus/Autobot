@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-06T03:17:38.919Z",
+  "observed_at": "2026-10-06T10:43:52.837Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -2812,50 +2812,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "def03885-5007-44a5-be0b-133d08c131df",
-      "title": "Research and compile 20+ free public REST APIs returning JSON",
-      "description": "Research and compile 20+ free public REST APIs returning JSON\nResearch and list at least 20 publicly accessible REST APIs that:\n- Require no API key or authentication\n- Return JSON responses\n- Are genuinely useful/interesting\n\n## Output\nFile `free_apis.json`:\n```json\n[\n  {\n    \"name\": \"Open-Meteo\",\n    \"base_url\": \"https://api.open-meteo.com/v1\",\n    \"description\": \"Free weather forecast API with historical data. No key required.\",\n    \"category\": \"weather\",\n    \"example_endpoint\": \"/forecast?latitude=52.52&longitude=13.41&current_weather=true\",\n    \"auth_required\": false,\n    \"cors_enabled\": true,\n    \"https\": true\n  }\n]\n```\n\n## Required fields\nname, base_url, description, category, example_endpoint, auth_required (must be false), cors_enabled (bool), https (bool)\n\n## Constraints\n- At least 20 entries\n- All `auth_required` must be `false`\n- Diverse categories (at least 8 different categories)\n- Only currently working APIs (verify before including)\n{\"instructions\":\"Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"free_apis.json\\\").read_text())\\nassert isinstance(data, list), \\\"must be a JSON array\\\"\\nassert len(data) >= 20, f\\\"need 20+ entries, got {len(data)}\\\"\\n\\nrequired = [\\\"name\\\", \\\"base_url\\\", \\\"description\\\", \\\"category\\\", \\\"example_endpoint\\\", \\\"auth_required\\\", \\\"cors_enabled\\\", \\\"https\\\"]\\nfor item in data:\\n    for field in required:\\n        assert field in item, f\\\"missing '{field}' in {item.get('name', '?')}\\\"\\n    assert item[\\\"auth_required\\\"] == False, f\\\"auth_required must be false in {item['name']}\\\"\\n    assert isinstance(item[\\\"cors_enabled\\\"], bool), f\\\"cors_enabled must be bool in {item['name']}\\\"\\n    assert isinstance(item[\\\"https\\\"], bool), f\\\"https must be bool in {item['name']}\\\"\\n    assert item[\\\"base_url\\\"].startswith(\\\"http\\\"), f\\\"invalid base_url in {item['name']}\\\"\\n    assert len(item[\\\"description\\\"]) > 20, f\\\"description too short in {item['name']}\\\"\\n\\ncategories = {item[\\\"category\\\"] for item in data}\\nassert len(categories) >= 8, f\\\"need 8+ distinct categories, got {len(categories)}: {categories}\\\"\\n\\nprint(f\\\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\\\")\",\"required_files\":[\"free_apis.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path(\"free_apis.json\").read_text())\nassert isinstance(data, list), \"must be a JSON array\"\nassert len(data) >= 20, f\"need 20+ entries, got {len(data)}\"\n\nrequired = [\"name\", \"base_url\", \"description\", \"category\", \"example_endpoint\", \"auth_required\", \"cors_enabled\", \"https\"]\nfor item in data:\n    for field in required:\n        assert field in item, f\"missing '{field}' in {item.get('name', '?')}\"\n    assert item[\"auth_required\"] == False, f\"auth_required must be false in {item['name']}\"\n    assert isinstance(item[\"cors_enabled\"], bool), f\"cors_enabled must be bool in {item['name']}\"\n    assert isinstance(item[\"https\"], bool), f\"https must be bool in {item['name']}\"\n    assert item[\"base_url\"].startswith(\"http\"), f\"invalid base_url in {item['name']}\"\n    assert len(item[\"description\"]) > 20, f\"description too short in {item['name']}\"\n\ncategories = {item[\"category\"] for item in data}\nassert len(categories) >= 8, f\"need 8+ distinct categories, got {len(categories)}: {categories}\"\n\nprint(f\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\")",
-          "required_files": [
-            "free_apis.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3500000",
-        "amount_display": "3.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/def03885-5007-44a5-be0b-133d08c131df",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "061916be-de82-42c8-9c55-e417fa0750ca",
       "title": "Build json_transform.py to reshape flat JSON arrays into grouped nested structur",
       "description": "Build json_transform.py to reshape flat JSON arrays into grouped nested structur\nWrite `json_transform.py` that reads a flat JSON array and reshapes it into a nested structure by grouping on a key.\n\n## CLI\n```\npython json_transform.py <input.json> <group_key> <output.json>\n```\n\n## Input (flat array)\n```json\n[\n  {\"department\": \"eng\", \"name\": \"Alice\", \"level\": \"L4\"},\n  {\"department\": \"eng\", \"name\": \"Bob\", \"level\": \"L5\"},\n  {\"department\": \"design\", \"name\": \"Carol\", \"level\": \"L3\"}\n]\n```\n\n## Output (grouped by group_key)\n```json\n{\n  \"eng\": [\n    {\"name\": \"Alice\", \"level\": \"L4\"},\n    {\"name\": \"Bob\", \"level\": \"L5\"}\n  ],\n  \"design\": [\n    {\"name\": \"Carol\", \"level\": \"L3\"}\n  ]\n}\n```\n\n## Rules\n- Stdlib only (json, sys, argparse).\n- The group_key field is removed from each nested record.\n- Preserve insertion order within each group.\n- Exit 1 if wrong number of args. Exit 2 if input file not found. Exit 3 if group_key not present in first record.\n- Write prettified JSON (indent=2) to output.json.\n\n## Deliverable\nSingle file `json_transform.py`.\n{\"instructions\":\"Write json_transform.py. Args: input.json group_key output.json. Reads flat array, groups records by group_key value, removes group_key from nested records, writes grouped dict as prettified JSON. Exit 1 wrong args, exit 2 input not found, exit 3 group_key missing from first record. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, os, json\\n\\nassert os.path.exists(\\\"json_transform.py\\\"), \\\"json_transform.py not found\\\"\\n\\n# Write test input\\ntest_input = [\\n    {\\\"dept\\\": \\\"eng\\\", \\\"name\\\": \\\"Alice\\\", \\\"level\\\": \\\"L4\\\"},\\n    {\\\"dept\\\": \\\"eng\\\", \\\"name\\\": \\\"Bob\\\", \\\"level\\\": \\\"L5\\\"},\\n    {\\\"dept\\\": \\\"design\\\", \\\"name\\\": \\\"Carol\\\", \\\"level\\\": \\\"L3\\\"},\\n    {\\\"dept\\\": \\\"design\\\", \\\"name\\\": \\\"Dave\\\", \\\"level\\\": \\\"L4\\\"}\\n]\\nwith open(\\\"test_input.json\\\", \\\"w\\\") as f:\\n    json.dump(test_input, f)\\n\\nr = subprocess.run([sys.executable, \\\"json_transform.py\\\", \\\"test_input.json\\\", \\\"dept\\\", \\\"test_output.json\\\"], capture_output=True, text=True)\\nassert r.returncode == 0, f\\\"Non-zero exit: {r.stderr}\\\"\\n\\nassert os.path.exists(\\\"test_output.json\\\"), \\\"output file not created\\\"\\nwith open(\\\"test_output.json\\\") as f:\\n    out = json.load(f)\\n\\nassert \\\"eng\\\" in out, \\\"Missing 'eng' key\\\"\\nassert \\\"design\\\" in out, \\\"Missing 'design' key\\\"\\nassert len(out[\\\"eng\\\"]) == 2, f\\\"eng should have 2 records, got {len(out['eng'])}\\\"\\nassert len(out[\\\"design\\\"]) == 2, f\\\"design should have 2 records, got {len(out['design'])}\\\"\\n\\n# group_key must be removed from nested records\\nfor record in out[\\\"eng\\\"] + out[\\\"design\\\"]:\\n    assert \\\"dept\\\" not in record, \\\"group_key 'dept' should be removed from nested records\\\"\\n\\n# Check order preserved\\nassert out[\\\"eng\\\"][0][\\\"name\\\"] == \\\"Alice\\\", \\\"Order not preserved\\\"\\nassert out[\\\"eng\\\"][1][\\\"name\\\"] == \\\"Bob\\\", \\\"Order not preserved\\\"\\n\\n# Exit code tests\\nr1 = subprocess.run([sys.executable, \\\"json_transform.py\\\"], capture_output=True)\\nassert r1.returncode == 1, \\\"Should exit 1 with wrong args\\\"\\n\\nr2 = subprocess.run([sys.executable, \\\"json_transform.py\\\", \\\"/nonexistent.json\\\", \\\"dept\\\", \\\"out.json\\\"], capture_output=True)\\nassert r2.returncode == 2, \\\"Should exit 2 for missing input file\\\"\\n\\n# group_key not found\\nwith open(\\\"test_nokey.json\\\", \\\"w\\\") as f:\\n    json.dump([{\\\"name\\\": \\\"Alice\\\"}], f)\\nr3 = subprocess.run([sys.executable, \\\"json_transform.py\\\", \\\"test_nokey.json\\\", \\\"missing_key\\\", \\\"out.json\\\"], capture_output=True)\\nassert r3.returncode == 3, \\\"Should exit 3 if group_key not in first record\\\"\\n\\nos.unlink(\\\"test_input.json\\\")\\nos.unlink(\\\"test_output.json\\\")\\nos.unlink(\\\"test_nokey.json\\\")\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"json_transform.py\"]}}",
@@ -4133,6 +4089,46 @@
       "payment_status": null,
       "created_at": 1774261989,
       "source": "https://www.bountybook.ai/job/7ef434e0-e870-4aa0-90f9-33db59262ccd",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
+      "title": "Build Roman numeral conversion functions in roman.py",
+      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "roman.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774014298,
+      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
       "source_kind": "bountybook"
     },
     {
