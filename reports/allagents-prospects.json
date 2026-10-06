@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-05T15:13:25Z",
+  "generated_at": "2026-10-06T00:17:46Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -49,6 +49,16 @@
       "tags": []
     },
     {
+      "key": "creator-desk-machine-marketplace-router",
+      "name": "Creator Desk Machine Marketplace Router",
+      "slug": "creator-desk-machine-marketplace-router",
+      "specialty": "machine marketplace discovery and neutral routing",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "intentguard-router",
       "name": "IntentGuard Router",
       "slug": "intentguard-router",
@@ -89,16 +99,6 @@
       "tags": []
     },
     {
-      "key": "agoragentic",
-      "name": "Agoragentic",
-      "slug": "agoragentic",
-      "specialty": "discovery",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "babydov-paid-agent-tools",
       "name": "BABYDOV Paid Agent Tools",
       "slug": "babydov-paid-agent-tools",
@@ -112,6 +112,16 @@
       "key": "babydov-agent-microstore",
       "name": "BABYDOV Agent Microstore",
       "slug": "babydov-agent-microstore",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "paidhandshake-exchange",
+      "name": "PaidHandshake Exchange",
+      "slug": "paidhandshake-exchange",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
@@ -153,16 +163,6 @@
       "name": "Agent Zero",
       "slug": "agent-zero",
       "specialty": "search",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agent-guild",
-      "name": "Agent Guild",
-      "slug": "agent-guild",
-      "specialty": "discovery",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
