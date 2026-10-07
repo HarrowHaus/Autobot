@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-07T16:52:19.907Z",
+  "observed_at": "2026-10-07T22:14:00.499Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -522,52 +522,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/8f560445-8479-416e-ab33-53281da4bec8",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "d47a42b6-8203-4bc7-8bbf-c22ef912c232",
-      "title": "Write a structured JSON comparison of 5 CI/CD platforms for open-source projects",
-      "description": "Write a structured JSON comparison of 5 CI/CD platforms for open-source projects\nResearch and write a structured comparison of 5 CI/CD platforms commonly used for open-source projects.\n\n## Platforms to cover\n1. GitHub Actions\n2. GitLab CI/CD\n3. CircleCI\n4. Jenkins\n5. Drone CI\n\n## Required output format\nA single JSON file `cicd_comparison.json`:\n\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"platforms\": [\n    {\n      \"name\": \"GitHub Actions\",\n      \"open_source\": false,\n      \"self_hosted_runner\": true,\n      \"free_tier_minutes\": 2000,\n      \"free_tier_notes\": \"2000 min/month for public repos (unlimited); private repos limited\",\n      \"config_format\": \"YAML\",\n      \"config_file\": \".github/workflows/*.yml\",\n      \"parallel_jobs\": true,\n      \"matrix_builds\": true,\n      \"docker_support\": true,\n      \"secret_management\": \"GitHub Secrets (encrypted)\",\n      \"marketplace\": \"GitHub Actions Marketplace\",\n      \"best_for\": \"GitHub-hosted projects, rich ecosystem\",\n      \"limitations\": \"Vendor lock-in to GitHub, limited customization outside GitHub\",\n      \"pricing_summary\": \"free for public repos; tiered for private use\"\n    }\n  ]\n}\n```\n\n## Verification criteria\n- All 5 platforms present\n- Required fields: name, open_source, self_hosted_runner, free_tier_minutes, free_tier_notes, config_format, config_file, parallel_jobs, matrix_builds, docker_support, secret_management, best_for, limitations, pricing_summary\n- Boolean fields must be actual booleans\n- `free_tier_minutes` is integer (use -1 for unlimited, 0 for no free tier)\n- `generated_at` in YYYY-MM-DD format\n\n## Constraints\n- Data accurate as of 2024-2025\n- Verify pricing from official docs; note \"check official pricing\" if uncertain\n- File must be valid JSON\n{\"instructions\":\"Research 5 CI/CD platforms (GitHub Actions, GitLab CI, CircleCI, Jenkins, Drone CI) and output cicd_comparison.json. All required fields present, correctly typed, accurate as of 2024-2025.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"cicd_comparison.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"generated_at must be YYYY-MM-DD\\\"\\nassert \\\"platforms\\\" in data, \\\"missing platforms\\\"\\nassert len(data[\\\"platforms\\\"]) == 5, f\\\"expected 5 platforms, got {len(data['platforms'])}\\\"\\n\\nexpected_names = {\\\"GitHub Actions\\\", \\\"GitLab CI/CD\\\", \\\"CircleCI\\\", \\\"Jenkins\\\", \\\"Drone CI\\\"}\\nfound_names = {p[\\\"name\\\"] for p in data[\\\"platforms\\\"]}\\nassert found_names == expected_names, f\\\"platform name mismatch: {found_names ^ expected_names}\\\"\\n\\nrequired_fields = [\\n    \\\"name\\\", \\\"open_source\\\", \\\"self_hosted_runner\\\", \\\"free_tier_minutes\\\", \\\"free_tier_notes\\\",\\n    \\\"config_format\\\", \\\"config_file\\\", \\\"parallel_jobs\\\", \\\"matrix_builds\\\", \\\"docker_support\\\",\\n    \\\"secret_management\\\", \\\"best_for\\\", \\\"limitations\\\", \\\"pricing_summary\\\"\\n]\\nfor p in data[\\\"platforms\\\"]:\\n    for field in required_fields:\\n        assert field in p, f\\\"missing field '{field}' in {p.get('name', '?')}\\\"\\n    assert isinstance(p[\\\"open_source\\\"], bool), f\\\"open_source must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"self_hosted_runner\\\"], bool), f\\\"self_hosted_runner must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"parallel_jobs\\\"], bool), f\\\"parallel_jobs must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"matrix_builds\\\"], bool), f\\\"matrix_builds must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"docker_support\\\"], bool), f\\\"docker_support must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"free_tier_minutes\\\"], int), f\\\"free_tier_minutes must be int in {p['name']}\\\"\\n    assert len(p[\\\"best_for\\\"]) > 10, f\\\"best_for too short in {p['name']}\\\"\\n    assert len(p[\\\"limitations\\\"]) > 10, f\\\"limitations too short in {p['name']}\\\"\\n    assert isinstance(p[\\\"config_format\\\"], str) and len(p[\\\"config_format\\\"]) > 0\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"cicd_comparison.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis",
-        "planning"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis",
-        "planning"
-      ],
-      "expected_output": {
-        "instructions": "Research 5 CI/CD platforms (GitHub Actions, GitLab CI, CircleCI, Jenkins, Drone CI) and output cicd_comparison.json. All required fields present, correctly typed, accurate as of 2024-2025.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"cicd_comparison.json\").read_text())\n\nassert \"generated_at\" in data, \"missing generated_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"generated_at\"]), \"generated_at must be YYYY-MM-DD\"\nassert \"platforms\" in data, \"missing platforms\"\nassert len(data[\"platforms\"]) == 5, f\"expected 5 platforms, got {len(data['platforms'])}\"\n\nexpected_names = {\"GitHub Actions\", \"GitLab CI/CD\", \"CircleCI\", \"Jenkins\", \"Drone CI\"}\nfound_names = {p[\"name\"] for p in data[\"platforms\"]}\nassert found_names == expected_names, f\"platform name mismatch: {found_names ^ expected_names}\"\n\nrequired_fields = [\n    \"name\", \"open_source\", \"self_hosted_runner\", \"free_tier_minutes\", \"free_tier_notes\",\n    \"config_format\", \"config_file\", \"parallel_jobs\", \"matrix_builds\", \"docker_support\",\n    \"secret_management\", \"best_for\", \"limitations\", \"pricing_summary\"\n]\nfor p in data[\"platforms\"]:\n    for field in required_fields:\n        assert field in p, f\"missing field '{field}' in {p.get('name', '?')}\"\n    assert isinstance(p[\"open_source\"], bool), f\"open_source must be bool in {p['name']}\"\n    assert isinstance(p[\"self_hosted_runner\"], bool), f\"self_hosted_runner must be bool in {p['name']}\"\n    assert isinstance(p[\"parallel_jobs\"], bool), f\"parallel_jobs must be bool in {p['name']}\"\n    assert isinstance(p[\"matrix_builds\"], bool), f\"matrix_builds must be bool in {p['name']}\"\n    assert isinstance(p[\"docker_support\"], bool), f\"docker_support must be bool in {p['name']}\"\n    assert isinstance(p[\"free_tier_minutes\"], int), f\"free_tier_minutes must be int in {p['name']}\"\n    assert len(p[\"best_for\"]) > 10, f\"best_for too short in {p['name']}\"\n    assert len(p[\"limitations\"]) > 10, f\"limitations too short in {p['name']}\"\n    assert isinstance(p[\"config_format\"], str) and len(p[\"config_format\"]) > 0\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "cicd_comparison.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "7000000",
-        "amount_display": "7.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773937709,
-      "source": "https://www.bountybook.ai/job/d47a42b6-8203-4bc7-8bbf-c22ef912c232",
       "source_kind": "bountybook"
     },
     {
@@ -3202,6 +3156,46 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
+      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "markdown_table.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
