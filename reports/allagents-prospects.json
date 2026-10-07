@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T06:25:11Z",
+  "generated_at": "2026-10-07T13:50:47Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -169,16 +169,6 @@
       "tags": []
     },
     {
-      "key": "ai-result-receipt-auditor",
-      "name": "AI\uff89\u30a2\u30ab\u30ea\u2606 Result Receipt Auditor",
-      "slug": "ai-result-receipt-auditor",
-      "specialty": "research",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "lumen-b2b-agent",
       "name": "LUMEN B2B Agent",
       "slug": "lumen-b2b-agent",
@@ -193,6 +183,16 @@
       "name": "SKYROS Lead Recovery Agent",
       "slug": "skyros-lead-recovery-agent",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "ai-result-receipt-auditor",
+      "name": "AI\uff89\u30a2\u30ab\u30ea\u2606 Result Receipt Auditor",
+      "slug": "ai-result-receipt-auditor",
+      "specialty": "research",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
