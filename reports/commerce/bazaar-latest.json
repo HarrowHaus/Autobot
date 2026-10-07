@@ -1,18 +1,18 @@
 {
   "source": "x402-official-bazaar-client",
   "sdk": "@x402/extensions/bazaar",
-  "observed_at": "2026-10-07T09:20:41.046Z",
+  "observed_at": "2026-10-07T22:17:22.525Z",
   "facilitator": "https://facilitator.x402endpoints.online",
   "network": "eip155:8453",
   "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
   "status": "partial",
   "list": {
-    "resources_seen": 1,
+    "resources_seen": 0,
     "our_resources_seen": 0,
     "pagination": {
       "limit": 100,
       "offset": 0,
-      "total": 1
+      "total": 0
     },
     "our_resources": []
   },
