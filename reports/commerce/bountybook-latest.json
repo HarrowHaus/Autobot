@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-07T01:46:26.933Z",
+  "observed_at": "2026-10-07T09:10:43.134Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -221,51 +221,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
-      "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
-      "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "typescript",
-        "entrypoint": "heap.ts",
-        "outputFormat": "file",
-        "checks": [
-          "compiles: tsc --strict heap.ts",
-          "ts-node heap.ts exits with code 0",
-          "peek() returns minimum without removing",
-          "pop() returns minimum and removes it",
-          "toSortedArray([4,2,7,1]) returns [1,2,4,7]",
-          "toSortedArray is non-destructive (size unchanged)",
-          "custom comparator works for object types"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000000",
-        "amount_display": "10.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
       "source_kind": "bountybook"
     },
     {
@@ -2769,6 +2724,50 @@
       "payment_status": null,
       "created_at": 1773847120,
       "source": "https://www.bountybook.ai/job/a5611f14-f07d-4c6a-820d-4d29b7783c22",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "def03885-5007-44a5-be0b-133d08c131df",
+      "title": "Research and compile 20+ free public REST APIs returning JSON",
+      "description": "Research and compile 20+ free public REST APIs returning JSON\nResearch and list at least 20 publicly accessible REST APIs that:\n- Require no API key or authentication\n- Return JSON responses\n- Are genuinely useful/interesting\n\n## Output\nFile `free_apis.json`:\n```json\n[\n  {\n    \"name\": \"Open-Meteo\",\n    \"base_url\": \"https://api.open-meteo.com/v1\",\n    \"description\": \"Free weather forecast API with historical data. No key required.\",\n    \"category\": \"weather\",\n    \"example_endpoint\": \"/forecast?latitude=52.52&longitude=13.41&current_weather=true\",\n    \"auth_required\": false,\n    \"cors_enabled\": true,\n    \"https\": true\n  }\n]\n```\n\n## Required fields\nname, base_url, description, category, example_endpoint, auth_required (must be false), cors_enabled (bool), https (bool)\n\n## Constraints\n- At least 20 entries\n- All `auth_required` must be `false`\n- Diverse categories (at least 8 different categories)\n- Only currently working APIs (verify before including)\n{\"instructions\":\"Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"free_apis.json\\\").read_text())\\nassert isinstance(data, list), \\\"must be a JSON array\\\"\\nassert len(data) >= 20, f\\\"need 20+ entries, got {len(data)}\\\"\\n\\nrequired = [\\\"name\\\", \\\"base_url\\\", \\\"description\\\", \\\"category\\\", \\\"example_endpoint\\\", \\\"auth_required\\\", \\\"cors_enabled\\\", \\\"https\\\"]\\nfor item in data:\\n    for field in required:\\n        assert field in item, f\\\"missing '{field}' in {item.get('name', '?')}\\\"\\n    assert item[\\\"auth_required\\\"] == False, f\\\"auth_required must be false in {item['name']}\\\"\\n    assert isinstance(item[\\\"cors_enabled\\\"], bool), f\\\"cors_enabled must be bool in {item['name']}\\\"\\n    assert isinstance(item[\\\"https\\\"], bool), f\\\"https must be bool in {item['name']}\\\"\\n    assert item[\\\"base_url\\\"].startswith(\\\"http\\\"), f\\\"invalid base_url in {item['name']}\\\"\\n    assert len(item[\\\"description\\\"]) > 20, f\\\"description too short in {item['name']}\\\"\\n\\ncategories = {item[\\\"category\\\"] for item in data}\\nassert len(categories) >= 8, f\\\"need 8+ distinct categories, got {len(categories)}: {categories}\\\"\\n\\nprint(f\\\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\\\")\",\"required_files\":[\"free_apis.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path(\"free_apis.json\").read_text())\nassert isinstance(data, list), \"must be a JSON array\"\nassert len(data) >= 20, f\"need 20+ entries, got {len(data)}\"\n\nrequired = [\"name\", \"base_url\", \"description\", \"category\", \"example_endpoint\", \"auth_required\", \"cors_enabled\", \"https\"]\nfor item in data:\n    for field in required:\n        assert field in item, f\"missing '{field}' in {item.get('name', '?')}\"\n    assert item[\"auth_required\"] == False, f\"auth_required must be false in {item['name']}\"\n    assert isinstance(item[\"cors_enabled\"], bool), f\"cors_enabled must be bool in {item['name']}\"\n    assert isinstance(item[\"https\"], bool), f\"https must be bool in {item['name']}\"\n    assert item[\"base_url\"].startswith(\"http\"), f\"invalid base_url in {item['name']}\"\n    assert len(item[\"description\"]) > 20, f\"description too short in {item['name']}\"\n\ncategories = {item[\"category\"] for item in data}\nassert len(categories) >= 8, f\"need 8+ distinct categories, got {len(categories)}: {categories}\"\n\nprint(f\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\")",
+          "required_files": [
+            "free_apis.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3500000",
+        "amount_display": "3.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774014298,
+      "source": "https://www.bountybook.ai/job/def03885-5007-44a5-be0b-133d08c131df",
       "source_kind": "bountybook"
     },
     {
