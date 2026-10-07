@@ -45,12 +45,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_OC8NWVZOr96vW9RzgThN1",
-      "score": 26.409
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
       "score": 25.775
     },
@@ -58,6 +52,12 @@
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_PRGxeT66PotQxYJw7EPlL",
+      "score": 25.775
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_ToEmWubWjjfNICs4qnkYg",
       "score": 25.775
     }
   ],
@@ -77,7 +77,7 @@
       "id": "distribution:x402-bazaar",
       "kind": "distribution",
       "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "observed_at": "2026-10-07T01:50:20.382Z",
+      "observed_at": "2026-10-07T09:20:41.046Z",
       "score": 35.0,
       "source": "x402-bazaar",
       "status": "observed",
@@ -104,7 +104,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -138,7 +138,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -172,7 +172,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -206,7 +206,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -240,7 +240,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -273,7 +273,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -285,36 +285,6 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_vr45efhdsoFyNHBpf8Wbu",
       "status": "observed",
       "title": "Industrial Sentinel Revenue Cashback 4"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "500000",
-        "amount_display": "0.50",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "JSON with five-gate qualification, external runtime/install evidence, seller wallet/endpoint, and two genuine 0.005 USDC Revenue Guard settlements from the same install on consecutive UTC dates.",
-      "first_seen_at": "2026-10-06T21:54:33.788Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_OC8NWVZOr96vW9RzgThN1",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
-      "output_format": "json",
-      "required_capabilities": [],
-      "score": 26.409,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_OC8NWVZOr96vW9RzgThN1",
-      "status": "observed",
-      "title": "Industrial Sentinel Revenue Guard Founding Partner \u2014 Open Pool v2"
     },
     {
       "advertised_value": {
@@ -337,7 +307,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -371,7 +341,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -405,7 +375,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -439,7 +409,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -473,7 +443,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -1457,6 +1427,36 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_NNmZ1aMjA6kNqkqIwOCHy",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.meetclair/clair ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "500000",
+        "amount_display": "0.50",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON with five-gate qualification, external runtime/install evidence, seller wallet/endpoint, and two genuine 0.005 USDC Revenue Guard settlements from the same install on consecutive UTC dates.",
+      "first_seen_at": "2026-10-06T21:54:33.788Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_OC8NWVZOr96vW9RzgThN1",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-07T01:50:22.050Z",
+      "output_format": "json",
+      "required_capabilities": [],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_OC8NWVZOr96vW9RzgThN1",
+      "status": "stale",
+      "title": "Industrial Sentinel Revenue Guard Founding Partner \u2014 Open Pool v2"
     },
     {
       "advertised_value": {
@@ -3207,12 +3207,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 12,
-      "observed_at": "2026-10-07T01:50:22.050Z",
+      "candidate_count": 11,
+      "observed_at": "2026-10-07T09:20:42.532Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-07T01:50:20.382Z",
+      "observed_at": "2026-10-07T09:20:41.046Z",
       "our_resources_seen": 0,
       "status": "partial"
     }
@@ -3224,5 +3224,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-07T01:50:22Z"
+  "updated_at": "2026-10-07T09:20:43Z"
 }
