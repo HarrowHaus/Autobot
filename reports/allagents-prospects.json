@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T13:50:47Z",
+  "generated_at": "2026-10-07T23:18:01Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -259,16 +259,6 @@
       "tags": []
     },
     {
-      "key": "nexus-intelligence",
-      "name": "NEXUS Intelligence",
-      "slug": "nexus-intelligence",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "kifly-agentic-commerce-payments",
       "name": "Kifly \u2014 Agentic Commerce & Payments",
       "slug": "kifly-agentic-commerce-payments",
@@ -323,6 +313,16 @@
       "name": "AION Commerce Edge",
       "slug": "aion-commerce-edge",
       "specialty": "verification",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "algovoi-payment-agent",
+      "name": "AlgoVoi Payment Agent",
+      "slug": "algovoi-payment-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
