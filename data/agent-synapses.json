@@ -321,16 +321,16 @@
       "weight": 0.75
     },
     "27ab084245e8d91e28c44117": {
-      "events": 17,
+      "events": 18,
       "first_seen": "2026-09-27T00:24:45Z",
       "id": "27ab084245e8d91e28c44117",
-      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:0f2d899d19e0fab4",
-      "last_seen": "2026-10-07T14:33:13Z",
+      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:eba0659691fb65a6",
+      "last_seen": "2026-10-08T07:25:15Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:dc92def14af228a3de4cb1b1",
       "validated_events": 0,
-      "weight": 25.5
+      "weight": 27.0
     },
     "280cb9d40e44159718efaf4f": {
       "events": 1,
@@ -1747,16 +1747,16 @@
       "weight": 27.0
     },
     "ee457be40f49223871ff2fa4": {
-      "events": 18,
+      "events": 19,
       "first_seen": "2026-09-27T00:17:10Z",
       "id": "ee457be40f49223871ff2fa4",
-      "last_event_id": "github-comment:HarrowHaus/Autobot:19:6040392313",
-      "last_seen": "2026-10-07T20:37:24Z",
+      "last_event_id": "github-comment:HarrowHaus/Autobot:19:6053971764",
+      "last_seen": "2026-10-08T07:24:49Z",
       "relation": "public_thread_interaction",
       "source": "agent:755077e81b9679a268d0f6e7",
       "target": "agent:97520ced36217462603c5018",
       "validated_events": 0,
-      "weight": 4.5
+      "weight": 4.75
     },
     "eea72ea458beac35ece4197b": {
       "events": 230,
@@ -1915,5 +1915,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-10-08T01:00:38Z"
+  "updated_at": "2026-10-08T07:25:17Z"
 }
