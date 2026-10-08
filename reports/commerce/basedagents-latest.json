@@ -2,7 +2,7 @@
   "source": "basedagents-official-sdk",
   "sdk": "basedagents@0.9.0",
   "api": "https://api.basedagents.ai",
-  "observed_at": "2026-10-08T09:30:51.249Z",
+  "observed_at": "2026-10-08T16:38:18.370Z",
   "status": "ok",
   "capabilities": [
     "research",
