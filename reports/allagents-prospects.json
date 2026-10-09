@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T06:38:35Z",
+  "generated_at": "2026-10-09T13:43:41Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -59,16 +59,6 @@
       "tags": []
     },
     {
-      "key": "intentguard-router",
-      "name": "IntentGuard Router",
-      "slug": "intentguard-router",
-      "specialty": "model-routing",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "proofline-evidence-router",
       "name": "Proofline Evidence Router",
       "slug": "proofline-evidence-router",
@@ -83,6 +73,16 @@
       "name": "Packrift A2A Packaging Procurement Router",
       "slug": "packrift-a2a-packaging-procurement-router",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "intentguard-router",
+      "name": "IntentGuard Router",
+      "slug": "intentguard-router",
+      "specialty": "model-routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -169,16 +169,6 @@
       "tags": []
     },
     {
-      "key": "agent-zero",
-      "name": "Agent Zero",
-      "slug": "agent-zero",
-      "specialty": "search",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "lumen-b2b-agent",
       "name": "LUMEN B2B Agent",
       "slug": "lumen-b2b-agent",
@@ -193,6 +183,16 @@
       "name": "SKYROS Lead Recovery Agent",
       "slug": "skyros-lead-recovery-agent",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "agent-zero",
+      "name": "Agent Zero",
+      "slug": "agent-zero",
+      "specialty": "search",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
