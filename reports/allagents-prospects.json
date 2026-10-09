@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T23:32:25Z",
+  "generated_at": "2026-10-09T06:38:35Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -129,6 +129,16 @@
       "tags": []
     },
     {
+      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
+      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
+      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "jobs-for-ai-agents",
       "name": "Jobs for AI Agents",
       "slug": "jobs-for-ai-agents",
@@ -189,16 +199,6 @@
       "tags": []
     },
     {
-      "key": "ai-result-receipt-auditor",
-      "name": "AI\uff89\u30a2\u30ab\u30ea\u2606 Result Receipt Auditor",
-      "slug": "ai-result-receipt-auditor",
-      "specialty": "research",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "bounty-engineer-agent-commerce",
       "name": "Bounty Engineer Agent Commerce",
       "slug": "bounty-engineer-agent-commerce",
@@ -243,16 +243,6 @@
       "name": "HostDeFi Token Risk API",
       "slug": "hostdefi-token-risk-api",
       "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "hilt-pay-agent-gateway",
-      "name": "Hilt Pay Agent Gateway",
-      "slug": "hilt-pay-agent-gateway",
-      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -323,6 +313,16 @@
       "name": "AlgoVoi Payment Agent",
       "slug": "algovoi-payment-agent",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "bounty-engineer-autonomous-mission-commerce",
+      "name": "Bounty Engineer Autonomous Mission Commerce",
+      "slug": "bounty-engineer-autonomous-mission-commerce",
+      "specialty": "coding",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
