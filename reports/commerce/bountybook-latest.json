@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-09T09:33:08.981Z",
+  "observed_at": "2026-10-09T16:30:41.521Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -182,48 +182,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
-      "title": "Build a generic finite state machine in TypeScript with state transitions and gu",
-      "description": "Build a generic finite state machine in TypeScript with state transitions and gu\nWrite `state_machine.ts` (ESM, TypeScript 5.x, no external deps) implementing a generic finite state machine.\n\n## Interface\n```typescript\nexport class StateMachine<S extends string, E extends string> {\n  constructor(states: Record<S, StateConfig<S, E>>, initialState: S, options?: StateMachineOptions);\n  getState(): S;\n  send(event: E): boolean;\n}\n```\n\nOn successful transition: currentState.onExit → transition.action → newState.onEnter.\nOn rejected transition (no definition or guard fails): return false, no side effects.\n\n## Deliverable\nSingle file `state_machine.ts`. Must compile with `tsc --strict`.\n{\"instructions\":\"Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { StateMachine } from './state_machine.js';\\n\\nconst log: string[] = [];\\n\\nconst sm = new StateMachine(\\n  {\\n    idle: {\\n      onExit: () => log.push(\\\"idle:exit\\\"),\\n      transitions: {\\n        START: { target: \\\"running\\\", action: () => log.push(\\\"action:start\\\") }\\n      }\\n    },\\n    running: {\\n      onEnter: () => log.push(\\\"running:enter\\\"),\\n      transitions: {\\n        PAUSE: { target: \\\"paused\\\" },\\n        STOP: { target: \\\"idle\\\", guard: () => false }\\n      }\\n    },\\n    paused: {\\n      transitions: {\\n        RESUME: { target: \\\"running\\\" }\\n      }\\n    }\\n  } as const,\\n  \\\"idle\\\" as const\\n);\\n\\nconsole.assert(sm.getState() === \\\"idle\\\", \\\"initial state\\\");\\nconsole.assert(sm.send(\\\"START\\\") === true, \\\"START should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running\\\");\\nconsole.assert(log.join(\\\",\\\") === \\\"idle:exit,action:start,running:enter\\\", `hook order wrong: ${log.join(\\\",\\\")}`);\\n\\nconsole.assert(sm.send(\\\"STOP\\\") === false, \\\"guarded STOP should fail\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"state unchanged after guard fail\\\");\\n\\nconst logLen = log.length;\\nsm.send(\\\"STOP\\\");\\nconsole.assert(log.length === logLen, \\\"no side effects on guard fail\\\");\\n\\nconsole.assert(sm.send(\\\"PAUSE\\\") === true, \\\"PAUSE should succeed\\\");\\nconsole.assert(sm.getState() === \\\"paused\\\", \\\"should be paused\\\");\\n\\nconsole.assert(sm.send(\\\"START\\\") === false, \\\"no START transition from paused\\\");\\n\\nconsole.assert(sm.send(\\\"RESUME\\\") === true, \\\"RESUME should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running again\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"state_machine.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { StateMachine } from './state_machine.js';\n\nconst log: string[] = [];\n\nconst sm = new StateMachine(\n  {\n    idle: {\n      onExit: () => log.push(\"idle:exit\"),\n      transitions: {\n        START: { target: \"running\", action: () => log.push(\"action:start\") }\n      }\n    },\n    running: {\n      onEnter: () => log.push(\"running:enter\"),\n      transitions: {\n        PAUSE: { target: \"paused\" },\n        STOP: { target: \"idle\", guard: () => false }\n      }\n    },\n    paused: {\n      transitions: {\n        RESUME: { target: \"running\" }\n      }\n    }\n  } as const,\n  \"idle\" as const\n);\n\nconsole.assert(sm.getState() === \"idle\", \"initial state\");\nconsole.assert(sm.send(\"START\") === true, \"START should succeed\");\nconsole.assert(sm.getState() === \"running\", \"should be running\");\nconsole.assert(log.join(\",\") === \"idle:exit,action:start,running:enter\", `hook order wrong: ${log.join(\",\")}`);\n\nconsole.assert(sm.send(\"STOP\") === false, \"guarded STOP should fail\");\nconsole.assert(sm.getState() === \"running\", \"state unchanged after guard fail\");\n\nconst logLen = log.length;\nsm.send(\"STOP\");\nconsole.assert(log.length === logLen, \"no side effects on guard fail\");\n\nconsole.assert(sm.send(\"PAUSE\") === true, \"PAUSE should succeed\");\nconsole.assert(sm.getState() === \"paused\", \"should be paused\");\n\nconsole.assert(sm.send(\"START\") === false, \"no START transition from paused\");\n\nconsole.assert(sm.send(\"RESUME\") === true, \"RESUME should succeed\");\nconsole.assert(sm.getState() === \"running\", \"should be running again\");\n\nconsole.log(\"ALL TESTS PASSED\");",
-          "required_files": [
-            "state_machine.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000000",
-        "amount_display": "10.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773831865,
-      "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
       "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
       "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
@@ -266,50 +224,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "45579287-a3b2-4181-bc84-85faf3b4d7ed",
-      "title": "Build ast_doc.py to parse Python files and generate structured JSON documentatio",
-      "description": "Build ast_doc.py to parse Python files and generate structured JSON documentatio\nWrite `ast_doc.py` that parses a Python source file using the `ast` module and outputs a structured JSON documentation summary.\n\n## CLI\n```\npython ast_doc.py <source_file.py>\n```\n\n## Output schema\n```json\n{\n  \"module\": { \"docstring\": \"...\" },\n  \"functions\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }],\n  \"classes\": [{ \"name\": \"...\", \"bases\": [...], \"docstring\": \"...\", \"lineno\": 1,\n    \"methods\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }] }]\n}\n```\n\n## Rules\n- Stdlib only. Top-level functions/classes only. Use ast.unparse() for annotations (Python 3.9+).\n- Exit 1 with error to stderr if file not parseable.\n\n## Deliverable\nSingle file `ast_doc.py`.\n{\"instructions\":\"Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, json, os, tempfile\\n\\n# Write sample Python file\\nsample = \\\"\\\"\\\"\\n\\\"\\\"\\\"Sample module for testing.\\\"\\\"\\\"\\n\\ndef add(x: int, y: int) -> int:\\n    \\\"\\\"\\\"Return sum of x and y.\\\"\\\"\\\"\\n    return x + y\\n\\ndef greet(name: str) -> None:\\n    pass\\n\\nclass Animal:\\n    \\\"\\\"\\\"Base animal class.\\\"\\\"\\\"\\n\\n    def __init__(self, name: str):\\n        \\\"\\\"\\\"Initialize with name.\\\"\\\"\\\"\\n        self.name = name\\n\\n    def speak(self) -> str:\\n        \\\"\\\"\\\"Return the animal's sound.\\\"\\\"\\\"\\n        return \\\"\\\"\\n\\nclass Dog(Animal):\\n    pass\\n\\\"\\\"\\\"\\n\\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\\n    f.write(sample)\\n    fname = f.name\\n\\ntry:\\n    result = subprocess.run([sys.executable, \\\"ast_doc.py\\\", fname],\\n                           capture_output=True, text=True)\\n    assert result.returncode == 0, f\\\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\\\"\\n\\n    doc = json.loads(result.stdout)\\n\\n    # Module docstring\\n    assert doc[\\\"module\\\"][\\\"docstring\\\"] == \\\"Sample module for testing.\\\", f\\\"Wrong module docstring: {doc['module']}\\\"\\n\\n    # Functions\\n    func_names = [f[\\\"name\\\"] for f in doc[\\\"functions\\\"]]\\n    assert \\\"add\\\" in func_names, f\\\"add not in functions: {func_names}\\\"\\n    assert \\\"greet\\\" in func_names, f\\\"greet not in functions: {func_names}\\\"\\n\\n    add_fn = next(f for f in doc[\\\"functions\\\"] if f[\\\"name\\\"] == \\\"add\\\")\\n    assert \\\"x\\\" in add_fn[\\\"args\\\"] and \\\"y\\\" in add_fn[\\\"args\\\"], f\\\"add args: {add_fn['args']}\\\"\\n    assert add_fn[\\\"docstring\\\"] == \\\"Return sum of x and y.\\\", f\\\"add docstring: {add_fn['docstring']}\\\"\\n    assert \\\"int\\\" in str(add_fn[\\\"returns\\\"]), f\\\"add return type: {add_fn['returns']}\\\"\\n\\n    # Classes\\n    class_names = [c[\\\"name\\\"] for c in doc[\\\"classes\\\"]]\\n    assert \\\"Animal\\\" in class_names, f\\\"Animal not in classes: {class_names}\\\"\\n    assert \\\"Dog\\\" in class_names, f\\\"Dog not in classes: {class_names}\\\"\\n\\n    animal_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Animal\\\")\\n    assert animal_cls[\\\"docstring\\\"] == \\\"Base animal class.\\\", f\\\"Animal docstring: {animal_cls['docstring']}\\\"\\n    method_names = [m[\\\"name\\\"] for m in animal_cls[\\\"methods\\\"]]\\n    assert \\\"__init__\\\" in method_names, f\\\"__init__ not in methods: {method_names}\\\"\\n    assert \\\"speak\\\" in method_names, f\\\"speak not in methods: {method_names}\\\"\\n\\n    dog_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Dog\\\")\\n    assert \\\"Animal\\\" in dog_cls[\\\"bases\\\"], f\\\"Dog bases: {dog_cls['bases']}\\\"\\n\\n    print(\\\"ALL TESTS PASSED\\\")\\nfinally:\\n    os.unlink(fname)\",\"required_files\":[\"ast_doc.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import subprocess, sys, json, os, tempfile\n\n# Write sample Python file\nsample = \"\"\"\n\"\"\"Sample module for testing.\"\"\"\n\ndef add(x: int, y: int) -> int:\n    \"\"\"Return sum of x and y.\"\"\"\n    return x + y\n\ndef greet(name: str) -> None:\n    pass\n\nclass Animal:\n    \"\"\"Base animal class.\"\"\"\n\n    def __init__(self, name: str):\n        \"\"\"Initialize with name.\"\"\"\n        self.name = name\n\n    def speak(self) -> str:\n        \"\"\"Return the animal's sound.\"\"\"\n        return \"\"\n\nclass Dog(Animal):\n    pass\n\"\"\"\n\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\n    f.write(sample)\n    fname = f.name\n\ntry:\n    result = subprocess.run([sys.executable, \"ast_doc.py\", fname],\n                           capture_output=True, text=True)\n    assert result.returncode == 0, f\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\"\n\n    doc = json.loads(result.stdout)\n\n    # Module docstring\n    assert doc[\"module\"][\"docstring\"] == \"Sample module for testing.\", f\"Wrong module docstring: {doc['module']}\"\n\n    # Functions\n    func_names = [f[\"name\"] for f in doc[\"functions\"]]\n    assert \"add\" in func_names, f\"add not in functions: {func_names}\"\n    assert \"greet\" in func_names, f\"greet not in functions: {func_names}\"\n\n    add_fn = next(f for f in doc[\"functions\"] if f[\"name\"] == \"add\")\n    assert \"x\" in add_fn[\"args\"] and \"y\" in add_fn[\"args\"], f\"add args: {add_fn['args']}\"\n    assert add_fn[\"docstring\"] == \"Return sum of x and y.\", f\"add docstring: {add_fn['docstring']}\"\n    assert \"int\" in str(add_fn[\"returns\"]), f\"add return type: {add_fn['returns']}\"\n\n    # Classes\n    class_names = [c[\"name\"] for c in doc[\"classes\"]]\n    assert \"Animal\" in class_names, f\"Animal not in classes: {class_names}\"\n    assert \"Dog\" in class_names, f\"Dog not in classes: {class_names}\"\n\n    animal_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Animal\")\n    assert animal_cls[\"docstring\"] == \"Base animal class.\", f\"Animal docstring: {animal_cls['docstring']}\"\n    method_names = [m[\"name\"] for m in animal_cls[\"methods\"]]\n    assert \"__init__\" in method_names, f\"__init__ not in methods: {method_names}\"\n    assert \"speak\" in method_names, f\"speak not in methods: {method_names}\"\n\n    dog_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Dog\")\n    assert \"Animal\" in dog_cls[\"bases\"], f\"Dog bases: {dog_cls['bases']}\"\n\n    print(\"ALL TESTS PASSED\")\nfinally:\n    os.unlink(fname)",
-          "required_files": [
-            "ast_doc.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "9000000",
-        "amount_display": "9.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773831865,
-      "source": "https://www.bountybook.ai/job/45579287-a3b2-4181-bc84-85faf3b4d7ed",
       "source_kind": "bountybook"
     },
     {
@@ -3250,6 +3164,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
+      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "markdown_table.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "c2fd6d93-91e4-4078-a355-225da2699c0c",
       "title": "Research Python web frameworks and generate frameworks.json",
       "description": "Research Python web frameworks and generate frameworks.json\nResearch the following Python web frameworks and output `frameworks.json`.\n\n## Frameworks to document\nFlask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon\n\n## Output: `frameworks.json`\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"frameworks\": [\n    {\n      \"name\": \"Flask\",\n      \"github_stars_approx\": 68000,\n      \"primary_use_case\": \"lightweight web apps and REST APIs\",\n      \"execution_model\": \"sync\",\n      \"async_support\": false,\n      \"supports_websockets\": false,\n      \"license\": \"BSD-3-Clause\",\n      \"latest_stable_version\": \"3.0.3\",\n      \"website_url\": \"https://flask.palletsprojects.com\"\n    }\n  ]\n}\n```\n\n## Required fields per framework\n- `name`: string\n- `github_stars_approx`: integer (nearest thousand is fine)\n- `primary_use_case`: string (5–20 words)\n- `execution_model`: one of `\"sync\"`, `\"async\"`, `\"both\"`\n- `async_support`: boolean\n- `supports_websockets`: boolean\n- `license`: string (SPDX identifier)\n- `latest_stable_version`: string (semver)\n- `website_url`: string (URL)\n\n## Constraints\n- All 8 frameworks present\n- Boolean fields must be actual JSON booleans (not strings)\n- `github_stars_approx` must be an integer, not a string\n{\"instructions\":\"Research Flask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon. Output frameworks.json with all 8 entries containing: name, github_stars_approx (int), primary_use_case, execution_model (sync/async/both), async_support (bool), supports_websockets (bool), license, latest_stable_version, website_url.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"frameworks.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"bad generated_at format\\\"\\nassert \\\"frameworks\\\" in data, \\\"missing frameworks key\\\"\\n\\nfws = data[\\\"frameworks\\\"]\\nassert len(fws) == 8, f\\\"expected 8 frameworks, got {len(fws)}\\\"\\n\\nrequired_names = {\\\"Flask\\\", \\\"Django\\\", \\\"FastAPI\\\", \\\"Tornado\\\", \\\"Starlette\\\", \\\"Bottle\\\", \\\"Sanic\\\", \\\"Falcon\\\"}\\nfound_names = {f[\\\"name\\\"] for f in fws}\\nassert found_names == required_names, f\\\"wrong frameworks: {found_names ^ required_names}\\\"\\n\\nVALID_MODELS = {\\\"sync\\\", \\\"async\\\", \\\"both\\\"}\\n\\nfor fw in fws:\\n    name = fw[\\\"name\\\"]\\n    assert isinstance(fw.get(\\\"github_stars_approx\\\"), int), f\\\"{name}: github_stars_approx must be int\\\"\\n    assert fw[\\\"github_stars_approx\\\"] > 0, f\\\"{name}: stars must be positive\\\"\\n    assert isinstance(fw.get(\\\"primary_use_case\\\"), str) and len(fw[\\\"primary_use_case\\\"]) > 10, f\\\"{name}: primary_use_case too short\\\"\\n    assert fw.get(\\\"execution_model\\\") in VALID_MODELS, f\\\"{name}: execution_model invalid: {fw.get('execution_model')}\\\"\\n    assert isinstance(fw.get(\\\"async_support\\\"), bool), f\\\"{name}: async_support must be bool\\\"\\n    assert isinstance(fw.get(\\\"supports_websockets\\\"), bool), f\\\"{name}: supports_websockets must be bool\\\"\\n    assert isinstance(fw.get(\\\"license\\\"), str) and len(fw[\\\"license\\\"]) > 2, f\\\"{name}: license missing\\\"\\n    ver = fw.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert re.match(r\\\"\\\\d+\\\\.\\\\d+\\\", ver), f\\\"{name}: latest_stable_version not semver-like: {ver}\\\"\\n    url = fw.get(\\\"website_url\\\", \\\"\\\")\\n    assert url.startswith(\\\"http\\\"), f\\\"{name}: website_url missing or not a URL\\\"\\n\\n# FastAPI and Tornado should have async support\\nfastapi = next(f for f in fws if f[\\\"name\\\"] == \\\"FastAPI\\\")\\nassert fastapi[\\\"async_support\\\"] is True, \\\"FastAPI must have async_support=true\\\"\\n\\ntornado = next(f for f in fws if f[\\\"name\\\"] == \\\"Tornado\\\")\\nassert tornado[\\\"async_support\\\"] is True, \\\"Tornado must have async_support=true\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"frameworks.json\"]}}",
@@ -4257,6 +4211,62 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "969317da-1a1d-418a-ae28-4306f1d85876",
+      "title": "Deliver warm introduction to qualified buyer for SaSame MCP services",
+      "description": "Deliver warm introduction to qualified buyer for SaSame MCP services\nHunter task, not a lead list. Get one real buyer to actively engage with SaSame/Pancho. Payable only for a warm handoff: the buyer has a real MCP/agent need and has agreed to be introduced or has contacted SaSame. No cold list, no signup-only, no clicks, no traffic. Strong Hunters can earn 50% of that buyer's first qualifying settled receipt after real payment and fulfillment.\n{\"hunter_goal\":\"Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.\",\"accepted_output\":[\"buyer_name_or_company\",\"buyer_url_or_source\",\"buyer_need_in_one_sentence\",\"proof_of_warm_handoff_or_opt_in\",\"where_the_buyer_was_sent_or_how_pancho_can_continue\",\"hunter_contact_for_follow_up\"],\"proof_examples\":[\"buyer asked to be introduced to SaSame/Pancho\",\"buyer sent or agreed to send an email/message to SaSame\",\"buyer explicitly asked for MCP inspection/build/monitoring help\",\"buyer accepted a next-step conversation or checkout link\"],\"reject_if\":[\"only a name or URL\",\"generic sales list\",\"registration-only submission\",\"clicks, traffic, impressions, or social engagement only\",\"no buyer opt-in or no path for Pancho to continue\",\"spam, impersonation, fake buyer, or scraped list\"],\"short_instruction\":\"Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.\",\"commission_note\":\"The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment.\"}",
+      "category": null,
+      "required_capabilities": [
+        "research"
+      ],
+      "matched_capabilities": [
+        "research"
+      ],
+      "expected_output": {
+        "hunter_goal": "Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.",
+        "accepted_output": [
+          "buyer_name_or_company",
+          "buyer_url_or_source",
+          "buyer_need_in_one_sentence",
+          "proof_of_warm_handoff_or_opt_in",
+          "where_the_buyer_was_sent_or_how_pancho_can_continue",
+          "hunter_contact_for_follow_up"
+        ],
+        "proof_examples": [
+          "buyer asked to be introduced to SaSame/Pancho",
+          "buyer sent or agreed to send an email/message to SaSame",
+          "buyer explicitly asked for MCP inspection/build/monitoring help",
+          "buyer accepted a next-step conversation or checkout link"
+        ],
+        "reject_if": [
+          "only a name or URL",
+          "generic sales list",
+          "registration-only submission",
+          "clicks, traffic, impressions, or social engagement only",
+          "no buyer opt-in or no path for Pancho to continue",
+          "spam, impersonation, fake buyer, or scraped list"
+        ],
+        "short_instruction": "Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.",
+        "commission_note": "The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment."
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "10000",
+        "amount_display": "0.01",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1787328124,
+      "source": "https://www.bountybook.ai/job/969317da-1a1d-418a-ae28-4306f1d85876",
       "source_kind": "bountybook"
     }
   ],
