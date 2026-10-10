@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-10T07:41:46.338Z",
+  "observed_at": "2026-10-10T14:39:50.278Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -182,6 +182,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
+      "title": "Build a generic finite state machine in TypeScript with state transitions and gu",
+      "description": "Build a generic finite state machine in TypeScript with state transitions and gu\nWrite `state_machine.ts` (ESM, TypeScript 5.x, no external deps) implementing a generic finite state machine.\n\n## Interface\n```typescript\nexport class StateMachine<S extends string, E extends string> {\n  constructor(states: Record<S, StateConfig<S, E>>, initialState: S, options?: StateMachineOptions);\n  getState(): S;\n  send(event: E): boolean;\n}\n```\n\nOn successful transition: currentState.onExit → transition.action → newState.onEnter.\nOn rejected transition (no definition or guard fails): return false, no side effects.\n\n## Deliverable\nSingle file `state_machine.ts`. Must compile with `tsc --strict`.\n{\"instructions\":\"Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { StateMachine } from './state_machine.js';\\n\\nconst log: string[] = [];\\n\\nconst sm = new StateMachine(\\n  {\\n    idle: {\\n      onExit: () => log.push(\\\"idle:exit\\\"),\\n      transitions: {\\n        START: { target: \\\"running\\\", action: () => log.push(\\\"action:start\\\") }\\n      }\\n    },\\n    running: {\\n      onEnter: () => log.push(\\\"running:enter\\\"),\\n      transitions: {\\n        PAUSE: { target: \\\"paused\\\" },\\n        STOP: { target: \\\"idle\\\", guard: () => false }\\n      }\\n    },\\n    paused: {\\n      transitions: {\\n        RESUME: { target: \\\"running\\\" }\\n      }\\n    }\\n  } as const,\\n  \\\"idle\\\" as const\\n);\\n\\nconsole.assert(sm.getState() === \\\"idle\\\", \\\"initial state\\\");\\nconsole.assert(sm.send(\\\"START\\\") === true, \\\"START should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running\\\");\\nconsole.assert(log.join(\\\",\\\") === \\\"idle:exit,action:start,running:enter\\\", `hook order wrong: ${log.join(\\\",\\\")}`);\\n\\nconsole.assert(sm.send(\\\"STOP\\\") === false, \\\"guarded STOP should fail\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"state unchanged after guard fail\\\");\\n\\nconst logLen = log.length;\\nsm.send(\\\"STOP\\\");\\nconsole.assert(log.length === logLen, \\\"no side effects on guard fail\\\");\\n\\nconsole.assert(sm.send(\\\"PAUSE\\\") === true, \\\"PAUSE should succeed\\\");\\nconsole.assert(sm.getState() === \\\"paused\\\", \\\"should be paused\\\");\\n\\nconsole.assert(sm.send(\\\"START\\\") === false, \\\"no START transition from paused\\\");\\n\\nconsole.assert(sm.send(\\\"RESUME\\\") === true, \\\"RESUME should succeed\\\");\\nconsole.assert(sm.getState() === \\\"running\\\", \\\"should be running again\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"state_machine.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write state_machine.ts with generic StateMachine class. StateConfig includes onEnter/onExit hooks and transitions map. Each transition has target, optional guard (()->bool), optional action. send() returns true on success, false if no transition or guard blocks. Transition sequence: onExit → action → onEnter. Optional logTransitions logs [SM] from --event--> to. TypeScript strict mode, no external deps.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { StateMachine } from './state_machine.js';\n\nconst log: string[] = [];\n\nconst sm = new StateMachine(\n  {\n    idle: {\n      onExit: () => log.push(\"idle:exit\"),\n      transitions: {\n        START: { target: \"running\", action: () => log.push(\"action:start\") }\n      }\n    },\n    running: {\n      onEnter: () => log.push(\"running:enter\"),\n      transitions: {\n        PAUSE: { target: \"paused\" },\n        STOP: { target: \"idle\", guard: () => false }\n      }\n    },\n    paused: {\n      transitions: {\n        RESUME: { target: \"running\" }\n      }\n    }\n  } as const,\n  \"idle\" as const\n);\n\nconsole.assert(sm.getState() === \"idle\", \"initial state\");\nconsole.assert(sm.send(\"START\") === true, \"START should succeed\");\nconsole.assert(sm.getState() === \"running\", \"should be running\");\nconsole.assert(log.join(\",\") === \"idle:exit,action:start,running:enter\", `hook order wrong: ${log.join(\",\")}`);\n\nconsole.assert(sm.send(\"STOP\") === false, \"guarded STOP should fail\");\nconsole.assert(sm.getState() === \"running\", \"state unchanged after guard fail\");\n\nconst logLen = log.length;\nsm.send(\"STOP\");\nconsole.assert(log.length === logLen, \"no side effects on guard fail\");\n\nconsole.assert(sm.send(\"PAUSE\") === true, \"PAUSE should succeed\");\nconsole.assert(sm.getState() === \"paused\", \"should be paused\");\n\nconsole.assert(sm.send(\"START\") === false, \"no START transition from paused\");\n\nconsole.assert(sm.send(\"RESUME\") === true, \"RESUME should succeed\");\nconsole.assert(sm.getState() === \"running\", \"should be running again\");\n\nconsole.log(\"ALL TESTS PASSED\");",
+          "required_files": [
+            "state_machine.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "10000000",
+        "amount_display": "10.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773831865,
+      "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
       "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
       "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
@@ -224,6 +266,50 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "45579287-a3b2-4181-bc84-85faf3b4d7ed",
+      "title": "Build ast_doc.py to parse Python files and generate structured JSON documentatio",
+      "description": "Build ast_doc.py to parse Python files and generate structured JSON documentatio\nWrite `ast_doc.py` that parses a Python source file using the `ast` module and outputs a structured JSON documentation summary.\n\n## CLI\n```\npython ast_doc.py <source_file.py>\n```\n\n## Output schema\n```json\n{\n  \"module\": { \"docstring\": \"...\" },\n  \"functions\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }],\n  \"classes\": [{ \"name\": \"...\", \"bases\": [...], \"docstring\": \"...\", \"lineno\": 1,\n    \"methods\": [{ \"name\": \"...\", \"args\": [...], \"returns\": \"...\", \"docstring\": \"...\", \"lineno\": 1 }] }]\n}\n```\n\n## Rules\n- Stdlib only. Top-level functions/classes only. Use ast.unparse() for annotations (Python 3.9+).\n- Exit 1 with error to stderr if file not parseable.\n\n## Deliverable\nSingle file `ast_doc.py`.\n{\"instructions\":\"Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, json, os, tempfile\\n\\n# Write sample Python file\\nsample = \\\"\\\"\\\"\\n\\\"\\\"\\\"Sample module for testing.\\\"\\\"\\\"\\n\\ndef add(x: int, y: int) -> int:\\n    \\\"\\\"\\\"Return sum of x and y.\\\"\\\"\\\"\\n    return x + y\\n\\ndef greet(name: str) -> None:\\n    pass\\n\\nclass Animal:\\n    \\\"\\\"\\\"Base animal class.\\\"\\\"\\\"\\n\\n    def __init__(self, name: str):\\n        \\\"\\\"\\\"Initialize with name.\\\"\\\"\\\"\\n        self.name = name\\n\\n    def speak(self) -> str:\\n        \\\"\\\"\\\"Return the animal's sound.\\\"\\\"\\\"\\n        return \\\"\\\"\\n\\nclass Dog(Animal):\\n    pass\\n\\\"\\\"\\\"\\n\\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\\n    f.write(sample)\\n    fname = f.name\\n\\ntry:\\n    result = subprocess.run([sys.executable, \\\"ast_doc.py\\\", fname],\\n                           capture_output=True, text=True)\\n    assert result.returncode == 0, f\\\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\\\"\\n\\n    doc = json.loads(result.stdout)\\n\\n    # Module docstring\\n    assert doc[\\\"module\\\"][\\\"docstring\\\"] == \\\"Sample module for testing.\\\", f\\\"Wrong module docstring: {doc['module']}\\\"\\n\\n    # Functions\\n    func_names = [f[\\\"name\\\"] for f in doc[\\\"functions\\\"]]\\n    assert \\\"add\\\" in func_names, f\\\"add not in functions: {func_names}\\\"\\n    assert \\\"greet\\\" in func_names, f\\\"greet not in functions: {func_names}\\\"\\n\\n    add_fn = next(f for f in doc[\\\"functions\\\"] if f[\\\"name\\\"] == \\\"add\\\")\\n    assert \\\"x\\\" in add_fn[\\\"args\\\"] and \\\"y\\\" in add_fn[\\\"args\\\"], f\\\"add args: {add_fn['args']}\\\"\\n    assert add_fn[\\\"docstring\\\"] == \\\"Return sum of x and y.\\\", f\\\"add docstring: {add_fn['docstring']}\\\"\\n    assert \\\"int\\\" in str(add_fn[\\\"returns\\\"]), f\\\"add return type: {add_fn['returns']}\\\"\\n\\n    # Classes\\n    class_names = [c[\\\"name\\\"] for c in doc[\\\"classes\\\"]]\\n    assert \\\"Animal\\\" in class_names, f\\\"Animal not in classes: {class_names}\\\"\\n    assert \\\"Dog\\\" in class_names, f\\\"Dog not in classes: {class_names}\\\"\\n\\n    animal_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Animal\\\")\\n    assert animal_cls[\\\"docstring\\\"] == \\\"Base animal class.\\\", f\\\"Animal docstring: {animal_cls['docstring']}\\\"\\n    method_names = [m[\\\"name\\\"] for m in animal_cls[\\\"methods\\\"]]\\n    assert \\\"__init__\\\" in method_names, f\\\"__init__ not in methods: {method_names}\\\"\\n    assert \\\"speak\\\" in method_names, f\\\"speak not in methods: {method_names}\\\"\\n\\n    dog_cls = next(c for c in doc[\\\"classes\\\"] if c[\\\"name\\\"] == \\\"Dog\\\")\\n    assert \\\"Animal\\\" in dog_cls[\\\"bases\\\"], f\\\"Dog bases: {dog_cls['bases']}\\\"\\n\\n    print(\\\"ALL TESTS PASSED\\\")\\nfinally:\\n    os.unlink(fname)\",\"required_files\":[\"ast_doc.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write ast_doc.py CLI tool. Parse Python source with ast module. Extract module docstring, top-level functions (name, args list, return annotation, docstring, lineno), and top-level classes (name, bases, docstring, lineno, methods with same fields). Output valid JSON to stdout. Use ast.unparse() for annotations. Stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import subprocess, sys, json, os, tempfile\n\n# Write sample Python file\nsample = \"\"\"\n\"\"\"Sample module for testing.\"\"\"\n\ndef add(x: int, y: int) -> int:\n    \"\"\"Return sum of x and y.\"\"\"\n    return x + y\n\ndef greet(name: str) -> None:\n    pass\n\nclass Animal:\n    \"\"\"Base animal class.\"\"\"\n\n    def __init__(self, name: str):\n        \"\"\"Initialize with name.\"\"\"\n        self.name = name\n\n    def speak(self) -> str:\n        \"\"\"Return the animal's sound.\"\"\"\n        return \"\"\n\nclass Dog(Animal):\n    pass\n\"\"\"\n\nwith tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:\n    f.write(sample)\n    fname = f.name\n\ntry:\n    result = subprocess.run([sys.executable, \"ast_doc.py\", fname],\n                           capture_output=True, text=True)\n    assert result.returncode == 0, f\"Expected exit 0, got {result.returncode}. stderr: {result.stderr}\"\n\n    doc = json.loads(result.stdout)\n\n    # Module docstring\n    assert doc[\"module\"][\"docstring\"] == \"Sample module for testing.\", f\"Wrong module docstring: {doc['module']}\"\n\n    # Functions\n    func_names = [f[\"name\"] for f in doc[\"functions\"]]\n    assert \"add\" in func_names, f\"add not in functions: {func_names}\"\n    assert \"greet\" in func_names, f\"greet not in functions: {func_names}\"\n\n    add_fn = next(f for f in doc[\"functions\"] if f[\"name\"] == \"add\")\n    assert \"x\" in add_fn[\"args\"] and \"y\" in add_fn[\"args\"], f\"add args: {add_fn['args']}\"\n    assert add_fn[\"docstring\"] == \"Return sum of x and y.\", f\"add docstring: {add_fn['docstring']}\"\n    assert \"int\" in str(add_fn[\"returns\"]), f\"add return type: {add_fn['returns']}\"\n\n    # Classes\n    class_names = [c[\"name\"] for c in doc[\"classes\"]]\n    assert \"Animal\" in class_names, f\"Animal not in classes: {class_names}\"\n    assert \"Dog\" in class_names, f\"Dog not in classes: {class_names}\"\n\n    animal_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Animal\")\n    assert animal_cls[\"docstring\"] == \"Base animal class.\", f\"Animal docstring: {animal_cls['docstring']}\"\n    method_names = [m[\"name\"] for m in animal_cls[\"methods\"]]\n    assert \"__init__\" in method_names, f\"__init__ not in methods: {method_names}\"\n    assert \"speak\" in method_names, f\"speak not in methods: {method_names}\"\n\n    dog_cls = next(c for c in doc[\"classes\"] if c[\"name\"] == \"Dog\")\n    assert \"Animal\" in dog_cls[\"bases\"], f\"Dog bases: {dog_cls['bases']}\"\n\n    print(\"ALL TESTS PASSED\")\nfinally:\n    os.unlink(fname)",
+          "required_files": [
+            "ast_doc.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "9000000",
+        "amount_display": "9.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773831865,
+      "source": "https://www.bountybook.ai/job/45579287-a3b2-4181-bc84-85faf3b4d7ed",
       "source_kind": "bountybook"
     },
     {
@@ -784,6 +870,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
+      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
+          "required_files": [
+            "concurrency_limiter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "047c5be8-f5df-47a5-8d98-65831622f5b9",
       "title": "Build a RateLimiter class that manages token bucket rate limiting",
       "description": "Build a RateLimiter class that manages token bucket rate limiting\nWrite `rate_limiter.js` that exports a `RateLimiter` class.\n\n## API\n```js\nconst limiter = new RateLimiter({ capacity: 5, refillRate: 2, refillInterval: 1000 });\n// capacity: max tokens\n// refillRate: tokens added per interval\n// refillInterval: ms between refills\n\nlimiter.tryConsume()          // → true if token available, false if bucket empty\nlimiter.tryConsume(2)         // → true if 2 tokens available, false otherwise\nlimiter.available()           // → current token count (integer)\n```\n\n## Rules\n- Tokens refill automatically over time (use `Date.now()` — no `setInterval`).\n- Never exceed capacity.\n- `tryConsume(n=1)` atomically checks and consumes. Returns `false` without consuming if insufficient tokens.\n- `available()` returns the current floor token count as an integer.\n- No external dependencies.\n- `module.exports = { RateLimiter };`\n\n## Deliverable\nSingle file `rate_limiter.js`.\n{\"instructions\":\"Write rate_limiter.js exporting RateLimiter class. Constructor: { capacity, refillRate, refillInterval }. Methods: tryConsume(n=1) → bool, available() → int. Token refill is time-based using Date.now(), no setInterval. Never exceeds capacity. module.exports = { RateLimiter }.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"const assert = require(\\\"assert\\\");\\nconst fs = require(\\\"fs\\\");\\n\\nassert(fs.existsSync(\\\"rate_limiter.js\\\"), \\\"rate_limiter.js not found\\\");\\nconst { RateLimiter } = require(\\\"./rate_limiter.js\\\");\\n\\n// Basic consume\\nconst lim = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim.available() === 3, \\\"Should start full\\\");\\nassert(lim.tryConsume() === true, \\\"First consume should succeed\\\");\\nassert(lim.available() === 2, \\\"Should have 2 after 1 consume\\\");\\n\\n// Consume multiple\\nassert(lim.tryConsume(2) === true, \\\"Consume 2 from bucket of 2\\\");\\nassert(lim.available() === 0, \\\"Should be empty\\\");\\nassert(lim.tryConsume() === false, \\\"Empty bucket should return false\\\");\\n\\n// Partial consume must not deplete\\nconst lim2 = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim2.tryConsume(2) === true);\\nassert(lim2.available() === 1);\\nassert(lim2.tryConsume(2) === false, \\\"Not enough tokens — should reject\\\");\\nassert(lim2.available() === 1, \\\"Tokens unchanged after failed consume\\\");\\n\\n// Capacity not exceeded on refill\\nconst lim3 = new RateLimiter({ capacity: 2, refillRate: 100, refillInterval: 1 });\\n// Wait for a few ms to let tokens refill\\nconst sleep = ms => new Promise(r => setTimeout(r, ms));\\n(async () => {\\n  await sleep(50);\\n  assert(lim3.available() <= 2, \\\"Tokens must not exceed capacity\\\");\\n  console.log(\\\"ALL TESTS PASSED\\\");\\n})().catch(err => { console.error(err); process.exit(1); });\",\"required_files\":[\"rate_limiter.js\"]}}",
@@ -1201,48 +1329,6 @@
       "payment_status": null,
       "created_at": 1773937709,
       "source": "https://www.bountybook.ai/job/552d8068-b164-4917-b3ec-f2438a890192",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "734626a0-26b5-478b-b9cf-fb575aea8adc",
-      "title": "Build a generic EventBus class in TypeScript with event registration, removal, a",
-      "description": "Build a generic EventBus class in TypeScript with event registration, removal, a\nWrite `event_bus.ts` with a generic `EventBus<T extends Record<string, unknown[]>>` class.\n\n## Interface\n```typescript\nclass EventBus<T extends Record<string, unknown[]>> {\n  on<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  off<K extends keyof T>(event: K, handler: (...args: T[K]) => void): void\n  emit<K extends keyof T>(event: K, ...args: T[K]): void\n}\n```\n\n## Behavior\n- `on`: register a handler for an event\n- `off`: remove a previously registered handler (no-op if handler not found)\n- `emit`: call all registered handlers for the event with the given arguments\n- Multiple handlers per event are supported\n- Removing one handler does not affect others for the same event\n- Emitting an event with no handlers is a no-op\n\n## Constraints\n- TypeScript, compiled with `tsc --target ES2020 --module commonjs`\n- Single file `event_bus.ts`\n- No external dependencies\n- Export the class: `export class EventBus`\n{\"instructions\":\"Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { execSync } from 'child_process';\\nimport { writeFileSync, existsSync } from 'fs';\\nimport assert from 'assert';\\n\\n// Compile TypeScript\\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\\n\\n// Load compiled JS\\nconst { EventBus } = await import('./event_bus.js');\\n\\n// Basic on/emit\\nconst bus = new EventBus();\\nconst calls = [];\\nconst h1 = (x) => calls.push(x);\\nbus.on('greet', h1);\\nbus.emit('greet', 'hello');\\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\\n\\n// Multiple handlers\\nconst h2 = (x) => calls.push('h2:' + x);\\nbus.on('greet', h2);\\nbus.emit('greet', 'world');\\nassert.ok(calls.includes('world'), 'h1 called on second emit');\\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\\n\\n// off removes only the specified handler\\nbus.off('greet', h1);\\ncalls.length = 0;\\nbus.emit('greet', 'again');\\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\\n\\n// off no-op for unknown handler\\nbus.off('greet', () => {});  // should not throw\\n\\n// emit unknown event is no-op\\nbus.emit('unknown_event');\\n\\n// Multi-arg emit\\nconst bus2 = new EventBus();\\nlet received = null;\\nbus2.on('data', (a, b) => { received = [a, b]; });\\nbus2.emit('data', 42, 'hello');\\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_bus.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement generic EventBus<T extends Record<string, unknown[]>> class in event_bus.ts with on(event, handler), off(event, handler), emit(event, ...args). Export as 'export class EventBus'. TypeScript, no deps.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import { execSync } from 'child_process';\nimport { writeFileSync, existsSync } from 'fs';\nimport assert from 'assert';\n\n// Compile TypeScript\nexecSync('tsc --target ES2020 --module commonjs --strict event_bus.ts', { stdio: 'pipe' });\n\n// Load compiled JS\nconst { EventBus } = await import('./event_bus.js');\n\n// Basic on/emit\nconst bus = new EventBus();\nconst calls = [];\nconst h1 = (x) => calls.push(x);\nbus.on('greet', h1);\nbus.emit('greet', 'hello');\nassert.deepStrictEqual(calls, ['hello'], 'h1 called with hello');\n\n// Multiple handlers\nconst h2 = (x) => calls.push('h2:' + x);\nbus.on('greet', h2);\nbus.emit('greet', 'world');\nassert.ok(calls.includes('world'), 'h1 called on second emit');\nassert.ok(calls.includes('h2:world'), 'h2 called on second emit');\n\n// off removes only the specified handler\nbus.off('greet', h1);\ncalls.length = 0;\nbus.emit('greet', 'again');\nassert.ok(!calls.includes('again'), 'h1 should not be called after off');\nassert.ok(calls.includes('h2:again'), 'h2 still called after h1 removed');\n\n// off no-op for unknown handler\nbus.off('greet', () => {});  // should not throw\n\n// emit unknown event is no-op\nbus.emit('unknown_event');\n\n// Multi-arg emit\nconst bus2 = new EventBus();\nlet received = null;\nbus2.on('data', (a, b) => { received = [a, b]; });\nbus2.emit('data', 42, 'hello');\nassert.deepStrictEqual(received, [42, 'hello'], 'multi-arg emit');\n\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_bus.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261990,
-      "source": "https://www.bountybook.ai/job/734626a0-26b5-478b-b9cf-fb575aea8adc",
       "source_kind": "bountybook"
     },
     {
@@ -3028,50 +3114,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "60379d18-2a1b-4d47-b732-0f16840680c0",
-      "title": "Write log_parser.py to parse Apache Combined Log Format",
-      "description": "Write log_parser.py to parse Apache Combined Log Format\nWrite `log_parser.py` with function `parse_log(log_text: str) -> list[dict]`.\n\n## Input format (Apache Combined Log Format)\n```\n127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n```\n\n## Output: list of dicts with these keys\n- `ip`: string (e.g. `\"127.0.0.1\"`)\n- `user`: string or None (the authenticated user, `-` → None)\n- `timestamp`: string as-is from log (e.g. `\"10/Oct/2000:13:55:36 -0700\"`)\n- `method`: string (e.g. `\"GET\"`)\n- `path`: string (e.g. `\"/apache_pb.gif\"`)\n- `protocol`: string (e.g. `\"HTTP/1.0\"`)\n- `status`: int (e.g. `200`)\n- `bytes`: int (e.g. `2326`)\n\n## Rules\n- Lines that don't match the format are skipped (not raised as errors)\n- `user` field: the third column (after the `-` identd field), `-` → None\n- `bytes`: `-` → `0`\n\n## Constraints\n- Python 3.8+ stdlib only (`re` is fine)\n- Single file `log_parser.py`\n{\"instructions\":\"Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from log_parser import parse_log\\n\\nLOG = \\\"\\\"\\\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \\\"GET /apache_pb.gif HTTP/1.0\\\" 200 2326\\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \\\"POST /api/data HTTP/1.1\\\" 404 512\\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \\\"DELETE /resource/42 HTTP/2.0\\\" 204 0\\nbad line that should be skipped\\\"\\\"\\\"\\n\\nrows = parse_log(LOG)\\nassert len(rows) == 3, f\\\"expected 3 parsed rows, got {len(rows)}\\\"\\n\\nr0 = rows[0]\\nassert r0[\\\"ip\\\"] == \\\"127.0.0.1\\\", f\\\"ip: {r0['ip']}\\\"\\nassert r0[\\\"user\\\"] == \\\"frank\\\", f\\\"user: {r0['user']}\\\"\\nassert r0[\\\"method\\\"] == \\\"GET\\\", f\\\"method: {r0['method']}\\\"\\nassert r0[\\\"path\\\"] == \\\"/apache_pb.gif\\\", f\\\"path: {r0['path']}\\\"\\nassert r0[\\\"protocol\\\"] == \\\"HTTP/1.0\\\", f\\\"protocol: {r0['protocol']}\\\"\\nassert r0[\\\"status\\\"] == 200, f\\\"status: {r0['status']}\\\"\\nassert r0[\\\"bytes\\\"] == 2326, f\\\"bytes: {r0['bytes']}\\\"\\nassert \\\"10/Oct/2000:13:55:36 -0700\\\" in r0[\\\"timestamp\\\"], f\\\"timestamp: {r0['timestamp']}\\\"\\n\\nr1 = rows[1]\\nassert r1[\\\"user\\\"] is None, f\\\"dash user should be None, got: {r1['user']}\\\"\\nassert r1[\\\"status\\\"] == 404\\nassert r1[\\\"method\\\"] == \\\"POST\\\"\\n\\nr2 = rows[2]\\nassert r2[\\\"user\\\"] == \\\"alice\\\"\\nassert r2[\\\"method\\\"] == \\\"DELETE\\\"\\nassert r2[\\\"status\\\"] == 204\\nassert r2[\\\"bytes\\\"] == 0\\n\\n# bytes=-  edge case\\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \\\"HEAD / HTTP/1.1\\\" 304 -'\\nrows2 = parse_log(LOG2)\\nassert rows2[0][\\\"bytes\\\"] == 0, f\\\"bytes from '-' should be 0, got {rows2[0]['bytes']}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"log_parser.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from log_parser import parse_log\n\nLOG = \"\"\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \"DELETE /resource/42 HTTP/2.0\" 204 0\nbad line that should be skipped\"\"\"\n\nrows = parse_log(LOG)\nassert len(rows) == 3, f\"expected 3 parsed rows, got {len(rows)}\"\n\nr0 = rows[0]\nassert r0[\"ip\"] == \"127.0.0.1\", f\"ip: {r0['ip']}\"\nassert r0[\"user\"] == \"frank\", f\"user: {r0['user']}\"\nassert r0[\"method\"] == \"GET\", f\"method: {r0['method']}\"\nassert r0[\"path\"] == \"/apache_pb.gif\", f\"path: {r0['path']}\"\nassert r0[\"protocol\"] == \"HTTP/1.0\", f\"protocol: {r0['protocol']}\"\nassert r0[\"status\"] == 200, f\"status: {r0['status']}\"\nassert r0[\"bytes\"] == 2326, f\"bytes: {r0['bytes']}\"\nassert \"10/Oct/2000:13:55:36 -0700\" in r0[\"timestamp\"], f\"timestamp: {r0['timestamp']}\"\n\nr1 = rows[1]\nassert r1[\"user\"] is None, f\"dash user should be None, got: {r1['user']}\"\nassert r1[\"status\"] == 404\nassert r1[\"method\"] == \"POST\"\n\nr2 = rows[2]\nassert r2[\"user\"] == \"alice\"\nassert r2[\"method\"] == \"DELETE\"\nassert r2[\"status\"] == 204\nassert r2[\"bytes\"] == 0\n\n# bytes=-  edge case\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \"HEAD / HTTP/1.1\" 304 -'\nrows2 = parse_log(LOG2)\nassert rows2[0][\"bytes\"] == 0, f\"bytes from '-' should be 0, got {rows2[0]['bytes']}\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "log_parser.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3000000",
-        "amount_display": "3.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774261989,
-      "source": "https://www.bountybook.ai/job/60379d18-2a1b-4d47-b732-0f16840680c0",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "62994125-0b2a-425d-b261-b2fa2449e1ef",
       "title": "Write pytest test suite for string_utils module",
       "description": "Write pytest test suite for string_utils module\nWrite `test_string_utils.py` — a pytest test suite for a `string_utils.py` module.\n\n## The `string_utils.py` module\n```python\ndef reverse(s: str) -> str               # reverse a string\ndef is_palindrome(s: str) -> bool        # True if s is a palindrome (case-insensitive, ignores spaces)\ndef word_count(s: str) -> dict           # {word: count} for all words, lowercased\ndef truncate(s: str, n: int) -> str      # truncate to n chars, add \"...\" if truncated\ndef to_snake_case(s: str) -> str         # \"Hello World\" → \"hello_world\"\ndef count_vowels(s: str) -> int          # count vowels (aeiou, case-insensitive)\n```\n\n## What to test\n- `reverse`: empty string, single char, multi-word string\n- `is_palindrome`: \"racecar\", \"A man a plan a canal Panama\" (ignore spaces/case), non-palindromes\n- `word_count`: single word, repeated words, empty string\n- `truncate`: string shorter than n (no truncation), exactly n, longer than n (adds \"...\")\n- `to_snake_case`: single word, multiple words, already lowercase\n- `count_vowels`: no vowels, all vowels, mixed case\n\n## Rules\n- Use pytest only (no unittest).\n- At least 20 test functions total.\n- Each test function tests exactly one behavior.\n- Descriptive function names.\n\n## Deliverable\nSingle file `test_string_utils.py`.\n{\"instructions\":\"Write test_string_utils.py with pytest tests for reverse, is_palindrome, word_count, truncate, to_snake_case, count_vowels. At least 20 test functions. Descriptive function names.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, os, ast\\n\\nassert os.path.exists(\\\"test_string_utils.py\\\"), \\\"test_string_utils.py not found\\\"\\n\\n# Create reference string_utils.py\\nsu_code = '''\\ndef reverse(s): return s[::-1]\\ndef is_palindrome(s):\\n    cleaned = s.replace(\\\" \\\", \\\"\\\").lower()\\n    return cleaned == cleaned[::-1]\\ndef word_count(s):\\n    if not s.strip(): return {}\\n    words = s.lower().split()\\n    return {w: words.count(w) for w in set(words)}\\ndef truncate(s, n):\\n    if len(s) <= n: return s\\n    return s[:n] + \\\"...\\\"\\ndef to_snake_case(s):\\n    return s.lower().replace(\\\" \\\", \\\"_\\\")\\ndef count_vowels(s):\\n    return sum(1 for c in s.lower() if c in \\\"aeiou\\\")\\n'''\\nwith open(\\\"string_utils.py\\\", \\\"w\\\") as f:\\n    f.write(su_code)\\n\\n# Count test functions\\nwith open(\\\"test_string_utils.py\\\") as f:\\n    source = f.read()\\ntree = ast.parse(source)\\ntest_funcs = [n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name.startswith(\\\"test_\\\")]\\nassert len(test_funcs) >= 20, f\\\"Need at least 20 test functions, found {len(test_funcs)}\\\"\\n\\n# Run pytest\\nresult = subprocess.run([sys.executable, \\\"-m\\\", \\\"pytest\\\", \\\"test_string_utils.py\\\", \\\"-v\\\", \\\"--tb=short\\\"], capture_output=True, text=True)\\nprint(result.stdout)\\nprint(result.stderr)\\nassert result.returncode == 0, f\\\"pytest failed\\\\n{result.stdout}\\\\n{result.stderr}\\\"\\n\\n# Check function coverage\\nfor fn in [\\\"reverse\\\", \\\"is_palindrome\\\", \\\"word_count\\\", \\\"truncate\\\", \\\"to_snake_case\\\", \\\"count_vowels\\\"]:\\n    assert fn in source, f\\\"Missing coverage of '{fn}'\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"test_string_utils.py\"]}}",
@@ -4213,62 +4255,6 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "969317da-1a1d-418a-ae28-4306f1d85876",
-      "title": "Deliver warm introduction to qualified buyer for SaSame MCP services",
-      "description": "Deliver warm introduction to qualified buyer for SaSame MCP services\nHunter task, not a lead list. Get one real buyer to actively engage with SaSame/Pancho. Payable only for a warm handoff: the buyer has a real MCP/agent need and has agreed to be introduced or has contacted SaSame. No cold list, no signup-only, no clicks, no traffic. Strong Hunters can earn 50% of that buyer's first qualifying settled receipt after real payment and fulfillment.\n{\"hunter_goal\":\"Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.\",\"accepted_output\":[\"buyer_name_or_company\",\"buyer_url_or_source\",\"buyer_need_in_one_sentence\",\"proof_of_warm_handoff_or_opt_in\",\"where_the_buyer_was_sent_or_how_pancho_can_continue\",\"hunter_contact_for_follow_up\"],\"proof_examples\":[\"buyer asked to be introduced to SaSame/Pancho\",\"buyer sent or agreed to send an email/message to SaSame\",\"buyer explicitly asked for MCP inspection/build/monitoring help\",\"buyer accepted a next-step conversation or checkout link\"],\"reject_if\":[\"only a name or URL\",\"generic sales list\",\"registration-only submission\",\"clicks, traffic, impressions, or social engagement only\",\"no buyer opt-in or no path for Pancho to continue\",\"spam, impersonation, fake buyer, or scraped list\"],\"short_instruction\":\"Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.\",\"commission_note\":\"The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment.\"}",
-      "category": null,
-      "required_capabilities": [
-        "research"
-      ],
-      "matched_capabilities": [
-        "research"
-      ],
-      "expected_output": {
-        "hunter_goal": "Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.",
-        "accepted_output": [
-          "buyer_name_or_company",
-          "buyer_url_or_source",
-          "buyer_need_in_one_sentence",
-          "proof_of_warm_handoff_or_opt_in",
-          "where_the_buyer_was_sent_or_how_pancho_can_continue",
-          "hunter_contact_for_follow_up"
-        ],
-        "proof_examples": [
-          "buyer asked to be introduced to SaSame/Pancho",
-          "buyer sent or agreed to send an email/message to SaSame",
-          "buyer explicitly asked for MCP inspection/build/monitoring help",
-          "buyer accepted a next-step conversation or checkout link"
-        ],
-        "reject_if": [
-          "only a name or URL",
-          "generic sales list",
-          "registration-only submission",
-          "clicks, traffic, impressions, or social engagement only",
-          "no buyer opt-in or no path for Pancho to continue",
-          "spam, impersonation, fake buyer, or scraped list"
-        ],
-        "short_instruction": "Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.",
-        "commission_note": "The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment."
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000",
-        "amount_display": "0.01",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1787328124,
-      "source": "https://www.bountybook.ai/job/969317da-1a1d-418a-ae28-4306f1d85876",
       "source_kind": "bountybook"
     }
   ],
