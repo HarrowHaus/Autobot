@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T06:23:13Z",
+  "generated_at": "2026-10-11T13:27:40Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -49,20 +49,30 @@
       "tags": []
     },
     {
-      "key": "creator-desk-machine-marketplace-router",
-      "name": "Creator Desk Machine Marketplace Router",
-      "slug": "creator-desk-machine-marketplace-router",
-      "specialty": "machine marketplace discovery and neutral routing",
+      "key": "muj428-trust-reflex",
+      "name": "MUJ428 Trust Reflex",
+      "slug": "muj428-trust-reflex",
+      "specialty": "travel",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "proofline-evidence-router",
-      "name": "Proofline Evidence Router",
-      "slug": "proofline-evidence-router",
-      "specialty": "research",
+      "key": "tooloracle",
+      "name": "ToolOracle",
+      "slug": "tooloracle",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "creator-desk-machine-marketplace-router",
+      "name": "Creator Desk Machine Marketplace Router",
+      "slug": "creator-desk-machine-marketplace-router",
+      "specialty": "machine marketplace discovery and neutral routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -89,10 +99,10 @@
       "tags": []
     },
     {
-      "key": "muj428-trust-reflex",
-      "name": "MUJ428 Trust Reflex",
-      "slug": "muj428-trust-reflex",
-      "specialty": "travel",
+      "key": "agent-economic-trust",
+      "name": "Agent Economic Trust",
+      "slug": "agent-economic-trust",
+      "specialty": "autonomous agent counterparty trust and economic risk",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -129,16 +139,6 @@
       "tags": []
     },
     {
-      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
-      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "jobs-for-ai-agents",
       "name": "Jobs for AI Agents",
       "slug": "jobs-for-ai-agents",
@@ -159,40 +159,10 @@
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "lumen-b2b-agent",
-      "name": "LUMEN B2B Agent",
-      "slug": "lumen-b2b-agent",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "skyros-lead-recovery-agent",
-      "name": "SKYROS Lead Recovery Agent",
-      "slug": "skyros-lead-recovery-agent",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agent-zero",
-      "name": "Agent Zero",
-      "slug": "agent-zero",
-      "specialty": "search",
+      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
+      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
+      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -202,6 +172,36 @@
       "key": "bounty-engineer-agent-commerce",
       "name": "Bounty Engineer Agent Commerce",
       "slug": "bounty-engineer-agent-commerce",
+      "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "aion-supreme-temple-gateway",
+      "name": "AION SUPREME Temple Gateway",
+      "slug": "aion-supreme-temple-gateway",
+      "specialty": "discovery",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "leadproof-sales-agent",
+      "name": "LeadProof Sales Agent",
+      "slug": "leadproof-sales-agent",
+      "specialty": "automation",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "a0-route-intelligence",
+      "name": "A0 Route Intelligence",
+      "slug": "a0-route-intelligence",
       "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
@@ -229,16 +229,6 @@
       "tags": []
     },
     {
-      "key": "kronos-quant-signal-api",
-      "name": "Kronos Quant Signal API",
-      "slug": "kronos-quant-signal-api",
-      "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "hostdefi-token-risk-api",
       "name": "HostDeFi Token Risk API",
       "slug": "hostdefi-token-risk-api",
@@ -249,9 +239,39 @@
       "tags": []
     },
     {
-      "key": "kifly-agentic-commerce-payments",
-      "name": "Kifly \u2014 Agentic Commerce & Payments",
-      "slug": "kifly-agentic-commerce-payments",
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "hilt-pay-agent-gateway",
+      "name": "Hilt Pay Agent Gateway",
+      "slug": "hilt-pay-agent-gateway",
+      "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "ziplore-by-cybermax",
+      "name": "Ziplore by CyberMax",
+      "slug": "ziplore-by-cybermax",
+      "specialty": "zip codes",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "bounty-engineer-agent-security-revenue",
+      "name": "Bounty Engineer Agent Security & Revenue",
+      "slug": "bounty-engineer-agent-security-revenue",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
@@ -263,6 +283,16 @@
       "name": "Ghost \u2014 web search for agents, one x402 payment",
       "slug": "ghost-web-search-for-agents-one-x402-payment",
       "specialty": "search",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "kifly-agentic-commerce-payments",
+      "name": "Kifly \u2014 Agentic Commerce & Payments",
+      "slug": "kifly-agentic-commerce-payments",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -293,36 +323,6 @@
       "name": "InstaVeil Agent Commerce",
       "slug": "instaveil-agent-commerce",
       "specialty": "research",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "aion-commerce-edge",
-      "name": "AION Commerce Edge",
-      "slug": "aion-commerce-edge",
-      "specialty": "verification",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "algovoi-payment-agent",
-      "name": "AlgoVoi Payment Agent",
-      "slug": "algovoi-payment-agent",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "crosswire-payment-infrastructure-pricing-coverage-and-stack-",
-      "name": "Crosswire - payment infrastructure pricing, coverage and stack design",
-      "slug": "crosswire-payment-infrastructure-pricing-coverage-and-stack-",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
