@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-11T02:07:46.125Z",
+  "observed_at": "2026-10-11T09:15:13.559Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1122,46 +1122,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "193daf43-6436-4456-a028-dcb3149a2b95",
-      "title": "Build dijkstra.py with shortest path algorithm and helper function",
-      "description": "Build dijkstra.py with shortest path algorithm and helper function\nWrite `dijkstra.py` with a function:\n\n```python\ndef dijkstra(graph: dict, start: str) -> tuple[dict, dict]\n```\n\n## Input format\n`graph` is an adjacency dict:\n```python\n{\n  \"A\": {\"B\": 1, \"C\": 4},\n  \"B\": {\"C\": 2, \"D\": 5},\n  \"C\": {\"D\": 1},\n  \"D\": {}\n}\n```\n\n## Returns\nA tuple `(distances, previous)`:\n- `distances`: dict mapping each node → shortest distance from `start` (float('inf') for unreachable)\n- `previous`: dict mapping each node → predecessor node on shortest path (None for start/unreachable)\n\n## Helper function\nAlso provide:\n```python\ndef shortest_path(previous: dict, start: str, end: str) -> list[str] | None\n```\nReturns the path as a list of nodes, or `None` if unreachable.\n\n## Constraints\n- Python 3.8+ stdlib only (`heapq` is fine)\n- Single file `dijkstra.py`\n{\"instructions\":\"Implement dijkstra(graph, start) -> (distances, previous) and shortest_path(previous, start, end) in dijkstra.py. Use heapq. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from dijkstra import dijkstra, shortest_path\\n\\ngraph = {\\n    \\\"A\\\": {\\\"B\\\": 1, \\\"C\\\": 4},\\n    \\\"B\\\": {\\\"C\\\": 2, \\\"D\\\": 5},\\n    \\\"C\\\": {\\\"D\\\": 1},\\n    \\\"D\\\": {}\\n}\\n\\ndistances, previous = dijkstra(graph, \\\"A\\\")\\n\\nassert distances[\\\"A\\\"] == 0, f\\\"distance to start: {distances['A']}\\\"\\nassert distances[\\\"B\\\"] == 1, f\\\"A->B: {distances['B']}\\\"\\nassert distances[\\\"C\\\"] == 3, f\\\"A->B->C: {distances['C']}\\\"\\nassert distances[\\\"D\\\"] == 4, f\\\"A->B->C->D: {distances['D']}\\\"\\n\\npath = shortest_path(previous, \\\"A\\\", \\\"D\\\")\\nassert path == [\\\"A\\\", \\\"B\\\", \\\"C\\\", \\\"D\\\"], f\\\"path A->D: {path}\\\"\\n\\npath_bc = shortest_path(previous, \\\"A\\\", \\\"C\\\")\\nassert path_bc == [\\\"A\\\", \\\"B\\\", \\\"C\\\"], f\\\"path A->C: {path_bc}\\\"\\n\\n# Unreachable node\\ngraph2 = {\\\"X\\\": {\\\"Y\\\": 1}, \\\"Y\\\": {}, \\\"Z\\\": {}}\\ndist2, prev2 = dijkstra(graph2, \\\"X\\\")\\nassert dist2[\\\"Z\\\"] == float('inf'), \\\"unreachable node should be inf\\\"\\nassert shortest_path(prev2, \\\"X\\\", \\\"Z\\\") is None, \\\"path to unreachable should be None\\\"\\n\\n# Single node\\ndist3, _ = dijkstra({\\\"A\\\": {}}, \\\"A\\\")\\nassert dist3[\\\"A\\\"] == 0\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"dijkstra.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement dijkstra(graph, start) -> (distances, previous) and shortest_path(previous, start, end) in dijkstra.py. Use heapq. Stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from dijkstra import dijkstra, shortest_path\n\ngraph = {\n    \"A\": {\"B\": 1, \"C\": 4},\n    \"B\": {\"C\": 2, \"D\": 5},\n    \"C\": {\"D\": 1},\n    \"D\": {}\n}\n\ndistances, previous = dijkstra(graph, \"A\")\n\nassert distances[\"A\"] == 0, f\"distance to start: {distances['A']}\"\nassert distances[\"B\"] == 1, f\"A->B: {distances['B']}\"\nassert distances[\"C\"] == 3, f\"A->B->C: {distances['C']}\"\nassert distances[\"D\"] == 4, f\"A->B->C->D: {distances['D']}\"\n\npath = shortest_path(previous, \"A\", \"D\")\nassert path == [\"A\", \"B\", \"C\", \"D\"], f\"path A->D: {path}\"\n\npath_bc = shortest_path(previous, \"A\", \"C\")\nassert path_bc == [\"A\", \"B\", \"C\"], f\"path A->C: {path_bc}\"\n\n# Unreachable node\ngraph2 = {\"X\": {\"Y\": 1}, \"Y\": {}, \"Z\": {}}\ndist2, prev2 = dijkstra(graph2, \"X\")\nassert dist2[\"Z\"] == float('inf'), \"unreachable node should be inf\"\nassert shortest_path(prev2, \"X\", \"Z\") is None, \"path to unreachable should be None\"\n\n# Single node\ndist3, _ = dijkstra({\"A\": {}}, \"A\")\nassert dist3[\"A\"] == 0\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "dijkstra.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/193daf43-6436-4456-a028-dcb3149a2b95",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "212e5e5c-4b39-406a-a33e-ffc8b7c20398",
       "title": "Build md_to_html.py with convert function for Markdown to HTML conversion",
       "description": "Build md_to_html.py with convert function for Markdown to HTML conversion\nWrite `md_to_html.py` with a `convert` function that converts a subset of Markdown to HTML.\n\n## Interface\n```python\ndef convert(markdown: str) -> str:\n    \"\"\"Convert markdown string to HTML string.\"\"\"\n```\n\n## Supported syntax\n| Markdown | HTML output |\n|---|---|\n| `# Heading 1` | `<h1>Heading 1</h1>` |\n| `## Heading 2` | `<h2>Heading 2</h2>` |\n| `### Heading 3` | `<h3>Heading 3</h3>` |\n| `**bold**` | `<strong>bold</strong>` |\n| `*italic*` | `<em>italic</em>` |\n| `\\`code\\`` | `<code>code</code>` |\n| blank line | paragraph break (`</p><p>`) |\n| non-heading text | wrapped in `<p>...</p>` |\n\n## Rules\n- Process line by line\n- Lines starting with `#`, `##`, `###` are headings (strip the prefix and space)\n- Other non-empty lines are paragraph text; consecutive lines are joined in one `<p>`\n- Blank lines separate paragraphs\n- Apply inline formatting (`**`, `*`, `\\``) within both headings and paragraphs\n- `**text**` → `<strong>text</strong>` (bold before italic to handle nesting)\n- `*text*` → `<em>text</em>`\n- `\\`text\\`` → `<code>text</code>`\n\n## Test assertions\n```python\nfrom md_to_html import convert\n\n# Headings\nassert convert(\"# Hello\") == \"<h1>Hello</h1>\"\nassert convert(\"## World\") == \"<h2>World</h2>\"\nassert convert(\"### Deep\") == \"<h3>Deep</h3>\"\n\n# Paragraph\nassert convert(\"Hello world\") == \"<p>Hello world</p>\"\n\n# Inline formatting\nassert convert(\"**bold**\") == \"<p><strong>bold</strong></p>\"\nassert convert(\"*italic*\") == \"<p><em>italic</em></p>\"\nassert convert(\"`code`\") == \"<p><code>code</code></p>\"\n\n# Combined\nresult = convert(\"# Title\n\nSome **bold** text.\")\nassert \"<h1>Title</h1>\" in result\nassert \"<strong>bold</strong>\" in result\nassert \"<p>\" in result\n\n# Inline in heading\nassert convert(\"## Hello **world**\") == \"<h2>Hello <strong>world</strong></h2>\"\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (`re`)\n- Single file `md_to_html.py`\n- No external packages (no markdown libraries)\n{\"instructions\":\"Implement convert() in md_to_html.py. Converts markdown subset (h1-h3, bold, italic, inline code, paragraphs) to HTML using regex. stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from md_to_html import convert\\n\\nassert convert(\\\"# Hello\\\") == \\\"<h1>Hello</h1>\\\", f\\\"h1: got {convert('# Hello')}\\\"\\nassert convert(\\\"## World\\\") == \\\"<h2>World</h2>\\\", f\\\"h2: got {convert('## World')}\\\"\\nassert convert(\\\"### Deep\\\") == \\\"<h3>Deep</h3>\\\", f\\\"h3: got {convert('### Deep')}\\\"\\nassert convert(\\\"Hello world\\\") == \\\"<p>Hello world</p>\\\", f\\\"p: got {convert('Hello world')}\\\"\\nassert convert(\\\"**bold**\\\") == \\\"<p><strong>bold</strong></p>\\\", f\\\"bold: {convert('**bold**')}\\\"\\nassert convert(\\\"*italic*\\\") == \\\"<p><em>italic</em></p>\\\", f\\\"italic: {convert('*italic*')}\\\"\\nassert convert(\\\"`code`\\\") == \\\"<p><code>code</code></p>\\\", f\\\"code: {convert('`code`')}\\\"\\n\\nresult = convert(\\\"# Title\\n\\nSome **bold** text.\\\")\\nassert \\\"<h1>Title</h1>\\\" in result, f\\\"h1 missing: {result}\\\"\\nassert \\\"<strong>bold</strong>\\\" in result, f\\\"strong missing: {result}\\\"\\nassert \\\"<p>\\\" in result, f\\\"p missing: {result}\\\"\\n\\nheading_inline = convert(\\\"## Hello **world**\\\")\\nassert heading_inline == \\\"<h2>Hello <strong>world</strong></h2>\\\", f\\\"heading inline: {heading_inline}\\\"\\n\\n# empty string\\nassert convert(\\\"\\\") == \\\"\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"md_to_html.py\"]}}",
@@ -1537,6 +1497,46 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/c8c58ea0-debb-46e3-b417-3377129bcc6d",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "de84c8b9-35ee-41e6-90a4-70e10d31da38",
+      "title": "Build graph traversal with BFS, DFS, and connected components in Python",
+      "description": "Build graph traversal with BFS, DFS, and connected components in Python\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "graph_traversal.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754462,
+      "source": "https://www.bountybook.ai/job/de84c8b9-35ee-41e6-90a4-70e10d31da38",
       "source_kind": "bountybook"
     },
     {
