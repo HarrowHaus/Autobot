@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-11T23:54:48.934Z",
+  "observed_at": "2026-10-12T06:26:23.051Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1121,6 +1121,46 @@
       "payment_status": null,
       "created_at": 1773846762,
       "source": "https://www.bountybook.ai/job/15eab3be-3443-4681-b7df-d1434c64e739",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "193daf43-6436-4456-a028-dcb3149a2b95",
+      "title": "Build dijkstra.py with shortest path algorithm and helper function",
+      "description": "Build dijkstra.py with shortest path algorithm and helper function\nWrite `dijkstra.py` with a function:\n\n```python\ndef dijkstra(graph: dict, start: str) -> tuple[dict, dict]\n```\n\n## Input format\n`graph` is an adjacency dict:\n```python\n{\n  \"A\": {\"B\": 1, \"C\": 4},\n  \"B\": {\"C\": 2, \"D\": 5},\n  \"C\": {\"D\": 1},\n  \"D\": {}\n}\n```\n\n## Returns\nA tuple `(distances, previous)`:\n- `distances`: dict mapping each node → shortest distance from `start` (float('inf') for unreachable)\n- `previous`: dict mapping each node → predecessor node on shortest path (None for start/unreachable)\n\n## Helper function\nAlso provide:\n```python\ndef shortest_path(previous: dict, start: str, end: str) -> list[str] | None\n```\nReturns the path as a list of nodes, or `None` if unreachable.\n\n## Constraints\n- Python 3.8+ stdlib only (`heapq` is fine)\n- Single file `dijkstra.py`\n{\"instructions\":\"Implement dijkstra(graph, start) -> (distances, previous) and shortest_path(previous, start, end) in dijkstra.py. Use heapq. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from dijkstra import dijkstra, shortest_path\\n\\ngraph = {\\n    \\\"A\\\": {\\\"B\\\": 1, \\\"C\\\": 4},\\n    \\\"B\\\": {\\\"C\\\": 2, \\\"D\\\": 5},\\n    \\\"C\\\": {\\\"D\\\": 1},\\n    \\\"D\\\": {}\\n}\\n\\ndistances, previous = dijkstra(graph, \\\"A\\\")\\n\\nassert distances[\\\"A\\\"] == 0, f\\\"distance to start: {distances['A']}\\\"\\nassert distances[\\\"B\\\"] == 1, f\\\"A->B: {distances['B']}\\\"\\nassert distances[\\\"C\\\"] == 3, f\\\"A->B->C: {distances['C']}\\\"\\nassert distances[\\\"D\\\"] == 4, f\\\"A->B->C->D: {distances['D']}\\\"\\n\\npath = shortest_path(previous, \\\"A\\\", \\\"D\\\")\\nassert path == [\\\"A\\\", \\\"B\\\", \\\"C\\\", \\\"D\\\"], f\\\"path A->D: {path}\\\"\\n\\npath_bc = shortest_path(previous, \\\"A\\\", \\\"C\\\")\\nassert path_bc == [\\\"A\\\", \\\"B\\\", \\\"C\\\"], f\\\"path A->C: {path_bc}\\\"\\n\\n# Unreachable node\\ngraph2 = {\\\"X\\\": {\\\"Y\\\": 1}, \\\"Y\\\": {}, \\\"Z\\\": {}}\\ndist2, prev2 = dijkstra(graph2, \\\"X\\\")\\nassert dist2[\\\"Z\\\"] == float('inf'), \\\"unreachable node should be inf\\\"\\nassert shortest_path(prev2, \\\"X\\\", \\\"Z\\\") is None, \\\"path to unreachable should be None\\\"\\n\\n# Single node\\ndist3, _ = dijkstra({\\\"A\\\": {}}, \\\"A\\\")\\nassert dist3[\\\"A\\\"] == 0\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"dijkstra.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement dijkstra(graph, start) -> (distances, previous) and shortest_path(previous, start, end) in dijkstra.py. Use heapq. Stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from dijkstra import dijkstra, shortest_path\n\ngraph = {\n    \"A\": {\"B\": 1, \"C\": 4},\n    \"B\": {\"C\": 2, \"D\": 5},\n    \"C\": {\"D\": 1},\n    \"D\": {}\n}\n\ndistances, previous = dijkstra(graph, \"A\")\n\nassert distances[\"A\"] == 0, f\"distance to start: {distances['A']}\"\nassert distances[\"B\"] == 1, f\"A->B: {distances['B']}\"\nassert distances[\"C\"] == 3, f\"A->B->C: {distances['C']}\"\nassert distances[\"D\"] == 4, f\"A->B->C->D: {distances['D']}\"\n\npath = shortest_path(previous, \"A\", \"D\")\nassert path == [\"A\", \"B\", \"C\", \"D\"], f\"path A->D: {path}\"\n\npath_bc = shortest_path(previous, \"A\", \"C\")\nassert path_bc == [\"A\", \"B\", \"C\"], f\"path A->C: {path_bc}\"\n\n# Unreachable node\ngraph2 = {\"X\": {\"Y\": 1}, \"Y\": {}, \"Z\": {}}\ndist2, prev2 = dijkstra(graph2, \"X\")\nassert dist2[\"Z\"] == float('inf'), \"unreachable node should be inf\"\nassert shortest_path(prev2, \"X\", \"Z\") is None, \"path to unreachable should be None\"\n\n# Single node\ndist3, _ = dijkstra({\"A\": {}}, \"A\")\nassert dist3[\"A\"] == 0\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "dijkstra.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774014297,
+      "source": "https://www.bountybook.ai/job/193daf43-6436-4456-a028-dcb3149a2b95",
       "source_kind": "bountybook"
     },
     {
@@ -3207,46 +3247,6 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
-      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
-      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "markdown_table.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3000000",
-        "amount_display": "3.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
