@@ -7,12 +7,6 @@
       "score": 67.408
     },
     {
-      "action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
-      "opportunity_id": "distribution:x402-bazaar",
-      "score": 35.0
-    },
-    {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_05LE4so7mcJ6r0fLWuprn",
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_vr45efhdsoFyNHBpf8Wbu",
       "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 67.408,
@@ -95,26 +95,6 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_ILI16I1DYjTOabbUBRvV9",
       "status": "observed",
       "title": "Test hire (please ignore)"
-    },
-    {
-      "advertised_value": null,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "facilitator": "https://facilitator.x402endpoints.online",
-        "our_resources_seen": 0,
-        "resources_seen": 0
-      },
-      "execution_gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
-      "first_seen_at": "2026-09-27T02:52:51.226Z",
-      "funding_evidence": "none",
-      "id": "distribution:x402-bazaar",
-      "kind": "distribution",
-      "next_action": "verify_live_sdk_endpoint_then_generate_real_bazaar_eligible_payment_traffic",
-      "observed_at": "2026-10-12T06:35:58.666Z",
-      "score": 35.0,
-      "source": "x402-bazaar",
-      "status": "observed",
-      "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
     },
     {
       "advertised_value": {
@@ -137,7 +117,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -171,7 +151,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -204,7 +184,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -237,7 +217,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -270,7 +250,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -304,7 +284,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -338,7 +318,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -372,7 +352,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -406,7 +386,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -440,7 +420,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -474,7 +454,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -508,7 +488,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -542,7 +522,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -3328,6 +3308,26 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_z1q1zbkEJYGplIzzke8Sy",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 city.close/close-api ($0.10, single run)"
+    },
+    {
+      "advertised_value": null,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "facilitator": "https://facilitator.x402endpoints.online",
+        "our_resources_seen": 0,
+        "resources_seen": 0
+      },
+      "execution_gate": "requires_live_deployment_and_external_or_controlled_buyer_payment",
+      "first_seen_at": "2026-09-27T02:52:51.226Z",
+      "funding_evidence": "none",
+      "id": "distribution:x402-bazaar",
+      "kind": "distribution",
+      "next_action": "none",
+      "observed_at": "2026-10-12T06:35:58.666Z",
+      "score": 0.0,
+      "source": "x402-bazaar",
+      "status": "stale",
+      "title": "Get the paid SwarmBrain route endpoint observed by Bazaar"
     }
   ],
   "revenue": {
@@ -3340,13 +3340,13 @@
   "sources": {
     "basedagents": {
       "candidate_count": 14,
-      "observed_at": "2026-10-12T06:36:00.271Z",
+      "observed_at": "2026-10-12T16:10:19.697Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-12T06:35:58.666Z",
-      "our_resources_seen": 0,
-      "status": "partial"
+      "observed_at": "2026-10-12T16:10:17.112Z",
+      "our_resources_seen": null,
+      "status": "unavailable"
     }
   },
   "truth_rules": {
@@ -3356,5 +3356,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-12T06:36:00Z"
+  "updated_at": "2026-10-12T16:10:20Z"
 }
