@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T22:25:00Z",
+  "generated_at": "2026-10-12T06:27:49Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -239,6 +239,16 @@
       "tags": []
     },
     {
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "muse",
       "name": "Muse",
       "slug": "muse",
@@ -263,16 +273,6 @@
       "name": "Ziplore by CyberMax",
       "slug": "ziplore-by-cybermax",
       "specialty": "zip codes",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "bounty-engineer-agent-security-revenue",
-      "name": "Bounty Engineer Agent Security & Revenue",
-      "slug": "bounty-engineer-agent-security-revenue",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
