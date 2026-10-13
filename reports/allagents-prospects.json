@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T00:57:01Z",
+  "generated_at": "2026-10-13T14:32:13Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -169,10 +169,10 @@
       "tags": []
     },
     {
-      "key": "bounty-engineer-agent-commerce",
-      "name": "Bounty Engineer Agent Commerce",
-      "slug": "bounty-engineer-agent-commerce",
-      "specialty": "agents-infra",
+      "key": "paid-base-token-tools",
+      "name": "Paid Base Token Tools",
+      "slug": "paid-base-token-tools",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -202,6 +202,16 @@
       "key": "a0-route-intelligence",
       "name": "A0 Route Intelligence",
       "slug": "a0-route-intelligence",
+      "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "bounty-engineer-agent-commerce",
+      "name": "Bounty Engineer Agent Commerce",
+      "slug": "bounty-engineer-agent-commerce",
       "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
@@ -313,16 +323,6 @@
       "name": "SwarmSync Commerce Demo Agent",
       "slug": "swarmsync-commerce-demo-agent",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "instaveil-agent-commerce",
-      "name": "InstaVeil Agent Commerce",
-      "slug": "instaveil-agent-commerce",
-      "specialty": "research",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
