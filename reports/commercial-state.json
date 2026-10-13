@@ -21,12 +21,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_62ZBECvWTDGU1MHjFcEok",
-      "score": 28.817
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_Q0G5ZxpsrXx13uMG0cJXf",
       "score": 28.817
     },
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_vr45efhdsoFyNHBpf8Wbu",
       "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 67.408,
@@ -120,7 +120,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
@@ -152,7 +152,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -182,44 +182,11 @@
       "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
       "first_seen_at": "2026-10-08T02:17:47.398Z",
       "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_62ZBECvWTDGU1MHjFcEok",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "docker",
-        "automation"
-      ],
-      "score": 28.817,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_62ZBECvWTDGU1MHjFcEok",
-      "status": "observed",
-      "title": "Industrial Sentinel Paid External Deployment 25"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
-      "first_seen_at": "2026-10-08T02:17:47.398Z",
-      "funding_evidence": "advertised_bounty",
       "id": "basedagents:task_Q0G5ZxpsrXx13uMG0cJXf",
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -252,7 +219,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -285,7 +252,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -319,7 +286,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -353,7 +320,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -387,7 +354,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -421,7 +388,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -455,7 +422,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -489,7 +456,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -523,7 +490,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -557,7 +524,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -913,6 +880,39 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_5bPQltQZqOya7F3mZU6Dz",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.afg/afg ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
+      "first_seen_at": "2026-10-08T02:17:47.398Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_62ZBECvWTDGU1MHjFcEok",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-13T12:12:53.637Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_62ZBECvWTDGU1MHjFcEok",
+      "status": "stale",
+      "title": "Industrial Sentinel Paid External Deployment 25"
     },
     {
       "advertised_value": {
@@ -3374,12 +3374,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 15,
-      "observed_at": "2026-10-13T12:12:53.637Z",
+      "candidate_count": 14,
+      "observed_at": "2026-10-13T19:34:13.764Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-13T12:12:51.452Z",
+      "observed_at": "2026-10-13T19:34:08.492Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3391,5 +3391,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-13T12:12:54Z"
+  "updated_at": "2026-10-13T19:34:15Z"
 }
