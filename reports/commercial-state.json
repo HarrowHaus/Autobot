@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 67.408,
@@ -120,7 +120,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
@@ -152,7 +152,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -186,7 +186,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -219,7 +219,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -252,7 +252,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -286,7 +286,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -320,7 +320,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -354,7 +354,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -388,7 +388,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -422,7 +422,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -456,7 +456,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -490,7 +490,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -524,7 +524,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -3375,11 +3375,11 @@
   "sources": {
     "basedagents": {
       "candidate_count": 14,
-      "observed_at": "2026-10-13T19:34:13.764Z",
+      "observed_at": "2026-10-13T23:27:15.756Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-13T19:34:08.492Z",
+      "observed_at": "2026-10-13T23:27:13.449Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3391,5 +3391,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-13T19:34:15Z"
+  "updated_at": "2026-10-13T23:27:16Z"
 }
