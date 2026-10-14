@@ -21,12 +21,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_Q0G5ZxpsrXx13uMG0cJXf",
-      "score": 28.817
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_Ti5ShGCXzmGkneQh2pnWF",
       "score": 28.817
     },
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_Ix8t4HnjAhX6HilQxdVtZ",
       "score": 25.775
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_PRGxeT66PotQxYJw7EPlL",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 67.408,
@@ -120,7 +120,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "agent-compatibility-testing"
@@ -152,7 +152,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -182,44 +182,11 @@
       "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
       "first_seen_at": "2026-10-08T02:17:47.398Z",
       "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_Q0G5ZxpsrXx13uMG0cJXf",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "docker",
-        "automation"
-      ],
-      "score": 28.817,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Q0G5ZxpsrXx13uMG0cJXf",
-      "status": "observed",
-      "title": "Industrial Sentinel Paid External Deployment 21"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
-      "first_seen_at": "2026-10-08T02:17:47.398Z",
-      "funding_evidence": "advertised_bounty",
       "id": "basedagents:task_Ti5ShGCXzmGkneQh2pnWF",
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -252,7 +219,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -286,7 +253,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -320,7 +287,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -354,7 +321,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -388,7 +355,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -422,7 +389,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -456,7 +423,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -490,7 +457,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -524,7 +491,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -1640,6 +1607,39 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_OWAQtPdx0DLGtq9YNjHFl",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 agency.ottobot/licensed-house-painters ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
+      "first_seen_at": "2026-10-08T02:17:47.398Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_Q0G5ZxpsrXx13uMG0cJXf",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-13T23:27:15.756Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Q0G5ZxpsrXx13uMG0cJXf",
+      "status": "stale",
+      "title": "Industrial Sentinel Paid External Deployment 21"
     },
     {
       "advertised_value": {
@@ -3374,12 +3374,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 14,
-      "observed_at": "2026-10-13T23:27:15.756Z",
+      "candidate_count": 13,
+      "observed_at": "2026-10-14T02:11:09.551Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-13T23:27:13.449Z",
+      "observed_at": "2026-10-14T02:11:07.355Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3391,5 +3391,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-13T23:27:16Z"
+  "updated_at": "2026-10-14T02:11:10Z"
 }
