@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T17:34:26Z",
+  "generated_at": "2026-10-14T21:54:56Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -239,20 +239,20 @@
       "tags": []
     },
     {
-      "key": "hostdefi-token-risk-api",
-      "name": "HostDeFi Token Risk API",
-      "slug": "hostdefi-token-risk-api",
-      "specialty": "trading",
+      "key": "agentrxi",
+      "name": "AgentRXI",
+      "slug": "agentrxi",
+      "specialty": "pay-per-call tools for ai agents (x402)",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
+      "key": "hostdefi-token-risk-api",
+      "name": "HostDeFi Token Risk API",
+      "slug": "hostdefi-token-risk-api",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -269,20 +269,20 @@
       "tags": []
     },
     {
-      "key": "hilt-pay-agent-gateway",
-      "name": "Hilt Pay Agent Gateway",
-      "slug": "hilt-pay-agent-gateway",
-      "specialty": "agents-infra",
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "base-wallet-lens",
-      "name": "Base Wallet Lens",
-      "slug": "base-wallet-lens",
-      "specialty": "finance",
+      "key": "hilt-pay-agent-gateway",
+      "name": "Hilt Pay Agent Gateway",
+      "slug": "hilt-pay-agent-gateway",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
