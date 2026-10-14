@@ -1,7 +1,7 @@
 {
   "source": "x402-official-bazaar-client",
   "sdk": "@x402/extensions/bazaar",
-  "observed_at": "2026-10-14T08:03:09.478Z",
+  "observed_at": "2026-10-14T14:04:25.721Z",
   "facilitator": "https://facilitator.x402endpoints.online",
   "network": "eip155:8453",
   "pay_to": "0xa47930496923574a33325b9be28fe84fa8d2b1c6",
@@ -24,7 +24,7 @@
       "query": "audio music",
       "result_count": null,
       "resources": [],
-      "error": "Facilitator searchDiscoveryResources failed (502): <!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-js ie8 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if gt IE 8]><!--> <html class=\"no-js\" lang=\"en-US\"> <!--<![endif]-->\n<head>\n\n<title>x402endpoints.online | 502: Bad gateway</title>\n<meta charset=\"UTF-8\" />\n<meta http-equiv=\"Content-Type\" content=\"text/"
+      "error": "fetch failed"
     },
     {
       "query": "art nft",
