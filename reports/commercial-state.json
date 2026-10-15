@@ -9,12 +9,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_y372I6J7kxULqpj35xpEz",
-      "score": 67.408
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_05LE4so7mcJ6r0fLWuprn",
       "score": 28.817
     },
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_PRGxeT66PotQxYJw7EPlL",
       "score": 25.775
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_ToEmWubWjjfNICs4qnkYg",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 67.408,
@@ -95,41 +95,6 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_ILI16I1DYjTOabbUBRvV9",
       "status": "observed",
       "title": "Test hire (please ignore)"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "1000000",
-        "amount_display": "1.00",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0x360eefe9580d456c494e500a46b0470adbe48f4157af8b109552946fb9851b04",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "worker-result-1.0 JSON; outcome + first_failure honestly stated; evidence hashes verify; environment is genuinely cursor/mcp.",
-      "first_seen_at": "2026-10-12T23:15:07.281Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_y372I6J7kxULqpj35xpEz",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "agent-compatibility-testing"
-      ],
-      "score": 67.408,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_y372I6J7kxULqpj35xpEz",
-      "status": "observed",
-      "title": "Independent MCP compatibility probe \u2014 DeepWiki: cursor / mcp (slot 3 of 3)"
     },
     {
       "advertised_value": {
@@ -152,7 +117,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -186,7 +151,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -219,7 +184,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -253,7 +218,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -287,7 +252,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -321,7 +286,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -355,7 +320,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -389,7 +354,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -423,7 +388,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -457,7 +422,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -491,7 +456,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -3207,6 +3172,41 @@
     },
     {
       "advertised_value": {
+        "amount_atomic": "1000000",
+        "amount_display": "1.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0x360eefe9580d456c494e500a46b0470adbe48f4157af8b109552946fb9851b04",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "worker-result-1.0 JSON; outcome + first_failure honestly stated; evidence hashes verify; environment is genuinely cursor/mcp.",
+      "first_seen_at": "2026-10-12T23:15:07.281Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_y372I6J7kxULqpj35xpEz",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-15T00:56:27.100Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "agent-compatibility-testing"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_y372I6J7kxULqpj35xpEz",
+      "status": "stale",
+      "title": "Independent MCP compatibility probe \u2014 DeepWiki: cursor / mcp (slot 3 of 3)"
+    },
+    {
+      "advertised_value": {
         "amount_atomic": "100000",
         "amount_display": "0.10",
         "asset": "USDC",
@@ -3374,12 +3374,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 13,
-      "observed_at": "2026-10-15T00:56:27.100Z",
+      "candidate_count": 12,
+      "observed_at": "2026-10-15T06:30:12.872Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-15T00:56:24.199Z",
+      "observed_at": "2026-10-15T06:30:10.814Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3391,5 +3391,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-15T00:56:28Z"
+  "updated_at": "2026-10-15T06:30:13Z"
 }
