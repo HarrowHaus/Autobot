@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T21:54:56Z",
+  "generated_at": "2026-10-15T05:06:48Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -259,20 +259,20 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": null,
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
