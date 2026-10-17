@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-17T01:29:20.305Z",
+  "observed_at": "2026-10-17T06:04:29.994Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -785,48 +785,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/6043441c-41cc-40d0-9edc-fed586699cc8",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "733d4731-7e60-4bb8-9233-ba3771c779d3",
-      "title": "Build a CLI program that checks HTTP status codes for URLs in a file",
-      "description": "Build a CLI program that checks HTTP status codes for URLs in a file\nWrite `urlcheck.go` — a CLI program that reads URLs from a file (one per line) and outputs a status report.\n\n## Usage\n```\ngo run urlcheck.go urls.txt\n```\n\n## Output format (one line per URL)\n```\n200 OK         https://example.com\n404 Not Found  https://example.com/missing\nERROR          https://invalid.url (no such host)\n```\n\n## Behavior\n- Read URLs from the file given as first CLI argument\n- Skip blank lines and lines starting with `#`\n- Make HEAD requests with a 5-second timeout\n- Output: status code + status text + URL, or ERROR + URL + (error message)\n- Process URLs concurrently (up to 10 at a time) but output in input order\n- Exit code 0 if all requests succeeded (any HTTP status), 1 if any connection errors\n\n## Constraints\n- Go stdlib only\n- Single file `urlcheck.go`, package `main`\n{\"instructions\":\"Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp urlcheck.go /tmp/urlcheck.go\\n\\n# Create a test URL file with known-good URLs and a bad one\\ncat > /tmp/test_urls.txt << 'EOF'\\n# Test URL list\\nhttps://httpbin.org/status/200\\nhttps://httpbin.org/status/404\\nhttps://httpbin.org/status/201\\n\\nEOF\\n\\n# Compile\\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\\necho \\\"Compiled OK\\\"\\n\\n# Run with test file\\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\\necho \\\"Output:\\\"\\necho \\\"$OUTPUT\\\"\\n\\n# Validate output has 3 lines (skip blank/comment lines)\\nLINE_COUNT=$(echo \\\"$OUTPUT\\\" | grep -c \\\"http\\\" || true)\\nif [ \\\"$LINE_COUNT\\\" -lt 3 ]; then\\n  echo \\\"ERROR: expected at least 3 output lines, got $LINE_COUNT\\\"\\n  exit 1\\nfi\\n\\n# Check 200 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"200\\\"; then\\n  echo \\\"ERROR: 200 OK not found in output\\\"\\n  exit 1\\nfi\\n\\n# Check 404 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"404\\\"; then\\n  echo \\\"ERROR: 404 not found in output\\\"\\n  exit 1\\nfi\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"urlcheck.go\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "bash",
-          "test_code": "#!/bin/bash\nset -e\n\ncp urlcheck.go /tmp/urlcheck.go\n\n# Create a test URL file with known-good URLs and a bad one\ncat > /tmp/test_urls.txt << 'EOF'\n# Test URL list\nhttps://httpbin.org/status/200\nhttps://httpbin.org/status/404\nhttps://httpbin.org/status/201\n\nEOF\n\n# Compile\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\necho \"Compiled OK\"\n\n# Run with test file\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\necho \"Output:\"\necho \"$OUTPUT\"\n\n# Validate output has 3 lines (skip blank/comment lines)\nLINE_COUNT=$(echo \"$OUTPUT\" | grep -c \"http\" || true)\nif [ \"$LINE_COUNT\" -lt 3 ]; then\n  echo \"ERROR: expected at least 3 output lines, got $LINE_COUNT\"\n  exit 1\nfi\n\n# Check 200 line is present\nif ! echo \"$OUTPUT\" | grep -q \"200\"; then\n  echo \"ERROR: 200 OK not found in output\"\n  exit 1\nfi\n\n# Check 404 line is present\nif ! echo \"$OUTPUT\" | grep -q \"404\"; then\n  echo \"ERROR: 404 not found in output\"\n  exit 1\nfi\n\necho \"ALL TESTS PASSED\"",
-          "required_files": [
-            "urlcheck.go"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "6000000",
-        "amount_display": "6.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/733d4731-7e60-4bb8-9233-ba3771c779d3",
       "source_kind": "bountybook"
     },
     {
@@ -1753,6 +1711,48 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "title": "Build extract_products.py parser for HTML product listings to JSON",
+      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "extract_products.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
