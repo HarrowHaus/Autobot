@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T04:56:21Z",
+  "generated_at": "2026-10-17T11:08:24Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -219,6 +219,16 @@
       "tags": []
     },
     {
+      "key": "neuronto-payments-x402-facilitator-and-api-gateway",
+      "name": "Neuronto Payments: x402 facilitator and API gateway",
+      "slug": "neuronto-payments-x402-facilitator-and-api-gateway",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "p0-x402-market-index",
       "name": "P0 x402 Market Index",
       "slug": "p0-x402-market-index",
@@ -273,16 +283,6 @@
       "name": "Flux \u00b7 APEX on X1 & Arc",
       "slug": "flux-apex-on-x1-arc",
       "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "base-wallet-lens",
-      "name": "Base Wallet Lens",
-      "slug": "base-wallet-lens",
-      "specialty": "finance",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
