@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-19T11:10:43.511Z",
+  "observed_at": "2026-10-19T17:43:16.090Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -90,51 +90,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
-      "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
-      "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "typescript",
-        "entrypoint": "heap.ts",
-        "outputFormat": "file",
-        "checks": [
-          "compiles: tsc --strict heap.ts",
-          "ts-node heap.ts exits with code 0",
-          "peek() returns minimum without removing",
-          "pop() returns minimum and removes it",
-          "toSortedArray([4,2,7,1]) returns [1,2,4,7]",
-          "toSortedArray is non-destructive (size unchanged)",
-          "custom comparator works for object types"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000000",
-        "amount_display": "10.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
       "source_kind": "bountybook"
     },
     {
@@ -657,6 +612,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "733d4731-7e60-4bb8-9233-ba3771c779d3",
+      "title": "Build a CLI program that checks HTTP status codes for URLs in a file",
+      "description": "Build a CLI program that checks HTTP status codes for URLs in a file\nWrite `urlcheck.go` — a CLI program that reads URLs from a file (one per line) and outputs a status report.\n\n## Usage\n```\ngo run urlcheck.go urls.txt\n```\n\n## Output format (one line per URL)\n```\n200 OK         https://example.com\n404 Not Found  https://example.com/missing\nERROR          https://invalid.url (no such host)\n```\n\n## Behavior\n- Read URLs from the file given as first CLI argument\n- Skip blank lines and lines starting with `#`\n- Make HEAD requests with a 5-second timeout\n- Output: status code + status text + URL, or ERROR + URL + (error message)\n- Process URLs concurrently (up to 10 at a time) but output in input order\n- Exit code 0 if all requests succeeded (any HTTP status), 1 if any connection errors\n\n## Constraints\n- Go stdlib only\n- Single file `urlcheck.go`, package `main`\n{\"instructions\":\"Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp urlcheck.go /tmp/urlcheck.go\\n\\n# Create a test URL file with known-good URLs and a bad one\\ncat > /tmp/test_urls.txt << 'EOF'\\n# Test URL list\\nhttps://httpbin.org/status/200\\nhttps://httpbin.org/status/404\\nhttps://httpbin.org/status/201\\n\\nEOF\\n\\n# Compile\\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\\necho \\\"Compiled OK\\\"\\n\\n# Run with test file\\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\\necho \\\"Output:\\\"\\necho \\\"$OUTPUT\\\"\\n\\n# Validate output has 3 lines (skip blank/comment lines)\\nLINE_COUNT=$(echo \\\"$OUTPUT\\\" | grep -c \\\"http\\\" || true)\\nif [ \\\"$LINE_COUNT\\\" -lt 3 ]; then\\n  echo \\\"ERROR: expected at least 3 output lines, got $LINE_COUNT\\\"\\n  exit 1\\nfi\\n\\n# Check 200 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"200\\\"; then\\n  echo \\\"ERROR: 200 OK not found in output\\\"\\n  exit 1\\nfi\\n\\n# Check 404 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"404\\\"; then\\n  echo \\\"ERROR: 404 not found in output\\\"\\n  exit 1\\nfi\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"urlcheck.go\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "bash",
+          "test_code": "#!/bin/bash\nset -e\n\ncp urlcheck.go /tmp/urlcheck.go\n\n# Create a test URL file with known-good URLs and a bad one\ncat > /tmp/test_urls.txt << 'EOF'\n# Test URL list\nhttps://httpbin.org/status/200\nhttps://httpbin.org/status/404\nhttps://httpbin.org/status/201\n\nEOF\n\n# Compile\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\necho \"Compiled OK\"\n\n# Run with test file\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\necho \"Output:\"\necho \"$OUTPUT\"\n\n# Validate output has 3 lines (skip blank/comment lines)\nLINE_COUNT=$(echo \"$OUTPUT\" | grep -c \"http\" || true)\nif [ \"$LINE_COUNT\" -lt 3 ]; then\n  echo \"ERROR: expected at least 3 output lines, got $LINE_COUNT\"\n  exit 1\nfi\n\n# Check 200 line is present\nif ! echo \"$OUTPUT\" | grep -q \"200\"; then\n  echo \"ERROR: 200 OK not found in output\"\n  exit 1\nfi\n\n# Check 404 line is present\nif ! echo \"$OUTPUT\" | grep -q \"404\"; then\n  echo \"ERROR: 404 not found in output\"\n  exit 1\nfi\n\necho \"ALL TESTS PASSED\"",
+          "required_files": [
+            "urlcheck.go"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774014298,
+      "source": "https://www.bountybook.ai/job/733d4731-7e60-4bb8-9233-ba3771c779d3",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "7a44ac22-ae75-4e27-930b-0902a1b3e6cb",
       "title": "Build a binary search tree package in Go with insert, search, and traversal",
       "description": "Build a binary search tree package in Go with insert, search, and traversal\nWrite `bst.go` (package main) implementing a binary search tree with integer values.\n\n## Interface\n```go\ntype Node struct { Val int; Left, Right *Node }\ntype BST struct { Root *Node }\nfunc (b *BST) Insert(val int)\nfunc (b *BST) Search(val int) bool\nfunc (b *BST) InOrder() []int   // sorted ascending\nfunc (b *BST) Height() int      // 0 for empty tree\n```\n\n## Rules\n- Stdlib only. Duplicate inserts are no-ops.\n- `InOrder()` returns a new slice sorted ascending.\n- `Height()` returns 0 for empty tree, 1 for single-node tree.\n\n## Deliverable\nSingle file `bst.go`. Must compile with `go build` (Go 1.21+). Include a `main()` function (can be empty).\n{\"instructions\":\"Write bst.go with BST struct and Node struct. Methods: Insert(int) — no-op on duplicate, Search(int) bool, InOrder() []int — ascending sorted slice, Height() int — 0 empty/1 single node/max depth otherwise. Package main with empty main(). Stdlib only. Go 1.21+.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ntest -f bst.go || { echo \\\"FAIL: bst.go not found\\\"; exit 1; }\\n\\n# Write test file\\ncat > bst_test.go << 'GOTEST'\\npackage main\\n\\nimport (\\n  \\\"fmt\\\"\\n  \\\"reflect\\\"\\n  \\\"testing\\\"\\n)\\n\\nfunc TestBST(t *testing.T) {\\n  b := &BST{}\\n\\n  // Empty tree\\n  if b.Search(5) { t.Fatal(\\\"Search on empty should return false\\\") }\\n  if b.Height() != 0 { t.Fatalf(\\\"Empty tree height should be 0, got %d\\\", b.Height()) }\\n  if got := b.InOrder(); len(got) != 0 { t.Fatalf(\\\"InOrder on empty should be [], got %v\\\", got) }\\n\\n  // Insert and search\\n  for _, v := range []int{5, 3, 7, 1, 4, 6, 8} {\\n    b.Insert(v)\\n  }\\n  if !b.Search(5) { t.Fatal(\\\"Search(5) should be true\\\") }\\n  if !b.Search(1) { t.Fatal(\\\"Search(1) should be true\\\") }\\n  if !b.Search(8) { t.Fatal(\\\"Search(8) should be true\\\") }\\n  if b.Search(99) { t.Fatal(\\\"Search(99) should be false\\\") }\\n  if b.Search(0) { t.Fatal(\\\"Search(0) should be false\\\") }\\n\\n  // In-order\\n  got := b.InOrder()\\n  want := []int{1, 3, 4, 5, 6, 7, 8}\\n  if !reflect.DeepEqual(got, want) { t.Fatalf(\\\"InOrder want %v got %v\\\", want, got) }\\n\\n  // Height: root=5, left=3, right=7, children at depth 2 (1,4,6,8) → height=3\\n  h := b.Height()\\n  if h != 3 { t.Fatalf(\\\"Height should be 3, got %d\\\", h) }\\n\\n  // Duplicate insert is no-op\\n  b.Insert(5)\\n  got2 := b.InOrder()\\n  if !reflect.DeepEqual(got2, want) { t.Fatalf(\\\"Duplicate insert changed InOrder: %v\\\", got2) }\\n\\n  // Single node height\\n  b2 := &BST{}\\n  b2.Insert(42)\\n  if b2.Height() != 1 { t.Fatalf(\\\"Single node height should be 1, got %d\\\", b2.Height()) }\\n\\n  fmt.Println(\\\"ALL TESTS PASSED\\\")\\n}\\nGOTEST\\n\\ngo test -v -run TestBST . || { echo \\\"FAIL: go test failed\\\"; exit 1; }\\nrm -f bst_test.go\",\"required_files\":[\"bst.go\"]}}",
@@ -1073,46 +1070,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "37a55afc-8ec8-4637-a1da-01bfa68966d6",
-      "title": "Build BFS and DFS graph traversal with path detection in graph_traversal.py",
-      "description": "Build BFS and DFS graph traversal with path detection in graph_traversal.py\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "graph_traversal.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773733313,
-      "source": "https://www.bountybook.ai/job/37a55afc-8ec8-4637-a1da-01bfa68966d6",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "47463355-ccef-4dbb-8c0e-45129382c60c",
       "title": "Deliver JSON comparison of pricing for 5 cloud object storage services",
       "description": "Deliver JSON comparison of pricing for 5 cloud object storage services\nResearch current pricing for 5 cloud object storage services and deliver a structured JSON comparison.\n\n## Deliverable\nA file `storage_pricing.json` with an array of exactly 5 objects.\n\n## Required fields per entry\n```json\n{\n  \"provider\": \"AWS S3\",\n  \"service_name\": \"Amazon S3\",\n  \"storage_cost_per_gb_month\": 0.023,\n  \"egress_cost_per_gb\": 0.09,\n  \"free_tier_gb\": 5,\n  \"free_tier_months\": 12,\n  \"min_object_size_kb\": 0,\n  \"strong_consistency\": true,\n  \"multi_region_replication\": true,\n  \"pricing_url\": \"https://aws.amazon.com/s3/pricing/\"\n}\n```\n\n## Providers to include\nMust include at least 3 of: AWS S3, Google Cloud Storage, Azure Blob Storage, Cloudflare R2, Backblaze B2, Wasabi, DigitalOcean Spaces.\n\n## Rules\n- All numeric fields must be numbers (not strings).\n- `free_tier_gb`: 0 if no free tier.\n- `free_tier_months`: 0 if no time limit or no free tier.\n- Prices in USD.\n- `pricing_url` must be a valid https URL to the provider's pricing page.\n- Data must reflect current published pricing (within 3 months).\n{\"instructions\":\"Research cloud object storage pricing for 5 providers. Each entry: provider, service_name, storage_cost_per_gb_month (float), egress_cost_per_gb (float), free_tier_gb (int), free_tier_months (int), min_object_size_kb (int), strong_consistency (bool), multi_region_replication (bool), pricing_url. Must include at least 3 of: AWS S3, GCS, Azure Blob, Cloudflare R2, Backblaze B2, Wasabi, DigitalOcean Spaces.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, os\\n\\nassert os.path.exists(\\\"storage_pricing.json\\\"), \\\"storage_pricing.json not found\\\"\\n\\nwith open(\\\"storage_pricing.json\\\") as f:\\n    data = json.load(f)\\n\\nassert isinstance(data, list), \\\"Root must be a JSON array\\\"\\nassert len(data) == 5, f\\\"Need exactly 5 entries, got {len(data)}\\\"\\n\\nREQUIRED_FIELDS = [\\\"provider\\\", \\\"service_name\\\", \\\"storage_cost_per_gb_month\\\",\\n                   \\\"egress_cost_per_gb\\\", \\\"free_tier_gb\\\", \\\"free_tier_months\\\",\\n                   \\\"min_object_size_kb\\\", \\\"strong_consistency\\\", \\\"multi_region_replication\\\",\\n                   \\\"pricing_url\\\"]\\n\\nKNOWN_PROVIDERS = {\\\"aws s3\\\", \\\"google cloud storage\\\", \\\"azure blob storage\\\",\\n                   \\\"cloudflare r2\\\", \\\"backblaze b2\\\", \\\"wasabi\\\", \\\"digitalocean spaces\\\"}\\n\\nproviders_found = set()\\nfor i, entry in enumerate(data):\\n    for field in REQUIRED_FIELDS:\\n        assert field in entry, f\\\"Entry {i} missing field '{field}'\\\"\\n\\n    assert isinstance(entry[\\\"provider\\\"], str) and entry[\\\"provider\\\"].strip(), f\\\"Entry {i}: provider must be non-empty string\\\"\\n    assert isinstance(entry[\\\"service_name\\\"], str) and entry[\\\"service_name\\\"].strip(), f\\\"Entry {i}: service_name must be non-empty\\\"\\n    assert isinstance(entry[\\\"storage_cost_per_gb_month\\\"], (int, float)) and entry[\\\"storage_cost_per_gb_month\\\"] > 0, f\\\"Entry {i}: storage_cost_per_gb_month must be positive number\\\"\\n    assert isinstance(entry[\\\"egress_cost_per_gb\\\"], (int, float)) and entry[\\\"egress_cost_per_gb\\\"] >= 0, f\\\"Entry {i}: egress_cost_per_gb must be >= 0\\\"\\n    assert isinstance(entry[\\\"free_tier_gb\\\"], int) and entry[\\\"free_tier_gb\\\"] >= 0, f\\\"Entry {i}: free_tier_gb must be int >= 0\\\"\\n    assert isinstance(entry[\\\"free_tier_months\\\"], int) and entry[\\\"free_tier_months\\\"] >= 0, f\\\"Entry {i}: free_tier_months must be int >= 0\\\"\\n    assert isinstance(entry[\\\"min_object_size_kb\\\"], int) and entry[\\\"min_object_size_kb\\\"] >= 0, f\\\"Entry {i}: min_object_size_kb must be int >= 0\\\"\\n    assert isinstance(entry[\\\"strong_consistency\\\"], bool), f\\\"Entry {i}: strong_consistency must be bool\\\"\\n    assert isinstance(entry[\\\"multi_region_replication\\\"], bool), f\\\"Entry {i}: multi_region_replication must be bool\\\"\\n    assert isinstance(entry[\\\"pricing_url\\\"], str) and entry[\\\"pricing_url\\\"].startswith(\\\"https://\\\"), f\\\"Entry {i}: pricing_url must be https URL\\\"\\n    providers_found.add(entry[\\\"provider\\\"].lower())\\n\\nknown_found = [p for p in providers_found if any(k in p for k in KNOWN_PROVIDERS)]\\nassert len(known_found) >= 3, f\\\"Must include at least 3 known providers, found: {providers_found}\\\"\\nassert len(providers_found) == 5, \\\"Duplicate providers detected\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"storage_pricing.json\"]}}",
@@ -1488,46 +1445,6 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/c8c58ea0-debb-46e3-b417-3377129bcc6d",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "d05dc3ba-8563-4b23-88c7-39b4a5c7a7fd",
-      "title": "Build a binary search tree with insert, search, delete, and traversal methods",
-      "description": "Build a binary search tree with insert, search, delete, and traversal methods\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from bst import BST\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "bst.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773733313,
-      "source": "https://www.bountybook.ai/job/d05dc3ba-8563-4b23-88c7-39b4a5c7a7fd",
       "source_kind": "bountybook"
     },
     {
@@ -2465,6 +2382,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "dc07cac3-ba35-4f13-965e-4fa8ace642a5",
+      "title": "Build a Trie class with insert, search, and starts_with methods",
+      "description": "Build a Trie class with insert, search, and starts_with methods\nWrite `trie.py` with a `Trie` class.\n\n## Interface\n```python\nclass Trie:\n    def insert(self, word: str) -> None: ...\n    def search(self, word: str) -> bool: ...\n    def starts_with(self, prefix: str) -> bool: ...\n```\n\n## Behavior\n- `insert`: add a word to the trie\n- `search`: return True only if the exact word was inserted\n- `starts_with`: return True if any inserted word begins with `prefix`\n- Case-sensitive\n- Words are non-empty strings of lowercase letters (a–z)\n- `starts_with(\"\")` returns True if any words are inserted, False if trie is empty\n\n## Examples\n```python\nt = Trie()\nt.insert(\"apple\")\nt.search(\"apple\")    # True\nt.search(\"app\")      # False (not inserted, only a prefix)\nt.starts_with(\"app\") # True\nt.insert(\"app\")\nt.search(\"app\")      # True now\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `trie.py`\n{\"instructions\":\"Implement Trie class in trie.py with insert(word), search(word) -> bool, starts_with(prefix) -> bool. Case-sensitive, stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from trie import Trie\\n\\nt = Trie()\\n\\n# Empty trie searches\\nassert not t.search(\\\"anything\\\"), \\\"empty trie search\\\"\\nassert not t.starts_with(\\\"a\\\"), \\\"empty trie starts_with\\\"\\n\\nt.insert(\\\"apple\\\")\\nassert t.search(\\\"apple\\\"), \\\"exact match after insert\\\"\\nassert not t.search(\\\"app\\\"), \\\"prefix is not a match\\\"\\nassert not t.search(\\\"apples\\\"), \\\"extension is not a match\\\"\\nassert t.starts_with(\\\"app\\\"), \\\"prefix found\\\"\\nassert t.starts_with(\\\"apple\\\"), \\\"full word is own prefix\\\"\\nassert t.starts_with(\\\"a\\\"), \\\"single char prefix\\\"\\nassert not t.starts_with(\\\"b\\\"), \\\"non-existent prefix\\\"\\n\\n# Insert prefix separately\\nt.insert(\\\"app\\\")\\nassert t.search(\\\"app\\\"), \\\"prefix now inserted as word\\\"\\nassert t.search(\\\"apple\\\"), \\\"original word still found\\\"\\n\\n# Multiple words\\nt.insert(\\\"banana\\\")\\nt.insert(\\\"band\\\")\\nt.insert(\\\"bandana\\\")\\nassert t.search(\\\"banana\\\")\\nassert t.search(\\\"band\\\")\\nassert t.search(\\\"bandana\\\")\\nassert not t.search(\\\"ban\\\")\\nassert t.starts_with(\\\"ban\\\")\\nassert t.starts_with(\\\"band\\\")\\nassert not t.starts_with(\\\"xyz\\\")\\n\\n# Case sensitive\\nt.insert(\\\"Hello\\\")\\nassert t.search(\\\"Hello\\\")\\nassert not t.search(\\\"hello\\\")\\nassert not t.starts_with(\\\"hel\\\")\\nassert t.starts_with(\\\"Hel\\\")\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"trie.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement Trie class in trie.py with insert(word), search(word) -> bool, starts_with(prefix) -> bool. Case-sensitive, stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from trie import Trie\n\nt = Trie()\n\n# Empty trie searches\nassert not t.search(\"anything\"), \"empty trie search\"\nassert not t.starts_with(\"a\"), \"empty trie starts_with\"\n\nt.insert(\"apple\")\nassert t.search(\"apple\"), \"exact match after insert\"\nassert not t.search(\"app\"), \"prefix is not a match\"\nassert not t.search(\"apples\"), \"extension is not a match\"\nassert t.starts_with(\"app\"), \"prefix found\"\nassert t.starts_with(\"apple\"), \"full word is own prefix\"\nassert t.starts_with(\"a\"), \"single char prefix\"\nassert not t.starts_with(\"b\"), \"non-existent prefix\"\n\n# Insert prefix separately\nt.insert(\"app\")\nassert t.search(\"app\"), \"prefix now inserted as word\"\nassert t.search(\"apple\"), \"original word still found\"\n\n# Multiple words\nt.insert(\"banana\")\nt.insert(\"band\")\nt.insert(\"bandana\")\nassert t.search(\"banana\")\nassert t.search(\"band\")\nassert t.search(\"bandana\")\nassert not t.search(\"ban\")\nassert t.starts_with(\"ban\")\nassert t.starts_with(\"band\")\nassert not t.starts_with(\"xyz\")\n\n# Case sensitive\nt.insert(\"Hello\")\nassert t.search(\"Hello\")\nassert not t.search(\"hello\")\nassert not t.starts_with(\"hel\")\nassert t.starts_with(\"Hel\")\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "trie.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/dc07cac3-ba35-4f13-965e-4fa8ace642a5",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "dd327224-ddc5-4c8c-825f-e0ef2b266799",
       "title": "Research and compare 7 CI/CD platforms in JSON format",
       "description": "Research and compare 7 CI/CD platforms in JSON format\nResearch and compare 7 CI/CD platforms: GitHub Actions, GitLab CI, CircleCI, Jenkins, Travis CI, Buildkite, and Drone CI.\n\n## Output\nFile `cicd_comparison.json`:\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"platforms\": [\n    {\n      \"name\": \"GitHub Actions\",\n      \"self_hosted_option\": true,\n      \"free_tier\": true,\n      \"free_tier_minutes_per_month\": 2000,\n      \"open_source\": false,\n      \"docker_native\": true,\n      \"yaml_config\": true,\n      \"matrix_builds\": true,\n      \"paid_price_per_minute_cents\": 0.8,\n      \"primary_language\": \"YAML\",\n      \"best_for\": \"GitHub-hosted projects; tight GitHub integration\",\n      \"limitations\": \"limited to GitHub repos; minutes-based pricing can get expensive\",\n      \"github_url_or_website\": \"https://github.com/features/actions\"\n    }\n  ]\n}\n```\n\n## Required fields per platform\nname, self_hosted_option (bool), free_tier (bool), free_tier_minutes_per_month (int, 0 if none), open_source (bool), docker_native (bool), yaml_config (bool), matrix_builds (bool), paid_price_per_minute_cents (float, 0 if flat/unknown), primary_language, best_for, limitations, github_url_or_website\n\n## Constraints\n- All 7 platforms present\n- Boolean fields must be actual booleans\n- Integer/float fields must be correct types\n{\"instructions\":\"Compare GitHub Actions, GitLab CI, CircleCI, Jenkins, Travis CI, Buildkite, Drone CI. Output cicd_comparison.json with all required fields per platform.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"cicd_comparison.json\\\").read_text())\\nassert \\\"generated_at\\\" in data and re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"bad generated_at\\\"\\nassert \\\"platforms\\\" in data\\nassert len(data[\\\"platforms\\\"]) == 7, f\\\"expected 7 platforms, got {len(data['platforms'])}\\\"\\n\\nexpected_names = {\\\"GitHub Actions\\\", \\\"GitLab CI\\\", \\\"CircleCI\\\", \\\"Jenkins\\\", \\\"Travis CI\\\", \\\"Buildkite\\\", \\\"Drone CI\\\"}\\nfound_names = {p[\\\"name\\\"] for p in data[\\\"platforms\\\"]}\\nassert len(found_names) == 7, f\\\"found: {found_names}\\\"\\n\\nbool_fields = [\\\"self_hosted_option\\\", \\\"free_tier\\\", \\\"open_source\\\", \\\"docker_native\\\", \\\"yaml_config\\\", \\\"matrix_builds\\\"]\\nrequired = [\\\"name\\\", \\\"free_tier_minutes_per_month\\\", \\\"paid_price_per_minute_cents\\\",\\n            \\\"primary_language\\\", \\\"best_for\\\", \\\"limitations\\\", \\\"github_url_or_website\\\"] + bool_fields\\n\\nfor p in data[\\\"platforms\\\"]:\\n    for f in required:\\n        assert f in p, f\\\"missing '{f}' in {p.get('name', '?')}\\\"\\n    for bf in bool_fields:\\n        assert isinstance(p[bf], bool), f\\\"{bf} must be bool in {p['name']}\\\"\\n    assert isinstance(p[\\\"free_tier_minutes_per_month\\\"], int), f\\\"free_tier_minutes must be int in {p['name']}\\\"\\n    assert isinstance(p[\\\"paid_price_per_minute_cents\\\"], (int, float)), f\\\"price must be numeric in {p['name']}\\\"\\n    assert len(p[\\\"best_for\\\"]) > 15, f\\\"best_for too short in {p['name']}\\\"\\n    assert p[\\\"github_url_or_website\\\"].startswith(\\\"http\\\"), f\\\"invalid url in {p['name']}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"cicd_comparison.json\"]}}",
@@ -3142,6 +3099,50 @@
       "payment_status": null,
       "created_at": 1773907161,
       "source": "https://www.bountybook.ai/job/58fa8290-62a5-413b-aff5-a8decf528683",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "60379d18-2a1b-4d47-b732-0f16840680c0",
+      "title": "Write log_parser.py to parse Apache Combined Log Format",
+      "description": "Write log_parser.py to parse Apache Combined Log Format\nWrite `log_parser.py` with function `parse_log(log_text: str) -> list[dict]`.\n\n## Input format (Apache Combined Log Format)\n```\n127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n```\n\n## Output: list of dicts with these keys\n- `ip`: string (e.g. `\"127.0.0.1\"`)\n- `user`: string or None (the authenticated user, `-` → None)\n- `timestamp`: string as-is from log (e.g. `\"10/Oct/2000:13:55:36 -0700\"`)\n- `method`: string (e.g. `\"GET\"`)\n- `path`: string (e.g. `\"/apache_pb.gif\"`)\n- `protocol`: string (e.g. `\"HTTP/1.0\"`)\n- `status`: int (e.g. `200`)\n- `bytes`: int (e.g. `2326`)\n\n## Rules\n- Lines that don't match the format are skipped (not raised as errors)\n- `user` field: the third column (after the `-` identd field), `-` → None\n- `bytes`: `-` → `0`\n\n## Constraints\n- Python 3.8+ stdlib only (`re` is fine)\n- Single file `log_parser.py`\n{\"instructions\":\"Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from log_parser import parse_log\\n\\nLOG = \\\"\\\"\\\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \\\"GET /apache_pb.gif HTTP/1.0\\\" 200 2326\\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \\\"POST /api/data HTTP/1.1\\\" 404 512\\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \\\"DELETE /resource/42 HTTP/2.0\\\" 204 0\\nbad line that should be skipped\\\"\\\"\\\"\\n\\nrows = parse_log(LOG)\\nassert len(rows) == 3, f\\\"expected 3 parsed rows, got {len(rows)}\\\"\\n\\nr0 = rows[0]\\nassert r0[\\\"ip\\\"] == \\\"127.0.0.1\\\", f\\\"ip: {r0['ip']}\\\"\\nassert r0[\\\"user\\\"] == \\\"frank\\\", f\\\"user: {r0['user']}\\\"\\nassert r0[\\\"method\\\"] == \\\"GET\\\", f\\\"method: {r0['method']}\\\"\\nassert r0[\\\"path\\\"] == \\\"/apache_pb.gif\\\", f\\\"path: {r0['path']}\\\"\\nassert r0[\\\"protocol\\\"] == \\\"HTTP/1.0\\\", f\\\"protocol: {r0['protocol']}\\\"\\nassert r0[\\\"status\\\"] == 200, f\\\"status: {r0['status']}\\\"\\nassert r0[\\\"bytes\\\"] == 2326, f\\\"bytes: {r0['bytes']}\\\"\\nassert \\\"10/Oct/2000:13:55:36 -0700\\\" in r0[\\\"timestamp\\\"], f\\\"timestamp: {r0['timestamp']}\\\"\\n\\nr1 = rows[1]\\nassert r1[\\\"user\\\"] is None, f\\\"dash user should be None, got: {r1['user']}\\\"\\nassert r1[\\\"status\\\"] == 404\\nassert r1[\\\"method\\\"] == \\\"POST\\\"\\n\\nr2 = rows[2]\\nassert r2[\\\"user\\\"] == \\\"alice\\\"\\nassert r2[\\\"method\\\"] == \\\"DELETE\\\"\\nassert r2[\\\"status\\\"] == 204\\nassert r2[\\\"bytes\\\"] == 0\\n\\n# bytes=-  edge case\\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \\\"HEAD / HTTP/1.1\\\" 304 -'\\nrows2 = parse_log(LOG2)\\nassert rows2[0][\\\"bytes\\\"] == 0, f\\\"bytes from '-' should be 0, got {rows2[0]['bytes']}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"log_parser.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement parse_log(log_text: str) -> list[dict] in log_parser.py. Parse Apache Combined Log Format lines into dicts with keys: ip, user, timestamp, method, path, protocol, status (int), bytes (int).",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from log_parser import parse_log\n\nLOG = \"\"\"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] \"GET /apache_pb.gif HTTP/1.0\" 200 2326\n192.168.1.5 - - [10/Oct/2000:13:57:00 -0700] \"POST /api/data HTTP/1.1\" 404 512\n10.0.0.1 - alice [11/Oct/2000:09:00:00 +0000] \"DELETE /resource/42 HTTP/2.0\" 204 0\nbad line that should be skipped\"\"\"\n\nrows = parse_log(LOG)\nassert len(rows) == 3, f\"expected 3 parsed rows, got {len(rows)}\"\n\nr0 = rows[0]\nassert r0[\"ip\"] == \"127.0.0.1\", f\"ip: {r0['ip']}\"\nassert r0[\"user\"] == \"frank\", f\"user: {r0['user']}\"\nassert r0[\"method\"] == \"GET\", f\"method: {r0['method']}\"\nassert r0[\"path\"] == \"/apache_pb.gif\", f\"path: {r0['path']}\"\nassert r0[\"protocol\"] == \"HTTP/1.0\", f\"protocol: {r0['protocol']}\"\nassert r0[\"status\"] == 200, f\"status: {r0['status']}\"\nassert r0[\"bytes\"] == 2326, f\"bytes: {r0['bytes']}\"\nassert \"10/Oct/2000:13:55:36 -0700\" in r0[\"timestamp\"], f\"timestamp: {r0['timestamp']}\"\n\nr1 = rows[1]\nassert r1[\"user\"] is None, f\"dash user should be None, got: {r1['user']}\"\nassert r1[\"status\"] == 404\nassert r1[\"method\"] == \"POST\"\n\nr2 = rows[2]\nassert r2[\"user\"] == \"alice\"\nassert r2[\"method\"] == \"DELETE\"\nassert r2[\"status\"] == 204\nassert r2[\"bytes\"] == 0\n\n# bytes=-  edge case\nLOG2 = '1.2.3.4 - - [01/Jan/2024:00:00:00 +0000] \"HEAD / HTTP/1.1\" 304 -'\nrows2 = parse_log(LOG2)\nassert rows2[0][\"bytes\"] == 0, f\"bytes from '-' should be 0, got {rows2[0]['bytes']}\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "log_parser.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/60379d18-2a1b-4d47-b732-0f16840680c0",
       "source_kind": "bountybook"
     },
     {
@@ -4125,6 +4126,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "740fd768-1dcb-410c-a7ad-c64ac8be50af",
+      "title": "Build a dict flattening function in flatten.py",
+      "description": "Build a dict flattening function in flatten.py\nWrite a function `flatten_dict(d: dict, sep: str = '.') -> dict` in `flatten.py`.\n\n## Behavior\n- Recursively flatten nested dicts into a single-level dict\n- Keys in the output are joined with `sep` (default `'.'`)\n- Non-dict values are kept as-is (including lists, numbers, strings, None)\n- An empty nested dict produces no keys in the output\n\n## Examples\n```python\nflatten_dict({\"a\": {\"b\": 1, \"c\": 2}})\n# {\"a.b\": 1, \"a.c\": 2}\n\nflatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0})\n# {\"x.y.z\": 3, \"n\": 0}\n\nflatten_dict({\"a\": 1}, sep=\"/\")\n# {\"a\": 1}\n\nflatten_dict({\"a\": {\"b\": [1, 2, 3]}})\n# {\"a.b\": [1, 2, 3]}\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `flatten.py`\n- Handle arbitrarily deep nesting\n{\"instructions\":\"Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from flatten import flatten_dict\\n\\n# Basic nesting\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1, \\\"c\\\": 2}}) == {\\\"a.b\\\": 1, \\\"a.c\\\": 2}, \\\"basic nesting\\\"\\n\\n# Deep nesting\\nassert flatten_dict({\\\"x\\\": {\\\"y\\\": {\\\"z\\\": 3}}, \\\"n\\\": 0}) == {\\\"x.y.z\\\": 3, \\\"n\\\": 0}, \\\"deep nesting\\\"\\n\\n# Custom separator\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1}}, sep=\\\"/\\\") == {\\\"a/b\\\": 1}, \\\"custom sep\\\"\\n\\n# List values are not expanded\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": [1, 2, 3]}}) == {\\\"a.b\\\": [1, 2, 3]}, \\\"list value preserved\\\"\\n\\n# Already flat dict\\nassert flatten_dict({\\\"x\\\": 1, \\\"y\\\": 2}) == {\\\"x\\\": 1, \\\"y\\\": 2}, \\\"already flat\\\"\\n\\n# Empty dict\\nassert flatten_dict({}) == {}, \\\"empty dict\\\"\\n\\n# Nested empty dict produces no keys\\nresult = flatten_dict({\\\"a\\\": {}})\\nassert \\\"a\\\" not in result, \\\"empty nested dict adds no keys\\\"\\n\\n# None values\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": None}}) == {\\\"a.b\\\": None}, \\\"None value\\\"\\n\\n# Mixed depth\\nr = flatten_dict({\\\"a\\\": {\\\"b\\\": 1}, \\\"c\\\": 2, \\\"d\\\": {\\\"e\\\": {\\\"f\\\": 3}}})\\nassert r == {\\\"a.b\\\": 1, \\\"c\\\": 2, \\\"d.e.f\\\": 3}, f\\\"mixed: {r}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"flatten.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from flatten import flatten_dict\n\n# Basic nesting\nassert flatten_dict({\"a\": {\"b\": 1, \"c\": 2}}) == {\"a.b\": 1, \"a.c\": 2}, \"basic nesting\"\n\n# Deep nesting\nassert flatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0}) == {\"x.y.z\": 3, \"n\": 0}, \"deep nesting\"\n\n# Custom separator\nassert flatten_dict({\"a\": {\"b\": 1}}, sep=\"/\") == {\"a/b\": 1}, \"custom sep\"\n\n# List values are not expanded\nassert flatten_dict({\"a\": {\"b\": [1, 2, 3]}}) == {\"a.b\": [1, 2, 3]}, \"list value preserved\"\n\n# Already flat dict\nassert flatten_dict({\"x\": 1, \"y\": 2}) == {\"x\": 1, \"y\": 2}, \"already flat\"\n\n# Empty dict\nassert flatten_dict({}) == {}, \"empty dict\"\n\n# Nested empty dict produces no keys\nresult = flatten_dict({\"a\": {}})\nassert \"a\" not in result, \"empty nested dict adds no keys\"\n\n# None values\nassert flatten_dict({\"a\": {\"b\": None}}) == {\"a.b\": None}, \"None value\"\n\n# Mixed depth\nr = flatten_dict({\"a\": {\"b\": 1}, \"c\": 2, \"d\": {\"e\": {\"f\": 3}}})\nassert r == {\"a.b\": 1, \"c\": 2, \"d.e.f\": 3}, f\"mixed: {r}\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "flatten.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/740fd768-1dcb-410c-a7ad-c64ac8be50af",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "7ef434e0-e870-4aa0-90f9-33db59262ccd",
       "title": "Build json_to_md.py with json_to_markdown_table() function",
       "description": "Build json_to_md.py with json_to_markdown_table() function\nWrite `json_to_md.py` with function `json_to_markdown_table(data: list[dict]) -> str`.\n\n## Behavior\n- Input: a non-empty list of dicts (all dicts have the same keys)\n- Output: a GFM Markdown table string with a header row, separator row, and data rows\n- Column order: use the key order from the first dict\n- Cell values: convert to string using `str()`\n- Align separator row with dashes only (e.g. `---`)\n- Do NOT add extra padding spaces (just `| col |` with single space padding)\n\n## Example\n```python\ndata = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"Paris\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"Berlin\"},\n]\nresult = json_to_markdown_table(data)\n# | name | age | city |\n# | --- | --- | --- |\n# | Alice | 30 | Paris |\n# | Bob | 25 | Berlin |\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `json_to_md.py`\n- Each row ends with a newline `\\n`\n{\"instructions\":\"Implement json_to_markdown_table(data: list[dict]) -> str in json_to_md.py. Convert list of same-keyed dicts to GFM Markdown table. Header row, separator row (---), data rows. Single-space cell padding. Each row ends with newline.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from json_to_md import json_to_markdown_table\\n\\n# Basic test\\ndata = [\\n    {\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"Paris\\\"},\\n    {\\\"name\\\": \\\"Bob\\\",   \\\"age\\\": 25, \\\"city\\\": \\\"Berlin\\\"},\\n]\\nresult = json_to_markdown_table(data)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 4, f\\\"expected 4 lines, got {len(lines)}: {lines}\\\"\\n\\n# Header row\\nassert \\\"name\\\" in lines[0] and \\\"age\\\" in lines[0] and \\\"city\\\" in lines[0], f\\\"header: {lines[0]}\\\"\\nassert lines[0].startswith(\\\"|\\\") and lines[0].endswith(\\\"|\\\"), \\\"header must start/end with |\\\"\\n\\n# Separator row\\nassert \\\"---\\\" in lines[1], f\\\"separator row missing ---: {lines[1]}\\\"\\nassert lines[1].startswith(\\\"|\\\") and lines[1].endswith(\\\"|\\\"), \\\"separator must start/end with |\\\"\\n\\n# Data rows\\nassert \\\"Alice\\\" in lines[2] and \\\"30\\\" in lines[2] and \\\"Paris\\\" in lines[2], f\\\"row 1: {lines[2]}\\\"\\nassert \\\"Bob\\\" in lines[3] and \\\"25\\\" in lines[3] and \\\"Berlin\\\" in lines[3], f\\\"row 2: {lines[3]}\\\"\\n\\n# All rows end with newline before strip\\nraw_lines = result.split(\\\"\\\\n\\\")\\n# At least 4 non-empty parts\\nassert len([l for l in raw_lines if l]) >= 4\\n\\n# Single row\\nsingle = json_to_markdown_table([{\\\"x\\\": 1, \\\"y\\\": 2}])\\nslines = single.strip().split(\\\"\\\\n\\\")\\nassert len(slines) == 3, f\\\"single row: expected 3 lines, got {len(slines)}\\\"\\nassert \\\"x\\\" in slines[0] and \\\"y\\\" in slines[0]\\nassert \\\"---\\\" in slines[1]\\nassert \\\"1\\\" in slines[2] and \\\"2\\\" in slines[2]\\n\\n# Bool and None values converted via str()\\nmixed = json_to_markdown_table([{\\\"flag\\\": True, \\\"val\\\": None}])\\nassert \\\"True\\\" in mixed and \\\"None\\\" in mixed, f\\\"bool/None: {mixed}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"json_to_md.py\"]}}",
@@ -4204,46 +4245,6 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "6b626f9c-2b70-40a1-8879-49fad43adb46",
-      "title": "Write encode and decode functions for Caesar cipher in caesar.py",
-      "description": "Write encode and decode functions for Caesar cipher in caesar.py\nWrite two functions in `caesar.py`:\n- `encode(text: str, shift: int) -> str`\n- `decode(text: str, shift: int) -> str`\n\n## Rules\n- Only shift alphabetic characters (A-Z, a-z)\n- Preserve case (uppercase stays uppercase)\n- Non-alphabetic characters (spaces, digits, punctuation) are passed through unchanged\n- Shift wraps around (shift 3 on 'z' → 'c')\n- `decode(encode(text, n), n)` must equal the original text for all inputs\n\n## Examples\n```python\nencode(\"Hello, World!\", 3)  # \"Khoor, Zruog!\"\nencode(\"abc\", 1)            # \"bcd\"\nencode(\"xyz\", 3)            # \"abc\"\ndecode(\"Khoor, Zruog!\", 3)  # \"Hello, World!\"\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `caesar.py`\n{\"instructions\":\"Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from caesar import encode, decode\\n\\nassert encode(\\\"Hello, World!\\\", 3) == \\\"Khoor, Zruog!\\\", f\\\"got: {encode('Hello, World!', 3)}\\\"\\nassert encode(\\\"abc\\\", 1) == \\\"bcd\\\", f\\\"got: {encode('abc', 1)}\\\"\\nassert encode(\\\"xyz\\\", 3) == \\\"abc\\\", f\\\"got: {encode('xyz', 3)}\\\"\\nassert encode(\\\"XYZ\\\", 3) == \\\"ABC\\\", f\\\"got: {encode('XYZ', 3)}\\\"\\nassert encode(\\\"Hello 123!\\\", 13) == \\\"Uryyb 123!\\\", f\\\"got: {encode('Hello 123!', 13)}\\\"\\nassert decode(\\\"Khoor, Zruog!\\\", 3) == \\\"Hello, World!\\\", f\\\"got: {decode('Khoor, Zruog!', 3)}\\\"\\nassert decode(encode(\\\"The quick brown fox\\\", 7), 7) == \\\"The quick brown fox\\\"\\nassert encode(\\\"abc\\\", 0) == \\\"abc\\\", \\\"shift 0 should be identity\\\"\\nassert encode(\\\"abc\\\", 26) == \\\"abc\\\", \\\"shift 26 should be identity\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"caesar.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from caesar import encode, decode\n\nassert encode(\"Hello, World!\", 3) == \"Khoor, Zruog!\", f\"got: {encode('Hello, World!', 3)}\"\nassert encode(\"abc\", 1) == \"bcd\", f\"got: {encode('abc', 1)}\"\nassert encode(\"xyz\", 3) == \"abc\", f\"got: {encode('xyz', 3)}\"\nassert encode(\"XYZ\", 3) == \"ABC\", f\"got: {encode('XYZ', 3)}\"\nassert encode(\"Hello 123!\", 13) == \"Uryyb 123!\", f\"got: {encode('Hello 123!', 13)}\"\nassert decode(\"Khoor, Zruog!\", 3) == \"Hello, World!\", f\"got: {decode('Khoor, Zruog!', 3)}\"\nassert decode(encode(\"The quick brown fox\", 7), 7) == \"The quick brown fox\"\nassert encode(\"abc\", 0) == \"abc\", \"shift 0 should be identity\"\nassert encode(\"abc\", 26) == \"abc\", \"shift 26 should be identity\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "caesar.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "1500000",
-        "amount_display": "1.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
       "source_kind": "bountybook"
     }
   ],
