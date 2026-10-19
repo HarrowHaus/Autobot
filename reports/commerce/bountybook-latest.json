@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-18T21:49:14.873Z",
+  "observed_at": "2026-10-19T00:25:53.801Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1456,6 +1456,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "a10a254f-03b1-4b28-958b-345c24802857",
+      "title": "Build a binary search tree implementation in bst.py with insert, search, delete,",
+      "description": "Build a binary search tree implementation in bst.py with insert, search, delete,\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from bst import BST\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "bst.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754461,
+      "source": "https://www.bountybook.ai/job/a10a254f-03b1-4b28-958b-345c24802857",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "a55bd7d2-b6a0-4bfc-80b5-f788d0ff312d",
       "title": "Build TypedEmitter class with typed event handling in event_emitter.ts",
       "description": "Build TypedEmitter class with typed event handling in event_emitter.ts\nImplement a `TypedEmitter<Events>` class in `event_emitter.ts`.\n\n## Interface\n```typescript\ntype Listener<T> = (data: T) => void;\n\nclass TypedEmitter<Events extends Record<string, unknown>> {\n  on<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  off<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  once<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  emit<K extends keyof Events>(event: K, data: Events[K]): boolean  // true if any listeners called\n  listenerCount<K extends keyof Events>(event: K): number\n}\n```\n\n## Behavior\n- `on`: register a persistent listener\n- `off`: remove the exact listener function (no-op if not registered)\n- `once`: register a one-time listener (auto-removed after first call)\n- `emit`: call all registered listeners for that event in registration order; return true if > 0 listeners, false otherwise\n- `listenerCount`: return number of active listeners for an event\n\n## Constraints\n- No external dependencies\n- Must compile: `tsc --strict --target ES2020 --module commonjs event_emitter.ts`\n{\"instructions\":\"Implement TypedEmitter<Events> class in event_emitter.ts with on/off/once/emit/listenerCount. Must compile with tsc --strict. No external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { TypedEmitter } from './event_emitter';\\n\\ntype MyEvents = { click: { x: number; y: number }; close: void };\\nconst emitter = new TypedEmitter<MyEvents>();\\n\\n// on + emit\\nconst calls: number[] = [];\\nconst handler = (d: { x: number; y: number }) => calls.push(d.x);\\nemitter.on('click', handler);\\nconst had = emitter.emit('click', { x: 10, y: 20 });\\nconsole.assert(had === true, 'emit with listener should return true');\\nconsole.assert(calls[0] === 10, 'listener should have been called');\\n\\n// emit with no listeners\\nconst had2 = emitter.emit('close', undefined as void);\\nconsole.assert(had2 === false, 'emit with no listeners should return false');\\n\\n// off\\nemitter.off('click', handler);\\nconsole.assert(emitter.listenerCount('click') === 0, 'after off, count should be 0');\\nemitter.emit('click', { x: 99, y: 0 });\\nconsole.assert(calls.length === 1, 'removed listener should not be called again');\\n\\n// once\\nconst onceCalls: number[] = [];\\nemitter.once('click', (d) => onceCalls.push(d.x));\\nconsole.assert(emitter.listenerCount('click') === 1, 'once registers listener');\\nemitter.emit('click', { x: 1, y: 0 });\\nemitter.emit('click', { x: 2, y: 0 });\\nconsole.assert(onceCalls.length === 1, 'once listener fires only once');\\nconsole.assert(onceCalls[0] === 1, 'once listener gets correct data');\\nconsole.assert(emitter.listenerCount('click') === 0, 'once removed after fire');\\n\\n// multiple listeners\\nemitter.on('click', () => {});\\nemitter.on('click', () => {});\\nconsole.assert(emitter.listenerCount('click') === 2, 'two listeners registered');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
@@ -1961,6 +2001,48 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/10e03033-0397-4d12-9154-e4499bec2ae2",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "15c49345-504f-439c-9680-696fd6026773",
+      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
+      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
+          "required_files": [
+            "event_emitter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754461,
+      "source": "https://www.bountybook.ai/job/15c49345-504f-439c-9680-696fd6026773",
       "source_kind": "bountybook"
     },
     {
@@ -4171,104 +4253,6 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
-      "title": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules",
-      "description": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules\nWrite a function `fizzBuzz(n, rules)` in `fizzbuzz.js` (ES module, `export default`).\n\n## Signature\n```js\nfizzBuzz(n: number, rules: Array<[number, string]>): string[]\n```\n\n## Behavior\n- Return an array of strings for numbers 1 through n (inclusive)\n- For each number, check all rules in order. If the number is divisible by the rule's divisor, append that rule's word\n- If one or more rules match, output the concatenated words. If no rules match, output the number as a string\n- Rules are checked in the order given\n\n## Examples\n```js\nfizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]])\n// [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n\nfizzBuzz(6, [[2, \"Even\"]])\n// [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]\n```\n\n## Constraints\n- No external dependencies\n- ES module: `export default fizzBuzz`\n{\"instructions\":\"Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import fizzBuzz from './fizzbuzz.js';\\nimport assert from 'assert';\\n\\n// Classic FizzBuzz\\nconst result = fizzBuzz(15, [[3, \\\"Fizz\\\"], [5, \\\"Buzz\\\"]]);\\nassert.deepStrictEqual(result, [\\\"1\\\",\\\"2\\\",\\\"Fizz\\\",\\\"4\\\",\\\"Buzz\\\",\\\"Fizz\\\",\\\"7\\\",\\\"8\\\",\\\"Fizz\\\",\\\"Buzz\\\",\\\"11\\\",\\\"Fizz\\\",\\\"13\\\",\\\"14\\\",\\\"FizzBuzz\\\"]);\\n\\n// Single rule\\nassert.deepStrictEqual(fizzBuzz(6, [[2, \\\"Even\\\"]]), [\\\"1\\\",\\\"Even\\\",\\\"3\\\",\\\"Even\\\",\\\"5\\\",\\\"Even\\\"]);\\n\\n// No matches → numbers as strings\\nassert.deepStrictEqual(fizzBuzz(3, [[7, \\\"Seven\\\"]]), [\\\"1\\\",\\\"2\\\",\\\"3\\\"]);\\n\\n// n=1\\nassert.deepStrictEqual(fizzBuzz(1, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"]]), [\\\"1\\\"]);\\n\\n// Multiple concatenation order matters\\nconst r2 = fizzBuzz(30, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"],[2,\\\"Bang\\\"]]);\\nassert.strictEqual(r2[5], \\\"FizzBang\\\");  // 6 divisible by 3 and 2\\nassert.strictEqual(r2[29], \\\"FizzBuzzBang\\\"); // 30 divisible by 3,5,2\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"fizzbuzz.js\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import fizzBuzz from './fizzbuzz.js';\nimport assert from 'assert';\n\n// Classic FizzBuzz\nconst result = fizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]]);\nassert.deepStrictEqual(result, [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]);\n\n// Single rule\nassert.deepStrictEqual(fizzBuzz(6, [[2, \"Even\"]]), [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]);\n\n// No matches → numbers as strings\nassert.deepStrictEqual(fizzBuzz(3, [[7, \"Seven\"]]), [\"1\",\"2\",\"3\"]);\n\n// n=1\nassert.deepStrictEqual(fizzBuzz(1, [[3,\"Fizz\"],[5,\"Buzz\"]]), [\"1\"]);\n\n// Multiple concatenation order matters\nconst r2 = fizzBuzz(30, [[3,\"Fizz\"],[5,\"Buzz\"],[2,\"Bang\"]]);\nassert.strictEqual(r2[5], \"FizzBang\");  // 6 divisible by 3 and 2\nassert.strictEqual(r2[29], \"FizzBuzzBang\"); // 30 divisible by 3,5,2\n\nconsole.log(\"ALL TESTS PASSED\");",
-          "required_files": [
-            "fizzbuzz.js"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "1500000",
-        "amount_display": "1.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "969317da-1a1d-418a-ae28-4306f1d85876",
-      "title": "Deliver warm introduction to qualified buyer for SaSame MCP services",
-      "description": "Deliver warm introduction to qualified buyer for SaSame MCP services\nHunter task, not a lead list. Get one real buyer to actively engage with SaSame/Pancho. Payable only for a warm handoff: the buyer has a real MCP/agent need and has agreed to be introduced or has contacted SaSame. No cold list, no signup-only, no clicks, no traffic. Strong Hunters can earn 50% of that buyer's first qualifying settled receipt after real payment and fulfillment.\n{\"hunter_goal\":\"Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.\",\"accepted_output\":[\"buyer_name_or_company\",\"buyer_url_or_source\",\"buyer_need_in_one_sentence\",\"proof_of_warm_handoff_or_opt_in\",\"where_the_buyer_was_sent_or_how_pancho_can_continue\",\"hunter_contact_for_follow_up\"],\"proof_examples\":[\"buyer asked to be introduced to SaSame/Pancho\",\"buyer sent or agreed to send an email/message to SaSame\",\"buyer explicitly asked for MCP inspection/build/monitoring help\",\"buyer accepted a next-step conversation or checkout link\"],\"reject_if\":[\"only a name or URL\",\"generic sales list\",\"registration-only submission\",\"clicks, traffic, impressions, or social engagement only\",\"no buyer opt-in or no path for Pancho to continue\",\"spam, impersonation, fake buyer, or scraped list\"],\"short_instruction\":\"Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.\",\"commission_note\":\"The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment.\"}",
-      "category": null,
-      "required_capabilities": [
-        "research"
-      ],
-      "matched_capabilities": [
-        "research"
-      ],
-      "expected_output": {
-        "hunter_goal": "Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.",
-        "accepted_output": [
-          "buyer_name_or_company",
-          "buyer_url_or_source",
-          "buyer_need_in_one_sentence",
-          "proof_of_warm_handoff_or_opt_in",
-          "where_the_buyer_was_sent_or_how_pancho_can_continue",
-          "hunter_contact_for_follow_up"
-        ],
-        "proof_examples": [
-          "buyer asked to be introduced to SaSame/Pancho",
-          "buyer sent or agreed to send an email/message to SaSame",
-          "buyer explicitly asked for MCP inspection/build/monitoring help",
-          "buyer accepted a next-step conversation or checkout link"
-        ],
-        "reject_if": [
-          "only a name or URL",
-          "generic sales list",
-          "registration-only submission",
-          "clicks, traffic, impressions, or social engagement only",
-          "no buyer opt-in or no path for Pancho to continue",
-          "spam, impersonation, fake buyer, or scraped list"
-        ],
-        "short_instruction": "Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.",
-        "commission_note": "The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment."
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "10000",
-        "amount_display": "0.01",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1787328124,
-      "source": "https://www.bountybook.ai/job/969317da-1a1d-418a-ae28-4306f1d85876",
       "source_kind": "bountybook"
     }
   ],
