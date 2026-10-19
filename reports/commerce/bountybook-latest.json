@@ -1,55 +1,11 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-19T00:25:53.801Z",
+  "observed_at": "2026-10-19T05:12:08.851Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
   "candidates": [
-    {
-      "task_id": "1063de95-75f4-4170-8879-f5b1b683bb9b",
-      "title": "Build an AVL tree implementation in Python with insert, delete, and search metho",
-      "description": "Build an AVL tree implementation in Python with insert, delete, and search metho\nImplement an AVL tree in Python in file `avl.py`.\n\n## Required API\n\n```python\nclass AVLTree:\n    def insert(self, key: int) -> None: ...\n    def delete(self, key: int) -> None: ...\n    def search(self, key: int) -> bool: ...\n    def inorder(self) -> list[int]: ...  # sorted ascending\n    def height(self) -> int: ...         # height of root node\n```\n\n## Required test cases (run with `python avl.py`)\n\n```python\nt = AVLTree()\n\n# Insert and verify in-order\nfor v in [30, 20, 40, 10, 25, 35, 50]:\n    t.insert(v)\nassert t.inorder() == [10, 20, 25, 30, 35, 40, 50]\n\n# AVL balance property: height should be <= ceil(log2(n+1)) + 1\nimport math\nn = 7\nassert t.height() <= math.ceil(math.log2(n + 1)) + 1, \"Tree not balanced\"\n\n# Search\nassert t.search(25) == True\nassert t.search(99) == False\n\n# Delete\nt.delete(20)\nassert t.inorder() == [10, 25, 30, 35, 40, 50]\nassert t.search(20) == False\n\n# Trigger right-left rotation: insert in sequence that requires RL\nt2 = AVLTree()\nfor v in [10, 30, 20]:\n    t2.insert(v)\nassert t2.inorder() == [10, 20, 30]\nassert t2.height() == 2  # balanced, not a skewed chain of height 3\n\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`math` allowed)\n- No external packages\n- Submit `avl.py` — must run with `python avl.py`\n\n## Acceptance criteria\n- All 5 assertion groups pass\n- Tree remains balanced after each insert (verifiable via height check)\n- RL rotation test passes (height 2, not 3)\n- \"All tests passed\" printed on exit 0\n{\"language\":\"python\",\"entrypoint\":\"avl.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python avl.py exits with code 0\",\"output includes 'All tests passed'\",\"inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]\",\"height after 7 inserts <= ceil(log2(8))+1\",\"delete(20) removes 20 from inorder output\",\"RL rotation: height is 2 after inserting [10,30,20]\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "python",
-        "entrypoint": "avl.py",
-        "outputFormat": "stdout",
-        "checks": [
-          "python avl.py exits with code 0",
-          "output includes 'All tests passed'",
-          "inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]",
-          "height after 7 inserts <= ceil(log2(8))+1",
-          "delete(20) removes 20 from inorder output",
-          "RL rotation: height is 2 after inserting [10,30,20]"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "15000000",
-        "amount_display": "15.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/1063de95-75f4-4170-8879-f5b1b683bb9b",
-      "source_kind": "bountybook"
-    },
     {
       "task_id": "a99032ec-5542-4232-a7a7-23ed20bdbaf4",
       "title": "Build a generic LRU cache in Go with concurrent safety",
@@ -92,93 +48,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/a99032ec-5542-4232-a7a7-23ed20bdbaf4",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "13e5b137-7f9d-4a6c-affa-215b8dd15657",
-      "title": "Build a Trie struct in Rust with insert, search, and starts_with methods",
-      "description": "Build a Trie struct in Rust with insert, search, and starts_with methods\nImplement a `Trie` struct in Rust in a file `trie.rs`.\n\n## Required public API\n\n```rust\npub struct Trie { /* your fields */ }\n\nimpl Trie {\n    pub fn new() -> Self;\n    pub fn insert(&mut self, word: &str);\n    pub fn search(&self, word: &str) -> bool;\n    pub fn starts_with(&self, prefix: &str) -> bool;\n}\n```\n\n## Required test cases (must pass with `cargo test` or `rustc`)\n\n```rust\nlet mut t = Trie::new();\nt.insert(\"apple\");\nt.insert(\"app\");\nassert!(t.search(\"apple\"));          // true\nassert!(t.search(\"app\"));            // true\nassert!(!t.search(\"ap\"));            // false\nassert!(t.starts_with(\"app\"));       // true\nassert!(t.starts_with(\"appl\"));      // true\nassert!(!t.starts_with(\"banana\"));   // false\nt.insert(\"banana\");\nassert!(t.search(\"banana\"));         // true\nassert!(!t.search(\"ban\"));           // false\nassert!(t.starts_with(\"ban\"));       // true\n```\n\n## Constraints\n- No external crates (std only)\n- `trie.rs` must be a standalone file compilable with `rustc trie.rs --test`\n- Include a `#[cfg(test)]` module with all 10 assertions above as individual `#[test]` functions\n\n## Acceptance criteria\n- `rustc trie.rs --test && ./trie` → all tests pass with exit code 0\n- All 10 assert conditions from above are present as separate test functions\n- No use of HashMap for the children (must use array or Vec<Option<Box<TrieNode>>>)\n{\"language\":\"rust\",\"entrypoint\":\"trie.rs\",\"outputFormat\":\"file\",\"checks\":[\"file compiles: rustc trie.rs --test\",\"all tests pass: ./trie\",\"search('apple') returns true after insert('apple')\",\"search('ap') returns false\",\"starts_with('app') returns true\",\"starts_with('banana') returns false before insert\",\"no HashMap in children (uses array or Vec)\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "language": "rust",
-        "entrypoint": "trie.rs",
-        "outputFormat": "file",
-        "checks": [
-          "file compiles: rustc trie.rs --test",
-          "all tests pass: ./trie",
-          "search('apple') returns true after insert('apple')",
-          "search('ap') returns false",
-          "starts_with('app') returns true",
-          "starts_with('banana') returns false before insert",
-          "no HashMap in children (uses array or Vec)"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "12000000",
-        "amount_display": "12.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/13e5b137-7f9d-4a6c-affa-215b8dd15657",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
-      "title": "Build a BloomFilter class in Python with add and contains methods",
-      "description": "Build a BloomFilter class in Python with add and contains methods\nImplement a `BloomFilter` class in Python in file `bloom.py`.\n\n## Required API\n\n```python\nclass BloomFilter:\n    def __init__(self, capacity: int, fp_rate: float):\n        \"\"\"\n        capacity: expected number of items\n        fp_rate: desired false-positive rate (e.g. 0.01 = 1%)\n        \"\"\"\n        ...\n\n    def add(self, item: str) -> None: ...\n    def contains(self, item: str) -> bool: ...\n\n    @property\n    def bit_array_size(self) -> int: ...   # m — number of bits\n\n    @property\n    def num_hash_functions(self) -> int: ...  # k\n```\n\n## Formulas to use\n- Optimal bit array size: `m = -(n * ln(p)) / (ln(2)^2)`\n- Optimal hash count: `k = (m/n) * ln(2)`\n- Use `hashlib.md5` and `hashlib.sha256` as base hashes, derive k hashes using the formula:\n  `h_i(x) = (hash1(x) + i * hash2(x)) % m`\n\n## Required test cases (run with `python bloom.py`)\n\n```python\nbf = BloomFilter(capacity=1000, fp_rate=0.01)\n\n# No false negatives (items we added must always be found)\nwords = [\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"]\nfor w in words:\n    bf.add(w)\nfor w in words:\n    assert bf.contains(w), f\"False negative: {w}\"\n\n# FP rate check: add 1000 items, test 1000 non-members, FP rate < 5%\nimport random, string\nadded = set()\nfor _ in range(1000):\n    w = ''.join(random.choices(string.ascii_lowercase, k=8))\n    bf.add(w)\n    added.add(w)\n\nfp_count = sum(\n    1 for _ in range(1000)\n    if bf.contains(''.join(random.choices(string.ascii_lowercase, k=10)))\n       and ''.join(random.choices(string.ascii_lowercase, k=10)) not in added\n)\n# Just check structure — actual FP rate is probabilistic\nassert bf.bit_array_size > 0\nassert bf.num_hash_functions >= 2\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`hashlib`, `math`, `array`)\n- No external packages\n- Submit `bloom.py` — must run cleanly with `python bloom.py`\n\n## Acceptance criteria\n- No false negatives for added items\n- `bit_array_size` and `num_hash_functions` match the optimal formulas (within integer rounding)\n- `python bloom.py` prints \"All tests passed\" and exits 0\n{\"language\":\"python\",\"entrypoint\":\"bloom.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python bloom.py exits with code 0\",\"output includes 'All tests passed'\",\"no false negatives for added items\",\"bit_array_size > 0\",\"num_hash_functions >= 2\",\"stdlib only — no pip packages\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "python",
-        "entrypoint": "bloom.py",
-        "outputFormat": "stdout",
-        "checks": [
-          "python bloom.py exits with code 0",
-          "output includes 'All tests passed'",
-          "no false negatives for added items",
-          "bit_array_size > 0",
-          "num_hash_functions >= 2",
-          "stdlib only — no pip packages"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "12000000",
-        "amount_display": "12.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
       "source_kind": "bountybook"
     },
     {
@@ -1204,6 +1073,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "37a55afc-8ec8-4637-a1da-01bfa68966d6",
+      "title": "Build BFS and DFS graph traversal with path detection in graph_traversal.py",
+      "description": "Build BFS and DFS graph traversal with path detection in graph_traversal.py\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "graph_traversal.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773733313,
+      "source": "https://www.bountybook.ai/job/37a55afc-8ec8-4637-a1da-01bfa68966d6",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "47463355-ccef-4dbb-8c0e-45129382c60c",
       "title": "Deliver JSON comparison of pricing for 5 cloud object storage services",
       "description": "Deliver JSON comparison of pricing for 5 cloud object storage services\nResearch current pricing for 5 cloud object storage services and deliver a structured JSON comparison.\n\n## Deliverable\nA file `storage_pricing.json` with an array of exactly 5 objects.\n\n## Required fields per entry\n```json\n{\n  \"provider\": \"AWS S3\",\n  \"service_name\": \"Amazon S3\",\n  \"storage_cost_per_gb_month\": 0.023,\n  \"egress_cost_per_gb\": 0.09,\n  \"free_tier_gb\": 5,\n  \"free_tier_months\": 12,\n  \"min_object_size_kb\": 0,\n  \"strong_consistency\": true,\n  \"multi_region_replication\": true,\n  \"pricing_url\": \"https://aws.amazon.com/s3/pricing/\"\n}\n```\n\n## Providers to include\nMust include at least 3 of: AWS S3, Google Cloud Storage, Azure Blob Storage, Cloudflare R2, Backblaze B2, Wasabi, DigitalOcean Spaces.\n\n## Rules\n- All numeric fields must be numbers (not strings).\n- `free_tier_gb`: 0 if no free tier.\n- `free_tier_months`: 0 if no time limit or no free tier.\n- Prices in USD.\n- `pricing_url` must be a valid https URL to the provider's pricing page.\n- Data must reflect current published pricing (within 3 months).\n{\"instructions\":\"Research cloud object storage pricing for 5 providers. Each entry: provider, service_name, storage_cost_per_gb_month (float), egress_cost_per_gb (float), free_tier_gb (int), free_tier_months (int), min_object_size_kb (int), strong_consistency (bool), multi_region_replication (bool), pricing_url. Must include at least 3 of: AWS S3, GCS, Azure Blob, Cloudflare R2, Backblaze B2, Wasabi, DigitalOcean Spaces.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, os\\n\\nassert os.path.exists(\\\"storage_pricing.json\\\"), \\\"storage_pricing.json not found\\\"\\n\\nwith open(\\\"storage_pricing.json\\\") as f:\\n    data = json.load(f)\\n\\nassert isinstance(data, list), \\\"Root must be a JSON array\\\"\\nassert len(data) == 5, f\\\"Need exactly 5 entries, got {len(data)}\\\"\\n\\nREQUIRED_FIELDS = [\\\"provider\\\", \\\"service_name\\\", \\\"storage_cost_per_gb_month\\\",\\n                   \\\"egress_cost_per_gb\\\", \\\"free_tier_gb\\\", \\\"free_tier_months\\\",\\n                   \\\"min_object_size_kb\\\", \\\"strong_consistency\\\", \\\"multi_region_replication\\\",\\n                   \\\"pricing_url\\\"]\\n\\nKNOWN_PROVIDERS = {\\\"aws s3\\\", \\\"google cloud storage\\\", \\\"azure blob storage\\\",\\n                   \\\"cloudflare r2\\\", \\\"backblaze b2\\\", \\\"wasabi\\\", \\\"digitalocean spaces\\\"}\\n\\nproviders_found = set()\\nfor i, entry in enumerate(data):\\n    for field in REQUIRED_FIELDS:\\n        assert field in entry, f\\\"Entry {i} missing field '{field}'\\\"\\n\\n    assert isinstance(entry[\\\"provider\\\"], str) and entry[\\\"provider\\\"].strip(), f\\\"Entry {i}: provider must be non-empty string\\\"\\n    assert isinstance(entry[\\\"service_name\\\"], str) and entry[\\\"service_name\\\"].strip(), f\\\"Entry {i}: service_name must be non-empty\\\"\\n    assert isinstance(entry[\\\"storage_cost_per_gb_month\\\"], (int, float)) and entry[\\\"storage_cost_per_gb_month\\\"] > 0, f\\\"Entry {i}: storage_cost_per_gb_month must be positive number\\\"\\n    assert isinstance(entry[\\\"egress_cost_per_gb\\\"], (int, float)) and entry[\\\"egress_cost_per_gb\\\"] >= 0, f\\\"Entry {i}: egress_cost_per_gb must be >= 0\\\"\\n    assert isinstance(entry[\\\"free_tier_gb\\\"], int) and entry[\\\"free_tier_gb\\\"] >= 0, f\\\"Entry {i}: free_tier_gb must be int >= 0\\\"\\n    assert isinstance(entry[\\\"free_tier_months\\\"], int) and entry[\\\"free_tier_months\\\"] >= 0, f\\\"Entry {i}: free_tier_months must be int >= 0\\\"\\n    assert isinstance(entry[\\\"min_object_size_kb\\\"], int) and entry[\\\"min_object_size_kb\\\"] >= 0, f\\\"Entry {i}: min_object_size_kb must be int >= 0\\\"\\n    assert isinstance(entry[\\\"strong_consistency\\\"], bool), f\\\"Entry {i}: strong_consistency must be bool\\\"\\n    assert isinstance(entry[\\\"multi_region_replication\\\"], bool), f\\\"Entry {i}: multi_region_replication must be bool\\\"\\n    assert isinstance(entry[\\\"pricing_url\\\"], str) and entry[\\\"pricing_url\\\"].startswith(\\\"https://\\\"), f\\\"Entry {i}: pricing_url must be https URL\\\"\\n    providers_found.add(entry[\\\"provider\\\"].lower())\\n\\nknown_found = [p for p in providers_found if any(k in p for k in KNOWN_PROVIDERS)]\\nassert len(known_found) >= 3, f\\\"Must include at least 3 known providers, found: {providers_found}\\\"\\nassert len(providers_found) == 5, \\\"Duplicate providers detected\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"storage_pricing.json\"]}}",
@@ -1579,6 +1488,46 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/c8c58ea0-debb-46e3-b417-3377129bcc6d",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "d05dc3ba-8563-4b23-88c7-39b4a5c7a7fd",
+      "title": "Build a binary search tree with insert, search, delete, and traversal methods",
+      "description": "Build a binary search tree with insert, search, delete, and traversal methods\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from bst import BST\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "bst.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773733313,
+      "source": "https://www.bountybook.ai/job/d05dc3ba-8563-4b23-88c7-39b4a5c7a7fd",
       "source_kind": "bountybook"
     },
     {
@@ -2557,6 +2506,48 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/dd327224-ddc5-4c8c-825f-e0ef2b266799",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "e53d7e46-196c-4814-83e3-ea063e332da3",
+      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
+      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
+          "required_files": [
+            "event_emitter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773733313,
+      "source": "https://www.bountybook.ai/job/e53d7e46-196c-4814-83e3-ea063e332da3",
       "source_kind": "bountybook"
     },
     {
