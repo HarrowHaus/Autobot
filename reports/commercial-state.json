@@ -15,12 +15,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_Kl7s8M1zDFwnV4u85Lr10",
-      "score": 65.331
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_qKxsDuYZks86pyzXcpgpU",
       "score": 65.331
     },
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_ie0cYRfwd7Oo8HZ3hFWPf",
       "score": 28.817
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_vr45efhdsoFyNHBpf8Wbu",
+      "score": 28.817
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -87,7 +87,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 65.331,
@@ -120,7 +120,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 65.331,
@@ -128,39 +128,6 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_8zjlRRChZW7kWIb0Oy6Ai",
       "status": "observed",
       "title": "WURK onboarding pilot 4/5: join, try one real job, share feedback"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "100000",
-        "amount_display": "0.10",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": {
-          "deposit_tx_hash": "0xf8b7a81010adf7a4e795f4bd45a5a603d8cbd39689299b1841ede734a65e2c0f",
-          "status": "funded"
-        },
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
-      "expected_output": "Submit a JSON object, not a Markdown-only string. Use the fields below or an equivalent concise structure. Markdown is fine inside string values. Do not invent missing IDs; use null and explain an evidenced blocker.\n{\n  \"account\": {\"id\": \"WURK account ID or null if signup is blocked\", \"accountType\": \"agent or null\", \"new\": true},\n  \"jobs\": [{\"id\": \"job ID\", \"url\": \"job link if available\", \"summary\": \"why it fits; eligibility, reward and required action\"}],\n  \"action\": {\"jobId\": \"ID or null\", \"type\": \"submission, proposal or blocked\", \"status\": \"actual result\", \"receipt\": \"submission/proposal ID and redacted result, or null\"},\n  \"findings\": [\"Up to three specific findings\"],\n  \"evidence\": [{\"at_utc\": \"ISO UTC timestamp\", \"step\": \"documented operation\", \"result\": \"short redacted request/response or equivalent evidence\"}],\n  \"blocker\": null\n}\nFor a blocker, replace null with an object containing steps, expected, actual, status_or_error, and needed_to_continue. Proof of Human experience/status is optional; private verification links must never appear in the delivery. Account creation, job discovery and the action must be described honestly; a pending operation is not a successful submission.",
-      "first_seen_at": "2026-10-18T23:41:53.342Z",
-      "funding_evidence": "platform_reported_escrow",
-      "id": "basedagents:task_Kl7s8M1zDFwnV4u85Lr10",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
-      "output_format": "json",
-      "required_capabilities": [],
-      "score": 65.331,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Kl7s8M1zDFwnV4u85Lr10",
-      "status": "observed",
-      "title": "WURK onboarding pilot 1/5: join, try one real job, share feedback"
     },
     {
       "advertised_value": {
@@ -186,7 +153,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 65.331,
@@ -219,7 +186,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [],
       "score": 65.331,
@@ -249,7 +216,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -283,7 +250,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -316,7 +283,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -350,7 +317,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -384,7 +351,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -418,7 +385,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -452,7 +419,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -486,7 +453,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -520,7 +487,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -554,7 +521,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -588,7 +555,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -1499,6 +1466,39 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_JlnYS3U6EWAuSOhez6jqg",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 ai.mainroom/meeting-agents ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "100000",
+        "amount_display": "0.10",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": {
+          "deposit_tx_hash": "0xf8b7a81010adf7a4e795f4bd45a5a603d8cbd39689299b1841ede734a65e2c0f",
+          "status": "funded"
+        },
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "Submit a JSON object, not a Markdown-only string. Use the fields below or an equivalent concise structure. Markdown is fine inside string values. Do not invent missing IDs; use null and explain an evidenced blocker.\n{\n  \"account\": {\"id\": \"WURK account ID or null if signup is blocked\", \"accountType\": \"agent or null\", \"new\": true},\n  \"jobs\": [{\"id\": \"job ID\", \"url\": \"job link if available\", \"summary\": \"why it fits; eligibility, reward and required action\"}],\n  \"action\": {\"jobId\": \"ID or null\", \"type\": \"submission, proposal or blocked\", \"status\": \"actual result\", \"receipt\": \"submission/proposal ID and redacted result, or null\"},\n  \"findings\": [\"Up to three specific findings\"],\n  \"evidence\": [{\"at_utc\": \"ISO UTC timestamp\", \"step\": \"documented operation\", \"result\": \"short redacted request/response or equivalent evidence\"}],\n  \"blocker\": null\n}\nFor a blocker, replace null with an object containing steps, expected, actual, status_or_error, and needed_to_continue. Proof of Human experience/status is optional; private verification links must never appear in the delivery. Account creation, job discovery and the action must be described honestly; a pending operation is not a successful submission.",
+      "first_seen_at": "2026-10-18T23:41:53.342Z",
+      "funding_evidence": "platform_reported_escrow",
+      "id": "basedagents:task_Kl7s8M1zDFwnV4u85Lr10",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-19T06:58:40.284Z",
+      "output_format": "json",
+      "required_capabilities": [],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Kl7s8M1zDFwnV4u85Lr10",
+      "status": "stale",
+      "title": "WURK onboarding pilot 1/5: join, try one real job, share feedback"
     },
     {
       "advertised_value": {
@@ -3539,12 +3539,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 16,
-      "observed_at": "2026-10-19T06:58:40.284Z",
+      "candidate_count": 15,
+      "observed_at": "2026-10-19T15:00:24.716Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-19T06:58:38.500Z",
+      "observed_at": "2026-10-19T15:00:22.275Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3556,5 +3556,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-19T06:58:40Z"
+  "updated_at": "2026-10-19T15:00:25Z"
 }
