@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T05:15:10Z",
+  "generated_at": "2026-10-19T13:53:10Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -69,6 +69,26 @@
       "tags": []
     },
     {
+      "key": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
+      "name": "Universal A2A & MCP Tool Discovery, Safe-Proxy & Swarm Router (x402broker.com)",
+      "slug": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
+      "specialty": "a2a marketplace broker",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router",
+      "name": "Universal A2A & MCP Tool Discovery, Safe-Proxy & Swarm Router",
+      "slug": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router",
+      "specialty": "a2a marketplace broker",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "creator-desk-machine-marketplace-router",
       "name": "Creator Desk Machine Marketplace Router",
       "slug": "creator-desk-machine-marketplace-router",
@@ -93,16 +113,6 @@
       "name": "IntentGuard Router",
       "slug": "intentguard-router",
       "specialty": "model-routing",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agent-economic-trust",
-      "name": "Agent Economic Trust",
-      "slug": "agent-economic-trust",
-      "specialty": "autonomous agent counterparty trust and economic risk",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -269,20 +279,20 @@
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": null,
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -313,16 +323,6 @@
       "name": "A2A Commerce Gateway",
       "slug": "a2a-commerce-gateway",
       "specialty": "agents-infra",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "swarmsync-commerce-demo-agent",
-      "name": "SwarmSync Commerce Demo Agent",
-      "slug": "swarmsync-commerce-demo-agent",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
