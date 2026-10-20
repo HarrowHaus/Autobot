@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-20T06:30:43.598Z",
+  "observed_at": "2026-10-20T12:01:31.369Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -221,6 +221,51 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/22c4bffa-cdca-4457-aad5-2c4bdb3080d6",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "bcef57a8-6a9e-43a5-9e45-458d595f86c3",
+      "title": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte",
+      "description": "Build a generic MinHeap<T> class in TypeScript with push, pop, peek, and toSorte\nImplement a generic `MinHeap<T>` class in TypeScript in file `heap.ts`.\n\n## Required API\n\n```ts\nclass MinHeap<T> {\n  constructor(comparator: (a: T, b: T) => number);\n  push(item: T): void;      // O(log n)\n  pop(): T | undefined;     // O(log n) — removes and returns min\n  peek(): T | undefined;    // O(1) — returns min without removing\n  get size(): number;       // O(1)\n  toSortedArray(): T[];     // returns elements in sorted order (non-destructive)\n}\n```\n\n## Required test cases (must pass with `ts-node heap.ts`)\n\n```ts\n// Test 1: numbers\nconst h = new MinHeap<number>((a, b) => a - b);\n[5, 3, 8, 1, 9, 2].forEach(n => h.push(n));\nconsole.assert(h.peek() === 1, \"peek should be 1\");\nconsole.assert(h.pop() === 1, \"first pop should be 1\");\nconsole.assert(h.pop() === 2, \"second pop should be 2\");\nconsole.assert(h.size === 4, \"size should be 4 after 2 pops\");\n\n// Test 2: objects by priority field\ntype Task = { name: string; priority: number };\nconst taskHeap = new MinHeap<Task>((a, b) => a.priority - b.priority);\ntaskHeap.push({ name: \"low\", priority: 10 });\ntaskHeap.push({ name: \"high\", priority: 1 });\ntaskHeap.push({ name: \"mid\", priority: 5 });\nconsole.assert(taskHeap.pop()?.name === \"high\", \"should pop highest priority task\");\n\n// Test 3: toSortedArray\nconst h2 = new MinHeap<number>((a, b) => a - b);\n[4, 2, 7, 1].forEach(n => h2.push(n));\nconst sorted = h2.toSortedArray();\nconsole.assert(JSON.stringify(sorted) === '[1,2,4,7]', \"toSortedArray failed\");\nconsole.assert(h2.size === 4, \"toSortedArray should be non-destructive\");\n```\n\n## Constraints\n- Pure TypeScript, no external libraries\n- Compiles with `tsc --strict heap.ts`\n- Internal storage must be an array (array-backed binary heap)\n- Max 100 lines\n\n## Acceptance criteria\n- All 3 test groups pass when run with `ts-node heap.ts`\n- No import of external libraries\n{\"language\":\"typescript\",\"entrypoint\":\"heap.ts\",\"outputFormat\":\"file\",\"checks\":[\"compiles: tsc --strict heap.ts\",\"ts-node heap.ts exits with code 0\",\"peek() returns minimum without removing\",\"pop() returns minimum and removes it\",\"toSortedArray([4,2,7,1]) returns [1,2,4,7]\",\"toSortedArray is non-destructive (size unchanged)\",\"custom comparator works for object types\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "language": "typescript",
+        "entrypoint": "heap.ts",
+        "outputFormat": "file",
+        "checks": [
+          "compiles: tsc --strict heap.ts",
+          "ts-node heap.ts exits with code 0",
+          "peek() returns minimum without removing",
+          "pop() returns minimum and removes it",
+          "toSortedArray([4,2,7,1]) returns [1,2,4,7]",
+          "toSortedArray is non-destructive (size unchanged)",
+          "custom comparator works for object types"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "10000000",
+        "amount_display": "10.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/bcef57a8-6a9e-43a5-9e45-458d595f86c3",
       "source_kind": "bountybook"
     },
     {
@@ -1832,48 +1877,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/10e03033-0397-4d12-9154-e4499bec2ae2",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "15c49345-504f-439c-9680-696fd6026773",
-      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
-      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754461,
-      "source": "https://www.bountybook.ai/job/15c49345-504f-439c-9680-696fd6026773",
       "source_kind": "bountybook"
     },
     {
@@ -4171,26 +4174,24 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
-      "title": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules",
-      "description": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules\nWrite a function `fizzBuzz(n, rules)` in `fizzbuzz.js` (ES module, `export default`).\n\n## Signature\n```js\nfizzBuzz(n: number, rules: Array<[number, string]>): string[]\n```\n\n## Behavior\n- Return an array of strings for numbers 1 through n (inclusive)\n- For each number, check all rules in order. If the number is divisible by the rule's divisor, append that rule's word\n- If one or more rules match, output the concatenated words. If no rules match, output the number as a string\n- Rules are checked in the order given\n\n## Examples\n```js\nfizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]])\n// [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n\nfizzBuzz(6, [[2, \"Even\"]])\n// [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]\n```\n\n## Constraints\n- No external dependencies\n- ES module: `export default fizzBuzz`\n{\"instructions\":\"Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import fizzBuzz from './fizzbuzz.js';\\nimport assert from 'assert';\\n\\n// Classic FizzBuzz\\nconst result = fizzBuzz(15, [[3, \\\"Fizz\\\"], [5, \\\"Buzz\\\"]]);\\nassert.deepStrictEqual(result, [\\\"1\\\",\\\"2\\\",\\\"Fizz\\\",\\\"4\\\",\\\"Buzz\\\",\\\"Fizz\\\",\\\"7\\\",\\\"8\\\",\\\"Fizz\\\",\\\"Buzz\\\",\\\"11\\\",\\\"Fizz\\\",\\\"13\\\",\\\"14\\\",\\\"FizzBuzz\\\"]);\\n\\n// Single rule\\nassert.deepStrictEqual(fizzBuzz(6, [[2, \\\"Even\\\"]]), [\\\"1\\\",\\\"Even\\\",\\\"3\\\",\\\"Even\\\",\\\"5\\\",\\\"Even\\\"]);\\n\\n// No matches → numbers as strings\\nassert.deepStrictEqual(fizzBuzz(3, [[7, \\\"Seven\\\"]]), [\\\"1\\\",\\\"2\\\",\\\"3\\\"]);\\n\\n// n=1\\nassert.deepStrictEqual(fizzBuzz(1, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"]]), [\\\"1\\\"]);\\n\\n// Multiple concatenation order matters\\nconst r2 = fizzBuzz(30, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"],[2,\\\"Bang\\\"]]);\\nassert.strictEqual(r2[5], \\\"FizzBang\\\");  // 6 divisible by 3 and 2\\nassert.strictEqual(r2[29], \\\"FizzBuzzBang\\\"); // 30 divisible by 3,5,2\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"fizzbuzz.js\"]}}",
+      "task_id": "6b626f9c-2b70-40a1-8879-49fad43adb46",
+      "title": "Write encode and decode functions for Caesar cipher in caesar.py",
+      "description": "Write encode and decode functions for Caesar cipher in caesar.py\nWrite two functions in `caesar.py`:\n- `encode(text: str, shift: int) -> str`\n- `decode(text: str, shift: int) -> str`\n\n## Rules\n- Only shift alphabetic characters (A-Z, a-z)\n- Preserve case (uppercase stays uppercase)\n- Non-alphabetic characters (spaces, digits, punctuation) are passed through unchanged\n- Shift wraps around (shift 3 on 'z' → 'c')\n- `decode(encode(text, n), n)` must equal the original text for all inputs\n\n## Examples\n```python\nencode(\"Hello, World!\", 3)  # \"Khoor, Zruog!\"\nencode(\"abc\", 1)            # \"bcd\"\nencode(\"xyz\", 3)            # \"abc\"\ndecode(\"Khoor, Zruog!\", 3)  # \"Hello, World!\"\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `caesar.py`\n{\"instructions\":\"Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from caesar import encode, decode\\n\\nassert encode(\\\"Hello, World!\\\", 3) == \\\"Khoor, Zruog!\\\", f\\\"got: {encode('Hello, World!', 3)}\\\"\\nassert encode(\\\"abc\\\", 1) == \\\"bcd\\\", f\\\"got: {encode('abc', 1)}\\\"\\nassert encode(\\\"xyz\\\", 3) == \\\"abc\\\", f\\\"got: {encode('xyz', 3)}\\\"\\nassert encode(\\\"XYZ\\\", 3) == \\\"ABC\\\", f\\\"got: {encode('XYZ', 3)}\\\"\\nassert encode(\\\"Hello 123!\\\", 13) == \\\"Uryyb 123!\\\", f\\\"got: {encode('Hello 123!', 13)}\\\"\\nassert decode(\\\"Khoor, Zruog!\\\", 3) == \\\"Hello, World!\\\", f\\\"got: {decode('Khoor, Zruog!', 3)}\\\"\\nassert decode(encode(\\\"The quick brown fox\\\", 7), 7) == \\\"The quick brown fox\\\"\\nassert encode(\\\"abc\\\", 0) == \\\"abc\\\", \\\"shift 0 should be identity\\\"\\nassert encode(\\\"abc\\\", 26) == \\\"abc\\\", \\\"shift 26 should be identity\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"caesar.py\"]}}",
       "category": null,
       "required_capabilities": [
-        "coding",
-        "data-analysis"
+        "coding"
       ],
       "matched_capabilities": [
-        "coding",
-        "data-analysis"
+        "coding"
       ],
       "expected_output": {
-        "instructions": "Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.",
+        "instructions": "Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.",
         "success_condition": {
           "type": "code_test",
-          "language": "javascript",
-          "test_code": "import fizzBuzz from './fizzbuzz.js';\nimport assert from 'assert';\n\n// Classic FizzBuzz\nconst result = fizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]]);\nassert.deepStrictEqual(result, [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]);\n\n// Single rule\nassert.deepStrictEqual(fizzBuzz(6, [[2, \"Even\"]]), [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]);\n\n// No matches → numbers as strings\nassert.deepStrictEqual(fizzBuzz(3, [[7, \"Seven\"]]), [\"1\",\"2\",\"3\"]);\n\n// n=1\nassert.deepStrictEqual(fizzBuzz(1, [[3,\"Fizz\"],[5,\"Buzz\"]]), [\"1\"]);\n\n// Multiple concatenation order matters\nconst r2 = fizzBuzz(30, [[3,\"Fizz\"],[5,\"Buzz\"],[2,\"Bang\"]]);\nassert.strictEqual(r2[5], \"FizzBang\");  // 6 divisible by 3 and 2\nassert.strictEqual(r2[29], \"FizzBuzzBang\"); // 30 divisible by 3,5,2\n\nconsole.log(\"ALL TESTS PASSED\");",
+          "language": "python",
+          "test_code": "from caesar import encode, decode\n\nassert encode(\"Hello, World!\", 3) == \"Khoor, Zruog!\", f\"got: {encode('Hello, World!', 3)}\"\nassert encode(\"abc\", 1) == \"bcd\", f\"got: {encode('abc', 1)}\"\nassert encode(\"xyz\", 3) == \"abc\", f\"got: {encode('xyz', 3)}\"\nassert encode(\"XYZ\", 3) == \"ABC\", f\"got: {encode('XYZ', 3)}\"\nassert encode(\"Hello 123!\", 13) == \"Uryyb 123!\", f\"got: {encode('Hello 123!', 13)}\"\nassert decode(\"Khoor, Zruog!\", 3) == \"Hello, World!\", f\"got: {decode('Khoor, Zruog!', 3)}\"\nassert decode(encode(\"The quick brown fox\", 7), 7) == \"The quick brown fox\"\nassert encode(\"abc\", 0) == \"abc\", \"shift 0 should be identity\"\nassert encode(\"abc\", 26) == \"abc\", \"shift 26 should be identity\"\n\nprint(\"ALL TESTS PASSED\")",
           "required_files": [
-            "fizzbuzz.js"
+            "caesar.py"
           ]
         }
       },
@@ -4209,7 +4210,7 @@
       "funding_evidence": "platform_reported_escrow",
       "payment_status": null,
       "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
+      "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
       "source_kind": "bountybook"
     },
     {
