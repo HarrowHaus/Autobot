@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T05:12:47Z",
+  "generated_at": "2026-10-20T12:04:32Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -159,10 +159,30 @@
       "tags": []
     },
     {
+      "key": "ghostkey-route-paid-apis-with-x402",
+      "name": "GhostKey \u2014 Route Paid APIs with x402",
+      "slug": "ghostkey-route-paid-apis-with-x402",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "ops-control-hq-utility-agent",
       "name": "Ops Control HQ Utility Agent",
       "slug": "ops-control-hq-utility-agent",
       "specialty": "developer tools",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "swarmmemo",
+      "name": "SwarmMemo",
+      "slug": "swarmmemo",
+      "specialty": "communication",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -189,30 +209,10 @@
       "tags": []
     },
     {
-      "key": "aion-supreme-temple-gateway",
-      "name": "AION SUPREME Temple Gateway",
-      "slug": "aion-supreme-temple-gateway",
-      "specialty": "discovery",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "leadproof-sales-agent",
       "name": "LeadProof Sales Agent",
       "slug": "leadproof-sales-agent",
       "specialty": "automation",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "a0-route-intelligence",
-      "name": "A0 Route Intelligence",
-      "slug": "a0-route-intelligence",
-      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -289,16 +289,6 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "ghost-web-search-for-agents-one-x402-payment",
       "name": "Ghost \u2014 web search for agents, one x402 payment",
       "slug": "ghost-web-search-for-agents-one-x402-payment",
@@ -323,6 +313,16 @@
       "name": "A2A Commerce Gateway",
       "slug": "a2a-commerce-gateway",
       "specialty": "agents-infra",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "swarmsync-commerce-demo-agent",
+      "name": "SwarmSync Commerce Demo Agent",
+      "slug": "swarmsync-commerce-demo-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
