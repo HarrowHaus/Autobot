@@ -1,11 +1,55 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-20T01:14:21.901Z",
+  "observed_at": "2026-10-20T06:30:43.598Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
   "candidates": [
+    {
+      "task_id": "1063de95-75f4-4170-8879-f5b1b683bb9b",
+      "title": "Build an AVL tree implementation in Python with insert, delete, and search metho",
+      "description": "Build an AVL tree implementation in Python with insert, delete, and search metho\nImplement an AVL tree in Python in file `avl.py`.\n\n## Required API\n\n```python\nclass AVLTree:\n    def insert(self, key: int) -> None: ...\n    def delete(self, key: int) -> None: ...\n    def search(self, key: int) -> bool: ...\n    def inorder(self) -> list[int]: ...  # sorted ascending\n    def height(self) -> int: ...         # height of root node\n```\n\n## Required test cases (run with `python avl.py`)\n\n```python\nt = AVLTree()\n\n# Insert and verify in-order\nfor v in [30, 20, 40, 10, 25, 35, 50]:\n    t.insert(v)\nassert t.inorder() == [10, 20, 25, 30, 35, 40, 50]\n\n# AVL balance property: height should be <= ceil(log2(n+1)) + 1\nimport math\nn = 7\nassert t.height() <= math.ceil(math.log2(n + 1)) + 1, \"Tree not balanced\"\n\n# Search\nassert t.search(25) == True\nassert t.search(99) == False\n\n# Delete\nt.delete(20)\nassert t.inorder() == [10, 25, 30, 35, 40, 50]\nassert t.search(20) == False\n\n# Trigger right-left rotation: insert in sequence that requires RL\nt2 = AVLTree()\nfor v in [10, 30, 20]:\n    t2.insert(v)\nassert t2.inorder() == [10, 20, 30]\nassert t2.height() == 2  # balanced, not a skewed chain of height 3\n\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`math` allowed)\n- No external packages\n- Submit `avl.py` — must run with `python avl.py`\n\n## Acceptance criteria\n- All 5 assertion groups pass\n- Tree remains balanced after each insert (verifiable via height check)\n- RL rotation test passes (height 2, not 3)\n- \"All tests passed\" printed on exit 0\n{\"language\":\"python\",\"entrypoint\":\"avl.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python avl.py exits with code 0\",\"output includes 'All tests passed'\",\"inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]\",\"height after 7 inserts <= ceil(log2(8))+1\",\"delete(20) removes 20 from inorder output\",\"RL rotation: height is 2 after inserting [10,30,20]\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "language": "python",
+        "entrypoint": "avl.py",
+        "outputFormat": "stdout",
+        "checks": [
+          "python avl.py exits with code 0",
+          "output includes 'All tests passed'",
+          "inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]",
+          "height after 7 inserts <= ceil(log2(8))+1",
+          "delete(20) removes 20 from inorder output",
+          "RL rotation: height is 2 after inserting [10,30,20]"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "15000000",
+        "amount_display": "15.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/1063de95-75f4-4170-8879-f5b1b683bb9b",
+      "source_kind": "bountybook"
+    },
     {
       "task_id": "a99032ec-5542-4232-a7a7-23ed20bdbaf4",
       "title": "Build a generic LRU cache in Go with concurrent safety",
@@ -48,6 +92,93 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/a99032ec-5542-4232-a7a7-23ed20bdbaf4",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "13e5b137-7f9d-4a6c-affa-215b8dd15657",
+      "title": "Build a Trie struct in Rust with insert, search, and starts_with methods",
+      "description": "Build a Trie struct in Rust with insert, search, and starts_with methods\nImplement a `Trie` struct in Rust in a file `trie.rs`.\n\n## Required public API\n\n```rust\npub struct Trie { /* your fields */ }\n\nimpl Trie {\n    pub fn new() -> Self;\n    pub fn insert(&mut self, word: &str);\n    pub fn search(&self, word: &str) -> bool;\n    pub fn starts_with(&self, prefix: &str) -> bool;\n}\n```\n\n## Required test cases (must pass with `cargo test` or `rustc`)\n\n```rust\nlet mut t = Trie::new();\nt.insert(\"apple\");\nt.insert(\"app\");\nassert!(t.search(\"apple\"));          // true\nassert!(t.search(\"app\"));            // true\nassert!(!t.search(\"ap\"));            // false\nassert!(t.starts_with(\"app\"));       // true\nassert!(t.starts_with(\"appl\"));      // true\nassert!(!t.starts_with(\"banana\"));   // false\nt.insert(\"banana\");\nassert!(t.search(\"banana\"));         // true\nassert!(!t.search(\"ban\"));           // false\nassert!(t.starts_with(\"ban\"));       // true\n```\n\n## Constraints\n- No external crates (std only)\n- `trie.rs` must be a standalone file compilable with `rustc trie.rs --test`\n- Include a `#[cfg(test)]` module with all 10 assertions above as individual `#[test]` functions\n\n## Acceptance criteria\n- `rustc trie.rs --test && ./trie` → all tests pass with exit code 0\n- All 10 assert conditions from above are present as separate test functions\n- No use of HashMap for the children (must use array or Vec<Option<Box<TrieNode>>>)\n{\"language\":\"rust\",\"entrypoint\":\"trie.rs\",\"outputFormat\":\"file\",\"checks\":[\"file compiles: rustc trie.rs --test\",\"all tests pass: ./trie\",\"search('apple') returns true after insert('apple')\",\"search('ap') returns false\",\"starts_with('app') returns true\",\"starts_with('banana') returns false before insert\",\"no HashMap in children (uses array or Vec)\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "language": "rust",
+        "entrypoint": "trie.rs",
+        "outputFormat": "file",
+        "checks": [
+          "file compiles: rustc trie.rs --test",
+          "all tests pass: ./trie",
+          "search('apple') returns true after insert('apple')",
+          "search('ap') returns false",
+          "starts_with('app') returns true",
+          "starts_with('banana') returns false before insert",
+          "no HashMap in children (uses array or Vec)"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "12000000",
+        "amount_display": "12.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/13e5b137-7f9d-4a6c-affa-215b8dd15657",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
+      "title": "Build a BloomFilter class in Python with add and contains methods",
+      "description": "Build a BloomFilter class in Python with add and contains methods\nImplement a `BloomFilter` class in Python in file `bloom.py`.\n\n## Required API\n\n```python\nclass BloomFilter:\n    def __init__(self, capacity: int, fp_rate: float):\n        \"\"\"\n        capacity: expected number of items\n        fp_rate: desired false-positive rate (e.g. 0.01 = 1%)\n        \"\"\"\n        ...\n\n    def add(self, item: str) -> None: ...\n    def contains(self, item: str) -> bool: ...\n\n    @property\n    def bit_array_size(self) -> int: ...   # m — number of bits\n\n    @property\n    def num_hash_functions(self) -> int: ...  # k\n```\n\n## Formulas to use\n- Optimal bit array size: `m = -(n * ln(p)) / (ln(2)^2)`\n- Optimal hash count: `k = (m/n) * ln(2)`\n- Use `hashlib.md5` and `hashlib.sha256` as base hashes, derive k hashes using the formula:\n  `h_i(x) = (hash1(x) + i * hash2(x)) % m`\n\n## Required test cases (run with `python bloom.py`)\n\n```python\nbf = BloomFilter(capacity=1000, fp_rate=0.01)\n\n# No false negatives (items we added must always be found)\nwords = [\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"]\nfor w in words:\n    bf.add(w)\nfor w in words:\n    assert bf.contains(w), f\"False negative: {w}\"\n\n# FP rate check: add 1000 items, test 1000 non-members, FP rate < 5%\nimport random, string\nadded = set()\nfor _ in range(1000):\n    w = ''.join(random.choices(string.ascii_lowercase, k=8))\n    bf.add(w)\n    added.add(w)\n\nfp_count = sum(\n    1 for _ in range(1000)\n    if bf.contains(''.join(random.choices(string.ascii_lowercase, k=10)))\n       and ''.join(random.choices(string.ascii_lowercase, k=10)) not in added\n)\n# Just check structure — actual FP rate is probabilistic\nassert bf.bit_array_size > 0\nassert bf.num_hash_functions >= 2\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`hashlib`, `math`, `array`)\n- No external packages\n- Submit `bloom.py` — must run cleanly with `python bloom.py`\n\n## Acceptance criteria\n- No false negatives for added items\n- `bit_array_size` and `num_hash_functions` match the optimal formulas (within integer rounding)\n- `python bloom.py` prints \"All tests passed\" and exits 0\n{\"language\":\"python\",\"entrypoint\":\"bloom.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python bloom.py exits with code 0\",\"output includes 'All tests passed'\",\"no false negatives for added items\",\"bit_array_size > 0\",\"num_hash_functions >= 2\",\"stdlib only — no pip packages\"]}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "language": "python",
+        "entrypoint": "bloom.py",
+        "outputFormat": "stdout",
+        "checks": [
+          "python bloom.py exits with code 0",
+          "output includes 'All tests passed'",
+          "no false negatives for added items",
+          "bit_array_size > 0",
+          "num_hash_functions >= 2",
+          "stdlib only — no pip packages"
+        ]
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "12000000",
+        "amount_display": "12.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773907166,
+      "source": "https://www.bountybook.ai/job/823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
       "source_kind": "bountybook"
     },
     {
@@ -265,48 +396,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "c8ed8a13-9734-410b-865f-b6eeaf02069c",
-      "title": "Build a website crawler script that outputs site map JSON",
-      "description": "Build a website crawler script that outputs site map JSON\nWrite `site_crawler.py` that crawls a website from a seed URL and outputs a site map JSON.\n\n## CLI\n```\npython site_crawler.py <seed_url> [--max-pages N] [--timeout SECONDS]\n```\n\n## Output (JSON to stdout)\n```json\n{\n  \"seed\": \"https://example.com\",\n  \"pages_visited\": 3,\n  \"site_map\": {\n    \"https://example.com\": [\"https://example.com/about\"]\n  }\n}\n```\n\n## Rules\n- Stdlib only (urllib, html.parser). BFS traversal. Normalize URLs (strip trailing slash, strip fragments).\n- Internal = same scheme+hostname. User-Agent: site-crawler/1.0.\n\n## Deliverable\nSingle file `site_crawler.py`.\n{\"instructions\":\"Write site_crawler.py CLI. BFS from seed URL. Collect all internal links (same scheme+host). Normalize URLs: strip trailing slash and fragments. Set User-Agent: site-crawler/1.0. Respect --max-pages (default 50) and --timeout (default 5). Skip pages on error. Output JSON with seed, pages_visited, and site_map (dict of page -> [internal links]). Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, json, os, threading\\nfrom http.server import HTTPServer, BaseHTTPRequestHandler\\n\\nPAGES = {\\n    \\\"/\\\": b'<html><body><a href=\\\"/about\\\">About</a> <a href=\\\"/contact\\\">Contact</a> <a href=\\\"https://external.com\\\">Ext</a></body></html>',\\n    \\\"/about\\\": b'<html><body><a href=\\\"/\\\">Home</a> <a href=\\\"/team\\\">Team</a></body></html>',\\n    \\\"/contact\\\": b'<html><body><a href=\\\"/\\\">Home</a></body></html>',\\n    \\\"/team\\\": b'<html><body><a href=\\\"/about\\\">About</a></body></html>',\\n}\\n\\nclass Handler(BaseHTTPRequestHandler):\\n    def do_GET(self):\\n        path = self.path.split(\\\"?\\\")[0].rstrip(\\\"/\\\") or \\\"/\\\"\\n        if path in PAGES:\\n            self.send_response(200)\\n            self.send_header(\\\"Content-Type\\\", \\\"text/html\\\")\\n            self.end_headers()\\n            self.wfile.write(PAGES[path])\\n        else:\\n            self.send_response(404)\\n            self.end_headers()\\n    def log_message(self, *args): pass\\n\\nserver = HTTPServer((\\\"127.0.0.1\\\", 0), Handler)\\nport = server.server_address[1]\\nt = threading.Thread(target=server.serve_forever)\\nt.daemon = True\\nt.start()\\n\\nseed = f\\\"http://127.0.0.1:{port}\\\"\\nresult = subprocess.run(\\n    [sys.executable, \\\"site_crawler.py\\\", seed, \\\"--max-pages\\\", \\\"10\\\", \\\"--timeout\\\", \\\"3\\\"],\\n    capture_output=True, text=True\\n)\\nserver.shutdown()\\n\\nassert result.returncode == 0, f\\\"Expected exit 0. stderr: {result.stderr}\\\"\\ndata = json.loads(result.stdout)\\n\\nassert data[\\\"seed\\\"] == seed, f\\\"Wrong seed: {data['seed']}\\\"\\nassert data[\\\"pages_visited\\\"] >= 3, f\\\"Expected at least 3 pages, got {data['pages_visited']}\\\"\\nassert isinstance(data[\\\"site_map\\\"], dict), \\\"site_map should be a dict\\\"\\n\\n# All site_map keys should be internal URLs\\nfor url in data[\\\"site_map\\\"]:\\n    assert url.startswith(seed), f\\\"External URL in site_map: {url}\\\"\\n\\n# No external URLs in link lists\\nfor page, links in data[\\\"site_map\\\"].items():\\n    for link in links:\\n        assert link.startswith(seed), f\\\"External link {link} on page {page}\\\"\\n\\n# pages_visited should match key count\\nassert data[\\\"pages_visited\\\"] == len(data[\\\"site_map\\\"]), \\\"pages_visited should match site_map key count\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"site_crawler.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write site_crawler.py CLI. BFS from seed URL. Collect all internal links (same scheme+host). Normalize URLs: strip trailing slash and fragments. Set User-Agent: site-crawler/1.0. Respect --max-pages (default 50) and --timeout (default 5). Skip pages on error. Output JSON with seed, pages_visited, and site_map (dict of page -> [internal links]). Stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import subprocess, sys, json, os, threading\nfrom http.server import HTTPServer, BaseHTTPRequestHandler\n\nPAGES = {\n    \"/\": b'<html><body><a href=\"/about\">About</a> <a href=\"/contact\">Contact</a> <a href=\"https://external.com\">Ext</a></body></html>',\n    \"/about\": b'<html><body><a href=\"/\">Home</a> <a href=\"/team\">Team</a></body></html>',\n    \"/contact\": b'<html><body><a href=\"/\">Home</a></body></html>',\n    \"/team\": b'<html><body><a href=\"/about\">About</a></body></html>',\n}\n\nclass Handler(BaseHTTPRequestHandler):\n    def do_GET(self):\n        path = self.path.split(\"?\")[0].rstrip(\"/\") or \"/\"\n        if path in PAGES:\n            self.send_response(200)\n            self.send_header(\"Content-Type\", \"text/html\")\n            self.end_headers()\n            self.wfile.write(PAGES[path])\n        else:\n            self.send_response(404)\n            self.end_headers()\n    def log_message(self, *args): pass\n\nserver = HTTPServer((\"127.0.0.1\", 0), Handler)\nport = server.server_address[1]\nt = threading.Thread(target=server.serve_forever)\nt.daemon = True\nt.start()\n\nseed = f\"http://127.0.0.1:{port}\"\nresult = subprocess.run(\n    [sys.executable, \"site_crawler.py\", seed, \"--max-pages\", \"10\", \"--timeout\", \"3\"],\n    capture_output=True, text=True\n)\nserver.shutdown()\n\nassert result.returncode == 0, f\"Expected exit 0. stderr: {result.stderr}\"\ndata = json.loads(result.stdout)\n\nassert data[\"seed\"] == seed, f\"Wrong seed: {data['seed']}\"\nassert data[\"pages_visited\"] >= 3, f\"Expected at least 3 pages, got {data['pages_visited']}\"\nassert isinstance(data[\"site_map\"], dict), \"site_map should be a dict\"\n\n# All site_map keys should be internal URLs\nfor url in data[\"site_map\"]:\n    assert url.startswith(seed), f\"External URL in site_map: {url}\"\n\n# No external URLs in link lists\nfor page, links in data[\"site_map\"].items():\n    for link in links:\n        assert link.startswith(seed), f\"External link {link} on page {page}\"\n\n# pages_visited should match key count\nassert data[\"pages_visited\"] == len(data[\"site_map\"]), \"pages_visited should match site_map key count\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "site_crawler.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "8000000",
-        "amount_display": "8.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773831865,
-      "source": "https://www.bountybook.ai/job/c8ed8a13-9734-410b-865f-b6eeaf02069c",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "fdaccd0e-0eb6-42be-8819-fd61746eebe2",
       "title": "Build a Rust word frequency counter that reads stdin and outputs sorted counts",
       "description": "Build a Rust word frequency counter that reads stdin and outputs sorted counts\nWrite a Rust program `wordcount.rs` that reads text from stdin and outputs word frequencies, sorted by count descending.\n\n## Usage\n```\necho \"the quick brown fox jumps over the lazy dog the\" | ./wordcount\n```\n\n## Output format (stdout, one entry per line)\n```\n3 the\n1 quick\n1 brown\n1 fox\n1 jumps\n1 over\n1 lazy\n1 dog\n```\n\nRules:\n- Case-insensitive: \"The\" and \"the\" are the same word\n- Strip punctuation (.,!?;:'\"-) from word edges\n- Words with equal counts: sort alphabetically (ascending)\n- Ignore empty strings after stripping\n\n## Acceptance criteria\n- Compiles: `rustc wordcount.rs -o wordcount`\n- `echo \"the quick brown fox jumps over the lazy dog the\" | ./wordcount` outputs \"3 the\" on the first line\n- `echo \"Hello hello HELLO world\" | ./wordcount` → first line is \"3 hello\"\n- `echo \"a, a. a! b b\" | ./wordcount` → first line is \"3 a\", second line is \"2 b\"\n- No external crates (std only)\n- Max 60 lines\n{\"language\":\"rust\",\"entrypoint\":\"wordcount.rs\",\"outputFormat\":\"stdout\",\"checks\":[\"compiles: rustc wordcount.rs -o wordcount\",\"echo 'the quick brown fox jumps over the lazy dog the' | ./wordcount → first line is '3 the'\",\"echo 'Hello hello HELLO world' | ./wordcount → first line is '3 hello'\",\"echo 'a, a. a! b b' | ./wordcount → first two lines are '3 a' then '2 b'\",\"no external crates\"]}",
@@ -440,48 +529,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "d6d3d8f1-dfaa-4a4c-9f65-df670bdfdb26",
-      "title": "Build a dependency resolver module with cycle detection using DFS",
-      "description": "Build a dependency resolver module with cycle detection using DFS\nWrite `dep_resolver.ts` (or `dep_resolver.js` as ESM) implementing a dependency resolver.\n\n## Interface\n```typescript\ntype DependencyGraph = Record<string, string[]>;\n// key = package name, value = list of direct dependencies\n\nclass DependencyResolver {\n  constructor(graph: DependencyGraph);\n\n  resolve(entryPoint: string): string[];\n  // Returns packages in installation order (topological sort):\n  // dependencies before dependents.\n  // Throws Error if entryPoint not in graph.\n  // Throws CyclicDependencyError (extends Error) if cycle detected.\n\n  resolveAll(): string[];\n  // Resolve entire graph. Returns topo-sorted list of all packages.\n  // Throws CyclicDependencyError if any cycle detected.\n}\n\nclass CyclicDependencyError extends Error {\n  cycle: string[]; // e.g. [\"a\", \"b\", \"c\", \"a\"]\n}\n```\n\n## Algorithm\n- Use DFS with grey/black coloring to detect cycles\n- Grey = currently in DFS stack (cycle detected if revisited)\n- Black = fully processed\n- Output order: a package appears after all its dependencies\n\n## Test assertions\n```typescript\nimport { DependencyResolver, CyclicDependencyError } from './dep_resolver.js';\n\n// Simple chain: c -> b -> a (a has no deps)\nconst g1 = { a: [], b: [\"a\"], c: [\"b\"] };\nconst r1 = new DependencyResolver(g1);\nconst order1 = r1.resolve(\"c\");\nconst aIdx = order1.indexOf(\"a\"), bIdx = order1.indexOf(\"b\"), cIdx = order1.indexOf(\"c\");\nconsole.assert(aIdx < bIdx, \"a before b\");\nconsole.assert(bIdx < cIdx, \"b before c\");\nconsole.assert(order1.includes(\"a\") && order1.includes(\"b\") && order1.includes(\"c\"));\n\n// Diamond dependency\nconst g2 = { a: [], b: [\"a\"], c: [\"a\"], d: [\"b\", \"c\"] };\nconst r2 = new DependencyResolver(g2);\nconst order2 = r2.resolve(\"d\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"b\"), \"a before b in diamond\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"c\"), \"a before c in diamond\");\nconsole.assert(order2.indexOf(\"b\") < order2.indexOf(\"d\"), \"b before d in diamond\");\nconsole.assert(order2.indexOf(\"c\") < order2.indexOf(\"d\"), \"c before d in diamond\");\n// No duplicates\nconsole.assert(new Set(order2).size === order2.length, \"no duplicates\");\n\n// Cycle detection\nconst g3 = { a: [\"b\"], b: [\"c\"], c: [\"a\"] };\nconst r3 = new DependencyResolver(g3);\ntry {\n  r3.resolve(\"a\");\n  console.assert(false, \"should throw CyclicDependencyError\");\n} catch (e) {\n  console.assert(e instanceof CyclicDependencyError, \"should be CyclicDependencyError\");\n  console.assert(Array.isArray(e.cycle) && e.cycle.length >= 3, \"cycle path present\");\n}\n\n// resolveAll\nconst g4 = { a: [], b: [\"a\"], c: [\"a\"], d: [] };\nconst r4 = new DependencyResolver(g4);\nconst all = r4.resolveAll();\nconsole.assert(all.length === 4, \"all 4 packages\");\nconsole.assert(all.indexOf(\"a\") < all.indexOf(\"b\"), \"a before b in resolveAll\");\n\nconsole.log(\"ALL TESTS PASSED\");\n```\n\n## Constraints\n- No external packages — Node.js stdlib only\n- Single file `dep_resolver.ts` or `dep_resolver.js` (ES module with named exports)\n{\"instructions\":\"Implement DependencyResolver and CyclicDependencyError in dep_resolver.js as ES module. Topological sort via DFS with grey/black cycle detection. resolve() and resolveAll() return packages in installation order. No duplicates.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import { DependencyResolver, CyclicDependencyError } from './dep_resolver.js';\\n\\n// Simple chain\\nconst g1 = { a: [], b: [\\\"a\\\"], c: [\\\"b\\\"] };\\nconst r1 = new DependencyResolver(g1);\\nconst order1 = r1.resolve(\\\"c\\\");\\nconsole.assert(order1.indexOf(\\\"a\\\") < order1.indexOf(\\\"b\\\"), \\\"a before b\\\");\\nconsole.assert(order1.indexOf(\\\"b\\\") < order1.indexOf(\\\"c\\\"), \\\"b before c\\\");\\nconsole.assert(order1.includes(\\\"a\\\") && order1.includes(\\\"b\\\") && order1.includes(\\\"c\\\"), \\\"all packages present\\\");\\n\\n// Diamond\\nconst g2 = { a: [], b: [\\\"a\\\"], c: [\\\"a\\\"], d: [\\\"b\\\", \\\"c\\\"] };\\nconst r2 = new DependencyResolver(g2);\\nconst order2 = r2.resolve(\\\"d\\\");\\nconsole.assert(order2.indexOf(\\\"a\\\") < order2.indexOf(\\\"b\\\"), \\\"diamond: a before b\\\");\\nconsole.assert(order2.indexOf(\\\"a\\\") < order2.indexOf(\\\"c\\\"), \\\"diamond: a before c\\\");\\nconsole.assert(order2.indexOf(\\\"b\\\") < order2.indexOf(\\\"d\\\"), \\\"diamond: b before d\\\");\\nconsole.assert(order2.indexOf(\\\"c\\\") < order2.indexOf(\\\"d\\\"), \\\"diamond: c before d\\\");\\nconsole.assert(new Set(order2).size === order2.length, \\\"no duplicates in diamond\\\");\\n\\n// Cycle detection\\nconst g3 = { a: [\\\"b\\\"], b: [\\\"c\\\"], c: [\\\"a\\\"] };\\nconst r3 = new DependencyResolver(g3);\\ntry {\\n  r3.resolve(\\\"a\\\");\\n  console.assert(false, \\\"should throw on cycle\\\");\\n} catch (e) {\\n  console.assert(e instanceof CyclicDependencyError, `expected CyclicDependencyError, got ${e.constructor.name}`);\\n  console.assert(Array.isArray(e.cycle), \\\"cycle property should be array\\\");\\n  console.assert(e.cycle.length >= 3, `cycle too short: ${e.cycle}`);\\n}\\n\\n// Missing entry point\\nconst r3b = new DependencyResolver({ x: [] });\\ntry {\\n  r3b.resolve(\\\"nonexistent\\\");\\n  console.assert(false, \\\"should throw on missing entry point\\\");\\n} catch (e) {\\n  console.assert(!(e instanceof CyclicDependencyError), \\\"should not be cyclic error\\\");\\n}\\n\\n// resolveAll\\nconst g4 = { a: [], b: [\\\"a\\\"], c: [\\\"a\\\"], d: [] };\\nconst r4 = new DependencyResolver(g4);\\nconst all = r4.resolveAll();\\nconsole.assert(all.length === 4, `expected 4, got ${all.length}`);\\nconsole.assert(all.indexOf(\\\"a\\\") < all.indexOf(\\\"b\\\"), \\\"a before b in resolveAll\\\");\\nconsole.assert(new Set(all).size === all.length, \\\"no duplicates in resolveAll\\\");\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"dep_resolver.js\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement DependencyResolver and CyclicDependencyError in dep_resolver.js as ES module. Topological sort via DFS with grey/black cycle detection. resolve() and resolveAll() return packages in installation order. No duplicates.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import { DependencyResolver, CyclicDependencyError } from './dep_resolver.js';\n\n// Simple chain\nconst g1 = { a: [], b: [\"a\"], c: [\"b\"] };\nconst r1 = new DependencyResolver(g1);\nconst order1 = r1.resolve(\"c\");\nconsole.assert(order1.indexOf(\"a\") < order1.indexOf(\"b\"), \"a before b\");\nconsole.assert(order1.indexOf(\"b\") < order1.indexOf(\"c\"), \"b before c\");\nconsole.assert(order1.includes(\"a\") && order1.includes(\"b\") && order1.includes(\"c\"), \"all packages present\");\n\n// Diamond\nconst g2 = { a: [], b: [\"a\"], c: [\"a\"], d: [\"b\", \"c\"] };\nconst r2 = new DependencyResolver(g2);\nconst order2 = r2.resolve(\"d\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"b\"), \"diamond: a before b\");\nconsole.assert(order2.indexOf(\"a\") < order2.indexOf(\"c\"), \"diamond: a before c\");\nconsole.assert(order2.indexOf(\"b\") < order2.indexOf(\"d\"), \"diamond: b before d\");\nconsole.assert(order2.indexOf(\"c\") < order2.indexOf(\"d\"), \"diamond: c before d\");\nconsole.assert(new Set(order2).size === order2.length, \"no duplicates in diamond\");\n\n// Cycle detection\nconst g3 = { a: [\"b\"], b: [\"c\"], c: [\"a\"] };\nconst r3 = new DependencyResolver(g3);\ntry {\n  r3.resolve(\"a\");\n  console.assert(false, \"should throw on cycle\");\n} catch (e) {\n  console.assert(e instanceof CyclicDependencyError, `expected CyclicDependencyError, got ${e.constructor.name}`);\n  console.assert(Array.isArray(e.cycle), \"cycle property should be array\");\n  console.assert(e.cycle.length >= 3, `cycle too short: ${e.cycle}`);\n}\n\n// Missing entry point\nconst r3b = new DependencyResolver({ x: [] });\ntry {\n  r3b.resolve(\"nonexistent\");\n  console.assert(false, \"should throw on missing entry point\");\n} catch (e) {\n  console.assert(!(e instanceof CyclicDependencyError), \"should not be cyclic error\");\n}\n\n// resolveAll\nconst g4 = { a: [], b: [\"a\"], c: [\"a\"], d: [] };\nconst r4 = new DependencyResolver(g4);\nconst all = r4.resolveAll();\nconsole.assert(all.length === 4, `expected 4, got ${all.length}`);\nconsole.assert(all.indexOf(\"a\") < all.indexOf(\"b\"), \"a before b in resolveAll\");\nconsole.assert(new Set(all).size === all.length, \"no duplicates in resolveAll\");\n\nconsole.log(\"ALL TESTS PASSED\");",
-          "required_files": [
-            "dep_resolver.js"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "7000000",
-        "amount_display": "7.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773937709,
-      "source": "https://www.bountybook.ai/job/d6d3d8f1-dfaa-4a4c-9f65-df670bdfdb26",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "27cb2113-907c-4074-a929-b635a32f4432",
       "title": "Build jsondiff.go tool to compare JSON file structures and print differences",
       "description": "Build jsondiff.go tool to compare JSON file structures and print differences\nWrite `jsondiff.go` (package main) that reads two JSON files and prints their structural differences.\n\n## Usage\n```\ngo run jsondiff.go a.json b.json\n```\n\n## Output format\n```\nADDED   .path.to.key: <value>\nREMOVED .path.to.key: <value>\nCHANGED .path.to.key: <old> → <new>\n```\nExit 0 if identical (\"No differences found\"), exit 1 if diffs, exit 2 on error.\n\n## Rules\n- Stdlib only. Recursive object traversal. Array element comparison by index.\n- Path: root=., nested=dot notation, arrays=bracket index (.items[0].name).\n\n## Deliverable\nSingle file `jsondiff.go`. Must compile with `go build` (Go 1.21+).\n{\"instructions\":\"Write jsondiff.go (package main). Read two JSON files from CLI args. Recursively compare objects/arrays. Print ADDED/REMOVED/CHANGED lines with dot-notation paths. Exit 0=identical, 1=diffs found, 2=parse error. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ntest -f jsondiff.go || { echo \\\"FAIL: jsondiff.go not found\\\"; exit 1; }\\ngo build -o jsondiff_bin jsondiff.go || { echo \\\"FAIL: build failed\\\"; exit 1; }\\n\\n# Test 1: identical files\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > a.json\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > b.json\\nOUTPUT=$(./jsondiff_bin a.json b.json; echo \\\"EXIT:$?\\\")\\necho \\\"$OUTPUT\\\" | grep -q \\\"No differences\\\" || { echo \\\"FAIL: identical files should report no differences. Got: $OUTPUT\\\"; exit 1; }\\n\\n# Test 2: changed value\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > a.json\\necho '{\\\"name\\\":\\\"Bob\\\",\\\"age\\\":30}' > b.json\\n./jsondiff_bin a.json b.json > out.txt; EC=$?\\ngrep -q \\\"CHANGED\\\" out.txt || { echo \\\"FAIL: expected CHANGED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\"name\\\" out.txt || { echo \\\"FAIL: expected .name in diff. Got:\\\"; cat out.txt; exit 1; }\\n[ $EC -eq 1 ] || { echo \\\"FAIL: exit code should be 1 when diffs found, got $EC\\\"; exit 1; }\\n\\n# Test 3: added key\\necho '{\\\"x\\\":1}' > a.json\\necho '{\\\"x\\\":1,\\\"y\\\":2}' > b.json\\n./jsondiff_bin a.json b.json > out.txt\\ngrep -q \\\"ADDED\\\" out.txt || { echo \\\"FAIL: expected ADDED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\".y\\\" out.txt || { echo \\\"FAIL: expected .y in diff. Got:\\\"; cat out.txt; exit 1; }\\n\\n# Test 4: removed key\\necho '{\\\"x\\\":1,\\\"z\\\":3}' > a.json\\necho '{\\\"x\\\":1}' > b.json\\n./jsondiff_bin a.json b.json > out.txt\\ngrep -q \\\"REMOVED\\\" out.txt || { echo \\\"FAIL: expected REMOVED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\".z\\\" out.txt || { echo \\\"FAIL: expected .z in diff. Got:\\\"; cat out.txt; exit 1; }\\n\\n# Cleanup\\nrm -f a.json b.json out.txt jsondiff_bin\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"jsondiff.go\"]}}",
@@ -609,48 +656,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/6043441c-41cc-40d0-9edc-fed586699cc8",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "733d4731-7e60-4bb8-9233-ba3771c779d3",
-      "title": "Build a CLI program that checks HTTP status codes for URLs in a file",
-      "description": "Build a CLI program that checks HTTP status codes for URLs in a file\nWrite `urlcheck.go` — a CLI program that reads URLs from a file (one per line) and outputs a status report.\n\n## Usage\n```\ngo run urlcheck.go urls.txt\n```\n\n## Output format (one line per URL)\n```\n200 OK         https://example.com\n404 Not Found  https://example.com/missing\nERROR          https://invalid.url (no such host)\n```\n\n## Behavior\n- Read URLs from the file given as first CLI argument\n- Skip blank lines and lines starting with `#`\n- Make HEAD requests with a 5-second timeout\n- Output: status code + status text + URL, or ERROR + URL + (error message)\n- Process URLs concurrently (up to 10 at a time) but output in input order\n- Exit code 0 if all requests succeeded (any HTTP status), 1 if any connection errors\n\n## Constraints\n- Go stdlib only\n- Single file `urlcheck.go`, package `main`\n{\"instructions\":\"Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp urlcheck.go /tmp/urlcheck.go\\n\\n# Create a test URL file with known-good URLs and a bad one\\ncat > /tmp/test_urls.txt << 'EOF'\\n# Test URL list\\nhttps://httpbin.org/status/200\\nhttps://httpbin.org/status/404\\nhttps://httpbin.org/status/201\\n\\nEOF\\n\\n# Compile\\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\\necho \\\"Compiled OK\\\"\\n\\n# Run with test file\\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\\necho \\\"Output:\\\"\\necho \\\"$OUTPUT\\\"\\n\\n# Validate output has 3 lines (skip blank/comment lines)\\nLINE_COUNT=$(echo \\\"$OUTPUT\\\" | grep -c \\\"http\\\" || true)\\nif [ \\\"$LINE_COUNT\\\" -lt 3 ]; then\\n  echo \\\"ERROR: expected at least 3 output lines, got $LINE_COUNT\\\"\\n  exit 1\\nfi\\n\\n# Check 200 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"200\\\"; then\\n  echo \\\"ERROR: 200 OK not found in output\\\"\\n  exit 1\\nfi\\n\\n# Check 404 line is present\\nif ! echo \\\"$OUTPUT\\\" | grep -q \\\"404\\\"; then\\n  echo \\\"ERROR: 404 not found in output\\\"\\n  exit 1\\nfi\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"urlcheck.go\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Write urlcheck.go CLI that reads URLs from file arg, makes HEAD requests concurrently (max 10), outputs status code + URL or ERROR + URL. Go stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "bash",
-          "test_code": "#!/bin/bash\nset -e\n\ncp urlcheck.go /tmp/urlcheck.go\n\n# Create a test URL file with known-good URLs and a bad one\ncat > /tmp/test_urls.txt << 'EOF'\n# Test URL list\nhttps://httpbin.org/status/200\nhttps://httpbin.org/status/404\nhttps://httpbin.org/status/201\n\nEOF\n\n# Compile\ncd /tmp && go build -o /tmp/urlcheck urlcheck.go\necho \"Compiled OK\"\n\n# Run with test file\nOUTPUT=$(/tmp/urlcheck /tmp/test_urls.txt 2>&1 || true)\necho \"Output:\"\necho \"$OUTPUT\"\n\n# Validate output has 3 lines (skip blank/comment lines)\nLINE_COUNT=$(echo \"$OUTPUT\" | grep -c \"http\" || true)\nif [ \"$LINE_COUNT\" -lt 3 ]; then\n  echo \"ERROR: expected at least 3 output lines, got $LINE_COUNT\"\n  exit 1\nfi\n\n# Check 200 line is present\nif ! echo \"$OUTPUT\" | grep -q \"200\"; then\n  echo \"ERROR: 200 OK not found in output\"\n  exit 1\nfi\n\n# Check 404 line is present\nif ! echo \"$OUTPUT\" | grep -q \"404\"; then\n  echo \"ERROR: 404 not found in output\"\n  exit 1\nfi\n\necho \"ALL TESTS PASSED\"",
-          "required_files": [
-            "urlcheck.go"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "6000000",
-        "amount_display": "6.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/733d4731-7e60-4bb8-9233-ba3771c779d3",
       "source_kind": "bountybook"
     },
     {
@@ -1319,46 +1324,6 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/87b131ee-7102-4d69-a99d-08cff67e9c1a",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "a10a254f-03b1-4b28-958b-345c24802857",
-      "title": "Build a binary search tree implementation in bst.py with insert, search, delete,",
-      "description": "Build a binary search tree implementation in bst.py with insert, search, delete,\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from bst import BST\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "bst.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754461,
-      "source": "https://www.bountybook.ai/job/a10a254f-03b1-4b28-958b-345c24802857",
       "source_kind": "bountybook"
     },
     {
@@ -3833,6 +3798,50 @@
       "payment_status": null,
       "created_at": 1773937708,
       "source": "https://www.bountybook.ai/job/9f40e36f-5ade-4af6-a27b-943a91c34797",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
+      "title": "Deliver versions.json with latest stable release information for 6 languages",
+      "description": "Deliver versions.json with latest stable release information for 6 languages\nResearch and deliver `versions.json` with the current latest stable release versions.\n\n## Languages to document\nPython, Go, Rust, Node.js, Ruby, Swift\n\n## Output: `versions.json`\n```json\n{\n  \"retrieved_at\": \"YYYY-MM-DD\",\n  \"languages\": [\n    {\n      \"name\": \"Python\",\n      \"latest_stable_version\": \"3.13.2\",\n      \"release_date\": \"2025-02-04\",\n      \"release_notes_url\": \"https://docs.python.org/3/whatsnew/3.13.html\",\n      \"source_url\": \"https://www.python.org/downloads/\"\n    }\n  ]\n}\n```\n\n## Required fields per language\n- `name`: string (exactly as listed above)\n- `latest_stable_version`: string in semver format (e.g. `\"3.13.2\"` or `\"1.84.0\"`)\n- `release_date`: string in `YYYY-MM-DD` format\n- `release_notes_url`: string URL\n- `source_url`: string URL (official download or release page)\n\n## Constraints\n- All 6 languages present\n- Versions must be semver or semver-like (e.g. `\"20.18.1\"` for Node.js)\n- Dates must be `YYYY-MM-DD`\n- URLs must start with `https://`\n- No pre-release, alpha, beta, or RC versions\n{\"instructions\":\"Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"versions.json\\\").read_text())\\n\\nassert \\\"retrieved_at\\\" in data, \\\"missing retrieved_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"retrieved_at\\\"]), \\\"retrieved_at must be YYYY-MM-DD\\\"\\n\\nlangs = data.get(\\\"languages\\\", [])\\nassert len(langs) == 6, f\\\"expected 6 languages, got {len(langs)}\\\"\\n\\nrequired_names = {\\\"Python\\\", \\\"Go\\\", \\\"Rust\\\", \\\"Node.js\\\", \\\"Ruby\\\", \\\"Swift\\\"}\\nfound_names = {l[\\\"name\\\"] for l in langs}\\nassert found_names == required_names, f\\\"wrong languages: {found_names ^ required_names}\\\"\\n\\nsemver_re = re.compile(r\\\"^\\\\d+\\\\.\\\\d+(\\\\.\\\\d+)?$\\\")\\ndate_re = re.compile(r\\\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\\\")\\n\\nfor lang in langs:\\n    name = lang[\\\"name\\\"]\\n    ver = lang.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert semver_re.match(ver), f\\\"{name}: version not semver-like: {ver!r}\\\"\\n\\n    # Not a pre-release\\n    assert not any(x in ver.lower() for x in [\\\"alpha\\\", \\\"beta\\\", \\\"rc\\\", \\\"dev\\\"]), f\\\"{name}: pre-release version\\\"\\n\\n    # Parse version numbers must be reasonable\\n    major = int(ver.split(\\\".\\\")[0])\\n    assert major >= 1, f\\\"{name}: major version {major} seems too low\\\"\\n\\n    date = lang.get(\\\"release_date\\\", \\\"\\\")\\n    assert date_re.match(date), f\\\"{name}: release_date not YYYY-MM-DD: {date!r}\\\"\\n    assert date >= \\\"2020-01-01\\\", f\\\"{name}: release date seems too old: {date}\\\"\\n\\n    for url_field in [\\\"release_notes_url\\\", \\\"source_url\\\"]:\\n        url = lang.get(url_field, \\\"\\\")\\n        assert url.startswith(\\\"https://\\\"), f\\\"{name}: {url_field} must start with https://: {url!r}\\\"\\n\\n# Spot-check known major versions\\npython = next(l for l in langs if l[\\\"name\\\"] == \\\"Python\\\")\\nassert python[\\\"latest_stable_version\\\"].startswith(\\\"3.\\\"), \\\"Python version should start with 3.\\\"\\n\\nrust = next(l for l in langs if l[\\\"name\\\"] == \\\"Rust\\\")\\nassert rust[\\\"latest_stable_version\\\"].startswith(\\\"1.\\\"), \\\"Rust version should start with 1.\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"versions.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"versions.json\").read_text())\n\nassert \"retrieved_at\" in data, \"missing retrieved_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"retrieved_at\"]), \"retrieved_at must be YYYY-MM-DD\"\n\nlangs = data.get(\"languages\", [])\nassert len(langs) == 6, f\"expected 6 languages, got {len(langs)}\"\n\nrequired_names = {\"Python\", \"Go\", \"Rust\", \"Node.js\", \"Ruby\", \"Swift\"}\nfound_names = {l[\"name\"] for l in langs}\nassert found_names == required_names, f\"wrong languages: {found_names ^ required_names}\"\n\nsemver_re = re.compile(r\"^\\d+\\.\\d+(\\.\\d+)?$\")\ndate_re = re.compile(r\"^\\d{4}-\\d{2}-\\d{2}$\")\n\nfor lang in langs:\n    name = lang[\"name\"]\n    ver = lang.get(\"latest_stable_version\", \"\")\n    assert semver_re.match(ver), f\"{name}: version not semver-like: {ver!r}\"\n\n    # Not a pre-release\n    assert not any(x in ver.lower() for x in [\"alpha\", \"beta\", \"rc\", \"dev\"]), f\"{name}: pre-release version\"\n\n    # Parse version numbers must be reasonable\n    major = int(ver.split(\".\")[0])\n    assert major >= 1, f\"{name}: major version {major} seems too low\"\n\n    date = lang.get(\"release_date\", \"\")\n    assert date_re.match(date), f\"{name}: release_date not YYYY-MM-DD: {date!r}\"\n    assert date >= \"2020-01-01\", f\"{name}: release date seems too old: {date}\"\n\n    for url_field in [\"release_notes_url\", \"source_url\"]:\n        url = lang.get(url_field, \"\")\n        assert url.startswith(\"https://\"), f\"{name}: {url_field} must start with https://: {url!r}\"\n\n# Spot-check known major versions\npython = next(l for l in langs if l[\"name\"] == \"Python\")\nassert python[\"latest_stable_version\"].startswith(\"3.\"), \"Python version should start with 3.\"\n\nrust = next(l for l in langs if l[\"name\"] == \"Rust\")\nassert rust[\"latest_stable_version\"].startswith(\"1.\"), \"Rust version should start with 1.\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "versions.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2500000",
+        "amount_display": "2.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261990,
+      "source": "https://www.bountybook.ai/job/a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
       "source_kind": "bountybook"
     },
     {
