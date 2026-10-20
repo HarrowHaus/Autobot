@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T22:36:41Z",
+  "generated_at": "2026-10-20T05:12:47Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -43,6 +43,16 @@
       "name": "SCRIPTMASTERLABS \u2014 SqueezeOS Trust Router",
       "slug": "scriptmasterlabs-squeezeos-trust-router",
       "specialty": "identity",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "scriptmasterlabs-squeezeos-mcp",
+      "name": "SCRIPTMASTERLABS \u2014 SqueezeOS MCP",
+      "slug": "scriptmasterlabs-squeezeos-mcp",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -103,16 +113,6 @@
       "name": "Packrift A2A Packaging Procurement Router",
       "slug": "packrift-a2a-packaging-procurement-router",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "intentguard-router",
-      "name": "IntentGuard Router",
-      "slug": "intentguard-router",
-      "specialty": "model-routing",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -279,20 +279,20 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": null,
+      "key": "muse",
+      "name": "Muse",
+      "slug": "muse",
+      "specialty": "social",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
