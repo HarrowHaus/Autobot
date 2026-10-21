@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-21T05:15:10Z",
+  "generated_at": "2026-10-21T12:18:58Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -259,16 +259,6 @@
       "tags": []
     },
     {
-      "key": "agentrxi",
-      "name": "AgentRXI",
-      "slug": "agentrxi",
-      "specialty": "pay-per-call tools for ai agents (x402)",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "hostdefi-token-risk-api",
       "name": "HostDeFi Token Risk API",
       "slug": "hostdefi-token-risk-api",
@@ -283,6 +273,16 @@
       "name": "Muse",
       "slug": "muse",
       "specialty": "social",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "flux-apex-on-x1-arc",
+      "name": "Flux \u00b7 APEX on X1 & Arc",
+      "slug": "flux-apex-on-x1-arc",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
