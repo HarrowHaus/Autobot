@@ -9,12 +9,6 @@
     {
       "action": "inspect_fit_before_claim",
       "gate": "analysis_only",
-      "opportunity_id": "basedagents:task_Ti5ShGCXzmGkneQh2pnWF",
-      "score": 28.817
-    },
-    {
-      "action": "inspect_fit_before_claim",
-      "gate": "analysis_only",
       "opportunity_id": "basedagents:task_YzhS2L2gCCpSVWTSaDWQU",
       "score": 28.817
     },
@@ -59,6 +53,12 @@
       "gate": "analysis_only",
       "opportunity_id": "basedagents:task_jqnmxHEcIGNHvANoCjtyZ",
       "score": 25.775
+    },
+    {
+      "action": "inspect_fit_before_claim",
+      "gate": "analysis_only",
+      "opportunity_id": "basedagents:task_xunXTsWppfdx45xo6eIMx",
+      "score": 25.775
     }
   ],
   "objective": "increase verified external net revenue without relabeling advertisements, internal credits, or asking prices as revenue",
@@ -84,7 +84,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -111,39 +111,6 @@
         "payment_status": "pending"
       },
       "execution_gate": "analysis_only",
-      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
-      "first_seen_at": "2026-10-08T02:17:47.398Z",
-      "funding_evidence": "advertised_bounty",
-      "id": "basedagents:task_Ti5ShGCXzmGkneQh2pnWF",
-      "kind": "paid_task",
-      "matched_capabilities": [],
-      "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
-      "output_format": "json",
-      "required_capabilities": [
-        "docker",
-        "automation"
-      ],
-      "score": 28.817,
-      "source": "basedagents",
-      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Ti5ShGCXzmGkneQh2pnWF",
-      "status": "observed",
-      "title": "Industrial Sentinel Paid External Deployment 24"
-    },
-    {
-      "advertised_value": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "asset": "USDC",
-        "network": "eip155:8453"
-      },
-      "claimable": true,
-      "earned_revenue_atomic": "0",
-      "evidence": {
-        "escrow": null,
-        "payment_status": "pending"
-      },
-      "execution_gate": "analysis_only",
       "expected_output": "JSON or link proving a genuine external Sentinel install, at least 2.50 USDC of attributable settled Industrial Platform revenue across two UTC days, and a real settled Sentinel call from the same install on day two.",
       "first_seen_at": "2026-10-06T10:48:36.971Z",
       "funding_evidence": "advertised_bounty",
@@ -151,7 +118,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -185,7 +152,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -219,7 +186,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -253,7 +220,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -287,7 +254,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -321,7 +288,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -355,7 +322,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -389,7 +356,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -423,7 +390,7 @@
       "kind": "paid_task",
       "matched_capabilities": [],
       "next_action": "inspect_fit_before_claim",
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "output_format": "json",
       "required_capabilities": [
         "docker",
@@ -1878,6 +1845,39 @@
       "source_ref": "https://api.basedagents.ai/v1/tasks/task_TepT6nnWMEKuphGPZOsWo",
       "status": "stale",
       "title": "Micro MCP interop probe \u2014 co.ainumbers/tools ($0.10, single run)"
+    },
+    {
+      "advertised_value": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "asset": "USDC",
+        "network": "eip155:8453"
+      },
+      "claimable": true,
+      "earned_revenue_atomic": "0",
+      "evidence": {
+        "escrow": null,
+        "payment_status": "pending"
+      },
+      "execution_gate": "analysis_only",
+      "expected_output": "JSON or link containing runtime/platform, immutable image digest, timestamped running/health evidence, and an independently reviewable artifact URL.",
+      "first_seen_at": "2026-10-08T02:17:47.398Z",
+      "funding_evidence": "advertised_bounty",
+      "id": "basedagents:task_Ti5ShGCXzmGkneQh2pnWF",
+      "kind": "paid_task",
+      "matched_capabilities": [],
+      "next_action": "none",
+      "observed_at": "2026-10-21T12:27:51.493Z",
+      "output_format": "json",
+      "required_capabilities": [
+        "docker",
+        "automation"
+      ],
+      "score": 0.0,
+      "source": "basedagents",
+      "source_ref": "https://api.basedagents.ai/v1/tasks/task_Ti5ShGCXzmGkneQh2pnWF",
+      "status": "stale",
+      "title": "Industrial Sentinel Paid External Deployment 24"
     },
     {
       "advertised_value": {
@@ -3539,12 +3539,12 @@
   "schema_version": 1,
   "sources": {
     "basedagents": {
-      "candidate_count": 11,
-      "observed_at": "2026-10-21T12:27:51.493Z",
+      "candidate_count": 10,
+      "observed_at": "2026-10-21T17:41:10.750Z",
       "status": "ok"
     },
     "x402_bazaar": {
-      "observed_at": "2026-10-21T12:27:49.662Z",
+      "observed_at": "2026-10-21T17:41:07.905Z",
       "our_resources_seen": null,
       "status": "unavailable"
     }
@@ -3556,5 +3556,5 @@
     "only_settlement_events_enter_verified_external_revenue": true,
     "platform_reported_escrow_is_not_independent_chain_verification": true
   },
-  "updated_at": "2026-10-21T12:27:52Z"
+  "updated_at": "2026-10-21T17:41:11Z"
 }
