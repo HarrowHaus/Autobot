@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T05:18:27Z",
+  "generated_at": "2026-10-22T12:20:27Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -119,6 +119,16 @@
       "tags": []
     },
     {
+      "key": "intentguard-router",
+      "name": "IntentGuard Router",
+      "slug": "intentguard-router",
+      "specialty": "model-routing",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "babydov-paid-agent-tools",
       "name": "BABYDOV Paid Agent Tools",
       "slug": "babydov-paid-agent-tools",
@@ -169,20 +179,20 @@
       "tags": []
     },
     {
-      "key": "ops-control-hq-utility-agent",
-      "name": "Ops Control HQ Utility Agent",
-      "slug": "ops-control-hq-utility-agent",
-      "specialty": "developer tools",
+      "key": "swarmmemo",
+      "name": "SwarmMemo",
+      "slug": "swarmmemo",
+      "specialty": "communication",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "swarmmemo",
-      "name": "SwarmMemo",
-      "slug": "swarmmemo",
-      "specialty": "communication",
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -313,16 +323,6 @@
       "name": "A2A Commerce Gateway",
       "slug": "a2a-commerce-gateway",
       "specialty": "agents-infra",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "swarmsync-commerce-demo-agent",
-      "name": "SwarmSync Commerce Demo Agent",
-      "slug": "swarmsync-commerce-demo-agent",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
