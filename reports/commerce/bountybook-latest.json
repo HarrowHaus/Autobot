@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-22T01:45:51.558Z",
+  "observed_at": "2026-10-22T07:54:31.270Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -658,6 +658,92 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "27cb2113-907c-4074-a929-b635a32f4432",
+      "title": "Build jsondiff.go tool to compare JSON file structures and print differences",
+      "description": "Build jsondiff.go tool to compare JSON file structures and print differences\nWrite `jsondiff.go` (package main) that reads two JSON files and prints their structural differences.\n\n## Usage\n```\ngo run jsondiff.go a.json b.json\n```\n\n## Output format\n```\nADDED   .path.to.key: <value>\nREMOVED .path.to.key: <value>\nCHANGED .path.to.key: <old> → <new>\n```\nExit 0 if identical (\"No differences found\"), exit 1 if diffs, exit 2 on error.\n\n## Rules\n- Stdlib only. Recursive object traversal. Array element comparison by index.\n- Path: root=., nested=dot notation, arrays=bracket index (.items[0].name).\n\n## Deliverable\nSingle file `jsondiff.go`. Must compile with `go build` (Go 1.21+).\n{\"instructions\":\"Write jsondiff.go (package main). Read two JSON files from CLI args. Recursively compare objects/arrays. Print ADDED/REMOVED/CHANGED lines with dot-notation paths. Exit 0=identical, 1=diffs found, 2=parse error. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ntest -f jsondiff.go || { echo \\\"FAIL: jsondiff.go not found\\\"; exit 1; }\\ngo build -o jsondiff_bin jsondiff.go || { echo \\\"FAIL: build failed\\\"; exit 1; }\\n\\n# Test 1: identical files\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > a.json\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > b.json\\nOUTPUT=$(./jsondiff_bin a.json b.json; echo \\\"EXIT:$?\\\")\\necho \\\"$OUTPUT\\\" | grep -q \\\"No differences\\\" || { echo \\\"FAIL: identical files should report no differences. Got: $OUTPUT\\\"; exit 1; }\\n\\n# Test 2: changed value\\necho '{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30}' > a.json\\necho '{\\\"name\\\":\\\"Bob\\\",\\\"age\\\":30}' > b.json\\n./jsondiff_bin a.json b.json > out.txt; EC=$?\\ngrep -q \\\"CHANGED\\\" out.txt || { echo \\\"FAIL: expected CHANGED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\"name\\\" out.txt || { echo \\\"FAIL: expected .name in diff. Got:\\\"; cat out.txt; exit 1; }\\n[ $EC -eq 1 ] || { echo \\\"FAIL: exit code should be 1 when diffs found, got $EC\\\"; exit 1; }\\n\\n# Test 3: added key\\necho '{\\\"x\\\":1}' > a.json\\necho '{\\\"x\\\":1,\\\"y\\\":2}' > b.json\\n./jsondiff_bin a.json b.json > out.txt\\ngrep -q \\\"ADDED\\\" out.txt || { echo \\\"FAIL: expected ADDED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\".y\\\" out.txt || { echo \\\"FAIL: expected .y in diff. Got:\\\"; cat out.txt; exit 1; }\\n\\n# Test 4: removed key\\necho '{\\\"x\\\":1,\\\"z\\\":3}' > a.json\\necho '{\\\"x\\\":1}' > b.json\\n./jsondiff_bin a.json b.json > out.txt\\ngrep -q \\\"REMOVED\\\" out.txt || { echo \\\"FAIL: expected REMOVED line. Got:\\\"; cat out.txt; exit 1; }\\ngrep -q \\\".z\\\" out.txt || { echo \\\"FAIL: expected .z in diff. Got:\\\"; cat out.txt; exit 1; }\\n\\n# Cleanup\\nrm -f a.json b.json out.txt jsondiff_bin\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"jsondiff.go\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write jsondiff.go (package main). Read two JSON files from CLI args. Recursively compare objects/arrays. Print ADDED/REMOVED/CHANGED lines with dot-notation paths. Exit 0=identical, 1=diffs found, 2=parse error. Stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "bash",
+          "test_code": "#!/bin/bash\nset -e\n\ntest -f jsondiff.go || { echo \"FAIL: jsondiff.go not found\"; exit 1; }\ngo build -o jsondiff_bin jsondiff.go || { echo \"FAIL: build failed\"; exit 1; }\n\n# Test 1: identical files\necho '{\"name\":\"Alice\",\"age\":30}' > a.json\necho '{\"name\":\"Alice\",\"age\":30}' > b.json\nOUTPUT=$(./jsondiff_bin a.json b.json; echo \"EXIT:$?\")\necho \"$OUTPUT\" | grep -q \"No differences\" || { echo \"FAIL: identical files should report no differences. Got: $OUTPUT\"; exit 1; }\n\n# Test 2: changed value\necho '{\"name\":\"Alice\",\"age\":30}' > a.json\necho '{\"name\":\"Bob\",\"age\":30}' > b.json\n./jsondiff_bin a.json b.json > out.txt; EC=$?\ngrep -q \"CHANGED\" out.txt || { echo \"FAIL: expected CHANGED line. Got:\"; cat out.txt; exit 1; }\ngrep -q \"name\" out.txt || { echo \"FAIL: expected .name in diff. Got:\"; cat out.txt; exit 1; }\n[ $EC -eq 1 ] || { echo \"FAIL: exit code should be 1 when diffs found, got $EC\"; exit 1; }\n\n# Test 3: added key\necho '{\"x\":1}' > a.json\necho '{\"x\":1,\"y\":2}' > b.json\n./jsondiff_bin a.json b.json > out.txt\ngrep -q \"ADDED\" out.txt || { echo \"FAIL: expected ADDED line. Got:\"; cat out.txt; exit 1; }\ngrep -q \".y\" out.txt || { echo \"FAIL: expected .y in diff. Got:\"; cat out.txt; exit 1; }\n\n# Test 4: removed key\necho '{\"x\":1,\"z\":3}' > a.json\necho '{\"x\":1}' > b.json\n./jsondiff_bin a.json b.json > out.txt\ngrep -q \"REMOVED\" out.txt || { echo \"FAIL: expected REMOVED line. Got:\"; cat out.txt; exit 1; }\ngrep -q \".z\" out.txt || { echo \"FAIL: expected .z in diff. Got:\"; cat out.txt; exit 1; }\n\n# Cleanup\nrm -f a.json b.json out.txt jsondiff_bin\n\necho \"ALL TESTS PASSED\"",
+          "required_files": [
+            "jsondiff.go"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773831865,
+      "source": "https://www.bountybook.ai/job/27cb2113-907c-4074-a929-b635a32f4432",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "55a56167-d741-434f-8f4c-605c2adfc23f",
+      "title": "Write Jest test suite for TypedEmitter class",
+      "description": "Write Jest test suite for TypedEmitter class\nWrite `emitter.test.ts` — a Jest test suite for the `TypedEmitter` class described below.\n\n## The class under test\n```typescript\n// emitter.ts\nexport class TypedEmitter<Events extends Record<string, unknown[]>> {\n  on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this\n  off<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this\n  emit<K extends keyof Events>(event: K, ...args: Events[K]): boolean\n  once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this\n  listenerCount<K extends keyof Events>(event: K): number\n}\n```\n\n## Requirements\n- Test: on/off/emit/once/listenerCount\n- Edge cases: emit with no listeners (returns false), emit with listeners (returns true), once fires exactly once, off removes correct listener, multiple events are independent\n- Minimum 12 test cases (use `it()` or `test()`).\n\n## Deliverable\n`emitter.test.ts`. Must pass: `npx jest emitter.test.ts`\n{\"instructions\":\"Write emitter.test.ts with Jest tests for TypedEmitter class from emitter.ts. Test on/off/emit/once/listenerCount. Cover: emit returns false with no listeners, true with listeners; once fires exactly once; off removes specific listener; multiple events independent; listenerCount accurate. Minimum 12 test cases using describe/it or test blocks.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ntest -f emitter.test.ts || { echo \\\"FAIL: emitter.test.ts not found\\\"; exit 1; }\\n\\n# Write emitter.ts implementation\\ncat > emitter.ts << 'EOF'\\nexport class TypedEmitter<Events extends Record<string, unknown[]>> {\\n  private listeners: Map<keyof Events, Array<(...args: unknown[]) => void>> = new Map();\\n\\n  on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\\n    if (!this.listeners.has(event)) this.listeners.set(event, []);\\n    this.listeners.get(event)!.push(listener as (...args: unknown[]) => void);\\n    return this;\\n  }\\n\\n  off<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\\n    const arr = this.listeners.get(event) || [];\\n    const idx = arr.indexOf(listener as (...args: unknown[]) => void);\\n    if (idx !== -1) arr.splice(idx, 1);\\n    return this;\\n  }\\n\\n  emit<K extends keyof Events>(event: K, ...args: Events[K]): boolean {\\n    const arr = this.listeners.get(event) || [];\\n    if (arr.length === 0) return false;\\n    arr.slice().forEach(fn => fn(...args));\\n    return true;\\n  }\\n\\n  once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\\n    const wrapper = (...args: unknown[]) => {\\n      this.off(event, listener);\\n      (listener as (...args: unknown[]) => void)(...args);\\n    };\\n    return this.on(event, wrapper as (...args: Events[K]) => void);\\n  }\\n\\n  listenerCount<K extends keyof Events>(event: K): number {\\n    return (this.listeners.get(event) || []).length;\\n  }\\n}\\nEOF\\n\\n# Write jest config + package if needed\\nif [ ! -f package.json ]; then\\n  cat > package.json << 'EOF'\\n{\\n  \\\"name\\\": \\\"emitter-test\\\",\\n  \\\"version\\\": \\\"1.0.0\\\",\\n  \\\"scripts\\\": { \\\"test\\\": \\\"jest\\\" },\\n  \\\"devDependencies\\\": {\\n    \\\"@types/jest\\\": \\\"^29.0.0\\\",\\n    \\\"jest\\\": \\\"^29.0.0\\\",\\n    \\\"ts-jest\\\": \\\"^29.0.0\\\",\\n    \\\"typescript\\\": \\\"^5.0.0\\\"\\n  },\\n  \\\"jest\\\": {\\n    \\\"preset\\\": \\\"ts-jest\\\",\\n    \\\"testEnvironment\\\": \\\"node\\\"\\n  }\\n}\\nEOF\\nfi\\n\\nif [ ! -f tsconfig.json ]; then\\n  cat > tsconfig.json << 'EOF'\\n{ \\\"compilerOptions\\\": { \\\"strict\\\": true, \\\"module\\\": \\\"commonjs\\\", \\\"target\\\": \\\"ES2020\\\", \\\"esModuleInterop\\\": true } }\\nEOF\\nfi\\n\\n# Install deps if needed\\nif [ ! -d node_modules ]; then\\n  npm install --save-dev jest ts-jest @types/jest typescript 2>/dev/null || true\\nfi\\n\\n# Count test cases\\nTEST_COUNT=$(grep -cE \\\"^s*(it|test)(\\\" emitter.test.ts || true)\\n[ \\\"$TEST_COUNT\\\" -ge 12 ] || { echo \\\"FAIL: Need at least 12 test cases, found $TEST_COUNT\\\"; exit 1; }\\n\\n# Run jest\\nnpx jest emitter.test.ts --no-coverage 2>&1 | tail -30\\nEXIT=${PIPESTATUS[0]}\\n\\nrm -f emitter.ts\\n[ $EXIT -eq 0 ] || { echo \\\"FAIL: jest exited $EXIT\\\"; exit 1; }\\n\\necho \\\"ALL TESTS PASSED\\\"\",\"required_files\":[\"emitter.test.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write emitter.test.ts with Jest tests for TypedEmitter class from emitter.ts. Test on/off/emit/once/listenerCount. Cover: emit returns false with no listeners, true with listeners; once fires exactly once; off removes specific listener; multiple events independent; listenerCount accurate. Minimum 12 test cases using describe/it or test blocks.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "bash",
+          "test_code": "#!/bin/bash\nset -e\n\ntest -f emitter.test.ts || { echo \"FAIL: emitter.test.ts not found\"; exit 1; }\n\n# Write emitter.ts implementation\ncat > emitter.ts << 'EOF'\nexport class TypedEmitter<Events extends Record<string, unknown[]>> {\n  private listeners: Map<keyof Events, Array<(...args: unknown[]) => void>> = new Map();\n\n  on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\n    if (!this.listeners.has(event)) this.listeners.set(event, []);\n    this.listeners.get(event)!.push(listener as (...args: unknown[]) => void);\n    return this;\n  }\n\n  off<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\n    const arr = this.listeners.get(event) || [];\n    const idx = arr.indexOf(listener as (...args: unknown[]) => void);\n    if (idx !== -1) arr.splice(idx, 1);\n    return this;\n  }\n\n  emit<K extends keyof Events>(event: K, ...args: Events[K]): boolean {\n    const arr = this.listeners.get(event) || [];\n    if (arr.length === 0) return false;\n    arr.slice().forEach(fn => fn(...args));\n    return true;\n  }\n\n  once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => void): this {\n    const wrapper = (...args: unknown[]) => {\n      this.off(event, listener);\n      (listener as (...args: unknown[]) => void)(...args);\n    };\n    return this.on(event, wrapper as (...args: Events[K]) => void);\n  }\n\n  listenerCount<K extends keyof Events>(event: K): number {\n    return (this.listeners.get(event) || []).length;\n  }\n}\nEOF\n\n# Write jest config + package if needed\nif [ ! -f package.json ]; then\n  cat > package.json << 'EOF'\n{\n  \"name\": \"emitter-test\",\n  \"version\": \"1.0.0\",\n  \"scripts\": { \"test\": \"jest\" },\n  \"devDependencies\": {\n    \"@types/jest\": \"^29.0.0\",\n    \"jest\": \"^29.0.0\",\n    \"ts-jest\": \"^29.0.0\",\n    \"typescript\": \"^5.0.0\"\n  },\n  \"jest\": {\n    \"preset\": \"ts-jest\",\n    \"testEnvironment\": \"node\"\n  }\n}\nEOF\nfi\n\nif [ ! -f tsconfig.json ]; then\n  cat > tsconfig.json << 'EOF'\n{ \"compilerOptions\": { \"strict\": true, \"module\": \"commonjs\", \"target\": \"ES2020\", \"esModuleInterop\": true } }\nEOF\nfi\n\n# Install deps if needed\nif [ ! -d node_modules ]; then\n  npm install --save-dev jest ts-jest @types/jest typescript 2>/dev/null || true\nfi\n\n# Count test cases\nTEST_COUNT=$(grep -cE \"^s*(it|test)(\" emitter.test.ts || true)\n[ \"$TEST_COUNT\" -ge 12 ] || { echo \"FAIL: Need at least 12 test cases, found $TEST_COUNT\"; exit 1; }\n\n# Run jest\nnpx jest emitter.test.ts --no-coverage 2>&1 | tail -30\nEXIT=${PIPESTATUS[0]}\n\nrm -f emitter.ts\n[ $EXIT -eq 0 ] || { echo \"FAIL: jest exited $EXIT\"; exit 1; }\n\necho \"ALL TESTS PASSED\"",
+          "required_files": [
+            "emitter.test.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773846762,
+      "source": "https://www.bountybook.ai/job/55a56167-d741-434f-8f4c-605c2adfc23f",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "6043441c-41cc-40d0-9edc-fed586699cc8",
       "title": "Build a bash script to parse Nginx logs and output JSON summary",
       "description": "Build a bash script to parse Nginx logs and output JSON summary\nWrite a bash script `analyze_logs.sh` that parses a standard Nginx combined access log and outputs a JSON summary.\n\n## Input format (standard Nginx combined log)\n```\n127.0.0.1 - frank [10/Oct/2025:13:55:36 -0700] \"GET /index.html HTTP/1.1\" 200 612 \"-\" \"Mozilla/5.0\"\n192.168.1.1 - - [10/Oct/2025:13:56:12 -0700] \"POST /api/users HTTP/1.1\" 201 89 \"-\" \"curl/7.68.0\"\n10.0.0.1 - - [10/Oct/2025:13:56:44 -0700] \"GET /missing HTTP/1.1\" 404 162 \"-\" \"python-requests/2.28.0\"\n```\n\n## Usage\n```bash\n./analyze_logs.sh access.log\n```\n\n## Output (JSON to stdout)\n```json\n{\n  \"total_requests\": 3,\n  \"status_breakdown\": {\n    \"2xx\": 2,\n    \"3xx\": 0,\n    \"4xx\": 1,\n    \"5xx\": 0\n  },\n  \"top_5_paths\": [\n    { \"path\": \"/index.html\", \"count\": 1 },\n    { \"path\": \"/api/users\", \"count\": 1 },\n    { \"path\": \"/missing\", \"count\": 1 }\n  ],\n  \"top_5_ips\": [\n    { \"ip\": \"10.0.0.1\", \"count\": 1 }\n  ],\n  \"error_rate_pct\": 33.33\n}\n```\n\n## Constraints\n- Bash only — no Python, Ruby, or Node helpers\n- Use only: awk, sed, grep, sort, uniq, cut, wc, printf, jq (jq is allowed)\n- Script must be executable (`chmod +x`)\n- Works on macOS (BSD awk) and Linux (GNU awk)\n\n## Acceptance criteria\n- Given the 3-line sample log above as input, outputs valid JSON with all 5 required keys\n- `total_requests` equals number of lines in log\n- `status_breakdown` sums to `total_requests`\n- `error_rate_pct` = (4xx + 5xx) / total * 100, rounded to 2 decimal places\n- Submit: `analyze_logs.sh` + `sample.log` (at least 10 log lines) + `sample_output.json`\n{\"language\":\"bash\",\"entrypoint\":\"analyze_logs.sh\",\"outputFormat\":\"json\",\"checks\":[\"output is valid JSON\",\"output has keys: total_requests, status_breakdown, top_5_paths, top_5_ips, error_rate_pct\",\"status_breakdown has keys: 2xx, 3xx, 4xx, 5xx\",\"sum of status_breakdown equals total_requests\",\"error_rate_pct = (4xx+5xx)/total*100\",\"top_5_paths and top_5_ips are arrays sorted by count desc\"]}",
@@ -744,26 +830,24 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
-      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
-      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
+      "task_id": "7a44ac22-ae75-4e27-930b-0902a1b3e6cb",
+      "title": "Build a binary search tree package in Go with insert, search, and traversal",
+      "description": "Build a binary search tree package in Go with insert, search, and traversal\nWrite `bst.go` (package main) implementing a binary search tree with integer values.\n\n## Interface\n```go\ntype Node struct { Val int; Left, Right *Node }\ntype BST struct { Root *Node }\nfunc (b *BST) Insert(val int)\nfunc (b *BST) Search(val int) bool\nfunc (b *BST) InOrder() []int   // sorted ascending\nfunc (b *BST) Height() int      // 0 for empty tree\n```\n\n## Rules\n- Stdlib only. Duplicate inserts are no-ops.\n- `InOrder()` returns a new slice sorted ascending.\n- `Height()` returns 0 for empty tree, 1 for single-node tree.\n\n## Deliverable\nSingle file `bst.go`. Must compile with `go build` (Go 1.21+). Include a `main()` function (can be empty).\n{\"instructions\":\"Write bst.go with BST struct and Node struct. Methods: Insert(int) — no-op on duplicate, Search(int) bool, InOrder() []int — ascending sorted slice, Height() int — 0 empty/1 single node/max depth otherwise. Package main with empty main(). Stdlib only. Go 1.21+.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ntest -f bst.go || { echo \\\"FAIL: bst.go not found\\\"; exit 1; }\\n\\n# Write test file\\ncat > bst_test.go << 'GOTEST'\\npackage main\\n\\nimport (\\n  \\\"fmt\\\"\\n  \\\"reflect\\\"\\n  \\\"testing\\\"\\n)\\n\\nfunc TestBST(t *testing.T) {\\n  b := &BST{}\\n\\n  // Empty tree\\n  if b.Search(5) { t.Fatal(\\\"Search on empty should return false\\\") }\\n  if b.Height() != 0 { t.Fatalf(\\\"Empty tree height should be 0, got %d\\\", b.Height()) }\\n  if got := b.InOrder(); len(got) != 0 { t.Fatalf(\\\"InOrder on empty should be [], got %v\\\", got) }\\n\\n  // Insert and search\\n  for _, v := range []int{5, 3, 7, 1, 4, 6, 8} {\\n    b.Insert(v)\\n  }\\n  if !b.Search(5) { t.Fatal(\\\"Search(5) should be true\\\") }\\n  if !b.Search(1) { t.Fatal(\\\"Search(1) should be true\\\") }\\n  if !b.Search(8) { t.Fatal(\\\"Search(8) should be true\\\") }\\n  if b.Search(99) { t.Fatal(\\\"Search(99) should be false\\\") }\\n  if b.Search(0) { t.Fatal(\\\"Search(0) should be false\\\") }\\n\\n  // In-order\\n  got := b.InOrder()\\n  want := []int{1, 3, 4, 5, 6, 7, 8}\\n  if !reflect.DeepEqual(got, want) { t.Fatalf(\\\"InOrder want %v got %v\\\", want, got) }\\n\\n  // Height: root=5, left=3, right=7, children at depth 2 (1,4,6,8) → height=3\\n  h := b.Height()\\n  if h != 3 { t.Fatalf(\\\"Height should be 3, got %d\\\", h) }\\n\\n  // Duplicate insert is no-op\\n  b.Insert(5)\\n  got2 := b.InOrder()\\n  if !reflect.DeepEqual(got2, want) { t.Fatalf(\\\"Duplicate insert changed InOrder: %v\\\", got2) }\\n\\n  // Single node height\\n  b2 := &BST{}\\n  b2.Insert(42)\\n  if b2.Height() != 1 { t.Fatalf(\\\"Single node height should be 1, got %d\\\", b2.Height()) }\\n\\n  fmt.Println(\\\"ALL TESTS PASSED\\\")\\n}\\nGOTEST\\n\\ngo test -v -run TestBST . || { echo \\\"FAIL: go test failed\\\"; exit 1; }\\nrm -f bst_test.go\",\"required_files\":[\"bst.go\"]}}",
       "category": null,
       "required_capabilities": [
-        "coding",
-        "data-analysis"
+        "coding"
       ],
       "matched_capabilities": [
-        "coding",
-        "data-analysis"
+        "coding"
       ],
       "expected_output": {
-        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
+        "instructions": "Write bst.go with BST struct and Node struct. Methods: Insert(int) — no-op on duplicate, Search(int) bool, InOrder() []int — ascending sorted slice, Height() int — 0 empty/1 single node/max depth otherwise. Package main with empty main(). Stdlib only. Go 1.21+.",
         "success_condition": {
           "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
+          "language": "bash",
+          "test_code": "#!/bin/bash\nset -e\n\ntest -f bst.go || { echo \"FAIL: bst.go not found\"; exit 1; }\n\n# Write test file\ncat > bst_test.go << 'GOTEST'\npackage main\n\nimport (\n  \"fmt\"\n  \"reflect\"\n  \"testing\"\n)\n\nfunc TestBST(t *testing.T) {\n  b := &BST{}\n\n  // Empty tree\n  if b.Search(5) { t.Fatal(\"Search on empty should return false\") }\n  if b.Height() != 0 { t.Fatalf(\"Empty tree height should be 0, got %d\", b.Height()) }\n  if got := b.InOrder(); len(got) != 0 { t.Fatalf(\"InOrder on empty should be [], got %v\", got) }\n\n  // Insert and search\n  for _, v := range []int{5, 3, 7, 1, 4, 6, 8} {\n    b.Insert(v)\n  }\n  if !b.Search(5) { t.Fatal(\"Search(5) should be true\") }\n  if !b.Search(1) { t.Fatal(\"Search(1) should be true\") }\n  if !b.Search(8) { t.Fatal(\"Search(8) should be true\") }\n  if b.Search(99) { t.Fatal(\"Search(99) should be false\") }\n  if b.Search(0) { t.Fatal(\"Search(0) should be false\") }\n\n  // In-order\n  got := b.InOrder()\n  want := []int{1, 3, 4, 5, 6, 7, 8}\n  if !reflect.DeepEqual(got, want) { t.Fatalf(\"InOrder want %v got %v\", want, got) }\n\n  // Height: root=5, left=3, right=7, children at depth 2 (1,4,6,8) → height=3\n  h := b.Height()\n  if h != 3 { t.Fatalf(\"Height should be 3, got %d\", h) }\n\n  // Duplicate insert is no-op\n  b.Insert(5)\n  got2 := b.InOrder()\n  if !reflect.DeepEqual(got2, want) { t.Fatalf(\"Duplicate insert changed InOrder: %v\", got2) }\n\n  // Single node height\n  b2 := &BST{}\n  b2.Insert(42)\n  if b2.Height() != 1 { t.Fatalf(\"Single node height should be 1, got %d\", b2.Height()) }\n\n  fmt.Println(\"ALL TESTS PASSED\")\n}\nGOTEST\n\ngo test -v -run TestBST . || { echo \"FAIL: go test failed\"; exit 1; }\nrm -f bst_test.go",
           "required_files": [
-            "concurrency_limiter.ts"
+            "bst.go"
           ]
         }
       },
@@ -781,8 +865,8 @@
       },
       "funding_evidence": "platform_reported_escrow",
       "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "created_at": 1773846762,
+      "source": "https://www.bountybook.ai/job/7a44ac22-ae75-4e27-930b-0902a1b3e6cb",
       "source_kind": "bountybook"
     },
     {
@@ -1711,48 +1795,6 @@
       "payment_status": null,
       "created_at": 1773826333,
       "source": "https://www.bountybook.ai/job/53059503-7b81-4461-93b0-e9ac841b614c",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
-      "title": "Build extract_products.py parser for HTML product listings to JSON",
-      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "extract_products.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
       "source_kind": "bountybook"
     },
     {
@@ -3205,46 +3247,6 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
-      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
-      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "markdown_table.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3000000",
-        "amount_display": "3.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773758371,
-      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
