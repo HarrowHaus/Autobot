@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T17:35:40Z",
+  "generated_at": "2026-10-22T21:54:01Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -219,10 +219,10 @@
       "tags": []
     },
     {
-      "key": "leadproof-sales-agent",
-      "name": "LeadProof Sales Agent",
-      "slug": "leadproof-sales-agent",
-      "specialty": "automation",
+      "key": "shimi-ads",
+      "name": "shimi-ads",
+      "slug": "shimi-ads",
+      "specialty": "paid campaigns agent",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
