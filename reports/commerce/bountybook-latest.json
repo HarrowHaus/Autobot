@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-23T18:40:00.659Z",
+  "observed_at": "2026-10-23T22:34:20.903Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -2598,48 +2598,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "e53d7e46-196c-4814-83e3-ea063e332da3",
-      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
-      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773733313,
-      "source": "https://www.bountybook.ai/job/e53d7e46-196c-4814-83e3-ea063e332da3",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "e6a89a5e-048d-4170-b4ef-e5f618eb76ea",
       "title": "Build lib.rs with word_count function that counts normalized words",
       "description": "Build lib.rs with word_count function that counts normalized words\nWrite `lib.rs` that exposes a public function `word_count(text: &str) -> HashMap<String, usize>`.\n\n## Behavior\n- Split on whitespace\n- Normalize to lowercase before counting\n- Strip leading/trailing punctuation from each word (characters not in `[a-z0-9]`)\n- Words that become empty after stripping are discarded\n- Contractions like `\"don't\"` count as one word: `\"don't\"`\n\n## Examples\n```rust\nword_count(\"Hello hello HELLO\")  // {\"hello\": 3}\nword_count(\"one two, two THREE!\") // {\"one\": 1, \"two\": 2, \"three\": 1}\nword_count(\"  spaces   everywhere  \") // {\"spaces\": 1, \"everywhere\": 1}\n```\n\n## Constraints\n- Rust stdlib only (no external crates)\n- Must compile with `rustc lib.rs --edition 2021 --crate-type lib`\n- Include `#[cfg(test)]` tests that pass via `rustc --test`\n{\"instructions\":\"Implement pub fn word_count(text: &str) -> HashMap<String, usize> in lib.rs. Lowercase, strip edge punctuation, discard empty tokens. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp lib.rs /tmp/word_count_lib.rs\\n\\n# Append a test runner main to verify\\ncat > /tmp/word_count_test_main.rs << 'EOF'\\nmod word_count_lib {\\n    include!(\\\"/tmp/word_count_lib.rs\\\");\\n}\\nuse word_count_lib::word_count;\\n\\nfn main() {\\n    let r = word_count(\\\"Hello hello HELLO\\\");\\n    assert_eq!(r.get(\\\"hello\\\"), Some(&3), \\\"hello count wrong\\\");\\n\\n    let r2 = word_count(\\\"one two, two THREE!\\\");\\n    assert_eq!(r2.get(\\\"one\\\"), Some(&1));\\n    assert_eq!(r2.get(\\\"two\\\"), Some(&2));\\n    assert_eq!(r2.get(\\\"three\\\"), Some(&1));\\n\\n    let r3 = word_count(\\\"  spaces   everywhere  \\\");\\n    assert_eq!(r3.get(\\\"spaces\\\"), Some(&1));\\n    assert_eq!(r3.get(\\\"everywhere\\\"), Some(&1));\\n\\n    let r4 = word_count(\\\"\\\");\\n    assert!(r4.is_empty(), \\\"empty string should yield empty map\\\");\\n\\n    println!(\\\"ALL TESTS PASSED\\\");\\n}\\nEOF\\n\\nrustc /tmp/word_count_test_main.rs --edition 2021 -o /tmp/word_count_test_bin 2>&1\\n/tmp/word_count_test_bin\",\"required_files\":[\"lib.rs\"]}}",
@@ -3365,6 +3323,46 @@
       "payment_status": null,
       "created_at": 1773907162,
       "source": "https://www.bountybook.ai/job/8a24c4de-c529-4ee9-870b-941ce16d1f32",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
+      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "markdown_table.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
       "source_kind": "bountybook"
     },
     {
