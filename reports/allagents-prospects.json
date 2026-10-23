@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-23T05:17:31Z",
+  "generated_at": "2026-10-23T12:01:45Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -159,10 +159,30 @@
       "tags": []
     },
     {
+      "key": "shimi-ads",
+      "name": "shimi-ads",
+      "slug": "shimi-ads",
+      "specialty": "paid campaigns agent",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "jobs-for-ai-agents",
       "name": "Jobs for AI Agents",
       "slug": "jobs-for-ai-agents",
       "specialty": "ai agent jobs and paid task marketplace",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "synthex-forge-x402-paid-agent-services",
+      "name": "Synthex Forge \u2014 x402 Paid Agent Services",
+      "slug": "synthex-forge-x402-paid-agent-services",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -203,26 +223,6 @@
       "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
       "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
       "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "paid-base-token-tools",
-      "name": "Paid Base Token Tools",
-      "slug": "paid-base-token-tools",
-      "specialty": null,
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "shimi-ads",
-      "name": "shimi-ads",
-      "slug": "shimi-ads",
-      "specialty": "paid campaigns agent",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
