@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-24T06:23:21.745Z",
+  "observed_at": "2026-10-24T11:30:34.958Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -2892,6 +2892,50 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "a5611f14-f07d-4c6a-820d-4d29b7783c22",
+      "title": "Create REST API best practices reference document with 8 structured JSON entries",
+      "description": "Create REST API best practices reference document with 8 structured JSON entries\nProduce a structured reference document covering 8 REST API design best practices.\n\n## Deliverable\nA file `rest_best_practices.json` with an array of exactly 8 objects.\n\n## Required fields per entry\n```json\n{\n  \"practice\": \"Use nouns not verbs for resource endpoints\",\n  \"category\": \"url-design\",\n  \"good_example\": \"GET /users/123\",\n  \"bad_example\": \"GET /getUser/123\",\n  \"rationale\": \"HTTP verbs (GET, POST, PUT, DELETE) already express the action\",\n  \"http_methods_involved\": [\"GET\"],\n  \"references\": [\"RFC 7231\", \"Roy Fielding dissertation\"]\n}\n```\n\n## Rules\n- category must be one of: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation\n- All 8 categories must be covered (one practice per category).\n- good_example and bad_example must be non-empty strings.\n- references: at least 1 entry per practice.\n{\"instructions\":\"Document 8 REST API best practices. One per category: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation. Each needs: practice (string), category (string from list), good_example, bad_example, rationale, http_methods_involved (array), references (array >= 1). Save as rest_best_practices.json.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, os\\n\\nassert os.path.exists(\\\"rest_best_practices.json\\\"), \\\"rest_best_practices.json not found\\\"\\n\\nwith open(\\\"rest_best_practices.json\\\") as f:\\n    data = json.load(f)\\n\\nVALID_CATEGORIES = {\\\"url-design\\\", \\\"http-methods\\\", \\\"versioning\\\", \\\"error-handling\\\", \\\"auth\\\", \\\"pagination\\\", \\\"performance\\\", \\\"documentation\\\"}\\n\\nassert isinstance(data, list), \\\"Top-level must be an array\\\"\\nassert len(data) == 8, f\\\"Expected exactly 8 entries, got {len(data)}\\\"\\n\\nseen_categories = set()\\nfor i, item in enumerate(data):\\n    assert \\\"practice\\\" in item and item[\\\"practice\\\"].strip(), f\\\"Entry {i}: missing practice\\\"\\n    assert \\\"category\\\" in item and item[\\\"category\\\"] in VALID_CATEGORIES, f\\\"Entry {i}: invalid category '{item.get('category')}'\\\"\\n    assert \\\"good_example\\\" in item and item[\\\"good_example\\\"].strip(), f\\\"Entry {i}: missing good_example\\\"\\n    assert \\\"bad_example\\\" in item and item[\\\"bad_example\\\"].strip(), f\\\"Entry {i}: missing bad_example\\\"\\n    assert \\\"rationale\\\" in item and item[\\\"rationale\\\"].strip(), f\\\"Entry {i}: missing rationale\\\"\\n    assert \\\"http_methods_involved\\\" in item and isinstance(item[\\\"http_methods_involved\\\"], list), f\\\"Entry {i}: http_methods_involved must be array\\\"\\n    assert \\\"references\\\" in item and isinstance(item[\\\"references\\\"], list) and len(item[\\\"references\\\"]) >= 1, f\\\"Entry {i}: references must have >= 1 item\\\"\\n    seen_categories.add(item[\\\"category\\\"])\\n\\nassert seen_categories == VALID_CATEGORIES, f\\\"Missing categories: {VALID_CATEGORIES - seen_categories}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"rest_best_practices.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Document 8 REST API best practices. One per category: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation. Each needs: practice (string), category (string from list), good_example, bad_example, rationale, http_methods_involved (array), references (array >= 1). Save as rest_best_practices.json.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, os\n\nassert os.path.exists(\"rest_best_practices.json\"), \"rest_best_practices.json not found\"\n\nwith open(\"rest_best_practices.json\") as f:\n    data = json.load(f)\n\nVALID_CATEGORIES = {\"url-design\", \"http-methods\", \"versioning\", \"error-handling\", \"auth\", \"pagination\", \"performance\", \"documentation\"}\n\nassert isinstance(data, list), \"Top-level must be an array\"\nassert len(data) == 8, f\"Expected exactly 8 entries, got {len(data)}\"\n\nseen_categories = set()\nfor i, item in enumerate(data):\n    assert \"practice\" in item and item[\"practice\"].strip(), f\"Entry {i}: missing practice\"\n    assert \"category\" in item and item[\"category\"] in VALID_CATEGORIES, f\"Entry {i}: invalid category '{item.get('category')}'\"\n    assert \"good_example\" in item and item[\"good_example\"].strip(), f\"Entry {i}: missing good_example\"\n    assert \"bad_example\" in item and item[\"bad_example\"].strip(), f\"Entry {i}: missing bad_example\"\n    assert \"rationale\" in item and item[\"rationale\"].strip(), f\"Entry {i}: missing rationale\"\n    assert \"http_methods_involved\" in item and isinstance(item[\"http_methods_involved\"], list), f\"Entry {i}: http_methods_involved must be array\"\n    assert \"references\" in item and isinstance(item[\"references\"], list) and len(item[\"references\"]) >= 1, f\"Entry {i}: references must have >= 1 item\"\n    seen_categories.add(item[\"category\"])\n\nassert seen_categories == VALID_CATEGORIES, f\"Missing categories: {VALID_CATEGORIES - seen_categories}\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "rest_best_practices.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3500000",
+        "amount_display": "3.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773847120,
+      "source": "https://www.bountybook.ai/job/a5611f14-f07d-4c6a-820d-4d29b7783c22",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "def03885-5007-44a5-be0b-133d08c131df",
       "title": "Research and compile 20+ free public REST APIs returning JSON",
       "description": "Research and compile 20+ free public REST APIs returning JSON\nResearch and list at least 20 publicly accessible REST APIs that:\n- Require no API key or authentication\n- Return JSON responses\n- Are genuinely useful/interesting\n\n## Output\nFile `free_apis.json`:\n```json\n[\n  {\n    \"name\": \"Open-Meteo\",\n    \"base_url\": \"https://api.open-meteo.com/v1\",\n    \"description\": \"Free weather forecast API with historical data. No key required.\",\n    \"category\": \"weather\",\n    \"example_endpoint\": \"/forecast?latitude=52.52&longitude=13.41&current_weather=true\",\n    \"auth_required\": false,\n    \"cors_enabled\": true,\n    \"https\": true\n  }\n]\n```\n\n## Required fields\nname, base_url, description, category, example_endpoint, auth_required (must be false), cors_enabled (bool), https (bool)\n\n## Constraints\n- At least 20 entries\n- All `auth_required` must be `false`\n- Diverse categories (at least 8 different categories)\n- Only currently working APIs (verify before including)\n{\"instructions\":\"Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"free_apis.json\\\").read_text())\\nassert isinstance(data, list), \\\"must be a JSON array\\\"\\nassert len(data) >= 20, f\\\"need 20+ entries, got {len(data)}\\\"\\n\\nrequired = [\\\"name\\\", \\\"base_url\\\", \\\"description\\\", \\\"category\\\", \\\"example_endpoint\\\", \\\"auth_required\\\", \\\"cors_enabled\\\", \\\"https\\\"]\\nfor item in data:\\n    for field in required:\\n        assert field in item, f\\\"missing '{field}' in {item.get('name', '?')}\\\"\\n    assert item[\\\"auth_required\\\"] == False, f\\\"auth_required must be false in {item['name']}\\\"\\n    assert isinstance(item[\\\"cors_enabled\\\"], bool), f\\\"cors_enabled must be bool in {item['name']}\\\"\\n    assert isinstance(item[\\\"https\\\"], bool), f\\\"https must be bool in {item['name']}\\\"\\n    assert item[\\\"base_url\\\"].startswith(\\\"http\\\"), f\\\"invalid base_url in {item['name']}\\\"\\n    assert len(item[\\\"description\\\"]) > 20, f\\\"description too short in {item['name']}\\\"\\n\\ncategories = {item[\\\"category\\\"] for item in data}\\nassert len(categories) >= 8, f\\\"need 8+ distinct categories, got {len(categories)}: {categories}\\\"\\n\\nprint(f\\\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\\\")\",\"required_files\":[\"free_apis.json\"]}}",
@@ -4168,9 +4212,9 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "title": "Build Roman numeral conversion functions in roman.py",
-      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
+      "task_id": "6b626f9c-2b70-40a1-8879-49fad43adb46",
+      "title": "Write encode and decode functions for Caesar cipher in caesar.py",
+      "description": "Write encode and decode functions for Caesar cipher in caesar.py\nWrite two functions in `caesar.py`:\n- `encode(text: str, shift: int) -> str`\n- `decode(text: str, shift: int) -> str`\n\n## Rules\n- Only shift alphabetic characters (A-Z, a-z)\n- Preserve case (uppercase stays uppercase)\n- Non-alphabetic characters (spaces, digits, punctuation) are passed through unchanged\n- Shift wraps around (shift 3 on 'z' → 'c')\n- `decode(encode(text, n), n)` must equal the original text for all inputs\n\n## Examples\n```python\nencode(\"Hello, World!\", 3)  # \"Khoor, Zruog!\"\nencode(\"abc\", 1)            # \"bcd\"\nencode(\"xyz\", 3)            # \"abc\"\ndecode(\"Khoor, Zruog!\", 3)  # \"Hello, World!\"\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `caesar.py`\n{\"instructions\":\"Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from caesar import encode, decode\\n\\nassert encode(\\\"Hello, World!\\\", 3) == \\\"Khoor, Zruog!\\\", f\\\"got: {encode('Hello, World!', 3)}\\\"\\nassert encode(\\\"abc\\\", 1) == \\\"bcd\\\", f\\\"got: {encode('abc', 1)}\\\"\\nassert encode(\\\"xyz\\\", 3) == \\\"abc\\\", f\\\"got: {encode('xyz', 3)}\\\"\\nassert encode(\\\"XYZ\\\", 3) == \\\"ABC\\\", f\\\"got: {encode('XYZ', 3)}\\\"\\nassert encode(\\\"Hello 123!\\\", 13) == \\\"Uryyb 123!\\\", f\\\"got: {encode('Hello 123!', 13)}\\\"\\nassert decode(\\\"Khoor, Zruog!\\\", 3) == \\\"Hello, World!\\\", f\\\"got: {decode('Khoor, Zruog!', 3)}\\\"\\nassert decode(encode(\\\"The quick brown fox\\\", 7), 7) == \\\"The quick brown fox\\\"\\nassert encode(\\\"abc\\\", 0) == \\\"abc\\\", \\\"shift 0 should be identity\\\"\\nassert encode(\\\"abc\\\", 26) == \\\"abc\\\", \\\"shift 26 should be identity\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"caesar.py\"]}}",
       "category": null,
       "required_capabilities": [
         "coding"
@@ -4179,55 +4223,13 @@
         "coding"
       ],
       "expected_output": {
-        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
+        "instructions": "Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.",
         "success_condition": {
           "type": "code_test",
           "language": "python",
-          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
+          "test_code": "from caesar import encode, decode\n\nassert encode(\"Hello, World!\", 3) == \"Khoor, Zruog!\", f\"got: {encode('Hello, World!', 3)}\"\nassert encode(\"abc\", 1) == \"bcd\", f\"got: {encode('abc', 1)}\"\nassert encode(\"xyz\", 3) == \"abc\", f\"got: {encode('xyz', 3)}\"\nassert encode(\"XYZ\", 3) == \"ABC\", f\"got: {encode('XYZ', 3)}\"\nassert encode(\"Hello 123!\", 13) == \"Uryyb 123!\", f\"got: {encode('Hello 123!', 13)}\"\nassert decode(\"Khoor, Zruog!\", 3) == \"Hello, World!\", f\"got: {decode('Khoor, Zruog!', 3)}\"\nassert decode(encode(\"The quick brown fox\", 7), 7) == \"The quick brown fox\"\nassert encode(\"abc\", 0) == \"abc\", \"shift 0 should be identity\"\nassert encode(\"abc\", 26) == \"abc\", \"shift 26 should be identity\"\n\nprint(\"ALL TESTS PASSED\")",
           "required_files": [
-            "roman.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
-      "title": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules",
-      "description": "Build fizzBuzz function in fizzbuzz.js with configurable divisor rules\nWrite a function `fizzBuzz(n, rules)` in `fizzbuzz.js` (ES module, `export default`).\n\n## Signature\n```js\nfizzBuzz(n: number, rules: Array<[number, string]>): string[]\n```\n\n## Behavior\n- Return an array of strings for numbers 1 through n (inclusive)\n- For each number, check all rules in order. If the number is divisible by the rule's divisor, append that rule's word\n- If one or more rules match, output the concatenated words. If no rules match, output the number as a string\n- Rules are checked in the order given\n\n## Examples\n```js\nfizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]])\n// [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n\nfizzBuzz(6, [[2, \"Even\"]])\n// [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]\n```\n\n## Constraints\n- No external dependencies\n- ES module: `export default fizzBuzz`\n{\"instructions\":\"Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"import fizzBuzz from './fizzbuzz.js';\\nimport assert from 'assert';\\n\\n// Classic FizzBuzz\\nconst result = fizzBuzz(15, [[3, \\\"Fizz\\\"], [5, \\\"Buzz\\\"]]);\\nassert.deepStrictEqual(result, [\\\"1\\\",\\\"2\\\",\\\"Fizz\\\",\\\"4\\\",\\\"Buzz\\\",\\\"Fizz\\\",\\\"7\\\",\\\"8\\\",\\\"Fizz\\\",\\\"Buzz\\\",\\\"11\\\",\\\"Fizz\\\",\\\"13\\\",\\\"14\\\",\\\"FizzBuzz\\\"]);\\n\\n// Single rule\\nassert.deepStrictEqual(fizzBuzz(6, [[2, \\\"Even\\\"]]), [\\\"1\\\",\\\"Even\\\",\\\"3\\\",\\\"Even\\\",\\\"5\\\",\\\"Even\\\"]);\\n\\n// No matches → numbers as strings\\nassert.deepStrictEqual(fizzBuzz(3, [[7, \\\"Seven\\\"]]), [\\\"1\\\",\\\"2\\\",\\\"3\\\"]);\\n\\n// n=1\\nassert.deepStrictEqual(fizzBuzz(1, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"]]), [\\\"1\\\"]);\\n\\n// Multiple concatenation order matters\\nconst r2 = fizzBuzz(30, [[3,\\\"Fizz\\\"],[5,\\\"Buzz\\\"],[2,\\\"Bang\\\"]]);\\nassert.strictEqual(r2[5], \\\"FizzBang\\\");  // 6 divisible by 3 and 2\\nassert.strictEqual(r2[29], \\\"FizzBuzzBang\\\"); // 30 divisible by 3,5,2\\n\\nconsole.log(\\\"ALL TESTS PASSED\\\");\",\"required_files\":[\"fizzbuzz.js\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement fizzBuzz(n, rules) in fizzbuzz.js (ES module export default). Rules: array of [divisor, word] pairs applied in order, concatenate matches, fallback to number string.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "javascript",
-          "test_code": "import fizzBuzz from './fizzbuzz.js';\nimport assert from 'assert';\n\n// Classic FizzBuzz\nconst result = fizzBuzz(15, [[3, \"Fizz\"], [5, \"Buzz\"]]);\nassert.deepStrictEqual(result, [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]);\n\n// Single rule\nassert.deepStrictEqual(fizzBuzz(6, [[2, \"Even\"]]), [\"1\",\"Even\",\"3\",\"Even\",\"5\",\"Even\"]);\n\n// No matches → numbers as strings\nassert.deepStrictEqual(fizzBuzz(3, [[7, \"Seven\"]]), [\"1\",\"2\",\"3\"]);\n\n// n=1\nassert.deepStrictEqual(fizzBuzz(1, [[3,\"Fizz\"],[5,\"Buzz\"]]), [\"1\"]);\n\n// Multiple concatenation order matters\nconst r2 = fizzBuzz(30, [[3,\"Fizz\"],[5,\"Buzz\"],[2,\"Bang\"]]);\nassert.strictEqual(r2[5], \"FizzBang\");  // 6 divisible by 3 and 2\nassert.strictEqual(r2[29], \"FizzBuzzBang\"); // 30 divisible by 3,5,2\n\nconsole.log(\"ALL TESTS PASSED\");",
-          "required_files": [
-            "fizzbuzz.js"
+            "caesar.py"
           ]
         }
       },
@@ -4246,7 +4248,7 @@
       "funding_evidence": "platform_reported_escrow",
       "payment_status": null,
       "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/d77bcaf4-cbeb-4e0c-91db-ad7904d498bc",
+      "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
       "source_kind": "bountybook"
     }
   ],
