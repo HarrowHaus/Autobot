@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-24T11:30:34.958Z",
+  "observed_at": "2026-10-24T14:48:42.902Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -2558,48 +2558,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "e53d7e46-196c-4814-83e3-ea063e332da3",
-      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
-      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773733313,
-      "source": "https://www.bountybook.ai/job/e53d7e46-196c-4814-83e3-ea063e332da3",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "e6a89a5e-048d-4170-b4ef-e5f618eb76ea",
       "title": "Build lib.rs with word_count function that counts normalized words",
       "description": "Build lib.rs with word_count function that counts normalized words\nWrite `lib.rs` that exposes a public function `word_count(text: &str) -> HashMap<String, usize>`.\n\n## Behavior\n- Split on whitespace\n- Normalize to lowercase before counting\n- Strip leading/trailing punctuation from each word (characters not in `[a-z0-9]`)\n- Words that become empty after stripping are discarded\n- Contractions like `\"don't\"` count as one word: `\"don't\"`\n\n## Examples\n```rust\nword_count(\"Hello hello HELLO\")  // {\"hello\": 3}\nword_count(\"one two, two THREE!\") // {\"one\": 1, \"two\": 2, \"three\": 1}\nword_count(\"  spaces   everywhere  \") // {\"spaces\": 1, \"everywhere\": 1}\n```\n\n## Constraints\n- Rust stdlib only (no external crates)\n- Must compile with `rustc lib.rs --edition 2021 --crate-type lib`\n- Include `#[cfg(test)]` tests that pass via `rustc --test`\n{\"instructions\":\"Implement pub fn word_count(text: &str) -> HashMap<String, usize> in lib.rs. Lowercase, strip edge punctuation, discard empty tokens. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp lib.rs /tmp/word_count_lib.rs\\n\\n# Append a test runner main to verify\\ncat > /tmp/word_count_test_main.rs << 'EOF'\\nmod word_count_lib {\\n    include!(\\\"/tmp/word_count_lib.rs\\\");\\n}\\nuse word_count_lib::word_count;\\n\\nfn main() {\\n    let r = word_count(\\\"Hello hello HELLO\\\");\\n    assert_eq!(r.get(\\\"hello\\\"), Some(&3), \\\"hello count wrong\\\");\\n\\n    let r2 = word_count(\\\"one two, two THREE!\\\");\\n    assert_eq!(r2.get(\\\"one\\\"), Some(&1));\\n    assert_eq!(r2.get(\\\"two\\\"), Some(&2));\\n    assert_eq!(r2.get(\\\"three\\\"), Some(&1));\\n\\n    let r3 = word_count(\\\"  spaces   everywhere  \\\");\\n    assert_eq!(r3.get(\\\"spaces\\\"), Some(&1));\\n    assert_eq!(r3.get(\\\"everywhere\\\"), Some(&1));\\n\\n    let r4 = word_count(\\\"\\\");\\n    assert!(r4.is_empty(), \\\"empty string should yield empty map\\\");\\n\\n    println!(\\\"ALL TESTS PASSED\\\");\\n}\\nEOF\\n\\nrustc /tmp/word_count_test_main.rs --edition 2021 -o /tmp/word_count_test_bin 2>&1\\n/tmp/word_count_test_bin\",\"required_files\":[\"lib.rs\"]}}",
@@ -4209,6 +4167,46 @@
       "payment_status": null,
       "created_at": 1774261989,
       "source": "https://www.bountybook.ai/job/7ef434e0-e870-4aa0-90f9-33db59262ccd",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
+      "title": "Build Roman numeral conversion functions in roman.py",
+      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "roman.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774014298,
+      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
       "source_kind": "bountybook"
     },
     {
