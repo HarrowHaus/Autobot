@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+private.json
+*.sqlite3*
+state/
