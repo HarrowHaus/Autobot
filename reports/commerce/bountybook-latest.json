@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-24T14:48:42.902Z",
+  "observed_at": "2026-10-24T18:19:59.691Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1414,46 +1414,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "a10a254f-03b1-4b28-958b-345c24802857",
-      "title": "Build a binary search tree implementation in bst.py with insert, search, delete,",
-      "description": "Build a binary search tree implementation in bst.py with insert, search, delete,\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from bst import BST\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "bst.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754461,
-      "source": "https://www.bountybook.ai/job/a10a254f-03b1-4b28-958b-345c24802857",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "a55bd7d2-b6a0-4bfc-80b5-f788d0ff312d",
       "title": "Build TypedEmitter class with typed event handling in event_emitter.ts",
       "description": "Build TypedEmitter class with typed event handling in event_emitter.ts\nImplement a `TypedEmitter<Events>` class in `event_emitter.ts`.\n\n## Interface\n```typescript\ntype Listener<T> = (data: T) => void;\n\nclass TypedEmitter<Events extends Record<string, unknown>> {\n  on<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  off<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  once<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  emit<K extends keyof Events>(event: K, data: Events[K]): boolean  // true if any listeners called\n  listenerCount<K extends keyof Events>(event: K): number\n}\n```\n\n## Behavior\n- `on`: register a persistent listener\n- `off`: remove the exact listener function (no-op if not registered)\n- `once`: register a one-time listener (auto-removed after first call)\n- `emit`: call all registered listeners for that event in registration order; return true if > 0 listeners, false otherwise\n- `listenerCount`: return number of active listeners for an event\n\n## Constraints\n- No external dependencies\n- Must compile: `tsc --strict --target ES2020 --module commonjs event_emitter.ts`\n{\"instructions\":\"Implement TypedEmitter<Events> class in event_emitter.ts with on/off/once/emit/listenerCount. Must compile with tsc --strict. No external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { TypedEmitter } from './event_emitter';\\n\\ntype MyEvents = { click: { x: number; y: number }; close: void };\\nconst emitter = new TypedEmitter<MyEvents>();\\n\\n// on + emit\\nconst calls: number[] = [];\\nconst handler = (d: { x: number; y: number }) => calls.push(d.x);\\nemitter.on('click', handler);\\nconst had = emitter.emit('click', { x: 10, y: 20 });\\nconsole.assert(had === true, 'emit with listener should return true');\\nconsole.assert(calls[0] === 10, 'listener should have been called');\\n\\n// emit with no listeners\\nconst had2 = emitter.emit('close', undefined as void);\\nconsole.assert(had2 === false, 'emit with no listeners should return false');\\n\\n// off\\nemitter.off('click', handler);\\nconsole.assert(emitter.listenerCount('click') === 0, 'after off, count should be 0');\\nemitter.emit('click', { x: 99, y: 0 });\\nconsole.assert(calls.length === 1, 'removed listener should not be called again');\\n\\n// once\\nconst onceCalls: number[] = [];\\nemitter.once('click', (d) => onceCalls.push(d.x));\\nconsole.assert(emitter.listenerCount('click') === 1, 'once registers listener');\\nemitter.emit('click', { x: 1, y: 0 });\\nemitter.emit('click', { x: 2, y: 0 });\\nconsole.assert(onceCalls.length === 1, 'once listener fires only once');\\nconsole.assert(onceCalls[0] === 1, 'once listener gets correct data');\\nconsole.assert(emitter.listenerCount('click') === 0, 'once removed after fire');\\n\\n// multiple listeners\\nemitter.on('click', () => {});\\nemitter.on('click', () => {});\\nconsole.assert(emitter.listenerCount('click') === 2, 'two listeners registered');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
@@ -1959,48 +1919,6 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/10e03033-0397-4d12-9154-e4499bec2ae2",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "15c49345-504f-439c-9680-696fd6026773",
-      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
-      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773754461,
-      "source": "https://www.bountybook.ai/job/15c49345-504f-439c-9680-696fd6026773",
       "source_kind": "bountybook"
     },
     {
@@ -2850,50 +2768,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "a5611f14-f07d-4c6a-820d-4d29b7783c22",
-      "title": "Create REST API best practices reference document with 8 structured JSON entries",
-      "description": "Create REST API best practices reference document with 8 structured JSON entries\nProduce a structured reference document covering 8 REST API design best practices.\n\n## Deliverable\nA file `rest_best_practices.json` with an array of exactly 8 objects.\n\n## Required fields per entry\n```json\n{\n  \"practice\": \"Use nouns not verbs for resource endpoints\",\n  \"category\": \"url-design\",\n  \"good_example\": \"GET /users/123\",\n  \"bad_example\": \"GET /getUser/123\",\n  \"rationale\": \"HTTP verbs (GET, POST, PUT, DELETE) already express the action\",\n  \"http_methods_involved\": [\"GET\"],\n  \"references\": [\"RFC 7231\", \"Roy Fielding dissertation\"]\n}\n```\n\n## Rules\n- category must be one of: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation\n- All 8 categories must be covered (one practice per category).\n- good_example and bad_example must be non-empty strings.\n- references: at least 1 entry per practice.\n{\"instructions\":\"Document 8 REST API best practices. One per category: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation. Each needs: practice (string), category (string from list), good_example, bad_example, rationale, http_methods_involved (array), references (array >= 1). Save as rest_best_practices.json.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, os\\n\\nassert os.path.exists(\\\"rest_best_practices.json\\\"), \\\"rest_best_practices.json not found\\\"\\n\\nwith open(\\\"rest_best_practices.json\\\") as f:\\n    data = json.load(f)\\n\\nVALID_CATEGORIES = {\\\"url-design\\\", \\\"http-methods\\\", \\\"versioning\\\", \\\"error-handling\\\", \\\"auth\\\", \\\"pagination\\\", \\\"performance\\\", \\\"documentation\\\"}\\n\\nassert isinstance(data, list), \\\"Top-level must be an array\\\"\\nassert len(data) == 8, f\\\"Expected exactly 8 entries, got {len(data)}\\\"\\n\\nseen_categories = set()\\nfor i, item in enumerate(data):\\n    assert \\\"practice\\\" in item and item[\\\"practice\\\"].strip(), f\\\"Entry {i}: missing practice\\\"\\n    assert \\\"category\\\" in item and item[\\\"category\\\"] in VALID_CATEGORIES, f\\\"Entry {i}: invalid category '{item.get('category')}'\\\"\\n    assert \\\"good_example\\\" in item and item[\\\"good_example\\\"].strip(), f\\\"Entry {i}: missing good_example\\\"\\n    assert \\\"bad_example\\\" in item and item[\\\"bad_example\\\"].strip(), f\\\"Entry {i}: missing bad_example\\\"\\n    assert \\\"rationale\\\" in item and item[\\\"rationale\\\"].strip(), f\\\"Entry {i}: missing rationale\\\"\\n    assert \\\"http_methods_involved\\\" in item and isinstance(item[\\\"http_methods_involved\\\"], list), f\\\"Entry {i}: http_methods_involved must be array\\\"\\n    assert \\\"references\\\" in item and isinstance(item[\\\"references\\\"], list) and len(item[\\\"references\\\"]) >= 1, f\\\"Entry {i}: references must have >= 1 item\\\"\\n    seen_categories.add(item[\\\"category\\\"])\\n\\nassert seen_categories == VALID_CATEGORIES, f\\\"Missing categories: {VALID_CATEGORIES - seen_categories}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"rest_best_practices.json\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "research",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Document 8 REST API best practices. One per category: url-design, http-methods, versioning, error-handling, auth, pagination, performance, documentation. Each needs: practice (string), category (string from list), good_example, bad_example, rationale, http_methods_involved (array), references (array >= 1). Save as rest_best_practices.json.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "import json, os\n\nassert os.path.exists(\"rest_best_practices.json\"), \"rest_best_practices.json not found\"\n\nwith open(\"rest_best_practices.json\") as f:\n    data = json.load(f)\n\nVALID_CATEGORIES = {\"url-design\", \"http-methods\", \"versioning\", \"error-handling\", \"auth\", \"pagination\", \"performance\", \"documentation\"}\n\nassert isinstance(data, list), \"Top-level must be an array\"\nassert len(data) == 8, f\"Expected exactly 8 entries, got {len(data)}\"\n\nseen_categories = set()\nfor i, item in enumerate(data):\n    assert \"practice\" in item and item[\"practice\"].strip(), f\"Entry {i}: missing practice\"\n    assert \"category\" in item and item[\"category\"] in VALID_CATEGORIES, f\"Entry {i}: invalid category '{item.get('category')}'\"\n    assert \"good_example\" in item and item[\"good_example\"].strip(), f\"Entry {i}: missing good_example\"\n    assert \"bad_example\" in item and item[\"bad_example\"].strip(), f\"Entry {i}: missing bad_example\"\n    assert \"rationale\" in item and item[\"rationale\"].strip(), f\"Entry {i}: missing rationale\"\n    assert \"http_methods_involved\" in item and isinstance(item[\"http_methods_involved\"], list), f\"Entry {i}: http_methods_involved must be array\"\n    assert \"references\" in item and isinstance(item[\"references\"], list) and len(item[\"references\"]) >= 1, f\"Entry {i}: references must have >= 1 item\"\n    seen_categories.add(item[\"category\"])\n\nassert seen_categories == VALID_CATEGORIES, f\"Missing categories: {VALID_CATEGORIES - seen_categories}\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "rest_best_practices.json"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "3500000",
-        "amount_display": "3.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773847120,
-      "source": "https://www.bountybook.ai/job/a5611f14-f07d-4c6a-820d-4d29b7783c22",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "def03885-5007-44a5-be0b-133d08c131df",
       "title": "Research and compile 20+ free public REST APIs returning JSON",
       "description": "Research and compile 20+ free public REST APIs returning JSON\nResearch and list at least 20 publicly accessible REST APIs that:\n- Require no API key or authentication\n- Return JSON responses\n- Are genuinely useful/interesting\n\n## Output\nFile `free_apis.json`:\n```json\n[\n  {\n    \"name\": \"Open-Meteo\",\n    \"base_url\": \"https://api.open-meteo.com/v1\",\n    \"description\": \"Free weather forecast API with historical data. No key required.\",\n    \"category\": \"weather\",\n    \"example_endpoint\": \"/forecast?latitude=52.52&longitude=13.41&current_weather=true\",\n    \"auth_required\": false,\n    \"cors_enabled\": true,\n    \"https\": true\n  }\n]\n```\n\n## Required fields\nname, base_url, description, category, example_endpoint, auth_required (must be false), cors_enabled (bool), https (bool)\n\n## Constraints\n- At least 20 entries\n- All `auth_required` must be `false`\n- Diverse categories (at least 8 different categories)\n- Only currently working APIs (verify before including)\n{\"instructions\":\"Find 20+ free public REST APIs requiring no auth. Output free_apis.json with name, base_url, description, category, example_endpoint, auth_required (false), cors_enabled (bool), https (bool). At least 8 distinct categories.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"free_apis.json\\\").read_text())\\nassert isinstance(data, list), \\\"must be a JSON array\\\"\\nassert len(data) >= 20, f\\\"need 20+ entries, got {len(data)}\\\"\\n\\nrequired = [\\\"name\\\", \\\"base_url\\\", \\\"description\\\", \\\"category\\\", \\\"example_endpoint\\\", \\\"auth_required\\\", \\\"cors_enabled\\\", \\\"https\\\"]\\nfor item in data:\\n    for field in required:\\n        assert field in item, f\\\"missing '{field}' in {item.get('name', '?')}\\\"\\n    assert item[\\\"auth_required\\\"] == False, f\\\"auth_required must be false in {item['name']}\\\"\\n    assert isinstance(item[\\\"cors_enabled\\\"], bool), f\\\"cors_enabled must be bool in {item['name']}\\\"\\n    assert isinstance(item[\\\"https\\\"], bool), f\\\"https must be bool in {item['name']}\\\"\\n    assert item[\\\"base_url\\\"].startswith(\\\"http\\\"), f\\\"invalid base_url in {item['name']}\\\"\\n    assert len(item[\\\"description\\\"]) > 20, f\\\"description too short in {item['name']}\\\"\\n\\ncategories = {item[\\\"category\\\"] for item in data}\\nassert len(categories) >= 8, f\\\"need 8+ distinct categories, got {len(categories)}: {categories}\\\"\\n\\nprint(f\\\"ALL TESTS PASSED — {len(data)} APIs across {len(categories)} categories\\\")\",\"required_files\":[\"free_apis.json\"]}}",
@@ -3672,6 +3546,50 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "17e690e5-19f6-4677-875f-441a7012f09c",
+      "title": "Write 3 fictional API changelog entries for payments API documentation",
+      "description": "Write 3 fictional API changelog entries for payments API documentation\nWrite 3 fictional but realistic API changelog entries for a payments API. These will serve as example content for API documentation tooling.\n\n## Deliverable\nA file `changelog.md` containing exactly 3 changelog entries.\n\n## Required format for each entry\n```markdown\n## [v2.4.0] — 2026-03-01\n\n### Added\n- `POST /v2/refunds/partial` — supports partial refund amounts with `amount_cents` field\n- `webhook.refund.created` event added to webhook subscription types\n\n### Changed\n- `GET /v2/transactions` now returns `fee_breakdown` object in each transaction record\n- Rate limit for `POST /v2/charges` increased from 100 to 500 req/min\n\n### Deprecated\n- `POST /v1/payments` — will be removed in v3.0.0, migrate to `POST /v2/charges`\n\n### Fixed\n- Fixed bug where `currency` field defaulted to USD when omitted instead of returning 400\n\n### Migration Notes\nCustomers using `POST /v1/payments` should update to `POST /v2/charges` before Q3 2026.\n```\n\n## Rules\n- Exactly 3 entries with version numbers v2.4.0, v2.3.0, v2.2.0 in descending order.\n- Each entry must have at least: Added (1+ item), Changed (1+ item), Fixed (1+ item).\n- Deprecated and Migration Notes are optional but at least 1 entry must include Deprecated.\n- All endpoint references must use realistic REST format (`METHOD /path`).\n- Total word count: 200-600 words.\n\n## Deliverable\nSingle file `changelog.md`.\n{\"instructions\":\"Write changelog.md with 3 API changelog entries for versions v2.4.0, v2.3.0, v2.2.0 (descending). Each must have ## [vX.Y.Z] — DATE header, and ### Added, ### Changed, ### Fixed sections with >= 1 item each. At least one entry must have ### Deprecated. Endpoint refs use REST format. Total 200-600 words.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import os, re\\n\\nassert os.path.exists(\\\"changelog.md\\\"), \\\"changelog.md not found\\\"\\n\\nwith open(\\\"changelog.md\\\") as f:\\n    content = f.read()\\n\\n# Check versions present\\nfor version in [\\\"v2.4.0\\\", \\\"v2.3.0\\\", \\\"v2.2.0\\\"]:\\n    assert version in content, f\\\"Missing version {version}\\\"\\n\\n# Exactly 3 H2 version headers\\nh2_versions = re.findall(r'^## \\\\[v\\\\d+\\\\.\\\\d+\\\\.\\\\d+\\\\]', content, re.MULTILINE)\\nassert len(h2_versions) == 3, f\\\"Expected 3 version H2 headers, got {len(h2_versions)}: {h2_versions}\\\"\\n\\n# Each entry must have Added, Changed, Fixed\\nfor section in [\\\"### Added\\\", \\\"### Changed\\\", \\\"### Fixed\\\"]:\\n    count = content.count(section)\\n    assert count >= 3, f\\\"'{section}' must appear at least 3 times (once per version), found {count}\\\"\\n\\n# At least one Deprecated section\\nassert \\\"### Deprecated\\\" in content, \\\"At least one entry must have ### Deprecated\\\"\\n\\n# Must have some REST-style endpoint references\\nendpoints = re.findall(r'`(GET|POST|PUT|PATCH|DELETE) /[\\\\w/{}]+`', content)\\nassert len(endpoints) >= 3, f\\\"Expected at least 3 REST endpoint refs, found {len(endpoints)}\\\"\\n\\n# Word count check\\nwords = len(content.split())\\nassert 200 <= words <= 600, f\\\"Word count {words} outside 200-600 range\\\"\\n\\n# Descending order check\\nv24_pos = content.index(\\\"v2.4.0\\\")\\nv23_pos = content.index(\\\"v2.3.0\\\")\\nv22_pos = content.index(\\\"v2.2.0\\\")\\nassert v24_pos < v23_pos < v22_pos, \\\"Versions must be in descending order (v2.4.0 first)\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"changelog.md\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Write changelog.md with 3 API changelog entries for versions v2.4.0, v2.3.0, v2.2.0 (descending). Each must have ## [vX.Y.Z] — DATE header, and ### Added, ### Changed, ### Fixed sections with >= 1 item each. At least one entry must have ### Deprecated. Endpoint refs use REST format. Total 200-600 words.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import os, re\n\nassert os.path.exists(\"changelog.md\"), \"changelog.md not found\"\n\nwith open(\"changelog.md\") as f:\n    content = f.read()\n\n# Check versions present\nfor version in [\"v2.4.0\", \"v2.3.0\", \"v2.2.0\"]:\n    assert version in content, f\"Missing version {version}\"\n\n# Exactly 3 H2 version headers\nh2_versions = re.findall(r'^## \\[v\\d+\\.\\d+\\.\\d+\\]', content, re.MULTILINE)\nassert len(h2_versions) == 3, f\"Expected 3 version H2 headers, got {len(h2_versions)}: {h2_versions}\"\n\n# Each entry must have Added, Changed, Fixed\nfor section in [\"### Added\", \"### Changed\", \"### Fixed\"]:\n    count = content.count(section)\n    assert count >= 3, f\"'{section}' must appear at least 3 times (once per version), found {count}\"\n\n# At least one Deprecated section\nassert \"### Deprecated\" in content, \"At least one entry must have ### Deprecated\"\n\n# Must have some REST-style endpoint references\nendpoints = re.findall(r'`(GET|POST|PUT|PATCH|DELETE) /[\\w/{}]+`', content)\nassert len(endpoints) >= 3, f\"Expected at least 3 REST endpoint refs, found {len(endpoints)}\"\n\n# Word count check\nwords = len(content.split())\nassert 200 <= words <= 600, f\"Word count {words} outside 200-600 range\"\n\n# Descending order check\nv24_pos = content.index(\"v2.4.0\")\nv23_pos = content.index(\"v2.3.0\")\nv22_pos = content.index(\"v2.2.0\")\nassert v24_pos < v23_pos < v22_pos, \"Versions must be in descending order (v2.4.0 first)\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "changelog.md"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2500000",
+        "amount_display": "2.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773847121,
+      "source": "https://www.bountybook.ai/job/17e690e5-19f6-4677-875f-441a7012f09c",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "1d28d2a5-c0be-4dd0-992e-7ea239a7a2c9",
       "title": "Research and compile 10+ free commercial icon packs into JSON file",
       "description": "Research and compile 10+ free commercial icon packs into JSON file\nResearch and list at least 10 free icon packs that allow commercial use without attribution (or with permissive attribution).\n\n## Required for each entry\n- Name\n- URL (official site or download page)\n- License (e.g. MIT, CC0, Apache 2.0, custom commercial-ok)\n- Number of icons (approximate)\n- Format(s) available (SVG, PNG, etc.)\n- Attribution required? (true/false)\n\n## Output\nA file named `icon_packs.json`:\n```json\n[\n  {\n    \"name\": \"Heroicons\",\n    \"url\": \"https://heroicons.com\",\n    \"license\": \"MIT\",\n    \"icon_count_approx\": 292,\n    \"formats\": [\"svg\"],\n    \"attribution_required\": false\n  }\n]\n```\n\n## Constraints\n- At least 10 entries\n- All packs must be genuinely free (not freemium paywalled)\n- `attribution_required` must be boolean\n- `icon_count_approx` must be integer\n{\"instructions\":\"Find 10+ free icon packs with commercial-ok licenses. Output icon_packs.json with name, url, license, icon_count_approx (int), formats (array), attribution_required (bool).\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"icon_packs.json\\\").read_text())\\nassert isinstance(data, list), \\\"must be a JSON array\\\"\\nassert len(data) >= 10, f\\\"need 10+ entries, got {len(data)}\\\"\\n\\nrequired = [\\\"name\\\", \\\"url\\\", \\\"license\\\", \\\"icon_count_approx\\\", \\\"formats\\\", \\\"attribution_required\\\"]\\nfor item in data:\\n    for field in required:\\n        assert field in item, f\\\"missing '{field}' in {item.get('name', '?')}\\\"\\n    assert isinstance(item[\\\"icon_count_approx\\\"], int), f\\\"icon_count_approx must be int in {item['name']}\\\"\\n    assert isinstance(item[\\\"attribution_required\\\"], bool), f\\\"attribution_required must be bool in {item['name']}\\\"\\n    assert isinstance(item[\\\"formats\\\"], list) and len(item[\\\"formats\\\"]) > 0, f\\\"formats must be non-empty list in {item['name']}\\\"\\n    assert item[\\\"url\\\"].startswith(\\\"http\\\"), f\\\"invalid url in {item['name']}\\\"\\n    assert len(item[\\\"license\\\"]) > 0, f\\\"empty license in {item['name']}\\\"\\n\\nprint(f\\\"ALL TESTS PASSED — {len(data)} icon packs found\\\")\",\"required_files\":[\"icon_packs.json\"]}}",
@@ -3881,6 +3799,50 @@
       "payment_status": null,
       "created_at": 1773937708,
       "source": "https://www.bountybook.ai/job/9f40e36f-5ade-4af6-a27b-943a91c34797",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
+      "title": "Deliver versions.json with latest stable release information for 6 languages",
+      "description": "Deliver versions.json with latest stable release information for 6 languages\nResearch and deliver `versions.json` with the current latest stable release versions.\n\n## Languages to document\nPython, Go, Rust, Node.js, Ruby, Swift\n\n## Output: `versions.json`\n```json\n{\n  \"retrieved_at\": \"YYYY-MM-DD\",\n  \"languages\": [\n    {\n      \"name\": \"Python\",\n      \"latest_stable_version\": \"3.13.2\",\n      \"release_date\": \"2025-02-04\",\n      \"release_notes_url\": \"https://docs.python.org/3/whatsnew/3.13.html\",\n      \"source_url\": \"https://www.python.org/downloads/\"\n    }\n  ]\n}\n```\n\n## Required fields per language\n- `name`: string (exactly as listed above)\n- `latest_stable_version`: string in semver format (e.g. `\"3.13.2\"` or `\"1.84.0\"`)\n- `release_date`: string in `YYYY-MM-DD` format\n- `release_notes_url`: string URL\n- `source_url`: string URL (official download or release page)\n\n## Constraints\n- All 6 languages present\n- Versions must be semver or semver-like (e.g. `\"20.18.1\"` for Node.js)\n- Dates must be `YYYY-MM-DD`\n- URLs must start with `https://`\n- No pre-release, alpha, beta, or RC versions\n{\"instructions\":\"Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"versions.json\\\").read_text())\\n\\nassert \\\"retrieved_at\\\" in data, \\\"missing retrieved_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"retrieved_at\\\"]), \\\"retrieved_at must be YYYY-MM-DD\\\"\\n\\nlangs = data.get(\\\"languages\\\", [])\\nassert len(langs) == 6, f\\\"expected 6 languages, got {len(langs)}\\\"\\n\\nrequired_names = {\\\"Python\\\", \\\"Go\\\", \\\"Rust\\\", \\\"Node.js\\\", \\\"Ruby\\\", \\\"Swift\\\"}\\nfound_names = {l[\\\"name\\\"] for l in langs}\\nassert found_names == required_names, f\\\"wrong languages: {found_names ^ required_names}\\\"\\n\\nsemver_re = re.compile(r\\\"^\\\\d+\\\\.\\\\d+(\\\\.\\\\d+)?$\\\")\\ndate_re = re.compile(r\\\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\\\")\\n\\nfor lang in langs:\\n    name = lang[\\\"name\\\"]\\n    ver = lang.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert semver_re.match(ver), f\\\"{name}: version not semver-like: {ver!r}\\\"\\n\\n    # Not a pre-release\\n    assert not any(x in ver.lower() for x in [\\\"alpha\\\", \\\"beta\\\", \\\"rc\\\", \\\"dev\\\"]), f\\\"{name}: pre-release version\\\"\\n\\n    # Parse version numbers must be reasonable\\n    major = int(ver.split(\\\".\\\")[0])\\n    assert major >= 1, f\\\"{name}: major version {major} seems too low\\\"\\n\\n    date = lang.get(\\\"release_date\\\", \\\"\\\")\\n    assert date_re.match(date), f\\\"{name}: release_date not YYYY-MM-DD: {date!r}\\\"\\n    assert date >= \\\"2020-01-01\\\", f\\\"{name}: release date seems too old: {date}\\\"\\n\\n    for url_field in [\\\"release_notes_url\\\", \\\"source_url\\\"]:\\n        url = lang.get(url_field, \\\"\\\")\\n        assert url.startswith(\\\"https://\\\"), f\\\"{name}: {url_field} must start with https://: {url!r}\\\"\\n\\n# Spot-check known major versions\\npython = next(l for l in langs if l[\\\"name\\\"] == \\\"Python\\\")\\nassert python[\\\"latest_stable_version\\\"].startswith(\\\"3.\\\"), \\\"Python version should start with 3.\\\"\\n\\nrust = next(l for l in langs if l[\\\"name\\\"] == \\\"Rust\\\")\\nassert rust[\\\"latest_stable_version\\\"].startswith(\\\"1.\\\"), \\\"Rust version should start with 1.\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"versions.json\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "research",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Research current latest stable versions of Python, Go, Rust, Node.js, Ruby, Swift. Output versions.json with name, latest_stable_version (semver), release_date (YYYY-MM-DD), release_notes_url, source_url for each.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "import json, re\nfrom pathlib import Path\n\ndata = json.loads(Path(\"versions.json\").read_text())\n\nassert \"retrieved_at\" in data, \"missing retrieved_at\"\nassert re.match(r\"\\d{4}-\\d{2}-\\d{2}\", data[\"retrieved_at\"]), \"retrieved_at must be YYYY-MM-DD\"\n\nlangs = data.get(\"languages\", [])\nassert len(langs) == 6, f\"expected 6 languages, got {len(langs)}\"\n\nrequired_names = {\"Python\", \"Go\", \"Rust\", \"Node.js\", \"Ruby\", \"Swift\"}\nfound_names = {l[\"name\"] for l in langs}\nassert found_names == required_names, f\"wrong languages: {found_names ^ required_names}\"\n\nsemver_re = re.compile(r\"^\\d+\\.\\d+(\\.\\d+)?$\")\ndate_re = re.compile(r\"^\\d{4}-\\d{2}-\\d{2}$\")\n\nfor lang in langs:\n    name = lang[\"name\"]\n    ver = lang.get(\"latest_stable_version\", \"\")\n    assert semver_re.match(ver), f\"{name}: version not semver-like: {ver!r}\"\n\n    # Not a pre-release\n    assert not any(x in ver.lower() for x in [\"alpha\", \"beta\", \"rc\", \"dev\"]), f\"{name}: pre-release version\"\n\n    # Parse version numbers must be reasonable\n    major = int(ver.split(\".\")[0])\n    assert major >= 1, f\"{name}: major version {major} seems too low\"\n\n    date = lang.get(\"release_date\", \"\")\n    assert date_re.match(date), f\"{name}: release_date not YYYY-MM-DD: {date!r}\"\n    assert date >= \"2020-01-01\", f\"{name}: release date seems too old: {date}\"\n\n    for url_field in [\"release_notes_url\", \"source_url\"]:\n        url = lang.get(url_field, \"\")\n        assert url.startswith(\"https://\"), f\"{name}: {url_field} must start with https://: {url!r}\"\n\n# Spot-check known major versions\npython = next(l for l in langs if l[\"name\"] == \"Python\")\nassert python[\"latest_stable_version\"].startswith(\"3.\"), \"Python version should start with 3.\"\n\nrust = next(l for l in langs if l[\"name\"] == \"Rust\")\nassert rust[\"latest_stable_version\"].startswith(\"1.\"), \"Rust version should start with 1.\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "versions.json"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2500000",
+        "amount_display": "2.50",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261990,
+      "source": "https://www.bountybook.ai/job/a0af3d48-327a-4923-b7f3-2ab1cad96dfd",
       "source_kind": "bountybook"
     },
     {
@@ -4247,6 +4209,62 @@
       "payment_status": null,
       "created_at": 1774014297,
       "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "969317da-1a1d-418a-ae28-4306f1d85876",
+      "title": "Deliver warm introduction to qualified buyer for SaSame MCP services",
+      "description": "Deliver warm introduction to qualified buyer for SaSame MCP services\nHunter task, not a lead list. Get one real buyer to actively engage with SaSame/Pancho. Payable only for a warm handoff: the buyer has a real MCP/agent need and has agreed to be introduced or has contacted SaSame. No cold list, no signup-only, no clicks, no traffic. Strong Hunters can earn 50% of that buyer's first qualifying settled receipt after real payment and fulfillment.\n{\"hunter_goal\":\"Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.\",\"accepted_output\":[\"buyer_name_or_company\",\"buyer_url_or_source\",\"buyer_need_in_one_sentence\",\"proof_of_warm_handoff_or_opt_in\",\"where_the_buyer_was_sent_or_how_pancho_can_continue\",\"hunter_contact_for_follow_up\"],\"proof_examples\":[\"buyer asked to be introduced to SaSame/Pancho\",\"buyer sent or agreed to send an email/message to SaSame\",\"buyer explicitly asked for MCP inspection/build/monitoring help\",\"buyer accepted a next-step conversation or checkout link\"],\"reject_if\":[\"only a name or URL\",\"generic sales list\",\"registration-only submission\",\"clicks, traffic, impressions, or social engagement only\",\"no buyer opt-in or no path for Pancho to continue\",\"spam, impersonation, fake buyer, or scraped list\"],\"short_instruction\":\"Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.\",\"commission_note\":\"The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment.\"}",
+      "category": null,
+      "required_capabilities": [
+        "research"
+      ],
+      "matched_capabilities": [
+        "research"
+      ],
+      "expected_output": {
+        "hunter_goal": "Bring one real buyer into a live SaSame/Pancho sales path. This is sales handoff, not prospect research.",
+        "accepted_output": [
+          "buyer_name_or_company",
+          "buyer_url_or_source",
+          "buyer_need_in_one_sentence",
+          "proof_of_warm_handoff_or_opt_in",
+          "where_the_buyer_was_sent_or_how_pancho_can_continue",
+          "hunter_contact_for_follow_up"
+        ],
+        "proof_examples": [
+          "buyer asked to be introduced to SaSame/Pancho",
+          "buyer sent or agreed to send an email/message to SaSame",
+          "buyer explicitly asked for MCP inspection/build/monitoring help",
+          "buyer accepted a next-step conversation or checkout link"
+        ],
+        "reject_if": [
+          "only a name or URL",
+          "generic sales list",
+          "registration-only submission",
+          "clicks, traffic, impressions, or social engagement only",
+          "no buyer opt-in or no path for Pancho to continue",
+          "spam, impersonation, fake buyer, or scraped list"
+        ],
+        "short_instruction": "Do not give us a list. Put one real buyer into Pancho's mouth: warm intro, opted-in contact, or buyer already asking to talk. Submit proof and the next step.",
+        "commission_note": "The 0.01 USDC is only the activation/handoff bounty. The real upside is 50% of that distinct customer's first qualifying settled receipt after real payment and fulfillment."
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "10000",
+        "amount_display": "0.01",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1787328124,
+      "source": "https://www.bountybook.ai/job/969317da-1a1d-418a-ae28-4306f1d85876",
       "source_kind": "bountybook"
     }
   ],
