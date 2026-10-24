@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-24T01:00:50.265Z",
+  "observed_at": "2026-10-24T06:23:21.745Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1414,46 +1414,6 @@
       "source_kind": "bountybook"
     },
     {
-      "task_id": "87b131ee-7102-4d69-a99d-08cff67e9c1a",
-      "title": "Build a StateMachine class in state_machine.py with transitions and guards",
-      "description": "Build a StateMachine class in state_machine.py with transitions and guards\nWrite a `StateMachine` class in `state_machine.py`.\n\n## Interface\n```python\nclass StateMachine:\n    def __init__(self, initial_state: str)\n    def add_transition(self, from_state: str, event: str, to_state: str, guard=None) -> None\n    def trigger(self, event: str, **context) -> bool\n    # Returns True if transition occurred, False if no valid transition\n    @property\n    def state(self) -> str\n```\n\n## Behavior\n- `add_transition`: register a transition. `guard` is an optional callable `(context) -> bool`; if it returns False the transition is skipped\n- `trigger`: look up transitions from current state matching the event. Try in registration order; take the first whose guard passes (or first with no guard). Return True if a transition fires, False otherwise\n- Raise `ValueError` if triggered in a state with no registered transitions for that event\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `state_machine.py`\n{\"instructions\":\"Implement StateMachine class in state_machine.py with add_transition(from, event, to, guard=None), trigger(event, **context), and state property. Guard is optional callable(context)->bool.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from state_machine import StateMachine\\n\\n# Basic transitions\\nsm = StateMachine(\\\"idle\\\")\\nsm.add_transition(\\\"idle\\\", \\\"start\\\", \\\"running\\\")\\nsm.add_transition(\\\"running\\\", \\\"pause\\\", \\\"paused\\\")\\nsm.add_transition(\\\"paused\\\", \\\"resume\\\", \\\"running\\\")\\nsm.add_transition(\\\"running\\\", \\\"stop\\\", \\\"idle\\\")\\n\\nassert sm.state == \\\"idle\\\"\\nassert sm.trigger(\\\"start\\\") == True\\nassert sm.state == \\\"running\\\"\\nassert sm.trigger(\\\"pause\\\") == True\\nassert sm.state == \\\"paused\\\"\\nassert sm.trigger(\\\"resume\\\") == True\\nassert sm.state == \\\"running\\\"\\nassert sm.trigger(\\\"stop\\\") == True\\nassert sm.state == \\\"idle\\\"\\n\\n# No matching event → False (not ValueError since state has NO transition for that event)\\n# Actually per spec: ValueError if event has NO transitions from current state\\n# Test: trigger unknown event from idle should raise\\ntry:\\n    sm.trigger(\\\"pause\\\")  # no transition from idle with 'pause'\\n    assert False, \\\"should have raised ValueError\\\"\\nexcept ValueError:\\n    pass\\n\\n# Guard-based transitions\\nsm2 = StateMachine(\\\"locked\\\")\\nsm2.add_transition(\\\"locked\\\", \\\"unlock\\\", \\\"unlocked\\\", guard=lambda ctx: ctx.get(\\\"pin\\\") == 1234)\\nsm2.add_transition(\\\"locked\\\", \\\"unlock\\\", \\\"unlocked\\\", guard=lambda ctx: ctx.get(\\\"key\\\") == \\\"master\\\")\\n\\n# Wrong pin\\nresult = sm2.trigger(\\\"unlock\\\", pin=9999)\\nassert result == False, f\\\"wrong pin should not unlock: {result}\\\"\\nassert sm2.state == \\\"locked\\\"\\n\\n# Correct pin\\nresult = sm2.trigger(\\\"unlock\\\", pin=1234)\\nassert result == True\\nassert sm2.state == \\\"unlocked\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"state_machine.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement StateMachine class in state_machine.py with add_transition(from, event, to, guard=None), trigger(event, **context), and state property. Guard is optional callable(context)->bool.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from state_machine import StateMachine\n\n# Basic transitions\nsm = StateMachine(\"idle\")\nsm.add_transition(\"idle\", \"start\", \"running\")\nsm.add_transition(\"running\", \"pause\", \"paused\")\nsm.add_transition(\"paused\", \"resume\", \"running\")\nsm.add_transition(\"running\", \"stop\", \"idle\")\n\nassert sm.state == \"idle\"\nassert sm.trigger(\"start\") == True\nassert sm.state == \"running\"\nassert sm.trigger(\"pause\") == True\nassert sm.state == \"paused\"\nassert sm.trigger(\"resume\") == True\nassert sm.state == \"running\"\nassert sm.trigger(\"stop\") == True\nassert sm.state == \"idle\"\n\n# No matching event → False (not ValueError since state has NO transition for that event)\n# Actually per spec: ValueError if event has NO transitions from current state\n# Test: trigger unknown event from idle should raise\ntry:\n    sm.trigger(\"pause\")  # no transition from idle with 'pause'\n    assert False, \"should have raised ValueError\"\nexcept ValueError:\n    pass\n\n# Guard-based transitions\nsm2 = StateMachine(\"locked\")\nsm2.add_transition(\"locked\", \"unlock\", \"unlocked\", guard=lambda ctx: ctx.get(\"pin\") == 1234)\nsm2.add_transition(\"locked\", \"unlock\", \"unlocked\", guard=lambda ctx: ctx.get(\"key\") == \"master\")\n\n# Wrong pin\nresult = sm2.trigger(\"unlock\", pin=9999)\nassert result == False, f\"wrong pin should not unlock: {result}\"\nassert sm2.state == \"locked\"\n\n# Correct pin\nresult = sm2.trigger(\"unlock\", pin=1234)\nassert result == True\nassert sm2.state == \"unlocked\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "state_machine.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/87b131ee-7102-4d69-a99d-08cff67e9c1a",
-      "source_kind": "bountybook"
-    },
-    {
       "task_id": "a10a254f-03b1-4b28-958b-345c24802857",
       "title": "Build a binary search tree implementation in bst.py with insert, search, delete,",
       "description": "Build a binary search tree implementation in bst.py with insert, search, delete,\nImplement a binary search tree (BST) in `bst.py`.\n\n## Required interface\n```python\nclass BST:\n    def insert(self, val: int) -> None: ...\n    def search(self, val: int) -> bool: ...\n    def inorder(self) -> list[int]: ...\n    def height(self) -> int: ...\n    def delete(self, val: int) -> None: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom bst import BST\n\ntree = BST()\nfor v in [5, 3, 7, 1, 4, 6, 8]:\n    tree.insert(v)\n\nassert tree.search(4) == True\nassert tree.search(9) == False\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\nassert tree.height() == 3\n\ntree.delete(3)\nassert tree.search(3) == False\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\n\ntree2 = BST()\ntree2.insert(1)\nassert tree2.height() == 1\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- No external libraries\n- Recursive implementation preferred but iterative is fine\n- Handle delete with 0, 1, and 2 children correctly\n- Single file `bst.py`, under 100 lines\n{\"instructions\":\"Implement BST class in bst.py with insert, search, inorder, height, and delete. Must pass all provided test assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from bst import BST\\ntree = BST()\\nfor v in [5, 3, 7, 1, 4, 6, 8]:\\n    tree.insert(v)\\nassert tree.search(4) == True\\nassert tree.search(9) == False\\nassert tree.inorder() == [1, 3, 4, 5, 6, 7, 8]\\nassert tree.height() == 3\\ntree.delete(3)\\nassert tree.search(3) == False\\nassert tree.inorder() == [1, 4, 5, 6, 7, 8]\\ntree2 = BST()\\ntree2.insert(1)\\nassert tree2.height() == 1\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"bst.py\"]}}",
@@ -2595,6 +2555,48 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/dd327224-ddc5-4c8c-825f-e0ef2b266799",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "e53d7e46-196c-4814-83e3-ea063e332da3",
+      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
+      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
+          "required_files": [
+            "event_emitter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773733313,
+      "source": "https://www.bountybook.ai/job/e53d7e46-196c-4814-83e3-ea063e332da3",
       "source_kind": "bountybook"
     },
     {
