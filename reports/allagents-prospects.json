@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T05:13:52Z",
+  "generated_at": "2026-10-25T11:57:08Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -119,10 +119,10 @@
       "tags": []
     },
     {
-      "key": "packrift-a2a-packaging-procurement-router",
-      "name": "Packrift A2A Packaging Procurement Router",
-      "slug": "packrift-a2a-packaging-procurement-router",
-      "specialty": "commerce",
+      "key": "scriptmasterlabs-b20-truth",
+      "name": "SCRIPTMASTERLABS \u2014 B20 Truth",
+      "slug": "scriptmasterlabs-b20-truth",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
