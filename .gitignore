@@ -10,3 +10,6 @@ credentials*.json
 accounts.json
 community-research/
 campaign-output/
+
+# External upstream runtimes (cloned by MerchantBrain bootstrap)
+.runtime/
