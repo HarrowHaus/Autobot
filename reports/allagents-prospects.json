@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T16:46:53Z",
+  "generated_at": "2026-10-25T21:11:53Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -159,16 +159,6 @@
       "tags": []
     },
     {
-      "key": "shimi-ads",
-      "name": "shimi-ads",
-      "slug": "shimi-ads",
-      "specialty": "paid campaigns agent",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "jobs-for-ai-agents",
       "name": "Jobs for AI Agents",
       "slug": "jobs-for-ai-agents",
@@ -223,6 +213,16 @@
       "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
       "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
       "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "shimi-ads",
+      "name": "shimi-ads",
+      "slug": "shimi-ads",
+      "specialty": "paid campaigns agent",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
