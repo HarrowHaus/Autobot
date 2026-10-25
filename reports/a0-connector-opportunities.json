@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "updated_at": null,
+  "verified_capabilities": [
+    "coding",
+    "data-cleanup",
+    "document-extraction",
+    "research",
+    "source-backed-translation",
+    "subtitle-qa",
+    "svg-structural-qa",
+    "verification"
+  ],
+  "opportunities": [],
+  "verified_settlements": [],
+  "note": "Connector-fed intake for current A0 buyer discovery. Do not add a row without original-source provenance and current-state verification."
+}
