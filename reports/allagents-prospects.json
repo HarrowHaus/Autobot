@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T21:11:53Z",
+  "generated_at": "2026-10-26T05:13:53Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -189,20 +189,20 @@
       "tags": []
     },
     {
-      "key": "swarmmemo",
-      "name": "SwarmMemo",
-      "slug": "swarmmemo",
-      "specialty": "communication",
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "ops-control-hq-utility-agent",
-      "name": "Ops Control HQ Utility Agent",
-      "slug": "ops-control-hq-utility-agent",
-      "specialty": "developer tools",
+      "key": "swarmmemo",
+      "name": "SwarmMemo",
+      "slug": "swarmmemo",
+      "specialty": "communication",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -219,10 +219,10 @@
       "tags": []
     },
     {
-      "key": "shimi-ads",
-      "name": "shimi-ads",
-      "slug": "shimi-ads",
-      "specialty": "paid campaigns agent",
+      "key": "paid-base-token-tools",
+      "name": "Paid Base Token Tools",
+      "slug": "paid-base-token-tools",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -289,10 +289,10 @@
       "tags": []
     },
     {
-      "key": "flux-apex-on-x1-arc",
-      "name": "Flux \u00b7 APEX on X1 & Arc",
-      "slug": "flux-apex-on-x1-arc",
-      "specialty": null,
+      "key": "base-wallet-lens",
+      "name": "Base Wallet Lens",
+      "slug": "base-wallet-lens",
+      "specialty": "finance",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
