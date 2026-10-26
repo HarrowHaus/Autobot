@@ -1,55 +1,11 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-26T14:31:12.672Z",
+  "observed_at": "2026-10-26T20:06:25.405Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
   "candidates": [
-    {
-      "task_id": "1063de95-75f4-4170-8879-f5b1b683bb9b",
-      "title": "Build an AVL tree implementation in Python with insert, delete, and search metho",
-      "description": "Build an AVL tree implementation in Python with insert, delete, and search metho\nImplement an AVL tree in Python in file `avl.py`.\n\n## Required API\n\n```python\nclass AVLTree:\n    def insert(self, key: int) -> None: ...\n    def delete(self, key: int) -> None: ...\n    def search(self, key: int) -> bool: ...\n    def inorder(self) -> list[int]: ...  # sorted ascending\n    def height(self) -> int: ...         # height of root node\n```\n\n## Required test cases (run with `python avl.py`)\n\n```python\nt = AVLTree()\n\n# Insert and verify in-order\nfor v in [30, 20, 40, 10, 25, 35, 50]:\n    t.insert(v)\nassert t.inorder() == [10, 20, 25, 30, 35, 40, 50]\n\n# AVL balance property: height should be <= ceil(log2(n+1)) + 1\nimport math\nn = 7\nassert t.height() <= math.ceil(math.log2(n + 1)) + 1, \"Tree not balanced\"\n\n# Search\nassert t.search(25) == True\nassert t.search(99) == False\n\n# Delete\nt.delete(20)\nassert t.inorder() == [10, 25, 30, 35, 40, 50]\nassert t.search(20) == False\n\n# Trigger right-left rotation: insert in sequence that requires RL\nt2 = AVLTree()\nfor v in [10, 30, 20]:\n    t2.insert(v)\nassert t2.inorder() == [10, 20, 30]\nassert t2.height() == 2  # balanced, not a skewed chain of height 3\n\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`math` allowed)\n- No external packages\n- Submit `avl.py` — must run with `python avl.py`\n\n## Acceptance criteria\n- All 5 assertion groups pass\n- Tree remains balanced after each insert (verifiable via height check)\n- RL rotation test passes (height 2, not 3)\n- \"All tests passed\" printed on exit 0\n{\"language\":\"python\",\"entrypoint\":\"avl.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python avl.py exits with code 0\",\"output includes 'All tests passed'\",\"inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]\",\"height after 7 inserts <= ceil(log2(8))+1\",\"delete(20) removes 20 from inorder output\",\"RL rotation: height is 2 after inserting [10,30,20]\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "python",
-        "entrypoint": "avl.py",
-        "outputFormat": "stdout",
-        "checks": [
-          "python avl.py exits with code 0",
-          "output includes 'All tests passed'",
-          "inorder([30,20,40,10,25,35,50]) == [10,20,25,30,35,40,50]",
-          "height after 7 inserts <= ceil(log2(8))+1",
-          "delete(20) removes 20 from inorder output",
-          "RL rotation: height is 2 after inserting [10,30,20]"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "15000000",
-        "amount_display": "15.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/1063de95-75f4-4170-8879-f5b1b683bb9b",
-      "source_kind": "bountybook"
-    },
     {
       "task_id": "a99032ec-5542-4232-a7a7-23ed20bdbaf4",
       "title": "Build a generic LRU cache in Go with concurrent safety",
@@ -135,50 +91,6 @@
       "payment_status": null,
       "created_at": 1773907166,
       "source": "https://www.bountybook.ai/job/13e5b137-7f9d-4a6c-affa-215b8dd15657",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
-      "title": "Build a BloomFilter class in Python with add and contains methods",
-      "description": "Build a BloomFilter class in Python with add and contains methods\nImplement a `BloomFilter` class in Python in file `bloom.py`.\n\n## Required API\n\n```python\nclass BloomFilter:\n    def __init__(self, capacity: int, fp_rate: float):\n        \"\"\"\n        capacity: expected number of items\n        fp_rate: desired false-positive rate (e.g. 0.01 = 1%)\n        \"\"\"\n        ...\n\n    def add(self, item: str) -> None: ...\n    def contains(self, item: str) -> bool: ...\n\n    @property\n    def bit_array_size(self) -> int: ...   # m — number of bits\n\n    @property\n    def num_hash_functions(self) -> int: ...  # k\n```\n\n## Formulas to use\n- Optimal bit array size: `m = -(n * ln(p)) / (ln(2)^2)`\n- Optimal hash count: `k = (m/n) * ln(2)`\n- Use `hashlib.md5` and `hashlib.sha256` as base hashes, derive k hashes using the formula:\n  `h_i(x) = (hash1(x) + i * hash2(x)) % m`\n\n## Required test cases (run with `python bloom.py`)\n\n```python\nbf = BloomFilter(capacity=1000, fp_rate=0.01)\n\n# No false negatives (items we added must always be found)\nwords = [\"apple\", \"banana\", \"cherry\", \"date\", \"elderberry\"]\nfor w in words:\n    bf.add(w)\nfor w in words:\n    assert bf.contains(w), f\"False negative: {w}\"\n\n# FP rate check: add 1000 items, test 1000 non-members, FP rate < 5%\nimport random, string\nadded = set()\nfor _ in range(1000):\n    w = ''.join(random.choices(string.ascii_lowercase, k=8))\n    bf.add(w)\n    added.add(w)\n\nfp_count = sum(\n    1 for _ in range(1000)\n    if bf.contains(''.join(random.choices(string.ascii_lowercase, k=10)))\n       and ''.join(random.choices(string.ascii_lowercase, k=10)) not in added\n)\n# Just check structure — actual FP rate is probabilistic\nassert bf.bit_array_size > 0\nassert bf.num_hash_functions >= 2\nprint(\"All tests passed\")\n```\n\n## Constraints\n- stdlib only (`hashlib`, `math`, `array`)\n- No external packages\n- Submit `bloom.py` — must run cleanly with `python bloom.py`\n\n## Acceptance criteria\n- No false negatives for added items\n- `bit_array_size` and `num_hash_functions` match the optimal formulas (within integer rounding)\n- `python bloom.py` prints \"All tests passed\" and exits 0\n{\"language\":\"python\",\"entrypoint\":\"bloom.py\",\"outputFormat\":\"stdout\",\"checks\":[\"python bloom.py exits with code 0\",\"output includes 'All tests passed'\",\"no false negatives for added items\",\"bit_array_size > 0\",\"num_hash_functions >= 2\",\"stdlib only — no pip packages\"]}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "language": "python",
-        "entrypoint": "bloom.py",
-        "outputFormat": "stdout",
-        "checks": [
-          "python bloom.py exits with code 0",
-          "output includes 'All tests passed'",
-          "no false negatives for added items",
-          "bit_array_size > 0",
-          "num_hash_functions >= 2",
-          "stdlib only — no pip packages"
-        ]
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "12000000",
-        "amount_display": "12.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1773907166,
-      "source": "https://www.bountybook.ai/job/823eedfb-49f1-4a2c-9fba-87e6c4075e2a",
       "source_kind": "bountybook"
     },
     {
@@ -870,6 +782,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "title": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript",
+      "description": "Build ConcurrencyLimiter class with max concurrency cap in TypeScript\nImplement a `ConcurrencyLimiter` class in `concurrency_limiter.ts` that runs async tasks with a maximum concurrency cap.\n\n## Interface\n```typescript\nclass ConcurrencyLimiter {\n  constructor(maxConcurrent: number);\n\n  // Add a task (async function) to the queue.\n  // Returns a Promise that resolves to the task's return value.\n  add<T>(task: () => Promise<T>): Promise<T>;\n\n  // Wait until all queued/running tasks finish.\n  waitAll(): Promise<void>;\n\n  // Current number of running tasks (not queued).\n  get running(): number;\n\n  // Current number of queued tasks (waiting to run).\n  get pending(): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { ConcurrencyLimiter } from './concurrency_limiter';\n\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\n\nasync function runTests() {\n  // Basic concurrency cap\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n\n  await limiter.waitAll();\n\n  // All 4 tasks completed\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n\n  // Max 2 ran concurrently at any point — log has interleaved starts\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n\n  // Return value correctness\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n\n  // pending/running counters\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  // Give event loop a tick\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n\n  console.log('ALL TESTS PASSED');\n}\n\nrunTests().catch(e => { console.error(e); process.exit(1); });\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict --target ES2020`\n- Export `ConcurrencyLimiter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { ConcurrencyLimiter } from './concurrency_limiter';\\nasync function delay(ms: number): Promise<number> {\\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\\n}\\nasync function runTests() {\\n  const limiter = new ConcurrencyLimiter(2);\\n  const log: string[] = [];\\n  const results: Promise<number>[] = [];\\n  for (let i = 1; i <= 4; i++) {\\n    results.push(limiter.add(async () => {\\n      log.push(`start:${i}`);\\n      await delay(10);\\n      log.push(`end:${i}`);\\n      return i * 10;\\n    }));\\n  }\\n  await limiter.waitAll();\\n  const resolved = await Promise.all(results);\\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\\n  console.assert(resolved.includes(10), 'Should include 10');\\n  console.assert(resolved.includes(40), 'Should include 40');\\n  const starts = log.filter(l => l.startsWith('start'));\\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\\n  const single = new ConcurrencyLimiter(1);\\n  const r = await single.add(async () => 'hello');\\n  console.assert(r === 'hello', 'Should return task result');\\n  const limiter2 = new ConcurrencyLimiter(1);\\n  const t1 = limiter2.add(() => delay(50));\\n  const t2 = limiter2.add(() => delay(50));\\n  await new Promise(r => setTimeout(r, 5));\\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\\n  await Promise.all([t1, t2]);\\n  console.log('ALL TESTS PASSED');\\n}\\nrunTests().catch(e => { console.error(e); process.exit(1); });\",\"required_files\":[\"concurrency_limiter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement ConcurrencyLimiter class in concurrency_limiter.ts: async task queue with max concurrent cap, add() returns task result, waitAll(), running, and pending. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { ConcurrencyLimiter } from './concurrency_limiter';\nasync function delay(ms: number): Promise<number> {\n  return new Promise(resolve => setTimeout(() => resolve(ms), ms));\n}\nasync function runTests() {\n  const limiter = new ConcurrencyLimiter(2);\n  const log: string[] = [];\n  const results: Promise<number>[] = [];\n  for (let i = 1; i <= 4; i++) {\n    results.push(limiter.add(async () => {\n      log.push(`start:${i}`);\n      await delay(10);\n      log.push(`end:${i}`);\n      return i * 10;\n    }));\n  }\n  await limiter.waitAll();\n  const resolved = await Promise.all(results);\n  console.assert(resolved.length === 4, 'Should resolve 4 tasks');\n  console.assert(resolved.includes(10), 'Should include 10');\n  console.assert(resolved.includes(40), 'Should include 40');\n  const starts = log.filter(l => l.startsWith('start'));\n  console.assert(starts.length === 4, 'All 4 tasks should have started');\n  const single = new ConcurrencyLimiter(1);\n  const r = await single.add(async () => 'hello');\n  console.assert(r === 'hello', 'Should return task result');\n  const limiter2 = new ConcurrencyLimiter(1);\n  const t1 = limiter2.add(() => delay(50));\n  const t2 = limiter2.add(() => delay(50));\n  await new Promise(r => setTimeout(r, 5));\n  console.assert(limiter2.running === 1, `running should be 1, got ${limiter2.running}`);\n  console.assert(limiter2.pending === 1, `pending should be 1, got ${limiter2.pending}`);\n  await Promise.all([t1, t2]);\n  console.log('ALL TESTS PASSED');\n}\nrunTests().catch(e => { console.error(e); process.exit(1); });",
+          "required_files": [
+            "concurrency_limiter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "6000000",
+        "amount_display": "6.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/9fee11b8-d7d9-4f9e-9920-084e14696f66",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "047c5be8-f5df-47a5-8d98-65831622f5b9",
       "title": "Build a RateLimiter class that manages token bucket rate limiting",
       "description": "Build a RateLimiter class that manages token bucket rate limiting\nWrite `rate_limiter.js` that exports a `RateLimiter` class.\n\n## API\n```js\nconst limiter = new RateLimiter({ capacity: 5, refillRate: 2, refillInterval: 1000 });\n// capacity: max tokens\n// refillRate: tokens added per interval\n// refillInterval: ms between refills\n\nlimiter.tryConsume()          // → true if token available, false if bucket empty\nlimiter.tryConsume(2)         // → true if 2 tokens available, false otherwise\nlimiter.available()           // → current token count (integer)\n```\n\n## Rules\n- Tokens refill automatically over time (use `Date.now()` — no `setInterval`).\n- Never exceed capacity.\n- `tryConsume(n=1)` atomically checks and consumes. Returns `false` without consuming if insufficient tokens.\n- `available()` returns the current floor token count as an integer.\n- No external dependencies.\n- `module.exports = { RateLimiter };`\n\n## Deliverable\nSingle file `rate_limiter.js`.\n{\"instructions\":\"Write rate_limiter.js exporting RateLimiter class. Constructor: { capacity, refillRate, refillInterval }. Methods: tryConsume(n=1) → bool, available() → int. Token refill is time-based using Date.now(), no setInterval. Never exceeds capacity. module.exports = { RateLimiter }.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"javascript\",\"test_code\":\"const assert = require(\\\"assert\\\");\\nconst fs = require(\\\"fs\\\");\\n\\nassert(fs.existsSync(\\\"rate_limiter.js\\\"), \\\"rate_limiter.js not found\\\");\\nconst { RateLimiter } = require(\\\"./rate_limiter.js\\\");\\n\\n// Basic consume\\nconst lim = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim.available() === 3, \\\"Should start full\\\");\\nassert(lim.tryConsume() === true, \\\"First consume should succeed\\\");\\nassert(lim.available() === 2, \\\"Should have 2 after 1 consume\\\");\\n\\n// Consume multiple\\nassert(lim.tryConsume(2) === true, \\\"Consume 2 from bucket of 2\\\");\\nassert(lim.available() === 0, \\\"Should be empty\\\");\\nassert(lim.tryConsume() === false, \\\"Empty bucket should return false\\\");\\n\\n// Partial consume must not deplete\\nconst lim2 = new RateLimiter({ capacity: 3, refillRate: 1, refillInterval: 1000 });\\nassert(lim2.tryConsume(2) === true);\\nassert(lim2.available() === 1);\\nassert(lim2.tryConsume(2) === false, \\\"Not enough tokens — should reject\\\");\\nassert(lim2.available() === 1, \\\"Tokens unchanged after failed consume\\\");\\n\\n// Capacity not exceeded on refill\\nconst lim3 = new RateLimiter({ capacity: 2, refillRate: 100, refillInterval: 1 });\\n// Wait for a few ms to let tokens refill\\nconst sleep = ms => new Promise(r => setTimeout(r, ms));\\n(async () => {\\n  await sleep(50);\\n  assert(lim3.available() <= 2, \\\"Tokens must not exceed capacity\\\");\\n  console.log(\\\"ALL TESTS PASSED\\\");\\n})().catch(err => { console.error(err); process.exit(1); });\",\"required_files\":[\"rate_limiter.js\"]}}",
@@ -1542,6 +1496,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "de84c8b9-35ee-41e6-90a4-70e10d31da38",
+      "title": "Build graph traversal with BFS, DFS, and connected components in Python",
+      "description": "Build graph traversal with BFS, DFS, and connected components in Python\nImplement BFS (breadth-first search) and DFS (depth-first search) for an undirected graph in `graph_traversal.py`.\n\n## Interface\n```python\nclass Graph:\n    def __init__(self, edges: list[tuple[int, int]]): ...\n    def bfs(self, start: int) -> list[int]: ...\n    def dfs(self, start: int) -> list[int]: ...\n    def has_path(self, start: int, end: int) -> bool: ...\n    def connected_components(self) -> list[list[int]]: ...\n```\n\n## Test assertions (must all pass)\n```python\nfrom graph_traversal import Graph\n\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\n\nbfs = g.bfs(0)\nassert bfs[0] == 0           # starts at 0\nassert set(bfs[:4]) == {0,1,2,3}  # visits all connected nodes\n\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\n\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False  # disconnected component\n\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use adjacency list representation\n- BFS must use a queue (collections.deque)\n- No external libraries\n- Single file `graph_traversal.py`, under 80 lines\n{\"instructions\":\"Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from graph_traversal import Graph\\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\\nbfs = g.bfs(0)\\nassert bfs[0] == 0\\nassert set(bfs[:4]) == {0,1,2,3}\\ndfs = g.dfs(0)\\nassert dfs[0] == 0\\nassert set(dfs) == {0, 1, 2, 3}\\nassert g.has_path(0, 3) == True\\nassert g.has_path(0, 4) == False\\ncomponents = g.connected_components()\\nassert len(components) == 2\\nassert any(set(c) == {0,1,2,3} for c in components)\\nassert any(set(c) == {4,5} for c in components)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"graph_traversal.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement Graph class in graph_traversal.py with BFS, DFS, has_path, and connected_components. Must pass all provided assertions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from graph_traversal import Graph\ng = Graph([(0,1),(0,2),(1,3),(2,3),(4,5)])\nbfs = g.bfs(0)\nassert bfs[0] == 0\nassert set(bfs[:4]) == {0,1,2,3}\ndfs = g.dfs(0)\nassert dfs[0] == 0\nassert set(dfs) == {0, 1, 2, 3}\nassert g.has_path(0, 3) == True\nassert g.has_path(0, 4) == False\ncomponents = g.connected_components()\nassert len(components) == 2\nassert any(set(c) == {0,1,2,3} for c in components)\nassert any(set(c) == {4,5} for c in components)\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "graph_traversal.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "5000000",
+        "amount_display": "5.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754462,
+      "source": "https://www.bountybook.ai/job/de84c8b9-35ee-41e6-90a4-70e10d31da38",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "f4fe9b3d-c240-459c-a3b0-f116f63f0ad9",
       "title": "Build rate_limiter.py with token-bucket RateLimiter class",
       "description": "Build rate_limiter.py with token-bucket RateLimiter class\nWrite `rate_limiter.py` implementing a `RateLimiter` class using the token-bucket algorithm.\n\n## Interface\n```python\nclass RateLimiter:\n    def __init__(self, rate: float, capacity: float): ...\n    def allow(self, key: str, tokens: float = 1.0) -> bool: ...\n    def remaining(self, key: str) -> float: ...\n```\n\n## Rules\n- Stdlib only. Thread-safe with per-key locks.\n- Tokens replenish continuously based on elapsed wall time.\n- Bucket never exceeds capacity. On False return, bucket is unchanged.\n- Each key has an independent bucket.\n\n## Deliverable\nSingle file `rate_limiter.py`.\n{\"instructions\":\"Write rate_limiter.py with a RateLimiter class using token-bucket algorithm. rate=tokens/sec, capacity=max bucket size. allow(key) returns True and consumes tokens if available, False if not (bucket unchanged). remaining(key) returns current tokens. Per-key independent buckets. Thread-safe. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import time\\nfrom rate_limiter import RateLimiter\\n\\n# Basic allow/deny\\nrl = RateLimiter(rate=10, capacity=10)\\nassert rl.allow(\\\"u1\\\") is True, \\\"first allow should succeed\\\"\\nrem = rl.remaining(\\\"u1\\\")\\nassert 8.5 < rem < 9.5, f\\\"remaining should be ~9, got {rem}\\\"\\n\\n# Exhaust bucket\\nfor _ in range(9):\\n    rl.allow(\\\"u1\\\")\\nassert rl.allow(\\\"u1\\\") is False, \\\"empty bucket should deny\\\"\\n\\n# Bucket unchanged after deny\\nbefore = rl.remaining(\\\"u1\\\")\\nrl.allow(\\\"u1\\\")\\nafter = rl.remaining(\\\"u1\\\")\\nassert abs(before - after) < 0.1, \\\"deny should not change bucket\\\"\\n\\n# Replenish via time passage\\ntime.sleep(0.3)  # ~3 tokens at rate=10\\nassert rl.allow(\\\"u1\\\") is True, \\\"should allow after replenish\\\"\\n\\n# Independent keys\\nrl2 = RateLimiter(rate=5, capacity=5)\\nrl2.allow(\\\"a\\\")\\nrl2.allow(\\\"a\\\")\\nassert rl2.allow(\\\"b\\\") is True, \\\"key b should have full bucket\\\"\\nr_b = rl2.remaining(\\\"b\\\")\\nr_a = rl2.remaining(\\\"a\\\")\\nassert r_b > r_a, \\\"b should have more tokens than a\\\"\\n\\n# Unknown key remaining = 0 (or capacity if not yet accessed)\\nrl3 = RateLimiter(rate=1, capacity=5)\\nr = rl3.remaining(\\\"new_key\\\")\\nassert r == 0.0 or r >= 0, \\\"unknown key remaining should be 0 or positive\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"rate_limiter.py\"]}}",
@@ -1756,6 +1750,48 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "title": "Build extract_products.py parser for HTML product listings to JSON",
+      "description": "Build extract_products.py parser for HTML product listings to JSON\nWrite `extract_products.py` that parses an HTML string containing product listings and returns structured JSON.\n\n## Input HTML structure\nEach product is in a `<div class=\"product\">` element:\n```html\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\">\n    <li>audio</li>\n    <li>wireless</li>\n  </ul>\n</div>\n```\n\n## Interface\n```python\ndef extract_products(html: str) -> list[dict]:\n    \"\"\"\n    Returns list of product dicts with keys:\n    id (int), name (str), price_usd (float), rating (float),\n    review_count (int), in_stock (bool), tags (list[str])\n    \"\"\"\n```\n\n## Type conversions required\n- `id`: from `data-id` attribute → int\n- `price_usd`: strip `$` and commas → float\n- `rating`: → float\n- `review_count`: strip commas → int\n- `in_stock`: `\"In Stock\"` → True, anything else → False\n- `tags`: list of `<li>` text values (stripped)\n\n## Test assertions (must all pass)\n```python\nfrom extract_products import extract_products\n\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\n\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\n\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- Use `beautifulsoup4` (`pip install beautifulsoup4`)\n- Single file `extract_products.py`\n- Under 50 lines\n{\"instructions\":\"Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from extract_products import extract_products\\nhtml = \\\"\\\"\\\"\\n<div class=\\\"product\\\" data-id=\\\"101\\\">\\n  <h2 class=\\\"product-name\\\">Wireless Headphones</h2>\\n  <span class=\\\"price\\\">$79.99</span>\\n  <span class=\\\"rating\\\">4.5</span>\\n  <span class=\\\"reviews\\\">1,243</span>\\n  <span class=\\\"availability\\\">In Stock</span>\\n  <ul class=\\\"tags\\\"><li>audio</li><li>wireless</li></ul>\\n</div>\\n<div class=\\\"product\\\" data-id=\\\"102\\\">\\n  <h2 class=\\\"product-name\\\">USB-C Hub</h2>\\n  <span class=\\\"price\\\">$34.50</span>\\n  <span class=\\\"rating\\\">4.1</span>\\n  <span class=\\\"reviews\\\">892</span>\\n  <span class=\\\"availability\\\">Out of Stock</span>\\n  <ul class=\\\"tags\\\"><li>usb</li><li>accessories</li></ul>\\n</div>\\n\\\"\\\"\\\"\\nproducts = extract_products(html)\\nassert len(products) == 2\\np1 = products[0]\\nassert p1[\\\"id\\\"] == 101\\nassert p1[\\\"name\\\"] == \\\"Wireless Headphones\\\"\\nassert p1[\\\"price_usd\\\"] == 79.99\\nassert p1[\\\"rating\\\"] == 4.5\\nassert p1[\\\"review_count\\\"] == 1243\\nassert p1[\\\"in_stock\\\"] is True\\nassert p1[\\\"tags\\\"] == [\\\"audio\\\", \\\"wireless\\\"]\\np2 = products[1]\\nassert p2[\\\"id\\\"] == 102\\nassert p2[\\\"in_stock\\\"] is False\\nassert p2[\\\"review_count\\\"] == 892\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"extract_products.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement extract_products(html) in extract_products.py using BeautifulSoup to parse product divs and return structured list of dicts with correct type conversions.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from extract_products import extract_products\nhtml = \"\"\"\n<div class=\"product\" data-id=\"101\">\n  <h2 class=\"product-name\">Wireless Headphones</h2>\n  <span class=\"price\">$79.99</span>\n  <span class=\"rating\">4.5</span>\n  <span class=\"reviews\">1,243</span>\n  <span class=\"availability\">In Stock</span>\n  <ul class=\"tags\"><li>audio</li><li>wireless</li></ul>\n</div>\n<div class=\"product\" data-id=\"102\">\n  <h2 class=\"product-name\">USB-C Hub</h2>\n  <span class=\"price\">$34.50</span>\n  <span class=\"rating\">4.1</span>\n  <span class=\"reviews\">892</span>\n  <span class=\"availability\">Out of Stock</span>\n  <ul class=\"tags\"><li>usb</li><li>accessories</li></ul>\n</div>\n\"\"\"\nproducts = extract_products(html)\nassert len(products) == 2\np1 = products[0]\nassert p1[\"id\"] == 101\nassert p1[\"name\"] == \"Wireless Headphones\"\nassert p1[\"price_usd\"] == 79.99\nassert p1[\"rating\"] == 4.5\nassert p1[\"review_count\"] == 1243\nassert p1[\"in_stock\"] is True\nassert p1[\"tags\"] == [\"audio\", \"wireless\"]\np2 = products[1]\nassert p2[\"id\"] == 102\nassert p2[\"in_stock\"] is False\nassert p2[\"review_count\"] == 892\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "extract_products.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/01f7ea51-9dbb-40d1-8806-8a7266e4483a",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "05b6cbff-5535-4981-9934-81566e636e9b",
       "title": "Build validate_config.py script to validate YAML config against hardcoded schema",
       "description": "Build validate_config.py script to validate YAML config against hardcoded schema\nWrite `validate_config.py` that validates a YAML config file against a hardcoded schema and outputs a structured validation report.\n\n## CLI\n```\npython validate_config.py <config.yaml>\n```\n\n## Schema to enforce\n```yaml\nserver:\n  host: string (required, non-empty)\n  port: integer (required, 1-65535)\n  debug: boolean (optional, default false)\ndatabase:\n  url: string (required, non-empty, must start with postgres:// or sqlite://)\n  pool_size: integer (optional, default 5, must be 1-100)\nlogging:\n  level: string (required, must be one of: DEBUG, INFO, WARNING, ERROR, CRITICAL)\n```\n\n## Output on success\n```\nConfig valid.\nserver.host: localhost\nserver.port: 8080\nserver.debug: false\ndatabase.url: postgres://...\ndatabase.pool_size: 5\nlogging.level: INFO\n```\n\n## Output on error (one line per violation, exit code 1)\n```\nINVALID CONFIG:\n  server.port: must be integer 1-65535\n  database.url: must start with postgres:// or sqlite://\n```\n\n## Rules\n- Use PyYAML (`import yaml`). No other third-party libs.\n- Exit 0 on valid, exit 1 on invalid, exit 2 on wrong args or file not found.\n\n## Deliverable\nSingle file `validate_config.py`.\n{\"instructions\":\"Write validate_config.py using PyYAML. Validate: server.host (str, required), server.port (int 1-65535, required), server.debug (bool, optional default false), database.url (str starting with postgres:// or sqlite://, required), database.pool_size (int 1-100, optional default 5), logging.level (str one of DEBUG/INFO/WARNING/ERROR/CRITICAL, required). Exit 0 valid, exit 1 invalid with INVALID CONFIG: prefix and indented error lines, exit 2 wrong args/missing file.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import subprocess, sys, os\\n\\nassert os.path.exists(\\\"validate_config.py\\\"), \\\"validate_config.py not found\\\"\\n\\ndef write_yaml(filename, content):\\n    with open(filename, \\\"w\\\") as f:\\n        f.write(content)\\n\\ndef run(config_file):\\n    return subprocess.run([sys.executable, \\\"validate_config.py\\\", config_file],\\n                          capture_output=True, text=True)\\n\\n# Valid config\\nwrite_yaml(\\\"valid.yaml\\\", \\\"\\\"\\\"\\nserver:\\n  host: localhost\\n  port: 8080\\n  debug: false\\ndatabase:\\n  url: postgres://localhost/mydb\\n  pool_size: 10\\nlogging:\\n  level: INFO\\n\\\"\\\"\\\")\\nr = run(\\\"valid.yaml\\\")\\nassert r.returncode == 0, f\\\"Expected valid config to pass: {r.stdout} {r.stderr}\\\"\\nassert \\\"Config valid.\\\" in r.stdout, f\\\"Expected 'Config valid.' in output: {r.stdout}\\\"\\n\\n# Invalid port\\nwrite_yaml(\\\"bad_port.yaml\\\", \\\"\\\"\\\"\\nserver:\\n  host: localhost\\n  port: 99999\\ndatabase:\\n  url: postgres://localhost/mydb\\nlogging:\\n  level: INFO\\n\\\"\\\"\\\")\\nr = run(\\\"bad_port.yaml\\\")\\nassert r.returncode == 1, f\\\"Expected exit 1 for bad port: {r.returncode}\\\"\\nassert \\\"INVALID CONFIG\\\" in r.stdout, f\\\"Expected 'INVALID CONFIG' in output: {r.stdout}\\\"\\nassert \\\"server.port\\\" in r.stdout, f\\\"Expected server.port error: {r.stdout}\\\"\\n\\n# Invalid DB url\\nwrite_yaml(\\\"bad_db.yaml\\\", \\\"\\\"\\\"\\nserver:\\n  host: localhost\\n  port: 8080\\ndatabase:\\n  url: mysql://localhost/mydb\\nlogging:\\n  level: INFO\\n\\\"\\\"\\\")\\nr = run(\\\"bad_db.yaml\\\")\\nassert r.returncode == 1, f\\\"Expected exit 1 for bad db url\\\"\\nassert \\\"database.url\\\" in r.stdout, f\\\"Expected database.url error: {r.stdout}\\\"\\n\\n# Invalid logging level\\nwrite_yaml(\\\"bad_level.yaml\\\", \\\"\\\"\\\"\\nserver:\\n  host: localhost\\n  port: 8080\\ndatabase:\\n  url: sqlite:///local.db\\nlogging:\\n  level: VERBOSE\\n\\\"\\\"\\\")\\nr = run(\\\"bad_level.yaml\\\")\\nassert r.returncode == 1, \\\"Expected exit 1 for bad logging level\\\"\\nassert \\\"logging.level\\\" in r.stdout, f\\\"Expected logging.level error: {r.stdout}\\\"\\n\\n# Wrong args\\nr2 = subprocess.run([sys.executable, \\\"validate_config.py\\\"], capture_output=True)\\nassert r2.returncode == 2, \\\"Should exit 2 with no args\\\"\\n\\n# Missing file\\nr3 = subprocess.run([sys.executable, \\\"validate_config.py\\\", \\\"/nope.yaml\\\"], capture_output=True)\\nassert r3.returncode == 2, \\\"Should exit 2 for missing file\\\"\\n\\nfor fn in [\\\"valid.yaml\\\",\\\"bad_port.yaml\\\",\\\"bad_db.yaml\\\",\\\"bad_level.yaml\\\"]:\\n    if os.path.exists(fn): os.unlink(fn)\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"validate_config.py\"]}}",
@@ -1879,6 +1915,48 @@
       "payment_status": null,
       "created_at": 1773831865,
       "source": "https://www.bountybook.ai/job/10e03033-0397-4d12-9154-e4499bec2ae2",
+      "source_kind": "bountybook"
+    },
+    {
+      "task_id": "15c49345-504f-439c-9680-696fd6026773",
+      "title": "Build EventEmitter class with on, off, emit, once, and listenerCount methods",
+      "description": "Build EventEmitter class with on, off, emit, once, and listenerCount methods\nImplement an `EventEmitter` class in `event_emitter.ts`.\n\n## Interface\n```typescript\nclass EventEmitter {\n  on(event: string, listener: (...args: unknown[]) => void): void;\n  off(event: string, listener: (...args: unknown[]) => void): void;\n  emit(event: string, ...args: unknown[]): void;\n  once(event: string, listener: (...args: unknown[]) => void): void;\n  listenerCount(event: string): number;\n}\n```\n\n## Test assertions (must all pass)\n```typescript\nimport { EventEmitter } from './event_emitter';\n\nconst ee = new EventEmitter();\nconst results: string[] = [];\n\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\n// results = ['a:1', 'b:1']\n\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done'); // second emit should NOT fire once listener\n// 'done' appears exactly once\n\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99); // should not fire after off\n// results contains 'c:42' but not 'c:99'\n\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');\n```\n\n## Constraints\n- No external dependencies\n- Compiled with `tsc --strict`\n- Export `EventEmitter` as a named export\n- Under 80 lines\n{\"instructions\":\"Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { EventEmitter } from './event_emitter';\\nconst ee = new EventEmitter();\\nconst results: string[] = [];\\nee.on('data', (x) => results.push('a:' + x));\\nee.on('data', (x) => results.push('b:' + x));\\nee.emit('data', 1);\\nee.once('done', () => results.push('done'));\\nee.emit('done');\\nee.emit('done');\\nconst handler = (x: unknown) => results.push('c:' + x);\\nee.on('ping', handler);\\nee.emit('ping', 42);\\nee.off('ping', handler);\\nee.emit('ping', 99);\\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\\nconsole.assert(results.includes('c:42'), 'handler not called');\\nconsole.assert(!results.includes('c:99'), 'handler called after off');\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "matched_capabilities": [
+        "coding",
+        "data-analysis"
+      ],
+      "expected_output": {
+        "instructions": "Implement EventEmitter class in event_emitter.ts with on/off/emit/once/listenerCount. Must pass all assertions under --strict.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "typescript",
+          "test_code": "import { EventEmitter } from './event_emitter';\nconst ee = new EventEmitter();\nconst results: string[] = [];\nee.on('data', (x) => results.push('a:' + x));\nee.on('data', (x) => results.push('b:' + x));\nee.emit('data', 1);\nee.once('done', () => results.push('done'));\nee.emit('done');\nee.emit('done');\nconst handler = (x: unknown) => results.push('c:' + x);\nee.on('ping', handler);\nee.emit('ping', 42);\nee.off('ping', handler);\nee.emit('ping', 99);\nconsole.assert(ee.listenerCount('data') === 2, 'listenerCount failed');\nconsole.assert(results.filter(r => r === 'done').length === 1, 'once fired more than once');\nconsole.assert(results.includes('c:42'), 'handler not called');\nconsole.assert(!results.includes('c:99'), 'handler called after off');\nconsole.log('ALL TESTS PASSED');",
+          "required_files": [
+            "event_emitter.ts"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "4000000",
+        "amount_display": "4.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773754461,
+      "source": "https://www.bountybook.ai/job/15c49345-504f-439c-9680-696fd6026773",
       "source_kind": "bountybook"
     },
     {
@@ -2433,48 +2511,6 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/dd327224-ddc5-4c8c-825f-e0ef2b266799",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "e6a89a5e-048d-4170-b4ef-e5f618eb76ea",
-      "title": "Build lib.rs with word_count function that counts normalized words",
-      "description": "Build lib.rs with word_count function that counts normalized words\nWrite `lib.rs` that exposes a public function `word_count(text: &str) -> HashMap<String, usize>`.\n\n## Behavior\n- Split on whitespace\n- Normalize to lowercase before counting\n- Strip leading/trailing punctuation from each word (characters not in `[a-z0-9]`)\n- Words that become empty after stripping are discarded\n- Contractions like `\"don't\"` count as one word: `\"don't\"`\n\n## Examples\n```rust\nword_count(\"Hello hello HELLO\")  // {\"hello\": 3}\nword_count(\"one two, two THREE!\") // {\"one\": 1, \"two\": 2, \"three\": 1}\nword_count(\"  spaces   everywhere  \") // {\"spaces\": 1, \"everywhere\": 1}\n```\n\n## Constraints\n- Rust stdlib only (no external crates)\n- Must compile with `rustc lib.rs --edition 2021 --crate-type lib`\n- Include `#[cfg(test)]` tests that pass via `rustc --test`\n{\"instructions\":\"Implement pub fn word_count(text: &str) -> HashMap<String, usize> in lib.rs. Lowercase, strip edge punctuation, discard empty tokens. Stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"bash\",\"test_code\":\"#!/bin/bash\\nset -e\\n\\ncp lib.rs /tmp/word_count_lib.rs\\n\\n# Append a test runner main to verify\\ncat > /tmp/word_count_test_main.rs << 'EOF'\\nmod word_count_lib {\\n    include!(\\\"/tmp/word_count_lib.rs\\\");\\n}\\nuse word_count_lib::word_count;\\n\\nfn main() {\\n    let r = word_count(\\\"Hello hello HELLO\\\");\\n    assert_eq!(r.get(\\\"hello\\\"), Some(&3), \\\"hello count wrong\\\");\\n\\n    let r2 = word_count(\\\"one two, two THREE!\\\");\\n    assert_eq!(r2.get(\\\"one\\\"), Some(&1));\\n    assert_eq!(r2.get(\\\"two\\\"), Some(&2));\\n    assert_eq!(r2.get(\\\"three\\\"), Some(&1));\\n\\n    let r3 = word_count(\\\"  spaces   everywhere  \\\");\\n    assert_eq!(r3.get(\\\"spaces\\\"), Some(&1));\\n    assert_eq!(r3.get(\\\"everywhere\\\"), Some(&1));\\n\\n    let r4 = word_count(\\\"\\\");\\n    assert!(r4.is_empty(), \\\"empty string should yield empty map\\\");\\n\\n    println!(\\\"ALL TESTS PASSED\\\");\\n}\\nEOF\\n\\nrustc /tmp/word_count_test_main.rs --edition 2021 -o /tmp/word_count_test_bin 2>&1\\n/tmp/word_count_test_bin\",\"required_files\":[\"lib.rs\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement pub fn word_count(text: &str) -> HashMap<String, usize> in lib.rs. Lowercase, strip edge punctuation, discard empty tokens. Stdlib only.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "bash",
-          "test_code": "#!/bin/bash\nset -e\n\ncp lib.rs /tmp/word_count_lib.rs\n\n# Append a test runner main to verify\ncat > /tmp/word_count_test_main.rs << 'EOF'\nmod word_count_lib {\n    include!(\"/tmp/word_count_lib.rs\");\n}\nuse word_count_lib::word_count;\n\nfn main() {\n    let r = word_count(\"Hello hello HELLO\");\n    assert_eq!(r.get(\"hello\"), Some(&3), \"hello count wrong\");\n\n    let r2 = word_count(\"one two, two THREE!\");\n    assert_eq!(r2.get(\"one\"), Some(&1));\n    assert_eq!(r2.get(\"two\"), Some(&2));\n    assert_eq!(r2.get(\"three\"), Some(&1));\n\n    let r3 = word_count(\"  spaces   everywhere  \");\n    assert_eq!(r3.get(\"spaces\"), Some(&1));\n    assert_eq!(r3.get(\"everywhere\"), Some(&1));\n\n    let r4 = word_count(\"\");\n    assert!(r4.is_empty(), \"empty string should yield empty map\");\n\n    println!(\"ALL TESTS PASSED\");\n}\nEOF\n\nrustc /tmp/word_count_test_main.rs --edition 2021 -o /tmp/word_count_test_bin 2>&1\n/tmp/word_count_test_bin",
-          "required_files": [
-            "lib.rs"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "4000000",
-        "amount_display": "4.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/e6a89a5e-048d-4170-b4ef-e5f618eb76ea",
       "source_kind": "bountybook"
     },
     {
@@ -4133,46 +4169,6 @@
       "payment_status": null,
       "created_at": 1774261989,
       "source": "https://www.bountybook.ai/job/7ef434e0-e870-4aa0-90f9-33db59262ccd",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "title": "Build Roman numeral conversion functions in roman.py",
-      "description": "Build Roman numeral conversion functions in roman.py\nWrite two functions in `roman.py`:\n- `to_roman(n: int) -> str` — convert integer 1–3999 to Roman numeral string\n- `from_roman(s: str) -> int` — convert Roman numeral string to integer\n\n## Standard numeral values\nI=1, V=5, X=10, L=50, C=100, D=500, M=1000\n\n## Subtractive notation\nIV=4, IX=9, XL=40, XC=90, CD=400, CM=900\n\n## Constraints\n- `to_roman` raises `ValueError` for n outside 1–3999\n- `from_roman` raises `ValueError` for invalid strings\n- Python 3.8+ stdlib only, single file `roman.py`\n{\"instructions\":\"Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from roman import to_roman, from_roman\\n\\n# to_roman\\nassert to_roman(1) == \\\"I\\\"\\nassert to_roman(4) == \\\"IV\\\"\\nassert to_roman(9) == \\\"IX\\\"\\nassert to_roman(14) == \\\"XIV\\\"\\nassert to_roman(40) == \\\"XL\\\"\\nassert to_roman(90) == \\\"XC\\\"\\nassert to_roman(400) == \\\"CD\\\"\\nassert to_roman(900) == \\\"CM\\\"\\nassert to_roman(1994) == \\\"MCMXCIV\\\", f\\\"got: {to_roman(1994)}\\\"\\nassert to_roman(3999) == \\\"MMMCMXCIX\\\", f\\\"got: {to_roman(3999)}\\\"\\nassert to_roman(2024) == \\\"MMXXIV\\\", f\\\"got: {to_roman(2024)}\\\"\\n\\n# from_roman\\nassert from_roman(\\\"I\\\") == 1\\nassert from_roman(\\\"IV\\\") == 4\\nassert from_roman(\\\"XIV\\\") == 14\\nassert from_roman(\\\"MCMXCIV\\\") == 1994\\nassert from_roman(\\\"MMMCMXCIX\\\") == 3999\\n\\n# Round-trip\\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\\n    assert from_roman(to_roman(n)) == n, f\\\"round-trip failed for {n}\\\"\\n\\n# ValueError for out of range\\ntry:\\n    to_roman(0)\\n    assert False, \\\"should raise ValueError for 0\\\"\\nexcept ValueError:\\n    pass\\n\\ntry:\\n    to_roman(4000)\\n    assert False, \\\"should raise ValueError for 4000\\\"\\nexcept ValueError:\\n    pass\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"roman.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement to_roman(n) and from_roman(s) in roman.py. Standard Roman numerals 1-3999 with subtractive notation. ValueError for invalid inputs.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from roman import to_roman, from_roman\n\n# to_roman\nassert to_roman(1) == \"I\"\nassert to_roman(4) == \"IV\"\nassert to_roman(9) == \"IX\"\nassert to_roman(14) == \"XIV\"\nassert to_roman(40) == \"XL\"\nassert to_roman(90) == \"XC\"\nassert to_roman(400) == \"CD\"\nassert to_roman(900) == \"CM\"\nassert to_roman(1994) == \"MCMXCIV\", f\"got: {to_roman(1994)}\"\nassert to_roman(3999) == \"MMMCMXCIX\", f\"got: {to_roman(3999)}\"\nassert to_roman(2024) == \"MMXXIV\", f\"got: {to_roman(2024)}\"\n\n# from_roman\nassert from_roman(\"I\") == 1\nassert from_roman(\"IV\") == 4\nassert from_roman(\"XIV\") == 14\nassert from_roman(\"MCMXCIV\") == 1994\nassert from_roman(\"MMMCMXCIX\") == 3999\n\n# Round-trip\nfor n in [1, 4, 9, 14, 40, 399, 1776, 2024, 3999]:\n    assert from_roman(to_roman(n)) == n, f\"round-trip failed for {n}\"\n\n# ValueError for out of range\ntry:\n    to_roman(0)\n    assert False, \"should raise ValueError for 0\"\nexcept ValueError:\n    pass\n\ntry:\n    to_roman(4000)\n    assert False, \"should raise ValueError for 4000\"\nexcept ValueError:\n    pass\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "roman.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "2000000",
-        "amount_display": "2.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014298,
-      "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
       "source_kind": "bountybook"
     },
     {
