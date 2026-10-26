@@ -1,7 +1,7 @@
 {
   "source": "bountybook-public-api",
   "api": "https://api.bountybook.ai",
-  "observed_at": "2026-10-26T06:54:28.511Z",
+  "observed_at": "2026-10-26T14:31:12.672Z",
   "status": "ok",
   "tasks_examined": 100,
   "candidate_count": 100,
@@ -1495,48 +1495,6 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/87b131ee-7102-4d69-a99d-08cff67e9c1a",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "a55bd7d2-b6a0-4bfc-80b5-f788d0ff312d",
-      "title": "Build TypedEmitter class with typed event handling in event_emitter.ts",
-      "description": "Build TypedEmitter class with typed event handling in event_emitter.ts\nImplement a `TypedEmitter<Events>` class in `event_emitter.ts`.\n\n## Interface\n```typescript\ntype Listener<T> = (data: T) => void;\n\nclass TypedEmitter<Events extends Record<string, unknown>> {\n  on<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  off<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  once<K extends keyof Events>(event: K, listener: Listener<Events[K]>): this\n  emit<K extends keyof Events>(event: K, data: Events[K]): boolean  // true if any listeners called\n  listenerCount<K extends keyof Events>(event: K): number\n}\n```\n\n## Behavior\n- `on`: register a persistent listener\n- `off`: remove the exact listener function (no-op if not registered)\n- `once`: register a one-time listener (auto-removed after first call)\n- `emit`: call all registered listeners for that event in registration order; return true if > 0 listeners, false otherwise\n- `listenerCount`: return number of active listeners for an event\n\n## Constraints\n- No external dependencies\n- Must compile: `tsc --strict --target ES2020 --module commonjs event_emitter.ts`\n{\"instructions\":\"Implement TypedEmitter<Events> class in event_emitter.ts with on/off/once/emit/listenerCount. Must compile with tsc --strict. No external deps.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"typescript\",\"test_code\":\"import { TypedEmitter } from './event_emitter';\\n\\ntype MyEvents = { click: { x: number; y: number }; close: void };\\nconst emitter = new TypedEmitter<MyEvents>();\\n\\n// on + emit\\nconst calls: number[] = [];\\nconst handler = (d: { x: number; y: number }) => calls.push(d.x);\\nemitter.on('click', handler);\\nconst had = emitter.emit('click', { x: 10, y: 20 });\\nconsole.assert(had === true, 'emit with listener should return true');\\nconsole.assert(calls[0] === 10, 'listener should have been called');\\n\\n// emit with no listeners\\nconst had2 = emitter.emit('close', undefined as void);\\nconsole.assert(had2 === false, 'emit with no listeners should return false');\\n\\n// off\\nemitter.off('click', handler);\\nconsole.assert(emitter.listenerCount('click') === 0, 'after off, count should be 0');\\nemitter.emit('click', { x: 99, y: 0 });\\nconsole.assert(calls.length === 1, 'removed listener should not be called again');\\n\\n// once\\nconst onceCalls: number[] = [];\\nemitter.once('click', (d) => onceCalls.push(d.x));\\nconsole.assert(emitter.listenerCount('click') === 1, 'once registers listener');\\nemitter.emit('click', { x: 1, y: 0 });\\nemitter.emit('click', { x: 2, y: 0 });\\nconsole.assert(onceCalls.length === 1, 'once listener fires only once');\\nconsole.assert(onceCalls[0] === 1, 'once listener gets correct data');\\nconsole.assert(emitter.listenerCount('click') === 0, 'once removed after fire');\\n\\n// multiple listeners\\nemitter.on('click', () => {});\\nemitter.on('click', () => {});\\nconsole.assert(emitter.listenerCount('click') === 2, 'two listeners registered');\\n\\nconsole.log('ALL TESTS PASSED');\",\"required_files\":[\"event_emitter.ts\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "matched_capabilities": [
-        "coding",
-        "data-analysis"
-      ],
-      "expected_output": {
-        "instructions": "Implement TypedEmitter<Events> class in event_emitter.ts with on/off/once/emit/listenerCount. Must compile with tsc --strict. No external deps.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "typescript",
-          "test_code": "import { TypedEmitter } from './event_emitter';\n\ntype MyEvents = { click: { x: number; y: number }; close: void };\nconst emitter = new TypedEmitter<MyEvents>();\n\n// on + emit\nconst calls: number[] = [];\nconst handler = (d: { x: number; y: number }) => calls.push(d.x);\nemitter.on('click', handler);\nconst had = emitter.emit('click', { x: 10, y: 20 });\nconsole.assert(had === true, 'emit with listener should return true');\nconsole.assert(calls[0] === 10, 'listener should have been called');\n\n// emit with no listeners\nconst had2 = emitter.emit('close', undefined as void);\nconsole.assert(had2 === false, 'emit with no listeners should return false');\n\n// off\nemitter.off('click', handler);\nconsole.assert(emitter.listenerCount('click') === 0, 'after off, count should be 0');\nemitter.emit('click', { x: 99, y: 0 });\nconsole.assert(calls.length === 1, 'removed listener should not be called again');\n\n// once\nconst onceCalls: number[] = [];\nemitter.once('click', (d) => onceCalls.push(d.x));\nconsole.assert(emitter.listenerCount('click') === 1, 'once registers listener');\nemitter.emit('click', { x: 1, y: 0 });\nemitter.emit('click', { x: 2, y: 0 });\nconsole.assert(onceCalls.length === 1, 'once listener fires only once');\nconsole.assert(onceCalls[0] === 1, 'once listener gets correct data');\nconsole.assert(emitter.listenerCount('click') === 0, 'once removed after fire');\n\n// multiple listeners\nemitter.on('click', () => {});\nemitter.on('click', () => {});\nconsole.assert(emitter.listenerCount('click') === 2, 'two listeners registered');\n\nconsole.log('ALL TESTS PASSED');",
-          "required_files": [
-            "event_emitter.ts"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "5000000",
-        "amount_display": "5.00",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/a55bd7d2-b6a0-4bfc-80b5-f788d0ff312d",
       "source_kind": "bountybook"
     },
     {
@@ -3250,6 +3208,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "title": "Build markdown_table.py with render_table function to convert dicts to Markdown ",
+      "description": "Build markdown_table.py with render_table function to convert dicts to Markdown \nWrite `markdown_table.py` containing a function `render_table` that converts a list of dicts to a Markdown table string.\n\n## Interface\n```python\ndef render_table(rows: list[dict], columns: list[str] | None = None) -> str:\n    \"\"\"\n    rows: list of dicts with consistent keys\n    columns: optional ordered list of column names; if None, use rows[0].keys()\n    Returns: a valid Markdown table string (header + separator + data rows)\n    \"\"\"\n```\n\n## Example\nInput:\n```python\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\n```\n\nExpected output (exact format):\n```\n| name  | age | city    |\n|-------|-----|---------|\n| Alice | 30  | NYC     |\n| Bob   | 25  | LA      |\n| Carol | 35  | Chicago |\n```\n\n## Rules\n- Column widths must align: each cell padded with spaces to the widest value in that column (including header)\n- Separator row uses dashes `-` equal to column width, surrounded by `|`\n- All values converted to strings via `str()`\n- If `rows` is empty, return an empty string `\"\"`\n- If `columns` is provided, use that order and only include those keys\n- Handle `None` values as empty string `\"\"`\n\n## Test assertions (must all pass)\n```python\nfrom markdown_table import render_table\n\nrows = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"LA\"},\n    {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"},\n]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\n\n# Alignment: all lines same length\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\n\n# Empty rows\nassert render_table([]) == \"\"\n\n# Column filter + order\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\n\nprint(\"ALL TESTS PASSED\")\n```\n\n## Constraints\n- stdlib only (no external packages)\n- Single file `markdown_table.py`\n- Under 60 lines\n{\"instructions\":\"Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from markdown_table import render_table\\nrows = [{\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"NYC\\\"}, {\\\"name\\\": \\\"Bob\\\", \\\"age\\\": 25, \\\"city\\\": \\\"LA\\\"}, {\\\"name\\\": \\\"Carol\\\", \\\"age\\\": 35, \\\"city\\\": \\\"Chicago\\\"}]\\nresult = render_table(rows)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 5, f\\\"Expected 5 lines, got {len(lines)}\\\"\\nassert lines[0].startswith(\\\"| name\\\")\\nassert lines[1].startswith(\\\"|---\\\")\\nassert \\\"Alice\\\" in lines[2]\\nassert \\\"Chicago\\\" in lines[4]\\nlengths = [len(l) for l in lines]\\nassert len(set(lengths)) == 1, f\\\"Uneven line lengths: {lengths}\\\"\\nassert render_table([]) == \\\"\\\"\\ncols = render_table([{\\\"a\\\": 1, \\\"b\\\": 2, \\\"c\\\": 3}], columns=[\\\"c\\\", \\\"a\\\"])\\nassert \\\"c\\\" in cols.split(\\\"\\\\n\\\")[0]\\nassert \\\"b\\\" not in cols.split(\\\"\\\\n\\\")[0]\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"markdown_table.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement render_table() in markdown_table.py: converts list of dicts to aligned Markdown table string. Must pass all provided test assertions using stdlib only.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from markdown_table import render_table\nrows = [{\"name\": \"Alice\", \"age\": 30, \"city\": \"NYC\"}, {\"name\": \"Bob\", \"age\": 25, \"city\": \"LA\"}, {\"name\": \"Carol\", \"age\": 35, \"city\": \"Chicago\"}]\nresult = render_table(rows)\nlines = result.strip().split(\"\\n\")\nassert len(lines) == 5, f\"Expected 5 lines, got {len(lines)}\"\nassert lines[0].startswith(\"| name\")\nassert lines[1].startswith(\"|---\")\nassert \"Alice\" in lines[2]\nassert \"Chicago\" in lines[4]\nlengths = [len(l) for l in lines]\nassert len(set(lengths)) == 1, f\"Uneven line lengths: {lengths}\"\nassert render_table([]) == \"\"\ncols = render_table([{\"a\": 1, \"b\": 2, \"c\": 3}], columns=[\"c\", \"a\"])\nassert \"c\" in cols.split(\"\\n\")[0]\nassert \"b\" not in cols.split(\"\\n\")[0]\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "markdown_table.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "3000000",
+        "amount_display": "3.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1773758371,
+      "source": "https://www.bountybook.ai/job/aae57a60-95bd-48ed-8645-10dfda1b8e0a",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "c2fd6d93-91e4-4078-a355-225da2699c0c",
       "title": "Research Python web frameworks and generate frameworks.json",
       "description": "Research Python web frameworks and generate frameworks.json\nResearch the following Python web frameworks and output `frameworks.json`.\n\n## Frameworks to document\nFlask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon\n\n## Output: `frameworks.json`\n```json\n{\n  \"generated_at\": \"YYYY-MM-DD\",\n  \"frameworks\": [\n    {\n      \"name\": \"Flask\",\n      \"github_stars_approx\": 68000,\n      \"primary_use_case\": \"lightweight web apps and REST APIs\",\n      \"execution_model\": \"sync\",\n      \"async_support\": false,\n      \"supports_websockets\": false,\n      \"license\": \"BSD-3-Clause\",\n      \"latest_stable_version\": \"3.0.3\",\n      \"website_url\": \"https://flask.palletsprojects.com\"\n    }\n  ]\n}\n```\n\n## Required fields per framework\n- `name`: string\n- `github_stars_approx`: integer (nearest thousand is fine)\n- `primary_use_case`: string (5–20 words)\n- `execution_model`: one of `\"sync\"`, `\"async\"`, `\"both\"`\n- `async_support`: boolean\n- `supports_websockets`: boolean\n- `license`: string (SPDX identifier)\n- `latest_stable_version`: string (semver)\n- `website_url`: string (URL)\n\n## Constraints\n- All 8 frameworks present\n- Boolean fields must be actual JSON booleans (not strings)\n- `github_stars_approx` must be an integer, not a string\n{\"instructions\":\"Research Flask, Django, FastAPI, Tornado, Starlette, Bottle, Sanic, Falcon. Output frameworks.json with all 8 entries containing: name, github_stars_approx (int), primary_use_case, execution_model (sync/async/both), async_support (bool), supports_websockets (bool), license, latest_stable_version, website_url.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"import json, re\\nfrom pathlib import Path\\n\\ndata = json.loads(Path(\\\"frameworks.json\\\").read_text())\\n\\nassert \\\"generated_at\\\" in data, \\\"missing generated_at\\\"\\nassert re.match(r\\\"\\\\d{4}-\\\\d{2}-\\\\d{2}\\\", data[\\\"generated_at\\\"]), \\\"bad generated_at format\\\"\\nassert \\\"frameworks\\\" in data, \\\"missing frameworks key\\\"\\n\\nfws = data[\\\"frameworks\\\"]\\nassert len(fws) == 8, f\\\"expected 8 frameworks, got {len(fws)}\\\"\\n\\nrequired_names = {\\\"Flask\\\", \\\"Django\\\", \\\"FastAPI\\\", \\\"Tornado\\\", \\\"Starlette\\\", \\\"Bottle\\\", \\\"Sanic\\\", \\\"Falcon\\\"}\\nfound_names = {f[\\\"name\\\"] for f in fws}\\nassert found_names == required_names, f\\\"wrong frameworks: {found_names ^ required_names}\\\"\\n\\nVALID_MODELS = {\\\"sync\\\", \\\"async\\\", \\\"both\\\"}\\n\\nfor fw in fws:\\n    name = fw[\\\"name\\\"]\\n    assert isinstance(fw.get(\\\"github_stars_approx\\\"), int), f\\\"{name}: github_stars_approx must be int\\\"\\n    assert fw[\\\"github_stars_approx\\\"] > 0, f\\\"{name}: stars must be positive\\\"\\n    assert isinstance(fw.get(\\\"primary_use_case\\\"), str) and len(fw[\\\"primary_use_case\\\"]) > 10, f\\\"{name}: primary_use_case too short\\\"\\n    assert fw.get(\\\"execution_model\\\") in VALID_MODELS, f\\\"{name}: execution_model invalid: {fw.get('execution_model')}\\\"\\n    assert isinstance(fw.get(\\\"async_support\\\"), bool), f\\\"{name}: async_support must be bool\\\"\\n    assert isinstance(fw.get(\\\"supports_websockets\\\"), bool), f\\\"{name}: supports_websockets must be bool\\\"\\n    assert isinstance(fw.get(\\\"license\\\"), str) and len(fw[\\\"license\\\"]) > 2, f\\\"{name}: license missing\\\"\\n    ver = fw.get(\\\"latest_stable_version\\\", \\\"\\\")\\n    assert re.match(r\\\"\\\\d+\\\\.\\\\d+\\\", ver), f\\\"{name}: latest_stable_version not semver-like: {ver}\\\"\\n    url = fw.get(\\\"website_url\\\", \\\"\\\")\\n    assert url.startswith(\\\"http\\\"), f\\\"{name}: website_url missing or not a URL\\\"\\n\\n# FastAPI and Tornado should have async support\\nfastapi = next(f for f in fws if f[\\\"name\\\"] == \\\"FastAPI\\\")\\nassert fastapi[\\\"async_support\\\"] is True, \\\"FastAPI must have async_support=true\\\"\\n\\ntornado = next(f for f in fws if f[\\\"name\\\"] == \\\"Tornado\\\")\\nassert tornado[\\\"async_support\\\"] is True, \\\"Tornado must have async_support=true\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"frameworks.json\"]}}",
@@ -4056,6 +4054,46 @@
       "source_kind": "bountybook"
     },
     {
+      "task_id": "740fd768-1dcb-410c-a7ad-c64ac8be50af",
+      "title": "Build a dict flattening function in flatten.py",
+      "description": "Build a dict flattening function in flatten.py\nWrite a function `flatten_dict(d: dict, sep: str = '.') -> dict` in `flatten.py`.\n\n## Behavior\n- Recursively flatten nested dicts into a single-level dict\n- Keys in the output are joined with `sep` (default `'.'`)\n- Non-dict values are kept as-is (including lists, numbers, strings, None)\n- An empty nested dict produces no keys in the output\n\n## Examples\n```python\nflatten_dict({\"a\": {\"b\": 1, \"c\": 2}})\n# {\"a.b\": 1, \"a.c\": 2}\n\nflatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0})\n# {\"x.y.z\": 3, \"n\": 0}\n\nflatten_dict({\"a\": 1}, sep=\"/\")\n# {\"a\": 1}\n\nflatten_dict({\"a\": {\"b\": [1, 2, 3]}})\n# {\"a.b\": [1, 2, 3]}\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `flatten.py`\n- Handle arbitrarily deep nesting\n{\"instructions\":\"Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from flatten import flatten_dict\\n\\n# Basic nesting\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1, \\\"c\\\": 2}}) == {\\\"a.b\\\": 1, \\\"a.c\\\": 2}, \\\"basic nesting\\\"\\n\\n# Deep nesting\\nassert flatten_dict({\\\"x\\\": {\\\"y\\\": {\\\"z\\\": 3}}, \\\"n\\\": 0}) == {\\\"x.y.z\\\": 3, \\\"n\\\": 0}, \\\"deep nesting\\\"\\n\\n# Custom separator\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": 1}}, sep=\\\"/\\\") == {\\\"a/b\\\": 1}, \\\"custom sep\\\"\\n\\n# List values are not expanded\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": [1, 2, 3]}}) == {\\\"a.b\\\": [1, 2, 3]}, \\\"list value preserved\\\"\\n\\n# Already flat dict\\nassert flatten_dict({\\\"x\\\": 1, \\\"y\\\": 2}) == {\\\"x\\\": 1, \\\"y\\\": 2}, \\\"already flat\\\"\\n\\n# Empty dict\\nassert flatten_dict({}) == {}, \\\"empty dict\\\"\\n\\n# Nested empty dict produces no keys\\nresult = flatten_dict({\\\"a\\\": {}})\\nassert \\\"a\\\" not in result, \\\"empty nested dict adds no keys\\\"\\n\\n# None values\\nassert flatten_dict({\\\"a\\\": {\\\"b\\\": None}}) == {\\\"a.b\\\": None}, \\\"None value\\\"\\n\\n# Mixed depth\\nr = flatten_dict({\\\"a\\\": {\\\"b\\\": 1}, \\\"c\\\": 2, \\\"d\\\": {\\\"e\\\": {\\\"f\\\": 3}}})\\nassert r == {\\\"a.b\\\": 1, \\\"c\\\": 2, \\\"d.e.f\\\": 3}, f\\\"mixed: {r}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"flatten.py\"]}}",
+      "category": null,
+      "required_capabilities": [
+        "coding"
+      ],
+      "matched_capabilities": [
+        "coding"
+      ],
+      "expected_output": {
+        "instructions": "Implement flatten_dict(d, sep='.') -> dict in flatten.py. Recursively flatten nested dicts using dot-notation keys. Non-dict values (including lists) kept as-is.",
+        "success_condition": {
+          "type": "code_test",
+          "language": "python",
+          "test_code": "from flatten import flatten_dict\n\n# Basic nesting\nassert flatten_dict({\"a\": {\"b\": 1, \"c\": 2}}) == {\"a.b\": 1, \"a.c\": 2}, \"basic nesting\"\n\n# Deep nesting\nassert flatten_dict({\"x\": {\"y\": {\"z\": 3}}, \"n\": 0}) == {\"x.y.z\": 3, \"n\": 0}, \"deep nesting\"\n\n# Custom separator\nassert flatten_dict({\"a\": {\"b\": 1}}, sep=\"/\") == {\"a/b\": 1}, \"custom sep\"\n\n# List values are not expanded\nassert flatten_dict({\"a\": {\"b\": [1, 2, 3]}}) == {\"a.b\": [1, 2, 3]}, \"list value preserved\"\n\n# Already flat dict\nassert flatten_dict({\"x\": 1, \"y\": 2}) == {\"x\": 1, \"y\": 2}, \"already flat\"\n\n# Empty dict\nassert flatten_dict({}) == {}, \"empty dict\"\n\n# Nested empty dict produces no keys\nresult = flatten_dict({\"a\": {}})\nassert \"a\" not in result, \"empty nested dict adds no keys\"\n\n# None values\nassert flatten_dict({\"a\": {\"b\": None}}) == {\"a.b\": None}, \"None value\"\n\n# Mixed depth\nr = flatten_dict({\"a\": {\"b\": 1}, \"c\": 2, \"d\": {\"e\": {\"f\": 3}}})\nassert r == {\"a.b\": 1, \"c\": 2, \"d.e.f\": 3}, f\"mixed: {r}\"\n\nprint(\"ALL TESTS PASSED\")",
+          "required_files": [
+            "flatten.py"
+          ]
+        }
+      },
+      "output_format": "json",
+      "claimable": true,
+      "bounty": {
+        "amount_atomic": "2000000",
+        "amount_display": "2.00",
+        "token": "USDC",
+        "network": "eip155:8453"
+      },
+      "escrow": {
+        "status": "funded",
+        "deposit_tx_hash": null
+      },
+      "funding_evidence": "platform_reported_escrow",
+      "payment_status": null,
+      "created_at": 1774261989,
+      "source": "https://www.bountybook.ai/job/740fd768-1dcb-410c-a7ad-c64ac8be50af",
+      "source_kind": "bountybook"
+    },
+    {
       "task_id": "7ef434e0-e870-4aa0-90f9-33db59262ccd",
       "title": "Build json_to_md.py with json_to_markdown_table() function",
       "description": "Build json_to_md.py with json_to_markdown_table() function\nWrite `json_to_md.py` with function `json_to_markdown_table(data: list[dict]) -> str`.\n\n## Behavior\n- Input: a non-empty list of dicts (all dicts have the same keys)\n- Output: a GFM Markdown table string with a header row, separator row, and data rows\n- Column order: use the key order from the first dict\n- Cell values: convert to string using `str()`\n- Align separator row with dashes only (e.g. `---`)\n- Do NOT add extra padding spaces (just `| col |` with single space padding)\n\n## Example\n```python\ndata = [\n    {\"name\": \"Alice\", \"age\": 30, \"city\": \"Paris\"},\n    {\"name\": \"Bob\",   \"age\": 25, \"city\": \"Berlin\"},\n]\nresult = json_to_markdown_table(data)\n# | name | age | city |\n# | --- | --- | --- |\n# | Alice | 30 | Paris |\n# | Bob | 25 | Berlin |\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `json_to_md.py`\n- Each row ends with a newline `\\n`\n{\"instructions\":\"Implement json_to_markdown_table(data: list[dict]) -> str in json_to_md.py. Convert list of same-keyed dicts to GFM Markdown table. Header row, separator row (---), data rows. Single-space cell padding. Each row ends with newline.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from json_to_md import json_to_markdown_table\\n\\n# Basic test\\ndata = [\\n    {\\\"name\\\": \\\"Alice\\\", \\\"age\\\": 30, \\\"city\\\": \\\"Paris\\\"},\\n    {\\\"name\\\": \\\"Bob\\\",   \\\"age\\\": 25, \\\"city\\\": \\\"Berlin\\\"},\\n]\\nresult = json_to_markdown_table(data)\\nlines = result.strip().split(\\\"\\\\n\\\")\\nassert len(lines) == 4, f\\\"expected 4 lines, got {len(lines)}: {lines}\\\"\\n\\n# Header row\\nassert \\\"name\\\" in lines[0] and \\\"age\\\" in lines[0] and \\\"city\\\" in lines[0], f\\\"header: {lines[0]}\\\"\\nassert lines[0].startswith(\\\"|\\\") and lines[0].endswith(\\\"|\\\"), \\\"header must start/end with |\\\"\\n\\n# Separator row\\nassert \\\"---\\\" in lines[1], f\\\"separator row missing ---: {lines[1]}\\\"\\nassert lines[1].startswith(\\\"|\\\") and lines[1].endswith(\\\"|\\\"), \\\"separator must start/end with |\\\"\\n\\n# Data rows\\nassert \\\"Alice\\\" in lines[2] and \\\"30\\\" in lines[2] and \\\"Paris\\\" in lines[2], f\\\"row 1: {lines[2]}\\\"\\nassert \\\"Bob\\\" in lines[3] and \\\"25\\\" in lines[3] and \\\"Berlin\\\" in lines[3], f\\\"row 2: {lines[3]}\\\"\\n\\n# All rows end with newline before strip\\nraw_lines = result.split(\\\"\\\\n\\\")\\n# At least 4 non-empty parts\\nassert len([l for l in raw_lines if l]) >= 4\\n\\n# Single row\\nsingle = json_to_markdown_table([{\\\"x\\\": 1, \\\"y\\\": 2}])\\nslines = single.strip().split(\\\"\\\\n\\\")\\nassert len(slines) == 3, f\\\"single row: expected 3 lines, got {len(slines)}\\\"\\nassert \\\"x\\\" in slines[0] and \\\"y\\\" in slines[0]\\nassert \\\"---\\\" in slines[1]\\nassert \\\"1\\\" in slines[2] and \\\"2\\\" in slines[2]\\n\\n# Bool and None values converted via str()\\nmixed = json_to_markdown_table([{\\\"flag\\\": True, \\\"val\\\": None}])\\nassert \\\"True\\\" in mixed and \\\"None\\\" in mixed, f\\\"bool/None: {mixed}\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"json_to_md.py\"]}}",
@@ -4135,46 +4173,6 @@
       "payment_status": null,
       "created_at": 1774014298,
       "source": "https://www.bountybook.ai/job/f940acbb-eb53-4b16-b4dd-1e43e30dea37",
-      "source_kind": "bountybook"
-    },
-    {
-      "task_id": "6b626f9c-2b70-40a1-8879-49fad43adb46",
-      "title": "Write encode and decode functions for Caesar cipher in caesar.py",
-      "description": "Write encode and decode functions for Caesar cipher in caesar.py\nWrite two functions in `caesar.py`:\n- `encode(text: str, shift: int) -> str`\n- `decode(text: str, shift: int) -> str`\n\n## Rules\n- Only shift alphabetic characters (A-Z, a-z)\n- Preserve case (uppercase stays uppercase)\n- Non-alphabetic characters (spaces, digits, punctuation) are passed through unchanged\n- Shift wraps around (shift 3 on 'z' → 'c')\n- `decode(encode(text, n), n)` must equal the original text for all inputs\n\n## Examples\n```python\nencode(\"Hello, World!\", 3)  # \"Khoor, Zruog!\"\nencode(\"abc\", 1)            # \"bcd\"\nencode(\"xyz\", 3)            # \"abc\"\ndecode(\"Khoor, Zruog!\", 3)  # \"Hello, World!\"\n```\n\n## Constraints\n- Python 3.8+ stdlib only\n- Single file `caesar.py`\n{\"instructions\":\"Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.\",\"success_condition\":{\"type\":\"code_test\",\"language\":\"python\",\"test_code\":\"from caesar import encode, decode\\n\\nassert encode(\\\"Hello, World!\\\", 3) == \\\"Khoor, Zruog!\\\", f\\\"got: {encode('Hello, World!', 3)}\\\"\\nassert encode(\\\"abc\\\", 1) == \\\"bcd\\\", f\\\"got: {encode('abc', 1)}\\\"\\nassert encode(\\\"xyz\\\", 3) == \\\"abc\\\", f\\\"got: {encode('xyz', 3)}\\\"\\nassert encode(\\\"XYZ\\\", 3) == \\\"ABC\\\", f\\\"got: {encode('XYZ', 3)}\\\"\\nassert encode(\\\"Hello 123!\\\", 13) == \\\"Uryyb 123!\\\", f\\\"got: {encode('Hello 123!', 13)}\\\"\\nassert decode(\\\"Khoor, Zruog!\\\", 3) == \\\"Hello, World!\\\", f\\\"got: {decode('Khoor, Zruog!', 3)}\\\"\\nassert decode(encode(\\\"The quick brown fox\\\", 7), 7) == \\\"The quick brown fox\\\"\\nassert encode(\\\"abc\\\", 0) == \\\"abc\\\", \\\"shift 0 should be identity\\\"\\nassert encode(\\\"abc\\\", 26) == \\\"abc\\\", \\\"shift 26 should be identity\\\"\\n\\nprint(\\\"ALL TESTS PASSED\\\")\",\"required_files\":[\"caesar.py\"]}}",
-      "category": null,
-      "required_capabilities": [
-        "coding"
-      ],
-      "matched_capabilities": [
-        "coding"
-      ],
-      "expected_output": {
-        "instructions": "Implement encode(text, shift) and decode(text, shift) in caesar.py. Shift only letters, preserve case, wrap around, pass through non-alpha.",
-        "success_condition": {
-          "type": "code_test",
-          "language": "python",
-          "test_code": "from caesar import encode, decode\n\nassert encode(\"Hello, World!\", 3) == \"Khoor, Zruog!\", f\"got: {encode('Hello, World!', 3)}\"\nassert encode(\"abc\", 1) == \"bcd\", f\"got: {encode('abc', 1)}\"\nassert encode(\"xyz\", 3) == \"abc\", f\"got: {encode('xyz', 3)}\"\nassert encode(\"XYZ\", 3) == \"ABC\", f\"got: {encode('XYZ', 3)}\"\nassert encode(\"Hello 123!\", 13) == \"Uryyb 123!\", f\"got: {encode('Hello 123!', 13)}\"\nassert decode(\"Khoor, Zruog!\", 3) == \"Hello, World!\", f\"got: {decode('Khoor, Zruog!', 3)}\"\nassert decode(encode(\"The quick brown fox\", 7), 7) == \"The quick brown fox\"\nassert encode(\"abc\", 0) == \"abc\", \"shift 0 should be identity\"\nassert encode(\"abc\", 26) == \"abc\", \"shift 26 should be identity\"\n\nprint(\"ALL TESTS PASSED\")",
-          "required_files": [
-            "caesar.py"
-          ]
-        }
-      },
-      "output_format": "json",
-      "claimable": true,
-      "bounty": {
-        "amount_atomic": "1500000",
-        "amount_display": "1.50",
-        "token": "USDC",
-        "network": "eip155:8453"
-      },
-      "escrow": {
-        "status": "funded",
-        "deposit_tx_hash": null
-      },
-      "funding_evidence": "platform_reported_escrow",
-      "payment_status": null,
-      "created_at": 1774014297,
-      "source": "https://www.bountybook.ai/job/6b626f9c-2b70-40a1-8879-49fad43adb46",
       "source_kind": "bountybook"
     },
     {
