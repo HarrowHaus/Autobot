@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-26T05:13:53Z",
+  "generated_at": "2026-10-26T13:29:41Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -189,10 +189,10 @@
       "tags": []
     },
     {
-      "key": "ops-control-hq-utility-agent",
-      "name": "Ops Control HQ Utility Agent",
-      "slug": "ops-control-hq-utility-agent",
-      "specialty": "developer tools",
+      "key": "apex-edge-x402-paid-machine-services",
+      "name": "Apex Edge \u2014 x402-paid machine services",
+      "slug": "apex-edge-x402-paid-machine-services",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -209,19 +209,19 @@
       "tags": []
     },
     {
-      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
-      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "specialty": null,
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "paid-base-token-tools",
-      "name": "Paid Base Token Tools",
-      "slug": "paid-base-token-tools",
+      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
+      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
+      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
       "specialty": null,
       "endpoints": {},
       "protocols": [],
