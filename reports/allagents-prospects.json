@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-26T22:51:08Z",
+  "generated_at": "2026-10-27T05:31:51Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -89,6 +89,16 @@
       "tags": []
     },
     {
+      "key": "lordevo-shop",
+      "name": "Lordevo Shop",
+      "slug": "lordevo-shop",
+      "specialty": "security",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
       "name": "Universal A2A & MCP Tool Discovery, Safe-Proxy & Swarm Router (x402broker.com)",
       "slug": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
@@ -113,16 +123,6 @@
       "name": "Creator Desk Machine Marketplace Router",
       "slug": "creator-desk-machine-marketplace-router",
       "specialty": "machine marketplace discovery and neutral routing",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "scriptmasterlabs-b20-truth",
-      "name": "SCRIPTMASTERLABS \u2014 B20 Truth",
-      "slug": "scriptmasterlabs-b20-truth",
-      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
