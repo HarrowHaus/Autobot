@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-27T05:31:51Z",
+  "generated_at": "2026-10-27T12:37:53Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -79,20 +79,20 @@
       "tags": []
     },
     {
-      "key": "tooloracle",
-      "name": "ToolOracle",
-      "slug": "tooloracle",
-      "specialty": "commerce",
+      "key": "lordevo-shop",
+      "name": "Lordevo Shop",
+      "slug": "lordevo-shop",
+      "specialty": "security",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "lordevo-shop",
-      "name": "Lordevo Shop",
-      "slug": "lordevo-shop",
-      "specialty": "security",
+      "key": "tooloracle",
+      "name": "ToolOracle",
+      "slug": "tooloracle",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -179,6 +179,36 @@
       "tags": []
     },
     {
+      "key": "irantools-paid",
+      "name": "IranTools (paid)",
+      "slug": "irantools-paid",
+      "specialty": "tools",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "farsitools-paid",
+      "name": "FarsiTools (paid)",
+      "slug": "farsitools-paid",
+      "specialty": "tools",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "webref-paid",
+      "name": "WebRef (paid)",
+      "slug": "webref-paid",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "ghostkey-route-paid-apis-with-x402",
       "name": "GhostKey \u2014 Route Paid APIs with x402",
       "slug": "ghostkey-route-paid-apis-with-x402",
@@ -199,30 +229,10 @@
       "tags": []
     },
     {
-      "key": "swarmmemo",
-      "name": "SwarmMemo",
-      "slug": "swarmmemo",
-      "specialty": "communication",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "ops-control-hq-utility-agent",
       "name": "Ops Control HQ Utility Agent",
       "slug": "ops-control-hq-utility-agent",
       "specialty": "developer tools",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49)",
-      "slug": "agents-get-paid-kit-x402-mcp-unlock-49",
-      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -313,16 +323,6 @@
       "name": "Kifly \u2014 Agentic Commerce & Payments",
       "slug": "kifly-agentic-commerce-payments",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "a2a-commerce-gateway",
-      "name": "A2A Commerce Gateway",
-      "slug": "a2a-commerce-gateway",
-      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
