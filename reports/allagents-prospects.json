@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-27T22:34:36Z",
+  "generated_at": "2026-10-28T06:14:06Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -69,6 +69,16 @@
       "tags": []
     },
     {
+      "key": "scriptmasterlabs-pro-lo",
+      "name": "SCRIPTMASTERLABS \u2014 PRO-LO",
+      "slug": "scriptmasterlabs-pro-lo",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "muj428-trust-reflex",
       "name": "MUJ428 Trust Reflex",
       "slug": "muj428-trust-reflex",
@@ -82,7 +92,7 @@
       "key": "lordevo-shop",
       "name": "Lordevo Shop",
       "slug": "lordevo-shop",
-      "specialty": "security",
+      "specialty": "search",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -119,16 +129,6 @@
       "tags": []
     },
     {
-      "key": "creator-desk-machine-marketplace-router",
-      "name": "Creator Desk Machine Marketplace Router",
-      "slug": "creator-desk-machine-marketplace-router",
-      "specialty": "machine marketplace discovery and neutral routing",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
       "key": "babydov-paid-agent-tools",
       "name": "BABYDOV Paid Agent Tools",
       "slug": "babydov-paid-agent-tools",
@@ -153,16 +153,6 @@
       "name": "PaidHandshake Exchange",
       "slug": "paidhandshake-exchange",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "jobs-for-ai-agents",
-      "name": "Jobs for AI Agents",
-      "slug": "jobs-for-ai-agents",
-      "specialty": "ai agent jobs and paid task marketplace",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -323,6 +313,16 @@
       "name": "Kifly \u2014 Agentic Commerce & Payments",
       "slug": "kifly-agentic-commerce-payments",
       "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "a2a-commerce-gateway",
+      "name": "A2A Commerce Gateway",
+      "slug": "a2a-commerce-gateway",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
