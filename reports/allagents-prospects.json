@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-29T06:24:19Z",
+  "generated_at": "2026-10-29T13:40:09Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -199,20 +199,20 @@
       "tags": []
     },
     {
-      "key": "apex-edge-x402-paid-machine-services",
-      "name": "Apex Edge \u2014 x402-paid machine services",
-      "slug": "apex-edge-x402-paid-machine-services",
-      "specialty": "tools",
+      "key": "ghostkey-route-paid-apis-with-x402",
+      "name": "GhostKey \u2014 Route Paid APIs with x402",
+      "slug": "ghostkey-route-paid-apis-with-x402",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "ghostkey-route-paid-apis-with-x402",
-      "name": "GhostKey \u2014 Route Paid APIs with x402",
-      "slug": "ghostkey-route-paid-apis-with-x402",
-      "specialty": null,
+      "key": "apex-edge-x402-paid-machine-services",
+      "name": "Apex Edge \u2014 x402-paid machine services",
+      "slug": "apex-edge-x402-paid-machine-services",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
