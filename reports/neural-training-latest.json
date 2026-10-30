@@ -6,45 +6,45 @@
   "optimizer": "AdamW",
   "epochs": 35,
   "learning_rate": 0.004,
-  "parameter_count": 85969,
-  "trainable_parameter_count": 85969,
-  "node_count": 1239,
-  "agent_count": 1233,
+  "parameter_count": 86017,
+  "trainable_parameter_count": 86017,
+  "node_count": 1240,
+  "agent_count": 1234,
   "relation_count": 18,
   "edge_count": 162,
-  "sample_count": 2981,
-  "train_count": 2442,
-  "holdout_count": 539,
+  "sample_count": 3003,
+  "train_count": 2460,
+  "holdout_count": 543,
   "expansion": {
     "checkpoint_found": true,
-    "reused_node_embeddings": 1238,
+    "reused_node_embeddings": 1239,
     "new_node_embeddings": 1,
     "reused_relation_embeddings": 18,
     "new_relation_embeddings": 0
   },
   "initial_holdout": {
-    "loss": 4.299948341213167e-05,
-    "mae": 0.0017407723935320973,
-    "count": 539,
-    "prediction_mean": 0.44274601340293884,
-    "target_mean": 0.441410094499588
+    "loss": 4.9557271267985925e-05,
+    "mae": 0.0016446674708276987,
+    "count": 543,
+    "prediction_mean": 0.4448002278804779,
+    "target_mean": 0.44419896602630615
   },
   "final_train": {
-    "loss": 6.433206181100104e-07,
-    "mae": 0.0006773896748200059,
-    "count": 2442,
-    "prediction_mean": 0.43557992577552795,
-    "target_mean": 0.43583130836486816
+    "loss": 4.10019674745854e-06,
+    "mae": 0.001357712666504085,
+    "count": 2460,
+    "prediction_mean": 0.4379945397377014,
+    "target_mean": 0.438642293214798
   },
   "final_holdout": {
-    "loss": 5.276682713883929e-05,
-    "mae": 0.0016261041164398193,
-    "count": 539,
-    "prediction_mean": 0.44193020462989807,
-    "target_mean": 0.441410094499588
+    "loss": 4.4769461965188384e-05,
+    "mae": 0.002195435343310237,
+    "count": 543,
+    "prediction_mean": 0.4443689286708832,
+    "target_mean": 0.44419896602630615
   },
-  "train_loss_first": 2.907247562689008e-06,
-  "train_loss_last": 2.831795427482575e-06,
+  "train_loss_first": 8.363319352611143e-07,
+  "train_loss_last": 6.907337706252292e-07,
   "checkpoint": "data/neural/swarmbrain_gnn.pt",
   "model_index": "data/neural/model-index.json"
 }
