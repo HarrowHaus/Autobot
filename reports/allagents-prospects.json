@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-30T06:23:18Z",
+  "generated_at": "2026-10-30T13:28:35Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -59,6 +59,16 @@
       "tags": []
     },
     {
+      "key": "scriptmasterlabs-quant-terminal",
+      "name": "SCRIPTMASTERLABS \u2014 Quant Terminal",
+      "slug": "scriptmasterlabs-quant-terminal",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "scriptmasterlabs-pro-lo",
       "name": "SCRIPTMASTERLABS \u2014 PRO-LO",
       "slug": "scriptmasterlabs-pro-lo",
@@ -79,10 +89,10 @@
       "tags": []
     },
     {
-      "key": "scriptmasterlabs-quant-terminal",
-      "name": "SCRIPTMASTERLABS \u2014 Quant Terminal",
-      "slug": "scriptmasterlabs-quant-terminal",
-      "specialty": null,
+      "key": "lordevo-shop",
+      "name": "Lordevo Shop",
+      "slug": "lordevo-shop",
+      "specialty": "search",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -93,16 +103,6 @@
       "name": "MUJ428 Trust Reflex",
       "slug": "muj428-trust-reflex",
       "specialty": "travel",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "lordevo-shop",
-      "name": "Lordevo Shop",
-      "slug": "lordevo-shop",
-      "specialty": "search",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -229,6 +229,16 @@
       "tags": []
     },
     {
+      "key": "agent-economy-os-2047-a2a-commerce-directory",
+      "name": "Agent Economy OS 2047 \u2014 A2A Commerce Directory",
+      "slug": "agent-economy-os-2047-a2a-commerce-directory",
+      "specialty": "agent payments and onchain receipt verification",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "neuronto-payments-x402-facilitator-and-api-gateway",
       "name": "Neuronto Payments: x402 facilitator and API gateway",
       "slug": "neuronto-payments-x402-facilitator-and-api-gateway",
@@ -283,16 +293,6 @@
       "name": "Muse",
       "slug": "muse",
       "specialty": "social",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "base-wallet-lens",
-      "name": "Base Wallet Lens",
-      "slug": "base-wallet-lens",
-      "specialty": "finance",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
