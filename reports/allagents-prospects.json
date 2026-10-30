@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-29T22:56:33Z",
+  "generated_at": "2026-10-30T06:23:18Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -79,6 +79,16 @@
       "tags": []
     },
     {
+      "key": "scriptmasterlabs-quant-terminal",
+      "name": "SCRIPTMASTERLABS \u2014 Quant Terminal",
+      "slug": "scriptmasterlabs-quant-terminal",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "muj428-trust-reflex",
       "name": "MUJ428 Trust Reflex",
       "slug": "muj428-trust-reflex",
@@ -103,16 +113,6 @@
       "name": "ToolOracle",
       "slug": "tooloracle",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
-      "name": "Universal A2A & MCP Tool Discovery, Safe-Proxy & Swarm Router (x402broker.com)",
-      "slug": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router-x40",
-      "specialty": "a2a marketplace broker",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -229,20 +229,20 @@
       "tags": []
     },
     {
-      "key": "bounty-engineer-agent-commerce",
-      "name": "Bounty Engineer Agent Commerce",
-      "slug": "bounty-engineer-agent-commerce",
-      "specialty": "agents-infra",
+      "key": "neuronto-payments-x402-facilitator-and-api-gateway",
+      "name": "Neuronto Payments: x402 facilitator and API gateway",
+      "slug": "neuronto-payments-x402-facilitator-and-api-gateway",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "neuronto-payments-x402-facilitator-and-api-gateway",
-      "name": "Neuronto Payments: x402 facilitator and API gateway",
-      "slug": "neuronto-payments-x402-facilitator-and-api-gateway",
-      "specialty": null,
+      "key": "bounty-engineer-agent-commerce",
+      "name": "Bounty Engineer Agent Commerce",
+      "slug": "bounty-engineer-agent-commerce",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -319,10 +319,10 @@
       "tags": []
     },
     {
-      "key": "a2a-commerce-gateway",
-      "name": "A2A Commerce Gateway",
-      "slug": "a2a-commerce-gateway",
-      "specialty": "agents-infra",
+      "key": "swarmsync-commerce-demo-agent",
+      "name": "SwarmSync Commerce Demo Agent",
+      "slug": "swarmsync-commerce-demo-agent",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
