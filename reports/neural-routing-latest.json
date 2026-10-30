@@ -12,7 +12,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.597572,
+      "neural_score": 0.56794,
       "interaction_count": 2,
       "validated_result_count": 0
     },
@@ -24,7 +24,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.593384,
+      "neural_score": 0.56265,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -36,7 +36,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.589015,
+      "neural_score": 0.557932,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -48,20 +48,8 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.58592,
+      "neural_score": 0.553699,
       "interaction_count": 2,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:5f90e0d84560855d75cb0fb8",
-      "name": "SCVD Evidence Agent",
-      "aliases": [
-        "SCVD Evidence Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.584872,
-      "interaction_count": 1,
       "validated_result_count": 0
     },
     {
@@ -72,8 +60,20 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.584699,
+      "neural_score": 0.553262,
       "interaction_count": 5,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:5f90e0d84560855d75cb0fb8",
+      "name": "SCVD Evidence Agent",
+      "aliases": [
+        "SCVD Evidence Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.550639,
+      "interaction_count": 1,
       "validated_result_count": 0
     },
     {
@@ -84,7 +84,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.584318,
+      "neural_score": 0.550078,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -96,7 +96,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.584221,
+      "neural_score": 0.549086,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -108,164 +108,19 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.5841,
+      "neural_score": 0.548378,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:f1a920b40a21302efa24f522",
-      "name": "Travel Planning & Trip Intelligence",
+      "agent_id": "agent:2b192ec58581d2e5904a584b",
+      "name": "Agent Identity Garden",
       "aliases": [
-        "Travel Planning & Trip Intelligence"
+        "Agent Identity Garden"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.583671,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:2e61aa9c5f81b60058d44b71",
-      "name": "AUX Evidence and Certification",
-      "aliases": [
-        "AUX Evidence and Certification"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.583468,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:66ed809fb5c61adf14682cd9",
-      "name": "ForgeMesh Fare Intelligence",
-      "aliases": [
-        "ForgeMesh Fare Intelligence"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.582619,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:c4e5b7b4343ec44d7f2f2372",
-      "name": "SNAIL",
-      "aliases": [
-        "SNAIL",
-        "snail"
-      ],
-      "kind": "coordination_service",
-      "status": "connected",
-      "neural_score": 0.582423,
-      "interaction_count": 1,
-      "validated_result_count": 1
-    },
-    {
-      "agent_id": "agent:fe630be108eb8c7276f6af54",
-      "name": "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4",
-      "aliases": [
-        "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.582335,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
-      "name": "x402 Swag",
-      "aliases": [
-        "x402 Swag"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.582247,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:a6509500be1b7ebe68764bba",
-      "name": "ForgeMesh x402 Ads",
-      "aliases": [
-        "ForgeMesh x402 Ads"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.58212,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:14ef6bf1c1d94706476933fb",
-      "name": "Agent Purchase Guard \u2014 Merchant Scout paper trial",
-      "aliases": [
-        "Agent Purchase Guard \u2014 Merchant Scout paper trial"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.581567,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:f41a96b0b0853c12f0c36faf",
-      "name": "Unknown Agent",
-      "aliases": [
-        "Unknown Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.581187,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:27ab9c3a832fb28139480c5b",
-      "name": "x402 Proxy",
-      "aliases": [
-        "x402 Proxy"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.581036,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:a82c25d464897ff1d41c80cb",
-      "name": "Summus Code Network",
-      "aliases": [
-        "Summus Code"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.581024,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:185aba2f83a50143c6e7f240",
-      "name": "x402 Router",
-      "aliases": [
-        "x402 Router"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.580893,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:83108b5b61ef5d37e5152ec4",
-      "name": "ToolsEngg A2A Agent",
-      "aliases": [
-        "ToolsEngg A2A Agent"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.580785,
+      "neural_score": 0.548004,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -277,20 +132,153 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.580629,
+      "neural_score": 0.547988,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:42559b79172ab938194fc4fa",
-      "name": "LeadProof Sales Agent",
+      "agent_id": "agent:f1a920b40a21302efa24f522",
+      "name": "Travel Planning & Trip Intelligence",
       "aliases": [
-        "LeadProof Sales Agent"
+        "Travel Planning & Trip Intelligence"
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.58052,
+      "neural_score": 0.546824,
       "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:a6509500be1b7ebe68764bba",
+      "name": "ForgeMesh x402 Ads",
+      "aliases": [
+        "ForgeMesh x402 Ads"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.54661,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:14ef6bf1c1d94706476933fb",
+      "name": "Agent Purchase Guard \u2014 Merchant Scout paper trial",
+      "aliases": [
+        "Agent Purchase Guard \u2014 Merchant Scout paper trial"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.546211,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:66ed809fb5c61adf14682cd9",
+      "name": "ForgeMesh Fare Intelligence",
+      "aliases": [
+        "ForgeMesh Fare Intelligence"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545752,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:c4e5b7b4343ec44d7f2f2372",
+      "name": "SNAIL",
+      "aliases": [
+        "SNAIL",
+        "snail"
+      ],
+      "kind": "coordination_service",
+      "status": "reachable",
+      "neural_score": 0.545741,
+      "interaction_count": 1,
+      "validated_result_count": 1
+    },
+    {
+      "agent_id": "agent:7801605d51e56c046075887b",
+      "name": "Wiggle",
+      "aliases": [
+        "Wiggle"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545711,
+      "interaction_count": 7,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:fe630be108eb8c7276f6af54",
+      "name": "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4",
+      "aliases": [
+        "\u5343\u91cc\u773c Alpha-Scout \u6295\u8d44\u60c5\u62a5 Agent \u96c6\u7fa4"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545455,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f41a96b0b0853c12f0c36faf",
+      "name": "Unknown Agent",
+      "aliases": [
+        "Unknown Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545397,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:2e61aa9c5f81b60058d44b71",
+      "name": "AUX Evidence and Certification",
+      "aliases": [
+        "AUX Evidence and Certification"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545278,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:7af2bf8cb2dbd8b93c660ec7",
+      "name": "x402 Swag",
+      "aliases": [
+        "x402 Swag"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545232,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:8b3239b50aa71ff61aea044b",
+      "name": "WAKORIA",
+      "aliases": [
+        "WAKORIA"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.54517,
+      "interaction_count": 4,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f0bcc2f0beb3c4cdcbd54f27",
+      "name": "Speedbot Autonomous Work Network",
+      "aliases": [
+        "Speedbot Autonomous Work Network"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.545169,
+      "interaction_count": 38,
       "validated_result_count": 0
     },
     {
@@ -301,7 +289,19 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.579864,
+      "neural_score": 0.544973,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:a82c25d464897ff1d41c80cb",
+      "name": "Summus Code Network",
+      "aliases": [
+        "Summus Code"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.544659,
       "interaction_count": 1,
       "validated_result_count": 0
     }
