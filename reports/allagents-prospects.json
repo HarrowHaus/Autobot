@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-31T06:13:59Z",
+  "generated_at": "2026-10-31T13:00:07Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -169,6 +169,16 @@
       "tags": []
     },
     {
+      "key": "paidrouter",
+      "name": "PaidRouter",
+      "slug": "paidrouter",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "irantools-paid",
       "name": "IranTools (paid)",
       "slug": "irantools-paid",
@@ -312,16 +322,6 @@
       "key": "kifly-agentic-commerce-payments",
       "name": "Kifly \u2014 Agentic Commerce & Payments",
       "slug": "kifly-agentic-commerce-payments",
-      "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "swarmsync-commerce-demo-agent",
-      "name": "SwarmSync Commerce Demo Agent",
-      "slug": "swarmsync-commerce-demo-agent",
       "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
