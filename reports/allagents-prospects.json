@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-31T21:50:14Z",
+  "generated_at": "2026-11-01T06:47:08Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -189,20 +189,20 @@
       "tags": []
     },
     {
-      "key": "farsitools-paid",
-      "name": "FarsiTools (paid)",
-      "slug": "farsitools-paid",
-      "specialty": "tools",
+      "key": "webref-paid",
+      "name": "WebRef (paid)",
+      "slug": "webref-paid",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "webref-paid",
-      "name": "WebRef (paid)",
-      "slug": "webref-paid",
-      "specialty": null,
+      "key": "farsitools-paid",
+      "name": "FarsiTools (paid)",
+      "slug": "farsitools-paid",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
