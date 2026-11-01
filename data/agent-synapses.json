@@ -426,16 +426,16 @@
       "weight": 10.5
     },
     "37a3ca456d5c3a76b880ae1e": {
-      "events": 51,
+      "events": 52,
       "first_seen": "2026-09-27T00:22:06Z",
       "id": "37a3ca456d5c3a76b880ae1e",
-      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:24d5441c7f2283b8",
-      "last_seen": "2026-10-31T12:28:24Z",
+      "last_event_id": "card-probe:agent:505e278ff85d492ec7f41a82:a8a62a2ead50545c",
+      "last_seen": "2026-11-01T19:39:39Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:505e278ff85d492ec7f41a82",
       "validated_events": 0,
-      "weight": 76.5
+      "weight": 78.0
     },
     "392c365585d94f3c690b49b8": {
       "events": 0,
@@ -985,16 +985,16 @@
       "weight": 73.75
     },
     "7adbc94da336a1889db59062": {
-      "events": 41,
+      "events": 42,
       "first_seen": "2026-09-27T00:24:46Z",
       "id": "7adbc94da336a1889db59062",
-      "last_event_id": "card-probe:agent:f0bcc2f0beb3c4cdcbd54f27:7103d5e152aa1603",
-      "last_seen": "2026-11-01T01:09:18Z",
+      "last_event_id": "card-probe:agent:f0bcc2f0beb3c4cdcbd54f27:52a5de188fbf2caa",
+      "last_seen": "2026-11-01T19:39:35Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:f0bcc2f0beb3c4cdcbd54f27",
       "validated_events": 0,
-      "weight": 61.5
+      "weight": 63.0
     },
     "7e355bbcb5d09b030ac0b355": {
       "events": 0,
@@ -1747,16 +1747,16 @@
       "weight": 75.0
     },
     "ee0a439974bddf8ebb0e9ec0": {
-      "events": 58,
+      "events": 59,
       "first_seen": "2026-09-27T00:22:09Z",
       "id": "ee0a439974bddf8ebb0e9ec0",
-      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:47803c2f8322a7ac",
-      "last_seen": "2026-11-01T01:09:23Z",
+      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:58c60f1d92636315",
+      "last_seen": "2026-11-01T19:39:44Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:75b07b49cd53a2c4db790a99",
       "validated_events": 0,
-      "weight": 87.0
+      "weight": 88.5
     },
     "ee457be40f49223871ff2fa4": {
       "events": 33,
@@ -1927,5 +1927,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-11-01T15:07:47Z"
+  "updated_at": "2026-11-01T19:39:45Z"
 }
