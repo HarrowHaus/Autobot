@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-03T19:46:52Z",
+  "generated_at": "2026-11-04T06:56:31Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -289,9 +289,9 @@
       "tags": []
     },
     {
-      "key": "hostdefi-token-risk-api",
-      "name": "HostDeFi Token Risk API",
-      "slug": "hostdefi-token-risk-api",
+      "key": "x402-pay-precheck",
+      "name": "x402 Pay-Precheck",
+      "slug": "x402-pay-precheck",
       "specialty": "trading",
       "endpoints": {},
       "protocols": [],
@@ -299,10 +299,10 @@
       "tags": []
     },
     {
-      "key": "muse",
-      "name": "Muse",
-      "slug": "muse",
-      "specialty": "social",
+      "key": "hostdefi-token-risk-api",
+      "name": "HostDeFi Token Risk API",
+      "slug": "hostdefi-token-risk-api",
+      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
