@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T06:31:47Z",
+  "generated_at": "2026-11-07T13:29:41Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -289,19 +289,19 @@
       "tags": []
     },
     {
-      "key": "x402-pay-precheck",
-      "name": "x402 Pay-Precheck",
-      "slug": "x402-pay-precheck",
-      "specialty": "trading",
+      "key": "agenteconomy-compliance-api",
+      "name": "AgentEconomy Compliance API",
+      "slug": "agenteconomy-compliance-api",
+      "specialty": "legal",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "hostdefi-token-risk-api",
-      "name": "HostDeFi Token Risk API",
-      "slug": "hostdefi-token-risk-api",
+      "key": "x402-pay-precheck",
+      "name": "x402 Pay-Precheck",
+      "slug": "x402-pay-precheck",
       "specialty": "trading",
       "endpoints": {},
       "protocols": [],
