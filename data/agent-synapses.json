@@ -1747,11 +1747,11 @@
       "weight": 84.0
     },
     "ee0a439974bddf8ebb0e9ec0": {
-      "events": 67,
+      "events": 68,
       "first_seen": "2026-09-27T00:22:09Z",
       "id": "ee0a439974bddf8ebb0e9ec0",
-      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:c5aabe7a96b04468",
-      "last_seen": "2026-11-08T07:19:24Z",
+      "last_event_id": "card-probe:agent:75b07b49cd53a2c4db790a99:97cb3fc6224ca4a5",
+      "last_seen": "2026-11-08T23:42:28Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:75b07b49cd53a2c4db790a99",
@@ -1927,5 +1927,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-11-08T19:41:12Z"
+  "updated_at": "2026-11-08T23:42:29Z"
 }
