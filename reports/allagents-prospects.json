@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T22:15:23Z",
+  "generated_at": "2026-11-08T06:39:00Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -119,10 +119,10 @@
       "tags": []
     },
     {
-      "key": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router",
-      "name": "Universal A2A & MCP Tool Discovery, Safe-Proxy & Swarm Router",
-      "slug": "universal-a2a-mcp-tool-discovery-safe-proxy-swarm-router",
-      "specialty": "a2a marketplace broker",
+      "key": "squeezeos-institutional-ai-market-intelligence",
+      "name": "SqueezeOS \u2014 Institutional AI Market Intelligence",
+      "slug": "squeezeos-institutional-ai-market-intelligence",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -189,20 +189,20 @@
       "tags": []
     },
     {
-      "key": "webref-paid",
-      "name": "WebRef (paid)",
-      "slug": "webref-paid",
-      "specialty": null,
+      "key": "farsitools-paid",
+      "name": "FarsiTools (paid)",
+      "slug": "farsitools-paid",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "farsitools-paid",
-      "name": "FarsiTools (paid)",
-      "slug": "farsitools-paid",
-      "specialty": "tools",
+      "key": "webref-paid",
+      "name": "WebRef (paid)",
+      "slug": "webref-paid",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
