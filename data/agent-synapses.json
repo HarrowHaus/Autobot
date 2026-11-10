@@ -485,16 +485,16 @@
       "weight": 36.0
     },
     "3eceaf5aae7c3489e7b568a6": {
-      "events": 2,
+      "events": 3,
       "first_seen": "2026-09-27T00:22:11Z",
       "id": "3eceaf5aae7c3489e7b568a6",
-      "last_event_id": "card-probe:agent:8bb74b5dbca0404857cd3e47:f442401d202ddd03",
-      "last_seen": "2026-11-01T07:31:58Z",
+      "last_event_id": "card-probe:agent:8bb74b5dbca0404857cd3e47:490d60b715e9733b",
+      "last_seen": "2026-11-10T09:49:31Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:8bb74b5dbca0404857cd3e47",
       "validated_events": 0,
-      "weight": 3.0
+      "weight": 4.5
     },
     "41471d2bfb4dc2288c6ddafd": {
       "events": 1,
@@ -1223,16 +1223,16 @@
       "weight": 1.5
     },
     "a36fa3e93bd411f02ffd51f5": {
-      "events": 2,
+      "events": 3,
       "first_seen": "2026-09-27T00:24:41Z",
       "id": "a36fa3e93bd411f02ffd51f5",
-      "last_event_id": "card-probe:agent:946b3b3431d310c32c716583:0061d55fbe46b8ba",
-      "last_seen": "2026-11-01T07:31:58Z",
+      "last_event_id": "card-probe:agent:946b3b3431d310c32c716583:3753c6d243d7e309",
+      "last_seen": "2026-11-10T09:49:32Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:946b3b3431d310c32c716583",
       "validated_events": 0,
-      "weight": 3.0
+      "weight": 4.5
     },
     "a4a14342f44f2530762d6fcb": {
       "events": 2,
@@ -1520,16 +1520,16 @@
       "weight": 0.25
     },
     "c36f8bae9401adbe53d420f2": {
-      "events": 2,
+      "events": 3,
       "first_seen": "2026-09-27T00:24:41Z",
       "id": "c36f8bae9401adbe53d420f2",
-      "last_event_id": "card-probe:agent:93b9f8b2670b3ca434c74ddf:79be3d03c9bab8c5",
-      "last_seen": "2026-10-20T22:22:33Z",
+      "last_event_id": "card-probe:agent:93b9f8b2670b3ca434c74ddf:854f64dbe3306169",
+      "last_seen": "2026-11-10T09:49:32Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:93b9f8b2670b3ca434c74ddf",
       "validated_events": 0,
-      "weight": 3.0
+      "weight": 4.5
     },
     "c50c99282144d4a0e8b7dedf": {
       "events": 1,
@@ -1556,16 +1556,16 @@
       "weight": 19.5
     },
     "cad0cc69079d949c48b347d9": {
-      "events": 2,
+      "events": 3,
       "first_seen": "2026-09-27T00:17:19Z",
       "id": "cad0cc69079d949c48b347d9",
-      "last_event_id": "card-probe:agent:0be0e99e4a89f1c9fd2086a7:563851e61a466d41",
-      "last_seen": "2026-11-01T07:31:59Z",
+      "last_event_id": "card-probe:agent:0be0e99e4a89f1c9fd2086a7:8717e9609deb3cf4",
+      "last_seen": "2026-11-10T09:49:31Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:0be0e99e4a89f1c9fd2086a7",
       "validated_events": 0,
-      "weight": 3.0
+      "weight": 4.5
     },
     "ce13dd503f9323ac16301b94": {
       "events": 3,
@@ -1639,16 +1639,16 @@
       "weight": 24.0
     },
     "dd30442a011efd06ca430066": {
-      "events": 46,
+      "events": 47,
       "first_seen": "2026-09-27T00:17:18Z",
       "id": "dd30442a011efd06ca430066",
-      "last_event_id": "card-probe:agent:04067a150df5c136f371bb40:ae1515d5e19c275c",
-      "last_seen": "2026-11-09T06:26:27Z",
+      "last_event_id": "card-probe:agent:04067a150df5c136f371bb40:daa00ee1b065b11e",
+      "last_seen": "2026-11-10T09:49:27Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:04067a150df5c136f371bb40",
       "validated_events": 0,
-      "weight": 69.0
+      "weight": 70.5
     },
     "ddd45856bbc3823375ba4fa7": {
       "events": 1,
@@ -1927,5 +1927,5 @@
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-11-10T01:30:20Z"
+  "updated_at": "2026-11-10T09:49:33Z"
 }
