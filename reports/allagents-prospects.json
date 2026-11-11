@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T19:58:46Z",
+  "generated_at": "2026-11-11T07:02:00Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -249,6 +249,26 @@
       "tags": []
     },
     {
+      "key": "p0-agent-economy-index-x402-bazaar-rank-worker-workers-dev",
+      "name": "P0 Agent Economy Index (x402-bazaar-rank-worker.workers.dev)",
+      "slug": "p0-agent-economy-index-x402-bazaar-rank-worker-workers-dev",
+      "specialty": "news",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
+      "key": "p0-x402-market-index",
+      "name": "P0 x402 Market Index",
+      "slug": "p0-x402-market-index",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "neuronto-payments-x402-facilitator-and-api-gateway",
       "name": "Neuronto Payments: x402 facilitator and API gateway",
       "slug": "neuronto-payments-x402-facilitator-and-api-gateway",
@@ -263,16 +283,6 @@
       "name": "Bounty Engineer Agent Commerce",
       "slug": "bounty-engineer-agent-commerce",
       "specialty": "agents-infra",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "p0-x402-market-index",
-      "name": "P0 x402 Market Index",
-      "slug": "p0-x402-market-index",
-      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -313,16 +323,6 @@
       "name": "Ghost \u2014 web search for agents, one x402 payment",
       "slug": "ghost-web-search-for-agents-one-x402-payment",
       "specialty": "search",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "kifly-agentic-commerce-payments",
-      "name": "Kifly \u2014 Agentic Commerce & Payments",
-      "slug": "kifly-agentic-commerce-payments",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
