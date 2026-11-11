@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T07:02:00Z",
+  "generated_at": "2026-11-11T19:50:27Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -319,10 +319,10 @@
       "tags": []
     },
     {
-      "key": "ghost-web-search-for-agents-one-x402-payment",
-      "name": "Ghost \u2014 web search for agents, one x402 payment",
-      "slug": "ghost-web-search-for-agents-one-x402-payment",
-      "specialty": "search",
+      "key": "agentrxi",
+      "name": "AgentRXI",
+      "slug": "agentrxi",
+      "specialty": "pay-per-call tools for ai agents (x402)",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
