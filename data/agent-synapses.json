@@ -321,16 +321,16 @@
       "weight": 0.75
     },
     "27ab084245e8d91e28c44117": {
-      "events": 31,
+      "events": 32,
       "first_seen": "2026-09-27T00:24:45Z",
       "id": "27ab084245e8d91e28c44117",
-      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:701b079f620a55e5",
-      "last_seen": "2026-11-10T17:49:59Z",
+      "last_event_id": "card-probe:agent:dc92def14af228a3de4cb1b1:d6289aace243d829",
+      "last_seen": "2026-11-11T15:11:29Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:dc92def14af228a3de4cb1b1",
       "validated_events": 0,
-      "weight": 46.5
+      "weight": 48.0
     },
     "280cb9d40e44159718efaf4f": {
       "events": 1,
@@ -1735,16 +1735,16 @@
       "weight": 0.75
     },
     "edbc1d9a4f6a1f209303a0f6": {
-      "events": 57,
+      "events": 58,
       "first_seen": "2026-09-27T00:17:30Z",
       "id": "edbc1d9a4f6a1f209303a0f6",
-      "last_event_id": "card-probe:agent:1b8b486764a843ed67865a4e:659e6b08a55842c7",
-      "last_seen": "2026-11-10T17:49:59Z",
+      "last_event_id": "card-probe:agent:1b8b486764a843ed67865a4e:969c83d7757ff6cd",
+      "last_seen": "2026-11-11T15:11:29Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:1b8b486764a843ed67865a4e",
       "validated_events": 0,
-      "weight": 85.5
+      "weight": 87.0
     },
     "ee0a439974bddf8ebb0e9ec0": {
       "events": 70,
@@ -1914,18 +1914,18 @@
       "weight": 0.05
     },
     "fedb5db98bc5c110f2515493": {
-      "events": 1,
+      "events": 2,
       "first_seen": "2026-09-27T00:17:30Z",
       "id": "fedb5db98bc5c110f2515493",
-      "last_event_id": "card-probe:agent:27ab9c3a832fb28139480c5b:a37746cece85786c",
-      "last_seen": "2026-09-27T00:17:30Z",
+      "last_event_id": "card-probe:agent:27ab9c3a832fb28139480c5b:b5cac923140debaf",
+      "last_seen": "2026-11-11T15:11:30Z",
       "relation": "card_observed",
       "source": "agent:rook",
       "target": "agent:27ab9c3a832fb28139480c5b",
       "validated_events": 0,
-      "weight": 1.5
+      "weight": 3.0
     }
   },
   "schema_version": 1,
-  "updated_at": "2026-11-11T06:18:37Z"
+  "updated_at": "2026-11-11T15:11:33Z"
 }
