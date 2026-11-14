@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T06:58:11Z",
+  "generated_at": "2026-11-14T18:27:53Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -229,6 +229,16 @@
       "tags": []
     },
     {
+      "key": "coinopselect-agent-data-api",
+      "name": "CoinOpSelect Agent Data API",
+      "slug": "coinopselect-agent-data-api",
+      "specialty": "data",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "ops-control-hq-utility-agent",
       "name": "Ops Control HQ Utility Agent",
       "slug": "ops-control-hq-utility-agent",
@@ -313,16 +323,6 @@
       "name": "x402 Pay-Precheck",
       "slug": "x402-pay-precheck",
       "specialty": "trading",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "agentrxi",
-      "name": "AgentRXI",
-      "slug": "agentrxi",
-      "specialty": "pay-per-call tools for ai agents (x402)",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
