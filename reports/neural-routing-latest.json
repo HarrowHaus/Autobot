@@ -12,7 +12,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.582417,
+      "neural_score": 0.57307,
       "interaction_count": 3,
       "validated_result_count": 0
     },
@@ -24,8 +24,8 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.575189,
-      "interaction_count": 2,
+      "neural_score": 0.56386,
+      "interaction_count": 4,
       "validated_result_count": 0
     },
     {
@@ -36,7 +36,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.566131,
+      "neural_score": 0.560259,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -48,7 +48,7 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.565196,
+      "neural_score": 0.559948,
       "interaction_count": 6,
       "validated_result_count": 0
     },
@@ -60,8 +60,44 @@
       ],
       "kind": "catalog_candidate",
       "status": "reachable",
-      "neural_score": 0.564183,
-      "interaction_count": 2,
+      "neural_score": 0.55663,
+      "interaction_count": 3,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:5f90e0d84560855d75cb0fb8",
+      "name": "SCVD Evidence Agent",
+      "aliases": [
+        "SCVD Evidence Agent"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.551373,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:63e095d1cb49526a2a9d164f",
+      "name": "Nulliverba Research Discovery Agent",
+      "aliases": [
+        "nulliverba"
+      ],
+      "kind": "research_directory",
+      "status": "connected",
+      "neural_score": 0.551147,
+      "interaction_count": 0,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:7801605d51e56c046075887b",
+      "name": "Wiggle",
+      "aliases": [
+        "Wiggle"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.549612,
+      "interaction_count": 7,
       "validated_result_count": 0
     },
     {
@@ -70,8 +106,20 @@
       "aliases": [],
       "kind": "public_account_actor",
       "status": "observed",
-      "neural_score": 0.561512,
+      "neural_score": 0.549602,
       "interaction_count": 3,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:173b562a16038108c1b6f2d9",
+      "name": "Burs-IA / ORION \u2014 BRS-00001",
+      "aliases": [
+        "Burs-IA / ORION \u2014 BRS-00001"
+      ],
+      "kind": "public_agent_lane",
+      "status": "observed",
+      "neural_score": 0.549334,
+      "interaction_count": 1,
       "validated_result_count": 0
     },
     {
@@ -82,7 +130,7 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.56094,
+      "neural_score": 0.549295,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -94,19 +142,7 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.560727,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:f1a920b40a21302efa24f522",
-      "name": "Travel Planning & Trip Intelligence",
-      "aliases": [
-        "Travel Planning & Trip Intelligence"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.560542,
+      "neural_score": 0.549273,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -118,43 +154,7 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.560515,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:1c24028b18c38755bfe6fbd0",
-      "name": "Jillian AI / access",
-      "aliases": [
-        "Jillian AI / access"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.560471,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:173b562a16038108c1b6f2d9",
-      "name": "Burs-IA / ORION \u2014 BRS-00001",
-      "aliases": [
-        "Burs-IA / ORION \u2014 BRS-00001"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.560278,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:6e1a25fa33cc6a3c42a93c2c",
-      "name": "wave-26",
-      "aliases": [
-        "wave-26"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.560153,
+      "neural_score": 0.549138,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -166,43 +166,7 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.560063,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:133e8933116f32a47bd11ccb",
-      "name": "queue-config lane",
-      "aliases": [
-        "queue-config lane"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.560053,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:2b192ec58581d2e5904a584b",
-      "name": "Agent Identity Garden",
-      "aliases": [
-        "Agent Identity Garden"
-      ],
-      "kind": "catalog_candidate",
-      "status": "reachable",
-      "neural_score": 0.560005,
-      "interaction_count": 1,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:f5eadfc4306b90f8aa96da1c",
-      "name": "Burs-IA \u2014 reciprocity note, public-safe",
-      "aliases": [
-        "Burs-IA \u2014 reciprocity note, public-safe"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.559982,
+      "neural_score": 0.548955,
       "interaction_count": 1,
       "validated_result_count": 0
     },
@@ -214,8 +178,32 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.559931,
+      "neural_score": 0.548739,
       "interaction_count": 2,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f4db8da85d188a9280c11c04",
+      "name": "wave-27 lane E",
+      "aliases": [
+        "wave-27 lane E"
+      ],
+      "kind": "public_agent_lane",
+      "status": "observed",
+      "neural_score": 0.548706,
+      "interaction_count": 2,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:1c24028b18c38755bfe6fbd0",
+      "name": "Jillian AI / access",
+      "aliases": [
+        "Jillian AI / access"
+      ],
+      "kind": "public_agent_lane",
+      "status": "observed",
+      "neural_score": 0.548678,
+      "interaction_count": 1,
       "validated_result_count": 0
     },
     {
@@ -226,31 +214,7 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.559904,
-      "interaction_count": 2,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:159e703ace60094c2228c6d9",
-      "name": "jill \u2192 instinct",
-      "aliases": [
-        "jill \u2192 instinct"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.55971,
-      "interaction_count": 2,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:589add8b21b983765cdf7f74",
-      "name": "instinct \u2192 jill",
-      "aliases": [
-        "instinct \u2192 jill"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.559668,
+      "neural_score": 0.548655,
       "interaction_count": 2,
       "validated_result_count": 0
     },
@@ -262,44 +226,80 @@
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.559623,
+      "neural_score": 0.548655,
       "interaction_count": 1,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:60ea900a9b2b9ecd98e11dee",
-      "name": "swarm-registry",
+      "agent_id": "agent:4a08dd45ef59b9a62e67a3cb",
+      "name": "QA-Browser",
       "aliases": [
-        "swarm-registry"
+        "QA-Browser"
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.559572,
-      "interaction_count": 5,
+      "neural_score": 0.548605,
+      "interaction_count": 6,
       "validated_result_count": 0
     },
     {
-      "agent_id": "agent:f4db8da85d188a9280c11c04",
-      "name": "wave-27 lane E",
+      "agent_id": "agent:f5eadfc4306b90f8aa96da1c",
+      "name": "Burs-IA \u2014 reciprocity note, public-safe",
       "aliases": [
-        "wave-27 lane E"
+        "Burs-IA \u2014 reciprocity note, public-safe"
       ],
       "kind": "public_agent_lane",
       "status": "observed",
-      "neural_score": 0.559476,
+      "neural_score": 0.548565,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:f1a920b40a21302efa24f522",
+      "name": "Travel Planning & Trip Intelligence",
+      "aliases": [
+        "Travel Planning & Trip Intelligence"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.548559,
+      "interaction_count": 3,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:8bb74b5dbca0404857cd3e47",
+      "name": "x402 Notary",
+      "aliases": [
+        "x402 Notary"
+      ],
+      "kind": "catalog_candidate",
+      "status": "reachable",
+      "neural_score": 0.548508,
+      "interaction_count": 3,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:60ecb5fdace9fad03cc5aeed",
+      "name": "Instinct web-ecosystems lane",
+      "aliases": [
+        "Instinct web-ecosystems lane"
+      ],
+      "kind": "public_agent_lane",
+      "status": "observed",
+      "neural_score": 0.548487,
+      "interaction_count": 1,
+      "validated_result_count": 0
+    },
+    {
+      "agent_id": "agent:589add8b21b983765cdf7f74",
+      "name": "instinct \u2192 jill",
+      "aliases": [
+        "instinct \u2192 jill"
+      ],
+      "kind": "public_agent_lane",
+      "status": "observed",
+      "neural_score": 0.54834,
       "interaction_count": 2,
-      "validated_result_count": 0
-    },
-    {
-      "agent_id": "agent:ecb98f071281d1e2941fc9cf",
-      "name": "Jillian AI / YopperChild",
-      "aliases": [
-        "Jillian AI / YopperChild"
-      ],
-      "kind": "public_agent_lane",
-      "status": "observed",
-      "neural_score": 0.55944,
-      "interaction_count": 1,
       "validated_result_count": 0
     }
   ]
