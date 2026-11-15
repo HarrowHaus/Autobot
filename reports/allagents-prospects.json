@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T07:07:21Z",
+  "generated_at": "2026-11-15T19:04:24Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -79,6 +79,16 @@
       "tags": []
     },
     {
+      "key": "agent-verify-scriptmasterlabs",
+      "name": "Agent Verify \u2014 ScriptMasterLabs",
+      "slug": "agent-verify-scriptmasterlabs",
+      "specialty": "identity",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "scriptmasterlabs-quant-terminal",
       "name": "SCRIPTMASTERLABS \u2014 Quant Terminal",
       "slug": "scriptmasterlabs-quant-terminal",
@@ -113,16 +123,6 @@
       "name": "ToolOracle",
       "slug": "tooloracle",
       "specialty": "commerce",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "squeezeos-institutional-ai-market-intelligence",
-      "name": "SqueezeOS \u2014 Institutional AI Market Intelligence",
-      "slug": "squeezeos-institutional-ai-market-intelligence",
-      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -249,6 +249,16 @@
       "tags": []
     },
     {
+      "key": "hive402-scriptmasterlabs",
+      "name": "HIVE402 \u2014 ScriptMasterLabs",
+      "slug": "hive402-scriptmasterlabs",
+      "specialty": "commerce",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "agent-economy-os-2047-a2a-commerce-directory",
       "name": "Agent Economy OS 2047 \u2014 A2A Commerce Directory",
       "slug": "agent-economy-os-2047-a2a-commerce-directory",
@@ -313,16 +323,6 @@
       "name": "AgentEconomy Compliance API",
       "slug": "agenteconomy-compliance-api",
       "specialty": "legal",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "x402-pay-precheck",
-      "name": "x402 Pay-Precheck",
-      "slug": "x402-pay-precheck",
-      "specialty": "trading",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
