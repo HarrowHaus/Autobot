@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T22:42:59Z",
+  "generated_at": "2026-11-15T07:07:21Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -219,10 +219,10 @@
       "tags": []
     },
     {
-      "key": "apex-edge-x402-paid-machine-services",
-      "name": "Apex Edge \u2014 x402-paid machine services",
-      "slug": "apex-edge-x402-paid-machine-services",
-      "specialty": "tools",
+      "key": "agents-get-paid-kit-x402-mcp-unlock-49-randall-75d-workers-d",
+      "name": "Agents Get Paid Kit \u2014 x402 MCP + Unlock ($49) (randall-75d.workers.dev)",
+      "slug": "agents-get-paid-kit-x402-mcp-unlock-49-randall-75d-workers-d",
+      "specialty": null,
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
