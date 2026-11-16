@@ -1,0 +1,21 @@
+name: A0 multimodal microservices tests
+on:
+  push:
+    paths: ['swarmbrain/micro_services.py', 'swarmbrain/asset_exit_planner.py', 'tests/test_micro_services.py', 'tests/test_asset_exit_planner.py', '.github/workflows/a0_multimodal_services_test.yml']
+  pull_request:
+    paths: ['swarmbrain/micro_services.py', 'swarmbrain/asset_exit_planner.py', 'tests/test_micro_services.py', 'tests/test_asset_exit_planner.py', '.github/workflows/a0_multimodal_services_test.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test actual services and read-only conversion planning
+        run: |
+          python -m unittest discover -s tests -p test_micro_services.py -v
+          python -m unittest discover -s tests -p test_asset_exit_planner.py -v
