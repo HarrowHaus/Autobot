@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T19:04:24Z",
+  "generated_at": "2026-11-16T07:12:52Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -309,20 +309,20 @@
       "tags": []
     },
     {
-      "key": "toolbelt402",
-      "name": "Toolbelt402",
-      "slug": "toolbelt402",
-      "specialty": "tools",
+      "key": "angel-agent-web-payment-guard",
+      "name": "Angel \u2014 Agent Web & Payment Guard",
+      "slug": "angel-agent-web-payment-guard",
+      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "agenteconomy-compliance-api",
-      "name": "AgentEconomy Compliance API",
-      "slug": "agenteconomy-compliance-api",
-      "specialty": "legal",
+      "key": "toolbelt402",
+      "name": "Toolbelt402",
+      "slug": "toolbelt402",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
