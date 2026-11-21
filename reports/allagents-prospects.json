@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-20T20:41:32Z",
+  "generated_at": "2026-11-21T07:39:31Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -99,6 +99,16 @@
       "tags": []
     },
     {
+      "key": "agent-exchange",
+      "name": "Agent Exchange",
+      "slug": "agent-exchange",
+      "specialty": "finance",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "lordevo-shop",
       "name": "Lordevo Shop",
       "slug": "lordevo-shop",
@@ -113,16 +123,6 @@
       "name": "MUJ428 Trust Reflex",
       "slug": "muj428-trust-reflex",
       "specialty": "travel",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "tooloracle",
-      "name": "ToolOracle",
-      "slug": "tooloracle",
-      "specialty": "commerce",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
