@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-22T19:56:28Z",
+  "generated_at": "2026-11-23T08:08:13Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -299,20 +299,20 @@
       "tags": []
     },
     {
-      "key": "bounty-engineer-agent-commerce",
-      "name": "Bounty Engineer Agent Commerce",
-      "slug": "bounty-engineer-agent-commerce",
-      "specialty": "agents-infra",
+      "key": "base-usdc-settlement-evidence",
+      "name": "Base USDC Settlement Evidence",
+      "slug": "base-usdc-settlement-evidence",
+      "specialty": "settlement evidence",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "angel-agent-web-payment-guard",
-      "name": "Angel \u2014 Agent Web & Payment Guard",
-      "slug": "angel-agent-web-payment-guard",
-      "specialty": "commerce",
+      "key": "bounty-engineer-agent-commerce",
+      "name": "Bounty Engineer Agent Commerce",
+      "slug": "bounty-engineer-agent-commerce",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
