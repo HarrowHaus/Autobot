@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-24T10:22:25Z",
+  "generated_at": "2026-11-24T22:44:12Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -239,20 +239,20 @@
       "tags": []
     },
     {
-      "key": "manteclaw-x402-api-base",
-      "name": "Manteclaw x402 API (Base)",
-      "slug": "manteclaw-x402-api-base",
-      "specialty": "x402 crypto data api",
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "ops-control-hq-utility-agent",
-      "name": "Ops Control HQ Utility Agent",
-      "slug": "ops-control-hq-utility-agent",
-      "specialty": "developer tools",
+      "key": "manteclaw-x402-api-base",
+      "name": "Manteclaw x402 API (Base)",
+      "slug": "manteclaw-x402-api-base",
+      "specialty": "x402 crypto data api",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
