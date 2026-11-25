@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T09:03:49Z",
+  "generated_at": "2026-11-25T21:57:19Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -99,6 +99,16 @@
       "tags": []
     },
     {
+      "key": "muj428-trust-reflex",
+      "name": "MUJ428 Trust Reflex",
+      "slug": "muj428-trust-reflex",
+      "specialty": "travel",
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "agent-exchange",
       "name": "Agent Exchange",
       "slug": "agent-exchange",
@@ -113,16 +123,6 @@
       "name": "Lordevo Shop",
       "slug": "lordevo-shop",
       "specialty": "search",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "muj428-trust-reflex",
-      "name": "MUJ428 Trust Reflex",
-      "slug": "muj428-trust-reflex",
-      "specialty": "travel",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -239,20 +239,20 @@
       "tags": []
     },
     {
-      "key": "ops-control-hq-utility-agent",
-      "name": "Ops Control HQ Utility Agent",
-      "slug": "ops-control-hq-utility-agent",
-      "specialty": "developer tools",
+      "key": "manteclaw-x402-api-base",
+      "name": "Manteclaw x402 API (Base)",
+      "slug": "manteclaw-x402-api-base",
+      "specialty": "x402 crypto data api",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "manteclaw-x402-api-base",
-      "name": "Manteclaw x402 API (Base)",
-      "slug": "manteclaw-x402-api-base",
-      "specialty": "x402 crypto data api",
+      "key": "ops-control-hq-utility-agent",
+      "name": "Ops Control HQ Utility Agent",
+      "slug": "ops-control-hq-utility-agent",
+      "specialty": "developer tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
@@ -309,20 +309,20 @@
       "tags": []
     },
     {
-      "key": "base-usdc-settlement-evidence",
-      "name": "Base USDC Settlement Evidence",
-      "slug": "base-usdc-settlement-evidence",
-      "specialty": "settlement evidence",
+      "key": "bounty-engineer-agent-commerce",
+      "name": "Bounty Engineer Agent Commerce",
+      "slug": "bounty-engineer-agent-commerce",
+      "specialty": "agents-infra",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
       "tags": []
     },
     {
-      "key": "bounty-engineer-agent-commerce",
-      "name": "Bounty Engineer Agent Commerce",
-      "slug": "bounty-engineer-agent-commerce",
-      "specialty": "agents-infra",
+      "key": "toolbelt402",
+      "name": "Toolbelt402",
+      "slug": "toolbelt402",
+      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
