@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-26T21:53:21Z",
+  "generated_at": "2026-11-27T09:00:13Z",
   "queries": [
     {
       "query": "phiontrust",
@@ -229,6 +229,16 @@
       "tags": []
     },
     {
+      "key": "opendata-best-web-intelligence-x402-usdc",
+      "name": "OpenData Best Web Intelligence (x402 USDC)",
+      "slug": "opendata-best-web-intelligence-x402-usdc",
+      "specialty": null,
+      "endpoints": {},
+      "protocols": [],
+      "capabilities": {},
+      "tags": []
+    },
+    {
       "key": "coinopselect-agent-data-api",
       "name": "CoinOpSelect Agent Data API",
       "slug": "coinopselect-agent-data-api",
@@ -313,16 +323,6 @@
       "name": "Bounty Engineer Agent Commerce",
       "slug": "bounty-engineer-agent-commerce",
       "specialty": "agents-infra",
-      "endpoints": {},
-      "protocols": [],
-      "capabilities": {},
-      "tags": []
-    },
-    {
-      "key": "toolbelt402",
-      "name": "Toolbelt402",
-      "slug": "toolbelt402",
-      "specialty": "tools",
       "endpoints": {},
       "protocols": [],
       "capabilities": {},
